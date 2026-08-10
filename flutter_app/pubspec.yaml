@@ -20,7 +20,7 @@ dependencies:
   # (guardrail runtime_seams canh); phần còn lại của app đi qua seam
   # KeyValueStore/SecureStore.
   shared_preferences: ^2.5.3
-  flutter_secure_storage: ^10.3.1
+  flutter_secure_storage: ^11.0.0
   # GĐ4-F8: serialization pilot (ADR-010 — DTO provisional chờ contract ký)
   json_annotation: ^4.9.0
 
