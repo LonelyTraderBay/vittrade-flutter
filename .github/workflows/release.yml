@@ -48,6 +48,11 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Install Android SDK platform 37
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-37"
+
       - name: Install dependencies
         run: flutter pub get
 

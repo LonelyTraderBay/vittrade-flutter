@@ -36,7 +36,9 @@ val hasReleaseSigning = listOf(
 
 android {
     namespace = "com.vittrade.vit_trade_flutter"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_secure_storage 11 requires Android API 37 at compile time.
+    // Keep min/target SDK controlled by the Flutter toolchain below.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
