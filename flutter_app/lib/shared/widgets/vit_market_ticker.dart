@@ -29,9 +29,16 @@ class VitMarketTickerData {
 
 /// Horizontally scrolling strip of [VitMarketTickerCard]s built from [items].
 class VitMarketTickerStrip extends StatelessWidget {
-  const VitMarketTickerStrip({super.key, required this.items});
+  const VitMarketTickerStrip({
+    super.key,
+    required this.items,
+    this.cardWidth,
+    this.itemGap,
+  });
 
   final List<VitMarketTickerData> items;
+  final double? cardWidth;
+  final double? itemGap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +48,10 @@ class VitMarketTickerStrip extends StatelessWidget {
       child: Row(
         children: [
           for (var index = 0; index < items.length; index++) ...[
-            VitMarketTickerCard(data: items[index]),
+            VitMarketTickerCard(data: items[index], width: cardWidth),
             if (index < items.length - 1)
-              const SizedBox(
-                width: SharedSpacingTokens.homeMarketTickerStripGap,
+              SizedBox(
+                width: itemGap ?? SharedSpacingTokens.homeMarketTickerStripGap,
               ),
           ],
         ],
@@ -56,14 +63,15 @@ class VitMarketTickerStrip extends StatelessWidget {
 /// Single fixed-width ticker card: title, price, and a trend-tinted change
 /// pill for one [VitMarketTickerData] entry.
 class VitMarketTickerCard extends StatelessWidget {
-  const VitMarketTickerCard({super.key, required this.data});
+  const VitMarketTickerCard({super.key, required this.data, this.width});
 
   final VitMarketTickerData data;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: SharedSpacingTokens.homeMarketTickerCardWidth,
+      width: width ?? SharedSpacingTokens.homeMarketTickerCardWidth,
       child: VitCard(
         onTap: data.onTap,
         borderColor: data.trend.foreground.withValues(alpha: .24),

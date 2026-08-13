@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/markets_tablet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_tablet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/widgets/hub/wallet_page_sections.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/pages/tablet/markets_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/pages/phone/wallet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/tablet/wallet_page_sections.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
@@ -122,11 +125,49 @@ void main() {
       // verify it actually renders clean, not just by code inspection.
       await pumpTabletWallet(tester, size: const Size(1180, 820));
 
-      await tester.tap(find.byKey(WalletPage.tabKey('chart')));
+      await tester.tap(find.byKey(WalletTabletKeys.tab('chart')));
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);
       expect(find.byType(WalletAllocationCard), findsOneWidget);
     },
   );
+
+  testWidgets('SC-135 wide tablet keeps compact section and inner rhythm', (
+    tester,
+  ) async {
+    await pumpTabletWallet(tester, size: const Size(1180, 820));
+
+    final toolsSectionFinder = find.ancestor(
+      of: find.text('Công cụ ví'),
+      matching: find.byType(VitPageSection),
+    );
+    final toolsSection = tester.getRect(toolsSectionFinder);
+    final dcaSectionFinder = find.ancestor(
+      of: find.text('Mua định kỳ'),
+      matching: find.byType(VitPageSection),
+    );
+    final dcaSection = tester.getRect(dcaSectionFinder);
+    final compactHeaderPadding = find.byWidgetPredicate(
+      (widget) =>
+          widget is Padding &&
+          widget.padding ==
+              const EdgeInsetsDirectional.only(
+                bottom: AppSpacing.pageRhythmCompactInnerGap,
+              ),
+    );
+
+    expect(
+      dcaSection.top - toolsSection.bottom,
+      closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
+    );
+    expect(
+      find.descendant(of: dcaSectionFinder, matching: compactHeaderPadding),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(of: toolsSectionFinder, matching: compactHeaderPadding),
+      findsOneWidget,
+    );
+  });
 }

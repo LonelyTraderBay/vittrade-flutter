@@ -236,14 +236,14 @@ const _homeMatrixSourceRules = [
   HomeEntryBackRule(
     id: 'HEB-001',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/widgets/home_header.dart',
+    file: 'lib/features/home/presentation/widgets/phone/home_header.dart',
     requiredSnippets: ["onNavigate('/search')"],
     notes: 'Header Search source is present.',
   ),
   HomeEntryBackRule(
     id: 'HEB-002',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/widgets/home_header.dart',
+    file: 'lib/features/home/presentation/widgets/phone/home_header.dart',
     requiredSnippets: ["onNavigate('/notifications')"],
     notes: 'Header Notifications source is present.',
   ),
@@ -365,14 +365,14 @@ const _homeMatrixSourceRules = [
   HomeEntryBackRule(
     id: 'HEB-018',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: ["onTap: () => onNavigate('/markets/predictions')"],
     notes: 'Discovery Predictions entry (not Home quick action) is present.',
   ),
   HomeEntryBackRule(
     id: 'HEB-019',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: ["onTap: () => onNavigate('/arena')"],
     notes: 'Discovery Arena entry (not Home quick action) is present.',
   ),
@@ -411,28 +411,28 @@ const _homeMatrixSourceRules = [
   HomeEntryBackRule(
     id: 'HEB-024',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: ["onTap: () => onNavigate('/markets/predictions')"],
     notes: 'Discovery Prediction Markets source is present.',
   ),
   HomeEntryBackRule(
     id: 'HEB-025',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: ["onTap: () => onNavigate('/arena')"],
     notes: 'Discovery Open Arena source is present.',
   ),
   HomeEntryBackRule(
     id: 'HEB-026',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: ["onNavigate('/markets')"],
     notes: 'Markets root source is present; system back uses Home history.',
   ),
   HomeEntryBackRule(
     id: 'HEB-027',
     area: 'Matrix source',
-    file: 'lib/features/home/presentation/pages/home_page_sections.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_sections.dart',
     requiredSnippets: [
       'class _MarketSection',
       "onNavigate('/pair/\${pairs[i].id}')",
@@ -445,7 +445,7 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C01',
     area: 'Home outbound',
-    file: 'lib/features/home/presentation/pages/home_page_state.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_state.dart',
     // GĐ4-F6: lint unawaited_futures bọc push thành
     // `unawaited(context.push(path));` — matcher nhận cả 2 dạng cũ/mới
     // (bài học audit-tool-text-matchers: đổi call site phải grep tool/).
@@ -456,7 +456,7 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C02A',
     area: 'Trade pair entry',
-    file: 'lib/features/trade/presentation/widgets/hub/trade_page_state.dart',
+    file: 'lib/features/trade/presentation/pages/phone/trade_page_state.dart',
     requiredSnippets: [
       'widget.chartVariant == TradeChartVariant.pairRoute || context.canPop()',
       'fallbackPath: AppRoutePaths.trade',
@@ -546,7 +546,7 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C02I',
     area: 'Wallet entry',
-    file: 'lib/features/wallet/presentation/pages/hub/wallet_page.dart',
+    file: 'lib/features/wallet/presentation/pages/phone/wallet_page.dart',
     requiredSnippets: [
       'final showBack = context.canPop();',
       'fallbackPath: AppRoutePaths.home',
@@ -587,7 +587,7 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C03',
     area: 'Home source coverage',
-    file: 'lib/features/home/presentation/pages/home_page_common.dart',
+    file: 'lib/features/home/presentation/pages/phone/home_page_common.dart',
     requiredSnippets: ["part of 'home_page.dart';"],
     forbiddenSnippets: ['onNavigate('],
     notes:

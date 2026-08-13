@@ -19,11 +19,11 @@ void main() {
     final source = [
       for (final entity in Directory(
         'lib/features/home/presentation/pages',
-      ).listSync().whereType<File>())
+      ).listSync(recursive: true).whereType<File>())
         entity.readAsStringSync(),
       for (final entity in Directory(
         'lib/features/home/presentation/widgets',
-      ).listSync().whereType<File>())
+      ).listSync(recursive: true).whereType<File>())
         entity.readAsStringSync(),
     ].join('\n');
 

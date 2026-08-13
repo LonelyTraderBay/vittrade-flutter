@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/pages/api_manage
 import 'package:vit_trade_flutter/features/profile/presentation/pages/api_key_create_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/device_management_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/kyc_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/profile_responsive_entry.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/pages/responsive/profile_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/sub_account_page.dart';

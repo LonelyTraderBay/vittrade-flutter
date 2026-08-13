@@ -552,23 +552,37 @@ enterprise_states,root_page,flutter_app/lib/features/enterprise_states/presentat
 enterprise_states,root_page,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,0,0,0,0,0,0,0,0,no,-
 enterprise_states,root_page,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_references.dart,0,0,0,0,0,0,0,0,no,-
 home,root_page,flutter_app/lib/features/home/presentation/pages/home_page.dart,0,0,0,0,0,0,0,0,no,-
-home,root_page,flutter_app/lib/features/home/presentation/pages/home_page_common.dart,0,0,0,0,0,0,0,0,no,-
-home,root_page,flutter_app/lib/features/home/presentation/pages/home_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
-home,root_page,flutter_app/lib/features/home/presentation/pages/home_page_state.dart,0,0,0,0,0,0,0,0,no,-
 home,root_page,flutter_app/lib/features/home/presentation/pages/home_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_header.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_market_watchlist_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_more_products_sheet.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_products_section.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_recent_products_section.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_scroll_shell.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
+home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page.dart,0,0,0,0,0,0,0,0,no,-
+home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_common.dart,0,0,0,0,0,0,0,0,no,-
+home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
+home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_state.dart,0,0,0,0,0,0,0,0,no,-
+home,root_page,flutter_app/lib/features/home/presentation/pages/tablet/home_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_header.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_more_products_sheet.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_products_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_recent_products_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_scroll_shell.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_products_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart,0,0,0,0,0,0,0,0,no,-
 launchpad,root_page,flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_compare_page.dart,0,0,0,0,0,0,0,0,no,-
 launchpad,root_page,flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_order_page.dart,0,0,0,0,0,0,0,0,no,-
 launchpad,root_page,flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_ido_bridge_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -701,6 +715,7 @@ markets,root_page,flutter_app/lib/features/markets/presentation/pages/hub/watchl
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/pair/market_depth_page.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/pair/market_heatmap_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/pair/pair_detail_page.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+markets,root_page,flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page_indicator_drawing_widgets.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page_signal_widgets.dart,0,0,0,0,0,0,0,0,no,-
@@ -722,6 +737,7 @@ markets,root_page,flutter_app/lib/features/markets/presentation/pages/research/t
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page_formatters.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page_schedule_widgets.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page_upcoming_widgets.dart,0,0,0,0,0,0,0,0,no,-
+markets,root_page,flutter_app/lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/comparison_tool_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/derivatives_overview_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/market_calendar_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -730,14 +746,6 @@ markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/mark
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/market_screener_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/pages/tools/market_sectors_page.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_formatters.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_common.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_discover.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_filters.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_header.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_movers.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_pairs.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_pairs_panel.dart,0,0,0,0,0,0,0,0,no,-
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/hub/market_list_tools.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/hub/watchlist_cards.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/hub/watchlist_common_painter.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/hub/watchlist_toolbar.dart,0,0,0,0,0,0,0,0,no,-
@@ -754,6 +762,14 @@ markets,root_page,flutter_app/lib/features/markets/presentation/widgets/pair/pai
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/pair/pair_detail_header_widgets.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/pair/pair_detail_order_widgets.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/pair/pair_detail_painter_widgets.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_common.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_discover.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_filters.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_header.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_movers.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_pairs.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_pairs_panel.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/phone/market_list_tools.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/portfolio/price_alerts_page_common.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/portfolio/price_alerts_page_details.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/portfolio/price_alerts_page_overview.dart,0,0,0,0,0,0,0,0,no,-
@@ -766,6 +782,15 @@ markets,root_page,flutter_app/lib/features/markets/presentation/widgets/research
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/research/token_info_detail_widgets.dart,0,0,0,0,0,0,0,0,no,-
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/research/token_info_market_widgets.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 markets,root_page,flutter_app/lib/features/markets/presentation/widgets/research/token_info_tabs_widgets.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_common.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_filters.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_header.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_common.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_tokens.dart,0,0,0,0,0,0,0,0,no,-
@@ -1089,17 +1114,25 @@ profile,root_page,flutter_app/lib/features/profile/presentation/pages/api_manage
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/device_management_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/edit_profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/kyc_page.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_arena_stats.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_hero.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_legal_accordion.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_menu_actions.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_vip_prediction.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/profile_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/security_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/settings_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/sub_account_page.dart,0,0,0,0,0,0,0,0,no,-
+profile,root_page,flutter_app/lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/vip_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/api_management_key_controls.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/api_management_keys.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/common/profile_icon_registry.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/device_management_page_common.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/device_management_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/kyc_details_privacy.dart,0,0,0,0,0,0,0,0,no,-
@@ -1109,12 +1142,6 @@ profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_api_key_create_result.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_hero_panel.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_home_arena_stats.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_home_hero.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_home_legal_accordion.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_home_menu_actions.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/widgets/profile_home_vip_prediction.dart,0,0,0,0,0,0,0,0,no,-
-profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_icon_registry.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_kyc_banner_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_legal_accordion_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/profile_menu_panel.dart,0,0,0,0,0,0,0,0,no,-
@@ -1133,6 +1160,16 @@ profile,root_page,flutter_app/lib/features/profile/presentation/widgets/security
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/security_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/settings_page_common.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_banner_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,0,0,0,0,0,0,0,0,no,-
 referral,root_page,flutter_app/lib/features/referral/presentation/pages/referral_friend_detail_page.dart,0,0,0,0,0,0,0,0,no,-
 referral,root_page,flutter_app/lib/features/referral/presentation/pages/referral_history_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -1168,7 +1205,6 @@ support,root_page,flutter_app/lib/features/support/presentation/widgets/support_
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/convert/convert_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/futures/futures_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/futures/leverage_page.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/order_receipt_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/orders_history_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/position_dashboard_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/trade_history_export_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -1177,6 +1213,11 @@ trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/trade_sett
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/hub/trade_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_hub_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/order_receipt_page.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/trade_page.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/trade_page_state.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_common.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,0,0,0,0,0,0,0,0,no,-
@@ -1186,8 +1227,6 @@ trade,root_page,flutter_app/lib/features/trade/presentation/widgets/futures/futu
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/futures/leverage_controls_presets.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/futures/leverage_header_hero_risk.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/futures/leverage_impact_confirm.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/orders_history_page_common.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/orders_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/position_dashboard_page_common.dart,0,0,0,0,0,0,0,0,no,-
@@ -1195,15 +1234,9 @@ trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/position
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_history_export_footer.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_history_export_selectors_includes.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_history_export_summary_sections.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_page_state.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_settings_page_common.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/hub/trade_settings_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/vit_trade_simple_order_form.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/hub/vit_trade_simple_shell.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_common.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_hub_cards.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_hub_hero_nav.dart,0,0,0,0,0,0,0,0,no,-
@@ -1213,6 +1246,21 @@ trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margi
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_reserved.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_shared_helpers.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_simple_form.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
+trade,root_page,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart,0,0,0,0,0,0,0,0,no,-
 trade_bots,root_page,flutter_app/lib/features/trade_bots/presentation/pages/backtest/bot_backtesting_page.dart,0,0,0,0,0,0,0,0,no,-
 trade_bots,root_page,flutter_app/lib/features/trade_bots/presentation/pages/backtest/bot_optimization_page.dart,0,0,0,0,0,0,0,0,no,-
 trade_bots,root_page,flutter_app/lib/features/trade_bots/presentation/pages/backtest/bot_strategy_compare_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -1525,6 +1573,8 @@ wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/history/tran
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/hub/wallet_page.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/hub/wallet_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
+wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/phone/wallet_page.dart,0,0,0,0,0,0,0,0,no,-
+wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -1561,12 +1611,19 @@ wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/tr
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_formatters.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_page_allocation_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_page_asset_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_page_balance_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_page_dca_tool_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_page_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_unavailable_banner.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_allocation_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_asset_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_balance_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_dca_tool_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_unavailable_banner.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_allocation_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_asset_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_balance_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_dca_tool_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_unavailable_banner.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/tools/network_status_cards_stats.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/tools/network_status_legend_common.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/tools/network_status_summary.dart,0,0,0,0,0,0,0,0,no,-

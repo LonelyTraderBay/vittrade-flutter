@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -63,6 +66,80 @@ void main() {
       await pumpDashboard(tester, 1000);
 
       expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('the two-column block width-caps at primaryColumnMaxWidth + '
+      'secondaryColumnMaxWidth (R5) instead of stretching to fill a much '
+      'wider shell', (tester) async {
+    await pumpDashboard(tester, 1600);
+
+    expect(
+      tester.getSize(find.byType(Row)).width,
+      TabletDashboardWidths.primaryColumnMaxWidth +
+          TabletDashboardWidths.secondaryColumnMaxWidth,
+    );
+  });
+
+  testWidgets('both tablet columns reserve the standard bottom content inset', (
+    tester,
+  ) async {
+    await pumpDashboard(tester, 1000);
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is SingleChildScrollView &&
+            widget.padding ==
+                const EdgeInsets.only(bottom: AppSpacing.contentPad),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Padding &&
+            widget.padding ==
+                const EdgeInsets.only(bottom: AppSpacing.contentPad),
+      ),
+      findsNWidgets(2),
+    );
+  });
+
+  testWidgets(
+    'the two-column path accepts independent primary and secondary section '
+    'rhythm overrides',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1000, 900);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: VitTwoColumnTabletDashboard(
+              primaryContentGap: 8,
+              secondaryContentGap: 13,
+              primaryChildren: [Text('Primary content')],
+              secondaryChildren: [Text('Secondary content')],
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        find.byWidgetPredicate(
+          (widget) => widget is VitPageContent && widget.customGap == 8,
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byWidgetPredicate(
+          (widget) => widget is VitPageContent && widget.customGap == 13,
+        ),
+        findsOneWidget,
+      );
     },
   );
 }

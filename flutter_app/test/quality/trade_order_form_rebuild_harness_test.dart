@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/trade/data/providers/trade_repository_provider.dart';
 import 'package:vit_trade_flutter/features/trade/data/repositories/mock_trade_repository.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/pages/phone/trade_page.dart';
 
 /// PERF-HN2 rebuild harness: types into `TradePage.amountFieldKey` and
 /// counts how many distinct `tradeOrderControllerProvider` family members

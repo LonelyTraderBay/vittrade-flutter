@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('representative high-risk pages use shared state primitives', () {
     const targets = {
-      'lib/features/trade/presentation/widgets/hub/trade_page_state.dart',
+      'lib/features/trade/presentation/pages/phone/trade_page_state.dart',
       'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
       'lib/features/p2p_marketplace/presentation/widgets/hub/p2p_home_page_state.dart',
       'lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart',

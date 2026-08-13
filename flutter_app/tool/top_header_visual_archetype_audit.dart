@@ -762,6 +762,15 @@ int _expectedActionCount(String source) {
 }
 
 String _extractPageClass(String block) {
+  // The Trade receipt route deliberately selects a device-specific page in
+  // one builder. Use the phone page as the audit representative; the Tablet
+  // page has its own dedicated receipt implementation and shares the same
+  // route contract.
+  if (block.contains('TradeTabletOrderReceiptPage') &&
+      block.contains('OrderReceiptPage')) {
+    return 'OrderReceiptPage';
+  }
+
   if (block.contains('AuthRouteShell')) {
     if (block.contains('LoginPage')) return 'LoginPage';
     if (block.contains('RegisterPage')) return 'RegisterPage';
@@ -900,9 +909,9 @@ List<String> _extraSourceForPageGroup(
   final extraPaths = <String>[];
 
   if (relativeGroup ==
-      'flutter_app/lib/features/markets/presentation/pages/hub/market_list_page.dart') {
+      'flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart') {
     extraPaths.add(
-      'lib/features/markets/presentation/widgets/hub/market_list_header.dart',
+      'lib/features/markets/presentation/widgets/phone/market_list_header.dart',
     );
   }
 
@@ -919,7 +928,7 @@ List<String> _extraSourceForPageGroup(
     'VitTradeSimpleShell(': [
       (
         path:
-            'lib/features/trade/presentation/widgets/hub/vit_trade_simple_shell.dart',
+            'lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart',
         className: null,
       ),
       // VitTradeSimpleShell always wraps VitTradeHubScaffold (never

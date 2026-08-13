@@ -467,7 +467,7 @@ String _renderComplianceReport(List<_AuditRow> rows) {
     buffer.writeln('- `${row.file}` — ${row.notes}');
   }
 
-  return buffer.toString();
+  return '${buffer.toString().trimRight()}\n';
 }
 
 /// Normalizes CRLF/CR line endings to LF so the staleness check is not

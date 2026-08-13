@@ -6,11 +6,11 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 317 |
-| Files with shared widgets | 284 |
-| Compliance pass | 219 |
+| Audit rows | 322 |
+| Files with shared widgets | 289 |
+| Compliance pass | 223 |
 | Compliance warn | 0 |
-| Compliance review | 98 |
+| Compliance review | 99 |
 | Interactive local classes | 0 |
 | P0 local classes | 0 |
 
@@ -18,12 +18,12 @@
 
 | Family | Call sites |
 | --- | ---: |
-| VitTabBar | 117 |
-| VitChoicePill | 118 |
-| VitSegmentedChoice | 80 |
+| VitTabBar | 118 |
+| VitChoicePill | 122 |
+| VitSegmentedChoice | 86 |
 | VitSegmentedTabBar | 26 |
-| VitPresetChipRow | 29 |
-| VitFilterChip | 56 |
+| VitPresetChipRow | 30 |
+| VitFilterChip | 58 |
 
 ## Module heat map
 
@@ -41,7 +41,7 @@
 | enterprise_states | 2 |
 | home | 2 |
 | launchpad | 24 |
-| markets | 34 |
+| markets | 36 |
 | news | 1 |
 | notifications | 1 |
 | p2p_account | 6 |
@@ -54,12 +54,12 @@
 | referral | 2 |
 | rewards | 1 |
 | support | 2 |
-| trade | 14 |
+| trade | 16 |
 | trade_bots | 10 |
 | trade_compliance | 20 |
 | trade_copy | 17 |
 | trade_terminal | 7 |
-| wallet | 18 |
+| wallet | 19 |
 
 ## Migration status
 

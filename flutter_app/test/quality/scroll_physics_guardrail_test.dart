@@ -53,7 +53,8 @@ void main() {
     // (không ghim số dòng để không gãy khi file xê dịch), CHỈ ĐƯỢC GIẢM.
     const allowlist = {
       'lib/features/profile/presentation/widgets/device_management_page_sections.dart',
-      'lib/features/trade/presentation/widgets/hub/vit_trade_confirm_sheet.dart',
+      'lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart',
+      'lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart',
       'lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart',
       'lib/features/wallet/presentation/pages/transfer/deposit_page.dart',
       'lib/features/wallet/presentation/pages/transfer/transfer_page.dart',

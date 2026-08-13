@@ -1,0 +1,183 @@
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  test('device-specific root UI stays in canonical presentation boundaries', () {
+    const requiredFiles = <String>[
+      'lib/features/home/presentation/pages/phone/home_page.dart',
+      'lib/features/home/presentation/pages/tablet/home_tablet_page.dart',
+      'lib/features/home/presentation/pages/responsive/home_responsive_entry.dart',
+      'lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart',
+      'lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart',
+      'lib/features/markets/presentation/pages/phone/market_list_page.dart',
+      'lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart',
+      'lib/features/markets/presentation/pages/responsive/markets_responsive_entry.dart',
+      'lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart',
+      'lib/features/wallet/presentation/pages/phone/wallet_page.dart',
+      'lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart',
+      'lib/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart',
+      'lib/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart',
+      'lib/features/trade/presentation/pages/phone/trade_page.dart',
+      'lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart',
+      'lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart',
+      'lib/features/trade/presentation/pages/responsive/trade_responsive_entry.dart',
+      'lib/features/trade/presentation/pages/phone/trade_page_state.dart',
+      'lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart',
+      'lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart',
+      'lib/features/profile/presentation/pages/phone/profile_page.dart',
+      'lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart',
+      'lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart',
+      'lib/features/profile/presentation/pages/phone/profile_home_hero.dart',
+      'lib/features/home/presentation/widgets/phone/home_header.dart',
+      'lib/features/markets/presentation/widgets/phone/market_list_header.dart',
+      'lib/features/wallet/presentation/widgets/phone/wallet_page_sections.dart',
+      'lib/features/trade/presentation/pages/phone/order_receipt_page.dart',
+      'lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart',
+      'lib/features/profile/presentation/widgets/common/profile_icon_registry.dart',
+      'lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart',
+      'lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart',
+    ];
+
+    final missing = requiredFiles
+        .where((path) => !File(path).existsSync())
+        .toList(growable: false);
+
+    expect(
+      missing,
+      isEmpty,
+      reason: 'Thiếu file trong boundary UI phone/tablet chuẩn: $missing',
+    );
+  });
+
+  test('legacy page paths remain export-only compatibility facades', () {
+    const legacyFiles = <String>[
+      'lib/features/home/presentation/pages/home_page.dart',
+      'lib/features/home/presentation/pages/home_tablet_page.dart',
+      'lib/features/home/presentation/pages/home_responsive_entry.dart',
+      'lib/features/markets/presentation/pages/hub/market_list_page.dart',
+      'lib/features/markets/presentation/pages/hub/markets_tablet_page.dart',
+      'lib/features/markets/presentation/pages/hub/markets_responsive_entry.dart',
+      'lib/features/wallet/presentation/pages/hub/wallet_page.dart',
+      'lib/features/wallet/presentation/pages/hub/wallet_tablet_page.dart',
+      'lib/features/wallet/presentation/pages/hub/wallet_responsive_entry.dart',
+      'lib/features/trade/presentation/pages/hub/trade_page.dart',
+      'lib/features/trade/presentation/pages/hub/trade_tablet_page.dart',
+      'lib/features/trade/presentation/pages/hub/trade_responsive_entry.dart',
+      'lib/features/profile/presentation/pages/profile_page.dart',
+      'lib/features/profile/presentation/pages/profile_tablet_page.dart',
+      'lib/features/profile/presentation/pages/profile_responsive_entry.dart',
+    ];
+
+    final violations = <String>[];
+    for (final path in legacyFiles) {
+      final file = File(path);
+      if (!file.existsSync()) {
+        violations.add('$path: thiếu compatibility facade');
+        continue;
+      }
+      final content = file.readAsStringSync();
+      if (!content.contains('export ') || content.contains('class ')) {
+        violations.add('$path: facade chứa logic UI thay vì chỉ export');
+      }
+    }
+
+    expect(violations, isEmpty, reason: violations.join('\n'));
+  });
+
+  test('tablet UI never imports phone or legacy feature UI', () {
+    const features = <String>['home', 'markets', 'wallet', 'trade', 'profile'];
+    final violations = <String>[];
+
+    for (final feature in features) {
+      final roots = <String>[
+        'lib/features/$feature/presentation/pages/tablet',
+        'lib/features/$feature/presentation/widgets/tablet',
+      ];
+      final forbidden = <String>[
+        'features/$feature/presentation/pages/phone/',
+        'features/$feature/presentation/pages/hub/',
+        'features/$feature/presentation/widgets/hub/',
+        'features/$feature/presentation/widgets/profile_icon_registry.dart',
+      ];
+      final phoneClasses = <String>[
+        'HomePage.',
+        'MarketListPage.',
+        'WalletPage.',
+        'TradePage.',
+        'ProfilePage.',
+      ];
+
+      for (final root in roots) {
+        final directory = Directory(root);
+        if (!directory.existsSync()) continue;
+        final files = directory
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((file) => file.path.endsWith('.dart'));
+        for (final file in files) {
+          final content = file.readAsStringSync();
+          final forbiddenImport = forbidden.firstWhere(
+            content.contains,
+            orElse: () => '',
+          );
+          final forbiddenClass = phoneClasses.firstWhere(
+            content.contains,
+            orElse: () => '',
+          );
+          if (forbiddenImport.isNotEmpty) {
+            violations.add('${file.path}: import UI legacy "$forbiddenImport"');
+          }
+          if (forbiddenClass.isNotEmpty) {
+            violations.add(
+              '${file.path}: tham chiếu class Phone "$forbiddenClass"',
+            );
+          }
+        }
+      }
+    }
+
+    expect(violations, isEmpty, reason: violations.join('\n'));
+  });
+
+  test('phone UI never imports tablet or legacy feature UI', () {
+    const features = <String>['home', 'markets', 'wallet', 'trade', 'profile'];
+    final violations = <String>[];
+
+    for (final feature in features) {
+      final roots = <String>[
+        'lib/features/$feature/presentation/pages/phone',
+        'lib/features/$feature/presentation/widgets/phone',
+      ];
+      final forbidden = <String>[
+        'features/$feature/presentation/pages/tablet/',
+        'features/$feature/presentation/widgets/tablet/',
+        'features/$feature/presentation/pages/hub/',
+        'features/$feature/presentation/widgets/hub/',
+      ];
+
+      for (final root in roots) {
+        final directory = Directory(root);
+        if (!directory.existsSync()) continue;
+        final files = directory
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((file) => file.path.endsWith('.dart'));
+        for (final file in files) {
+          final content = file.readAsStringSync();
+          final forbiddenImport = forbidden.firstWhere(
+            content.contains,
+            orElse: () => '',
+          );
+          if (forbiddenImport.isNotEmpty) {
+            violations.add(
+              '${file.path}: import UI ngoài Phone "$forbiddenImport"',
+            );
+          }
+        }
+      }
+    }
+
+    expect(violations, isEmpty, reason: violations.join('\n'));
+  });
+}

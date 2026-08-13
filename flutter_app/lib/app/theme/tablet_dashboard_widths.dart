@@ -21,8 +21,14 @@ final class TabletDashboardWidths {
 
   /// Caps the primary (main-content) column's own width on wide
   /// tablets/landscape so rows and cards built for phone-width content
-  /// don't stretch into sparse, oversized layouts.
-  static const double primaryColumnMaxWidth = 640;
+  /// don't stretch into sparse, oversized layouts. Paired with
+  /// [secondaryColumnMaxWidth] as the two-column block's total width cap in
+  /// [VitTwoColumnTabletDashboard] — raised from an original 640 once a
+  /// wide (1280dp-logical) tablet showed that value left a visible unused
+  /// margin rather than actually being a deliberate content-width ceiling;
+  /// re-verify on-device before raising further, don't just keep bumping
+  /// the number.
+  static const double primaryColumnMaxWidth = 760;
 
   /// Caps the secondary (sidebar-panel) column's own width — see
   /// [primaryColumnMaxWidth].

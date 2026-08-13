@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/markets_tablet_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/pages/tablet/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/data/trade_repository.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_tablet_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/hub/trade_positions_panel.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/hub/vit_trade_simple_hero.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/hub/vit_trade_simple_order_form.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/pages/phone/trade_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/pages/tablet/trade_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_positions_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart';
+import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_module_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -158,4 +161,35 @@ void main() {
       findsWidgets,
     );
   });
+
+  testWidgets(
+    'SC-048 wide tablet keeps compact section rhythm in both columns',
+    (tester) async {
+      await pumpTabletTrade(tester, size: const Size(1180, 820));
+
+      final hero = tester.getRect(find.byType(VitTradeSimpleHero));
+      final orderForm = tester.getRect(find.byType(VitTradeSimpleOrderForm));
+      final nextSection = tester.getRect(
+        find.ancestor(
+          of: find.byKey(TradeTabletKeys.nextAction),
+          matching: find.byType(VitTradeSection),
+        ),
+      );
+      final assetsSection = tester.getRect(
+        find.ancestor(
+          of: find.text('Tài sản của bạn'),
+          matching: find.byType(VitTradeSection),
+        ),
+      );
+
+      expect(
+        orderForm.top - hero.bottom,
+        closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
+      );
+      expect(
+        assetsSection.top - nextSection.bottom,
+        closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
+      );
+    },
+  );
 }

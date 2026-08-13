@@ -32,15 +32,15 @@ void main() {
       // `VitServiceTile.fromAction(...)` call inline. That builder is the
       // one and only place that still has to call the real factory, which
       // is asserted directly.
-      'lib/features/home/presentation/widgets/home_products_section.dart':
+      'lib/features/home/presentation/widgets/phone/home_products_section.dart':
           'buildHomeQuickActionTile(',
-      'lib/features/home/presentation/widgets/home_more_products_sheet.dart':
+      'lib/features/home/presentation/widgets/phone/home_more_products_sheet.dart':
           'buildHomeQuickActionTile(',
-      'lib/features/home/presentation/widgets/home_formatters.dart':
+      'lib/features/home/presentation/widgets/phone/home_formatters.dart':
           'VitServiceTile.fromAction(',
-      'lib/features/home/presentation/widgets/home_portfolio_card.dart':
+      'lib/features/home/presentation/widgets/phone/home_portfolio_card.dart':
           'VitBalanceBreakdownRow(',
-      'lib/features/home/presentation/pages/home_page_sections.dart':
+      'lib/features/home/presentation/pages/phone/home_page_sections.dart':
           'VitRiskDisclaimerNote(',
     };
 

@@ -437,7 +437,7 @@ BodyRouteEntry _analyzeRouteEntry({
     feature: routeEntry.feature,
     route: routeEntry.route,
     pageClass: routeEntry.pageClass,
-    pageFile: routeEntry.pageFile,
+    pageFile: _canonicalPageFile(routeEntry),
     screenLevel: routeEntry.screenLevel,
     archetype: routeEntry.archetype,
     bodyGrade: bodyGrade,
@@ -466,7 +466,11 @@ SourceBundle _readSourceBundle(
   String repoRoot,
   RouteInventoryEntry entry,
 ) {
-  final pageFile = _resolveRepoFile(appRoot, repoRoot, entry.pageFile);
+  final pageFile = _resolveRepoFile(
+    appRoot,
+    repoRoot,
+    _canonicalPageFile(entry),
+  );
   if (pageFile == null || !pageFile.existsSync()) {
     return const SourceBundle(source: '', files: [], unresolved: true);
   }
@@ -568,6 +572,25 @@ SourceBundle _readSourceBundle(
     files: files,
     unresolved: false,
   );
+}
+
+/// Responsive entries are dispatchers, not the body composition audited by
+/// this inventory. Keep the audit pointed at the canonical Phone page, while
+/// Tablet has its own separate page and focused UI suite.
+String _canonicalPageFile(RouteInventoryEntry entry) {
+  return switch (entry.pageClass) {
+    'HomeResponsiveEntry' =>
+      'flutter_app/lib/features/home/presentation/pages/phone/home_page.dart',
+    'MarketsResponsiveEntry' =>
+      'flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart',
+    'WalletResponsiveEntry' =>
+      'flutter_app/lib/features/wallet/presentation/pages/phone/wallet_page.dart',
+    'TradeResponsiveEntry' =>
+      'flutter_app/lib/features/trade/presentation/pages/phone/trade_page.dart',
+    'ProfileResponsiveEntry' =>
+      'flutter_app/lib/features/profile/presentation/pages/phone/profile_page.dart',
+    _ => entry.pageFile,
+  };
 }
 
 File? _resolveRepoFile(Directory appRoot, String repoRoot, String path) {

@@ -64,15 +64,18 @@ const gateShellWidgets = {'InternalSurfaceGate'};
 /// own file-level page_rhythm_audit, and the phone page is the pre-existing
 /// canonical reference, so it stays the rollup target here.
 const widgetClassPageOverrides = <String, String>{
-  'HomeResponsiveEntry': 'features/home/presentation/pages/home_page.dart',
+  'HomeResponsiveEntry':
+      'features/home/presentation/pages/phone/home_page.dart',
   'WalletResponsiveEntry':
-      'features/wallet/presentation/pages/hub/wallet_page.dart',
+      'features/wallet/presentation/pages/phone/wallet_page.dart',
   'MarketsResponsiveEntry':
-      'features/markets/presentation/pages/hub/market_list_page.dart',
+      'features/markets/presentation/pages/phone/market_list_page.dart',
   'TradeResponsiveEntry':
-      'features/trade/presentation/pages/hub/trade_page.dart',
+      'features/trade/presentation/pages/phone/trade_page.dart',
+  'OrderReceiptPage':
+      'features/trade/presentation/pages/phone/order_receipt_page.dart',
   'ProfileResponsiveEntry':
-      'features/profile/presentation/pages/profile_page.dart',
+      'features/profile/presentation/pages/phone/profile_page.dart',
   'ClientOptUpRequestPage':
       'features/trade_compliance/presentation/pages/governance/client_categorization_opt_up_page.dart',
   'PredictionTournamentDetailPage':
@@ -236,7 +239,7 @@ List<String> collectVpcFilesForPage(
     }
   }
 
-  if (relativePage.endsWith('trade/presentation/pages/trade_page.dart')) {
+  if (relativePage.endsWith('trade/presentation/pages/phone/trade_page.dart')) {
     const layout =
         'features/trade_core/presentation/widgets/trade_module_layout.dart';
     if (auditRelativePaths.contains(layout)) files.add(layout);
@@ -314,6 +317,15 @@ String? resolvePageFilePath({
   final outer = pageWidget.contains('>')
       ? pageWidget.split('>').first
       : pageWidget;
+
+  // The trade receipt route selects Phone/Tablet page implementations inside
+  // one builder, so the route truth table records the conditional branch as
+  // `real_page` instead of a concrete leaf widget.
+  if (routeName == 'AppRouteNames.sc051OrderReceipt') {
+    return '${appRoot.path}/lib/features/trade/presentation/pages/phone/'
+            'order_receipt_page.dart'
+        .replaceAll('\\', '/');
+  }
 
   final override = widgetClassPageOverrides[leaf];
   if (override != null) {

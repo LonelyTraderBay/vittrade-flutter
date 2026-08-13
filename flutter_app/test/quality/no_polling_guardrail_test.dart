@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// `SpotTradeRepository.watchCandles`) — cấm UI tự polling bằng
 /// `Timer.periodic` trong `lib/features/**/presentation/` và `lib/shared/`.
 ///
-/// 2 site hiện có trong allowlist KHÔNG phải polling dữ liệu — chúng chỉ
+/// 3 site hiện có trong allowlist KHÔNG phải polling dữ liệu — chúng chỉ
 /// đếm ngược/tự động chuyển trang cục bộ (không gọi lại repository):
 /// - `otp_page.dart`: đếm ngược giây gửi lại OTP.
 /// - `home_announcement_banner.dart`: tự động chuyển slide carousel.
@@ -20,7 +20,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// `Timer.periodic` trong UI.
 const _allowlist = {
   'lib/features/auth/presentation/pages/otp_page.dart',
-  'lib/features/home/presentation/widgets/home_announcement_banner.dart',
+  'lib/features/home/presentation/widgets/phone/home_announcement_banner.dart',
+  'lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart',
 };
 
 List<String> _timerPeriodicViolations() {

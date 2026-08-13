@@ -283,7 +283,7 @@ List<String> _extraSourceForPageGroup(
   final extraPaths = <String>[];
 
   if (relativeGroup ==
-      'flutter_app/lib/features/markets/presentation/pages/market_list_page.dart') {
+      'flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart') {
     extraPaths.add(
       'lib/features/markets/presentation/widgets/market_list_header.dart',
     );
@@ -302,7 +302,7 @@ List<String> _extraSourceForPageGroup(
     'VitTradeSimpleShell(': [
       (
         path:
-            'lib/features/trade/presentation/widgets/hub/vit_trade_simple_shell.dart',
+            'lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart',
         className: null,
       ),
       // VitTradeSimpleShell always wraps VitTradeHubScaffold (never

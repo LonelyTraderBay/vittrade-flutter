@@ -90,8 +90,8 @@ earn_staking,earn_staking/presentation/widgets/staking/staking_tax_guide_jurisdi
 earn_staking,earn_staking/presentation/widgets/staking/staking_validator_selection_filters.dart,VitChoicePill,chip,3,44,hug,-,pass,
 enterprise_states,enterprise_states/presentation/widgets/enterprise_states_hero_tabs.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 enterprise_states,enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
-home,home/presentation/pages/home_page_sections.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
-home,home/presentation/widgets/home_market_watchlist_panel.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+home,home/presentation/pages/phone/home_page_sections.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+home,home/presentation/widgets/tablet/home_market_watchlist_panel.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 launchpad,launchpad/presentation/pages/claim/launchpad_claim_receipt_page.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 launchpad,launchpad/presentation/pages/tools/launchpad_gas_tracker_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 launchpad,launchpad/presentation/pages/tools/launchpad_limit_orders_page.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
@@ -125,19 +125,21 @@ markets,markets/presentation/pages/portfolio/price_alerts_page.dart,VitSegmented
 markets,markets/presentation/pages/research/social_signals_page_tabs_widgets.dart,VitFilterChip,filter_accent,8,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/pages/research/token_unlocks_page_upcoming_widgets.dart,VitFilterChip,filter_accent,5,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/pages/research/token_unlocks_page_upcoming_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
-markets,markets/presentation/widgets/hub/market_list_filters.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
-markets,markets/presentation/widgets/hub/market_list_tools.dart,VitChoicePill,chip,2,44,hug,-,pass,
 markets,markets/presentation/widgets/pair/market_depth_chart.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/pair/market_depth_tabs.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 markets,markets/presentation/widgets/pair/market_heatmap_summary.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/pair/pair_detail_chart_widgets.dart,VitChoicePill,chip,2,44,hug,-,pass,
 markets,markets/presentation/widgets/pair/pair_detail_chart_widgets.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 markets,markets/presentation/widgets/pair/pair_detail_chart_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
+markets,markets/presentation/widgets/phone/market_list_filters.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/phone/market_list_tools.dart,VitChoicePill,chip,3,44,hug,-,pass,
 markets,markets/presentation/widgets/research/market_news_page_sections.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/research/market_news_page_sections.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/research/social_sentiment_tabs_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 markets,markets/presentation/widgets/research/social_sentiment_token_widgets.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/research/token_info_tabs_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
+markets,markets/presentation/widgets/tablet/market_list_filters.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/market_list_tools.dart,VitChoicePill,chip,3,44,hug,-,pass,
 markets,markets/presentation/widgets/tools/comparison_tool_tokens.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/tools/market_calendar_filters.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/tools/market_calendar_filters.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
@@ -241,9 +243,11 @@ trade,trade/presentation/widgets/hub/orders_history_page_sections.dart,VitSegmen
 trade,trade/presentation/widgets/hub/position_dashboard_page_sections.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/widgets/hub/trade_history_export_selectors_includes.dart,VitChoicePill,chip,1,44,hug,-,pass,
 trade,trade/presentation/widgets/hub/trade_settings_page_sections.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
-trade,trade/presentation/widgets/hub/vit_trade_side_switch.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
-trade,trade/presentation/widgets/hub/vit_trade_simple_order_form.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade,trade/presentation/widgets/margin/margin_trading_simple_form.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
+trade,trade/presentation/widgets/phone/vit_trade_side_switch.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
+trade,trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
+trade,trade/presentation/widgets/tablet/vit_trade_side_switch.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
+trade,trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade_bots,trade_bots/presentation/pages/dashboard/bot_equity_curve_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 trade_bots,trade_bots/presentation/pages/dashboard/bot_history_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 trade_bots,trade_bots/presentation/pages/settings/bot_api_documentation_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
@@ -306,7 +310,8 @@ wallet,wallet/presentation/widgets/address/wallet_address_book_list.dart,VitChoi
 wallet,wallet/presentation/widgets/assets/asset_detail_page_sections.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 wallet,wallet/presentation/widgets/assets/wallet_buy_crypto_input_sections.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
 wallet,wallet/presentation/widgets/assets/wallet_dust_converter_targets.dart,VitSegmentedChoice,primaryAccent,2,44,equal_expanded,-,pass,
-wallet,wallet/presentation/widgets/hub/wallet_page_asset_sections.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+wallet,wallet/presentation/widgets/phone/wallet_page_asset_sections.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+wallet,wallet/presentation/widgets/tablet/wallet_page_asset_sections.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 wallet,wallet/presentation/widgets/tools/portfolio_analytics_overview_chart.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 wallet,wallet/presentation/widgets/tools/portfolio_analytics_summary_switcher.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 wallet,wallet/presentation/widgets/tools/wallet_gas_optimizer_current.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,

@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/profile_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/profile_tablet_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/profile_hero_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/profile_legal_accordion_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/profile_menu_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/profile_vip_card_panel.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_tablet_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/pages/phone/profile_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/pages/tablet/profile_tablet_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_hero_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -81,7 +85,7 @@ void main() {
       // true against the production mock.
       await pumpTabletProfile(tester);
 
-      expect(find.byKey(ProfilePage.kycBannerKey), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycBanner), findsOneWidget);
     },
   );
 
@@ -142,6 +146,38 @@ void main() {
           matching: find.byType(VitCard),
         ),
         findsWidgets,
+      );
+    },
+  );
+
+  testWidgets(
+    'SC-156 wide tablet keeps compact rhythm without stacked header gaps',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      final accountTitle = tester.getRect(find.text('TÀI KHOẢN'));
+      final menu = tester.getRect(find.byType(ProfileMenuPanel).first);
+      final predictionTitle = tester.getRect(find.text('Dự đoán & Thách đấu'));
+      final prediction = tester.getRect(find.byType(ProfilePredictionCard));
+      final arena = tester.getRect(find.byType(ProfileArenaCard));
+      final productTitle = tester.getRect(find.text('LỐI TẮT SẢN PHẨM'));
+      final productHub = tester.getRect(find.byType(ProfileProductHubPanel));
+
+      expect(
+        menu.top - accountTitle.bottom,
+        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
+      );
+      expect(
+        prediction.top - predictionTitle.bottom,
+        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
+      );
+      expect(
+        arena.top - prediction.bottom,
+        closeTo(AppSpacing.pageRhythmStandardInnerGap, 0.01),
+      );
+      expect(
+        productHub.top - productTitle.bottom,
+        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
       );
     },
   );

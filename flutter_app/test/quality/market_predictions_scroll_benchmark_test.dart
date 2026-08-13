@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/market_list_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/pages/phone/market_list_page.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/predictions_home_page.dart';
 
 /// PERF-HN2 scroll benchmark: fling both Danh sách thị trường (SC-008) and

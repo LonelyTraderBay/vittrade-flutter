@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/trade/data/trade_repository.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/pages/futures/futures_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/hub/vit_trade_confirm_sheet.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
