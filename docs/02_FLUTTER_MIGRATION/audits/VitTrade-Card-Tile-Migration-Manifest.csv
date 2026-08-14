@@ -237,8 +237,11 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart,C,allow_start_baseline,pending,1,fixed_height_baseline
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,E,-,done,0,-

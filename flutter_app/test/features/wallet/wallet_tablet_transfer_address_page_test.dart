@@ -6,7 +6,10 @@ import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
@@ -65,5 +68,26 @@ void main() {
   ) async {
     await pumpRoute(tester, AppRoutePaths.walletPendingDeposits);
     expect(find.byType(PendingDepositsTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Portfolio Analytics composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletPortfolioAnalytics);
+    expect(find.byType(PortfolioAnalyticsTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Buy Crypto composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletBuyCrypto);
+    expect(find.byType(BuyCryptoTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Asset Detail composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletAsset('ETH'));
+    expect(find.byType(AssetDetailTabletPage), findsOneWidget);
   });
 }

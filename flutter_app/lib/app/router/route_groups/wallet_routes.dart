@@ -25,6 +25,9 @@ import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withd
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
@@ -145,8 +148,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletPortfolioAnalytics,
       name: AppRouteNames.sc142PortfolioAnalytics,
-      builder: (_, _) =>
-          PortfolioAnalyticsPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const PortfolioAnalyticsTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => PortfolioAnalyticsPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletAddressBookAdd,
@@ -173,7 +181,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletBuyCrypto,
       name: AppRouteNames.sc145BuyCrypto,
-      builder: (_, _) => BuyCryptoPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const BuyCryptoTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => BuyCryptoPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletTransfer,
@@ -189,11 +203,18 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: '/wallet/asset/:assetId',
       name: AppRouteNames.sc147AssetDetail,
-      builder: (_, state) => AssetDetailPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        assetId: state.pathParameters['assetId'] ?? 'btc',
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (_, state) {
+        final assetId = state.pathParameters['assetId'] ?? 'btc';
+        return switch (surface) {
+          AppSurface.tablet => AssetDetailTabletPage(assetId: assetId),
+          // Web surface composition is migrated in P7.
+          AppSurface.phone || AppSurface.web || null => AssetDetailPage(
+            // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+            assetId: assetId,
+            shellRenderMode: shellRenderMode,
+          ),
+        };
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletMultiManager,
