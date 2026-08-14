@@ -50,17 +50,20 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// goes in the secondary column. See
 /// docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md.
 class TradeTabletPage extends ConsumerStatefulWidget {
-  const TradeTabletPage({super.key, this.initialSide = TradeOrderSide.buy});
+  const TradeTabletPage({
+    super.key,
+    this.initialSide = TradeOrderSide.buy,
+    this.pairId = 'btcusdt',
+  });
 
   final TradeOrderSide initialSide;
+  final String pairId;
 
   @override
   ConsumerState<TradeTabletPage> createState() => _TradeTabletPageState();
 }
 
 class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
-  static const _pairId = 'btcusdt';
-
   late TradeOrderSide _side;
   final _amountController = TextEditingController();
 
@@ -97,7 +100,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
         secondaryPressedLabel: 'Đã chia sẻ',
         secondaryKey: TradeTabletOrderReceiptPage.shareKey,
         onPrimary: () {
-          context.go(AppRoutePaths.tradePair('btcusdt'));
+          context.go(AppRoutePaths.tradePair(widget.pairId));
         },
       );
       return;
@@ -153,7 +156,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenAsync = ref.watch(tradeScreenProvider(_pairId));
+    final screenAsync = ref.watch(tradeScreenProvider(widget.pairId));
     final showBack = context.canPop();
     // Unlike the phone page (whose header lives entirely inside its data
     // branch, so loading/error show no chrome at all), the tablet header is
@@ -206,7 +209,8 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
                   title: 'Không tải được màn hình giao dịch',
                   message: 'Vui lòng kiểm tra kết nối và thử lại.',
                   actionLabel: 'Thử lại',
-                  onAction: () => ref.invalidate(tradeScreenProvider(_pairId)),
+                  onAction: () =>
+                      ref.invalidate(tradeScreenProvider(widget.pairId)),
                 ),
               ),
               data: _buildDashboard,
@@ -235,7 +239,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
       price: pair.price,
       amount: amount,
     );
-    final orderRequest = (pairId: _pairId, draft: draft);
+    final orderRequest = (pairId: widget.pairId, draft: draft);
     final orderState = ref.watch(tradeOrderControllerProvider(orderRequest));
     final orderNotifier = ref.read(
       tradeOrderControllerProvider(orderRequest).notifier,

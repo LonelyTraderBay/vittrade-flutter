@@ -40,12 +40,12 @@ hard_coded_offline_banner=0
 | L2_detail | 179 |
 | L2_utilityDetail | 69 |
 | L3_transactionFlow | 56 |
-| L2_entityDetail | 38 |
+| L2_entityDetail | 39 |
 | L1_utilityHub | 25 |
 | L2_sectionHub | 19 |
 | L1_productModuleHub | 8 |
 | L1_authFlow | 5 |
-| L1_instrumentWorkspace | 5 |
+| L1_instrumentWorkspace | 4 |
 | L1_primaryTabRoot | 3 |
 | L3_fullscreenTool | 2 |
 | L0_authEntry | 1 |
@@ -56,9 +56,9 @@ hard_coded_offline_banner=0
 
 | Archetype | Routes |
 | --- | ---: |
-| detail | 391 |
+| detail | 392 |
 | rootModule | 11 |
-| instrument | 6 |
+| instrument | 5 |
 | fullscreenTool | 2 |
 | authOnboarding | 1 |
 | rootBrand | 1 |
@@ -380,7 +380,7 @@ hard_coded_offline_banner=0
 | support | `AppRoutePaths.support` | `SupportPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_utilityHub | detail | no | yes | no | `-` | - | content | state_driven | offlineWithCache | 0 | - | - | `flutter_app/lib/features/support/presentation/pages/support_page.dart` |
 | support | `AppRoutePaths.supportAnnouncements` | `AnnouncementsPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_utilityHub | detail | no | yes | no | `-` | - | content | state_driven | offlineWithCache | 0 | - | - | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `HelpCenterPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_utilityHub | detail | no | yes | no | `-` | - | content | state_driven | offlineWithCache | 0 | - | - | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` |
-| trade | `'/trade/:pairId'` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 2 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
+| trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 2 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
 | trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/pages/futures/futures_page.dart` |
 | trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/pages/futures/leverage_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 2 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |

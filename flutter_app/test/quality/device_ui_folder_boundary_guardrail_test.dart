@@ -48,6 +48,7 @@ void main() {
       'lib/features/trade/presentation/phone/pages/trade_page.dart',
       'lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart',
       'lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart',
+      'lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
       'lib/features/trade/presentation/pages/responsive/trade_responsive_entry.dart',
       'lib/features/trade/presentation/phone/pages/trade_page_state.dart',
       'lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart',

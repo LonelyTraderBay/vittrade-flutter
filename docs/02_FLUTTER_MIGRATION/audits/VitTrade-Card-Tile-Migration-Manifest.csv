@@ -210,6 +210,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 04_financial,flutter_app/lib/features/trade/presentation/pages/hub/trade_history_export_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/pages/hub/trade_settings_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_widgets.dart,D,-,done,0,-

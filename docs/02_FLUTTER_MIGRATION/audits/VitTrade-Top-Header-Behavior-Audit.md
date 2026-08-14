@@ -4,8 +4,8 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=22
-auto_hide_header=366
+fixed_vit_header_remaining=23
+auto_hide_header=365
 custom_scroll_header=1
 no_top_header=23
 unresolved=0
@@ -18,8 +18,8 @@ unresolved=0
 | trade_copy | 10 |
 | trade_bots | 4 |
 | admin | 3 |
+| trade | 3 |
 | enterprise_states | 2 |
-| trade | 2 |
 | markets | 1 |
 
 ## Route Header Inventory
@@ -327,7 +327,7 @@ unresolved=0
 | support | `AppRoutePaths.support` | `SupportPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/support_page.dart` |
 | support | `AppRoutePaths.supportAnnouncements` | `AnnouncementsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `HelpCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` |
-| trade | `'/trade/:pairId'` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
+| trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
 | trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/futures_page.dart` |
 | trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/leverage_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |

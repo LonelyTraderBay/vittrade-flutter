@@ -6,7 +6,7 @@ Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
 ## Summary
 
-Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0, documented exceptions 2.
+Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0, documented exceptions 3.
 | Level | Meaning |
 | --- | --- |
 | L1 | Wiring: rhythm, orphan gaps, nested VPC |
@@ -17,7 +17,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 | Screen | Route | L1 | L2 | L3 |
 | --- | --- | --- | --- | --- |
-| AppRouteNames.sc049TradePair | `'/trade/:pairId'` | pass | pass | pass |
 | AppRouteNames.sc027PredictionsHome | `AppRoutePaths.marketsPredictions` | pass | pass | pass |
 | AppRouteNames.sc048Trade | `AppRoutePaths.trade` | pass | pass | pass |
 

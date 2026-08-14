@@ -97,6 +97,28 @@ const routeNameToPageOverrides = <String, String>{
       'features/home/presentation/phone/pages/home_page.dart',
   'AppRouteNames.sc008MarketList':
       'features/markets/presentation/phone/pages/market_list_page.dart',
+  'AppRouteNames.sc049TradePair':
+      'features/trade/presentation/tablet/pages/trade_tablet_page.dart',
+  'AppRouteNames.sc050OrdersHistory':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc052TradeSettings':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc053PositionDashboard':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc054TradeHistoryExport':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc056Convert':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc057Futures':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc058Leverage':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc085MarginTrading':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc086MarginTradingPair':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+  'AppRouteNames.sc090MarginTradingHub':
+      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
   'AppRouteNames.sc135Wallet':
       'features/wallet/presentation/tablet/pages/wallet_tablet_page.dart',
   'AppRouteNames.sc136TxHistory':

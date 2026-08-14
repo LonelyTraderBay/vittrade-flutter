@@ -759,6 +759,7 @@ trade,flutter_app/lib/features/trade/presentation/pages/hub/position_dashboard_p
 trade,flutter_app/lib/features/trade/presentation/pages/hub/trade_history_export_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/pages/hub/trade_settings_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart,1,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,2,1,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,1,0,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_widgets.dart,1,1,0,D,0,0,0,pass,-
