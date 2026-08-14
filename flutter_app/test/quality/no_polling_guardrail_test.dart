@@ -19,7 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// tương ứng (khuôn `watchTicker`/`watchDepth`/`watchCandles`) thay vì
 /// `Timer.periodic` trong UI.
 const _allowlist = {
-  'lib/features/auth/presentation/pages/otp_page.dart',
+  'lib/features/auth/presentation/phone/pages/otp_page.dart',
   'lib/features/home/presentation/widgets/phone/home_announcement_banner.dart',
   'lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart',
 };

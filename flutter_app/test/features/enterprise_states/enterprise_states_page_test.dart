@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/pages/login_page.dart';
+import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/login_page.dart';
 import 'package:vit_trade_flutter/features/enterprise_states/data/enterprise_states_repository.dart';
 import 'package:vit_trade_flutter/features/enterprise_states/presentation/pages/enterprise_states_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';

@@ -37,6 +37,18 @@ void main() {
       'lib/features/profile/presentation/widgets/common/profile_icon_registry.dart',
       'lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart',
       'lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart',
+      'lib/features/auth/presentation/phone/pages/login_page.dart',
+      'lib/features/auth/presentation/phone/pages/register_page.dart',
+      'lib/features/auth/presentation/phone/pages/otp_page.dart',
+      'lib/features/auth/presentation/phone/pages/two_fa_setup_page.dart',
+      'lib/features/auth/presentation/phone/pages/forgot_password_page.dart',
+      'lib/features/auth/presentation/phone/pages/reset_password_page.dart',
+      'lib/features/auth/presentation/tablet/pages/login_tablet_page.dart',
+      'lib/features/auth/presentation/tablet/pages/register_tablet_page.dart',
+      'lib/features/auth/presentation/tablet/pages/otp_tablet_page.dart',
+      'lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart',
+      'lib/features/auth/presentation/tablet/pages/forgot_password_tablet_page.dart',
+      'lib/features/auth/presentation/tablet/pages/reset_password_tablet_page.dart',
     ];
 
     final missing = requiredFiles
@@ -79,6 +91,12 @@ void main() {
       'lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart',
       'lib/features/profile/presentation/pages/phone/profile_page.dart',
       'lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart',
+      'lib/features/auth/presentation/pages/login_page.dart',
+      'lib/features/auth/presentation/pages/register_page.dart',
+      'lib/features/auth/presentation/pages/otp_page.dart',
+      'lib/features/auth/presentation/pages/two_fa_setup_page.dart',
+      'lib/features/auth/presentation/pages/forgot_password_page.dart',
+      'lib/features/auth/presentation/pages/reset_password_page.dart',
     ];
 
     final violations = <String>[];
@@ -98,7 +116,14 @@ void main() {
   });
 
   test('tablet UI never imports phone or legacy feature UI', () {
-    const features = <String>['home', 'markets', 'wallet', 'trade', 'profile'];
+    const features = <String>[
+      'home',
+      'markets',
+      'wallet',
+      'trade',
+      'profile',
+      'auth',
+    ];
     final violations = <String>[];
 
     for (final feature in features) {
@@ -153,7 +178,14 @@ void main() {
   });
 
   test('phone UI never imports tablet or legacy feature UI', () {
-    const features = <String>['home', 'markets', 'wallet', 'trade', 'profile'];
+    const features = <String>[
+      'home',
+      'markets',
+      'wallet',
+      'trade',
+      'profile',
+      'auth',
+    ];
     final violations = <String>[];
 
     for (final feature in features) {

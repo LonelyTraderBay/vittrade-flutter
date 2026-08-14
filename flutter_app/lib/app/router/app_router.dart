@@ -13,7 +13,7 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/auth/data/auth_repository.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/pages/otp_page.dart';
+import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/otp_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_app_shell.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
@@ -26,6 +26,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
+import 'package:vit_trade_flutter/app/router/contracts/auth_route_args.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/admin_route_ids.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/admin_routes.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/arena_route_ids.dart';

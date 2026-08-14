@@ -32,7 +32,7 @@ GoRouter createAppRouter({
       return null;
     },
     routes: [
-      ...topLevelRoutes(shellRenderMode),
+      ...topLevelRoutes(shellRenderMode, surface: surface),
       _appShellRoute(shellRenderMode, surface: surface),
     ],
   );

@@ -77,9 +77,11 @@ arena,flutter_app/lib/features/arena/presentation/widgets/studio/arena_smart_rul
 arena,flutter_app/lib/features/arena/presentation/widgets/studio/arena_studio_fee_banner.dart,2,0,0,D,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/widgets/studio/arena_studio_footer.dart,2,1,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/widgets/studio/arena_studio_steps.dart,3,0,0,C,0,0,0,pass,-
-auth,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_backup.dart,2,0,0,C,0,0,0,pass,-
-auth,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_qr.dart,1,0,0,C,0,0,0,pass,-
-auth,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_verify.dart,1,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_backup.dart,2,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_qr.dart,1,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_verify.dart,1,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart,2,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart,2,0,0,C,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_and_reports_tabs.dart,4,0,0,D,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_tab.dart,2,0,0,D,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_settings_tab.dart,3,1,0,D,0,0,0,pass,-

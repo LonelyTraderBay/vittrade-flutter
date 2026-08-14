@@ -89,16 +89,17 @@ const widgetClassPageOverrides = <String, String>{
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].
 const authRouteNameToPage = <String, String>{
   'AppRouteNames.sc001Login':
-      'features/auth/presentation/pages/login_page.dart',
+      'features/auth/presentation/phone/pages/login_page.dart',
   'AppRouteNames.sc002Register':
-      'features/auth/presentation/pages/register_page.dart',
-  'AppRouteNames.sc003Otp': 'features/auth/presentation/pages/otp_page.dart',
+      'features/auth/presentation/phone/pages/register_page.dart',
+  'AppRouteNames.sc003Otp':
+      'features/auth/presentation/phone/pages/otp_page.dart',
   'AppRouteNames.sc004TwoFaSetup':
-      'features/auth/presentation/pages/two_fa_setup_page.dart',
+      'features/auth/presentation/phone/pages/two_fa_setup_page.dart',
   'AppRouteNames.sc005ForgotPassword':
-      'features/auth/presentation/pages/forgot_password_page.dart',
+      'features/auth/presentation/phone/pages/forgot_password_page.dart',
   'AppRouteNames.sc006ResetPassword':
-      'features/auth/presentation/pages/reset_password_page.dart',
+      'features/auth/presentation/phone/pages/reset_password_page.dart',
 };
 
 /// [InternalSurfaceGate] routes → gated child page (rollup / audit target).

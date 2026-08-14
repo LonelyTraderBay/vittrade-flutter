@@ -13,7 +13,8 @@ arena,arena/presentation/widgets/challenge/arena_leaderboard_controls.dart,VitFi
 arena,arena/presentation/widgets/challenge/arena_leaderboard_controls.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 arena,arena/presentation/widgets/governance/my_arena_reports_page_sections.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 arena,arena/presentation/widgets/points/arena_points_ledger_page_sections.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
-auth,auth/presentation/pages/register_page.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
+auth,auth/presentation/phone/pages/register_page.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
+auth,auth/presentation/tablet/pages/register_tablet_page.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
 cross_module,cross_module/presentation/pages/tax_report_center_generate_and_reports_tabs.dart,VitChoicePill,chip,2,44,full_or_hug,-,pass,
 cross_module,cross_module/presentation/pages/tax_report_center_generate_tab.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 cross_module,cross_module/presentation/widgets/cross_module_analytics_tabs.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment

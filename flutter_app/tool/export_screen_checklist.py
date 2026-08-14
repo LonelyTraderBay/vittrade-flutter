@@ -158,7 +158,7 @@ def extract_widget(block: str) -> str:
 
 MANUAL_OVERRIDES: dict[str, dict[str, str]] = {
     "sc003Otp": {
-        "page_file": "lib/features/auth/presentation/pages/otp_page.dart",
+        "page_file": "lib/features/auth/presentation/phone/pages/otp_page.dart",
         "widget_class": "OtpPage",
     },
     "sc196ArenaPoints": {

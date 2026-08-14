@@ -181,7 +181,7 @@ void main() {
       'auth reset flow does not carry OTP secrets in route query params',
       () {
         final otpPage = readSource(
-          'lib/features/auth/presentation/pages/otp_page.dart',
+          'lib/features/auth/presentation/phone/pages/otp_page.dart',
         );
         final authRoutes = readSource(
           'lib/app/router/route_groups/auth_routes.dart',

@@ -426,9 +426,11 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/admin/presentation/widgets/analytics_dashboard_sections.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/admin/presentation/widgets/funnel_dashboard_selector_metrics.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/admin/presentation/widgets/funnel_dashboard_waterfall_details.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_backup.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_qr.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/auth/presentation/widgets/two_fa_setup_verify.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_backup.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_qr.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_verify.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_and_reports_tabs.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_tab.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_settings_tab.dart,D,-,done,0,-

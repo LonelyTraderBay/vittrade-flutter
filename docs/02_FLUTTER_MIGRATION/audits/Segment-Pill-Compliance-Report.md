@@ -6,9 +6,9 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 322 |
-| Files with shared widgets | 289 |
-| Compliance pass | 223 |
+| Audit rows | 323 |
+| Files with shared widgets | 290 |
+| Compliance pass | 224 |
 | Compliance warn | 0 |
 | Compliance review | 99 |
 | Interactive local classes | 0 |
@@ -20,7 +20,7 @@
 | --- | ---: |
 | VitTabBar | 118 |
 | VitChoicePill | 122 |
-| VitSegmentedChoice | 86 |
+| VitSegmentedChoice | 89 |
 | VitSegmentedTabBar | 26 |
 | VitPresetChipRow | 30 |
 | VitFilterChip | 58 |
@@ -31,7 +31,7 @@
 | --- | ---: |
 | admin | 1 |
 | arena | 13 |
-| auth | 1 |
+| auth | 2 |
 | cross_module | 5 |
 | dca | 12 |
 | dev | 4 |
