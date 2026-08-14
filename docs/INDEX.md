@@ -63,25 +63,22 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | `.codex/skills/ponytail-audit/SKILL.md` | Skill ledger-only (không fix trong audit turn) |
 | `.codex/skills/vittrade-minimal-review/SKILL.md` | Fix batch sau audit |
 
-## Claude Code subagents (.claude/agents/)
+## Codex workflow skills
 
-Claude Code sessions only — dispatched via the Agent tool, not directly
-usable from Cursor/Codex (different runtime). Each file is a self-contained
-runbook; readable and followable by any AI even without the dispatch
-mechanism.
+Load only the skill needed for the current task. `AGENTS.md` remains the
+project contract and the skill files provide focused procedures.
 
-| File | When |
+| Skill | When |
 | --- | --- |
-| `.claude/agents/flutter-batch-planner.md` | Split a large migration/rollout into 5-10 file batches |
-| `.claude/agents/flutter-batch-builder.md` | Implement one pre-scoped batch |
-| `.claude/agents/flutter-screen-designer.md` | Design/build a new screen or deliberate redesign |
-| `.claude/agents/flutter-domain-auditor.md` | Check one or more design-consistency domains |
-| `.claude/agents/flutter-diff-trimmer.md` | Trim over-engineering in the current diff |
-| `.claude/agents/flutter-architecture-sweep.md` | Whole-module debt sweep (dead code/circular/god-class) — Claude Code counterpart to ponytail-audit above |
-| `.claude/agents/flutter-button-wiring-auditor.md` | Check button/data-flow wiring — dead `onPressed`/`onTap` handlers, gap route/navigation-edge audits don't cover |
-| `.claude/agents/flutter-test-writer.md` | Write unit/controller/widget tests |
-| `.claude/agents/flutter-test-coverage-auditor.md` | Check structural test-coverage gaps |
-| `.claude/agents/flutter-pr-gate.md` | Full PR merge-readiness gate |
+| `.codex/skills/planning-and-task-breakdown/SKILL.md` | Break down ambiguous or multi-file work |
+| `.codex/skills/incremental-implementation/SKILL.md` | Implement and verify changes in small slices |
+| `.codex/skills/frontend-ui-engineering/SKILL.md` | Build or redesign Flutter UI |
+| `.codex/skills/vittrade-ui-checklists/SKILL.md` | Review accessibility, density, states, motion, and shared primitives |
+| `.codex/skills/vittrade-design-domain/SKILL.md` | Select exact design audit commands |
+| `.codex/skills/vittrade-product-verify/SKILL.md` | Verify high-risk financial flows |
+| `.codex/skills/vittrade-button-wiring-audit/SKILL.md` | Find dead or ambiguously wired button handlers |
+| `.codex/skills/vittrade-minimal-review/SKILL.md` | Trim over-engineering from a diff |
+| `.codex/skills/code-review-and-quality/SKILL.md` | Pre-merge correctness, architecture, security, and performance review |
 
 ## Checklists
 

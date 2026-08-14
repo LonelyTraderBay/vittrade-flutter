@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-07-18 (GĐ4-S4: 28 feature module / 27 file controller_providers; ARCH-A4: quy ước part-file; DOC-D4: hệ ADR)
+**Last Updated:** 2026-08-14 (Codex-only runtime cleanup; GĐ4-S4, ARCH-A4, DOC-D4)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -152,10 +152,10 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens) live in
-  `.claude/rules/ui-visual-standards.md` (Claude Code, lazy-loaded for
-  presentation/shared-widget/theme work) and the matching `.cursor/rules/
-  vittrade-*.mdc` files (Cursor) — read the one your tool loads before
-  touching presentation code; do not duplicate their content here.
+  `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
+  the matching files under `docs/02_FLUTTER_MIGRATION/standards/` — read the
+  applicable standard before touching presentation code; do not duplicate its
+  content here.
 - Never wrap `VitTabBar` / `VitSegmentedTabBar` in `VitCard` or `DecoratedBox`
   with a border — segment tabs render their own pill outline. Never use
   `BorderRadius.circular()` outside `app_radii.dart`.
@@ -188,18 +188,20 @@ flutter run
 Use focused tests for touched modules and full tests for router, shared layout,
 repository, or broad structural changes.
 
-## Cursor AI Workflow
+## Codex Workflow
 
-Cursor subscription ($200) is the default agent surface. Optimize quota with:
+Codex is the default repository agent surface. Keep the working context small
+and load only the relevant local skill from `.codex/skills/` for each task:
 
-- Daily session: `.\scripts\Start-CursorSession.ps1` (Headroom proxy + GitNexus status).
-- MCP scope split (no duplicate server names):
- - **Home** (`~/.cursor/mcp.json`): `gitnexus`, `dart`, `headroom` — must be Connected.
- - **Workspace** (project `.cursor/mcp.json`): empty — no project-level servers.
-- Model: Cursor **Auto** only — do not switch models manually or suggest tier changes.
-- When stuck: smaller scope, new chat, or GitNexus trace — not a different model.
-- Docs: load **one** execution prompt + **one** plan per task via `docs/INDEX.md`.
-- Batch 5–10 files per turn; new chat after each batch.
+- Multi-file or ambiguous work: use `planning-and-task-breakdown` first.
+- Implementation: use `incremental-implementation` and verify every slice.
+- Symbol changes: run GitNexus `impact` before editing and
+  `detect_changes` before committing.
+- UI work: use `vittrade-ui-checklists` plus the matching design-domain
+  standard.
+- High-risk financial flows: use `vittrade-product-verify`.
+- Batch size: 5–10 files; load one execution prompt and one plan slice from
+  `docs/INDEX.md` at a time.
 
 ### Minimal diff (Ponytail-lite)
 
@@ -209,8 +211,8 @@ Cursor subscription ($200) is the default agent surface. Optimize quota with:
 - Batch completion gate: self-check diff and trim bloat before marking batch done (see workflow rule).
 - AGENTS.md and the active execution prompt override YAGNI — do not skip required migration scope.
 
-Headroom details: `scripts/headroom/README.md`. Claude Code CLI is optional
-(Anthropic account only).
+Headroom is optional Cursor tooling only; it is not required by Codex. See
+`scripts/headroom/README.md` only when working in Cursor.
 
 ## Repo Hygiene
 
@@ -232,56 +234,18 @@ boundaries always take precedence over generic skill guidance.
 | Task | Skill |
 | --- | --- |
 | UI review / screen polish | `.codex/skills/vittrade-ui-checklists/SKILL.md` |
+| Batch completion gate | `.codex/skills/vittrade-batch-gate/SKILL.md` |
+| Design-domain audit lookup | `.codex/skills/vittrade-design-domain/SKILL.md` |
+| High-risk product verification | `.codex/skills/vittrade-product-verify/SKILL.md` |
+| Button wiring audit | `.codex/skills/vittrade-button-wiring-audit/SKILL.md` |
+| Plan multi-file work | `.codex/skills/planning-and-task-breakdown/SKILL.md` |
+| Incremental implementation | `.codex/skills/incremental-implementation/SKILL.md` |
 | Pre-merge review | `.codex/skills/code-review-and-quality/SKILL.md` |
 | GitNexus impact / refactor | `.codex/skills/gitnexus-impact-analysis/SKILL.md` |
 | Over-engineering / diff trim | `.codex/skills/vittrade-minimal-review/SKILL.md` |
 | Debug / test failure / blocked batch | `.codex/skills/debugging-and-error-recovery/SKILL.md` |
 | Performance / jank / profiling | `.codex/skills/performance-optimization/SKILL.md` |
 | Trade module debt scan (sprint) | `.codex/skills/ponytail-audit/SKILL.md` |
-
-## Claude Code Subagents
-
-Claude Code sessions only — dispatched via the Task/Agent tool, not directly
-invokable from Cursor/Codex. Each file under `.claude/agents/` is a
-self-contained runbook in plain markdown; any AI (including Cursor's) can
-still open one and follow its procedure manually for a matching task.
-
-Entry slash commands (Claude Code): `/vt-verify`, `/vt-audit`, `/vt-batch`
-(Plan → Build → Trim → Verify for one batch), `/vt-review` (pre-merge).
-Project skills: `.claude/skills/*/SKILL.md` (mirrors under `.codex/skills/`
-are for Cursor/Codex — runtimes do not share skill discovery). Session
-discipline: `.claude/rules/session-discipline.md`. Descendant notes:
-`flutter_app/CLAUDE.md`.
-
-| Task | Agent |
-| --- | --- |
-| Split large migration/rollout into safe batches | `.claude/agents/flutter-batch-planner.md` |
-| Implement one pre-scoped batch | `.claude/agents/flutter-batch-builder.md` |
-| Design/build a new screen or deliberate redesign | `.claude/agents/flutter-screen-designer.md` |
-| Check design-consistency domain compliance | `.claude/agents/flutter-domain-auditor.md` |
-| Trim over-engineered diff (current diff only) | `.claude/agents/flutter-diff-trimmer.md` |
-| Whole-module architecture-debt sweep (dead code/circular/god-class) | `.claude/agents/flutter-architecture-sweep.md` |
-| Check button/data-flow wiring (dead `onPressed`/`onTap`) | `.claude/agents/flutter-button-wiring-auditor.md` |
-| Write unit/controller/widget tests | `.claude/agents/flutter-test-writer.md` |
-| Check structural test-coverage gaps | `.claude/agents/flutter-test-coverage-auditor.md` |
-| Full PR merge-readiness gate | `.claude/agents/flutter-pr-gate.md` |
-| Whole-app sweep of high-risk financial flows | `.claude/agents/flutter-financial-safety-sweeper.md` |
-| Pay down vi-VN-only English copy debt | `.claude/agents/flutter-i18n-debt-sweeper.md` |
-| Review Riverpod controller/provider pattern (ADR-001) | `.claude/agents/flutter-provider-pattern-auditor.md` |
-| Check a11y/perf guardrail coverage gaps | `.claude/agents/flutter-a11y-perf-coverage-auditor.md` |
-
-`flutter-architecture-sweep` is the Claude Code-native counterpart to the
-`ponytail-audit` skill above — same ledger format/location
-(`flutter_app/run-artifacts/ponytail-audit-<scope>-<date>.md`), same tags,
-but uses the `tokensave` MCP server instead of GitNexus (unavailable in
-Claude Code sessions). They are two entry points to the same process, not
-two different processes.
-
-`flutter-button-wiring-auditor` fills a gap neither `route_coverage_audit`
-nor `navigation_edge_audit` covers: those two verify navigation calls
-resolve to real routes, not that non-navigation `onPressed`/`onTap`
-handlers actually do anything. Ledger location:
-`flutter_app/run-artifacts/button-wiring-audit-<scope>-<date>.md`.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence

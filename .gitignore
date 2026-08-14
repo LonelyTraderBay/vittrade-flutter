@@ -24,18 +24,8 @@ Thumbs.db
 # Local linked worktrees (never commit gitlinks / machine paths)
 .worktrees/
 
-# Claude Code — track harness; ignore runtime / machine-local only
-.claude/worktrees/
-.claude/data/
-.claude/settings.local.json
-.claude/**/*.lock
-.claude/scheduled_tasks.json
-.claude/agent-registry.json
-.claude/first-run
-.claude/assistant-daemon-state.json
-.claude/checkpoints/
-.claude/mailbox/
-.claude/routines/
+# Retired AI runtime — keep any accidental local runtime output untracked
+.claude/
 CLAUDE.local.md
 scripts/headroom/vittrade.headroom.local.env
 .headroom/

@@ -19,6 +19,10 @@ Apply this order every time:
 4. `.codex/skills/ui-ux-pro-max`
 5. Selected external `ui-skills` checklist from the allowlist below
 
+For detailed VitTrade visual contracts, also read
+`references/ui-visual-standards.md` and the matching standard document before
+editing presentation code.
+
 External checklist rules must be translated to Flutter. Drop any rule that conflicts with VitTrade architecture, financial safety, product boundaries, or shared component standards.
 
 ## Allowlist

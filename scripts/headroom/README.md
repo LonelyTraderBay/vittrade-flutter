@@ -2,7 +2,7 @@
 
 Headroom nén output tool dài **trước khi** Cursor Agent đọc, qua MCP `headroom` trong Cursor.
 
-**Không cần** API key Anthropic hay Claude Code — gói Cursor subscription đã đủ.
+Headroom là tooling tùy chọn cho Cursor; Codex không phụ thuộc vào proxy này.
 
 ## Hàng ngày
 
@@ -21,8 +21,6 @@ Mở Cursor → Settings → MCP → `headroom` phải **connected** (restart ID
 | `Start-VitTradeHeadroom.ps1` | **Bắt buộc** — proxy `:8787` cho MCP Cursor |
 | `Stop-VitTradeHeadroom.ps1` | Dừng proxy |
 | `vittrade.headroom.env` | Preset env (copy override → `vittrade.headroom.local.env`) |
-| `Launch-ClaudeCode.ps1` | **Optional** — chỉ khi có tài khoản Anthropic riêng |
-| `Wrap-ClaudeCode.ps1` | **Optional** — one-time wrap Claude Code |
 
 ## Cursor $200 — tối ưu quota
 
@@ -34,7 +32,7 @@ Mở Cursor → Settings → MCP → `headroom` phải **connected** (restart ID
 
 ## Giới hạn
 
-Proxy **không** nén traffic Cursor subscription (Agent chạy backend Cursor). Tiết kiệm đến từ MCP + quy trình batch, không phải full proxy như Claude Code.
+Proxy **không** nén traffic Cursor subscription (Agent chạy backend Cursor). Tiết kiệm đến từ MCP + quy trình batch.
 
 ## Theo dõi
 
@@ -42,5 +40,3 @@ Proxy **không** nén traffic Cursor subscription (Agent chạy backend Cursor).
 headroom perf
 headroom dashboard
 ```
-
-Rollback Claude wrap (nếu từng bật): `headroom unwrap claude`

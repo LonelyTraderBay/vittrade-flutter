@@ -26,8 +26,9 @@ alwaysApply: true
   files in one tree.
 - Load docs **on demand** only — see [docs/INDEX.md](../../docs/INDEX.md). Never load backlog + plan + prompt in one turn.
 - Read large files with line limits; do not paste full audit CSVs into chat.
-- Claude Code counterpart: `.claude/rules/session-discipline.md` +
-  `/vt-batch` / `/vt-review`.
+- Codex counterpart: `.codex/skills/planning-and-task-breakdown/SKILL.md`,
+  `.codex/skills/incremental-implementation/SKILL.md`, and
+  `.codex/skills/vittrade-batch-gate/SKILL.md`.
 
 ## Batch completion gate
 
@@ -54,20 +55,13 @@ Or manually: `.\scripts\headroom\Start-VitTradeHeadroom.ps1` then verify in **Cu
 
 [AGENTS.md](../../AGENTS.md) wins over this file for product, financial, and architecture rules.
 
-## Claude Code subagents (parallel toolset)
+## Codex skill routing
 
-`.claude/agents/*.md` — 10 Claude Code subagents covering migration batching,
-new-screen design, design-domain audits, minimal-diff review, architecture-debt
-sweep, button/data-flow wiring audit, test writing/coverage, and PR gating
-(see AGENTS.md § Claude Code Subagents). Cursor cannot invoke these directly —
-different runtime — but each file is a readable runbook; open and follow it
-manually for a matching task. If the user has Claude Code available, prefer
-suggesting the matching subagent over re-deriving the same procedure here.
-`flutter-architecture-sweep` is the Claude Code-native counterpart to
-`ponytail-audit` above (uses `tokensave` instead of GitNexus, same ledger
-format/location). `flutter-button-wiring-auditor` covers a gap neither
-`route_coverage_audit` nor `navigation_edge_audit` catches: non-navigation
-`onPressed`/`onTap` handlers that are wired to nothing.
+For the same procedures when working in Codex, load the smallest matching
+skill: planning/incremental implementation for batches, `vittrade-ui-checklists`
+for UI, `vittrade-design-domain` for audit selection, `vittrade-minimal-review`
+for diff trimming, `vittrade-button-wiring-audit` for dead handlers, and
+`code-review-and-quality` before merge.
 
 ## Optional QA (gstack)
 

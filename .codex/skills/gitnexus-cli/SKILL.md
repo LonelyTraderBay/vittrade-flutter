@@ -31,7 +31,8 @@ node .gitnexus/run.cjs analyze --skip-agents-md --skip-skills
 
 Run after major code changes, after a stale-index warning, or when the MCP
 server cannot answer graph questions accurately. Keep the skip flags so
-GitNexus refreshes the graph without generating `CLAUDE.md` or `.claude/skills`.
+GitNexus refreshes only the graph and does not generate runtime-specific
+instruction or skill files.
 
 Useful flags:
 

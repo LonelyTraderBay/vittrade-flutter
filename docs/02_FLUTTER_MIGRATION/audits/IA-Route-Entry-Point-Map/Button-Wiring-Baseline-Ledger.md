@@ -5,9 +5,10 @@ Generated: 2026-07-21 · Expanded: STEP-P0.10 · **Closed: STEP-P6.1 / P6.2 (202
 Purpose: baseline matrix for non-navigation `onPressed` / `onTap` dead-handler discovery (complements `route_coverage_audit` + `navigation_edge_audit`).  
 **Status: P6 sweeps complete — product `broken=0`.**
 
-## Command hint (`flutter-button-wiring-auditor`)
+## Command hint
 
-Claude Code agent: [`.claude/agents/flutter-button-wiring-auditor.md`](../../../../.claude/agents/flutter-button-wiring-auditor.md)
+This ledger is verified directly with the documented Flutter audit commands;
+it does not depend on a runtime-specific agent.
 
 Scope one module at a time under `flutter_app/lib/features/<module>/` (or `presentation/` subtree). Exhaustive grep patterns:
 

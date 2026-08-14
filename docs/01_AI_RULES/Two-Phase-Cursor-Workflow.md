@@ -50,12 +50,11 @@ Output bắt buộc:
 4. Mỗi batch: paths tường minh + domain Standard (nếu UI) + lệnh verify cụ thể từ Flutter-Design-System-Reference / prompt hiện hành
 5. Lệnh verify tổng (analyze + focused tests) sau batch cuối
 
-Tham chiếu runbook: .claude/agents/flutter-batch-planner.md
+Tham chiếu Codex: `.codex/skills/planning-and-task-breakdown/SKILL.md`
 Không mở rộng scope ngoài <task>.
 ```
 
-Optional runbook (Claude Code agent file, usable as procedure in Cursor):
-`.claude/agents/flutter-batch-planner.md`.
+Codex là nguồn skill chuẩn; không cần runtime-specific agent runbook.
 
 ## Phase 2 — Execute (Chat B, C, …)
 
@@ -78,7 +77,7 @@ Ràng buộc:
   rồi chạy verification gate (AI_PROMPT_SHELL § Verification) — analyze + focused tests
 - Báo evidence (lệnh + kết quả). Không hỏi “làm batch tiếp?” nếu plan đã định nghĩa batch kế
 
-Tham chiếu runbook: .claude/agents/flutter-batch-builder.md
+Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
 ```
 
 ## Cost and quality rules
@@ -108,6 +107,6 @@ Tham chiếu runbook: .claude/agents/flutter-batch-builder.md
 | `docs/01_AI_RULES/AI_PROMPT_SHELL.md` | Verification + batch discipline |
 | `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md` | Execution gate |
 | `docs/INDEX.md` | On-demand doc picker |
-| `.claude/agents/flutter-batch-planner.md` | Batch plan procedure |
-| `.claude/agents/flutter-batch-builder.md` | Single-batch implement procedure |
+| `.codex/skills/planning-and-task-breakdown/SKILL.md` | Batch plan procedure |
+| `.codex/skills/incremental-implementation/SKILL.md` | Single-batch implement procedure |
 | `.codex/skills/vittrade-minimal-review/SKILL.md` | Diff trim before batch done |

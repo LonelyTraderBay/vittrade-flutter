@@ -29,7 +29,7 @@
 | Domain map row | `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` §2 + page checklist |
 | Product contract | `AGENTS.md` UI Rules — 1–3 lines |
 | Cursor rule | `.cursor/rules/vittrade-notice-acknowledgement.mdc` (globs presentation) |
-| Claude lazy rule | `.claude/rules/ui-visual-standards.md` — one Domain contracts row |
+| Codex UI reference | `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` — one Domain contracts row |
 
 **Gate:** docs only; no `flutter test` required.
 
@@ -169,7 +169,7 @@ Do not merge multiple modules in one chat (>10 files).
 
 ## Done when
 
-- [x] Standard + AGENTS + Cursor/Claude rules shipped  
+- [x] Standard + AGENTS + Cursor/Codex references shipped
 - [x] Zero success overlays / local success toasts outside allow  
 - [x] Zero presentation `showSnackBar` outside allow + markers  
 - [x] Guardrail green with empty (or documented) baseline  
