@@ -1,4 +1,4 @@
-part of '../../pages/transfer/deposit_page.dart';
+part of '../../phone/pages/deposit_page.dart';
 
 class _DepositInfoCard extends StatelessWidget {
   const _DepositInfoCard({required this.asset, required this.network});

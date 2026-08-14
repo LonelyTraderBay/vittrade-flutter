@@ -235,6 +235,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,C,-,done,0,-

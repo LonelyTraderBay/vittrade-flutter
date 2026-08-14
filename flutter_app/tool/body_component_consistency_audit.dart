@@ -523,6 +523,25 @@ SourceBundle _readSourceBundle(
     }
   }
 
+  // Tablet wallet detail pages own their wide-screen VitPageLayout and
+  // VitPageContent in WalletTabletDetailSurface. Append that shared surface
+  // for grading only; keep it out of source_files so the route inventory does
+  // not pretend the page directly owns the frame implementation.
+  var walletTabletSurfaceOverlay = '';
+  if (primaryJoined.contains('WalletTabletDetailSurface(')) {
+    final surfaceFile = File(
+      _joinPath(
+        appRoot.path,
+        'lib/features/wallet/presentation/tablet/widgets/'
+                'wallet_tablet_detail_surface.dart'
+            .replaceAll('/', Platform.pathSeparator),
+      ),
+    );
+    if (surfaceFile.existsSync()) {
+      walletTabletSurfaceOverlay = surfaceFile.readAsStringSync();
+    }
+  }
+
   if (entry.pageClass == 'RewardsHubPage') {
     widgetFiles.add(
       File(
@@ -568,6 +587,7 @@ SourceBundle _readSourceBundle(
       ...primarySources,
       ...widgetSources,
       if (tradeShellLayoutOverlay.isNotEmpty) tradeShellLayoutOverlay,
+      if (walletTabletSurfaceOverlay.isNotEmpty) walletTabletSurfaceOverlay,
     ].join('\n'),
     files: files,
     unresolved: false,

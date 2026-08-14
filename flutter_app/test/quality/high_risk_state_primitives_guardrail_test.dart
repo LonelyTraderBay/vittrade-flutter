@@ -8,7 +8,7 @@ void main() {
   test('representative high-risk pages use shared state primitives', () {
     const targets = {
       'lib/features/trade/presentation/phone/pages/trade_page_state.dart',
-      'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
+      'lib/features/wallet/presentation/phone/pages/withdraw_page.dart',
       'lib/features/p2p_marketplace/presentation/widgets/hub/p2p_home_page_state.dart',
       'lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart',
       'lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_order_page.dart',

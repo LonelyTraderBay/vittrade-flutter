@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/add
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/buy_crypto_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/deposit_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/deposit_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/dust_converter_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/network_status_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/pending_deposits_page.dart';
@@ -21,7 +21,9 @@ import 'package:vit_trade_flutter/features/wallet/presentation/pages/responsive/
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
@@ -53,32 +55,64 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletDeposit,
       name: AppRouteNames.sc137Deposit,
-      builder: (_, _) => DepositPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const DepositTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => DepositPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: '${AppRoutePaths.walletDeposit}/:asset',
       name: AppRouteNames.sc138DepositUsdt,
-      builder: (_, state) => DepositPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        asset: state.pathParameters['asset'] ?? 'USDT',
-        assetScoped: true,
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (_, state) {
+        final asset = state.pathParameters['asset'] ?? 'USDT';
+        return switch (surface) {
+          AppSurface.tablet => DepositTabletPage(
+            asset: asset,
+            assetScoped: true,
+          ),
+          // Web surface composition is migrated in P7.
+          AppSurface.phone || AppSurface.web || null => DepositPage(
+            // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+            asset: asset,
+            assetScoped: true,
+            shellRenderMode: shellRenderMode,
+          ),
+        };
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletWithdraw,
       name: AppRouteNames.sc139Withdraw,
-      builder: (_, _) => WithdrawPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WithdrawTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WithdrawPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: '${AppRoutePaths.walletWithdraw}/:asset',
       name: AppRouteNames.sc140WithdrawUsdt,
-      builder: (_, state) => WithdrawPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        asset: state.pathParameters['asset'] ?? 'USDT',
-        assetScoped: true,
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (_, state) {
+        final asset = state.pathParameters['asset'] ?? 'USDT';
+        return switch (surface) {
+          AppSurface.tablet => WithdrawTabletPage(
+            asset: asset,
+            assetScoped: true,
+          ),
+          // Web surface composition is migrated in P7.
+          AppSurface.phone || AppSurface.web || null => WithdrawPage(
+            // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+            asset: asset,
+            assetScoped: true,
+            shellRenderMode: shellRenderMode,
+          ),
+        };
+      },
     ),
     GoRoute(
       path: '/wallet/transaction/:txId',

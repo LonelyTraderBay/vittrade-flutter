@@ -1633,8 +1633,8 @@ wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_token_approval_settings_tab.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_token_approval_tabs.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_token_revoke_sheet.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_common.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_common.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_common.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_asset_amount.dart,0,0,0,0,0,0,0,0,no,-

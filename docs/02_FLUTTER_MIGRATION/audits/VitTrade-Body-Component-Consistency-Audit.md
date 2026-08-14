@@ -15,12 +15,12 @@ Generated from `flutter_app/tool/body_component_consistency_audit.dart`.
 
 ```text
 total_routed_screens=412
-grade_A=327
-grade_B=57
+grade_A=325
+grade_B=65
 grade_C=16
-grade_D=7
+grade_D=1
 grade_Tool=5
-manual_review=34
+manual_review=28
 financial_safety_warn_or_fail=6
 copy_boundary_warn_or_fail=0
 ```
@@ -38,19 +38,19 @@ screen_level_mismatches=0
 
 | Grade | Routes |
 | --- | ---: |
-| A | 327 |
-| B | 57 |
+| A | 325 |
+| B | 65 |
 | C | 16 |
-| D | 7 |
 | Tool | 5 |
+| D | 1 |
 
 ## Issue Priority Counts
 
 | Priority | Routes |
 | --- | ---: |
-| P3 | 333 |
-| P2 | 56 |
-| P1 | 22 |
+| P3 | 331 |
+| P2 | 64 |
+| P1 | 16 |
 | P0 | 1 |
 
 ## Feature-Level Status
@@ -59,7 +59,7 @@ screen_level_mismatches=0
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | admin | 5 | 2 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 20.0 | 11.6 |
 | arena | 25 | 22 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 22 | 37.3 | 15.2 |
-| auth | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 6 | 0 | 0 | 0.0 | 0.0 |
+| auth | 6 | 1 | 5 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 14.3 | 0.8 |
 | cross_module | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 28.5 | 21.8 |
 | dca | 14 | 11 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 11 | 30.7 | 12.6 |
 | dev | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 33.3 | 11.5 |
@@ -88,36 +88,37 @@ screen_level_mismatches=0
 | trade_compliance | 30 | 25 | 5 | 0 | 0 | 0 | 0 | 0 | 5 | 25 | 49.2 | 8.8 |
 | trade_copy | 22 | 21 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 21 | 46.0 | 14.3 |
 | trade_terminal | 6 | 5 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 6 | 45.3 | 14.8 |
-| wallet | 21 | 13 | 8 | 0 | 0 | 0 | 0 | 0 | 8 | 13 | 31.4 | 9.4 |
+| wallet | 21 | 10 | 11 | 0 | 0 | 0 | 0 | 0 | 11 | 10 | 31.0 | 9.0 |
 
 ## Screen-Level Grade Counts
 
 | Screen level / grade | Routes |
 | --- | ---: |
-| L2_detail / A | 158 |
+| L2_detail / A | 157 |
 | L2_utilityDetail / A | 52 |
-| L3_transactionFlow / A | 45 |
-| L2_entityDetail / A | 27 |
+| L3_transactionFlow / A | 44 |
+| L2_entityDetail / A | 26 |
 | L1_utilityHub / A | 20 |
-| L2_detail / B | 15 |
+| L2_detail / B | 16 |
 | L2_sectionHub / A | 13 |
 | L2_utilityDetail / B | 13 |
-| L2_entityDetail / B | 9 |
+| L2_entityDetail / B | 10 |
 | L1_productModuleHub / A | 8 |
 | L3_transactionFlow / C | 7 |
 | L2_sectionHub / B | 6 |
-| L1_authFlow / D | 5 |
 | L1_utilityHub / B | 5 |
+| L3_transactionFlow / B | 5 |
+| L1_authFlow / B | 4 |
 | L2_detail / C | 4 |
 | L2_utilityDetail / C | 4 |
-| L3_transactionFlow / B | 4 |
 | L1_instrumentWorkspace / A | 2 |
 | L1_instrumentWorkspace / B | 2 |
 | L1_primaryTabRoot / B | 2 |
 | L2_detail / Tool | 2 |
 | L3_fullscreenTool / Tool | 2 |
-| L0_authEntry / D | 1 |
+| L0_authEntry / B | 1 |
 | L0_homeRoot / B | 1 |
+| L1_authFlow / A | 1 |
 | L1_instrumentWorkspace / Tool | 1 |
 | L1_primaryTabRoot / A | 1 |
 | L2_entityDetail / C | 1 |
@@ -128,12 +129,6 @@ screen_level_mismatches=0
 
 | Priority | Feature | Route | Page | Grade | Issue | Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| P1 | auth | `AppRoutePaths.authForgotPassword` | `ForgotPasswordPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
-| P1 | auth | `AppRoutePaths.authLogin` | `LoginPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
-| P1 | auth | `AppRoutePaths.authOtp` | `OTPPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
-| P1 | auth | `AppRoutePaths.authRegister` | `RegisterPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
-| P1 | auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
-| P1 | auth | `AppRoutePaths.auth2faSetup` | `TwoFASetupPage` | D | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. |
 | P0 | p2p_account | `'/p2p/merchant/:merchantId'` | `P2PMerchantProfilePage` | D | responsive_or_bottom_chrome_risk | Remove unsafe fixed sizes or bottom positioning; verify 360 px and bottom-nav clearance. |
 
 ## C-Grade Pages
@@ -240,12 +235,12 @@ flutter test --reporter=compact
 | arena | `AppRoutePaths.arenaStudioSmartRules` | `ArenaSmartRuleBuilderPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 93 | 34 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/arena/presentation/pages/studio/arena_smart_rule_builder_page.dart` |
 | arena | `AppRoutePaths.arenaStudio` | `ArenaStudioPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 58 | 17 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/arena/presentation/pages/studio/arena_studio_page.dart` |
 | arena | `AppRoutePaths.arenaStudioPresets` | `ArenaUniversalPresetLibraryPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 44 | 32 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/arena/presentation/pages/studio/arena_universal_preset_library_page.dart` |
-| auth | `AppRoutePaths.authForgotPassword` | `ForgotPasswordPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/forgot_password_page.dart` |
-| auth | `AppRoutePaths.authLogin` | `LoginPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/login_page.dart` |
-| auth | `AppRoutePaths.authOtp` | `OTPPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/otp_page.dart` |
-| auth | `AppRoutePaths.authRegister` | `RegisterPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/register_page.dart` |
-| auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/reset_password_page.dart` |
-| auth | `AppRoutePaths.auth2faSetup` | `TwoFASetupPage` | D | P1 | fail | warn | pass | pass | not_applicable | pass | pass | 0 | 0 | 0 | 0 | 1 | missing_shared_body_layout | Wrap the standard body in VitPageLayout/VitAutoHideHeaderScaffold and VitPageContent. | `flutter_app/lib/features/auth/presentation/pages/two_fa_setup_page.dart` |
+| auth | `AppRoutePaths.authForgotPassword` | `ForgotPasswordPage` | B | P2 | pass | warn | pass | pass | not_applicable | pass | pass | 9 | 2 | 0 | 0 | 2 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/auth/presentation/phone/pages/forgot_password_page.dart` |
+| auth | `AppRoutePaths.authLogin` | `LoginPage` | B | P2 | pass | warn | pass | pass | not_applicable | pass | pass | 14 | 1 | 0 | 0 | 1 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/auth/presentation/phone/pages/login_page.dart` |
+| auth | `AppRoutePaths.authOtp` | `OTPPage` | B | P2 | pass | warn | pass | pass | not_applicable | pass | pass | 11 | 0 | 0 | 0 | 3 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart` |
+| auth | `AppRoutePaths.authRegister` | `RegisterPage` | B | P2 | pass | warn | pass | pass | not_applicable | pass | pass | 15 | 0 | 0 | 0 | 2 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart` |
+| auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | B | P2 | pass | warn | pass | pass | not_applicable | pass | pass | 16 | 0 | 0 | 0 | 2 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart` |
+| auth | `AppRoutePaths.auth2faSetup` | `TwoFASetupPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 21 | 2 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/auth/presentation/phone/pages/two_fa_setup_page.dart` |
 | cross_module | `AppRoutePaths.crossModuleAnalytics` | `CrossModuleAnalyticsPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 21 | 22 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/cross_module/presentation/pages/cross_module_analytics_page.dart` |
 | cross_module | `AppRoutePaths.smartAlerts` | `SmartAlertCenterPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 29 | 16 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/cross_module/presentation/pages/smart_alert_center_page.dart` |
 | cross_module | `AppRoutePaths.taxReports` | `TaxReportCenterPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 33 | 25 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_page.dart` |
@@ -604,9 +599,9 @@ flutter test --reporter=compact
 | wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddPage` | B | P2 | pass | warn | pass | pass | pass | pass | pass | 6 | 0 | 0 | 0 | 2 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/wallet/presentation/pages/address/address_add_page.dart` |
 | wallet | `AppRoutePaths.walletAddressBook` | `AddressBookPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 28 | 1 | 0 | 0 | 4 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` |
 | wallet | `'/wallet/asset/:assetId'` | `AssetDetailPage` | B | P2 | warn | pass | pass | pass | not_applicable | pass | pass | 34 | 7 | 0 | 0 | 4 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart` |
-| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 39 | 8 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart` |
-| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 23 | 5 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/assets/dust_converter_page.dart` |
-| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 26 | 4 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` |
+| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 8 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart` |
+| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 19 | 5 | 0 | 0 | 6 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/assets/dust_converter_page.dart` |
+| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailPage` | B | P2 | warn | pass | pass | pass | not_applicable | pass | pass | 22 | 4 | 0 | 0 | 4 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` |
 | wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryPage` | B | P2 | warn | pass | pass | pass | not_applicable | pass | pass | 26 | 7 | 0 | 0 | 3 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart` |
 | wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 50 | 13 | 0 | 0 | 4 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart` |
 | wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsPage` | B | P2 | warn | pass | pass | pass | not_applicable | pass | pass | 22 | 8 | 0 | 0 | 5 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart` |
@@ -614,11 +609,11 @@ flutter test --reporter=compact
 | wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScorePage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 42 | 21 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_health_score_page.dart` |
 | wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerPage` | B | P2 | pass | warn | pass | pass | pass | pass | pass | 8 | 0 | 0 | 0 | 2 | surface_consistency_needs_review | Normalize primary surfaces to VitCard and theme tokens when touching this screen. | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart` |
 | wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 58 | 19 | 0 | 0 | 9 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart` |
-| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 21 | 11 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/deposit_page.dart` |
-| wallet | `AppRoutePaths.walletDeposit` | `DepositPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 21 | 11 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/deposit_page.dart` |
 | wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 31 | 9 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` |
-| wallet | `AppRoutePaths.walletTransfer` | `TransferPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 8 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/transfer_page.dart` |
+| wallet | `AppRoutePaths.walletTransfer` | `TransferPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 31 | 8 | 0 | 0 | 7 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/pages/transfer/transfer_page.dart` |
 | wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 12 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart` |
-| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 10 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` |
-| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 10 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` |
 | wallet | `AppRoutePaths.wallet` | `WalletPage` | B | P2 | warn | pass | pass | pass | not_applicable | pass | pass | 53 | 18 | 0 | 0 | 7 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` |
+| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
+| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 12 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 12 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |

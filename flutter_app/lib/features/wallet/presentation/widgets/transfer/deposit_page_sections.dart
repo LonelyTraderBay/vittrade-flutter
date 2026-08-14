@@ -1,4 +1,4 @@
-part of '../../pages/transfer/deposit_page.dart';
+part of '../../phone/pages/deposit_page.dart';
 
 class _NetworkSelector extends StatelessWidget {
   const _NetworkSelector({

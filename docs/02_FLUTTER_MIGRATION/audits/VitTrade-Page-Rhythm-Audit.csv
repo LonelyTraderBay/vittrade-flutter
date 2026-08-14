@@ -1445,7 +1445,9 @@ wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_app
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart,compact,compact,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart,standard,,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_common.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_form.dart,standard,,0,,0,,0,0,pass

@@ -557,7 +557,7 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C02J',
     area: 'Withdraw next action',
-    file: 'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
+    file: 'lib/features/wallet/presentation/phone/pages/withdraw_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.wallet',
       'mode: BackNavigationMode.historyThenFallback',

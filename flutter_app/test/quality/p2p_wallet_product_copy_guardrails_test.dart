@@ -104,9 +104,9 @@ void main() {
       final targets = [
         HighRiskCopyTarget(
           path:
-              'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
+              'lib/features/wallet/presentation/phone/pages/withdraw_page.dart',
           paths: [
-            'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
+            'lib/features/wallet/presentation/phone/pages/withdraw_page.dart',
             'lib/features/wallet/presentation/widgets/transfer/withdraw_common.dart',
             'lib/features/wallet/presentation/widgets/transfer/withdraw_form_sections.dart',
             'lib/features/wallet/presentation/widgets/transfer/withdraw_network_picker.dart',

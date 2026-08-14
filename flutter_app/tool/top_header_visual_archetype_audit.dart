@@ -941,7 +941,14 @@ List<String> _extraSourceForPageGroup(
     'VitWalletDetailScaffold(': [
       (
         path:
-            'lib/features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart',
+            'lib/features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart',
+        className: null,
+      ),
+    ],
+    'WalletTabletDetailSurface(': [
+      (
+        path:
+            'lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
         className: null,
       ),
     ],

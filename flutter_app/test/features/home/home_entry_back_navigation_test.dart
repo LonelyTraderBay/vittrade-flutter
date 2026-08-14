@@ -30,7 +30,7 @@ import 'package:vit_trade_flutter/features/trade/presentation/pages/margin/margi
 import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_page.dart';
 import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/hub/trading_bots_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
 
 void main() {
   Future<GoRouter> pumpApp(
