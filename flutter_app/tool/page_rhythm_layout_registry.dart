@@ -127,6 +127,10 @@ const routeNameToPageOverrides = <String, String>{
       'features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart',
   'AppRouteNames.sc153WithdrawLimits':
       'features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart',
+  'AppRouteNames.sc154DustConverter':
+      'features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart',
+  'AppRouteNames.sc155NetworkStatus':
+      'features/wallet/presentation/tablet/pages/network_status_tablet_page.dart',
   'AppRouteNames.sc156Profile':
       'features/profile/presentation/phone/pages/profile_page.dart',
 };

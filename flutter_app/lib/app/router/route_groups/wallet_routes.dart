@@ -38,6 +38,8 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wall
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
@@ -290,12 +292,24 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletDustConverter,
       name: AppRouteNames.sc154DustConverter,
-      builder: (_, _) => DustConverterPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const DustConverterTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => DustConverterPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletNetworkStatus,
       name: AppRouteNames.sc155NetworkStatus,
-      builder: (_, _) => NetworkStatusPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const NetworkStatusTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => NetworkStatusPage(shellRenderMode: shellRenderMode),
+      },
     ),
     ...walletOutgoingPlaceholders,
   ];

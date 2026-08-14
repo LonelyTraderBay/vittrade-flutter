@@ -979,6 +979,8 @@ wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_ta
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart,4,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart,4,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart,4,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart,11,4,0,D,0,0,0,warn,fixed_height_baseline
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart,5,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart,4,0,0,C,0,0,0,pass,-
