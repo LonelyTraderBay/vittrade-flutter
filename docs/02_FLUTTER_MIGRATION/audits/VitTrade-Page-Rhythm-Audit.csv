@@ -772,6 +772,7 @@ p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_method_verification_methods.dart,standard,,0,,0,,0,0,pass
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_common.dart,standard,,0,,0,,0,0,pass
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_sections.dart,standard,,0,,0,,0,0,pass
+p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart,standard,form,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/widgets/p2p_formatters.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/widgets/p2p_notice_widgets.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/widgets/vit_p2p_flow_scaffold.dart,standard,,0,,0,,0,0,pass

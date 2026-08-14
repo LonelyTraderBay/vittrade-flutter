@@ -541,6 +541,7 @@ p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_method_verification_flow.dart,2,0,0,C,0,0,0,pass,-
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_method_verification_methods.dart,2,0,0,C,0,0,0,pass,-
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_sections.dart,2,1,0,D,0,0,0,pass,-
+p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 p2p_core,flutter_app/lib/features/p2p_core/presentation/widgets/p2p_notice_widgets.dart,1,0,0,C,0,0,0,pass,-
 p2p_dispute,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page_common.dart,3,0,0,D,0,0,0,pass,-
 p2p_dispute,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page_sections.dart,4,0,0,D,0,0,0,pass,-

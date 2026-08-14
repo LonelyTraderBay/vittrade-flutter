@@ -718,6 +718,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_method_verification_flow.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_method_verification_methods.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_sections.dart,D,-,done,0,-
+06_other,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_core/presentation/widgets/p2p_notice_widgets.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page_common.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page_sections.dart,D,-,done,0,-

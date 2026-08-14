@@ -959,6 +959,13 @@ List<String> _extraSourceForPageGroup(
         className: null,
       ),
     ],
+    'P2PTabletUtilitySurface(': [
+      (
+        path:
+            'lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
+        className: null,
+      ),
+    ],
     'CrossModuleTabbedPageShell(': [
       (
         path:

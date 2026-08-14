@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=397
+vit_header_total=398
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -17,7 +17,7 @@ action_groups_over_limit=0
 
 | Classification | Count |
 | --- | ---: |
-| canonical | 382 |
+| canonical | 383 |
 
 ## Action Inventory
 
@@ -255,6 +255,7 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 92 | `_P2PPaymentMethodVerificationPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 106 | `_P2PPaymentMethodVerificationPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 127 | `_P2PPaymentMethodVerificationPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart` | 38 | `P2PTabletUtilitySurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_detail_page.dart` | 91 | `_P2PDisputeDetailPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_evidence_page.dart` | 76 | `_P2PDisputeEvidencePageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_page.dart` | 85 | `_P2PDisputePageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |

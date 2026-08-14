@@ -119,9 +119,9 @@ ShellRoute _appShellRoute(
       // (marketplace → orders → account → security → dispute).
       ...p2pMarketplaceRoutes(shellRenderMode),
       ...p2pOrdersRoutes(shellRenderMode),
-      ...p2pAccountRoutes(shellRenderMode),
-      ...p2pSecurityRoutes(shellRenderMode),
-      ...p2pDisputeRoutes(shellRenderMode),
+      ...p2pAccountRoutes(shellRenderMode, surface: surface),
+      ...p2pSecurityRoutes(shellRenderMode, surface: surface),
+      ...p2pDisputeRoutes(shellRenderMode, surface: surface),
       ...supportRoutes(shellRenderMode),
       ...launchpadRoutes(shellRenderMode),
       ...arenaCoreRoutes(shellRenderMode),

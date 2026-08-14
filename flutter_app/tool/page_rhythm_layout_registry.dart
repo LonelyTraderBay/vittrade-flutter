@@ -8,6 +8,8 @@ const shellWidgetToVpcPath = <String, String>{
       'features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
   'ProfileTabletUtilitySurface':
       'features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
+  'P2PTabletUtilitySurface':
+      'features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
   'VitWalletDetailScaffold':
       'features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart',
   'VitP2PFlowScaffold':
@@ -28,6 +30,7 @@ const shellWidgetToVpcPath = <String, String>{
 const shellWidgetRhythmTier = <String, String>{
   'WalletTabletDetailSurface': 'form',
   'ProfileTabletUtilitySurface': 'form',
+  'P2PTabletUtilitySurface': 'form',
   'VitTradeWorkspaceScaffold': 'compact',
   'VitTradeHubScaffold': 'compact',
   'VitTradeDetailScaffold': 'standard',
@@ -184,6 +187,106 @@ const routeNameToPageOverrides = <String, String>{
       'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
   'AppRouteNames.sc406SettingsSecurityChangePassword':
       'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc227P2PMerchantApply':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc228P2PMerchantProfile':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc247P2PKycRequirements':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc248P2PKycStatus':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc249P2PIdentityVerification':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc250P2PAddressProof':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc402P2PKycVerify':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc403P2PKycFaceMatch':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc251P2PSelfieVerification':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc252P2PVideoVerification':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc232P2PPaymentMethodAdd':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc233P2PPaymentMethodVerification':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc234P2PPaymentMethodOwnership':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc235P2PPaymentMethodCoolingPeriod':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc236P2PPaymentMethodHistory':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc237P2PPaymentMethods':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc253P2PSecurityCenter':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc254P2P2FASettings':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc255P2PDeviceManagement':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc256P2PAntiPhishingCode':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc257P2PLoginHistory':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc258P2PSuspiciousActivity':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc404P2PWhitelistMode':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc229P2PReportMerchant':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc231P2PReviews':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc242P2PContributionHistory':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc276P2PBlacklistAdd':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc277P2PBlacklist':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc259P2PE2EInfo':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc260P2PFraudPrevention':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc266P2PTransactionLimits':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc265P2PLimitTracker':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc267P2PComplianceOverview':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc268P2PAmlScreening':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc269P2PSourceOfFunds':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc270P2PLargeTransaction':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc271P2PRiskAssessment':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc272P2PTaxReporting':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc275P2PAchievements':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc407P2PTaxReportDetail':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc218P2PDisputeDetail':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc219P2PDisputeEvidence':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc220P2PDisputeResolution':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc221P2PDispute':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc222P2PDisputes':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc238P2PInsuranceFund':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc239P2PInsuranceCertificate':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc240P2PInsuranceScore':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc241P2PInsurancePolicy':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc243P2PClaimDetail':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

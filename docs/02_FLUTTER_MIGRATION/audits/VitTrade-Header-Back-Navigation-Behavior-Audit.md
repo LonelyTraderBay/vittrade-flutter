@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=532
+visible_header_back_entries=533
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 467 |
+| parent_route_only | 468 |
 | history_then_fallback | 65 |
 
 ## Strict Issue Counts
@@ -394,6 +394,7 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 92 | `_P2PPaymentMethodVerificationPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pPaymentMethods` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 106 | `_P2PPaymentMethodVerificationPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pPaymentMethods` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` | 127 | `_P2PPaymentMethodVerificationPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pPaymentMethods` | no | - | Back goes to an explicit parent route. |
+| `flutter_app/lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart` | 38 | `P2PTabletUtilitySurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/p2p_core/presentation/widgets/vit_p2p_flow_scaffold.dart` | 108 | `VitP2PFlowScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_detail_page.dart` | 91 | `_P2PDisputeDetailPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pDisputes` | yes | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_evidence_page.dart` | 76 | `_P2PDisputeEvidencePageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pDisputeDetail(widget.disputeId)` | yes | - | Back goes to an explicit parent route. |
