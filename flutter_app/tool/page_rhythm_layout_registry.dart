@@ -390,6 +390,82 @@ const routeNameToPageOverrides = <String, String>{
       'shared/layout/vit_tablet_utility_page.dart',
   'AppRouteNames.sc289ReferralFriendDetail':
       'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc027PredictionsHome':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc028PredictionsSearch':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc029PredictionsBreaking':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc030PredictionEventDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc031PredictionsPortfolio':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc032PredictionsRewards':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc033PredictionsLeaderboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc034PredictionsGlobalActivity':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc035PredictionOrderReceipt':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc036PredictionRiskCalculator':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc037PredictionMarketMaker':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc038PredictionPortfolioAnalyzer':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc039PredictionEventCalendar':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc040PredictionSocial':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc041PredictionAdvancedChart':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc042PredictionTournaments':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc414PredictionTournamentDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc043PredictionDataIntegration':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc044PairDetail': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc045TokenInfo': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc046PairDepth': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc055AdvancedChart':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc060RiskManagement':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc061ExecutionQuality':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc062AdvancedTools':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc088AdvancedTradingDemo':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc092AdvancedAnalytics':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc169Dca': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc170DcaRebalanceConfig':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc171DcaRebalanceDashboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc172DcaScheduleConfig':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc173DcaScheduleAnalytics':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc174DcaPortfolioOptimizer':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc175DcaDynamicAmount':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc176DcaBacktester':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc177DcaMultiAsset':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc178DcaPerformanceCompare':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc179DcaSmartRules':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc408DcaRebalanceEdit':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc409DcaRebalanceHistory':
+      'shared/layout/vit_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

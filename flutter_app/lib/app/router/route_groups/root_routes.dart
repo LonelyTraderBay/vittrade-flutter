@@ -102,8 +102,8 @@ ShellRoute _appShellRoute(
     routes: [
       ...homeRoutes(shellRenderMode, surface: surface),
       ...marketsRoutes(shellRenderMode, surface: surface),
-      ...predictionRoutes(shellRenderMode),
-      ...marketPairRoutes(shellRenderMode),
+      ...predictionRoutes(shellRenderMode, surface: surface),
+      ...marketPairRoutes(shellRenderMode, surface: surface),
       ...tradeComplianceRoutes(shellRenderMode),
       ...tradeCopyRoutes(shellRenderMode),
       ...tradeBotsRoutes(shellRenderMode),
@@ -112,7 +112,7 @@ ShellRoute _appShellRoute(
       // execution-quality, advanced-tools, ...) that would otherwise be
       // shadowed by the parameterized `/trade/:pairId` route at the end of
       // `tradeRoutes` (go_router matches in declaration order).
-      ...tradeTerminalRoutes(shellRenderMode),
+      ...tradeTerminalRoutes(shellRenderMode, surface: surface),
       ...tradeRoutes(shellRenderMode, surface: surface),
       ...adminRoutes(shellRenderMode, surface: surface),
       // ADR-012: P2P family route groups
@@ -129,7 +129,7 @@ ShellRoute _appShellRoute(
       ...earnStakingRoutes(shellRenderMode),
       ...earnSavingsRoutes(shellRenderMode),
       ...arenaExtendedRoutes(shellRenderMode),
-      ...dcaRoutes(shellRenderMode),
+      ...dcaRoutes(shellRenderMode, surface: surface),
       ...walletRoutes(shellRenderMode, surface: surface),
       ...profileRoutes(shellRenderMode, surface: surface),
       ...discoveryAndReferralRoutes(shellRenderMode, surface: surface),

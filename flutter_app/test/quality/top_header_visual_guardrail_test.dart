@@ -71,12 +71,7 @@ void main() {
     expect(markdown, contains('screen_level_mismatches=0'));
     expect(csv, contains('screenLevel,expectedArchetype,screenLevelMismatch'));
 
-    for (final pageClass in [
-      'ArenaHomePage',
-      'DCAPage',
-      'StakingEarnPage',
-      'PredictionsHomePage',
-    ]) {
+    for (final pageClass in ['ArenaHomePage', 'StakingEarnPage']) {
       expect(
         csv,
         matches(
@@ -88,6 +83,24 @@ void main() {
         ),
         reason:
             '$pageClass must use rootModule and report no screen-level mismatch.',
+      );
+    }
+
+    for (final routePath in [
+      'AppRoutePaths.marketsPredictions',
+      'AppRoutePaths.dca',
+    ]) {
+      expect(
+        csv,
+        matches(
+          RegExp(
+            '"[^"]+","$routePath","VitTabletUtilityPage","[^"]+",'
+            '"fixed_vit_header","vit_header_default_title_subtitle",'
+            '"rootModule","L1_productModuleHub","rootModule","no"',
+          ),
+        ),
+        reason:
+            '$routePath Tablet composition must stay a root product module.',
       );
     }
   });

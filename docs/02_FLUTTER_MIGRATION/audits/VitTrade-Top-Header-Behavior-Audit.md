@@ -4,11 +4,11 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=20
-auto_hide_header=337
+fixed_vit_header_remaining=19
+auto_hide_header=299
 custom_scroll_header=1
-no_top_header=26
-unresolved=28
+no_top_header=25
+unresolved=68
 ```
 
 ## Fixed Header Count By Feature
@@ -19,7 +19,6 @@ unresolved=28
 | trade_bots | 4 |
 | trade | 3 |
 | enterprise_states | 2 |
-| markets | 1 |
 
 ## Route Header Inventory
 
@@ -61,19 +60,19 @@ unresolved=28
 | auth | `AppRoutePaths.authOtp` | `OTPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart` |
 | auth | `AppRoutePaths.authRegister` | `RegisterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart` |
 | auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart` |
-| dca | `'/dca/rebalance/:configId/edit'` | `DCARebalanceConfigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart` |
-| dca | `'/dca/rebalance/:configId/history'` | `DCARebalanceDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_dashboard_page.dart` |
-| dca | `AppRoutePaths.dca` | `DCAPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/hub/dca_page.dart` |
-| dca | `AppRoutePaths.dcaBacktester` | `DCABacktesterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/research/dca_backtester_page.dart` |
-| dca | `AppRoutePaths.dcaDynamicAmount` | `DCADynamicAmountPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/research/dca_dynamic_amount_page.dart` |
-| dca | `AppRoutePaths.dcaMultiAsset` | `DCAMultiAssetPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_multi_asset_page.dart` |
-| dca | `AppRoutePaths.dcaPerformanceCompare` | `DCAPerformanceComparePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_performance_compare_page.dart` |
-| dca | `AppRoutePaths.dcaPortfolioOptimizer` | `DCAPortfolioOptimizerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_portfolio_optimizer_page.dart` |
-| dca | `AppRoutePaths.dcaRebalanceConfig` | `DCARebalanceConfigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart` |
-| dca | `AppRoutePaths.dcaRebalanceDashboard` | `DCARebalanceDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_dashboard_page.dart` |
-| dca | `AppRoutePaths.dcaScheduleAnalytics` | `DCAScheduleAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_schedule_analytics_page.dart` |
-| dca | `AppRoutePaths.dcaScheduleConfig` | `DCAScheduleConfigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_schedule_config_page.dart` |
-| dca | `AppRoutePaths.dcaSmartRules` | `DCASmartRulesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_smart_rules_page.dart` |
+| dca | `'/dca/rebalance/:configId/edit'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `'/dca/rebalance/:configId/history'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dca` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaBacktester` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaDynamicAmount` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaMultiAsset` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaPerformanceCompare` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaPortfolioOptimizer` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaRebalanceConfig` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaRebalanceDashboard` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaScheduleAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaScheduleConfig` | `unresolved` | unresolved | unresolved | `unresolved` |
+| dca | `AppRoutePaths.dcaSmartRules` | `unresolved` | unresolved | unresolved | `unresolved` |
 | earn_savings | `AppRoutePaths.earnSavings` | `SavingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/savings_page.dart` |
 | earn_savings | `AppRoutePaths.earnSavingsAnalytics` | `SavingsAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/savings_analytics_page.dart` |
 | earn_savings | `AppRoutePaths.earnSavingsAutoCompound` | `AutoCompoundSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/auto_compound_settings_page.dart` |
@@ -171,9 +170,9 @@ unresolved=28
 | launchpad | `AppRoutePaths.launchpadStaking` | `LaunchpadStakingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_staking_page.dart` |
 | launchpad | `AppRoutePaths.launchpadSwapAggregator` | `LaunchpadSwapAggregatorPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_swap_aggregator_page.dart` |
 | launchpad | `AppRoutePaths.launchpadWebhooks` | `LaunchpadWebhooksPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_webhooks_page.dart` |
-| markets | `'/pair/:pairId'` | `PairDetailPage` | fixed_vit_header | trade_custom_in_scroll | `flutter_app/lib/features/markets/presentation/pages/pair/pair_detail_page.dart` |
-| markets | `'/pair/:pairId/depth'` | `MarketDepthPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/pair/market_depth_page.dart` |
-| markets | `'/pair/:pairId/info'` | `TokenInfoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/token_info_page.dart` |
+| markets | `'/pair/:pairId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| markets | `'/pair/:pairId/depth'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| markets | `'/pair/:pairId/info'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | markets | `AppRoutePaths.markets` | `MarketListPage` | custom_scroll_header | market_custom_in_scroll | `flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart` |
 | markets | `AppRoutePaths.marketsAdvancedCharts` | `AdvancedChartsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page.dart` |
 | markets | `AppRoutePaths.marketsAlerts` | `PriceAlertsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/price_alerts_page.dart` |
@@ -271,24 +270,24 @@ unresolved=28
 | p2p_security | `AppRoutePaths.p2pSecuritySuspiciousActivity` | `P2PSuspiciousActivityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/pages/security/p2p_suspicious_activity_page.dart` |
 | p2p_security | `AppRoutePaths.p2pSecurityWhitelist` | `P2PWhitelistModePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/pages/security/p2p_security_center_page.dart` |
 | p2p_security | `AppRoutePaths.p2pTaxReporting` | `P2PTaxReportingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/pages/security/p2p_tax_reporting_page.dart` |
-| predictions | `'/markets/predictions/advanced-chart/:eventId'` | `PredictionAdvancedChartPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/event/prediction_advanced_chart_page.dart` |
-| predictions | `'/markets/predictions/event/:eventId'` | `PredictionEventDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/event/prediction_event_detail_page.dart` |
-| predictions | `'/markets/predictions/receipt/:receiptId'` | `PredictionOrderReceiptPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/event/prediction_order_receipt_page.dart` |
-| predictions | `'/markets/predictions/tournament/:tournamentId'` | `PredictionTournamentDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_tournaments_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictions` | `PredictionsHomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_home_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsActivity` | `PredictionsGlobalActivityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/predictions_global_activity_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsBreaking` | `PredictionsBreakingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_breaking_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsDataIntegration` | `PredictionDataIntegrationPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_data_integration_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsEventCalendar` | `PredictionEventCalendarPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_event_calendar_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsLeaderboard` | `PredictionsLeaderboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/predictions_leaderboard_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsMarketMaker` | `PredictionMarketMakerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/portfolio/prediction_market_maker_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsPortfolio` | `PredictionsPortfolioPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/portfolio/predictions_portfolio_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsPortfolioAnalyzer` | `PredictionPortfolioAnalyzerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/portfolio/prediction_portfolio_analyzer_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsRewards` | `PredictionsRewardsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_rewards_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsRiskCalculator` | `PredictionRiskCalculatorPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/portfolio/prediction_risk_calculator_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsSearch` | `PredictionsSearchPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_search_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsSocial` | `PredictionSocialPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_social_page.dart` |
-| predictions | `AppRoutePaths.marketsPredictionsTournaments` | `PredictionTournamentsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_tournaments_page.dart` |
+| predictions | `'/markets/predictions/advanced-chart/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/markets/predictions/event/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/markets/predictions/receipt/:receiptId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/markets/predictions/tournament/:tournamentId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictions` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsActivity` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsBreaking` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsDataIntegration` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsEventCalendar` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsLeaderboard` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsMarketMaker` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsPortfolio` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsPortfolioAnalyzer` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsRewards` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsRiskCalculator` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsSearch` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsSocial` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `AppRoutePaths.marketsPredictionsTournaments` | `unresolved` | unresolved | unresolved | `unresolved` |
 | profile | `AppRoutePaths.profile` | `ProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
 | profile | `AppRoutePaths.profileActivity` | `ActivityLogPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/activity_log_page.dart` |
 | profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/api_management_page.dart` |
@@ -390,12 +389,12 @@ unresolved=28
 | trade_copy | `AppRoutePaths.tradeCopySafetyCenter` | `CopySafetyCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_copy/presentation/pages/safety/copy_safety_center_page.dart` |
 | trade_copy | `AppRoutePaths.tradeCopySettings` | `CopySettingsPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade_copy/presentation/pages/hub/copy_settings_page.dart` |
 | trade_copy | `AppRoutePaths.tradeCopyTrading` | `CopyTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_copy/presentation/pages/hub/copy_trading_page.dart` |
-| trade_terminal | `'/trade/advanced-chart/:pairId'` | `AdvancedChartPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_chart_page.dart` |
-| trade_terminal | `AppRoutePaths.tradeAdvancedTools` | `AdvancedToolsDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_tools_demo_page.dart` |
-| trade_terminal | `AppRoutePaths.tradeExecutionQuality` | `ExecutionQualityDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/execution_quality_demo_page.dart` |
-| trade_terminal | `AppRoutePaths.tradeMarginAdvancedAnalytics` | `AdvancedAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_analytics_page.dart` |
-| trade_terminal | `AppRoutePaths.tradeMarginAdvancedDemo` | `AdvancedTradingDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_trading_demo_page.dart` |
-| trade_terminal | `AppRoutePaths.tradeRiskManagement` | `RiskManagementDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/risk_management_demo_page.dart` |
+| trade_terminal | `'/trade/advanced-chart/:pairId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade_terminal | `AppRoutePaths.tradeAdvancedTools` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade_terminal | `AppRoutePaths.tradeExecutionQuality` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade_terminal | `AppRoutePaths.tradeMarginAdvancedAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade_terminal | `AppRoutePaths.tradeMarginAdvancedDemo` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade_terminal | `AppRoutePaths.tradeRiskManagement` | `unresolved` | unresolved | unresolved | `unresolved` |
 | utility | `'/referral/friend/:friendId'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | utility | `AppRoutePaths.crossModuleAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
 | utility | `AppRoutePaths.devDcaOverview` | `unresolved` | unresolved | unresolved | `unresolved` |

@@ -376,6 +376,10 @@ VisualHeaderRouteEntry _buildEntry({
     variant: variant,
     source: source,
   );
+  if (pageClass == 'VitTabletUtilityPage' &&
+      _tabletProductHubPaths.contains(path)) {
+    archetype = 'rootModule';
+  }
   var noHeaderReason = '-';
   var exceptionReason = '-';
   var issue = '-';
@@ -490,6 +494,11 @@ String _detectArchetype({
   return 'unclassified';
 }
 
+const _tabletProductHubPaths = <String>{
+  'AppRoutePaths.marketsPredictions',
+  'AppRoutePaths.dca',
+};
+
 String? _transitiveTopChromeType({
   required String pageClass,
   required String source,
@@ -511,6 +520,10 @@ String _screenLevelFor({
   if (pageClass == 'HomePage') return 'L0_homeRoot';
   if (pageClass == 'LoginPage') return 'L0_authEntry';
   if (_primaryTabRootPages.contains(pageClass)) return 'L1_primaryTabRoot';
+  if (pageClass == 'VitTabletUtilityPage' &&
+      _tabletProductHubPaths.contains(path)) {
+    return 'L1_productModuleHub';
+  }
   if (_productModuleHubPages.contains(pageClass)) {
     return 'L1_productModuleHub';
   }
@@ -779,7 +792,11 @@ int _expectedActionCount(String source) {
 }
 
 String _extractPageClass(String block) {
-  if (block.contains('buildSurfaceAwareTabletRoute')) {
+  if (block.contains('buildSurfaceAwareTabletRoute') ||
+      block.contains('_tabletPredictionRoute') ||
+      block.contains('_tabletMarketPairRoute') ||
+      block.contains('_tabletTradeTerminalRoute') ||
+      block.contains('_tabletDcaRoute')) {
     return 'VitTabletUtilityPage';
   }
 

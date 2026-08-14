@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/pages/event/prediction_advanced_chart_page.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/pages/social/prediction_data_integration_page.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/predictions_breaking_page.dart';
@@ -21,123 +23,239 @@ import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/pr
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> predictionRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> predictionRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.marketsPredictions,
       name: AppRouteNames.sc027PredictionsHome,
-      builder: (_, _) => PredictionsHomePage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc027PredictionsHome,
+        fallback: PredictionsHomePage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsSearch,
       name: AppRouteNames.sc028PredictionsSearch,
-      builder: (_, _) =>
-          PredictionsSearchPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc028PredictionsSearch,
+        fallback: PredictionsSearchPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsBreaking,
       name: AppRouteNames.sc029PredictionsBreaking,
-      builder: (_, _) =>
-          PredictionsBreakingPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc029PredictionsBreaking,
+        fallback: PredictionsBreakingPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/markets/predictions/event/:eventId',
       name: AppRouteNames.sc030PredictionEventDetail,
-      builder: (_, state) => PredictionEventDetailPage(
-        eventId: requireRouteParam(state, 'eventId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc030PredictionEventDetail,
+        fallback: PredictionEventDetailPage(
+          eventId: requireRouteParam(state, 'eventId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsPortfolio,
       name: AppRouteNames.sc031PredictionsPortfolio,
-      builder: (_, _) =>
-          PredictionsPortfolioPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc031PredictionsPortfolio,
+        fallback: PredictionsPortfolioPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsRewards,
       name: AppRouteNames.sc032PredictionsRewards,
-      builder: (_, _) =>
-          PredictionsRewardsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc032PredictionsRewards,
+        fallback: PredictionsRewardsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsLeaderboard,
       name: AppRouteNames.sc033PredictionsLeaderboard,
-      builder: (_, _) =>
-          PredictionsLeaderboardPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc033PredictionsLeaderboard,
+        fallback: PredictionsLeaderboardPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsActivity,
       name: AppRouteNames.sc034PredictionsGlobalActivity,
-      builder: (_, _) =>
-          PredictionsGlobalActivityPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc034PredictionsGlobalActivity,
+        fallback: PredictionsGlobalActivityPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: '/markets/predictions/receipt/:receiptId',
       name: AppRouteNames.sc035PredictionOrderReceipt,
-      builder: (_, state) => PredictionOrderReceiptPage(
-        receiptId: requireRouteParam(state, 'receiptId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc035PredictionOrderReceipt,
+        fallback: PredictionOrderReceiptPage(
+          receiptId: requireRouteParam(state, 'receiptId'),
+          shellRenderMode: shellRenderMode,
+        ),
+        requiresConfirmation: true,
+        actionLabel: 'Rà soát biên nhận',
       ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsRiskCalculator,
       name: AppRouteNames.sc036PredictionRiskCalculator,
-      builder: (_, _) =>
-          PredictionRiskCalculatorPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc036PredictionRiskCalculator,
+        fallback: PredictionRiskCalculatorPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsMarketMaker,
       name: AppRouteNames.sc037PredictionMarketMaker,
-      builder: (_, _) =>
-          PredictionMarketMakerPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc037PredictionMarketMaker,
+        fallback: PredictionMarketMakerPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsPortfolioAnalyzer,
       name: AppRouteNames.sc038PredictionPortfolioAnalyzer,
-      builder: (_, _) =>
-          PredictionPortfolioAnalyzerPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc038PredictionPortfolioAnalyzer,
+        fallback: PredictionPortfolioAnalyzerPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsEventCalendar,
       name: AppRouteNames.sc039PredictionEventCalendar,
-      builder: (_, _) =>
-          PredictionEventCalendarPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc039PredictionEventCalendar,
+        fallback: PredictionEventCalendarPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsSocial,
       name: AppRouteNames.sc040PredictionSocial,
-      builder: (_, _) => PredictionSocialPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc040PredictionSocial,
+        fallback: PredictionSocialPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/markets/predictions/advanced-chart/:eventId',
       name: AppRouteNames.sc041PredictionAdvancedChart,
-      builder: (_, state) => PredictionAdvancedChartPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        eventId: state.pathParameters['eventId'] ?? 'btcusdt',
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc041PredictionAdvancedChart,
+        fallback: PredictionAdvancedChartPage(
+          // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+          eventId: state.pathParameters['eventId'] ?? 'btcusdt',
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsTournaments,
       name: AppRouteNames.sc042PredictionTournaments,
-      builder: (_, _) =>
-          PredictionTournamentsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc042PredictionTournaments,
+        fallback: PredictionTournamentsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/markets/predictions/tournament/:tournamentId',
       name: AppRouteNames.sc414PredictionTournamentDetail,
-      builder: (_, state) => PredictionTournamentDetailPage(
-        tournamentId: requireRouteParam(state, 'tournamentId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc414PredictionTournamentDetail,
+        fallback: PredictionTournamentDetailPage(
+          tournamentId: requireRouteParam(state, 'tournamentId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.marketsPredictionsDataIntegration,
       name: AppRouteNames.sc043PredictionDataIntegration,
-      builder: (_, _) =>
-          PredictionDataIntegrationPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletPredictionRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc043PredictionDataIntegration,
+        fallback: PredictionDataIntegrationPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
   ];
+}
+
+Widget _tabletPredictionRoute({
+  required BuildContext context,
+  required AppSurface? surface,
+  required String semanticIdentifier,
+  required Widget fallback,
+  bool requiresConfirmation = false,
+  String? actionLabel,
+}) {
+  return buildSurfaceAwareTabletRoute(
+    context: context,
+    surface: surface,
+    semanticIdentifier: semanticIdentifier,
+    title: 'Prediction Markets',
+    subtitle: 'Phân tích và quản trị vị thế trên Tablet',
+    description:
+        'Không gian Tablet tập trung cho dữ liệu, vị thế và quyết định có kiểm soát.',
+    backPath: AppRoutePaths.marketsPredictions,
+    fallback: fallback,
+    requiresConfirmation: requiresConfirmation,
+    actionLabel: actionLabel,
+    icon: Icons.insights_outlined,
+  );
 }

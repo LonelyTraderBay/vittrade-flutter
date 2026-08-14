@@ -6,7 +6,7 @@ Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
 ## Summary
 
-Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0, documented exceptions 3.
+Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0, documented exceptions 2.
 | Level | Meaning |
 | --- | --- |
 | L1 | Wiring: rhythm, orphan gaps, nested VPC |
@@ -17,7 +17,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 | Screen | Route | L1 | L2 | L3 |
 | --- | --- | --- | --- | --- |
-| AppRouteNames.sc027PredictionsHome | `AppRoutePaths.marketsPredictions` | pass | pass | pass |
 | AppRouteNames.sc048Trade | `AppRoutePaths.trade` | pass | pass | pass |
 
 ## L2 warn routes
@@ -32,13 +31,11 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ## By module
 
-### app (28 routes, L2 warn 0, unknown 0)
+### app (68 routes, L2 warn 0, unknown 0)
 
 ### arena (25 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
-
-### dca (13 routes, L2 warn 0, unknown 0)
 
 ### earn_savings (24 routes, L2 warn 0, unknown 0)
 
@@ -50,15 +47,13 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ### launchpad (24 routes, L2 warn 0, unknown 0)
 
-### markets (22 routes, L2 warn 0, unknown 0)
+### markets (19 routes, L2 warn 0, unknown 0)
 
 ### news (1 routes, L2 warn 0, unknown 0)
 
 ### onboarding (1 routes, L2 warn 0, unknown 0)
 
 ### p2p_core (76 routes, L2 warn 0, unknown 0)
-
-### predictions (18 routes, L2 warn 0, unknown 0)
 
 ### profile (14 routes, L2 warn 0, unknown 0)
 
@@ -69,8 +64,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 ### trade_compliance (30 routes, L2 warn 0, unknown 0)
 
 ### trade_copy (22 routes, L2 warn 0, unknown 0)
-
-### trade_terminal (6 routes, L2 warn 0, unknown 0)
 
 ### wallet (21 routes, L2 warn 0, unknown 0)
 

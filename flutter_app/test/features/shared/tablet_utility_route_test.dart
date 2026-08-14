@@ -53,4 +53,38 @@ void main() {
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Cài đặt quản trị'), findsOneWidget);
   });
+
+  testWidgets('SC-027 Tablet uses the independent prediction composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.marketsPredictions);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Prediction Markets'), findsOneWidget);
+  });
+
+  testWidgets('SC-044 Tablet uses the independent pair composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.pairDetail('btcusdt'));
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Chi tiết thị trường'), findsOneWidget);
+  });
+
+  testWidgets('SC-169 Tablet uses the independent DCA composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.dca);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('DCA'), findsOneWidget);
+  });
+
+  testWidgets('SC-060 Tablet keeps trade risk review explicit', (tester) async {
+    await pumpTabletRoute(tester, AppRoutePaths.tradeRiskManagement);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Rà soát trước khi xác nhận'), findsOneWidget);
+  });
 }

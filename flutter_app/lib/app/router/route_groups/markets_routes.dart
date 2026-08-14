@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/portfolio/advanced_charts_page.dart';
@@ -25,6 +26,7 @@ import 'package:vit_trade_flutter/features/markets/presentation/pages/research/t
 import 'package:vit_trade_flutter/features/markets/presentation/pages/research/token_unlocks_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/watchlist_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 
@@ -142,39 +144,87 @@ List<RouteBase> marketsRoutes(
   ];
 }
 
-List<RouteBase> marketPairRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> marketPairRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: '/pair/:pairId',
       name: AppRouteNames.sc044PairDetail,
-      builder: (_, state) => PairDetailPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        pairId: state.pathParameters['pairId'] ?? 'btcusdt',
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (context, state) {
+        final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
+        return _tabletMarketPairRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: AppRouteNames.sc044PairDetail,
+          backPath: AppRoutePaths.markets,
+          fallback: PairDetailPage(
+            // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+            pairId: pairId,
+            shellRenderMode: shellRenderMode,
+          ),
+        );
+      },
     ),
     GoRoute(
       path: '/pair/:pairId/info',
       name: AppRouteNames.sc045TokenInfo,
-      builder: (_, state) => TokenInfoPage(
-        // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
-        pairId: state.pathParameters['pairId'] ?? 'btcusdt',
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (context, state) {
+        final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
+        return _tabletMarketPairRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: AppRouteNames.sc045TokenInfo,
+          backPath: AppRoutePaths.pairDetail(pairId),
+          fallback: TokenInfoPage(
+            // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
+            pairId: pairId,
+            shellRenderMode: shellRenderMode,
+          ),
+        );
+      },
     ),
     GoRoute(
       path: '/pair/:pairId/depth',
       name: AppRouteNames.sc046PairDepth,
-      builder: (_, state) {
+      builder: (context, state) {
         // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
         final returnTo = state.uri.queryParameters['returnTo'];
-        return MarketDepthPage(
-          pairId: pairId,
+        return _tabletMarketPairRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: AppRouteNames.sc046PairDepth,
           backPath: returnTo ?? AppRoutePaths.pairDetail(pairId),
-          shellRenderMode: shellRenderMode,
+          fallback: MarketDepthPage(
+            pairId: pairId,
+            backPath: returnTo ?? AppRoutePaths.pairDetail(pairId),
+            shellRenderMode: shellRenderMode,
+          ),
         );
       },
     ),
   ];
+}
+
+Widget _tabletMarketPairRoute({
+  required BuildContext context,
+  required AppSurface? surface,
+  required String semanticIdentifier,
+  required String backPath,
+  required Widget fallback,
+}) {
+  return buildSurfaceAwareTabletRoute(
+    context: context,
+    surface: surface,
+    semanticIdentifier: semanticIdentifier,
+    title: 'Chi tiết thị trường',
+    subtitle: 'Phân tích cặp giao dịch trên Tablet',
+    description:
+        'Không gian Tablet dành cho dữ liệu giá, thanh khoản và thông tin tài sản.',
+    backPath: backPath,
+    fallback: fallback,
+    icon: Icons.show_chart_rounded,
+  );
 }
