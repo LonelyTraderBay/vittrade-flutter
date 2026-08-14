@@ -8,6 +8,8 @@ import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart';
 
 void main() {
   Future<void> pumpTabletRoute(
@@ -89,5 +91,49 @@ void main() {
       find.byKey(WalletHealthScoreTabletPage.sheetCloseKey),
       findsNothing,
     );
+  });
+
+  testWidgets('SC-150 tablet route keeps revoke preview boundary', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.walletTokenApproval);
+
+    expect(find.byType(WalletTokenApprovalTabletPage), findsOneWidget);
+    expect(find.text('Phê duyệt token'), findsOneWidget);
+    expect(
+      find.byKey(WalletTokenApprovalTabletPage.approvalKey('a3')),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.byKey(WalletTokenApprovalTabletPage.revokeKey('a3')));
+    await tester.pumpAndSettle();
+    expect(
+      find.byKey(WalletTokenApprovalTabletPage.revokeSheetCancelKey),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Xem lại bên chi tiêu'), findsOneWidget);
+    await tester.tap(
+      find.byKey(WalletTokenApprovalTabletPage.revokeSheetCancelKey),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.byKey(WalletTokenApprovalTabletPage.revokeSheetCancelKey),
+      findsNothing,
+    );
+  });
+
+  testWidgets('SC-153 tablet route renders KYC limit controls', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.walletLimits);
+
+    expect(find.byType(WithdrawLimitsTabletPage), findsOneWidget);
+    expect(find.text('Hạn mức rút tiền'), findsOneWidget);
+    expect(
+      find.byKey(WithdrawLimitsTabletPage.currentTierKey),
+      findsOneWidget,
+    );
+    expect(find.byKey(WithdrawLimitsTabletPage.dailyUsageKey), findsOneWidget);
+    expect(find.byKey(WithdrawLimitsTabletPage.tierKey(3)), findsOneWidget);
   });
 }

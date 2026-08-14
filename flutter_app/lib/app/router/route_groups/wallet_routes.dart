@@ -36,6 +36,8 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/with
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
@@ -244,8 +246,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletTokenApproval,
       name: AppRouteNames.sc150TokenApproval,
-      builder: (_, _) =>
-          WalletTokenApprovalPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WalletTokenApprovalTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WalletTokenApprovalPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletHealthScore,
@@ -272,7 +279,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletLimits,
       name: AppRouteNames.sc153WithdrawLimits,
-      builder: (_, _) => WithdrawLimitsPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WithdrawLimitsTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WithdrawLimitsPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletDustConverter,

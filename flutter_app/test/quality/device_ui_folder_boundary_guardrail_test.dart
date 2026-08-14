@@ -38,6 +38,8 @@ void main() {
       'lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart',
       'lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart',
       'lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart',
+      'lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart',
+      'lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart',
       'lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
       'lib/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart',
       'lib/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart',

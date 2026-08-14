@@ -247,6 +247,8 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,C,-,done,0,-

@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=412
 fixed_vit_header_remaining=22
-auto_hide_header=369
+auto_hide_header=367
 custom_scroll_header=1
-no_top_header=20
+no_top_header=22
 unresolved=0
 ```
 
@@ -430,11 +430,11 @@ unresolved=0
 | wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScoreTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart` |
+| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart` |
 | wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart` |
+| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletTransfer` | `TransferTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |

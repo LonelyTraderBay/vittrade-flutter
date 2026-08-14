@@ -986,6 +986,8 @@ wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_his
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart,7,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart,7,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart,5,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart,6,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart,6,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,4,2,0,E,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart,2,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,1,0,0,C,0,0,0,pass,-

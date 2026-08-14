@@ -119,10 +119,14 @@ const routeNameToPageOverrides = <String, String>{
       'features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart',
   'AppRouteNames.sc149GasOptimizer':
       'features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart',
+  'AppRouteNames.sc150TokenApproval':
+      'features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart',
   'AppRouteNames.sc151HealthScore':
       'features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart',
   'AppRouteNames.sc152PendingDeposits':
       'features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart',
+  'AppRouteNames.sc153WithdrawLimits':
+      'features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart',
   'AppRouteNames.sc156Profile':
       'features/profile/presentation/phone/pages/profile_page.dart',
 };
