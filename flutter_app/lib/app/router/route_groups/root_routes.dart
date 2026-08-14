@@ -4,6 +4,7 @@ GoRouter createAppRouter({
   String? initialLocation,
   ShellRenderMode shellRenderMode = ShellRenderMode.native,
   AppConfig? appConfig,
+  AppSurface? surface,
 }) {
   final config = appConfig ?? AppConfig.current;
   return GoRouter(
@@ -32,12 +33,15 @@ GoRouter createAppRouter({
     },
     routes: [
       ...topLevelRoutes(shellRenderMode),
-      _appShellRoute(shellRenderMode),
+      _appShellRoute(shellRenderMode, surface: surface),
     ],
   );
 }
 
-ShellRoute _appShellRoute(ShellRenderMode shellRenderMode) {
+ShellRoute _appShellRoute(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return ShellRoute(
     builder: (context, state, child) {
       final activeDestination = _activeDestinationForPath(state.uri.path);
@@ -63,8 +67,8 @@ ShellRoute _appShellRoute(ShellRenderMode shellRenderMode) {
       );
     },
     routes: [
-      ...homeRoutes(shellRenderMode),
-      ...marketsRoutes(shellRenderMode),
+      ...homeRoutes(shellRenderMode, surface: surface),
+      ...marketsRoutes(shellRenderMode, surface: surface),
       ...predictionRoutes(shellRenderMode),
       ...marketPairRoutes(shellRenderMode),
       ...tradeComplianceRoutes(shellRenderMode),
@@ -76,7 +80,7 @@ ShellRoute _appShellRoute(ShellRenderMode shellRenderMode) {
       // shadowed by the parameterized `/trade/:pairId` route at the end of
       // `tradeRoutes` (go_router matches in declaration order).
       ...tradeTerminalRoutes(shellRenderMode),
-      ...tradeRoutes(shellRenderMode),
+      ...tradeRoutes(shellRenderMode, surface: surface),
       ...adminRoutes(shellRenderMode),
       // ADR-012: P2P family route groups
       // (marketplace → orders → account → security → dispute).
@@ -93,8 +97,8 @@ ShellRoute _appShellRoute(ShellRenderMode shellRenderMode) {
       ...earnSavingsRoutes(shellRenderMode),
       ...arenaExtendedRoutes(shellRenderMode),
       ...dcaRoutes(shellRenderMode),
-      ...walletRoutes(shellRenderMode),
-      ...profileRoutes(shellRenderMode),
+      ...walletRoutes(shellRenderMode, surface: surface),
+      ...profileRoutes(shellRenderMode, surface: surface),
       ...discoveryAndReferralRoutes(shellRenderMode),
       ...navigationPlaceholderRoutes,
     ],

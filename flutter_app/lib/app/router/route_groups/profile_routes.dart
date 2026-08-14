@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/activity_log_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/api_management_page.dart';
@@ -7,6 +8,8 @@ import 'package:vit_trade_flutter/features/profile/presentation/pages/api_key_cr
 import 'package:vit_trade_flutter/features/profile/presentation/pages/device_management_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/kyc_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/responsive/profile_responsive_entry.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/pages/phone/profile_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/pages/tablet/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/sub_account_page.dart';
@@ -16,13 +19,21 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
 
-List<RouteBase> profileRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> profileRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.profile,
       name: AppRouteNames.sc156Profile,
-      builder: (_, _) =>
-          ProfileResponsiveEntry(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.phone => ProfilePage(shellRenderMode: shellRenderMode),
+        AppSurface.tablet => const ProfileTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.web => ProfilePage(shellRenderMode: shellRenderMode),
+        null => ProfileResponsiveEntry(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.profileEdit,

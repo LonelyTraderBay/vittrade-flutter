@@ -1,6 +1,7 @@
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_add_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
@@ -17,6 +18,8 @@ import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/walle
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_health_score_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/pages/phone/wallet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
@@ -25,13 +28,21 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
 
-List<RouteBase> walletRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> walletRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.wallet,
       name: AppRouteNames.sc135Wallet,
-      builder: (_, _) =>
-          WalletResponsiveEntry(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.phone => WalletPage(shellRenderMode: shellRenderMode),
+        AppSurface.tablet => const WalletTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.web => WalletPage(shellRenderMode: shellRenderMode),
+        null => WalletResponsiveEntry(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletHistory,

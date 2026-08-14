@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/portfolio/advanced_charts_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/derivatives_overview_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/comparison_tool_page.dart';
@@ -8,6 +9,8 @@ import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/mark
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_depth_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_heatmap_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/responsive/markets_responsive_entry.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/pages/phone/market_list_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/pages/tablet/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/market_movers_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/research/market_news_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/market_overview_page.dart';
@@ -25,13 +28,21 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 
-List<RouteBase> marketsRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> marketsRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.markets,
       name: AppRouteNames.sc008MarketList,
-      builder: (_, _) =>
-          MarketsResponsiveEntry(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.phone => MarketListPage(shellRenderMode: shellRenderMode),
+        AppSurface.tablet => const MarketsTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.web => MarketListPage(shellRenderMode: shellRenderMode),
+        null => MarketsResponsiveEntry(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.marketsOverview,
