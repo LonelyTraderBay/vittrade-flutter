@@ -5,34 +5,34 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('device-specific root UI stays in canonical presentation boundaries', () {
     const requiredFiles = <String>[
-      'lib/features/home/presentation/pages/phone/home_page.dart',
-      'lib/features/home/presentation/pages/tablet/home_tablet_page.dart',
+      'lib/features/home/presentation/phone/pages/home_page.dart',
+      'lib/features/home/presentation/tablet/pages/home_tablet_page.dart',
       'lib/features/home/presentation/pages/responsive/home_responsive_entry.dart',
       'lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart',
       'lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart',
-      'lib/features/markets/presentation/pages/phone/market_list_page.dart',
-      'lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart',
+      'lib/features/markets/presentation/phone/pages/market_list_page.dart',
+      'lib/features/markets/presentation/tablet/pages/markets_tablet_page.dart',
       'lib/features/markets/presentation/pages/responsive/markets_responsive_entry.dart',
       'lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart',
-      'lib/features/wallet/presentation/pages/phone/wallet_page.dart',
-      'lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart',
+      'lib/features/wallet/presentation/phone/pages/wallet_page.dart',
+      'lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart',
       'lib/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart',
       'lib/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart',
-      'lib/features/trade/presentation/pages/phone/trade_page.dart',
-      'lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart',
-      'lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart',
+      'lib/features/trade/presentation/phone/pages/trade_page.dart',
+      'lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart',
+      'lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart',
       'lib/features/trade/presentation/pages/responsive/trade_responsive_entry.dart',
-      'lib/features/trade/presentation/pages/phone/trade_page_state.dart',
+      'lib/features/trade/presentation/phone/pages/trade_page_state.dart',
       'lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart',
       'lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart',
-      'lib/features/profile/presentation/pages/phone/profile_page.dart',
-      'lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart',
+      'lib/features/profile/presentation/phone/pages/profile_page.dart',
+      'lib/features/profile/presentation/tablet/pages/profile_tablet_page.dart',
       'lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart',
-      'lib/features/profile/presentation/pages/phone/profile_home_hero.dart',
+      'lib/features/profile/presentation/phone/pages/profile_home_hero.dart',
       'lib/features/home/presentation/widgets/phone/home_header.dart',
       'lib/features/markets/presentation/widgets/phone/market_list_header.dart',
       'lib/features/wallet/presentation/widgets/phone/wallet_page_sections.dart',
-      'lib/features/trade/presentation/pages/phone/order_receipt_page.dart',
+      'lib/features/trade/presentation/phone/pages/order_receipt_page.dart',
       'lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart',
       'lib/features/profile/presentation/widgets/common/profile_icon_registry.dart',
       'lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart',
@@ -67,6 +67,18 @@ void main() {
       'lib/features/profile/presentation/pages/profile_page.dart',
       'lib/features/profile/presentation/pages/profile_tablet_page.dart',
       'lib/features/profile/presentation/pages/profile_responsive_entry.dart',
+      'lib/features/home/presentation/pages/phone/home_page.dart',
+      'lib/features/home/presentation/pages/tablet/home_tablet_page.dart',
+      'lib/features/markets/presentation/pages/phone/market_list_page.dart',
+      'lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart',
+      'lib/features/wallet/presentation/pages/phone/wallet_page.dart',
+      'lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart',
+      'lib/features/trade/presentation/pages/phone/trade_page.dart',
+      'lib/features/trade/presentation/pages/phone/order_receipt_page.dart',
+      'lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart',
+      'lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart',
+      'lib/features/profile/presentation/pages/phone/profile_page.dart',
+      'lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart',
     ];
 
     final violations = <String>[];
@@ -91,11 +103,11 @@ void main() {
 
     for (final feature in features) {
       final roots = <String>[
-        'lib/features/$feature/presentation/pages/tablet',
+        'lib/features/$feature/presentation/tablet/pages',
         'lib/features/$feature/presentation/widgets/tablet',
       ];
       final forbidden = <String>[
-        'features/$feature/presentation/pages/phone/',
+        'features/$feature/presentation/phone/',
         'features/$feature/presentation/pages/hub/',
         'features/$feature/presentation/widgets/hub/',
         'features/$feature/presentation/widgets/profile_icon_registry.dart',
@@ -146,11 +158,11 @@ void main() {
 
     for (final feature in features) {
       final roots = <String>[
-        'lib/features/$feature/presentation/pages/phone',
+        'lib/features/$feature/presentation/phone/pages',
         'lib/features/$feature/presentation/widgets/phone',
       ];
       final forbidden = <String>[
-        'features/$feature/presentation/pages/tablet/',
+        'features/$feature/presentation/tablet/',
         'features/$feature/presentation/widgets/tablet/',
         'features/$feature/presentation/pages/hub/',
         'features/$feature/presentation/widgets/hub/',

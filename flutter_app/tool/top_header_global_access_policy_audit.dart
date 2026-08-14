@@ -335,7 +335,7 @@ List<String> _collectSourceIssues(Directory appRoot) {
   }
 
   final homePart = File(
-    '${appRoot.path}/lib/features/home/presentation/pages/phone/home_page_state.dart',
+    '${appRoot.path}/lib/features/home/presentation/phone/pages/home_page_state.dart',
   );
   final homeSource = homePart.readAsStringSync();
   if (homeSource.contains('notifications: snapshot.notifications')) {

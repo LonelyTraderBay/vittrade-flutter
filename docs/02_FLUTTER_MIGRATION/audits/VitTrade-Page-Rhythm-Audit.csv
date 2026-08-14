@@ -501,7 +501,7 @@ enterprise_states,flutter_app/lib/features/enterprise_states/presentation/pages/
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_hero_tabs.dart,standard,,0,,0,,0,0,pass
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,standard,,0,,0,,0,0,pass
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_references.dart,standard,,0,,0,,0,0,pass
-home,flutter_app/lib/features/home/presentation/pages/phone/home_page_state.dart,compact,compact,0,,0,,0,0,pass
+home,flutter_app/lib/features/home/presentation/phone/pages/home_page_state.dart,compact,compact,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_formatters.dart,standard,,0,,0,,0,0,pass
@@ -654,7 +654,6 @@ markets,flutter_app/lib/features/markets/presentation/pages/hub/watchlist_page.d
 markets,flutter_app/lib/features/markets/presentation/pages/pair/market_depth_page.dart,flush,flush,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/pair/market_heatmap_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/pair/pair_detail_page.dart,compact,compact,0,,0,,0,0,pass
-markets,flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page_tabs_filters_widgets.dart,compact,flush,0,,0,,1,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/portfolio/portfolio_tracker_page_overview_widgets.dart,compact,compact,0,,0,,2,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/portfolio/price_alerts_page.dart,compact,compact,0,,0,,0,0,pass
@@ -663,7 +662,6 @@ markets,flutter_app/lib/features/markets/presentation/pages/research/social_sent
 markets,flutter_app/lib/features/markets/presentation/pages/research/social_signals_page_tabs_widgets.dart,compact,compact,0,,0,,1,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/research/token_info_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page_upcoming_widgets.dart,compact,compact,0,,0,,2,0,pass
-markets,flutter_app/lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/tools/comparison_tool_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/tools/derivatives_overview_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/tools/market_calendar_page.dart,compact,compact,0,,0,,0,0,pass
@@ -671,6 +669,8 @@ markets,flutter_app/lib/features/markets/presentation/pages/tools/market_correla
 markets,flutter_app/lib/features/markets/presentation/pages/tools/market_movers_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/tools/market_screener_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/pages/tools/market_sectors_page.dart,compact,compact,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart,compact,compact,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/tablet/pages/markets_tablet_page.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/hub/market_formatters.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/hub/watchlist_cards.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/hub/watchlist_common_painter.dart,standard,,0,,0,,0,0,pass
@@ -1010,12 +1010,12 @@ profile,flutter_app/lib/features/profile/presentation/pages/api_management_page.
 profile,flutter_app/lib/features/profile/presentation/pages/device_management_page.dart,standard,standard,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/edit_profile_page.dart,standard,standard,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/kyc_page.dart,form,form,0,,0,,0,0,pass
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_page.dart,compact,compact,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/security_page.dart,standard,standard,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/settings_page.dart,standard,standard,0,,0,,4,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/sub_account_page.dart,standard,standard,0,,0,,0,0,pass
-profile,flutter_app/lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/pages/vip_page.dart,standard,standard,0,,0,,0,0,pass
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart,compact,compact,0,,0,,0,0,pass
+profile,flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_page.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,standard,,0,,0,,0,0,pass
@@ -1092,10 +1092,10 @@ trade,flutter_app/lib/features/trade/presentation/pages/hub/trade_history_export
 trade,flutter_app/lib/features/trade/presentation/pages/hub/trade_settings_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_hub_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart,standard,,0,,0,,0,0,pass
-trade,flutter_app/lib/features/trade/presentation/pages/phone/order_receipt_page.dart,standard,,0,,0,,0,0,pass
-trade,flutter_app/lib/features/trade/presentation/pages/phone/trade_page_state.dart,standard,,0,,0,,0,0,pass
-trade,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart,standard,,0,,0,,0,0,pass
-trade,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/phone/pages/trade_page_state.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_common.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,standard,,0,,0,,0,0,pass
@@ -1446,8 +1446,6 @@ wallet,flutter_app/lib/features/wallet/presentation/pages/address/address_add_pa
 wallet,flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart,standard,standard,0,,0,,0,0,pass
-wallet,flutter_app/lib/features/wallet/presentation/pages/phone/wallet_page.dart,compact,compact,0,,0,,0,0,pass
-wallet,flutter_app/lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart,standard,standard,0,,0,,0,0,pass
@@ -1455,6 +1453,8 @@ wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_multi_man
 wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart,standard,form,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart,compact,compact,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_common.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_form.dart,standard,,0,,0,,0,0,pass

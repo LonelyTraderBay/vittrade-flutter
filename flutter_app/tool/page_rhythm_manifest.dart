@@ -336,7 +336,7 @@ Quy tắc:
 4. dart run tool/page_rhythm_manifest.dart (cập nhật done/pending)
 5. Sang batch kế TIẾP — không dừng, không hỏi user — đến pending=0
 
-Tham chiếu code mẫu: features/home/presentation/pages/phone/home_page_state.dart
+Tham chiếu code mẫu: features/home/presentation/phone/pages/home_page_state.dart
 ```
 
 ### Checklist từng file (4 bước)

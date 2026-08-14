@@ -26,18 +26,18 @@ failed=0
 | HEB-015 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 111 | Quick action Staking → /earn source is present. |
 | HEB-016 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 119 | Quick action Savings source is present. |
 | HEB-017 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 125 | Quick action Launchpad source is present. |
-| HEB-018 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 31 | Discovery Predictions entry (not Home quick action) is present. |
-| HEB-019 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 49 | Discovery Arena entry (not Home quick action) is present. |
+| HEB-018 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 31 | Discovery Predictions entry (not Home quick action) is present. |
+| HEB-019 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 49 | Discovery Arena entry (not Home quick action) is present. |
 | HEB-020 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 105 | Quick action Rewards source is present. |
 | HEB-021 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 65 | Support removed from Home quick actions (Profile menu only). |
 | HEB-022 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 232 | Quick action Topics source is present. |
 | HEB-023 | Matrix source | `lib/features/home/data/home_mock_data.dart` | PASS | line 65 | Referral removed from Home quick actions (Profile menu only). |
-| HEB-024 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 31 | Discovery Prediction Markets source is present. |
-| HEB-025 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 49 | Discovery Open Arena source is present. |
-| HEB-026 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 87 | Markets root source is present; system back uses Home history. |
-| HEB-027 | Matrix source | `lib/features/home/presentation/pages/phone/home_page_sections.dart` | PASS | line 64 | Market section pair source is present. |
-| HEB-C01 | Home outbound | `lib/features/home/presentation/pages/phone/home_page_state.dart` | PASS | line 18 | Home feature/product entries preserve route history. |
-| HEB-C02A | Trade pair entry | `lib/features/trade/presentation/pages/phone/trade_page_state.dart` | PASS | line 131 | Home opens /trade/:pair with Home history; direct entry falls back to Trade. |
+| HEB-024 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 31 | Discovery Prediction Markets source is present. |
+| HEB-025 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 49 | Discovery Open Arena source is present. |
+| HEB-026 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 87 | Markets root source is present; system back uses Home history. |
+| HEB-027 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 64 | Market section pair source is present. |
+| HEB-C01 | Home outbound | `lib/features/home/presentation/phone/pages/home_page_state.dart` | PASS | line 18 | Home feature/product entries preserve route history. |
+| HEB-C02A | Trade pair entry | `lib/features/trade/presentation/phone/pages/trade_page_state.dart` | PASS | line 131 | Home opens /trade/:pair with Home history; direct entry falls back to Trade. |
 | HEB-C02B | Convert entry | `lib/features/trade/presentation/pages/convert/convert_page.dart` | PASS | line 145 | Convert pops to Home when Home-pushed and falls back to Trade directly. |
 | HEB-C02C | Margin entry | `lib/features/trade/presentation/pages/margin/margin_trading_page.dart` | PASS | line 83 | Margin keeps Trade as direct parent fallback. |
 | HEB-C02D | Bot entry | `lib/features/trade_bots/presentation/pages/hub/trading_bots_page.dart` | PASS | line 84 | Bot keeps Trade as direct parent fallback. |
@@ -45,8 +45,8 @@ failed=0
 | HEB-C02F | DCA entry | `lib/features/dca/presentation/pages/hub/dca_page_state_overview.dart` | PASS | line 205 | DCA is reached from Home but its safe direct parent remains Trade. |
 | HEB-C02G | Savings entry | `lib/features/earn_savings/presentation/pages/savings/savings_page.dart` | PASS | line 126 | Savings pops to Home when Home-pushed and falls back to Earn directly. |
 | HEB-C02H | Prediction Markets entry | `lib/features/predictions/presentation/pages/hub/predictions_home_page.dart` | PASS | line 128 | Prediction Markets falls back to Markets when opened directly. |
-| HEB-C02I | Wallet entry | `lib/features/wallet/presentation/pages/phone/wallet_page.dart` | PASS | line 76 | Wallet shows a back button only when Home/source history exists. |
+| HEB-C02I | Wallet entry | `lib/features/wallet/presentation/phone/pages/wallet_page.dart` | PASS | line 76 | Wallet shows a back button only when Home/source history exists. |
 | HEB-C02J | Withdraw next action | `lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` | PASS | line 131 | Home next-action withdraw returns Home; direct withdraw falls back to Wallet. |
 | HEB-C02K | Pair detail entry | `lib/features/markets/presentation/pages/pair/pair_detail_page.dart` | PASS | line 122 | Home market rows return Home; direct pair detail falls back to Markets. |
 | HEB-C02L | Instrument chrome | `lib/shared/layout/vit_top_chrome.dart` | PASS | line 118 | Instrument headers can show both back and an instrument leading slot. |
-| HEB-C03 | Home source coverage | `lib/features/home/presentation/pages/phone/home_page_common.dart` | PASS | line 1 | Part 03 currently has no Home outgoing route; update matrix if this changes. |
+| HEB-C03 | Home source coverage | `lib/features/home/presentation/phone/pages/home_page_common.dart` | PASS | line 1 | Part 03 currently has no Home outgoing route; update matrix if this changes. |

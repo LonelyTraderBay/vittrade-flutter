@@ -65,17 +65,17 @@ const gateShellWidgets = {'InternalSurfaceGate'};
 /// canonical reference, so it stays the rollup target here.
 const widgetClassPageOverrides = <String, String>{
   'HomeResponsiveEntry':
-      'features/home/presentation/pages/phone/home_page.dart',
+      'features/home/presentation/phone/pages/home_page.dart',
   'WalletResponsiveEntry':
-      'features/wallet/presentation/pages/phone/wallet_page.dart',
+      'features/wallet/presentation/phone/pages/wallet_page.dart',
   'MarketsResponsiveEntry':
-      'features/markets/presentation/pages/phone/market_list_page.dart',
+      'features/markets/presentation/phone/pages/market_list_page.dart',
   'TradeResponsiveEntry':
-      'features/trade/presentation/pages/phone/trade_page.dart',
+      'features/trade/presentation/phone/pages/trade_page.dart',
   'OrderReceiptPage':
-      'features/trade/presentation/pages/phone/order_receipt_page.dart',
+      'features/trade/presentation/phone/pages/order_receipt_page.dart',
   'ProfileResponsiveEntry':
-      'features/profile/presentation/pages/phone/profile_page.dart',
+      'features/profile/presentation/phone/pages/profile_page.dart',
   'ClientOptUpRequestPage':
       'features/trade_compliance/presentation/pages/governance/client_categorization_opt_up_page.dart',
   'PredictionTournamentDetailPage':
@@ -239,7 +239,7 @@ List<String> collectVpcFilesForPage(
     }
   }
 
-  if (relativePage.endsWith('trade/presentation/pages/phone/trade_page.dart')) {
+  if (relativePage.endsWith('trade/presentation/phone/pages/trade_page.dart')) {
     const layout =
         'features/trade_core/presentation/widgets/trade_module_layout.dart';
     if (auditRelativePaths.contains(layout)) files.add(layout);
@@ -322,7 +322,7 @@ String? resolvePageFilePath({
   // one builder, so the route truth table records the conditional branch as
   // `real_page` instead of a concrete leaf widget.
   if (routeName == 'AppRouteNames.sc051OrderReceipt') {
-    return '${appRoot.path}/lib/features/trade/presentation/pages/phone/'
+    return '${appRoot.path}/lib/features/trade/presentation/phone/pages/'
             'order_receipt_page.dart'
         .replaceAll('\\', '/');
   }

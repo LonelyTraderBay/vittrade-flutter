@@ -6,8 +6,8 @@ import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
 import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/tablet/home_tablet_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/tablet/pages/home_tablet_page.dart';
 
 void main() {
   Future<void> setViewport(WidgetTester tester) async {

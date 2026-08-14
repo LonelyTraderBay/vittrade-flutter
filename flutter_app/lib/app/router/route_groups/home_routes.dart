@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/tablet/home_tablet_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/tablet/pages/home_tablet_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/pages/responsive/home_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/news/presentation/pages/news_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';

@@ -1,4 +1,4 @@
-part of '../../pages/phone/order_receipt_page.dart';
+part of '../../phone/pages/order_receipt_page.dart';
 
 class _RiskBox extends StatelessWidget {
   const _RiskBox({

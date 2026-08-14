@@ -8,8 +8,8 @@ import 'package:vit_trade_flutter/features/profile/presentation/pages/api_key_cr
 import 'package:vit_trade_flutter/features/profile/presentation/pages/device_management_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/kyc_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/responsive/profile_responsive_entry.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/phone/profile_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/tablet/profile_tablet_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/sub_account_page.dart';

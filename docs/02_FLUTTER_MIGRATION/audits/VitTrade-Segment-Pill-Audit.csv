@@ -90,7 +90,7 @@ earn_staking,earn_staking/presentation/widgets/staking/staking_tax_guide_jurisdi
 earn_staking,earn_staking/presentation/widgets/staking/staking_validator_selection_filters.dart,VitChoicePill,chip,3,44,hug,-,pass,
 enterprise_states,enterprise_states/presentation/widgets/enterprise_states_hero_tabs.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 enterprise_states,enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
-home,home/presentation/pages/phone/home_page_sections.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+home,home/presentation/phone/pages/home_page_sections.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 home,home/presentation/widgets/tablet/home_market_watchlist_panel.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 launchpad,launchpad/presentation/pages/claim/launchpad_claim_receipt_page.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 launchpad,launchpad/presentation/pages/tools/launchpad_gas_tracker_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,

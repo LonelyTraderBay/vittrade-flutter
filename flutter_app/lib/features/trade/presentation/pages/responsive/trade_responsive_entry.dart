@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/phone/trade_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/tablet/trade_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Width-based dispatcher for the Trade route (SC-048): the single widget

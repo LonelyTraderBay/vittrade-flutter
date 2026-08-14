@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/tablet/home_tablet_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/tablet/pages/home_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Width-based dispatcher for the Home route (SC-007): the single widget

@@ -124,10 +124,10 @@ void main() {
 }
 
 const _tabRootPages = {
-  'features/home/presentation/pages/phone/home_page.dart',
-  'features/profile/presentation/pages/phone/profile_page.dart',
-  'features/wallet/presentation/pages/phone/wallet_page.dart',
-  'features/trade/presentation/pages/phone/trade_page.dart',
+  'features/home/presentation/phone/pages/home_page.dart',
+  'features/profile/presentation/phone/pages/profile_page.dart',
+  'features/wallet/presentation/phone/pages/wallet_page.dart',
+  'features/trade/presentation/phone/pages/trade_page.dart',
   'features/predictions/presentation/pages/predictions_home_page.dart',
 };
 
@@ -176,7 +176,8 @@ String _structuralViolationsForFile(String content, String relative) {
 }
 
 bool _isPageFile(String relative) {
-  return relative.contains('/presentation/pages/');
+  return relative.contains('/presentation/pages/') ||
+      RegExp(r'/presentation/(?:phone|tablet|web)/pages/').hasMatch(relative);
 }
 
 bool _hasSingleChildSectionColumn(String source) {

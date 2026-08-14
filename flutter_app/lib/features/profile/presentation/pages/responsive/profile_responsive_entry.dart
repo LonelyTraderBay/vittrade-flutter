@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/phone/profile_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/tablet/profile_tablet_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Width-based dispatcher for the Profile route (SC-156): the single widget

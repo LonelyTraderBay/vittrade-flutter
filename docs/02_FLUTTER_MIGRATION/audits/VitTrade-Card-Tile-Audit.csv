@@ -367,7 +367,7 @@ earn_staking,flutter_app/lib/features/earn_staking/presentation/widgets/staking/
 earn_staking,flutter_app/lib/features/earn_staking/presentation/widgets/staking/staking_withdrawal_policy_penalties.dart,2,0,0,D,0,0,0,pass,-
 earn_staking,flutter_app/lib/features/earn_staking/presentation/widgets/staking/staking_withdrawal_policy_timeline.dart,2,1,0,D,0,0,0,pass,-
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,1,0,0,E,0,0,0,pass,-
-home,flutter_app/lib/features/home/presentation/pages/phone/home_page_sections.dart,1,0,0,E,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.dart,1,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,2,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,2,0,0,D,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,1,0,0,E,0,0,0,pass,-
@@ -699,11 +699,11 @@ predictions,flutter_app/lib/features/predictions/presentation/widgets/social/pre
 predictions,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_podium_rankings.dart,2,0,0,C,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_rows_wins.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/pages/edit_profile_page.dart,2,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_arena_stats.dart,1,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_hero.dart,1,0,0,D,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_legal_accordion.dart,1,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_menu_actions.dart,4,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_vip_prediction.dart,2,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_arena_stats.dart,1,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_hero.dart,1,0,0,D,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_legal_accordion.dart,1,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_menu_actions.dart,4,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_vip_prediction.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,1,0,0,C,0,0,0,pass,-

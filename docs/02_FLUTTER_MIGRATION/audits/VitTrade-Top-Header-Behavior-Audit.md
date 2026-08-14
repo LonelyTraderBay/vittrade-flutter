@@ -4,11 +4,11 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=21
-auto_hide_header=374
-custom_scroll_header=0
-no_top_header=16
-unresolved=1
+fixed_vit_header_remaining=22
+auto_hide_header=378
+custom_scroll_header=1
+no_top_header=11
+unresolved=0
 ```
 
 ## Fixed Header Count By Feature
@@ -19,8 +19,8 @@ unresolved=1
 | trade_bots | 4 |
 | admin | 3 |
 | enterprise_states | 2 |
+| trade | 2 |
 | markets | 1 |
-| trade | 1 |
 
 ## Route Header Inventory
 
@@ -160,7 +160,7 @@ unresolved=1
 | enterprise_states | `AppRoutePaths.enterpriseStates` | `EnterpriseStatesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/enterprise_states/presentation/pages/enterprise_states_page.dart` |
 | enterprise_states | `AppRoutePaths.forceUpdateGate` | `ForceUpdateGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/force_update_gate_page.dart` |
 | enterprise_states | `AppRoutePaths.maintenanceGate` | `MaintenanceGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/maintenance_gate_page.dart` |
-| home | `AppRoutePaths.home` | `HomeResponsiveEntry` | no_top_header | no_top_header | `flutter_app/lib/features/home/presentation/pages/responsive/home_responsive_entry.dart` |
+| home | `AppRoutePaths.home` | `HomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/home/presentation/phone/pages/home_page.dart` |
 | launchpad | `AppRoutePaths.launchpad` | `LaunchpadPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_page.dart` |
 | launchpad | `AppRoutePaths.launchpadAbiDiff` | `LaunchpadAbiDiffPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_abi_diff_page.dart` |
 | launchpad | `AppRoutePaths.launchpadAddressBook` | `LaunchpadAddressBookPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_address_book_page.dart` |
@@ -188,7 +188,7 @@ unresolved=1
 | markets | `'/pair/:pairId'` | `PairDetailPage` | fixed_vit_header | trade_custom_in_scroll | `flutter_app/lib/features/markets/presentation/pages/pair/pair_detail_page.dart` |
 | markets | `'/pair/:pairId/depth'` | `MarketDepthPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/pair/market_depth_page.dart` |
 | markets | `'/pair/:pairId/info'` | `TokenInfoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/token_info_page.dart` |
-| markets | `AppRoutePaths.markets` | `MarketsResponsiveEntry` | no_top_header | no_top_header | `flutter_app/lib/features/markets/presentation/pages/responsive/markets_responsive_entry.dart` |
+| markets | `AppRoutePaths.markets` | `MarketListPage` | custom_scroll_header | market_custom_in_scroll | `flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart` |
 | markets | `AppRoutePaths.marketsAdvancedCharts` | `AdvancedChartsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page.dart` |
 | markets | `AppRoutePaths.marketsAlerts` | `PriceAlertsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/price_alerts_page.dart` |
 | markets | `AppRoutePaths.marketsCalendar` | `MarketCalendarPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_calendar_page.dart` |
@@ -304,7 +304,7 @@ unresolved=1
 | predictions | `AppRoutePaths.marketsPredictionsSearch` | `PredictionsSearchPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_search_page.dart` |
 | predictions | `AppRoutePaths.marketsPredictionsSocial` | `PredictionSocialPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_social_page.dart` |
 | predictions | `AppRoutePaths.marketsPredictionsTournaments` | `PredictionTournamentsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/predictions/presentation/pages/social/prediction_tournaments_page.dart` |
-| profile | `AppRoutePaths.profile` | `ProfileResponsiveEntry` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart` |
+| profile | `AppRoutePaths.profile` | `ProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
 | profile | `AppRoutePaths.profileActivity` | `ActivityLogPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/activity_log_page.dart` |
 | profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/api_management_page.dart` |
 | profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/api_key_create_page.dart` |
@@ -327,16 +327,16 @@ unresolved=1
 | support | `AppRoutePaths.support` | `SupportPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/support_page.dart` |
 | support | `AppRoutePaths.supportAnnouncements` | `AnnouncementsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `HelpCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` |
-| trade | `'/trade/:pairId'` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/phone/trade_page.dart` |
+| trade | `'/trade/:pairId'` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
 | trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/futures_page.dart` |
 | trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/leverage_page.dart` |
-| trade | `AppRoutePaths.trade` | `TradeResponsiveEntry` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/pages/responsive/trade_responsive_entry.dart` |
+| trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
 | trade | `AppRoutePaths.tradeConvert` | `ConvertPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/convert/convert_page.dart` |
 | trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/pages/hub/trade_history_export_page.dart` |
 | trade | `AppRoutePaths.tradeMargin` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart` |
 | trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart` |
 | trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_hub_page.dart` |
-| trade | `AppRoutePaths.tradeOrderReceipt` | `unresolved` | unresolved | unresolved | `unresolved` |
+| trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
 | trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/hub/orders_history_page.dart` |
 | trade | `AppRoutePaths.tradePositions` | `PositionDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/hub/position_dashboard_page.dart` |
 | trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/hub/trade_settings_page.dart` |
@@ -421,7 +421,7 @@ unresolved=1
 | wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` |
 | wallet | `'/wallet/asset/:assetId'` | `AssetDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart` |
 | wallet | `'/wallet/transaction/:txId'` | `TransactionDetailPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` |
-| wallet | `AppRoutePaths.wallet` | `WalletResponsiveEntry` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart` |
+| wallet | `AppRoutePaths.wallet` | `WalletPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` |
 | wallet | `AppRoutePaths.walletAddressBook` | `AddressBookPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` |
 | wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/address/address_add_page.dart` |
 | wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart` |

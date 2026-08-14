@@ -19,7 +19,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 01_shared,flutter_app/lib/shared/widgets/vit_task_card.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_trade_instrument_hero.dart,E,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_trade_order_list.dart,E,-,done,0,-
-02_home,flutter_app/lib/features/home/presentation/pages/phone/home_page_sections.dart,E,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,D,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,E,-,done,0,-
@@ -808,11 +808,11 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/p2p_security/presentation/widgets/security/p2p_transaction_limits_page_common.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/p2p_security/presentation/widgets/security/p2p_transaction_limits_page_sections.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/pages/edit_profile_page.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_arena_stats.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_hero.dart,D,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_legal_accordion.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_menu_actions.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_vip_prediction.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_arena_stats.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_hero.dart,D,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_legal_accordion.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_menu_actions.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_vip_prediction.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,C,-,done,0,-

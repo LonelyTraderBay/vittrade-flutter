@@ -18,8 +18,8 @@ import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/walle
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_health_score_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/phone/wallet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';

@@ -909,7 +909,7 @@ List<String> _extraSourceForPageGroup(
   final extraPaths = <String>[];
 
   if (relativeGroup ==
-      'flutter_app/lib/features/markets/presentation/pages/phone/market_list_page.dart') {
+      'flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart') {
     extraPaths.add(
       'lib/features/markets/presentation/widgets/phone/market_list_header.dart',
     );

@@ -554,9 +554,6 @@ enterprise_states,root_page,flutter_app/lib/features/enterprise_states/presentat
 home,root_page,flutter_app/lib/features/home/presentation/pages/home_page.dart,0,0,0,0,0,0,0,0,no,-
 home,root_page,flutter_app/lib/features/home/presentation/pages/home_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page.dart,0,0,0,0,0,0,0,0,no,-
-home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_common.dart,0,0,0,0,0,0,0,0,no,-
-home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
-home,root_page,flutter_app/lib/features/home/presentation/pages/phone/home_page_state.dart,0,0,0,0,0,0,0,0,no,-
 home,root_page,flutter_app/lib/features/home/presentation/pages/tablet/home_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
@@ -1114,11 +1111,6 @@ profile,root_page,flutter_app/lib/features/profile/presentation/pages/api_manage
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/device_management_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/edit_profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/kyc_page.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_arena_stats.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_hero.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_legal_accordion.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_menu_actions.dart,0,0,0,0,0,0,0,0,no,-
-profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_home_vip_prediction.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/phone/profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/profile_page.dart,0,0,0,0,0,0,0,0,no,-
 profile,root_page,flutter_app/lib/features/profile/presentation/pages/profile_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
@@ -1215,7 +1207,6 @@ trade,root_page,flutter_app/lib/features/trade/presentation/pages/margin/margin_
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/margin/margin_trading_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/order_receipt_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/trade_page.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/pages/phone/trade_page_state.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,0,0,0,0,0,0,0,0,no,-
@@ -1246,15 +1237,15 @@ trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margi
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_reserved.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_shared_helpers.dart,0,0,0,0,0,0,0,0,no,-
 trade,root_page,flutter_app/lib/features/trade/presentation/widgets/margin/margin_trading_simple_form.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
-trade,root_page,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-

@@ -9,8 +9,8 @@ import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/mark
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_depth_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_heatmap_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/responsive/markets_responsive_entry.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/phone/market_list_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/tablet/markets_tablet_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/market_movers_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/research/market_news_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/hub/market_overview_page.dart';

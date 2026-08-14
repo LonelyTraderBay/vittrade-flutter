@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/phone/market_list_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/tablet/markets_tablet_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Width-based dispatcher for the Markets route (SC-008): the single widget

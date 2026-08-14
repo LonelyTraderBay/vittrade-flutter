@@ -40,7 +40,7 @@ void main() {
           'VitServiceTile.fromAction(',
       'lib/features/home/presentation/widgets/phone/home_portfolio_card.dart':
           'VitBalanceBreakdownRow(',
-      'lib/features/home/presentation/pages/phone/home_page_sections.dart':
+      'lib/features/home/presentation/phone/pages/home_page_sections.dart':
           'VitRiskDisclaimerNote(',
     };
 

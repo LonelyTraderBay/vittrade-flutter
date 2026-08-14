@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/phone/wallet_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Width-based dispatcher for the Wallet route (SC-135): the single widget

@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/features/home/data/providers/home_repository_p
 import 'package:vit_trade_flutter/features/home/data/repositories/mock_home_repository.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/domain/repositories/home_repository.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_sparkline.dart';
 
@@ -18,7 +18,7 @@ void main() {
   test('SC-007 Home keeps the shared component foundation contract', () {
     final source = [
       for (final entity in Directory(
-        'lib/features/home/presentation/pages',
+        'lib/features/home/presentation/phone/pages',
       ).listSync(recursive: true).whereType<File>())
         entity.readAsStringSync(),
       for (final entity in Directory(

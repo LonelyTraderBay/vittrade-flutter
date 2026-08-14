@@ -1,7 +1,7 @@
 feature,tier,file,widget,pattern,fixed_height,center_align,padding_token,status,notes
 shared,A,flutter_app/lib/shared/widgets/vit_compact_product_card.dart,VitCompactProductCard,canonical,yes,yes,cardTilePadding,pass,-
 shared,A,flutter_app/lib/shared/widgets/vit_market_ticker.dart,VitMarketTickerCard,canonical,yes,yes,cardTilePadding,pass,-
-home,E,flutter_app/lib/features/home/presentation/pages/phone/home_page_sections.dart,file_summary,home_scan,0,-,-,pass,-
+home,E,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.dart,file_summary,home_scan,0,-,-,pass,-
 home,E,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,file_summary,home_scan,0,-,-,pass,-
 home,D,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,file_summary,home_scan,0,-,-,pass,-
 home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,file_summary,home_scan,0,-,-,pass,-

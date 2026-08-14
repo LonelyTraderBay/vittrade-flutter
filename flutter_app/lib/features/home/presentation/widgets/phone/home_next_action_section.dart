@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 class HomeNextActionSection extends StatelessWidget {

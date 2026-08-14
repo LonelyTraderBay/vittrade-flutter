@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/phone/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
