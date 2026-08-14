@@ -287,6 +287,58 @@ const routeNameToPageOverrides = <String, String>{
       'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
   'AppRouteNames.sc243P2PClaimDetail':
       'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc211P2PExpress':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc210P2PExpressConfirm':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc223P2PAdAnalytics':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc224P2PAdDetail':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc225P2PMyAds':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc226P2PCreateAd':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc230P2PTradingLevel':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc280P2PGuide':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc279P2PSettings':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc278P2PNotificationsSettings':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc273P2POrderBook':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc274P2PDashboard':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc282P2PHome':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc212P2POrderTimeline':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc213P2POrderRate':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc214P2POrderCancel':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc215P2POrderProof':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc216P2POrder':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc217P2PChat':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc245P2PEscrowBalance':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc246P2PEscrowDetail':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc264P2PWallet':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc261P2PWalletTransfer':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc262P2PFundLockHistory':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc263P2PWalletHistoryAlias':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc281P2PMyOrders':
+      'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

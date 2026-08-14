@@ -117,8 +117,8 @@ ShellRoute _appShellRoute(
       ...adminRoutes(shellRenderMode),
       // ADR-012: P2P family route groups
       // (marketplace → orders → account → security → dispute).
-      ...p2pMarketplaceRoutes(shellRenderMode),
-      ...p2pOrdersRoutes(shellRenderMode),
+      ...p2pMarketplaceRoutes(shellRenderMode, surface: surface),
+      ...p2pOrdersRoutes(shellRenderMode, surface: surface),
       ...p2pAccountRoutes(shellRenderMode, surface: surface),
       ...p2pSecurityRoutes(shellRenderMode, surface: surface),
       ...p2pDisputeRoutes(shellRenderMode, surface: surface),

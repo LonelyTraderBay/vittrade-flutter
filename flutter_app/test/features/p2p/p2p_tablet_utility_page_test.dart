@@ -48,4 +48,24 @@ void main() {
     expect(find.text('Mở tranh chấp P2P'), findsOneWidget);
     expect(find.text('Chưa gửi'), findsOneWidget);
   });
+
+  testWidgets('SC-282 Tablet uses independent P2P marketplace composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.p2p);
+
+    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
+    expect(find.text('P2P Marketplace'), findsOneWidget);
+  });
+
+  testWidgets('SC-214 Tablet keeps order cancellation behind confirmation', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, '/p2p/order/cancel/order-123');
+
+    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
+    await tester.tap(find.byKey(const Key('SC-214-tablet-action')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('SC-214-tablet-cancel')), findsOneWidget);
+  });
 }
