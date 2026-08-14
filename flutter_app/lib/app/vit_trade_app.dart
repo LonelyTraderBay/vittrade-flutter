@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,7 +8,11 @@ import 'package:flutter_riverpod/misc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/bootstrap/surface_router_host.dart';
+import 'package:vit_trade_flutter/app/router/phone/phone_app_router.dart';
+import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
+import 'package:vit_trade_flutter/app/router/web/web_app_router.dart';
 import 'package:vit_trade_flutter/app/session_bootstrap.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -18,11 +23,16 @@ class VitTradeApp extends StatelessWidget {
     super.key,
     this.routerConfig,
     this.shellRenderMode,
+    this.surface,
     this.overrides = const [],
   });
 
   final GoRouter? routerConfig;
   final ShellRenderMode? shellRenderMode;
+
+  /// Cho phép entrypoint/test chốt surface. Khi bỏ trống, bootstrap chọn
+  /// Web hoặc Phone/Tablet theo viewport hiện tại.
+  final AppSurface? surface;
 
   /// GĐ4-F1: điểm bơm DI runtime từ bootstrap (storage thật, error reporter
   /// hợp nhất). Test không truyền gì — provider mặc định là impl in-memory.
@@ -31,6 +41,8 @@ class VitTradeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolvedShellRenderMode = shellRenderMode ?? defaultShellRenderMode();
+    final resolvedRouter =
+        routerConfig ?? _createSurfaceRouter(context, resolvedShellRenderMode);
 
     return ProviderScope(
       overrides: [...authSessionNetworkOverrides(), ...overrides],
@@ -45,14 +57,38 @@ class VitTradeApp extends StatelessWidget {
         // GĐ4-F1: khôi phục phiên đăng nhập từ SecureStore ngay khi cây
         // widget dựng — phải nằm DƯỚI ProviderScope để đọc được provider.
         child: SessionBootstrap(
-          child: _VitTradeMaterialApp(
-            routerConfig:
-                routerConfig ??
-                createAppRouter(shellRenderMode: resolvedShellRenderMode),
-          ),
+          child: _VitTradeMaterialApp(routerConfig: resolvedRouter),
         ),
       ),
     );
+  }
+
+  GoRouter _createSurfaceRouter(
+    BuildContext context,
+    ShellRenderMode resolvedShellRenderMode,
+  ) {
+    final viewportWidth = _viewportWidth(context);
+    final selectedSurface =
+        surface ??
+        AppSurfaceResolver.resolve(viewportWidth: viewportWidth, isWeb: kIsWeb);
+    final host = SurfaceRouterHost(
+      phoneRouter: () =>
+          createPhoneAppRouter(shellRenderMode: resolvedShellRenderMode),
+      tabletRouter: () =>
+          createTabletAppRouter(shellRenderMode: resolvedShellRenderMode),
+      webRouter: () =>
+          createWebAppRouter(shellRenderMode: resolvedShellRenderMode),
+    );
+    return host.createRouter(selectedSurface);
+  }
+
+  double _viewportWidth(BuildContext context) {
+    final mediaQueryWidth = MediaQuery.maybeOf(context)?.size.width;
+    if (mediaQueryWidth != null && mediaQueryWidth > 0) return mediaQueryWidth;
+
+    final view = View.of(context);
+    if (view.devicePixelRatio <= 0) return 0;
+    return view.physicalSize.width / view.devicePixelRatio;
   }
 }
 
