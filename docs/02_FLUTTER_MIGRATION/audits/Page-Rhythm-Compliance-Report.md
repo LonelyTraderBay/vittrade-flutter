@@ -31,9 +31,7 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ## By module
 
-### app (68 routes, L2 warn 0, unknown 0)
-
-### arena (25 routes, L2 warn 0, unknown 0)
+### app (117 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
 
@@ -44,8 +42,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 ### enterprise_states (2 routes, L2 warn 0, unknown 0)
 
 ### home (1 routes, L2 warn 0, unknown 0)
-
-### launchpad (24 routes, L2 warn 0, unknown 0)
 
 ### markets (19 routes, L2 warn 0, unknown 0)
 

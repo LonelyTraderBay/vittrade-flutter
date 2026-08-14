@@ -466,6 +466,99 @@ const routeNameToPageOverrides = <String, String>{
       'shared/layout/vit_tablet_utility_page.dart',
   'AppRouteNames.sc409DcaRebalanceHistory':
       'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc184ArenaHome': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc185ArenaStudio':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc186ArenaSmartRules':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc187ArenaPresetLibrary':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc188ArenaGovernanceGate':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc189ArenaModeDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc190ArenaChallengeDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc191ArenaJoin': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc192ArenaResolutionCenter':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc193ArenaCreator':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc194ArenaLeaderboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc195VerifiedChallenges':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc197ArenaFlowMap':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc198ArenaSafetyCenter':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc199ArenaTrustBreakdown':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc200ArenaPointsEntryDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc201ArenaPointsLedger':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc202ArenaReportCase':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc203ArenaBlockedUsers':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc204MyArenaReports':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc205MyArena': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc206ArenaProductionReady':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc207ArenaPredictionBridgeFoundation':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc208ConnectedEcosystemProduction':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc209ArenaGuide': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc295Launchpad': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc296LaunchpadPortfolio':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc297LaunchpadPerformance':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc298LaunchpadStaking':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc299LaunchpadIdoBridge':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc300LaunchpadContract':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc301LaunchpadReceipt':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc302LaunchpadClaimReceipt':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc303LaunchpadBridgeOrder':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc304LaunchpadBatchClaim':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc305LaunchpadBridgeCompare':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc306LaunchpadNotifSound':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc307LaunchpadEventLog':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc308LaunchpadAbiDiff':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc309LaunchpadAddressBook':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc310LaunchpadWebhooks':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc311LaunchpadGasTracker':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc312LaunchpadRebalance':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc313LaunchpadMultisig':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc314LaunchpadSwapAggregator':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc315LaunchpadLimitOrders':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc316LaunchpadDcaBuilder':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc317LaunchpadRiskAnalytics':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc318LaunchpadDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

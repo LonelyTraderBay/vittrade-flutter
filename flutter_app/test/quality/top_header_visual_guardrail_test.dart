@@ -71,7 +71,7 @@ void main() {
     expect(markdown, contains('screen_level_mismatches=0'));
     expect(csv, contains('screenLevel,expectedArchetype,screenLevelMismatch'));
 
-    for (final pageClass in ['ArenaHomePage', 'StakingEarnPage']) {
+    for (final pageClass in ['StakingEarnPage']) {
       expect(
         csv,
         matches(
@@ -89,6 +89,8 @@ void main() {
     for (final routePath in [
       'AppRoutePaths.marketsPredictions',
       'AppRoutePaths.dca',
+      'AppRoutePaths.arena',
+      'AppRoutePaths.launchpad',
     ]) {
       expect(
         csv,

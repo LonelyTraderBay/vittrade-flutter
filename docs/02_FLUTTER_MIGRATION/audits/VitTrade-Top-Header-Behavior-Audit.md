@@ -5,10 +5,10 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=412
 fixed_vit_header_remaining=19
-auto_hide_header=299
+auto_hide_header=250
 custom_scroll_header=1
 no_top_header=25
-unresolved=68
+unresolved=117
 ```
 
 ## Fixed Header Count By Feature
@@ -29,31 +29,31 @@ unresolved=68
 | admin | `AppRoutePaths.adminAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
 | admin | `AppRoutePaths.adminFunnels` | `unresolved` | unresolved | unresolved | `unresolved` |
 | admin | `AppRoutePaths.adminSettings` | `unresolved` | unresolved | unresolved | `unresolved` |
-| arena | `'/arena/challenge/:challengeId'` | `ArenaChallengeDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page.dart` |
-| arena | `'/arena/creator/:creatorId'` | `ArenaCreatorPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/studio/arena_creator_page.dart` |
-| arena | `'/arena/join/:challengeId'` | `ArenaJoinPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_join_page.dart` |
-| arena | `'/arena/ledger/entry/:entryId'` | `ArenaPointsEntryDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/points/arena_points_entry_detail_page.dart` |
-| arena | `'/arena/mode/:modeId'` | `ArenaModeDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_mode_detail_page.dart` |
-| arena | `'/arena/report/:caseId'` | `ArenaReportCasePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_report_case_page.dart` |
-| arena | `'/arena/trust/:userId'` | `ArenaTrustBreakdownPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_trust_breakdown_page.dart` |
-| arena | `AppRoutePaths.arena` | `ArenaHomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/hub/arena_home_page.dart` |
-| arena | `AppRoutePaths.arenaBlocked` | `ArenaBlockedUsersPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_blocked_users_page.dart` |
-| arena | `AppRoutePaths.arenaBridge` | `ArenaPredictionBridgeFoundationPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/bridge/arena_prediction_bridge_foundation_page.dart` |
-| arena | `AppRoutePaths.arenaEcosystem` | `ConnectedEcosystemProductionPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/bridge/connected_ecosystem_production_page.dart` |
-| arena | `AppRoutePaths.arenaFlowMap` | `ArenaFlowMapPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/hub/arena_flow_map_page.dart` |
-| arena | `AppRoutePaths.arenaGuide` | `ArenaGuidePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_guide_page.dart` |
-| arena | `AppRoutePaths.arenaLeaderboard` | `ArenaLeaderboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_leaderboard_page.dart` |
-| arena | `AppRoutePaths.arenaLedger` | `ArenaPointsLedgerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/points/arena_points_ledger_page.dart` |
-| arena | `AppRoutePaths.arenaMy` | `MyArenaPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/hub/my_arena_page.dart` |
-| arena | `AppRoutePaths.arenaMyReports` | `MyArenaReportsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/my_arena_reports_page.dart` |
-| arena | `AppRoutePaths.arenaProduction` | `ArenaProductionReadyPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/hub/arena_production_ready_page.dart` |
-| arena | `AppRoutePaths.arenaResolution` | `ArenaResolutionCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_resolution_center_page.dart` |
-| arena | `AppRoutePaths.arenaSafety` | `ArenaSafetyCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_safety_center_page.dart` |
-| arena | `AppRoutePaths.arenaStudio` | `ArenaStudioPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/studio/arena_studio_page.dart` |
-| arena | `AppRoutePaths.arenaStudioGovernance` | `ArenaGovernanceGatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/governance/arena_governance_gate_page.dart` |
-| arena | `AppRoutePaths.arenaStudioPresets` | `ArenaUniversalPresetLibraryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/studio/arena_universal_preset_library_page.dart` |
-| arena | `AppRoutePaths.arenaStudioSmartRules` | `ArenaSmartRuleBuilderPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/studio/arena_smart_rule_builder_page.dart` |
-| arena | `AppRoutePaths.arenaVerified` | `VerifiedChallengesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/verified_challenges_page.dart` |
+| arena | `'/arena/challenge/:challengeId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/creator/:creatorId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/join/:challengeId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/ledger/entry/:entryId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/mode/:modeId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/report/:caseId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `'/arena/trust/:userId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arena` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaBlocked` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaBridge` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaEcosystem` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaFlowMap` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaGuide` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaLeaderboard` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaLedger` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaMy` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaMyReports` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaProduction` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaResolution` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaSafety` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaStudio` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaStudioGovernance` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaStudioPresets` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaStudioSmartRules` | `unresolved` | unresolved | unresolved | `unresolved` |
+| arena | `AppRoutePaths.arenaVerified` | `unresolved` | unresolved | unresolved | `unresolved` |
 | auth | `AppRoutePaths.auth2faSetup` | `TwoFASetupPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/two_fa_setup_page.dart` |
 | auth | `AppRoutePaths.authForgotPassword` | `ForgotPasswordPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/forgot_password_page.dart` |
 | auth | `AppRoutePaths.authLogin` | `LoginPage` | no_top_header | no_top_header | `flutter_app/lib/features/auth/presentation/phone/pages/login_page.dart` |
@@ -146,30 +146,30 @@ unresolved=68
 | enterprise_states | `AppRoutePaths.forceUpdateGate` | `ForceUpdateGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/force_update_gate_page.dart` |
 | enterprise_states | `AppRoutePaths.maintenanceGate` | `MaintenanceGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/maintenance_gate_page.dart` |
 | home | `AppRoutePaths.home` | `HomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/home/presentation/phone/pages/home_page.dart` |
-| launchpad | `AppRoutePaths.launchpad` | `LaunchpadPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_page.dart` |
-| launchpad | `AppRoutePaths.launchpadAbiDiff` | `LaunchpadAbiDiffPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_abi_diff_page.dart` |
-| launchpad | `AppRoutePaths.launchpadAddressBook` | `LaunchpadAddressBookPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_address_book_page.dart` |
-| launchpad | `AppRoutePaths.launchpadBatchClaim` | `LaunchpadBatchClaimPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/claim/launchpad_batch_claim_page.dart` |
-| launchpad | `AppRoutePaths.launchpadBridgeCompare` | `LaunchpadBridgeComparePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_compare_page.dart` |
-| launchpad | `AppRoutePaths.launchpadBridgeOrderTx001` | `LaunchpadBridgeOrderPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_order_page.dart` |
-| launchpad | `AppRoutePaths.launchpadClaimReceiptPos001` | `LaunchpadClaimReceiptPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/claim/launchpad_claim_receipt_page.dart` |
-| launchpad | `AppRoutePaths.launchpadContractSample` | `LaunchpadContractPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_contract_page.dart` |
-| launchpad | `AppRoutePaths.launchpadDcaBuilder` | `LaunchpadDcaBuilderPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_dca_builder_page.dart` |
-| launchpad | `AppRoutePaths.launchpadEventLog` | `LaunchpadEventLogPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_event_log_page.dart` |
-| launchpad | `AppRoutePaths.launchpadGasTracker` | `LaunchpadGasTrackerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_gas_tracker_page.dart` |
-| launchpad | `AppRoutePaths.launchpadIdoBridgeSample` | `LaunchpadIdoBridgePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_ido_bridge_page.dart` |
-| launchpad | `AppRoutePaths.launchpadLimitOrders` | `LaunchpadLimitOrdersPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_limit_orders_page.dart` |
-| launchpad | `AppRoutePaths.launchpadMultisig` | `LaunchpadMultisigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_multisig_page.dart` |
-| launchpad | `AppRoutePaths.launchpadNotifSound` | `LaunchpadNotifSoundPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_notif_sound_page.dart` |
-| launchpad | `AppRoutePaths.launchpadPerformance` | `LaunchpadPerformancePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_performance_page.dart` |
-| launchpad | `AppRoutePaths.launchpadPortfolio` | `LaunchpadPortfolioPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_portfolio_page.dart` |
-| launchpad | `AppRoutePaths.launchpadRebalance` | `LaunchpadRebalancePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_rebalance_page.dart` |
-| launchpad | `AppRoutePaths.launchpadReceiptSub001` | `LaunchpadReceiptPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_receipt_page.dart` |
-| launchpad | `AppRoutePaths.launchpadRiskAnalytics` | `LaunchpadRiskAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_risk_analytics_page.dart` |
-| launchpad | `AppRoutePaths.launchpadSample` | `LaunchpadDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/hub/launchpad_detail_page.dart` |
-| launchpad | `AppRoutePaths.launchpadStaking` | `LaunchpadStakingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_staking_page.dart` |
-| launchpad | `AppRoutePaths.launchpadSwapAggregator` | `LaunchpadSwapAggregatorPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/bridge/launchpad_swap_aggregator_page.dart` |
-| launchpad | `AppRoutePaths.launchpadWebhooks` | `LaunchpadWebhooksPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/launchpad/presentation/pages/tools/launchpad_webhooks_page.dart` |
+| launchpad | `AppRoutePaths.launchpad` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadAbiDiff` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadAddressBook` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadBatchClaim` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadBridgeCompare` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadBridgeOrderTx001` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadClaimReceiptPos001` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadContractSample` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadDcaBuilder` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadEventLog` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadGasTracker` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadIdoBridgeSample` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadLimitOrders` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadMultisig` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadNotifSound` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadPerformance` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadPortfolio` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadRebalance` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadReceiptSub001` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadRiskAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadSample` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadStaking` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadSwapAggregator` | `unresolved` | unresolved | unresolved | `unresolved` |
+| launchpad | `AppRoutePaths.launchpadWebhooks` | `unresolved` | unresolved | unresolved | `unresolved` |
 | markets | `'/pair/:pairId'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | markets | `'/pair/:pairId/depth'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | markets | `'/pair/:pairId/info'` | `unresolved` | unresolved | unresolved | `unresolved` |

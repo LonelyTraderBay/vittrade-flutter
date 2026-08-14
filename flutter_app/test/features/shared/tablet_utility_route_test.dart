@@ -87,4 +87,20 @@ void main() {
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Rà soát trước khi xác nhận'), findsOneWidget);
   });
+
+  testWidgets('SC-184 Tablet keeps Arena points separate', (tester) async {
+    await pumpTabletRoute(tester, AppRoutePaths.arena);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Open Arena'), findsOneWidget);
+  });
+
+  testWidgets('SC-295 Tablet uses the independent Launchpad composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.launchpad);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Launchpad'), findsOneWidget);
+  });
 }

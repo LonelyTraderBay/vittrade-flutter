@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/pages/hub/arena_home_page.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/pages/governance/arena_governance_gate_page.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/pages/governance/arena_guide_page.dart';
@@ -29,90 +31,156 @@ import 'package:vit_trade_flutter/features/arena/presentation/pages/challenge/ve
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> arenaCoreRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> arenaCoreRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.arena,
       name: AppRouteNames.sc184ArenaHome,
-      builder: (_, _) => ArenaHomePage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc184ArenaHome,
+        fallback: ArenaHomePage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaGuide,
       name: AppRouteNames.sc209ArenaGuide,
-      builder: (_, _) => ArenaGuidePage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc209ArenaGuide,
+        fallback: ArenaGuidePage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaStudio,
       name: AppRouteNames.sc185ArenaStudio,
-      builder: (_, _) => ArenaStudioPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc185ArenaStudio,
+        fallback: ArenaStudioPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaStudioSmartRules,
       name: AppRouteNames.sc186ArenaSmartRules,
-      builder: (_, _) =>
-          ArenaSmartRuleBuilderPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc186ArenaSmartRules,
+        fallback: ArenaSmartRuleBuilderPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaStudioPresets,
       name: AppRouteNames.sc187ArenaPresetLibrary,
-      builder: (_, _) =>
-          ArenaUniversalPresetLibraryPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc187ArenaPresetLibrary,
+        fallback: ArenaUniversalPresetLibraryPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaStudioGovernance,
       name: AppRouteNames.sc188ArenaGovernanceGate,
-      builder: (_, _) =>
-          ArenaGovernanceGatePage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc188ArenaGovernanceGate,
+        fallback: ArenaGovernanceGatePage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/arena/mode/:modeId',
       name: AppRouteNames.sc189ArenaModeDetail,
-      builder: (_, state) => ArenaModeDetailPage(
-        modeId: requireRouteParam(state, 'modeId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc189ArenaModeDetail,
+        fallback: ArenaModeDetailPage(
+          modeId: requireRouteParam(state, 'modeId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: '/arena/challenge/:challengeId',
       name: AppRouteNames.sc190ArenaChallengeDetail,
-      builder: (_, state) => ArenaChallengeDetailPage(
-        challengeId: requireRouteParam(state, 'challengeId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc190ArenaChallengeDetail,
+        fallback: ArenaChallengeDetailPage(
+          challengeId: requireRouteParam(state, 'challengeId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: '/arena/join/:challengeId',
       name: AppRouteNames.sc191ArenaJoin,
-      builder: (_, state) => ArenaJoinPage(
-        challengeId: requireRouteParam(state, 'challengeId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc191ArenaJoin,
+        fallback: ArenaJoinPage(
+          challengeId: requireRouteParam(state, 'challengeId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaResolution,
       name: AppRouteNames.sc192ArenaResolutionCenter,
-      builder: (_, _) =>
-          ArenaResolutionCenterPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc192ArenaResolutionCenter,
+        fallback: ArenaResolutionCenterPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/arena/creator/:creatorId',
       name: AppRouteNames.sc193ArenaCreator,
-      builder: (_, state) => ArenaCreatorPage(
-        creatorId: requireRouteParam(state, 'creatorId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc193ArenaCreator,
+        fallback: ArenaCreatorPage(
+          creatorId: requireRouteParam(state, 'creatorId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaLeaderboard,
       name: AppRouteNames.sc194ArenaLeaderboard,
-      builder: (_, _) => ArenaLeaderboardPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc194ArenaLeaderboard,
+        fallback: ArenaLeaderboardPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaVerified,
       name: AppRouteNames.sc195VerifiedChallenges,
-      builder: (_, _) =>
-          VerifiedChallengesPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc195VerifiedChallenges,
+        fallback: VerifiedChallengesPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaPoints,
@@ -121,85 +189,166 @@ List<RouteBase> arenaCoreRoutes(ShellRenderMode shellRenderMode) {
   ];
 }
 
-List<RouteBase> arenaExtendedRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> arenaExtendedRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.arenaFlowMap,
       name: AppRouteNames.sc197ArenaFlowMap,
-      builder: (_, _) => ArenaFlowMapPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc197ArenaFlowMap,
+        fallback: ArenaFlowMapPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaSafety,
       name: AppRouteNames.sc198ArenaSafetyCenter,
-      builder: (_, _) =>
-          ArenaSafetyCenterPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc198ArenaSafetyCenter,
+        fallback: ArenaSafetyCenterPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaBlocked,
       name: AppRouteNames.sc203ArenaBlockedUsers,
-      builder: (_, _) =>
-          ArenaBlockedUsersPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc203ArenaBlockedUsers,
+        fallback: ArenaBlockedUsersPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaMyReports,
       name: AppRouteNames.sc204MyArenaReports,
-      builder: (_, _) => MyArenaReportsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc204MyArenaReports,
+        fallback: MyArenaReportsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaMy,
       name: AppRouteNames.sc205MyArena,
-      builder: (_, _) => MyArenaPage(
-        contractScope: MyArenaContractScope.arena,
-        shellRenderMode: shellRenderMode,
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc205MyArena,
+        fallback: MyArenaPage(
+          contractScope: MyArenaContractScope.arena,
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaProduction,
       name: AppRouteNames.sc206ArenaProductionReady,
-      builder: (_, _) =>
-          ArenaProductionReadyPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc206ArenaProductionReady,
+        fallback: ArenaProductionReadyPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaBridge,
       name: AppRouteNames.sc207ArenaPredictionBridgeFoundation,
-      builder: (_, _) =>
-          ArenaPredictionBridgeFoundationPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc207ArenaPredictionBridgeFoundation,
+        fallback: ArenaPredictionBridgeFoundationPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaEcosystem,
       name: AppRouteNames.sc208ConnectedEcosystemProduction,
-      builder: (_, _) =>
-          ConnectedEcosystemProductionPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc208ConnectedEcosystemProduction,
+        fallback: ConnectedEcosystemProductionPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: '/arena/trust/:userId',
       name: AppRouteNames.sc199ArenaTrustBreakdown,
-      builder: (_, state) => ArenaTrustBreakdownPage(
-        entityId: requireRouteParam(state, 'userId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc199ArenaTrustBreakdown,
+        fallback: ArenaTrustBreakdownPage(
+          entityId: requireRouteParam(state, 'userId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: '/arena/ledger/entry/:entryId',
       name: AppRouteNames.sc200ArenaPointsEntryDetail,
-      builder: (_, state) => ArenaPointsEntryDetailPage(
-        entryId: requireRouteParam(state, 'entryId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc200ArenaPointsEntryDetail,
+        fallback: ArenaPointsEntryDetailPage(
+          entryId: requireRouteParam(state, 'entryId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.arenaLedger,
       name: AppRouteNames.sc201ArenaPointsLedger,
-      builder: (_, _) =>
-          ArenaPointsLedgerPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc201ArenaPointsLedger,
+        fallback: ArenaPointsLedgerPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/arena/report/:caseId',
       name: AppRouteNames.sc202ArenaReportCase,
-      builder: (_, state) => ArenaReportCasePage(
-        caseId: requireRouteParam(state, 'caseId'),
-        shellRenderMode: shellRenderMode,
+      builder: (context, state) => _tabletArenaRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: AppRouteNames.sc202ArenaReportCase,
+        fallback: ArenaReportCasePage(
+          caseId: requireRouteParam(state, 'caseId'),
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
   ];
+}
+
+Widget _tabletArenaRoute({
+  required BuildContext context,
+  required AppSurface? surface,
+  required String semanticIdentifier,
+  required Widget fallback,
+}) {
+  return buildSurfaceAwareTabletRoute(
+    context: context,
+    surface: surface,
+    semanticIdentifier: semanticIdentifier,
+    title: 'Open Arena',
+    subtitle: 'Không gian thử thách và điểm Arena trên Tablet',
+    description:
+        'Không gian Tablet riêng cho thử thách, điểm Arena, an toàn cộng đồng và quản trị hệ sinh thái.',
+    backPath: AppRoutePaths.arena,
+    fallback: fallback,
+    icon: Icons.sports_esports_outlined,
+  );
 }

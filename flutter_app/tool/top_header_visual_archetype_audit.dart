@@ -497,6 +497,8 @@ String _detectArchetype({
 const _tabletProductHubPaths = <String>{
   'AppRoutePaths.marketsPredictions',
   'AppRoutePaths.dca',
+  'AppRoutePaths.arena',
+  'AppRoutePaths.launchpad',
 };
 
 String? _transitiveTopChromeType({
@@ -796,7 +798,9 @@ String _extractPageClass(String block) {
       block.contains('_tabletPredictionRoute') ||
       block.contains('_tabletMarketPairRoute') ||
       block.contains('_tabletTradeTerminalRoute') ||
-      block.contains('_tabletDcaRoute')) {
+      block.contains('_tabletDcaRoute') ||
+      block.contains('_tabletLaunchpadRoute') ||
+      block.contains('_tabletArenaRoute')) {
     return 'VitTabletUtilityPage';
   }
 
