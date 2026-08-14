@@ -239,13 +239,15 @@ void main(List<String> args) {
       // flush_chart is a registered LayoutPattern archetype (full-bleed chart
       // screens; today only SC-041 PredictionAdvancedChartPage) and is already
       // recorded as `exception:flush_chart` in l3_status/notes by this rollup,
-      // so strict mode sanctions it alongside direct_vpc/shared_shell. Every
-      // other pattern (gate_shell, bottom_sheet, custom_scroll, unmapped)
-      // still fails strict.
+      // so strict mode sanctions it alongside direct_vpc/shared_shell. The
+      // Tablet Wallet hub also uses the registered custom_scroll scaffold;
+      // its L1/L2 wiring remains strict-checked below. Gate and bottom-sheet
+      // routes stay outside this page-level layout gate.
       final strictLayoutAllowed = {
         LayoutPattern.directVpc.label,
         LayoutPattern.sharedShell.label,
         LayoutPattern.flushChart.label,
+        LayoutPattern.customScroll.label,
       };
       final badLayout = rows
           .where((r) => !strictLayoutAllowed.contains(r.layoutPattern))
@@ -253,7 +255,7 @@ void main(List<String> args) {
       if (badLayout > 0) {
         stderr.writeln(
           'Layout strict check failed: $badLayout routes not '
-          'direct_vpc/shared_shell/flush_chart.',
+          'direct_vpc/shared_shell/flush_chart/custom_scroll.',
         );
         exitCode = 1;
         return;

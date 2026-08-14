@@ -6,7 +6,7 @@ Generated from `flutter_app/tool/top_header_visual_archetype_audit.dart`.
 total_routed_screens=412
 strict_visual_issues=0
 screen_level_mismatches=0
-uses_vit_top_chrome=60
+uses_vit_top_chrome=59
 status_banner_in_header=0
 hard_coded_offline_banner=0
 ```
@@ -480,11 +480,11 @@ hard_coded_offline_banner=0
 | wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletDustConverter` | `DustConverterPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/assets/dust_converter_page.dart` |
-| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart` |
-| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScorePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_health_score_page.dart` |
+| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScoreTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryTabletPage` | fixed_vit_header | vit_header_default_with_actions | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart` |
-| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerPage` | auto_hide_header | vit_top_chrome_detail | detail | L2_detail | detail | no | no | yes | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart` |
+| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart` |
 | wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsTabletPage` | fixed_vit_header | vit_header_default_with_actions | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart` |

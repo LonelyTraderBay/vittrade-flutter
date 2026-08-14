@@ -4,6 +4,8 @@ import 'dart:io';
 
 /// Shell widget class → lib-relative VPC owner file.
 const shellWidgetToVpcPath = <String, String>{
+  'WalletTabletDetailSurface':
+      'features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
   'VitWalletDetailScaffold':
       'features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart',
   'VitP2PFlowScaffold':
@@ -22,6 +24,7 @@ const shellWidgetToVpcPath = <String, String>{
 
 /// Rhythm tier owned by each shell when a layout file declares multiple tiers.
 const shellWidgetRhythmTier = <String, String>{
+  'WalletTabletDetailSurface': 'form',
   'VitTradeWorkspaceScaffold': 'compact',
   'VitTradeHubScaffold': 'compact',
   'VitTradeDetailScaffold': 'standard',
@@ -84,6 +87,44 @@ const widgetClassPageOverrides = <String, String>{
       'features/p2p_security/presentation/pages/security/p2p_security_center_page.dart',
   'PredictionAdvancedChartPage':
       'features/predictions/presentation/pages/prediction_advanced_chart_page.dart',
+};
+
+/// Surface-aware route builders are recorded as `switch` in the route truth
+/// table. Keep the rollup pointed at the active Tablet composition where it
+/// exists; routes without a Tablet page use their canonical Phone page.
+const routeNameToPageOverrides = <String, String>{
+  'AppRouteNames.sc007Home':
+      'features/home/presentation/phone/pages/home_page.dart',
+  'AppRouteNames.sc008MarketList':
+      'features/markets/presentation/phone/pages/market_list_page.dart',
+  'AppRouteNames.sc135Wallet':
+      'features/wallet/presentation/tablet/pages/wallet_tablet_page.dart',
+  'AppRouteNames.sc136TxHistory':
+      'features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart',
+  'AppRouteNames.sc137Deposit':
+      'features/wallet/presentation/tablet/pages/deposit_tablet_page.dart',
+  'AppRouteNames.sc139Withdraw':
+      'features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart',
+  'AppRouteNames.sc142PortfolioAnalytics':
+      'features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart',
+  'AppRouteNames.sc143AddressAdd':
+      'features/wallet/presentation/tablet/pages/address_add_tablet_page.dart',
+  'AppRouteNames.sc144AddressBook':
+      'features/wallet/presentation/tablet/pages/address_book_tablet_page.dart',
+  'AppRouteNames.sc145BuyCrypto':
+      'features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart',
+  'AppRouteNames.sc146Transfer':
+      'features/wallet/presentation/tablet/pages/transfer_tablet_page.dart',
+  'AppRouteNames.sc148MultiManager':
+      'features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart',
+  'AppRouteNames.sc149GasOptimizer':
+      'features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart',
+  'AppRouteNames.sc151HealthScore':
+      'features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart',
+  'AppRouteNames.sc152PendingDeposits':
+      'features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart',
+  'AppRouteNames.sc156Profile':
+      'features/profile/presentation/phone/pages/profile_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].
@@ -331,6 +372,10 @@ String? resolvePageFilePath({
   final override = widgetClassPageOverrides[leaf];
   if (override != null) {
     return '${appRoot.path}/lib/$override'.replaceAll('\\', '/');
+  }
+  final routeOverride = routeNameToPageOverrides[routeName];
+  if (routeOverride != null) {
+    return '${appRoot.path}/lib/$routeOverride'.replaceAll('\\', '/');
   }
   final mapped = widgetToPage[leaf];
   if (mapped != null) {

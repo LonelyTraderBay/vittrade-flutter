@@ -33,6 +33,9 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/tran
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
@@ -219,14 +222,24 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletMultiManager,
       name: AppRouteNames.sc148MultiManager,
-      builder: (_, _) =>
-          WalletMultiManagerPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WalletMultiManagerTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WalletMultiManagerPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletGasOptimizer,
       name: AppRouteNames.sc149GasOptimizer,
-      builder: (_, _) =>
-          WalletGasOptimizerPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WalletGasOptimizerTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WalletGasOptimizerPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletTokenApproval,
@@ -237,8 +250,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletHealthScore,
       name: AppRouteNames.sc151HealthScore,
-      builder: (_, _) =>
-          WalletHealthScorePage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const WalletHealthScoreTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WalletHealthScorePage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletPendingDeposits,
