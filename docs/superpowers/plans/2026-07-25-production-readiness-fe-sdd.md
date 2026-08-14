@@ -13,7 +13,7 @@ UI/UX đã đóng. Wave còn lại: network/auth session → remote repos (khi c
 
 ## Global constraints
 
-1. Cursor **Auto only** — không escalate model.
+1. Dùng một phiên Codex nhất quán — không đổi model giữa batch.
 2. **Không commit** trừ khi user yêu cầu rõ.
 3. `core/` không import `app/`; session refresh nối qua provider overrides.
 4. ADR-010: **không** tạo remote repository / DTO shape đoán cho tới khi BE ký JSON schema.

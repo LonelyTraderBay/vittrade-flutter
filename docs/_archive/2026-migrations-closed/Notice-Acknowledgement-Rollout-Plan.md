@@ -28,7 +28,7 @@
 | New mandatory standard | `docs/02_FLUTTER_MIGRATION/standards/Notice-Acknowledgement-Standard.md` (mirror structure of Scroll-Auto-Hide-Standard: Authority, Rules, Anti-patterns, Verify, Exceptions) |
 | Domain map row | `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` §2 + page checklist |
 | Product contract | `AGENTS.md` UI Rules — 1–3 lines |
-| Cursor rule | `.cursor/rules/vittrade-notice-acknowledgement.mdc` (globs presentation) |
+| Codex skill | `.codex/skills/vittrade-ui-checklists/SKILL.md` (notice acknowledgement checklist) |
 | Codex UI reference | `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` — one Domain contracts row |
 
 **Gate:** docs only; no `flutter test` required.
@@ -147,7 +147,7 @@ flowchart LR
 
 ---
 
-## Chat sequence (Cursor)
+## Chat sequence (Codex)
 
 1. Chat A — Phase 0 only  
 2. Chat B — Batch 1 + introduce guardrail/baseline  
@@ -169,7 +169,7 @@ Do not merge multiple modules in one chat (>10 files).
 
 ## Done when
 
-- [x] Standard + AGENTS + Cursor/Codex references shipped
+- [x] Standard + AGENTS + Codex references shipped
 - [x] Zero success overlays / local success toasts outside allow  
 - [x] Zero presentation `showSnackBar` outside allow + markers  
 - [x] Guardrail green with empty (or documented) baseline  

@@ -2,7 +2,7 @@
 
 Generated: 2026-07-21  
 **Last reconciled:** 2026-07-22 (P0–P6 done — **PROGRAM COMPLETE**)  
-Authority: `AGENTS.md` · `Two-Phase-Cursor-Workflow.md` · this file  
+Authority: `AGENTS.md` · `Two-Phase-Codex-Workflow.md` · this file
 Entry index: [`00-INDEX.md`](./00-INDEX.md)
 
 **Mục tiêu:** Sắp xếp lại navigation + hub composition để user **không bị rỗi / lạc**, tìm được sản phẩm trong ≤3 tap từ entry điểm, mỗi hub có nội dung actionable (không blank/sparse).
@@ -32,7 +32,7 @@ User muốn AI **làm theo thứ tự trong cùng một chat**, không bắt bu�
 |-----------|-----------------|---------------------|
 | Tiến độ liên tục | Tốt — AI nhớ quyết định D1–D6, style docs vừa viết | Phải `@` playbook + re-orient mỗi lần |
 | Bỏ sót STEP | Thấp nếu **bắt buộc tick checklist** sau mỗi STEP | Thấp nếu user nhớ mở đúng STEP |
-| Context Cursor (~40% soft ceiling) | **Rủi ro chính** — chat dài → AI quên rule / hallucinate file | An toàn hơn, tốn công mở chat |
+| Context Codex (~40% soft ceiling) | **Rủi ro chính** — chat dài → AI quên rule / hallucinate file | An toàn hơn, tốn công mở chat |
 | Docs-only (P0) | **Nên cùng chat** — ít token, cùng family wireframe | Không cần thiết |
 | Code batch (P1+) | Cùng chat **được** nếu mỗi STEP vẫn ≤5–10 file + verify xong mới sang STEP sau | Bắt buộc new chat nếu analyze/test fail chồng hoặc đụng >10 file |
 
@@ -47,7 +47,7 @@ User muốn AI **làm theo thứ tự trong cùng một chat**, không bắt bu�
 5. Chạy **verify của STEP**; ghi evidence ngắn.  
 6. Tick `[x]` ở checkbox STEP **và** cập nhật §1 Dashboard + §1.1 Log.  
 7. **Tự chuyển** sang STEP kế trong playbook (báo user: `Done STEP-… → next STEP-…`) — **không hỏi** “có làm tiếp không?” trừ khi `blocked`.  
-8. Model: Cursor **Auto only**.
+8. Runtime: Codex theo workflow đã chốt; không đổi model giữa batch.
 
 ### 0.4 Soft ceiling (cùng chat vẫn tiếp tục được, nhưng AI phải cảnh báo)
 
@@ -129,7 +129,7 @@ Status values: `pending` · `in_progress` · `blocked` · `done`
 | **Next STEP** | — (program complete) |
 | **Phases xong** | P0 · P1 · P2 · P3 · P4 · P5 · **P6** |
 | **Phases còn** | **0** |
-| **Branch** | `cursor/ia-ux-readiness-pack` |
+| **Branch** | `ia-ux-readiness-pack` |
 | **Git note** | Diff lớn P1–P6 trên worktree (+ `1b1511c1` P5.4). Nên mở PR → `main`. |
 | **D1–D6** | Locked |
 | **RG** | RG-01…11,13 closed/accepted; **RG-12** open tension (D1) — không block program |
@@ -141,7 +141,7 @@ Status values: `pending` · `in_progress` · `blocked` · `done`
 **Prompt continue:**
 
 ```text
-Program complete. Open PR for cursor/ia-ux-readiness-pack → main.
+Program complete. Open PR for ia-ux-readiness-pack → main.
 ```
 
 ### 1.1 Run log (append-only)
@@ -711,13 +711,13 @@ P0.3–P0.8 có thể song song **chỉ docs**, mỗi worktree/chat một file �
 | [`UX-Evidence-Matrix.csv`](./UX-Evidence-Matrix.csv) | Per-route UX columns |
 | [`UI-UX-Pre-Implementation-Gate.md`](./UI-UX-Pre-Implementation-Gate.md) | Gate summary |
 | [`UI-UX-REORG-MASTER-PLAN.md`](./UI-UX-REORG-MASTER-PLAN.md) | Short outline (playbook này = chi tiết) |
-| `docs/01_AI_RULES/Two-Phase-Cursor-Workflow.md` | Plan→Execute |
+| `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` | Plan→Execute |
 
 ---
 
 ## 13. First action for human
 
 1. **Hiện tại (2026-07-22):** P0–P6 = `done` → **`UI/UX REORG PROGRAM COMPLETE`**.  
-2. Mở PR `cursor/ia-ux-readiness-pack` → `main` (worktree còn diff lớn chưa commit hết).  
+2. Mở PR `ia-ux-readiness-pack` → `main` (worktree còn diff lớn chưa commit hết).
 3. D1–D6 đã khóa; RG-12 vẫn là tension đã ghi nhận (không block).  
 4. Không mở lại Sparse/Visual QA trừ regression sau merge.

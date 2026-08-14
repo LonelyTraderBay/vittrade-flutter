@@ -171,7 +171,7 @@ flutter test test/features/trade/trade_page_test.dart --reporter=compact
 
 ### STEP 5 — Self-check
 
-`vittrade-minimal-review` · clutter after ≤4/10 · max 5–10 files/chat · Cursor Auto only.
+`vittrade-minimal-review` · clutter after ≤4/10 · max 5–10 files/chat · Codex session only.
 
 ---
 

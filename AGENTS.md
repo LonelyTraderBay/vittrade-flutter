@@ -205,14 +205,12 @@ and load only the relevant local skill from `.codex/skills/` for each task:
 
 ### Minimal diff (Ponytail-lite)
 
-- Rule [`.cursor/rules/vittrade-minimal-diff.mdc`](.cursor/rules/vittrade-minimal-diff.mdc) auto-applies when editing `flutter_app/**`.
+- Rule `.codex/skills/vittrade-minimal-review/SKILL.md` governs diff trimming
+  when editing `flutter_app/**`.
 - Reuse `Vit*` shared widgets and theme tokens; shortest diff that passes the plan gate.
 - No one-caller abstractions, no new pub deps unless explicitly requested.
 - Batch completion gate: self-check diff and trim bloat before marking batch done (see workflow rule).
 - AGENTS.md and the active execution prompt override YAGNI — do not skip required migration scope.
-
-Headroom is optional Cursor tooling only; it is not required by Codex. See
-`scripts/headroom/README.md` only when working in Cursor.
 
 ## Repo Hygiene
 

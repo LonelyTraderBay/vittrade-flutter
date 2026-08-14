@@ -1,11 +1,11 @@
-# Two-Phase Cursor Workflow
+# Two-Phase Codex Workflow
 
 Standard VitTrade pattern: **analyze once, execute in small chats**. Saves
 context and retry cost without manual model switching.
 
-Authority: `AGENTS.md` and `.cursor/rules/vittrade-cursor-workflow.mdc` win on
-product, financial, architecture, and **Auto-only** model policy. This doc is
-the operator runbook.
+Authority: `AGENTS.md` and the applicable `.codex/skills/*/SKILL.md` files win
+on product, financial, architecture, and verification policy. This doc is the
+Codex operator runbook.
 
 ## Why two phases
 
@@ -14,9 +14,8 @@ the operator runbook.
 | 1 — Plan | Plan (read-only) | Chat A | Scope, risks, batch list, verify commands |
 | 2 — Execute | Agent | Chat B, C, … | One batch per chat; verify; stop |
 
-Do **not** rely on rules to force a “strong model then cheap model.” Cursor
-**Auto** already balances cost/intelligence per request. Quality comes from
-**Plan → approve → batch execute**, not from escalating Sonnet/Opus.
+Quality comes from **Plan → approve → batch execute**, not from changing model
+tiers. Keep the scope explicit and verify every batch.
 
 ## When to use
 
@@ -31,9 +30,9 @@ Skip Plan (single Agent chat) for small, obvious edits (1–3 files, clear fix).
 
 ## Phase 1 — Plan (Chat A)
 
-1. Keep **Auto** selected. Switch to **Plan mode** (mode picker / Shift+Tab).
-2. Daily session already running (`.\scripts\Start-CursorSession.ps1`) —
-   GitNexus + Headroom connected.
+1. Start in read-only planning mode.
+2. Load the relevant Codex skills; GitNexus is available through the Codex
+   workspace tools.
 3. Paste the **Plan prompt** below (fill `<task>`).
 4. Agent explores only: GitNexus `impact` / `query`, targeted reads — no edits.
 5. **You approve** the batch plan before any Build / Execute chat.
@@ -58,7 +57,8 @@ Codex là nguồn skill chuẩn; không cần runtime-specific agent runbook.
 
 ## Phase 2 — Execute (Chat B, C, …)
 
-1. **New chat** per batch. Keep **Auto**. Use **Agent mode**.
+1. **New Codex chat** per batch. Keep the approved scope and use implementation
+   mode.
 2. Attach only: approved batch slice (or `@` the plan section) + needed files.
 3. Paste the **Execute prompt** below.
 4. After the batch: minimal-diff self-check → verification gate → cite evidence.
@@ -71,7 +71,7 @@ Thực hiện đúng Batch <N> trong plan đã duyệt (dán / @ đoạn Batch N
 
 Ràng buộc:
 - Chỉ các file trong batch — không mở rộng scope
-- Auto only — không đề xuất đổi model
+- Giữ nguyên scope đã duyệt — không tự mở rộng yêu cầu
 - GitNexus impact trước khi sửa symbol
 - Xong: tự check minimal-diff (.codex/skills/vittrade-minimal-review/SKILL.md),
   rồi chạy verification gate (AI_PROMPT_SHELL § Verification) — analyze + focused tests
@@ -84,11 +84,11 @@ Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
 
 | Do | Don’t |
 | --- | --- |
-| Auto always | Escalate model when stuck |
+| Keep the approved Codex workflow | Change model when stuck |
 | Plan → approve → Build/Execute | Implement while still unclear |
 | 5–10 files / chat; new chat after batch | One giant migration chat |
 | Load one prompt + one plan slice (`docs/INDEX.md`) | Paste full audit CSV / backlog + plan |
-| QA (`/browse`, `/review`) in a **separate** chat | Mix visual QA into migration batch |
+| QA in a **separate** chat | Mix visual QA into migration batch |
 | Hard task → smaller batch / Plan / GitNexus | Assume a higher model tier |
 
 ## Stuck recovery
@@ -103,7 +103,7 @@ Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
 
 | Doc / tool | Role |
 | --- | --- |
-| `.cursor/rules/vittrade-cursor-workflow.mdc` | Always-on Cursor session rules |
+| `.codex/skills/vittrade-batch-gate/SKILL.md` | Batch completion gate |
 | `docs/01_AI_RULES/AI_PROMPT_SHELL.md` | Verification + batch discipline |
 | `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md` | Execution gate |
 | `docs/INDEX.md` | On-demand doc picker |

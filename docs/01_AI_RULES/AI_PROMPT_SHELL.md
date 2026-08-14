@@ -15,7 +15,7 @@ must reference this shell instead of duplicating boilerplate.
 
 1. User instruction in the current conversation.
 2. `AGENTS.md`
-3. `.cursor/rules/*.mdc`
+3. Applicable `.codex/skills/*/SKILL.md`
 4. `docs/00_START_HERE.md`, `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
 5. Active task execution prompt (scope only — does not override product boundaries).
 6. Flutter source and tests.
@@ -52,13 +52,6 @@ Rename with GitNexus `rename`, not find-and-replace.
 
 If index stale: `.\scripts\gitnexus\Refresh-Index.ps1`
 
-## Headroom (MCP, Cursor-only)
-
-Daily: `.\scripts\headroom\Start-VitTradeHeadroom.ps1`
-
-Compress tool output >500 lines with `headroom_compress`; retrieve details with
-`headroom_retrieve` when needed.
-
 ## Product boundaries
 
 - Open Arena: points-only (no wallet/payout/profit/stake-return language).
@@ -84,16 +77,16 @@ flutter test --reporter=compact
 Add task-specific audits/tests from the active plan. Run focused tests for touched
 modules before marking a batch complete.
 
-## Two-phase Cursor (large tasks)
+## Two-phase Codex (large tasks)
 
 For work spanning ~10+ files or unclear scope, use Plan then Execute chats —
-see `docs/01_AI_RULES/Two-Phase-Cursor-Workflow.md` (copy-paste prompts). Keep
-Auto; do not switch models between phases.
+see `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (copy-paste prompts). Keep
+the same approved scope between phases; load only the relevant Codex skills.
 
 ## Batch discipline
 
 - 5–10 files per turn for migration work.
-- New Cursor chat after each completed batch.
+- New Codex chat after each completed batch.
 - Load one execution prompt + one plan per task — see `docs/INDEX.md`.
 - Do not load backlog + full plan + full audit in one turn.
 
@@ -103,11 +96,6 @@ Auto; do not switch models between phases.
 - No one-caller abstractions or new pub deps unless explicitly requested.
 - **Batch completion gate:** before marking a batch done, self-check the diff (see `.codex/skills/vittrade-minimal-review/SKILL.md`), trim safe bloat, then verify.
 - `AGENTS.md` and the active execution prompt override YAGNI.
-
-## Model policy (Auto only)
-
-- Use Cursor **Auto** only — do not instruct the user to pick a model tier.
-- Do not assume thinking/Opus capabilities; hard tasks → smaller batches + `RESUME FROM:` handoff.
 
 ## Doc loading
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-26  
 **Base:** `main` (post #82)  
-**Branch:** `cursor/route-page-naming-standardize`  
+**Branch:** `feature/route-page-naming-standardize`
 **Ledger:** `.superpowers/sdd/progress-route-page-naming.md`
 
 ## Goal

@@ -11,13 +11,13 @@
 
 ## §0. Luật vận hành (áp cho MỌI batch)
 
-Kế thừa toàn bộ [AI_PROMPT_SHELL.md](../../01_AI_RULES/AI_PROMPT_SHELL.md) và [Two-Phase-Cursor-Workflow.md](../../01_AI_RULES/Two-Phase-Cursor-Workflow.md). Bổ sung riêng cho roadmap này:
+Kế thừa toàn bộ [AI_PROMPT_SHELL.md](../../01_AI_RULES/AI_PROMPT_SHELL.md) và [Two-Phase-Codex-Workflow.md](../../01_AI_RULES/Two-Phase-Codex-Workflow.md). Bổ sung riêng cho roadmap này:
 
 1. **State machine**: `status` trong manifest ∈ `pending | blocked | in_progress | done | dup`. Chỉ được chuyển `pending → in_progress → done`. `done` chỉ hợp lệ khi **toàn bộ lệnh trong cột `verify` pass** và evidence (lệnh + kết quả) được báo lại. Task `dup` không thực thi — làm tại task trong cột `same_as`.
 2. **Kiểm tra tiền đề trước khi làm**: mọi `task_id` trong `depends_on` phải `done`; `decision_gate` (nếu có, không ghi "soft") phải `decided` trong DECISIONS.
 3. **Verify pattern còn tồn tại trước khi sửa** (§16 của báo cáo): số dòng trong báo cáo là bằng chứng tại thời điểm audit 2026-07-15. Trước khi edit, grep xác nhận symbol/pattern còn đúng; nếu code đã đổi, ghi chú vào cột `notes`-của-batch trong báo cáo phiên và điều chỉnh, không làm mù theo line number.
 4. **Nguyên tắc "guardrail trước, sửa sau"**: không bao giờ làm task "Viết lại/Tối ưu" trước khi task guardrail tương ứng trong `depends_on` xanh (A2→A1, S24→HN1/S23, 83→82, HN2→HN3/4/5).
-5. **Batch 5–10 file, chat mới mỗi batch, minimal-diff self-check** trước khi verify (theo `.cursor/rules/vittrade-cursor-workflow.mdc`). Batch quá 10 file → half-batch.
+5. **Batch 5–10 file, phiên Codex mới mỗi batch, minimal-diff self-check** trước khi verify (theo `.codex/skills/vittrade-minimal-review/SKILL.md`). Batch quá 10 file → half-batch.
 6. **Bí khi thực thi**: half-batch ≤5 file → re-plan slice → dòng `RESUME FROM: <batch-id> - <task_id>` rồi dừng, không viết gì sau đó.
 7. **Ranh giới sản phẩm bất di bất dịch**: Open Arena = points-only; Prediction Markets = positions/P&L; mọi flow tài chính phải preview→confirm. Không guardrail nào được nới để "cho tiện".
 8. **Cấm hand-edit artifact CSV do tool sinh** (`docs/02_FLUTTER_MIGRATION/audits/*`): chạy lại `tool/*_audit.dart` ở WRITE mode. (Manifest của roadmap này KHÔNG do tool sinh — được phép sửa `status` bằng tay.)
@@ -95,7 +95,7 @@ LƯU Ý: trước mỗi git rm phải grep zero-reference toàn repo; bản top-
 
 Gate: cd flutter_app && flutter test test/quality/ops_metadata_guardrails_test.dart
       && dart run tool/card_tile_audit.dart --check && dart run tool/design_token_consistency_audit.dart --check;
-      git ls-files --error-unmatch docs/01_AI_RULES/Two-Phase-Cursor-Workflow.md
+      git ls-files --error-unmatch docs/01_AI_RULES/Two-Phase-Codex-Workflow.md
 Completion: A-PLUS BATCH PASS — AP-GD0-B3
 ```
 

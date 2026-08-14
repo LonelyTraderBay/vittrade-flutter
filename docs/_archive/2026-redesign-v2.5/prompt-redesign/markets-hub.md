@@ -184,7 +184,7 @@ Test cover (giữ `sc008_*`): search, category filter, sort, pair tap navigation
 
 ## Batch discipline
 
-Max **5–10 files**/chat · Phase 1 = hub only · Cursor **Auto** · STEP 0→5 liên tục.
+Max **5–10 files**/chat · Phase 1 = hub only · Codex · STEP 0→5 liên tục.
 
 ---
 

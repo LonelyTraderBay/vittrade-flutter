@@ -1,7 +1,7 @@
 # Kế hoạch Ponytail Audit — Toàn module VitTrade (Sequential Runbook)
 
 **Phiên bản:** 2.1 (2026-07-02)
-**Mục đích:** Cho Cursor AI quét over-engineering **từng bước một**, không bỏ sót, không gộp việc.
+**Mục đích:** Cho Codex quét over-engineering **từng bước một**, không bỏ sót, không gộp việc.
 **Chế độ audit:** Chỉ ghi ledger — **KHÔNG sửa code** trong bước audit.
 **Skill:** `.codex/skills/ponytail-audit/SKILL.md`
 **Shell chung:** `docs/01_AI_RULES/AI_PROMPT_SHELL.md`
@@ -35,7 +35,7 @@
 
 | Rule | Mo ta |
 | --- | --- |
-| **R1** | Moi chat Cursor chi duoc lam **dung 1 STEP** trong bang Section 4. |
+| **R1** | Mỗi phiên Codex chỉ được làm **đúng 1 STEP** trong bảng Section 4. |
 | **R2** | Xong STEP → ghi ledger (hoac partial ledger) → cap nhat file tien do → **DUNG**. |
 | **R3** | **Cam** tu dong chay STEP tiep theo trong cung chat. |
 | **R4** | **Cam** gop audit + fix trong cung chat. |
@@ -145,7 +145,7 @@ Hoac doc file tien do va chon STEP co trang thai ⬜.
 
 ### Checklist nguoi van hanh
 
-- [ ] Mo **chat Cursor moi** cho moi STEP
+- [ ] Mở **phiên Codex mới** cho mỗi STEP
 - [ ] Chi paste **1** prompt STEP
 - [ ] Xác nhận AI trả về **khối HANDOFF Section 1.2** (có dòng `Chạy STEP-NNN+1 theo docs/...`)
 - [ ] **Không** chấp nhận reply chỉ có `PONYTAIL AUDIT DONE` hoặc `Next step:` một dòng

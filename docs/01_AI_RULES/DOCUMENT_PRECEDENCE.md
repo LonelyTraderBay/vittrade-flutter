@@ -6,8 +6,8 @@ Use this order when documents disagree.
 
 1. User instruction in the current conversation.
 2. Root `AGENTS.md` for coding and repository constraints.
-3. `.cursor/rules/*.mdc` for Cursor agent workflow (does not override AGENTS.md
-   product, financial, or architecture rules).
+3. Applicable `.codex/skills/*/SKILL.md` for Codex workflow (does not override
+   AGENTS.md product, financial, or architecture rules).
 4. Active execution prompt for the current task scope only (does not override
    AGENTS.md product boundaries).
 5. `docs/INDEX.md` for choosing which doc to load (picker only, not source of truth).

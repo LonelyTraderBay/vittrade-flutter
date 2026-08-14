@@ -295,7 +295,7 @@ RESUME FROM: Phase 1 — STEP <n>
 
 - Max **5–10 files**/chat.
 - Phase 1 = hub only; Phase 2 = `bot_*` batches.
-- Cursor **Auto** only.
+- Codex session only; không đổi model giữa batch.
 - Visual QA riêng chat: `/browse` sau `flutter run -d chrome` ([Flutter-Visual-QA.md](../checklists/Flutter-Visual-QA.md)).
 
 ---

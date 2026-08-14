@@ -1,6 +1,6 @@
 # VitTrade Docs Index
 
-**Last Updated:** 2026-07-23 (repo cleanup: archive completed playbooks → `docs/_archive/`)
+**Last Updated:** 2026-08-14 (Codex-only workflow; archive completed playbooks → `docs/_archive/`)
 
 Load docs **on demand** — do not paste large audit output into chat. Shared rules:
 [AI_PROMPT_SHELL.md](01_AI_RULES/AI_PROMPT_SHELL.md).
@@ -13,7 +13,7 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | [DESIGN.md](../DESIGN.md) | UI work — tokens + component ladder |
 | [00_START_HERE.md](00_START_HERE.md) | First time / architecture |
 | [AI_EXECUTION_CONTRACT.md](01_AI_RULES/AI_EXECUTION_CONTRACT.md) | Execution gate |
-| [Two-Phase-Cursor-Workflow.md](01_AI_RULES/Two-Phase-Cursor-Workflow.md) | Plan chat → Execute chats (Auto + batch); copy-paste prompts |
+| [Two-Phase-Codex-Workflow.md](01_AI_RULES/Two-Phase-Codex-Workflow.md) | Plan → Execute batches; copy-paste prompts |
 | [DOCUMENT_PRECEDENCE.md](01_AI_RULES/DOCUMENT_PRECEDENCE.md) | Doc conflicts |
 
 ## Status and remaining work
@@ -126,16 +126,17 @@ Generated CSV/MD artifacts live under `docs/02_FLUTTER_MIGRATION/audits/` (not
 the `02_FLUTTER_MIGRATION/` top level — verified against the tools' own
 `docsDir.path` construction, e.g. `tool/design_token_consistency_audit.dart:154-159`).
 
-## Cursor AI setup
+## Codex workflow setup
 
 | Resource | Purpose |
 | --- | --- |
-| `~/.cursor/mcp.json` (Home) | `gitnexus`, `dart`, `headroom` |
-| [.cursor/mcp.json](../.cursor/mcp.json) (Workspace) | empty — no project servers |
-| [.cursor/rules/](../.cursor/rules/) | Cursor agent rules |
-| [scripts/Start-CursorSession.ps1](../scripts/Start-CursorSession.ps1) | Daily startup |
+| `.codex/skills/` | Repo-local Codex skills and VitTrade procedures |
+| `AGENTS.md` | Project contract and Codex workflow authority |
+| `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` | Plan → Execute batch discipline |
+| `.gitnexus/` | Local GitNexus graph cache (ignored) |
 
-Policy: use **Cursor Auto**; optimize via batch/GitNexus/Headroom.
+Policy: use the smallest applicable Codex skill, GitNexus impact before symbol
+changes, and `detect_changes` before commits.
 
 ## Removed / archived docs (2026-07-23)
 

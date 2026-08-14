@@ -18,7 +18,7 @@ Generated: 2026-07-13 · **Readiness pack updated: 2026-07-22**
 | **Execution playbook (chi tiết + tiến độ)** | [UI-UX-FULL-REORG-EXECUTION-PLAYBOOK.md](../../../_archive/2026-ia-ux-reorg/UI-UX-FULL-REORG-EXECUTION-PLAYBOOK.md) (archived) |
 | Short outline | [UI-UX-REORG-MASTER-PLAN.md](./UI-UX-REORG-MASTER-PLAN.md) |
 
-> Program complete. Next human action: open PR `cursor/ia-ux-readiness-pack` → `main`. D1–D6 locked; RG-12 closed (Referral → Profile tab, 2026-07-23).
+> Program complete. Next human action: open PR `ia-ux-readiness-pack` → `main`. D1–D6 locked; RG-12 closed (Referral → Profile tab, 2026-07-23).
 
 Generated: 2026-07-13  
 Source: ``Flutter-Route-Coverage-Truth-Table.md`` (413 ``real_page`` routes)  

@@ -35,7 +35,7 @@
 
 - [segment_pill_audit.dart](../../flutter_app/tool/segment_pill_audit.dart) — `--strict-full` fails on P0/P1 bans, warn rows, interactive locals, duplicate locals in audit
 - CI + guardrail test use `--strict-full` (replaces separate `--strict-p0 --strict-p1`)
-- Docs: AGENTS.md, DESIGN.md, Segment-Pill-Standard.md, Enterprise-PR-Review-Checklist.md, `.cursor/rules/vittrade-segment-pill.mdc`
+- Docs: AGENTS.md, DESIGN.md, Segment-Pill-Standard.md, Enterprise-PR-Review-Checklist.md, `.codex/skills/vittrade-ui-checklists/SKILL.md`
 
 ## Verify (regression)
 

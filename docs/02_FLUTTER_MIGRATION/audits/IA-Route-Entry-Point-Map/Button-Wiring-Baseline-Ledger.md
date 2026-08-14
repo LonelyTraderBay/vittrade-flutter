@@ -29,7 +29,7 @@ Persist findings to:
 flutter_app/run-artifacts/button-wiring-audit-<scope>-<date>.md
 ```
 
-Cursor sessions: follow the same agent runbook manually (read-only); do not invent parallel tooling.
+Codex sessions: load `.codex/skills/vittrade-button-wiring-audit/SKILL.md` and use the same read-only audit runbook; do not invent parallel tooling.
 
 ## Scope matrix by module
 

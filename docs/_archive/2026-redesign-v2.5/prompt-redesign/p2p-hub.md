@@ -196,7 +196,7 @@ Gate: [AI_PROMPT_SHELL.md](../01_AI_RULES/AI_PROMPT_SHELL.md) § Verification (`
 
 ## Batch discipline
 
-Max 5–10 files/chat · hub trước · Cursor Auto · visual QA riêng: `/browse` ([Flutter-Visual-QA.md](../checklists/Flutter-Visual-QA.md)).
+Max 5–10 files/chat · hub trước · Codex · visual QA riêng theo checklist Flutter.
 
 **Bắt đầu ngay:** STEP 0 → 1 → 2 → 3 đến pass gate hoặc `RESUME FROM: Phase 1 — STEP <n> — RD-P01`.
 

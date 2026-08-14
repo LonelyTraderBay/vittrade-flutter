@@ -187,7 +187,7 @@ Test cover (giữ `sc001_login_*`): field validation, submit success, forgot/reg
 
 ## Batch discipline
 
-Max **5–10 files**/chat · Phase 1 = login only · Cursor **Auto** · STEP 0→5 liên tục.
+Max **5–10 files**/chat · Phase 1 = login only · Codex · STEP 0→5 liên tục.
 
 ---
 

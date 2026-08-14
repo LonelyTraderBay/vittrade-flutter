@@ -8,7 +8,7 @@ web screenshot baseline were removed on 2026-05-26.
 1. `AGENTS.md`
 2. `docs/00_START_HERE.md`
 3. `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
-4. `docs/01_AI_RULES/Two-Phase-Cursor-Workflow.md` (Plan → Execute for large tasks)
+4. `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (Plan → Execute for large tasks)
 5. `docs/01_AI_RULES/DOCUMENT_PRECEDENCE.md`
 6. `docs/02_FLUTTER_MIGRATION/Flutter-App-Foundation.md`
 7. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md`

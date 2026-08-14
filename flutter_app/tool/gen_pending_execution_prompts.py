@@ -291,7 +291,7 @@ def render(changed: set[str], today: str, *, title: str, intro: str, doc_name: s
                 "4. dart run tool/route_coverage_audit.dart --check",
                 "5. dart run tool/navigation_edge_audit.dart --check",
                 "",
-                "Fix any failure. Headroom if log >500 lines.",
+                "Fix any failure. Keep verification output focused; use the documented Codex gate.",
                 "Completion: VITTRADE UI REDESIGN COMPLETE — 415 screens",
                 "```",
                 "",
@@ -306,7 +306,7 @@ def main() -> None:
     changed = changed_files()
 
     intro = (
-        "> **Cách dùng:** Mỗi block ```text``` = **1 chat Cursor mới**, chạy **Chat 1 → Chat N** liên tiếp.\n"
+        "> **Cách dùng:** Mỗi block ```text``` = **1 phiên Codex mới**, chạy **Chat 1 → Chat N** liên tiếp.\n"
         "> Chỉ ghi CSV `status=done` khi prompt ghi **LAST CHAT FOR BATCH**.\n"
         "> **Chat cuối** = Final gate (sau khi hết batch pending)."
     )

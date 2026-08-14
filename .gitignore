@@ -24,12 +24,9 @@ Thumbs.db
 # Local linked worktrees (never commit gitlinks / machine paths)
 .worktrees/
 
-# Retired AI runtime — keep any accidental local runtime output untracked
+# Retired AI runtime — keep accidental legacy runtime output untracked
 .claude/
 CLAUDE.local.md
-scripts/headroom/vittrade.headroom.local.env
-.headroom/
-.tokensave/
 .gitnexus/
 .kilo/
 # Superpowers / SDD agent scratch (briefs, reports, review diffs) — never commit
@@ -50,6 +47,5 @@ output/
 *.log
 
 # AgentsRoom — machine-local MCP + caches (absolute paths; never commit)
-# Home MCP stays in ~/.cursor/mcp.json; workspace .cursor/mcp.json stays empty.
 .mcp.json
 .agentsroom/

@@ -19,7 +19,7 @@
 
 ## Global constraints
 
-1. Cursor **Auto only**.
+1. Dùng một phiên Codex nhất quán.
 2. Không commit trừ khi user yêu cầu rõ (SDD mặc định: no commit).
 3. ADR-010: **cấm** `remote_*_repository` / DTO đoán.
 4. `core/` không import `app/`.
