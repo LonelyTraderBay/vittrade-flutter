@@ -1,4 +1,4 @@
-part of '../../pages/transfer/pending_deposits_page.dart';
+part of '../../phone/pages/pending_deposits_page.dart';
 
 class _StatusNotice extends StatelessWidget {
   const _StatusNotice({

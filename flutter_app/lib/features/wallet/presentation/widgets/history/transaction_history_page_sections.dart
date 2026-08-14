@@ -1,4 +1,4 @@
-part of '../../pages/history/transaction_history_page.dart';
+part of '../../phone/pages/transaction_history_page.dart';
 
 class _HistorySummaryBar extends StatelessWidget {
   const _HistorySummaryBar({required this.count, this.exportNotice});

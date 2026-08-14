@@ -1,4 +1,4 @@
-part of '../../pages/history/transaction_history_page.dart';
+part of '../../phone/pages/transaction_history_page.dart';
 
 class _AmountStatus extends StatelessWidget {
   const _AmountStatus({required this.tx, required this.meta});

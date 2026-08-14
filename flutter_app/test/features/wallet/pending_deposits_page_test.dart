@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/data/wallet_repository.dart';
 import 'package:vit_trade_flutter/features/support/presentation/pages/support_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/deposit_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/pending_deposits_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/pending_deposits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';

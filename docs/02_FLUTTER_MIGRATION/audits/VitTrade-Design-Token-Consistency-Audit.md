@@ -16,7 +16,7 @@ generated=2026-06-12
 status_fail=0
 status_warn=53
 status_exception=250
-rows=2942
+rows=2933
 ```
 
 ## CI Baseline Gates
@@ -135,7 +135,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | `5 files` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart` | `flutter_app/lib/features/earn_staking/presentation/widgets/staking/staking_earn_hero_tabs.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/p2p_marketplace/presentation/pages/ads/p2p_ad_analytics_page.dart` | `flutter_app/lib/features/p2p_marketplace/presentation/widgets/ads/p2p_ad_analytics_breakdown_cards.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/p2p_dispute/presentation/widgets/dispute/p2p_insurance_score_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/arena/presentation/pages/governance/arena_report_case_page.dart` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_related_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_summary_timeline.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/arena/presentation/pages/governance/arena_report_case_page.dart` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_summary_timeline.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -2066,11 +2066,8 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_selectors.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_list.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_list.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_security.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_security.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/assets/asset_detail_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/assets/asset_detail_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/assets/asset_detail_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -2088,13 +2085,9 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_dust_converter_targets.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/wallet/presentation/pages/assets/dust_converter_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_dust_converter_targets.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_formatters.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_allocation_sections.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
@@ -2154,9 +2147,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_sections.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_asset_amount.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_confirm_sheet.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_history_picker.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -2776,7 +2767,10 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/trade_copy/presentation/pages/provider/provider_comparison_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/execution_quality_demo_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/address/address_add_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/hub/wallet_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/hub/wallet_tablet_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/phone/wallet_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -2784,6 +2778,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/deposit_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/transfer_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` | `1 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/earn_savings/presentation/pages/savings/savings_what_if_page.dart` | `10 files` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
@@ -2892,9 +2887,6 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/trade_copy/presentation/pages/safety/safety_education_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_trading_demo_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart` | `3 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/admin/presentation/pages/funnel_dashboard_page.dart` | `4 files` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | root_page_bundle_summary | `flutter_app/lib/features/arena/presentation/pages/bridge/arena_prediction_bridge_foundation_page.dart` | `4 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -2997,7 +2989,6 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_chart_page.dart` | `4 files` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | root_page_bundle_summary | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_tools_demo_page.dart` | `4 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/risk_management_demo_page.dart` | `4 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` | `4 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/tools/network_status_page.dart` | `4 files` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart` | `4 files` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | root_page_bundle_summary | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_health_score_page.dart` | `4 files` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |

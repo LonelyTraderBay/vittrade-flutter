@@ -975,7 +975,11 @@ trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tool
 trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tools/risk_management_overview.dart,3,0,0,C,0,0,0,pass,-
 trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tools/risk_management_tabs.dart,2,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart,1,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart,4,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart,4,0,0,C,0,0,0,pass,-
+wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart,3,1,0,C,0,0,0,warn,fixed_height_baseline
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,4,2,0,E,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart,2,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,1,0,0,C,0,0,0,pass,-

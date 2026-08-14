@@ -303,8 +303,11 @@ trade_terminal,trade_terminal/presentation/widgets/tools/advanced_trading_demo_p
 trade_terminal,trade_terminal/presentation/widgets/tools/advanced_trading_demo_page_sections.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 trade_terminal,trade_terminal/presentation/widgets/tools/execution_quality_tabs.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 trade_terminal,trade_terminal/presentation/widgets/tools/risk_management_tabs.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
-wallet,wallet/presentation/pages/history/transaction_history_page.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 wallet,wallet/presentation/pages/tools/network_status_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+wallet,wallet/presentation/phone/pages/transaction_history_page.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+wallet,wallet/presentation/tablet/pages/address_book_tablet_page.dart,VitChoicePill,chip,2,44,hug,-,pass,
+wallet,wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart,VitChoicePill,chip,1,44,hug,-,pass,
+wallet,wallet/presentation/tablet/pages/transaction_history_tablet_page.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 wallet,wallet/presentation/widgets/address/wallet_address_add_selectors.dart,VitChoicePill,chip,2,44,full_or_hug,-,pass,
 wallet,wallet/presentation/widgets/address/wallet_address_book_controls.dart,VitChoicePill,chip,1,44,hug,-,pass,
 wallet,wallet/presentation/widgets/address/wallet_address_book_list.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,

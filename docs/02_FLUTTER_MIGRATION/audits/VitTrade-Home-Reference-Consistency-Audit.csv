@@ -1573,9 +1573,9 @@ wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/addre
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_selectors.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_list.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_security.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_controls.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_list.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_book_security.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/asset_detail_page_common.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/asset_detail_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_buy_crypto_input_sections.dart,0,0,0,0,0,0,0,0,no,-
@@ -1586,10 +1586,10 @@ wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/wal
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_dust_converter_confirm.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_dust_converter_hero.dart,0,0,0,0,0,0,0,0,no,-
 wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/assets/wallet_dust_converter_targets.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_common.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_common.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_common.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_common.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/hub/wallet_formatters.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_allocation_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
@@ -1635,8 +1635,8 @@ wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_token_revoke_sheet.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_common.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/deposit_page_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_common.dart,0,0,0,0,0,0,0,0,no,-
-wallet,root_page,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_sections.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_common.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/pending_deposits_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_asset_amount.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/wallet_transfer_history_picker.dart,0,0,0,0,0,0,0,0,no,-

@@ -5,6 +5,10 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 
 void main() {
@@ -33,5 +37,33 @@ void main() {
     await pumpRoute(tester, AppRoutePaths.walletAddressBookAdd);
     expect(find.byType(AddressAddTabletPage), findsOneWidget);
     expect(find.byType(TransferTabletPage), findsNothing);
+  });
+
+  testWidgets('Tablet Wallet chọn Address Book composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletAddressBook);
+    expect(find.byType(AddressBookTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Transaction History composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletHistory);
+    expect(find.byType(TransactionHistoryTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Transaction Detail composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletTransaction('tx001'));
+    expect(find.byType(TransactionDetailTabletPage), findsOneWidget);
+  });
+
+  testWidgets('Tablet Wallet chọn Pending Deposits composition riêng', (
+    tester,
+  ) async {
+    await pumpRoute(tester, AppRoutePaths.walletPendingDeposits);
+    expect(find.byType(PendingDepositsTabletPage), findsOneWidget);
   });
 }

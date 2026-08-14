@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/features/admin/presentation/pages/admin_home_p
 import 'package:vit_trade_flutter/features/p2p_account/presentation/pages/payment/p2p_payment_methods_page.dart';
 import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/predictions_home_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_book_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_page.dart';
 
 void main() {

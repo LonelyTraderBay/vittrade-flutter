@@ -1,4 +1,4 @@
-part of '../../pages/address/address_book_page.dart';
+part of '../../phone/pages/address_book_page.dart';
 
 class _SearchBox extends StatelessWidget {
   const _SearchBox({required this.controller, required this.onChanged});

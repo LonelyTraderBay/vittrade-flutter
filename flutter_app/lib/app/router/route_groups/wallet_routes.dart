@@ -3,16 +3,16 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_add_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_book_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/buy_crypto_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/deposit_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/dust_converter_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/network_status_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/pending_deposits_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/pending_deposits_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/history/transaction_detail_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/history/transaction_history_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transaction_detail_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transaction_history_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transfer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_health_score_page.dart';
@@ -23,7 +23,11 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wall
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
@@ -51,8 +55,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletHistory,
       name: AppRouteNames.sc136TxHistory,
-      builder: (_, _) =>
-          TransactionHistoryPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const TransactionHistoryTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => TransactionHistoryPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletDeposit,
@@ -119,10 +128,19 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: '/wallet/transaction/:txId',
       name: AppRouteNames.sc141TransactionDetail,
-      builder: (_, state) => TransactionDetailPage(
-        transactionId: requireRouteParam(state, 'txId'),
-        shellRenderMode: shellRenderMode,
-      ),
+      builder: (_, state) {
+        final transactionId = requireRouteParam(state, 'txId');
+        return switch (surface) {
+          AppSurface.tablet => TransactionDetailTabletPage(
+            transactionId: transactionId,
+          ),
+          // Web surface composition is migrated in P7.
+          AppSurface.phone || AppSurface.web || null => TransactionDetailPage(
+            transactionId: transactionId,
+            shellRenderMode: shellRenderMode,
+          ),
+        };
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletPortfolioAnalytics,
@@ -144,7 +162,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletAddressBook,
       name: AppRouteNames.sc144AddressBook,
-      builder: (_, _) => AddressBookPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const AddressBookTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => AddressBookPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletBuyCrypto,
@@ -198,7 +222,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletPendingDeposits,
       name: AppRouteNames.sc152PendingDeposits,
-      builder: (_, _) => PendingDepositsPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const PendingDepositsTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => PendingDepositsPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletLimits,

@@ -1,4 +1,4 @@
-part of '../../pages/address/address_book_page.dart';
+part of '../../phone/pages/address_book_page.dart';
 
 class _WhitelistModeCard extends StatelessWidget {
   const _WhitelistModeCard({required this.enabled, required this.onTap});

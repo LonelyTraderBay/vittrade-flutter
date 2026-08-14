@@ -1,4 +1,4 @@
-part of '../../pages/history/transaction_detail_page.dart';
+part of '../../phone/pages/transaction_detail_page.dart';
 
 class _SupportButton extends StatelessWidget {
   const _SupportButton({required this.onTap});
