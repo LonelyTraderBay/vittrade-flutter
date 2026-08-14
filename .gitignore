@@ -48,6 +48,10 @@ scripts/headroom/vittrade.headroom.local.env
 # Root-level scratch files
 /tmp_*
 
+# Python bytecode caches from local AI/tool scripts
+__pycache__/
+*.py[cod]
+
 # Retired web tooling / generated artifacts
 node_modules/
 dist/
