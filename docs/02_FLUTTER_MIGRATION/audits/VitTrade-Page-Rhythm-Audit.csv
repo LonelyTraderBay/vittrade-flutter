@@ -1533,3 +1533,4 @@ wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_li
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_limits_page_sections.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_network_picker.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_preview_sheet.dart,standard,,0,,0,,0,0,pass
+layout,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,standard,form,0,,0,,0,0,pass

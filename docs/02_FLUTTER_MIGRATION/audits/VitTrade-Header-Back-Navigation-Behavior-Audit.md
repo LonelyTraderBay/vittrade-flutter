@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=533
+visible_header_back_entries=534
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 468 |
+| parent_route_only | 469 |
 | history_then_fallback | 65 |
 
 ## Strict Issue Counts
@@ -567,4 +567,5 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart` | 41 | `WalletTabletDetailSurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart` | 132 | `AddressSavedState` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | yes | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_health_score_page_shell.dart` | 19 | `_WalletHealthScorePageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.wallet` | no | - | Back goes to an explicit parent route. |
+| `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` | 58 | `VitTabletUtilityPage` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/shared/layout/vit_top_chrome.dart` | 91 | `VitTopChrome` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |

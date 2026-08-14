@@ -339,6 +339,57 @@ const routeNameToPageOverrides = <String, String>{
       'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
   'AppRouteNames.sc281P2PMyOrders':
       'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+  'AppRouteNames.sc180AdminHome': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc181AnalyticsDashboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc182AbTestDashboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc183FunnelDashboard':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc410AdminSettings':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc292HelpCenter': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc293Announcements':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc294Support': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc319RewardsHub': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc320EnterpriseStates':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc321UnifiedPortfolio':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc322CrossModuleAnalytics':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc323SmartAlertCenter':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc324TaxReportCenter':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc325RouteChecker':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc326PerformanceMonitor':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc398MissingScreensShowcase':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc399DesignSystem':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc400DcaOverviewDemo':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc283UnifiedSearch':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc291Notifications':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc284TopicHub': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc285TopicCrypto':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc290ReferralHome':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc286ReferralHistory':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc287ReferralRewards':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc288ReferralRules':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc289ReferralFriendDetail':
+      'shared/layout/vit_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

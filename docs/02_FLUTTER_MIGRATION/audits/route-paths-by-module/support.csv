@@ -1,4 +1,4 @@
 module,classification,route_path_symbol,route_path_token,route_name_symbol,route_name_token,builder_evidence,source_file,source_line
-support,real_page,AppRoutePaths.support,support,AppRouteNames.sc294Support,sc294Support,SupportPage,lib/app/router/route_groups/support_routes.dart,13
-support,real_page,AppRoutePaths.supportAnnouncements,supportAnnouncements,AppRouteNames.sc293Announcements,sc293Announcements,AnnouncementsPage,lib/app/router/route_groups/support_routes.dart,28
-support,real_page,AppRoutePaths.supportHelp,supportHelp,AppRouteNames.sc292HelpCenter,sc292HelpCenter,HelpCenterPage,lib/app/router/route_groups/support_routes.dart,23
+support,real_page,AppRoutePaths.support,support,AppRouteNames.sc294Support,sc294Support,buildSurfaceAwareTabletRoute,lib/app/router/route_groups/support_routes.dart,19
+support,real_page,AppRoutePaths.supportAnnouncements,supportAnnouncements,AppRouteNames.sc293Announcements,sc293Announcements,buildSurfaceAwareTabletRoute,lib/app/router/route_groups/support_routes.dart,58
+support,real_page,AppRoutePaths.supportHelp,supportHelp,AppRouteNames.sc292HelpCenter,sc292HelpCenter,buildSurfaceAwareTabletRoute,lib/app/router/route_groups/support_routes.dart,41

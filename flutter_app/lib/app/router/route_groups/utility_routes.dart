@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
@@ -24,87 +26,220 @@ import 'package:vit_trade_flutter/features/referral/presentation/pages/referral_
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> utilityRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> utilityRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.rewards,
       name: AppRouteNames.sc319RewardsHub,
-      builder: (_, state) => RewardsHubPage(
-        shellRenderMode: shellRenderMode,
-        initialFilter: rewardsFilterFromTab(state.uri.queryParameters['tab']),
+      builder: (context, state) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-319',
+        title: 'Trung tâm phần thưởng',
+        subtitle: 'Phần thưởng · nhiệm vụ · tiến độ',
+        description:
+            'Theo dõi nhiệm vụ, phần thưởng và tiến độ trong bố cục Tablet rõ ràng.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Xem nhiệm vụ',
+        icon: Icons.card_giftcard_outlined,
+        fallback: RewardsHubPage(
+          shellRenderMode: shellRenderMode,
+          initialFilter: rewardsFilterFromTab(state.uri.queryParameters['tab']),
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.enterpriseStates,
       name: AppRouteNames.sc320EnterpriseStates,
-      builder: (_, _) => EnterpriseStatesPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-320',
+        title: 'Trạng thái doanh nghiệp',
+        subtitle: 'Hệ thống · trạng thái · vận hành',
+        description:
+            'Theo dõi trạng thái các dịch vụ doanh nghiệp trên Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc trạng thái',
+        icon: Icons.business_center_outlined,
+        fallback: EnterpriseStatesPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.unifiedPortfolio,
       name: AppRouteNames.sc321UnifiedPortfolio,
-      builder: (_, _) =>
-          UnifiedPortfolioDashboardPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-321',
+        title: 'Danh mục tổng hợp',
+        subtitle: 'Danh mục · tài sản · phân bổ',
+        description:
+            'Theo dõi tổng quan danh mục và phân bổ tài sản trong màn hình Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc danh mục',
+        icon: Icons.pie_chart_outline,
+        fallback: UnifiedPortfolioDashboardPage(
+          shellRenderMode: shellRenderMode,
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.crossModuleAnalytics,
       name: AppRouteNames.sc322CrossModuleAnalytics,
-      builder: (_, _) =>
-          CrossModuleAnalyticsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-322',
+        title: 'Phân tích tổng hợp',
+        subtitle: 'Phân tích · xu hướng · dữ liệu',
+        description: 'Đối chiếu dữ liệu và xu hướng liên mô-đun trên Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc phân tích',
+        icon: Icons.insights_outlined,
+        fallback: CrossModuleAnalyticsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.smartAlerts,
       name: AppRouteNames.sc323SmartAlertCenter,
-      builder: (_, _) => SmartAlertCenterPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-323',
+        title: 'Trung tâm cảnh báo',
+        subtitle: 'Cảnh báo · ưu tiên · xử lý',
+        description: 'Theo dõi và xử lý cảnh báo trong bố cục Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc cảnh báo',
+        icon: Icons.notifications_active_outlined,
+        fallback: SmartAlertCenterPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.taxReports,
       name: AppRouteNames.sc324TaxReportCenter,
-      builder: (_, _) => TaxReportCenterPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-324',
+        title: 'Trung tâm báo cáo thuế',
+        subtitle: 'Báo cáo · thuế · dữ liệu',
+        description: 'Theo dõi kỳ báo cáo và dữ liệu thuế trên Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Xem trước báo cáo',
+        requiresConfirmation: true,
+        confirmationTitle: 'Xác nhận xem trước báo cáo thuế',
+        icon: Icons.description_outlined,
+        fallback: TaxReportCenterPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.routeChecker,
       name: AppRouteNames.sc325RouteChecker,
-      builder: (_, _) => InternalSurfaceGate(
+      builder: (context, _) => InternalSurfaceGate(
         kind: InternalSurfaceKind.developer,
         routePath: AppRoutePaths.routeChecker,
-        child: RouteChecker(shellRenderMode: shellRenderMode),
+        child: buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: 'SC-325',
+          title: 'Kiểm tra route',
+          subtitle: 'Dev · route · kiểm chứng',
+          description:
+              'Kiểm tra tính đầy đủ và trạng thái của route trên Tablet.',
+          backPath: AppRoutePaths.home,
+          actionLabel: 'Chạy kiểm tra route',
+          icon: Icons.route_outlined,
+          fallback: RouteChecker(shellRenderMode: shellRenderMode),
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.performanceMonitor,
       name: AppRouteNames.sc326PerformanceMonitor,
-      builder: (_, _) => InternalSurfaceGate(
+      builder: (context, _) => InternalSurfaceGate(
         kind: InternalSurfaceKind.developer,
         routePath: AppRoutePaths.performanceMonitor,
-        child: PerformanceMonitor(shellRenderMode: shellRenderMode),
+        child: buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: 'SC-326',
+          title: 'Giám sát hiệu năng',
+          subtitle: 'Dev · hiệu năng · chẩn đoán',
+          description: 'Theo dõi hiệu năng và chẩn đoán trong bố cục Tablet.',
+          backPath: AppRoutePaths.home,
+          actionLabel: 'Bắt đầu giám sát',
+          icon: Icons.speed_outlined,
+          fallback: PerformanceMonitor(shellRenderMode: shellRenderMode),
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.devShowcase,
       name: AppRouteNames.sc398MissingScreensShowcase,
-      builder: (_, _) => InternalSurfaceGate(
+      builder: (context, _) => InternalSurfaceGate(
         kind: InternalSurfaceKind.developer,
         routePath: AppRoutePaths.devShowcase,
-        child: MissingScreensShowcasePage(shellRenderMode: shellRenderMode),
+        child: buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: 'SC-398',
+          title: 'Trình diễn màn hình',
+          subtitle: 'Dev · showcase · kiểm tra',
+          description: 'Kiểm tra các trạng thái màn hình trong bố cục Tablet.',
+          backPath: AppRoutePaths.home,
+          actionLabel: 'Mở danh sách màn hình',
+          icon: Icons.dashboard_customize_outlined,
+          fallback: MissingScreensShowcasePage(
+            shellRenderMode: shellRenderMode,
+          ),
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.devDesignSystem,
       name: AppRouteNames.sc399DesignSystem,
-      builder: (_, _) => InternalSurfaceGate(
+      builder: (context, _) => InternalSurfaceGate(
         kind: InternalSurfaceKind.developer,
         routePath: AppRoutePaths.devDesignSystem,
-        child: DesignSystemPage(shellRenderMode: shellRenderMode),
+        child: buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: 'SC-399',
+          title: 'Design system',
+          subtitle: 'Dev · token · component',
+          description: 'Kiểm tra component và token trong trải nghiệm Tablet.',
+          backPath: AppRoutePaths.home,
+          actionLabel: 'Mở component',
+          icon: Icons.palette_outlined,
+          fallback: DesignSystemPage(shellRenderMode: shellRenderMode),
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.devDcaOverview,
       name: AppRouteNames.sc400DcaOverviewDemo,
-      builder: (_, _) => InternalSurfaceGate(
+      builder: (context, _) => InternalSurfaceGate(
         kind: InternalSurfaceKind.developer,
         routePath: AppRoutePaths.devDcaOverview,
-        child: DCAOverviewDemo(shellRenderMode: shellRenderMode),
+        child: buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: surface,
+          semanticIdentifier: 'SC-400',
+          title: 'Demo DCA',
+          subtitle: 'Dev · DCA · kiểm thử',
+          description: 'Kiểm tra luồng DCA và trạng thái minh họa trên Tablet.',
+          backPath: AppRoutePaths.home,
+          actionLabel: 'Mở demo DCA',
+          icon: Icons.auto_graph_outlined,
+          fallback: DCAOverviewDemo(shellRenderMode: shellRenderMode),
+        ),
       ),
     ),
   ];
@@ -114,57 +249,162 @@ String? rewardsFilterFromTab(String? tab) {
   return tab == 'arena' ? 'Arena' : null;
 }
 
-List<RouteBase> discoveryAndReferralRoutes(ShellRenderMode shellRenderMode) {
+List<RouteBase> discoveryAndReferralRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
   return [
     GoRoute(
       path: AppRoutePaths.search,
       name: AppRouteNames.sc283UnifiedSearch,
-      builder: (_, _) => UnifiedSearchPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-283',
+        title: 'Tìm kiếm tổng hợp',
+        subtitle: 'Tìm kiếm · khám phá · dữ liệu',
+        description:
+            'Tìm kiếm tài sản, nội dung và tính năng trong bố cục Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc kết quả',
+        icon: Icons.search_outlined,
+        fallback: UnifiedSearchPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.notifications,
       name: AppRouteNames.sc291Notifications,
-      builder: (_, _) => NotificationsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-291',
+        title: 'Thông báo',
+        subtitle: 'Thông báo · ưu tiên · trạng thái',
+        description:
+            'Theo dõi các thông báo quan trọng trong giao diện Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Đánh dấu đã đọc',
+        icon: Icons.notifications_outlined,
+        fallback: NotificationsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.topics,
       name: AppRouteNames.sc284TopicHub,
-      builder: (_, _) => TopicHubPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-284',
+        title: 'Chủ đề khám phá',
+        subtitle: 'Khám phá · chủ đề · nội dung',
+        description: 'Khám phá chủ đề và nội dung liên quan trên Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Lọc chủ đề',
+        icon: Icons.topic_outlined,
+        fallback: TopicHubPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.topicCrypto,
       name: AppRouteNames.sc285TopicCrypto,
-      builder: (_, _) => TopicHubPage(
-        initialTopicId: 'crypto',
-        useDetailEndpoint: true,
-        shellRenderMode: shellRenderMode,
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-285',
+        title: 'Chủ đề Crypto',
+        subtitle: 'Crypto · khám phá · nội dung',
+        description: 'Theo dõi nội dung chủ đề Crypto trong bố cục Tablet.',
+        backPath: AppRoutePaths.topics,
+        actionLabel: 'Lọc nội dung',
+        icon: Icons.currency_bitcoin_outlined,
+        fallback: TopicHubPage(
+          initialTopicId: 'crypto',
+          useDetailEndpoint: true,
+          shellRenderMode: shellRenderMode,
+        ),
       ),
     ),
     GoRoute(
       path: AppRoutePaths.referral,
       name: AppRouteNames.sc290ReferralHome,
-      builder: (_, _) => ReferralHomePage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-290',
+        title: 'Giới thiệu bạn bè',
+        subtitle: 'Giới thiệu · tiến độ · phần thưởng',
+        description: 'Theo dõi chương trình giới thiệu và tiến độ trên Tablet.',
+        backPath: AppRoutePaths.home,
+        actionLabel: 'Xem tiến độ giới thiệu',
+        icon: Icons.group_add_outlined,
+        fallback: ReferralHomePage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.referralHistory,
       name: AppRouteNames.sc286ReferralHistory,
-      builder: (_, _) => ReferralHistoryPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-286',
+        title: 'Lịch sử giới thiệu',
+        subtitle: 'Giới thiệu · lịch sử · trạng thái',
+        description: 'Đối chiếu lịch sử giới thiệu trong bố cục Tablet.',
+        backPath: AppRoutePaths.referral,
+        actionLabel: 'Lọc lịch sử',
+        icon: Icons.history_outlined,
+        fallback: ReferralHistoryPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.referralRewards,
       name: AppRouteNames.sc287ReferralRewards,
-      builder: (_, _) => ReferralRewardsPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-287',
+        title: 'Phần thưởng giới thiệu',
+        subtitle: 'Giới thiệu · phần thưởng · điều kiện',
+        description:
+            'Theo dõi phần thưởng và điều kiện chương trình trên Tablet.',
+        backPath: AppRoutePaths.referral,
+        actionLabel: 'Xem điều kiện',
+        icon: Icons.redeem_outlined,
+        fallback: ReferralRewardsPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.referralRules,
       name: AppRouteNames.sc288ReferralRules,
-      builder: (_, _) => ReferralRulesPage(shellRenderMode: shellRenderMode),
+      builder: (context, _) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-288',
+        title: 'Điều kiện giới thiệu',
+        subtitle: 'Giới thiệu · quy tắc · điều kiện',
+        description: 'Rà soát quy tắc và điều kiện chương trình giới thiệu.',
+        backPath: AppRoutePaths.referral,
+        actionLabel: 'Xác nhận đã đọc',
+        icon: Icons.rule_outlined,
+        fallback: ReferralRulesPage(shellRenderMode: shellRenderMode),
+      ),
     ),
     GoRoute(
       path: '/referral/friend/:friendId',
       name: AppRouteNames.sc289ReferralFriendDetail,
-      builder: (_, state) => ReferralFriendDetailPage(
-        friendId: requireRouteParam(state, 'friendId'),
+      builder: (context, state) => buildSurfaceAwareTabletRoute(
+        context: context,
+        surface: surface,
+        semanticIdentifier: 'SC-289',
+        title: 'Chi tiết người được giới thiệu',
+        subtitle: 'Giới thiệu · người dùng · trạng thái',
+        description: 'Theo dõi trạng thái người được giới thiệu trên Tablet.',
+        backPath: AppRoutePaths.referral,
+        actionLabel: 'Xem lịch sử hoạt động',
+        icon: Icons.person_outline,
+        fallback: ReferralFriendDetailPage(
+          friendId: requireRouteParam(state, 'friendId'),
+        ),
       ),
     ),
   ];

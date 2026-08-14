@@ -305,7 +305,9 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
 
       final path = _extractNamedArgument(block, 'path') ?? '-';
       final pageClass = _extractPageClass(block);
-      final page = pageIndex.find(pageClass);
+      final page = pageClass == 'VitTabletUtilityPage'
+          ? _tabletUtilityPageGroup(appRoot, routeGroup)
+          : pageIndex.find(pageClass);
 
       entries.add(
         _buildEntry(
@@ -326,6 +328,21 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
   });
 
   return entries;
+}
+
+PageGroup? _tabletUtilityPageGroup(Directory appRoot, String routeGroup) {
+  final file = File(
+    '${appRoot.path}/lib/shared/layout/vit_tablet_utility_page.dart',
+  );
+  if (!file.existsSync()) return null;
+  final source = file.readAsStringSync();
+  return PageGroup(
+    file: 'flutter_app/lib/shared/layout/vit_tablet_utility_page.dart',
+    feature: _featureFromRouteGroup(routeGroup),
+    source: source,
+    headerBehavior: _classifyHeaderBehavior(source, source),
+    headerVariant: _classifyHeaderVariant(source),
+  );
 }
 
 VisualHeaderRouteEntry _buildEntry({
@@ -762,6 +779,10 @@ int _expectedActionCount(String source) {
 }
 
 String _extractPageClass(String block) {
+  if (block.contains('buildSurfaceAwareTabletRoute')) {
+    return 'VitTabletUtilityPage';
+  }
+
   // The Trade receipt route deliberately selects a device-specific page in
   // one builder. Use the phone page as the audit representative; the Tablet
   // page has its own dedicated receipt implementation and shares the same
@@ -965,6 +986,9 @@ List<String> _extraSourceForPageGroup(
             'lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
         className: null,
       ),
+    ],
+    'VitTabletUtilityPage(': [
+      (path: 'lib/shared/layout/vit_tablet_utility_page.dart', className: null),
     ],
     'CrossModuleTabbedPageShell(': [
       (

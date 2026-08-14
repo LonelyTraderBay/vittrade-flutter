@@ -1,4 +1,5 @@
 cluster,file,suggested_tier,violation_type,status,batch,notes
+01_shared,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_announcement_banner.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_balance_breakdown_row.dart,C,-,done,0,-

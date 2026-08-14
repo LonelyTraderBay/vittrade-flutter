@@ -10,7 +10,7 @@ void main(List<String> args) {
   final docsDir = Directory('${repoRoot}docs/02_FLUTTER_MIGRATION');
   final csvFile = File('${docsDir.path}/audits/VitTrade-Page-Rhythm-Audit.csv');
 
-  final libDir = Directory('${appRoot.path}/lib/features');
+  final libDir = Directory('${appRoot.path}/lib');
   final rows = <_AuditRow>[];
   final visualDebt = <_VisualDebtRow>[];
 
@@ -18,7 +18,11 @@ void main(List<String> args) {
     if (entity is! File || !entity.path.endsWith('.dart')) continue;
     final relative = entity.path.replaceAll('\\', '/').split('/lib/').last;
 
-    if (!relative.contains('/presentation/')) continue;
+    final isSharedTabletUtility =
+        relative == 'shared/layout/vit_tablet_utility_page.dart';
+    if (!relative.contains('/presentation/') && !isSharedTabletUtility) {
+      continue;
+    }
 
     final source = entity.readAsStringSync();
     final hasVitPageContent = source.contains('VitPageContent');

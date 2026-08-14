@@ -4,11 +4,11 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=23
-auto_hide_header=362
+fixed_vit_header_remaining=20
+auto_hide_header=337
 custom_scroll_header=1
 no_top_header=26
-unresolved=0
+unresolved=28
 ```
 
 ## Fixed Header Count By Feature
@@ -17,7 +17,6 @@ unresolved=0
 | --- | ---: |
 | trade_copy | 10 |
 | trade_bots | 4 |
-| admin | 3 |
 | trade | 3 |
 | enterprise_states | 2 |
 | markets | 1 |
@@ -26,11 +25,11 @@ unresolved=0
 
 | Feature | Route | Page | Header behavior | Variant | Page file |
 | --- | --- | --- | --- | --- | --- |
-| admin | `AppRoutePaths.admin` | `AdminHomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/admin/presentation/pages/admin_home_page.dart` |
-| admin | `AppRoutePaths.adminAbtests` | `ABTestDashboardPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/admin/presentation/pages/ab_test_dashboard_page.dart` |
-| admin | `AppRoutePaths.adminAnalytics` | `AnalyticsDashboardPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/admin/presentation/pages/analytics_dashboard_page.dart` |
-| admin | `AppRoutePaths.adminFunnels` | `FunnelDashboardPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/admin/presentation/pages/funnel_dashboard_page.dart` |
-| admin | `AppRoutePaths.adminSettings` | `AdminSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/admin/presentation/pages/admin_settings_page.dart` |
+| admin | `AppRoutePaths.admin` | `unresolved` | unresolved | unresolved | `unresolved` |
+| admin | `AppRoutePaths.adminAbtests` | `unresolved` | unresolved | unresolved | `unresolved` |
+| admin | `AppRoutePaths.adminAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| admin | `AppRoutePaths.adminFunnels` | `unresolved` | unresolved | unresolved | `unresolved` |
+| admin | `AppRoutePaths.adminSettings` | `unresolved` | unresolved | unresolved | `unresolved` |
 | arena | `'/arena/challenge/:challengeId'` | `ArenaChallengeDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page.dart` |
 | arena | `'/arena/creator/:creatorId'` | `ArenaCreatorPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/studio/arena_creator_page.dart` |
 | arena | `'/arena/join/:challengeId'` | `ArenaJoinPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/arena/presentation/pages/challenge/arena_join_page.dart` |
@@ -62,10 +61,6 @@ unresolved=0
 | auth | `AppRoutePaths.authOtp` | `OTPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart` |
 | auth | `AppRoutePaths.authRegister` | `RegisterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart` |
 | auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart` |
-| cross_module | `AppRoutePaths.crossModuleAnalytics` | `CrossModuleAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/cross_module/presentation/pages/cross_module_analytics_page.dart` |
-| cross_module | `AppRoutePaths.smartAlerts` | `SmartAlertCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/cross_module/presentation/pages/smart_alert_center_page.dart` |
-| cross_module | `AppRoutePaths.taxReports` | `TaxReportCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_page.dart` |
-| cross_module | `AppRoutePaths.unifiedPortfolio` | `UnifiedPortfolioDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/cross_module/presentation/pages/unified_portfolio_dashboard_page.dart` |
 | dca | `'/dca/rebalance/:configId/edit'` | `DCARebalanceConfigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart` |
 | dca | `'/dca/rebalance/:configId/history'` | `DCARebalanceDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/portfolio/dca_rebalance_dashboard_page.dart` |
 | dca | `AppRoutePaths.dca` | `DCAPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/hub/dca_page.dart` |
@@ -79,14 +74,6 @@ unresolved=0
 | dca | `AppRoutePaths.dcaScheduleAnalytics` | `DCAScheduleAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_schedule_analytics_page.dart` |
 | dca | `AppRoutePaths.dcaScheduleConfig` | `DCAScheduleConfigPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_schedule_config_page.dart` |
 | dca | `AppRoutePaths.dcaSmartRules` | `DCASmartRulesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/schedule/dca_smart_rules_page.dart` |
-| dca | `AppRoutePaths.devDcaOverview` | `DCAOverviewDemo` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dca/presentation/pages/hub/dca_overview_demo.dart` |
-| dev | `AppRoutePaths.devDesignSystem` | `DesignSystemPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dev/presentation/pages/design_system_page.dart` |
-| dev | `AppRoutePaths.devShowcase` | `MissingScreensShowcasePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dev/presentation/pages/missing_screens_showcase_page.dart` |
-| dev | `AppRoutePaths.performanceMonitor` | `PerformanceMonitor` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dev/presentation/pages/performance_monitor.dart` |
-| dev | `AppRoutePaths.routeChecker` | `RouteChecker` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/dev/presentation/pages/route_checker_page.dart` |
-| discovery | `AppRoutePaths.search` | `UnifiedSearchPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/discovery/presentation/pages/unified_search_page.dart` |
-| discovery | `AppRoutePaths.topicCrypto` | `TopicHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/discovery/presentation/pages/topic_hub_page.dart` |
-| discovery | `AppRoutePaths.topics` | `TopicHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/discovery/presentation/pages/topic_hub_page.dart` |
 | earn_savings | `AppRoutePaths.earnSavings` | `SavingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/savings_page.dart` |
 | earn_savings | `AppRoutePaths.earnSavingsAnalytics` | `SavingsAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/savings_analytics_page.dart` |
 | earn_savings | `AppRoutePaths.earnSavingsAutoCompound` | `AutoCompoundSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_savings/presentation/pages/savings/auto_compound_settings_page.dart` |
@@ -157,7 +144,6 @@ unresolved=0
 | earn_staking | `AppRoutePaths.earnVoting` | `StakingVotingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_voting_page.dart` |
 | earn_staking | `AppRoutePaths.earnVotingProposalRoute` | `StakingVotingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_voting_page.dart` |
 | earn_staking | `AppRoutePaths.earnWebhooks` | `StakingWebhooksPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_webhooks_page.dart` |
-| enterprise_states | `AppRoutePaths.enterpriseStates` | `EnterpriseStatesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/enterprise_states/presentation/pages/enterprise_states_page.dart` |
 | enterprise_states | `AppRoutePaths.forceUpdateGate` | `ForceUpdateGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/force_update_gate_page.dart` |
 | enterprise_states | `AppRoutePaths.maintenanceGate` | `MaintenanceGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/maintenance_gate_page.dart` |
 | home | `AppRoutePaths.home` | `HomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/home/presentation/phone/pages/home_page.dart` |
@@ -208,7 +194,6 @@ unresolved=0
 | markets | `AppRoutePaths.marketsUnlocks` | `TokenUnlocksPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page.dart` |
 | markets | `AppRoutePaths.marketsWatchlist` | `WatchlistPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/hub/watchlist_page.dart` |
 | news | `AppRoutePaths.news` | `NewsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/news/presentation/pages/news_page.dart` |
-| notifications | `AppRoutePaths.notifications` | `NotificationsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/notifications/presentation/pages/notifications_page.dart` |
 | onboarding | `AppRoutePaths.onboarding` | `OnboardingFlowPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/onboarding/presentation/pages/onboarding_flow_page.dart` |
 | p2p_account | `'/p2p/merchant/:merchantId'` | `P2PMerchantProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/merchant/p2p_merchant_profile_page.dart` |
 | p2p_account | `'/p2p/payment-method/ownership/:methodId'` | `P2PPaymentMethodOwnershipPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_ownership_page.dart` |
@@ -318,15 +303,9 @@ unresolved=0
 | profile | `AppRoutePaths.settingsSecurity` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
 | profile | `AppRoutePaths.settingsSecurityBiometric` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
 | profile | `AppRoutePaths.settingsSecurityChangePassword` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| referral | `'/referral/friend/:friendId'` | `ReferralFriendDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_friend_detail_page.dart` |
-| referral | `AppRoutePaths.referral` | `ReferralHomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_home_page.dart` |
-| referral | `AppRoutePaths.referralHistory` | `ReferralHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_history_page.dart` |
-| referral | `AppRoutePaths.referralRewards` | `ReferralRewardsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_rewards_page.dart` |
-| referral | `AppRoutePaths.referralRules` | `ReferralRulesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_rules_page.dart` |
-| rewards | `AppRoutePaths.rewards` | `RewardsHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` |
-| support | `AppRoutePaths.support` | `SupportPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/support_page.dart` |
-| support | `AppRoutePaths.supportAnnouncements` | `AnnouncementsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` |
-| support | `AppRoutePaths.supportHelp` | `HelpCenterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` |
+| support | `AppRoutePaths.support` | `unresolved` | unresolved | unresolved | `unresolved` |
+| support | `AppRoutePaths.supportAnnouncements` | `unresolved` | unresolved | unresolved | `unresolved` |
+| support | `AppRoutePaths.supportHelp` | `unresolved` | unresolved | unresolved | `unresolved` |
 | trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
 | trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/futures_page.dart` |
 | trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/pages/futures/leverage_page.dart` |
@@ -417,6 +396,26 @@ unresolved=0
 | trade_terminal | `AppRoutePaths.tradeMarginAdvancedAnalytics` | `AdvancedAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_analytics_page.dart` |
 | trade_terminal | `AppRoutePaths.tradeMarginAdvancedDemo` | `AdvancedTradingDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/advanced_trading_demo_page.dart` |
 | trade_terminal | `AppRoutePaths.tradeRiskManagement` | `RiskManagementDemoPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade_terminal/presentation/pages/tools/risk_management_demo_page.dart` |
+| utility | `'/referral/friend/:friendId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.crossModuleAnalytics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.devDcaOverview` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.devDesignSystem` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.devShowcase` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.enterpriseStates` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.notifications` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.performanceMonitor` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.referral` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.referralHistory` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.referralRewards` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.referralRules` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.rewards` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.routeChecker` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.search` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.smartAlerts` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.taxReports` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.topicCrypto` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.topics` | `unresolved` | unresolved | unresolved | `unresolved` |
+| utility | `AppRoutePaths.unifiedPortfolio` | `unresolved` | unresolved | unresolved | `unresolved` |
 | wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
 | wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
 | wallet | `'/wallet/asset/:assetId'` | `AssetDetailTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart` |

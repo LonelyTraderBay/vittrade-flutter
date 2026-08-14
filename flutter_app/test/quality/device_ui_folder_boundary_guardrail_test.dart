@@ -59,6 +59,7 @@ void main() {
       'lib/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
       'lib/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
       'lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
+      'lib/shared/layout/vit_tablet_utility_page.dart',
       'lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart',
       'lib/features/profile/presentation/phone/pages/profile_home_hero.dart',
       'lib/features/home/presentation/widgets/phone/home_header.dart',

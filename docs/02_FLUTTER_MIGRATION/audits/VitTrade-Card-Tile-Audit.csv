@@ -1051,6 +1051,7 @@ wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_li
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_limits_page_sections.dart,3,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_network_picker.dart,1,0,0,C,0,0,0,pass,-
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_preview_sheet.dart,1,0,0,C,0,0,0,pass,-
+shared,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_announcement_banner.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_balance_breakdown_row.dart,1,0,0,C,0,0,0,pass,-

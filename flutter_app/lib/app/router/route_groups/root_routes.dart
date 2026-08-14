@@ -114,7 +114,7 @@ ShellRoute _appShellRoute(
       // `tradeRoutes` (go_router matches in declaration order).
       ...tradeTerminalRoutes(shellRenderMode),
       ...tradeRoutes(shellRenderMode, surface: surface),
-      ...adminRoutes(shellRenderMode),
+      ...adminRoutes(shellRenderMode, surface: surface),
       // ADR-012: P2P family route groups
       // (marketplace → orders → account → security → dispute).
       ...p2pMarketplaceRoutes(shellRenderMode, surface: surface),
@@ -122,17 +122,17 @@ ShellRoute _appShellRoute(
       ...p2pAccountRoutes(shellRenderMode, surface: surface),
       ...p2pSecurityRoutes(shellRenderMode, surface: surface),
       ...p2pDisputeRoutes(shellRenderMode, surface: surface),
-      ...supportRoutes(shellRenderMode),
+      ...supportRoutes(shellRenderMode, surface: surface),
       ...launchpadRoutes(shellRenderMode),
       ...arenaCoreRoutes(shellRenderMode),
-      ...utilityRoutes(shellRenderMode),
+      ...utilityRoutes(shellRenderMode, surface: surface),
       ...earnStakingRoutes(shellRenderMode),
       ...earnSavingsRoutes(shellRenderMode),
       ...arenaExtendedRoutes(shellRenderMode),
       ...dcaRoutes(shellRenderMode),
       ...walletRoutes(shellRenderMode, surface: surface),
       ...profileRoutes(shellRenderMode, surface: surface),
-      ...discoveryAndReferralRoutes(shellRenderMode),
+      ...discoveryAndReferralRoutes(shellRenderMode, surface: surface),
       ...navigationPlaceholderRoutes,
     ],
   );

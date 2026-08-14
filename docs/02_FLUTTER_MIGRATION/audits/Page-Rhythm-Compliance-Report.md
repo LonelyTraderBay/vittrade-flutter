@@ -32,25 +32,19 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ## By module
 
-### admin (5 routes, L2 warn 0, unknown 0)
+### app (28 routes, L2 warn 0, unknown 0)
 
 ### arena (25 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
 
-### cross_module (4 routes, L2 warn 0, unknown 0)
-
-### dca (14 routes, L2 warn 0, unknown 0)
-
-### dev (4 routes, L2 warn 0, unknown 0)
-
-### discovery (3 routes, L2 warn 0, unknown 0)
+### dca (13 routes, L2 warn 0, unknown 0)
 
 ### earn_savings (24 routes, L2 warn 0, unknown 0)
 
 ### earn_staking (46 routes, L2 warn 0, unknown 0)
 
-### enterprise_states (3 routes, L2 warn 0, unknown 0)
+### enterprise_states (2 routes, L2 warn 0, unknown 0)
 
 ### home (1 routes, L2 warn 0, unknown 0)
 
@@ -60,8 +54,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ### news (1 routes, L2 warn 0, unknown 0)
 
-### notifications (1 routes, L2 warn 0, unknown 0)
-
 ### onboarding (1 routes, L2 warn 0, unknown 0)
 
 ### p2p_core (76 routes, L2 warn 0, unknown 0)
@@ -69,12 +61,6 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 ### predictions (18 routes, L2 warn 0, unknown 0)
 
 ### profile (14 routes, L2 warn 0, unknown 0)
-
-### referral (5 routes, L2 warn 0, unknown 0)
-
-### rewards (1 routes, L2 warn 0, unknown 0)
-
-### support (3 routes, L2 warn 0, unknown 0)
 
 ### trade (13 routes, L2 warn 0, unknown 0)
 
