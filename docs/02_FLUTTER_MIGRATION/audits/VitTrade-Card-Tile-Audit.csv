@@ -706,6 +706,7 @@ profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_h
 profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_legal_accordion.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_menu_actions.dart,4,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_vip_prediction.dart,2,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,1,0,0,C,0,0,0,pass,-

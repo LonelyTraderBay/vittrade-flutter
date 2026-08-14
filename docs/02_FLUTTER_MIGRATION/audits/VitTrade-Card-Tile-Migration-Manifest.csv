@@ -832,6 +832,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_legal_accordion.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_menu_actions.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_vip_prediction.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,C,-,done,0,-

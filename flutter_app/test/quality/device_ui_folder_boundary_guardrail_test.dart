@@ -55,6 +55,8 @@ void main() {
       'lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart',
       'lib/features/profile/presentation/phone/pages/profile_page.dart',
       'lib/features/profile/presentation/tablet/pages/profile_tablet_page.dart',
+      'lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+      'lib/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
       'lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart',
       'lib/features/profile/presentation/phone/pages/profile_home_hero.dart',
       'lib/features/home/presentation/widgets/phone/home_header.dart',

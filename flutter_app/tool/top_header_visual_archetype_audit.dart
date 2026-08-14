@@ -952,6 +952,13 @@ List<String> _extraSourceForPageGroup(
         className: null,
       ),
     ],
+    'ProfileTabletUtilitySurface(': [
+      (
+        path:
+            'lib/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
+        className: null,
+      ),
+    ],
     'CrossModuleTabbedPageShell(': [
       (
         path:

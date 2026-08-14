@@ -6,6 +6,8 @@ import 'dart:io';
 const shellWidgetToVpcPath = <String, String>{
   'WalletTabletDetailSurface':
       'features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
+  'ProfileTabletUtilitySurface':
+      'features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
   'VitWalletDetailScaffold':
       'features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart',
   'VitP2PFlowScaffold':
@@ -25,6 +27,7 @@ const shellWidgetToVpcPath = <String, String>{
 /// Rhythm tier owned by each shell when a layout file declares multiple tiers.
 const shellWidgetRhythmTier = <String, String>{
   'WalletTabletDetailSurface': 'form',
+  'ProfileTabletUtilitySurface': 'form',
   'VitTradeWorkspaceScaffold': 'compact',
   'VitTradeHubScaffold': 'compact',
   'VitTradeDetailScaffold': 'standard',
@@ -155,6 +158,32 @@ const routeNameToPageOverrides = <String, String>{
       'features/wallet/presentation/tablet/pages/network_status_tablet_page.dart',
   'AppRouteNames.sc156Profile':
       'features/profile/presentation/phone/pages/profile_page.dart',
+  'AppRouteNames.sc157EditProfile':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc158Security':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc159Kyc':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc160Settings':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc161ActivityLog':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc162ApiKeyCreate':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc163ApiManagement':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc164Vip':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc165DeviceManagement':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc166SubAccount':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc413SettingsSecurity':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc405SettingsSecurityBiometric':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+  'AppRouteNames.sc406SettingsSecurityChangePassword':
+      'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
 };
 
 /// Auth routes list `AuthRouteShell`; child pages own [VitPageContent].

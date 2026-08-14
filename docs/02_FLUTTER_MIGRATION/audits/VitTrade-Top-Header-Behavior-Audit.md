@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=412
 fixed_vit_header_remaining=23
-auto_hide_header=365
+auto_hide_header=362
 custom_scroll_header=1
-no_top_header=23
+no_top_header=26
 unresolved=0
 ```
 
@@ -315,9 +315,9 @@ unresolved=0
 | profile | `AppRoutePaths.profileSettings` | `SettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/settings_page.dart` |
 | profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/sub_account_page.dart` |
 | profile | `AppRoutePaths.profileVip` | `VIPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/vip_page.dart` |
-| profile | `AppRoutePaths.settingsSecurity` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/security_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityBiometric` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/security_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityChangePassword` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/pages/security_page.dart` |
+| profile | `AppRoutePaths.settingsSecurity` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
+| profile | `AppRoutePaths.settingsSecurityBiometric` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
+| profile | `AppRoutePaths.settingsSecurityChangePassword` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
 | referral | `'/referral/friend/:friendId'` | `ReferralFriendDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_friend_detail_page.dart` |
 | referral | `AppRoutePaths.referral` | `ReferralHomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_home_page.dart` |
 | referral | `AppRoutePaths.referralHistory` | `ReferralHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/referral/presentation/pages/referral_history_page.dart` |
