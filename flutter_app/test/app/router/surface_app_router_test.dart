@@ -4,6 +4,8 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/phone/phone_app_router.dart';
 import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
+import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
 import 'package:vit_trade_flutter/features/home/presentation/pages/phone/home_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/pages/tablet/home_tablet_page.dart';
 
@@ -22,6 +24,8 @@ void main() {
 
     expect(find.byType(HomePage), findsOneWidget);
     expect(find.byType(HomeTabletPage), findsNothing);
+    expect(find.byType(PhoneAppShell), findsOneWidget);
+    expect(find.byType(TabletAppShell), findsNothing);
   });
 
   testWidgets('Tablet router chọn Tablet Home trực tiếp', (tester) async {
@@ -31,6 +35,8 @@ void main() {
 
     expect(find.byType(HomeTabletPage), findsOneWidget);
     expect(find.byType(HomePage), findsNothing);
+    expect(find.byType(TabletAppShell), findsOneWidget);
+    expect(find.byType(PhoneAppShell), findsNothing);
   });
 
   testWidgets('bootstrap tự chọn Tablet router theo viewport', (tester) async {

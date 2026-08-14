@@ -1,7 +1,7 @@
 module,source_file,line,source_unit,trigger_hint,kind,target_expression,normalized_target,target_screen,notes
 app,flutter_app/lib/app/router/internal_surface_gate.dart,96,internal_surface_gate.dart,Restricted surface | Internal surface restricted,context.go,AppRoutePaths.home,/home,switch (/home),
 app,flutter_app/lib/app/router/route_error_page.dart,29,route_error_page.dart,Về trang chủ | Không tìm thấy trang,context.go,AppRoutePaths.home,/home,switch (/home),
-app,flutter_app/lib/app/router/route_groups/root_routes.dart,59,root_routes.dart,,context.go,destination.routePath,,,dynamic_route_expression
+app,flutter_app/lib/app/router/route_groups/root_routes.dart,57,root_routes.dart,,context.go,destination.routePath,,,dynamic_route_expression
 core,flutter_app/lib/core/navigation/back_navigation.dart,25,back_navigation.dart,,context.go,safeFallback,,,dynamic_route_expression
 core,flutter_app/lib/core/navigation/back_navigation.dart,31,back_navigation.dart,,context.go,safeFallback,,,dynamic_route_expression
 core,flutter_app/lib/core/navigation/back_navigation.dart,28,back_navigation.dart,,context.pop,,,,back_or_close_modal

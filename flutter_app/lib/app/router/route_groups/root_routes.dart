@@ -47,19 +47,52 @@ ShellRoute _appShellRoute(
       final activeDestination = _activeDestinationForPath(state.uri.path);
       return Consumer(
         builder: (context, ref, _) {
-          final appShell = VitAppShell(
-            renderMode: shellRenderMode,
-            currentPath: state.uri.path,
-            activeDestination: activeDestination,
-            notificationBadgeCount: ref.watch(notificationUnreadCountProvider),
-            statusBarTime: shellRenderMode.usesVisualQaFrame
-                ? _visualQaStatusBarTimeForUri(state.uri)
-                : null,
-            onDestinationSelected: (destination) {
-              context.go(destination.routePath);
-            },
-            child: child,
+          final notificationBadgeCount = ref.watch(
+            notificationUnreadCountProvider,
           );
+          final statusBarTime = shellRenderMode.usesVisualQaFrame
+              ? _visualQaStatusBarTimeForUri(state.uri)
+              : null;
+          void onDestinationSelected(VitBottomNavDestination destination) {
+            context.go(destination.routePath);
+          }
+
+          final appShell = switch (surface) {
+            AppSurface.phone => PhoneAppShell(
+              renderMode: shellRenderMode,
+              currentPath: state.uri.path,
+              activeDestination: activeDestination,
+              notificationBadgeCount: notificationBadgeCount,
+              statusBarTime: statusBarTime,
+              onDestinationSelected: onDestinationSelected,
+              child: child,
+            ),
+            AppSurface.tablet => TabletAppShell(
+              renderMode: shellRenderMode,
+              activeDestination: activeDestination,
+              notificationBadgeCount: notificationBadgeCount,
+              statusBarTime: statusBarTime,
+              onDestinationSelected: onDestinationSelected,
+              child: child,
+            ),
+            AppSurface.web => WebAppShell(
+              renderMode: shellRenderMode,
+              activeDestination: activeDestination,
+              notificationBadgeCount: notificationBadgeCount,
+              statusBarTime: statusBarTime,
+              onDestinationSelected: onDestinationSelected,
+              child: child,
+            ),
+            null => VitAppShell(
+              renderMode: shellRenderMode,
+              currentPath: state.uri.path,
+              activeDestination: activeDestination,
+              notificationBadgeCount: notificationBadgeCount,
+              statusBarTime: statusBarTime,
+              onDestinationSelected: onDestinationSelected,
+              child: child,
+            ),
+          };
 
           if (!shellRenderMode.usesVisualQaFrame) return appShell;
           return VitPhoneFrame(child: appShell);
