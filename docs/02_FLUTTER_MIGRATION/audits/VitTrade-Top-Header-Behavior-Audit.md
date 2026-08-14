@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=412
 fixed_vit_header_remaining=22
-auto_hide_header=378
+auto_hide_header=377
 custom_scroll_header=1
-no_top_header=11
+no_top_header=12
 unresolved=0
 ```
 
@@ -423,7 +423,7 @@ unresolved=0
 | wallet | `'/wallet/transaction/:txId'` | `TransactionDetailPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/history/transaction_detail_page.dart` |
 | wallet | `AppRoutePaths.wallet` | `WalletPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` |
 | wallet | `AppRoutePaths.walletAddressBook` | `AddressBookPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart` |
-| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/address/address_add_page.dart` |
+| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart` |
 | wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletDustConverter` | `DustConverterPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/assets/dust_converter_page.dart` |
@@ -436,5 +436,5 @@ unresolved=0
 | wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart` |
 | wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart` |
 | wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart` |
-| wallet | `AppRoutePaths.walletTransfer` | `TransferPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/pages/transfer/transfer_page.dart` |
+| wallet | `AppRoutePaths.walletTransfer` | `TransferTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |

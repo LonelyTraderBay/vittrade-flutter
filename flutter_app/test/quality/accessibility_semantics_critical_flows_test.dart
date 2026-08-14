@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/transfer_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transfer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
 

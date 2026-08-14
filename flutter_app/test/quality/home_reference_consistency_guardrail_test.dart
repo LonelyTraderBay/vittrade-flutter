@@ -110,7 +110,7 @@ void main() {
       'lib/features/wallet/presentation/widgets/tools/wallet_token_approval_common.dart',
     ];
     const formWizardBundle = <String>[
-      'lib/features/wallet/presentation/pages/address/address_add_page.dart',
+      'lib/features/wallet/presentation/phone/pages/address_add_page.dart',
       'lib/features/wallet/presentation/widgets/address/wallet_address_add_form.dart',
       'lib/features/wallet/presentation/widgets/address/wallet_address_add_sections.dart',
       'lib/features/wallet/presentation/widgets/address/wallet_address_add_common.dart',
@@ -142,7 +142,7 @@ void main() {
     const structuralMarkers = <String, String>{
       'lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart':
           'WalletTokenApprovalTabs(',
-      'lib/features/wallet/presentation/pages/address/address_add_page.dart':
+      'lib/features/wallet/presentation/phone/pages/address_add_page.dart':
           'AddressAddForm.sections(',
     };
     structuralMarkers.forEach((path, needle) {

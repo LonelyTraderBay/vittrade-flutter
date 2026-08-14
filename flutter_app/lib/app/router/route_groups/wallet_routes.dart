@@ -2,7 +2,7 @@ import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_add_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_add_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/address/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/buy_crypto_page.dart';
@@ -13,7 +13,7 @@ import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/pe
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/portfolio_analytics_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/history/transaction_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/history/transaction_history_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/transfer_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transfer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_health_score_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart';
@@ -23,6 +23,8 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wall
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
@@ -131,7 +133,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletAddressBookAdd,
       name: AppRouteNames.sc143AddressAdd,
-      builder: (_, _) => AddressAddPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const AddressAddTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => AddressAddPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: AppRoutePaths.walletAddressBook,
@@ -146,7 +154,13 @@ List<RouteBase> walletRoutes(
     GoRoute(
       path: AppRoutePaths.walletTransfer,
       name: AppRouteNames.sc146Transfer,
-      builder: (_, _) => TransferPage(shellRenderMode: shellRenderMode),
+      builder: (_, _) => switch (surface) {
+        AppSurface.tablet => const TransferTabletPage(),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => TransferPage(shellRenderMode: shellRenderMode),
+      },
     ),
     GoRoute(
       path: '/wallet/asset/:assetId',

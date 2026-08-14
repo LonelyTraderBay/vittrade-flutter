@@ -130,9 +130,10 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/wallet/presentation/pages/address/address_add_page.dart',
+              'lib/features/wallet/presentation/phone/pages/address_add_page.dart',
           paths: [
-            'lib/features/wallet/presentation/pages/address/address_add_page.dart',
+            'lib/features/wallet/presentation/phone/pages/address_add_page.dart',
+            'lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart',
             'lib/features/wallet/presentation/widgets/address/wallet_address_add_sections.dart',
             'lib/features/wallet/presentation/controllers/wallet_controller.dart',
           ],

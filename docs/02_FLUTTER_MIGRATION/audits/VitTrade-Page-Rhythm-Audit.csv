@@ -1433,7 +1433,6 @@ trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tool
 trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tools/risk_management_common.dart,standard,,0,,0,,0,0,pass
 trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tools/risk_management_overview.dart,standard,,0,,0,,0,0,pass
 trade_terminal,flutter_app/lib/features/trade_terminal/presentation/widgets/tools/risk_management_tabs.dart,standard,,0,,0,,0,0,pass
-wallet,flutter_app/lib/features/wallet/presentation/pages/address/address_add_page.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/address/address_book_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/assets/asset_detail_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/history/transaction_history_page.dart,standard,standard,0,,0,,0,0,pass
@@ -1444,6 +1443,7 @@ wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_multi_man
 wallet,flutter_app/lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart,standard,standard,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/pages/transfer/withdraw_limits_page.dart,standard,form,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/phone/pages/address_add_page.dart,standard,form,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart,compact,compact,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart,standard,,0,,0,,0,0,pass
