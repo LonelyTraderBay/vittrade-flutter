@@ -56,5 +56,5 @@ dart run tool/route_coverage_audit.dart --check
 
 ## SDD
 
-1 implementer → 1 reviewer · Auto only · no commit trừ user yêu cầu.
+1 implementer → 1 reviewer · dùng phiên Codex hiện tại · no commit trừ user yêu cầu.
 Use GitNexus rename if available; else careful dart rename + update imports.

@@ -9,9 +9,7 @@ $ErrorActionPreference = 'Stop'
 $RepoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 Set-Location $RepoRoot
 
-$env:Path = "$env:APPDATA\npm;" + $env:Path
-
 Write-Host "Refreshing GitNexus index (may take several minutes)..."
-gitnexus analyze --skip-agents-md --skip-skills
-gitnexus status
-gitnexus doctor
+node .gitnexus/run.cjs analyze --skip-agents-md --skip-skills
+node .gitnexus/run.cjs status
+node .gitnexus/run.cjs doctor

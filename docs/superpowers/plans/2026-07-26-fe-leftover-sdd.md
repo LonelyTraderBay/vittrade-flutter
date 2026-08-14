@@ -49,7 +49,7 @@ Ghi W2–4 vẫn BLOCKED. Không Dart.
 
 ## SDD
 
-1 implementer → 1 reviewer / task · Auto only · no commit trừ user yêu cầu
+1 implementer → 1 reviewer / task · dùng phiên Codex hiện tại · no commit trừ user yêu cầu
 (sau wave: user thường muốn PR — chờ lệnh commit).
 
 ---

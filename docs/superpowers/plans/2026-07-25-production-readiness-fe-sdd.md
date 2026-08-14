@@ -120,5 +120,5 @@ Do **not** dispatch implementers for Task 4+ while blocked.
 - One implementer subagent per task; then one reviewer; fix loop if needed.
 - Controller writes brief/report/diff paths under `flutter_app/run-artifacts/sdd/`.
 - Implementers: **do not git commit** unless plan task says user approved commits.
-- Model: inherit session Auto — do not request Sonnet/Opus.
+- Runtime: dùng Codex session hiện tại — không yêu cầu đổi model giữa task.
 - After each approved task: append ledger line in `.superpowers/sdd/progress-prod-fe.md`.

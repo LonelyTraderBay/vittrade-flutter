@@ -199,7 +199,7 @@ Không mở PR “dịch hết 280 dòng” trừ khi user yêu cầu riêng.
 
 ## SDD rules
 
-1. Auto only; không escalate model.  
+1. Dùng phiên Codex hiện tại; không đổi model giữa batch.
 2. Không commit trừ user yêu cầu.  
 3. GitNexus `impact` trước khi sửa symbol (nếu index sẵn).  
 4. Batch gate: minimal-diff + `flutter analyze` + focused tests.  

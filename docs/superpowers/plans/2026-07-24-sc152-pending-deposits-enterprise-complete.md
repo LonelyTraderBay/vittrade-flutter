@@ -1,6 +1,6 @@
 # SC-152 Nạp tiền đang chờ — Hoàn thiện Enterprise UI
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) hoặc `superpowers:executing-plans` để làm task-by-task. Steps dùng checkbox (`- [ ]`). Mỗi **batch = một phiên Execute Codex mới** (Two-Phase Codex Workflow).
+> **For Codex workers:** Đọc `.codex/skills/incremental-implementation/SKILL.md` và làm task-by-task. Steps dùng checkbox (`- [ ]`). Mỗi **batch = một phiên Execute Codex mới** (Two-Phase Codex Workflow).
 
 **Goal:** Đưa `/wallet/pending-deposits` (SC-152) từ trạng thái “P0 Vit*/spacing đã merge (#61)” lên mức enterprise-complete: honesty refresh, states/CTA, mật độ card, hygiene token/test — không redesign.
 

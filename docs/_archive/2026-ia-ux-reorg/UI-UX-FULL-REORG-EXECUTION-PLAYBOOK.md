@@ -92,7 +92,7 @@ Ràng buộc:
 - Mỗi STEP xong: verify → tick checkbox + §1 Dashboard + §1.1 Log → báo next STEP → tiếp tục
 - Hard stop §0.5: dừng và nói rõ lý do
 - Soft ceiling §0.4: cảnh báo nhưng tiếp tục nếu user đã chọn continuum
-- Auto only; Dart: GitNexus impact trước khi sửa symbol
+- Dùng phiên Codex hiện tại; Dart: GitNexus impact trước khi sửa symbol
 - P0: không sửa flutter_app/lib (trừ khi STEP ghi rõ)
 ```
 

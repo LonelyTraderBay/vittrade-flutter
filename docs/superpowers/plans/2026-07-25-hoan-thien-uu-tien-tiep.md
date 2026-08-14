@@ -172,7 +172,7 @@ Skeletons sẵn: `docs/02_FLUTTER_MIGRATION/*-Backend-Contract-Skeleton.md`.
 
 ## SDD
 
-Auto only · không commit trừ user yêu cầu · batch ≤10 file ·
+Dùng phiên Codex hiện tại · không commit trừ user yêu cầu · batch ≤10 file ·
 `flutter analyze` + focused tests mỗi task · ADR-010 giữ nguyên.
 
 ---

@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-08-14 (Codex-only runtime cleanup; GĐ4-S4, ARCH-A4, DOC-D4)
+**Last Updated:** 2026-08-15 (Codex workspace hardening; GĐ4-S4, ARCH-A4, DOC-D4)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -193,6 +193,8 @@ repository, or broad structural changes.
 Codex is the default repository agent surface. Keep the working context small
 and load only the relevant local skill from `.codex/skills/` for each task:
 
+- Session entrypoint: `.codex/README.md` → `docs/INDEX.md` → task-specific skill.
+
 - Multi-file or ambiguous work: use `planning-and-task-breakdown` first.
 - Implementation: use `incremental-implementation` and verify every slice.
 - Symbol changes: run GitNexus `impact` before editing and
@@ -248,9 +250,12 @@ boundaries always take precedence over generic skill guidance.
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **vittrade-flutter** (35032 symbols, 60882 relationships, 102 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **vittrade-flutter**. Counts and
+execution-flow totals are runtime data; verify freshness with
+`node .gitnexus/run.cjs status` instead of relying on hard-coded numbers. Use
+the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
-> Index stale? Run `.\scripts\gitnexus\Refresh-Index.ps1` or `gitnexus analyze --skip-agents-md --skip-skills`. Local index lives in `.gitnexus/` (gitignored, ~730MB — refresh after clone).
+> Index stale? Run `.\scripts\gitnexus\Refresh-Index.ps1` or `node .gitnexus/run.cjs analyze --skip-agents-md --skip-skills`. Local index lives in `.gitnexus/` (gitignored, ~730MB — refresh after clone).
 
 ## Always Do
 

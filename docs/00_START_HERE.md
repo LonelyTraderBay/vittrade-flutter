@@ -6,22 +6,23 @@ web screenshot baseline were removed on 2026-05-26.
 ## Required Reading Order
 
 1. `AGENTS.md`
-2. `docs/00_START_HERE.md`
-3. `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
-4. `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (Plan → Execute for large tasks)
-5. `docs/01_AI_RULES/DOCUMENT_PRECEDENCE.md`
-6. `docs/02_FLUTTER_MIGRATION/Flutter-App-Foundation.md`
-7. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md`
-8. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md`
-9. `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md`
-10. `docs/02_FLUTTER_MIGRATION/Flutter-Port-Master-Plan.md`
-11. `docs/03_DESIGN_SYSTEM/Guidelines.md`
-12. `DESIGN.md` (root — visual tokens and Vit* component ladder)
-13. `docs/02_FLUTTER_MIGRATION/ke-hoac-tong-the.md` (status dashboard)
-14. `docs/02_FLUTTER_MIGRATION/ke-hoach-san-sang-production.md` (production gaps)
-15. `docs/02_FLUTTER_MIGRATION/checklists/Future-Feature-Onboarding-Checklist.md`
-16. `docs/02_FLUTTER_MIGRATION/checklists/Enterprise-PR-Review-Checklist.md`
-17. Screen- or module-specific references only when working on that area.
+2. `.codex/README.md`
+3. `docs/00_START_HERE.md`
+4. `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
+5. `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (Plan → Execute for large tasks)
+6. `docs/01_AI_RULES/DOCUMENT_PRECEDENCE.md`
+7. `docs/02_FLUTTER_MIGRATION/Flutter-App-Foundation.md`
+8. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md`
+9. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md`
+10. `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md`
+11. `docs/02_FLUTTER_MIGRATION/Flutter-Port-Master-Plan.md`
+12. `docs/03_DESIGN_SYSTEM/Guidelines.md`
+13. `DESIGN.md` (root — visual tokens and Vit* component ladder)
+14. `docs/02_FLUTTER_MIGRATION/ke-hoac-tong-the.md` (status dashboard)
+15. `docs/02_FLUTTER_MIGRATION/ke-hoach-san-sang-production.md` (production gaps)
+16. `docs/02_FLUTTER_MIGRATION/checklists/Future-Feature-Onboarding-Checklist.md`
+17. `docs/02_FLUTTER_MIGRATION/checklists/Enterprise-PR-Review-Checklist.md`
+18. Screen- or module-specific references only when working on that area.
 
 ## Source Of Truth
 
@@ -68,6 +69,7 @@ behavior changes.
 | Path | Purpose |
 | --- | --- |
 | `AGENTS.md` | Active coding constraints for agents. |
+| `.codex/README.md` | Codex session entrypoint and skill router. |
 | `docs/INDEX.md` | Doc picker — which file to load per task (on-demand). |
 | `DESIGN.md` | Visual token contract and component ladder for UI work. |
 | `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md` | Execution rules after Flutter-only cleanup. |
