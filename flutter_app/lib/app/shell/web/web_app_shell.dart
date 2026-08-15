@@ -7,9 +7,8 @@ import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
 
 /// Web shell độc lập.
 ///
-/// Navigation primitive hiện tại là rail để giữ parity trong P7; composition
-/// web-specific (header, workspace và responsive columns) sẽ được thay tại
-/// shell này, không mượn [TabletAppShell].
+/// Navigation primitive của Web là rail; header, workspace và responsive
+/// columns thuộc shell này, không mượn [TabletAppShell].
 class WebAppShell extends StatelessWidget {
   const WebAppShell({
     super.key,

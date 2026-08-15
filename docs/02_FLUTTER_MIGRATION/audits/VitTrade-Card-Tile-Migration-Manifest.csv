@@ -1,6 +1,7 @@
 cluster,file,suggested_tier,violation_type,status,batch,notes
 01_shared,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,C,-,done,0,-
+01_shared,flutter_app/lib/shared/layout/vit_web_utility_page.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_announcement_banner.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_balance_breakdown_row.dart,C,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_community_rules_link.dart,C,-,done,0,-
@@ -21,6 +22,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 01_shared,flutter_app/lib/shared/widgets/vit_trade_instrument_hero.dart,E,-,done,0,-
 01_shared,flutter_app/lib/shared/widgets/vit_trade_order_list.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.dart,E,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,C,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,D,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,E,-,done,0,-
@@ -449,6 +451,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_verify.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/web/pages/auth_web_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_and_reports_tabs.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_tab.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_settings_tab.dart,D,-,done,0,-

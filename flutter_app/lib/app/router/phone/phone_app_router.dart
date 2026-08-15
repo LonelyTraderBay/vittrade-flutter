@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 /// Router composition root của Phone.
 ///
 /// Các route contract vẫn giữ nguyên; builder đã chọn trực tiếp Phone và
-/// không chạy qua ResponsiveEntry.
+/// không chạy qua bộ điều phối theo chiều rộng.
 GoRouter createPhoneAppRouter({
   String? initialLocation,
   ShellRenderMode shellRenderMode = ShellRenderMode.native,

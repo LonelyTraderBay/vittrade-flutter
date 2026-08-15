@@ -221,9 +221,10 @@ List<RouteBase> tradeComplianceRoutes(
           LiveMarketDataAnalyticsPage(shellRenderMode: shellRenderMode),
     ),
   ];
-  if (surface != AppSurface.tablet) return routes;
+  if (surface != AppSurface.tablet && surface != AppSurface.web) return routes;
   return buildTabletUtilityRouteFamily(
     routes: routes,
+    surface: surface!,
     title: 'Tuân thủ giao dịch',
     subtitle: 'Báo cáo, công bố và kiểm soát tuân thủ trên Tablet',
     description:

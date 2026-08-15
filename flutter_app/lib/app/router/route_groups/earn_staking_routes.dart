@@ -328,9 +328,10 @@ List<RouteBase> earnStakingRoutes(
     ),
     ...earnRiskOutgoingPlaceholders,
   ];
-  if (surface != AppSurface.tablet) return routes;
+  if (surface != AppSurface.tablet && surface != AppSurface.web) return routes;
   return buildTabletUtilityRouteFamily(
     routes: routes,
+    surface: surface!,
     title: 'Earn Staking',
     subtitle: 'Staking, validator và quản trị rủi ro trên Tablet',
     description:

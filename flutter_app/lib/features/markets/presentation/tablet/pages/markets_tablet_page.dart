@@ -23,8 +23,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// persistent two-column dashboard instead of one scrolling phone column:
 /// filter/sort/pair list on the left, market snapshot (top movers, tools,
 /// discover) on the right. Does not touch `market_list_page.dart` — reached
-/// via `MarketsResponsiveEntry` when the shell width is at or above
-/// `AppBreakpoints.tablet`. Third reference implementation for
+/// via `createTabletAppRouter`/surface bootstrap. Third reference implementation for
 /// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md` (see
 /// `home_tablet_page.dart`, `wallet_tablet_page.dart` for the first two).
 class MarketsTabletPage extends ConsumerStatefulWidget {

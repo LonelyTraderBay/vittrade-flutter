@@ -14,9 +14,9 @@ Generated from `flutter_app/tool/design_token_consistency_audit.dart`.
 ```text
 generated=2026-06-12
 status_fail=0
-status_warn=53
+status_warn=54
 status_exception=250
-rows=2934
+rows=2935
 ```
 
 ## CI Baseline Gates
@@ -92,15 +92,15 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/predictions/presentation/pages/social/predictions_global_activity_page.dart` | `3 files` | warn | 2 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/referral/presentation/pages/referral_history_page.dart` | `3 files` | warn | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` | `4 files` | warn | 2 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` | `flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/predictions/presentation/widgets/hub/predictions_home_highlights.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/predictions/presentation/pages/hub/predictions_home_page.dart` | `flutter_app/lib/features/predictions/presentation/widgets/hub/predictions_home_highlights.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/predictions/presentation/widgets/social/predictions_global_activity_feed_widgets.dart` | warn | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/predictions/presentation/pages/social/predictions_global_activity_page.dart` | `flutter_app/lib/features/predictions/presentation/widgets/social/predictions_global_activity_feed_widgets.dart` | warn | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/predictions/presentation/widgets/social/predictions_global_activity_widgets.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/predictions/presentation/pages/social/predictions_global_activity_page.dart` | `flutter_app/lib/features/predictions/presentation/widgets/social/predictions_global_activity_widgets.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_stats_grid.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` | `flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/challenge/arena_mode_detail_hero.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/points/arena_points_ledger_page_sections.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade_core/presentation/widgets/vit_trade_compliance_section.dart` | warn | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -116,8 +116,8 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `flutter_app/lib/features/arena/presentation/pages/points/arena_points_ledger_page.dart` | `flutter_app/lib/features/arena/presentation/widgets/points/arena_points_ledger_page_sections.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` | `flutter_app/lib/features/rewards/presentation/pages/rewards_hub_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` | `flutter_app/lib/features/support/presentation/pages/announcements_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_segmented_choice.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/earn_savings/presentation/widgets/savings/savings_home_hero.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/arena/presentation/pages/points/arena_points_ledger_page.dart` | `3 files` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/news/presentation/pages/news_page.dart` | `3 files` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -134,9 +134,9 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | root_page_bundle_summary | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart` | `5 files` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | root_page_bundle_summary | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | `5 files` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart` | `flutter_app/lib/features/earn_staking/presentation/widgets/staking/staking_earn_hero_tabs.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| root_page | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | `flutter_app/lib/features/support/presentation/pages/help_center_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/p2p_dispute/presentation/widgets/dispute/p2p_insurance_score_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `flutter_app/lib/features/arena/presentation/pages/governance/arena_report_case_page.dart` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_related_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| shared_layout | `` | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| root_page | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | `flutter_app/lib/features/support/presentation/pages/support_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_score_page.dart` | `flutter_app/lib/features/p2p_dispute/presentation/widgets/dispute/p2p_insurance_score_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_summary_timeline.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `flutter_app/lib/features/arena/presentation/pages/governance/arena_report_case_page.dart` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_summary_timeline.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_report_case_system_appeal.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -3073,6 +3073,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_top_chrome.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart` | warn | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| shared_layout | `` | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | warn | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_accent_icon_box.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_accent_pill.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_action_tile_grid.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/portfolio/advanced_charts_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/derivatives_overview_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/comparison_tool_page.dart';
@@ -9,7 +10,6 @@ import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/mark
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/market_correlations_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_depth_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/market_heatmap_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/responsive/markets_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/pages/tools/market_movers_page.dart';
@@ -41,9 +41,11 @@ List<RouteBase> marketsRoutes(
       builder: (_, _) => switch (surface) {
         AppSurface.phone => MarketListPage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const MarketsTabletPage(),
-        // Web surface composition is migrated in P7.
         AppSurface.web => MarketListPage(shellRenderMode: shellRenderMode),
-        null => MarketsResponsiveEntry(shellRenderMode: shellRenderMode),
+        null => ResponsiveSurfacePage(
+          phoneBuilder: (_) => MarketListPage(shellRenderMode: shellRenderMode),
+          tabletBuilder: (_) => const MarketsTabletPage(),
+        ),
       },
     ),
     GoRoute(
@@ -142,11 +144,24 @@ List<RouteBase> marketsRoutes(
           MarketCorrelationsPage(shellRenderMode: shellRenderMode),
     ),
   ];
+  if (surface == AppSurface.web) {
+    return buildTabletUtilityRouteFamily(
+      routes: routes,
+      surface: surface!,
+      title: 'Công cụ thị trường',
+      subtitle: 'Phân tích, nghiên cứu và cảnh báo trên Tablet',
+      description:
+          'Không gian Tablet để theo dõi xu hướng, dữ liệu chuyên sâu, nghiên cứu và công cụ quản trị thị trường.',
+      backPath: AppRoutePaths.markets,
+      icon: Icons.query_stats_outlined,
+    );
+  }
   if (surface != AppSurface.tablet) return routes;
   return [
     routes.first,
     ...buildTabletUtilityRouteFamily(
       routes: routes.skip(1),
+      surface: surface!,
       title: 'Công cụ thị trường',
       subtitle: 'Phân tích, nghiên cứu và cảnh báo trên Tablet',
       description:

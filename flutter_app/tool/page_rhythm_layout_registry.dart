@@ -66,25 +66,13 @@ const gateShellWidgets = {'InternalSurfaceGate'};
 
 /// Route truth-table widget → page file to actually inspect for VPC
 /// compliance — either because the widget isn't under `presentation/pages/`,
-/// or (like `HomeResponsiveEntry`/`WalletResponsiveEntry`) the widget is a
-/// tablet-adaptive dispatcher whose own file has no VitPageContent of its
-/// own (see `Tablet-Adaptive-Standard.md` R1). Each dispatcher picks between
-/// its phone page and tablet page by width; both independently pass their
-/// own file-level page_rhythm_audit, and the phone page is the pre-existing
-/// canonical reference, so it stays the rollup target here.
+/// or a thin composition wrapper whose own file has no VitPageContent of its
+/// own. Surface routers now select Phone, Tablet, or Web directly; this map is
+/// retained only for genuine shared wrappers that still need a concrete page
+/// owner during audit.
 const widgetClassPageOverrides = <String, String>{
-  'HomeResponsiveEntry':
-      'features/home/presentation/phone/pages/home_page.dart',
-  'WalletResponsiveEntry':
-      'features/wallet/presentation/phone/pages/wallet_page.dart',
-  'MarketsResponsiveEntry':
-      'features/markets/presentation/phone/pages/market_list_page.dart',
-  'TradeResponsiveEntry':
-      'features/trade/presentation/phone/pages/trade_page.dart',
   'OrderReceiptPage':
       'features/trade/presentation/phone/pages/order_receipt_page.dart',
-  'ProfileResponsiveEntry':
-      'features/profile/presentation/phone/pages/profile_page.dart',
   'ClientOptUpRequestPage':
       'features/trade_compliance/presentation/pages/governance/client_categorization_opt_up_page.dart',
   'PredictionTournamentDetailPage':
@@ -99,6 +87,12 @@ const widgetClassPageOverrides = <String, String>{
 /// table. Keep the rollup pointed at the active Tablet composition where it
 /// exists; routes without a Tablet page use their canonical Phone page.
 const routeNameToPageOverrides = <String, String>{
+  'AppRouteNames.sc047News': 'shared/layout/vit_web_utility_page.dart',
+  'AppRouteNames.sc397Onboarding': 'shared/layout/vit_web_utility_page.dart',
+  'AppRouteNames.sc417MaintenanceGate':
+      'shared/layout/vit_web_utility_page.dart',
+  'AppRouteNames.sc418ForceUpdateGate':
+      'shared/layout/vit_web_utility_page.dart',
   'AppRouteNames.sc007Home':
       'features/home/presentation/phone/pages/home_page.dart',
   'AppRouteNames.sc008MarketList':
@@ -1157,6 +1151,13 @@ LayoutPattern classifyLayoutPattern({
   required List<String> vpcFiles,
   String? pageSource,
 }) {
+  // Web utility routes own a fixed VitHeader plus a flush scroll body in one
+  // shared composition file. They are intentionally outside feature/page
+  // audit inventory, but still follow the custom-scroll rhythm contract.
+  if (pageSource != null && pageSource.contains('class VitWebUtilityPage')) {
+    return LayoutPattern.customScroll;
+  }
+
   if (pageSource != null && pageSource.contains('VitPageContent(')) {
     return LayoutPattern.directVpc;
   }

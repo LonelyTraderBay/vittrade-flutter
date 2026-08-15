@@ -22,12 +22,13 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> p2pAccountRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.p2pMerchantApply,
       name: AppRouteNames.sc227P2PMerchantApply,
@@ -431,4 +432,17 @@ List<RouteBase> p2pAccountRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Tài khoản P2P',
+      subtitle: 'Thương nhân · KYC · phương thức thanh toán',
+      description:
+          'Không gian Web riêng cho hồ sơ thương nhân, xác minh danh tính và phương thức thanh toán P2P. Điều kiện an toàn và bằng chứng cần được rà soát trước khi ghi nhận.',
+      backPath: AppRoutePaths.p2p,
+      icon: Icons.handshake_outlined,
+    );
+  }
+  return routes;
 }

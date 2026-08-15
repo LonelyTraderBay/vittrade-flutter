@@ -136,9 +136,10 @@ List<RouteBase> tradeBotsRoutes(
           BotApiDocumentationPage(shellRenderMode: shellRenderMode),
     ),
   ];
-  if (surface != AppSurface.tablet) return routes;
+  if (surface != AppSurface.tablet && surface != AppSurface.web) return routes;
   return buildTabletUtilityRouteFamily(
     routes: routes,
+    surface: surface!,
     title: 'Trading Bots',
     subtitle: 'Tự động hóa giao dịch và kiểm soát rủi ro trên Tablet',
     description:

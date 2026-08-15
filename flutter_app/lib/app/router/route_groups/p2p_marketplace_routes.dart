@@ -21,12 +21,13 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> p2pMarketplaceRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.p2pExpress,
       name: AppRouteNames.sc211P2PExpress,
@@ -347,4 +348,17 @@ List<RouteBase> p2pMarketplaceRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Thị trường P2P',
+      subtitle: 'Quảng cáo · lệnh · cấp độ giao dịch',
+      description:
+          'Không gian Web riêng cho thị trường P2P, quảng cáo và theo dõi lệnh. Số tiền, phí, giới hạn và điều kiện đối tác phải được kiểm tra trước khi tiếp tục.',
+      backPath: AppRoutePaths.p2p,
+      icon: Icons.storefront_outlined,
+    );
+  }
+  return routes;
 }

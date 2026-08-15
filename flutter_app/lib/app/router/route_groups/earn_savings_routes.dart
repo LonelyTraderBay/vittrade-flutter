@@ -171,9 +171,10 @@ List<RouteBase> earnSavingsRoutes(
       builder: (_, _) => SavingsReceiptPage(shellRenderMode: shellRenderMode),
     ),
   ];
-  if (surface != AppSurface.tablet) return routes;
+  if (surface != AppSurface.tablet && surface != AppSurface.web) return routes;
   return buildTabletUtilityRouteFamily(
     routes: routes,
+    surface: surface!,
     title: 'Earn Savings',
     subtitle: 'Tích lũy linh hoạt và mục tiêu tài chính trên Tablet',
     description:

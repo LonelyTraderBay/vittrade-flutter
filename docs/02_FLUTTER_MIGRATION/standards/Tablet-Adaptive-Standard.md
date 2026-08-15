@@ -1,8 +1,8 @@
 # Tablet-Adaptive Standard (mandatory for any screen with a dedicated tablet layout)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · `AGENTS.md` UI Rules · Reference screen: Home (SC-007)
-**Enforcement:** No dedicated audit tool — R4-R8's scaffold is now implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`), so a page using it satisfies those rules by construction rather than by manual review. `page_rhythm_audit.dart`'s `_hasTradeRhythmScaffold` allowlist recognizes the shared widget so structural page-rhythm coverage isn't lost. What's still manually verified per page: R1-R3 (dispatcher wiring, phone reference untouched, threshold choice) and R9 (header promotion) — plus (a) the page's own widget test at/above its two-column threshold, (b) the existing whole-repo structural audits (page rhythm, card tile, page content width), which already scan every file under `lib/features/**/presentation` regardless of phone/tablet.
-**Reference screens:** all 5 app root tabs now have a dedicated tablet page, all delegating their two-column body to `VitTwoColumnTabletDashboard`: `home_responsive_entry.dart` + `home_tablet_page.dart` (first, R1-R9 originally established here); `wallet_responsive_entry.dart` + `wallet_tablet_page.dart` (confirmed R9's header-promotion pattern generalizes); `markets_responsive_entry.dart` + `markets_tablet_page.dart` (confirmed a phone-only content gate, like Markets' `showMarketSummary`, can be safely dropped in the tablet secondary column when the gated widgets' own data doesn't depend on the filter state; see R7); `trade_responsive_entry.dart` + `trade_tablet_page.dart` (confirmed a financial-safety column-placement invariant — the risk panel staying in the primary column — survives being expressed as plain child-list ordering, no special-casing needed in the shared widget); `profile_responsive_entry.dart` + `profile_tablet_page.dart` (confirmed a nested inner screen-state switch upstream of the two-column body doesn't need to interact with the shared widget at all). After all 5 confirmed the identical scaffold, it was extracted into `VitTwoColumnTabletDashboard` (own test: `test/shared/layout/vit_two_column_tablet_dashboard_test.dart`) and all 5 pages migrated onto it — see "Upgrade path" below.
+**Enforcement:** No dedicated audit tool — R4-R8's scaffold is now implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`), so a page using it satisfies those rules by construction rather than by manual review. `page_rhythm_audit.dart`'s `_hasTradeRhythmScaffold` allowlist recognizes the shared widget so structural page-rhythm coverage isn't lost. What's still manually verified per page: R1-R3 (explicit Tablet route wiring, phone reference untouched, threshold choice) and R9 (header promotion) — plus (a) the page's own widget test at/above its two-column threshold, (b) the existing whole-repo structural audits (page rhythm, card tile, page content width), which already scan every file under `lib/features/**/presentation` regardless of phone/tablet.
+**Reference screens:** all 5 app root tabs now have a dedicated tablet page, all delegating their two-column body to `VitTwoColumnTabletDashboard`: `home_tablet_page.dart` (first, R1-R9 originally established here); `wallet_tablet_page.dart` (confirmed R9's header-promotion pattern generalizes); `markets_tablet_page.dart` (confirmed a phone-only content gate, like Markets' `showMarketSummary`, can be safely dropped in the tablet secondary column when the gated widgets' own data doesn't depend on the filter state; see R7); `trade_tablet_page.dart` (confirmed a financial-safety column-placement invariant — the risk panel staying in the primary column — survives being expressed as plain child-list ordering, no special-casing needed in the shared widget); `profile_tablet_page.dart` (confirmed a nested inner screen-state switch upstream of the two-column body doesn't need to interact with the shared widget at all). After all 5 confirmed the identical scaffold, it was extracted into `VitTwoColumnTabletDashboard` (own test: `test/shared/layout/vit_two_column_tablet_dashboard_test.dart`) and all 5 pages migrated onto it — see "Upgrade path" below.
 
 ## Scope
 
@@ -27,16 +27,19 @@ that turned out unnecessary is not.
 ## Invariant
 
 ```text
-Same route, same data provider, same SC-NNN identifier as the phone page.
-Only the WIDGET BUILT at that route changes, dispatched by width via a
-LayoutBuilder-based responsive entry widget — never a second route/path.
+Same route contract, same data provider, same SC-NNN identifier as the phone
+page. The explicit Tablet router builds the Tablet widget directly — never a
+second route/path and never a Phone/Tablet conditional inside either page.
+The legacy `createAppRouter()` facade may use the composition-root
+`ResponsiveSurfacePage` for old responsive callers; new surface routers never
+use that compatibility dispatcher.
 ```
 
 ## Mandatory rules
 
 | # | Rule |
 | --- | --- |
-| R1 | **Dispatcher, not a new route.** `<Feature>ResponsiveEntry` (`LayoutBuilder` + `AppBreakpoints.isTablet(constraints.maxWidth)` → `<Feature>TabletPage`, else the phone page unchanged) wired at the *existing* route builder. Register the dispatcher class in `tool/page_rhythm_layout_registry.dart`'s `widgetClassPageOverrides` map, pointing at the phone reference file, so structural audits keep inspecting real content instead of the thin dispatcher — and in `top_header_visual_archetype_audit.dart`'s `_noHeaderDecisions` map (the dispatcher has no header of its own). See `HomeResponsiveEntry`. |
+| R1 | **Explicit surface route, not a new path.** `AppSurface.tablet` in the existing route group builds `<Feature>TabletPage` directly; `AppSurface.phone` builds the phone page directly. Keep any legacy width dispatcher only in `app/bootstrap/responsive_surface_page.dart` for the compatibility `createAppRouter()` facade. |
 | R2 | **Never touch the phone reference.** Don't edit the phone page or its `part` family to build a tablet variant. Reuse its already-public presentation widgets directly. For a section that's `private` inside another page's part family, write a new public tablet-specific widget instead — naming `<feature>_<section>_panel.dart` (see `home_market_watchlist_panel.dart`, `home_discovery_panel.dart`). |
 | R3 | **Verify the threshold empirically, don't invent a new global breakpoint tier.** Below some min-width, fall back to a single column (still tablet shell, still nav rail). Start from `TabletDashboardWidths.twoColumnMinWidth` (`lib/app/theme/tablet_dashboard_widths.dart`) — all 5 existing dashboards confirmed 900 by pumping real widgets at candidate widths, not guessing — but re-verify against your own page's content rather than assuming it holds; if it doesn't, keep a page-local `static const` override instead of editing the shared value (see that file's own doc comment). Never invent a second `AppBreakpoints` tier for one screen. |
 | R4 | **Independent-scroll columns**: primary is `Expanded`, secondary is a fixed-width `SizedBox` (not `Expanded` — see R5), each wrapping its own `SingleChildScrollView` — never one `SingleChildScrollView` wrapping the whole `Row`. A `Row` of unbounded natural height inside a single outer scrollview breaks once any child needs a bounded height; two independently height-bounded scrolling columns is the supported shape. |
@@ -51,11 +54,11 @@ R4-R8 are implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/
 ## Step checklist (new tablet page)
 
 1. Confirm the screen qualifies — see "When to build a dedicated tablet page."
-2. Add `<Feature>ResponsiveEntry` + wire it at the existing route (R1).
+2. Add `<Feature>TabletPage` + wire it directly in the existing `AppSurface.tablet` route branch (R1).
 3. Build `<Feature>TabletPage`, reusing phone widgets (R2); write new public panel widgets only for sections that are private to the phone page's part family.
 4. Pick the two-column threshold empirically (R3, R8) — re-verify `VitTwoColumnTabletDashboard`'s `TabletDashboardWidths` defaults hold for this page's content; pass constructor overrides if they don't rather than editing the shared constants.
 5. Build `primaryChildren`/`secondaryChildren` lists from the page's own content, then `return VitTwoColumnTabletDashboard(primaryChildren: ..., secondaryChildren: ...)` — R4-R8 satisfied automatically. Header promoted to a fixed `Column` sibling above it (R9, still page-specific — the shared widget has no opinion on headers).
-6. Register the dispatcher in `page_rhythm_layout_registry.dart` and `top_header_visual_archetype_audit.dart` (R1).
+6. Register any route/page override needed by the structural audits; do not add a feature-specific responsive dispatcher (R1).
 7. Add a widget test that pumps at the page's own two-column width and asserts `tester.takeException()` is `null` (the overflow guard) plus both columns' key content is present — the phone-width tests in the same file do **not** exercise this path. The shared widget's own generic mechanics (fallback threshold, `Row` shape, `VitCard` framing) already have dedicated coverage in `test/shared/layout/vit_two_column_tablet_dashboard_test.dart` — the page-level test only needs to prove *this page's* content lands in the right column, not re-verify the scaffold itself.
 8. Run the existing check suite (§5 of `Flutter-Design-System-Reference.md`) — a new tablet file is scanned by the same page-rhythm/card-tile/content-width audits as any phone file; no separate command exists yet.
 

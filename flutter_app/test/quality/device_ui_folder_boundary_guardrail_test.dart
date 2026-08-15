@@ -7,12 +7,11 @@ void main() {
     const requiredFiles = <String>[
       'lib/features/home/presentation/phone/pages/home_page.dart',
       'lib/features/home/presentation/tablet/pages/home_tablet_page.dart',
-      'lib/features/home/presentation/pages/responsive/home_responsive_entry.dart',
+      'lib/features/home/presentation/web/pages/home_web_page.dart',
       'lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart',
       'lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart',
       'lib/features/markets/presentation/phone/pages/market_list_page.dart',
       'lib/features/markets/presentation/tablet/pages/markets_tablet_page.dart',
-      'lib/features/markets/presentation/pages/responsive/markets_responsive_entry.dart',
       'lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart',
       'lib/features/wallet/presentation/phone/pages/wallet_page.dart',
       'lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart',
@@ -43,13 +42,11 @@ void main() {
       'lib/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart',
       'lib/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart',
       'lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
-      'lib/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart',
       'lib/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart',
       'lib/features/trade/presentation/phone/pages/trade_page.dart',
       'lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart',
       'lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart',
       'lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
-      'lib/features/trade/presentation/pages/responsive/trade_responsive_entry.dart',
       'lib/features/trade/presentation/phone/pages/trade_page_state.dart',
       'lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart',
       'lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart',
@@ -60,7 +57,6 @@ void main() {
       'lib/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
       'lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
       'lib/shared/layout/vit_tablet_utility_page.dart',
-      'lib/features/profile/presentation/pages/responsive/profile_responsive_entry.dart',
       'lib/features/profile/presentation/phone/pages/profile_home_hero.dart',
       'lib/features/home/presentation/widgets/phone/home_header.dart',
       'lib/features/markets/presentation/widgets/phone/market_list_header.dart',
@@ -82,6 +78,8 @@ void main() {
       'lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart',
       'lib/features/auth/presentation/tablet/pages/forgot_password_tablet_page.dart',
       'lib/features/auth/presentation/tablet/pages/reset_password_tablet_page.dart',
+      'lib/features/auth/presentation/web/pages/auth_web_page.dart',
+      'lib/shared/layout/vit_web_utility_page.dart',
     ];
 
     final missing = requiredFiles
@@ -99,19 +97,14 @@ void main() {
     const legacyFiles = <String>[
       'lib/features/home/presentation/pages/home_page.dart',
       'lib/features/home/presentation/pages/home_tablet_page.dart',
-      'lib/features/home/presentation/pages/home_responsive_entry.dart',
       'lib/features/markets/presentation/pages/hub/market_list_page.dart',
       'lib/features/markets/presentation/pages/hub/markets_tablet_page.dart',
-      'lib/features/markets/presentation/pages/hub/markets_responsive_entry.dart',
       'lib/features/wallet/presentation/pages/hub/wallet_page.dart',
       'lib/features/wallet/presentation/pages/hub/wallet_tablet_page.dart',
-      'lib/features/wallet/presentation/pages/hub/wallet_responsive_entry.dart',
       'lib/features/trade/presentation/pages/hub/trade_page.dart',
       'lib/features/trade/presentation/pages/hub/trade_tablet_page.dart',
-      'lib/features/trade/presentation/pages/hub/trade_responsive_entry.dart',
       'lib/features/profile/presentation/pages/profile_page.dart',
       'lib/features/profile/presentation/pages/profile_tablet_page.dart',
-      'lib/features/profile/presentation/pages/profile_responsive_entry.dart',
       'lib/features/home/presentation/pages/phone/home_page.dart',
       'lib/features/home/presentation/pages/tablet/home_tablet_page.dart',
       'lib/features/markets/presentation/pages/phone/market_list_page.dart',
@@ -258,6 +251,38 @@ void main() {
             violations.add(
               '${file.path}: import UI ngoài Phone "$forbiddenImport"',
             );
+          }
+        }
+      }
+    }
+
+    expect(violations, isEmpty, reason: violations.join('\n'));
+  });
+
+  test('web UI never imports phone or tablet feature UI', () {
+    const features = <String>['home', 'auth'];
+    final violations = <String>[];
+
+    for (final feature in features) {
+      final root = Directory('lib/features/$feature/presentation/web');
+      if (!root.existsSync()) continue;
+      final files = root
+          .listSync(recursive: true)
+          .whereType<File>()
+          .where((file) => file.path.endsWith('.dart'));
+      for (final file in files) {
+        final content = file.readAsStringSync();
+        const forbidden = <String>[
+          'presentation/phone/',
+          'presentation/tablet/',
+          'presentation/pages/phone/',
+          'presentation/pages/tablet/',
+          'presentation/pages/hub/',
+          'presentation/widgets/hub/',
+        ];
+        for (final token in forbidden) {
+          if (content.contains(token)) {
+            violations.add('${file.path}: import UI ngoài Web "$token"');
           }
         }
       }

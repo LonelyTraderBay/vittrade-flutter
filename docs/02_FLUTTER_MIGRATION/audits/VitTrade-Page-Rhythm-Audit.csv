@@ -96,6 +96,7 @@ auth,flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart,f
 auth,flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart,form,form,0,,0,,0,0,pass
 auth,flutter_app/lib/features/auth/presentation/phone/pages/two_fa_setup_page.dart,form,form,0,,0,,0,0,pass
 auth,flutter_app/lib/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart,form,form,0,,0,,1,0,pass
+auth,flutter_app/lib/features/auth/presentation/web/pages/auth_web_page.dart,form,form,0,,0,,0,0,pass
 cross_module,flutter_app/lib/features/cross_module/presentation/widgets/cross_module_analytics_cards.dart,standard,,0,,0,,0,0,pass
 cross_module,flutter_app/lib/features/cross_module/presentation/widgets/cross_module_analytics_common.dart,standard,,0,,0,,0,0,pass
 cross_module,flutter_app/lib/features/cross_module/presentation/widgets/cross_module_analytics_painters.dart,standard,,0,,0,,0,0,pass
@@ -493,6 +494,7 @@ enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widget
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,standard,,0,,0,,0,0,pass
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_references.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/phone/pages/home_page_state.dart,compact,compact,0,,0,,0,0,pass
+home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,compact,relaxed,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_formatters.dart,standard,,0,,0,,0,0,pass

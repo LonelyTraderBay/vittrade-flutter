@@ -211,9 +211,10 @@ List<RouteBase> tradeCopyRoutes(
       ),
     ),
   ];
-  if (surface != AppSurface.tablet) return routes;
+  if (surface != AppSurface.tablet && surface != AppSurface.web) return routes;
   return buildTabletUtilityRouteFamily(
     routes: routes,
+    surface: surface!,
     title: 'Copy Trading',
     subtitle: 'Theo dõi nhà giao dịch và quản trị sao chép trên Tablet',
     description:

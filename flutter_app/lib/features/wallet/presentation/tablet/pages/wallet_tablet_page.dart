@@ -25,8 +25,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// [WalletPage], but laid out as a persistent two-column dashboard instead
 /// of one scrolling phone column: balance + assets on the left, tools + DCA
 /// on the right. Does not touch `wallet_page.dart` — reached via
-/// `WalletResponsiveEntry` when the shell width is at or above
-/// `AppBreakpoints.tablet`. Second reference implementation for
+/// `createTabletAppRouter`/surface bootstrap. Second reference implementation for
 /// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`
 /// (see `home_tablet_page.dart` for the first).
 class WalletTabletPage extends ConsumerStatefulWidget {

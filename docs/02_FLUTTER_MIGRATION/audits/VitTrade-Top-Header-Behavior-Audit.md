@@ -4,8 +4,8 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=167
-auto_hide_header=105
+fixed_vit_header_remaining=169
+auto_hide_header=103
 custom_scroll_header=1
 no_top_header=25
 unresolved=114
@@ -21,8 +21,9 @@ unresolved=114
 | trade_copy | 22 |
 | markets | 21 |
 | trade_bots | 19 |
+| auth | 3 |
 | trade | 3 |
-| enterprise_states | 2 |
+| home | 1 |
 
 ## Route Header Inventory
 
@@ -64,6 +65,9 @@ unresolved=114
 | auth | `AppRoutePaths.authOtp` | `OTPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart` |
 | auth | `AppRoutePaths.authRegister` | `RegisterPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart` |
 | auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart` |
+| auth | `AppRoutePaths.forceUpdateGate` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
+| auth | `AppRoutePaths.maintenanceGate` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
+| auth | `AppRoutePaths.onboarding` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
 | dca | `'/dca/rebalance/:configId/edit'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | dca | `'/dca/rebalance/:configId/history'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | dca | `AppRoutePaths.dca` | `unresolved` | unresolved | unresolved | `unresolved` |
@@ -147,9 +151,8 @@ unresolved=114
 | earn_staking | `AppRoutePaths.earnVoting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | earn_staking | `AppRoutePaths.earnVotingProposalRoute` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | earn_staking | `AppRoutePaths.earnWebhooks` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| enterprise_states | `AppRoutePaths.forceUpdateGate` | `ForceUpdateGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/force_update_gate_page.dart` |
-| enterprise_states | `AppRoutePaths.maintenanceGate` | `MaintenanceGatePage` | fixed_vit_header | vit_header_default_title_only | `flutter_app/lib/features/enterprise_states/presentation/pages/maintenance_gate_page.dart` |
 | home | `AppRoutePaths.home` | `HomePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/home/presentation/phone/pages/home_page.dart` |
+| home | `AppRoutePaths.news` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
 | launchpad | `AppRoutePaths.launchpad` | `unresolved` | unresolved | unresolved | `unresolved` |
 | launchpad | `AppRoutePaths.launchpadAbiDiff` | `unresolved` | unresolved | unresolved | `unresolved` |
 | launchpad | `AppRoutePaths.launchpadAddressBook` | `unresolved` | unresolved | unresolved | `unresolved` |
@@ -196,8 +199,6 @@ unresolved=114
 | markets | `AppRoutePaths.marketsSocialSentiment` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | markets | `AppRoutePaths.marketsUnlocks` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | markets | `AppRoutePaths.marketsWatchlist` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| news | `AppRoutePaths.news` | `NewsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/news/presentation/pages/news_page.dart` |
-| onboarding | `AppRoutePaths.onboarding` | `OnboardingFlowPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/onboarding/presentation/pages/onboarding_flow_page.dart` |
 | p2p_account | `'/p2p/merchant/:merchantId'` | `P2PMerchantProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/merchant/p2p_merchant_profile_page.dart` |
 | p2p_account | `'/p2p/payment-method/ownership/:methodId'` | `P2PPaymentMethodOwnershipPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_ownership_page.dart` |
 | p2p_account | `'/p2p/payment-method/verification/:methodId'` | `P2PPaymentMethodVerificationPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` |

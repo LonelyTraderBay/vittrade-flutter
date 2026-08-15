@@ -147,9 +147,11 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
           usesTabletUtilityFamily && path != 'AppRoutePaths.markets'
           ? 'VitTabletUtilityPage'
           : _extractPageClass(block);
-      final page = pageClass == 'VitTabletUtilityPage'
-          ? _tabletUtilityPageGroup(appRoot, routeGroup)
-          : pageIndex.find(pageClass);
+      final page = switch (pageClass) {
+        'VitTabletUtilityPage' => _tabletUtilityPageGroup(appRoot, routeGroup),
+        'VitWebUtilityPage' => _webUtilityPageGroup(appRoot, routeGroup),
+        _ => pageIndex.find(pageClass),
+      };
 
       entries.add(
         HeaderRouteEntry(
@@ -182,6 +184,21 @@ PageGroup? _tabletUtilityPageGroup(Directory appRoot, String routeGroup) {
   final source = file.readAsStringSync();
   return PageGroup(
     file: 'flutter_app/lib/shared/layout/vit_tablet_utility_page.dart',
+    feature: _featureFromRouteGroup(routeGroup),
+    source: source,
+    classification: _classifyHeaderBehavior(source, source),
+    variant: _classifyHeaderVariant(source),
+  );
+}
+
+PageGroup? _webUtilityPageGroup(Directory appRoot, String routeGroup) {
+  final file = File(
+    '${appRoot.path}/lib/shared/layout/vit_web_utility_page.dart',
+  );
+  if (!file.existsSync()) return null;
+  final source = file.readAsStringSync();
+  return PageGroup(
+    file: 'flutter_app/lib/shared/layout/vit_web_utility_page.dart',
     feature: _featureFromRouteGroup(routeGroup),
     source: source,
     classification: _classifyHeaderBehavior(source, source),

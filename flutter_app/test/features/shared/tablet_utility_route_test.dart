@@ -5,10 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/features/auth/presentation/web/pages/auth_web_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/web/pages/home_web_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_web_utility_page.dart';
 
 void main() {
-  Future<void> pumpTabletRoute(WidgetTester tester, String location) async {
+  Future<void> pumpSurfaceRoute(
+    WidgetTester tester,
+    String location,
+    AppSurface surface,
+  ) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(1280, 900);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -19,12 +26,20 @@ void main() {
         child: VitTradeApp(
           routerConfig: createAppRouter(
             initialLocation: location,
-            surface: AppSurface.tablet,
+            surface: surface,
           ),
         ),
       ),
     );
     await tester.pumpAndSettle();
+  }
+
+  Future<void> pumpTabletRoute(WidgetTester tester, String location) {
+    return pumpSurfaceRoute(tester, location, AppSurface.tablet);
+  }
+
+  Future<void> pumpWebRoute(WidgetTester tester, String location) {
+    return pumpSurfaceRoute(tester, location, AppSurface.web);
   }
 
   testWidgets('SC-294 Tablet uses the independent support composition', (
@@ -156,5 +171,78 @@ void main() {
 
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Công cụ thị trường'), findsOneWidget);
+  });
+
+  testWidgets('Web Wallet uses an independent Web composition', (tester) async {
+    await pumpWebRoute(tester, AppRoutePaths.wallet);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Ví và tài sản'), findsOneWidget);
+  });
+
+  testWidgets('Web Trade uses an independent Web composition', (tester) async {
+    await pumpWebRoute(tester, AppRoutePaths.trade);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Thị trường · lệnh · quản trị rủi ro'), findsOneWidget);
+  });
+
+  testWidgets('Web Profile uses an independent Web composition', (
+    tester,
+  ) async {
+    await pumpWebRoute(tester, AppRoutePaths.profile);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Tài khoản'), findsOneWidget);
+  });
+
+  testWidgets('Web P2P account uses an independent Web composition', (
+    tester,
+  ) async {
+    await pumpWebRoute(tester, AppRoutePaths.p2pMerchantApply);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Tài khoản P2P'), findsOneWidget);
+  });
+
+  testWidgets('Web P2P security uses an independent Web composition', (
+    tester,
+  ) async {
+    await pumpWebRoute(tester, AppRoutePaths.p2pFraudPrevention);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Bảo mật và tuân thủ P2P'), findsOneWidget);
+  });
+
+  testWidgets('Web Home uses its own dashboard composition', (tester) async {
+    await pumpWebRoute(tester, AppRoutePaths.home);
+
+    expect(find.byType(HomeWebPage), findsOneWidget);
+    expect(find.text('Tổng quan hôm nay'), findsOneWidget);
+  });
+
+  testWidgets('Web Login uses its own authentication composition', (
+    tester,
+  ) async {
+    await pumpWebRoute(tester, AppRoutePaths.authLogin);
+
+    expect(find.byType(AuthWebPage), findsOneWidget);
+    expect(find.text('Tài khoản · xác thực an toàn'), findsOneWidget);
+  });
+
+  testWidgets('Web News uses an independent Web composition', (tester) async {
+    await pumpWebRoute(tester, AppRoutePaths.news);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Tin tức thị trường'), findsOneWidget);
+  });
+
+  testWidgets('Web onboarding uses an independent Web composition', (
+    tester,
+  ) async {
+    await pumpWebRoute(tester, AppRoutePaths.onboarding);
+
+    expect(find.byType(VitWebUtilityPage), findsOneWidget);
+    expect(find.text('Bắt đầu với VitTrade'), findsOneWidget);
   });
 }

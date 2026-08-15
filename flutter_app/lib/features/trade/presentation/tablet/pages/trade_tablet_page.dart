@@ -32,9 +32,8 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// [tradeScreenProvider] data and the same public Trade widgets as
 /// [TradePage], but laid out as a persistent two-column dashboard instead
 /// of one scrolling phone column. Does not touch `trade_page.dart`/
-/// `trade_page_state.dart` — reached via `TradeResponsiveEntry` when the
-/// shell width is at or above `AppBreakpoints.tablet`. Fourth reference
-/// implementation for
+/// `trade_page_state.dart` — reached via `createTabletAppRouter`/surface
+/// bootstrap. Fourth reference implementation for
 /// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
 ///
 /// Deliberate financial-safety column grouping (not just a generic content

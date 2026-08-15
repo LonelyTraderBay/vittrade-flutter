@@ -30,12 +30,13 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> p2pSecurityRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.p2pSecurityCenter,
       name: AppRouteNames.sc253P2PSecurityCenter,
@@ -629,4 +630,17 @@ List<RouteBase> p2pSecurityRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Bảo mật và tuân thủ P2P',
+      subtitle: 'Bảo mật · AML · giới hạn · báo cáo',
+      description:
+          'Không gian Web riêng cho bảo mật, phòng chống gian lận và tuân thủ P2P. Dữ liệu nhạy cảm, hạn mức và bằng chứng cần được rà soát trước khi cập nhật.',
+      backPath: AppRoutePaths.p2p,
+      icon: Icons.shield_outlined,
+    );
+  }
+  return routes;
 }

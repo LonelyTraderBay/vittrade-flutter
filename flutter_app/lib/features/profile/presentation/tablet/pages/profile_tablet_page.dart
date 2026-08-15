@@ -34,8 +34,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// the primary column; VIP progress, Prediction/Arena summary and product
 /// shortcuts framed as a sidebar in the secondary column. Does not touch
 /// `profile_page.dart` or its `part` family — reached via
-/// `ProfileResponsiveEntry` when the shell width is at or above
-/// `AppBreakpoints.tablet`. Fifth reference implementation for
+/// `createTabletAppRouter`/surface bootstrap. Fifth reference implementation for
 /// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
 class ProfileTabletPage extends ConsumerStatefulWidget {
   const ProfileTabletPage({super.key});

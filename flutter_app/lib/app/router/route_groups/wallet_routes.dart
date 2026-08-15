@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_add_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
@@ -17,7 +19,6 @@ import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/trans
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_gas_optimizer_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_health_score_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_multi_manager_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/responsive/wallet_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart';
@@ -45,21 +46,24 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> walletRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.wallet,
       name: AppRouteNames.sc135Wallet,
       builder: (_, _) => switch (surface) {
         AppSurface.phone => WalletPage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const WalletTabletPage(),
-        // Web surface composition is migrated in P7.
         AppSurface.web => WalletPage(shellRenderMode: shellRenderMode),
-        null => WalletResponsiveEntry(shellRenderMode: shellRenderMode),
+        null => ResponsiveSurfacePage(
+          phoneBuilder: (_) => WalletPage(shellRenderMode: shellRenderMode),
+          tabletBuilder: (_) => const WalletTabletPage(),
+        ),
       },
     ),
     GoRoute(
@@ -313,4 +317,17 @@ List<RouteBase> walletRoutes(
     ),
     ...walletOutgoingPlaceholders,
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Ví và tài sản',
+      subtitle: 'Tài sản · lịch sử · công cụ quản lý',
+      description:
+          'Không gian Web riêng cho quản lý tài sản, lịch sử giao dịch và công cụ ví. Các điều kiện phí, hạn mức và xác nhận vẫn được rà soát trước khi thực thi.',
+      backPath: AppRoutePaths.home,
+      icon: Icons.account_balance_wallet_outlined,
+    );
+  }
+  return routes;
 }

@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/activity_log_page.dart';
@@ -8,7 +10,6 @@ import 'package:vit_trade_flutter/features/profile/presentation/pages/api_manage
 import 'package:vit_trade_flutter/features/profile/presentation/pages/api_key_create_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/device_management_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/pages/kyc_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/pages/responsive/profile_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
@@ -20,21 +21,24 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> profileRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.profile,
       name: AppRouteNames.sc156Profile,
       builder: (_, _) => switch (surface) {
         AppSurface.phone => ProfilePage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const ProfileTabletPage(),
-        // Web surface composition is migrated in P7.
         AppSurface.web => ProfilePage(shellRenderMode: shellRenderMode),
-        null => ProfileResponsiveEntry(shellRenderMode: shellRenderMode),
+        null => ResponsiveSurfacePage(
+          phoneBuilder: (_) => ProfilePage(shellRenderMode: shellRenderMode),
+          tabletBuilder: (_) => const ProfileTabletPage(),
+        ),
       },
     ),
     GoRoute(
@@ -416,6 +420,19 @@ List<RouteBase> profileRoutes(
     ),
     ...profileOutgoingPlaceholders,
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Tài khoản',
+      subtitle: 'Hồ sơ · bảo mật · cài đặt',
+      description:
+          'Không gian Web riêng cho hồ sơ, bảo mật, thiết bị và quyền truy cập tài khoản. Các thay đổi nhạy cảm luôn yêu cầu rà soát trước khi xác nhận.',
+      backPath: AppRoutePaths.home,
+      icon: Icons.manage_accounts_outlined,
+    );
+  }
+  return routes;
 }
 
 ProfileTabletUtilityPage _profileTabletUtility({

@@ -37,14 +37,14 @@ hard_coded_offline_banner=0
 
 | Screen level | Routes |
 | --- | ---: |
-| L2_detail | 188 |
+| L2_detail | 185 |
 | L2_utilityDetail | 71 |
 | L3_transactionFlow | 55 |
 | L2_entityDetail | 40 |
 | L1_utilityHub | 23 |
 | L2_sectionHub | 13 |
+| L1_authFlow | 8 |
 | L1_productModuleHub | 7 |
-| L1_authFlow | 5 |
 | L1_instrumentWorkspace | 4 |
 | L1_primaryTabRoot | 3 |
 | L0_authEntry | 1 |
@@ -114,6 +114,9 @@ hard_coded_offline_banner=0
 | auth | `AppRoutePaths.authOtp` | `OTPPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart` |
 | auth | `AppRoutePaths.authRegister` | `RegisterPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart` |
 | auth | `AppRoutePaths.authResetPassword` | `ResetPasswordPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart` |
+| auth | `AppRoutePaths.forceUpdateGate` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
+| auth | `AppRoutePaths.maintenanceGate` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
+| auth | `AppRoutePaths.onboarding` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_authFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
 | dca | `'/dca/rebalance/:configId/edit'` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | dca | `'/dca/rebalance/:configId/history'` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | dca | `AppRoutePaths.dca` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | rootModule | L1_productModuleHub | rootModule | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
@@ -197,9 +200,8 @@ hard_coded_offline_banner=0
 | earn_staking | `AppRoutePaths.earnVoting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | earn_staking | `AppRoutePaths.earnVotingProposalRoute` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | earn_staking | `AppRoutePaths.earnWebhooks` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| enterprise_states | `AppRoutePaths.forceUpdateGate` | `ForceUpdateGatePage` | fixed_vit_header | vit_header_default_title_only | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/enterprise_states/presentation/pages/force_update_gate_page.dart` |
-| enterprise_states | `AppRoutePaths.maintenanceGate` | `MaintenanceGatePage` | fixed_vit_header | vit_header_default_title_only | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/enterprise_states/presentation/pages/maintenance_gate_page.dart` |
 | home | `AppRoutePaths.home` | `HomePage` | auto_hide_header | shared_auto_hide_scaffold | rootBrand | L0_homeRoot | rootBrand | no | no | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/home/presentation/phone/pages/home_page.dart` |
+| home | `AppRoutePaths.news` | `VitWebUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` |
 | launchpad | `AppRoutePaths.launchpad` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | rootModule | L1_productModuleHub | rootModule | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | launchpad | `AppRoutePaths.launchpadAbiDiff` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | launchpad | `AppRoutePaths.launchpadAddressBook` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
@@ -246,8 +248,6 @@ hard_coded_offline_banner=0
 | markets | `AppRoutePaths.marketsSocialSentiment` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | markets | `AppRoutePaths.marketsUnlocks` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | markets | `AppRoutePaths.marketsWatchlist` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| news | `AppRoutePaths.news` | `NewsPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L1_utilityHub | detail | no | yes | no | `-` | - | content | state_driven | offlineWithCache | 0 | - | - | `flutter_app/lib/features/news/presentation/pages/news_page.dart` |
-| onboarding | `AppRoutePaths.onboarding` | `OnboardingFlowPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | content | state_driven | offlineNoCache | 0 | - | - | `flutter_app/lib/features/onboarding/presentation/pages/onboarding_flow_page.dart` |
 | p2p_account | `'/p2p/merchant/:merchantId'` | `P2PMerchantProfilePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/p2p_account/presentation/pages/merchant/p2p_merchant_profile_page.dart` |
 | p2p_account | `'/p2p/payment-method/ownership/:methodId'` | `P2PPaymentMethodOwnershipPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_ownership_page.dart` |
 | p2p_account | `'/p2p/payment-method/verification/:methodId'` | `P2PPaymentMethodVerificationPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_verification_page.dart` |

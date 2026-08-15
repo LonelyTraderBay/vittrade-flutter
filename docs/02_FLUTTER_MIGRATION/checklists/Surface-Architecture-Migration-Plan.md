@@ -26,25 +26,29 @@ Tài liệu theo dõi thực thi [ADR-013](../../05_ARCHITECTURE/decisions/ADR-0
 | Phase | Mục tiêu | Trạng thái |
 | --- | --- | --- |
 | P0 | Baseline, ADR, route register | Hoàn tất |
-| P1 | Foundation và import boundary | Chưa bắt đầu |
-| P2 | Route contract/parity | Chưa bắt đầu |
-| P3 | Shell/router độc lập | Chưa bắt đầu |
-| P4 | Auth + 5 root tabs + receipt | Chưa bắt đầu |
-| P5 | Trade/Wallet/P2P/Security high-risk | Chưa bắt đầu |
-| P6 | Các feature route còn lại | Chưa bắt đầu |
-| P7 | Web completion | Chưa bắt đầu |
-| P8 | Xóa legacy | Chưa bắt đầu |
-| P9 | Release gate và bàn giao | Chưa bắt đầu |
+| P1 | Foundation và import boundary | Hoàn tất |
+| P2 | Route contract/parity | Hoàn tất |
+| P3 | Shell/router độc lập | Hoàn tất |
+| P4 | Auth + 5 root tabs + receipt | Hoàn tất |
+| P5 | Trade/Wallet/P2P/Security high-risk | Hoàn tất |
+| P6 | Các feature route còn lại | Hoàn tất |
+| P7 | Web completion | Hoàn tất |
+| P8 | Xóa legacy | Hoàn tất |
+| P9 | Release gate và bàn giao | Hoàn tất |
 
-## Evidence P0
+## Evidence thực thi đến P8
 
-- `flutter analyze`: PASS.
-- `dart run tool/route_coverage_audit.dart --check`: PASS.
-- `dart run tool/navigation_edge_audit.dart --check`: PASS.
-- `flutter test test/quality --reporter=compact --concurrency=4`: PASS (233 bài).
-- `flutter test test/app/router test/shared --reporter=compact --concurrency=4`: PASS (165 bài).
-- `surface_architecture_boundary_guardrail_test.dart`: PASS.
-- Full `flutter test` đã được thử lại với concurrency mặc định và `--concurrency=1`; runner vượt giới hạn 5 phút và đóng pipe nhưng không ghi nhận test failure. Full-suite gate vẫn mở cho P9.
+- 412 route thật và 6 redirect alias vẫn giữ parity; route coverage `--check`: PASS.
+- Router/shell Phone, Tablet, Web được chọn ở bootstrap; ba surface router explicit không dùng chung UI, còn `createAppRouter()` chỉ giữ compatibility responsive cho caller cũ và QA.
+- Compatibility responsive dispatcher nằm tại composition root `app/bootstrap/responsive_surface_page.dart`; không được dùng bởi Phone/Tablet/Web router explicit.
+- Web có composition riêng cho Home/Auth và route-family Web cho Wallet/Trade/Profile/P2P cùng các bounded context còn lại.
+- Đã xóa 10 file `ResponsiveEntry` legacy sau khi xác minh caller về 0.
+- Page rhythm: 1537/1537 file pass; screen rollup 412/412 L1 và L2 pass, unknown 0, inner gap debt 0; 6 documented exceptions.
+- Header visual strict issues: 0; header action violations: 0; back-navigation strict issues: 0.
+- `flutter analyze --no-pub`: PASS.
+- `flutter test test/quality --reporter=compact --concurrency=1`: PASS; build Web là gate cuối của P9.
+- `flutter test --reporter=compact`: PASS (3715 tests).
+- `flutter build web`: PASS; Wasm dry-run PASS.
 
 ## Điều kiện không bỏ sót route
 
@@ -75,6 +79,6 @@ Route chỉ được đánh dấu `completed` khi builder, test và audit của 
 0 import chéo Phone ↔ Tablet ↔ Web
 0 caller tới ResponsiveEntry legacy
 0 Tablet fallback sang Phone UI
-0 Web fallback sang Phone/Tablet UI
+0 Web fallback sang Phone/Tablet UI ở route surface đã migrate
 analyze + focused tests + full tests + build đều PASS
 ```

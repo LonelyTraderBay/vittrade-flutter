@@ -82,6 +82,7 @@ auth,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_qr.da
 auth,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_verify.dart,1,0,0,C,0,0,0,pass,-
 auth,flutter_app/lib/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart,2,0,0,C,0,0,0,pass,-
 auth,flutter_app/lib/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart,2,0,0,C,0,0,0,pass,-
+auth,flutter_app/lib/features/auth/presentation/web/pages/auth_web_page.dart,3,0,0,C,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_and_reports_tabs.dart,4,0,0,D,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_generate_tab.dart,2,0,0,D,0,0,0,pass,-
 cross_module,flutter_app/lib/features/cross_module/presentation/pages/tax_report_center_settings_tab.dart,3,1,0,D,0,0,0,pass,-
@@ -370,6 +371,7 @@ earn_staking,flutter_app/lib/features/earn_staking/presentation/widgets/staking/
 earn_staking,flutter_app/lib/features/earn_staking/presentation/widgets/staking/staking_withdrawal_policy_timeline.dart,2,1,0,D,0,0,0,pass,-
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,1,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.dart,1,0,0,E,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,4,0,0,C,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,2,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,2,0,0,D,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,1,0,0,E,0,0,0,pass,-
@@ -1053,6 +1055,7 @@ wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_ne
 wallet,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_preview_sheet.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,1,0,0,C,0,0,0,pass,-
+shared,flutter_app/lib/shared/layout/vit_web_utility_page.dart,3,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_announcement_banner.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_balance_breakdown_row.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_community_rules_link.dart,1,0,0,C,0,0,0,pass,-

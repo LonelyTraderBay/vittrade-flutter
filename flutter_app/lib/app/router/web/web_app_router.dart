@@ -7,9 +7,8 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 /// Router composition root của Web.
 ///
-/// Web có route tree riêng ngay từ bootstrap. Page composition Web sẽ được
-/// hoàn thiện theo bounded context ở P7; compatibility builders hiện tại chỉ
-/// là trạng thái chuyển tiếp có kiểm soát.
+/// Web có route tree và shell riêng ngay từ bootstrap. Feature route families
+/// được lắp ráp theo surface Web tại composition root.
 GoRouter createWebAppRouter({
   String? initialLocation,
   ShellRenderMode shellRenderMode = ShellRenderMode.native,

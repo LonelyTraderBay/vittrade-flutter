@@ -599,16 +599,6 @@ SourceBundle _readSourceBundle(
 /// Tablet has its own separate page and focused UI suite.
 String _canonicalPageFile(RouteInventoryEntry entry) {
   return switch (entry.pageClass) {
-    'HomeResponsiveEntry' =>
-      'flutter_app/lib/features/home/presentation/phone/pages/home_page.dart',
-    'MarketsResponsiveEntry' =>
-      'flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart',
-    'WalletResponsiveEntry' =>
-      'flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart',
-    'TradeResponsiveEntry' =>
-      'flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart',
-    'ProfileResponsiveEntry' =>
-      'flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart',
     _ => entry.pageFile,
   };
 }

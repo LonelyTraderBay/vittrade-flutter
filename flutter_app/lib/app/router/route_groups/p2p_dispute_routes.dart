@@ -18,12 +18,13 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> p2pDisputeRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: '/p2p/dispute/detail/:disputeId',
       name: AppRouteNames.sc218P2PDisputeDetail,
@@ -278,4 +279,17 @@ List<RouteBase> p2pDisputeRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Tranh chấp P2P',
+      subtitle: 'Khiếu nại · bằng chứng · xử lý',
+      description:
+          'Không gian Web riêng để theo dõi tranh chấp, chứng từ và trạng thái xử lý P2P. Mọi kết quả và bước tiếp theo phải được đối chiếu trước khi xác nhận.',
+      backPath: AppRoutePaths.p2p,
+      icon: Icons.gavel_outlined,
+    );
+  }
+  return routes;
 }

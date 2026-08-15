@@ -2,10 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/responsive/trade_responsive_entry.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade_core/domain/entities/trade_core_entities.dart';
@@ -24,12 +24,13 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> tradeRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: AppRoutePaths.trade,
       name: AppRouteNames.sc048Trade,
@@ -43,14 +44,16 @@ List<RouteBase> tradeRoutes(
             shellRenderMode: shellRenderMode,
           ),
           AppSurface.tablet => TradeTabletPage(initialSide: initialSide),
-          // Web surface composition is migrated in P7.
           AppSurface.web => TradePage(
             initialSide: initialSide,
             shellRenderMode: shellRenderMode,
           ),
-          null => TradeResponsiveEntry(
-            initialSide: initialSide,
-            shellRenderMode: shellRenderMode,
+          null => ResponsiveSurfacePage(
+            phoneBuilder: (_) => TradePage(
+              initialSide: initialSide,
+              shellRenderMode: shellRenderMode,
+            ),
+            tabletBuilder: (_) => TradeTabletPage(initialSide: initialSide),
           ),
         };
       },
@@ -396,6 +399,19 @@ List<RouteBase> tradeRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Giao dịch',
+      subtitle: 'Thị trường · lệnh · quản trị rủi ro',
+      description:
+          'Không gian Web riêng cho giao dịch, vị thế, lịch sử lệnh và cấu hình. Thông tin giá, phí, hạn mức và rủi ro phải được rà soát trước khi thực thi.',
+      backPath: AppRoutePaths.home,
+      icon: Icons.candlestick_chart_outlined,
+    );
+  }
+  return routes;
 }
 
 TradeOrderSide _tradeSideFromQuery(String? value) {

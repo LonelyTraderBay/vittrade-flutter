@@ -20,12 +20,13 @@ import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> p2pOrdersRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <RouteBase>[
     GoRoute(
       path: '/p2p/order/timeline/:orderId',
       name: AppRouteNames.sc212P2POrderTimeline,
@@ -354,6 +355,19 @@ List<RouteBase> p2pOrdersRoutes(
       },
     ),
   ];
+
+  if (surface == AppSurface.web) {
+    return buildWebUtilityRouteFamily(
+      routes: routes,
+      title: 'Lệnh P2P',
+      subtitle: 'Đơn hàng · ký quỹ · bằng chứng',
+      description:
+          'Không gian Web riêng để theo dõi lệnh, ký quỹ, trao đổi và lịch sử P2P. Các bước giải phóng hoặc xác nhận phải đi qua kiểm tra điều kiện an toàn.',
+      backPath: AppRoutePaths.p2p,
+      icon: Icons.receipt_long_outlined,
+    );
+  }
+  return routes;
 }
 
 String p2pAssetFromQuery(String? value) {

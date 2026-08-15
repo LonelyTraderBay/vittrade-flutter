@@ -32,6 +32,9 @@ GoRouter createAppRouter({
       return null;
     },
     routes: [
+      // Explicit surface routers are fully independent. The null surface is
+      // retained only for the public compatibility API and keeps its
+      // responsive phone/tablet shell behavior for existing callers and QA.
       ...topLevelRoutes(shellRenderMode, surface: surface),
       _appShellRoute(shellRenderMode, surface: surface),
     ],

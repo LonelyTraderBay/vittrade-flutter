@@ -146,36 +146,6 @@ const _noHeaderDecisions = <String, _NoHeaderDecision>{
     'Profile root module must move page identity into VitTopChrome.',
     issue: 'root_title_in_content',
   ),
-  'HomeResponsiveEntry': _NoHeaderDecision(
-    'detail',
-    'Thin width-based dispatcher for SC-007 Home — delegates to HomePage '
-        '(phone) or HomeTabletPage (tablet), each of which owns its own '
-        'header chrome (VitAutoHidePageScaffold / HomeHeader).',
-  ),
-  'WalletResponsiveEntry': _NoHeaderDecision(
-    'detail',
-    'Thin width-based dispatcher for SC-135 Wallet — delegates to '
-        'WalletPage (phone) or WalletTabletPage (tablet), each of which '
-        'owns its own header chrome (VitAutoHidePageScaffold / VitTopChrome).',
-  ),
-  'MarketsResponsiveEntry': _NoHeaderDecision(
-    'detail',
-    'Thin width-based dispatcher for SC-008 Markets — delegates to '
-        'MarketListPage (phone) or MarketsTabletPage (tablet), each of '
-        'which owns its own header chrome (MarketListHeader / VitTopChrome).',
-  ),
-  'TradeResponsiveEntry': _NoHeaderDecision(
-    'detail',
-    'Thin width-based dispatcher for SC-048 Trade — delegates to '
-        'TradePage (phone) or TradeTabletPage (tablet), each of which '
-        'owns its own header chrome (VitAutoHideHeaderScaffold / VitHeader).',
-  ),
-  'ProfileResponsiveEntry': _NoHeaderDecision(
-    'detail',
-    'Thin width-based dispatcher for SC-156 Profile — delegates to '
-        'ProfilePage (phone) or ProfileTabletPage (tablet), each of which '
-        'owns its own header chrome (VitAutoHidePageScaffold / VitTopChrome).',
-  ),
 };
 
 void main(List<String> args) {
@@ -319,9 +289,11 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
           usesTabletUtilityFamily && path != 'AppRoutePaths.markets'
           ? 'VitTabletUtilityPage'
           : _extractPageClass(block);
-      final page = pageClass == 'VitTabletUtilityPage'
-          ? _tabletUtilityPageGroup(appRoot, routeGroup)
-          : pageIndex.find(pageClass);
+      final page = switch (pageClass) {
+        'VitTabletUtilityPage' => _tabletUtilityPageGroup(appRoot, routeGroup),
+        'VitWebUtilityPage' => _webUtilityPageGroup(appRoot, routeGroup),
+        _ => pageIndex.find(pageClass),
+      };
 
       entries.add(
         _buildEntry(
@@ -352,6 +324,21 @@ PageGroup? _tabletUtilityPageGroup(Directory appRoot, String routeGroup) {
   final source = file.readAsStringSync();
   return PageGroup(
     file: 'flutter_app/lib/shared/layout/vit_tablet_utility_page.dart',
+    feature: _featureFromRouteGroup(routeGroup),
+    source: source,
+    headerBehavior: _classifyHeaderBehavior(source, source),
+    headerVariant: _classifyHeaderVariant(source),
+  );
+}
+
+PageGroup? _webUtilityPageGroup(Directory appRoot, String routeGroup) {
+  final file = File(
+    '${appRoot.path}/lib/shared/layout/vit_web_utility_page.dart',
+  );
+  if (!file.existsSync()) return null;
+  final source = file.readAsStringSync();
+  return PageGroup(
+    file: 'flutter_app/lib/shared/layout/vit_web_utility_page.dart',
     feature: _featureFromRouteGroup(routeGroup),
     source: source,
     headerBehavior: _classifyHeaderBehavior(source, source),
