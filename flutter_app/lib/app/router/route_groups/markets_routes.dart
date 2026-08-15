@@ -34,7 +34,7 @@ List<RouteBase> marketsRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  return [
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.markets,
       name: AppRouteNames.sc008MarketList,
@@ -140,6 +140,19 @@ List<RouteBase> marketsRoutes(
       name: AppRouteNames.sc026MarketCorrelations,
       builder: (_, _) =>
           MarketCorrelationsPage(shellRenderMode: shellRenderMode),
+    ),
+  ];
+  if (surface != AppSurface.tablet) return routes;
+  return [
+    routes.first,
+    ...buildTabletUtilityRouteFamily(
+      routes: routes.skip(1),
+      title: 'Công cụ thị trường',
+      subtitle: 'Phân tích, nghiên cứu và cảnh báo trên Tablet',
+      description:
+          'Không gian Tablet để theo dõi xu hướng, dữ liệu chuyên sâu, nghiên cứu và công cụ quản trị thị trường.',
+      backPath: AppRoutePaths.markets,
+      icon: Icons.query_stats_outlined,
     ),
   ];
 }

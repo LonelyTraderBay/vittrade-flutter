@@ -197,9 +197,9 @@ Evidence for `InternalSurfaceGate` / `AuthRouteShell` builders uses `Wrapper>Chi
 | `lib/app/router/route_groups/markets_routes.dart` | 128 | `AppRoutePaths.marketsUnlocks` | `AppRouteNames.sc024TokenUnlocks` | `real_page` | `TokenUnlocksPage` |
 | `lib/app/router/route_groups/markets_routes.dart` | 133 | `AppRoutePaths.marketsSignals` | `AppRouteNames.sc025SocialSignals` | `real_page` | `SocialSignalsPage` |
 | `lib/app/router/route_groups/markets_routes.dart` | 138 | `AppRoutePaths.marketsCorrelations` | `AppRouteNames.sc026MarketCorrelations` | `real_page` | `MarketCorrelationsPage` |
-| `lib/app/router/route_groups/markets_routes.dart` | 152 | `'/pair/:pairId'` | `AppRouteNames.sc044PairDetail` | `real_page` | `_tabletMarketPairRoute` |
-| `lib/app/router/route_groups/markets_routes.dart` | 170 | `'/pair/:pairId/info'` | `AppRouteNames.sc045TokenInfo` | `real_page` | `_tabletMarketPairRoute` |
-| `lib/app/router/route_groups/markets_routes.dart` | 188 | `'/pair/:pairId/depth'` | `AppRouteNames.sc046PairDepth` | `real_page` | `_tabletMarketPairRoute` |
+| `lib/app/router/route_groups/markets_routes.dart` | 165 | `'/pair/:pairId'` | `AppRouteNames.sc044PairDetail` | `real_page` | `_tabletMarketPairRoute` |
+| `lib/app/router/route_groups/markets_routes.dart` | 183 | `'/pair/:pairId/info'` | `AppRouteNames.sc045TokenInfo` | `real_page` | `_tabletMarketPairRoute` |
+| `lib/app/router/route_groups/markets_routes.dart` | 201 | `'/pair/:pairId/depth'` | `AppRouteNames.sc046PairDepth` | `real_page` | `_tabletMarketPairRoute` |
 | `lib/app/router/route_groups/p2p_account_routes.dart` | 31 | `AppRoutePaths.p2pMerchantApply` | `AppRouteNames.sc227P2PMerchantApply` | `real_page` | `switch` |
 | `lib/app/router/route_groups/p2p_account_routes.dart` | 56 | `'/p2p/merchant/:merchantId'` | `AppRouteNames.sc228P2PMerchantProfile` | `real_page` | `switch` |
 | `lib/app/router/route_groups/p2p_account_routes.dart` | 80 | `AppRoutePaths.p2pKycRequirements` | `AppRouteNames.sc247P2PKycRequirements` | `real_page` | `switch` |

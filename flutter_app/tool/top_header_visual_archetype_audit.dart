@@ -296,7 +296,8 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
         routeGroup.endsWith('earn_staking_routes.dart') ||
         routeGroup.endsWith('trade_bots_routes.dart') ||
         routeGroup.endsWith('trade_copy_routes.dart') ||
-        routeGroup.endsWith('trade_compliance_routes.dart');
+        routeGroup.endsWith('trade_compliance_routes.dart') ||
+        routeGroup.endsWith('markets_routes.dart');
     var index = 0;
 
     while (true) {
@@ -314,7 +315,8 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
       }
 
       final path = _extractNamedArgument(block, 'path') ?? '-';
-      final pageClass = usesTabletUtilityFamily
+      final pageClass =
+          usesTabletUtilityFamily && path != 'AppRoutePaths.markets'
           ? 'VitTabletUtilityPage'
           : _extractPageClass(block);
       final page = pageClass == 'VitTabletUtilityPage'

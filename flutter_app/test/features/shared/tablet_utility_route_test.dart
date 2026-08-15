@@ -148,4 +148,13 @@ void main() {
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Tuân thủ giao dịch'), findsOneWidget);
   });
+
+  testWidgets('SC-009 Tablet uses the independent market tool composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.marketsOverview);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Công cụ thị trường'), findsOneWidget);
+  });
 }

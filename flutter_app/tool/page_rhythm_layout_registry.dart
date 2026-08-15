@@ -695,6 +695,40 @@ const routeNameToPageOverrides = <String, String>{
       'shared/layout/vit_tablet_utility_page.dart',
   'AppRouteNames.sc396StakingDeveloperConsole':
       'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc009MarketOverview':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc010MarketMovers':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc011MarketSectors':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc012Watchlist': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc013MarketHeatmap':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc014PriceAlerts':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc015MarketScreener':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc016ComparisonTool':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc017MarketCalendar':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc018DerivativesOverview':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc019MarketDepth':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc020SocialSentiment':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc021PortfolioTracker':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc022MarketNews': 'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc023AdvancedCharts':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc024TokenUnlocks':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc025SocialSignals':
+      'shared/layout/vit_tablet_utility_page.dart',
+  'AppRouteNames.sc026MarketCorrelations':
+      'shared/layout/vit_tablet_utility_page.dart',
   'AppRouteNames.sc059TradingBots':
       'shared/layout/vit_tablet_utility_page.dart',
   'AppRouteNames.sc117BotTermsOfService':

@@ -149,9 +149,9 @@ launchpad,real_page,AppRoutePaths.launchpadSample,launchpadSample,AppRouteNames.
 launchpad,real_page,AppRoutePaths.launchpadStaking,launchpadStaking,AppRouteNames.sc298LaunchpadStaking,sc298LaunchpadStaking,_tabletLaunchpadRoute,lib/app/router/route_groups/launchpad_routes.dart,70
 launchpad,real_page,AppRoutePaths.launchpadSwapAggregator,launchpadSwapAggregator,AppRouteNames.sc314LaunchpadSwapAggregator,sc314LaunchpadSwapAggregator,_tabletLaunchpadRoute,lib/app/router/route_groups/launchpad_routes.dart,220
 launchpad,real_page,AppRoutePaths.launchpadWebhooks,launchpadWebhooks,AppRouteNames.sc310LaunchpadWebhooks,sc310LaunchpadWebhooks,_tabletLaunchpadRoute,lib/app/router/route_groups/launchpad_routes.dart,180
-markets,real_page,'/pair/:pairId','/pair/:pairId',AppRouteNames.sc044PairDetail,sc044PairDetail,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,152
-markets,real_page,'/pair/:pairId/depth','/pair/:pairId/depth',AppRouteNames.sc046PairDepth,sc046PairDepth,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,188
-markets,real_page,'/pair/:pairId/info','/pair/:pairId/info',AppRouteNames.sc045TokenInfo,sc045TokenInfo,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,170
+markets,real_page,'/pair/:pairId','/pair/:pairId',AppRouteNames.sc044PairDetail,sc044PairDetail,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,165
+markets,real_page,'/pair/:pairId/depth','/pair/:pairId/depth',AppRouteNames.sc046PairDepth,sc046PairDepth,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,201
+markets,real_page,'/pair/:pairId/info','/pair/:pairId/info',AppRouteNames.sc045TokenInfo,sc045TokenInfo,_tabletMarketPairRoute,lib/app/router/route_groups/markets_routes.dart,183
 markets,real_page,AppRoutePaths.markets,markets,AppRouteNames.sc008MarketList,sc008MarketList,switch,lib/app/router/route_groups/markets_routes.dart,38
 markets,real_page,AppRoutePaths.marketsAdvancedCharts,marketsAdvancedCharts,AppRouteNames.sc023AdvancedCharts,sc023AdvancedCharts,AdvancedChartsPage,lib/app/router/route_groups/markets_routes.dart,123
 markets,real_page,AppRoutePaths.marketsAlerts,marketsAlerts,AppRouteNames.sc014PriceAlerts,sc014PriceAlerts,PriceAlertsPage,lib/app/router/route_groups/markets_routes.dart,77

@@ -4,11 +4,11 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=412
-fixed_vit_header_remaining=146
-auto_hide_header=123
+fixed_vit_header_remaining=167
+auto_hide_header=105
 custom_scroll_header=1
 no_top_header=25
-unresolved=117
+unresolved=114
 ```
 
 ## Fixed Header Count By Feature
@@ -19,6 +19,7 @@ unresolved=117
 | trade_compliance | 30 |
 | earn_savings | 24 |
 | trade_copy | 22 |
+| markets | 21 |
 | trade_bots | 19 |
 | trade | 3 |
 | enterprise_states | 2 |
@@ -173,28 +174,28 @@ unresolved=117
 | launchpad | `AppRoutePaths.launchpadStaking` | `unresolved` | unresolved | unresolved | `unresolved` |
 | launchpad | `AppRoutePaths.launchpadSwapAggregator` | `unresolved` | unresolved | unresolved | `unresolved` |
 | launchpad | `AppRoutePaths.launchpadWebhooks` | `unresolved` | unresolved | unresolved | `unresolved` |
-| markets | `'/pair/:pairId'` | `unresolved` | unresolved | unresolved | `unresolved` |
-| markets | `'/pair/:pairId/depth'` | `unresolved` | unresolved | unresolved | `unresolved` |
-| markets | `'/pair/:pairId/info'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| markets | `'/pair/:pairId'` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `'/pair/:pairId/depth'` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `'/pair/:pairId/info'` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | markets | `AppRoutePaths.markets` | `MarketListPage` | custom_scroll_header | market_custom_in_scroll | `flutter_app/lib/features/markets/presentation/phone/pages/market_list_page.dart` |
-| markets | `AppRoutePaths.marketsAdvancedCharts` | `AdvancedChartsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/advanced_charts_page.dart` |
-| markets | `AppRoutePaths.marketsAlerts` | `PriceAlertsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/price_alerts_page.dart` |
-| markets | `AppRoutePaths.marketsCalendar` | `MarketCalendarPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_calendar_page.dart` |
-| markets | `AppRoutePaths.marketsCompare` | `ComparisonToolPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/comparison_tool_page.dart` |
-| markets | `AppRoutePaths.marketsCorrelations` | `MarketCorrelationsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_correlations_page.dart` |
-| markets | `AppRoutePaths.marketsDepth` | `MarketDepthPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/pair/market_depth_page.dart` |
-| markets | `AppRoutePaths.marketsDerivatives` | `DerivativesOverviewPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/derivatives_overview_page.dart` |
-| markets | `AppRoutePaths.marketsHeatmap` | `MarketHeatmapPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/pair/market_heatmap_page.dart` |
-| markets | `AppRoutePaths.marketsMovers` | `MarketMoversPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_movers_page.dart` |
-| markets | `AppRoutePaths.marketsNews` | `MarketNewsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/market_news_page.dart` |
-| markets | `AppRoutePaths.marketsOverview` | `MarketOverviewPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/hub/market_overview_page.dart` |
-| markets | `AppRoutePaths.marketsPortfolioTracker` | `PortfolioTrackerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/portfolio/portfolio_tracker_page.dart` |
-| markets | `AppRoutePaths.marketsScreener` | `MarketScreenerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_screener_page.dart` |
-| markets | `AppRoutePaths.marketsSectors` | `MarketSectorsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/tools/market_sectors_page.dart` |
-| markets | `AppRoutePaths.marketsSignals` | `SocialSignalsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/social_signals_page.dart` |
-| markets | `AppRoutePaths.marketsSocialSentiment` | `SocialSentimentPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/social_sentiment_page.dart` |
-| markets | `AppRoutePaths.marketsUnlocks` | `TokenUnlocksPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/research/token_unlocks_page.dart` |
-| markets | `AppRoutePaths.marketsWatchlist` | `WatchlistPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/markets/presentation/pages/hub/watchlist_page.dart` |
+| markets | `AppRoutePaths.marketsAdvancedCharts` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsAlerts` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsCalendar` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsCompare` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsCorrelations` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsDepth` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsDerivatives` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsHeatmap` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsMovers` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsNews` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsOverview` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsPortfolioTracker` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsScreener` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsSectors` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsSignals` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsSocialSentiment` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsUnlocks` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
+| markets | `AppRoutePaths.marketsWatchlist` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | news | `AppRoutePaths.news` | `NewsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/news/presentation/pages/news_page.dart` |
 | onboarding | `AppRoutePaths.onboarding` | `OnboardingFlowPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/onboarding/presentation/pages/onboarding_flow_page.dart` |
 | p2p_account | `'/p2p/merchant/:merchantId'` | `P2PMerchantProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_account/presentation/pages/merchant/p2p_merchant_profile_page.dart` |

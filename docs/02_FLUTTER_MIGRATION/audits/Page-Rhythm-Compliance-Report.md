@@ -31,7 +31,7 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ## By module
 
-### app (257 routes, L2 warn 0, unknown 0)
+### app (275 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
 
@@ -39,7 +39,7 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ### home (1 routes, L2 warn 0, unknown 0)
 
-### markets (19 routes, L2 warn 0, unknown 0)
+### markets (1 routes, L2 warn 0, unknown 0)
 
 ### news (1 routes, L2 warn 0, unknown 0)
 
