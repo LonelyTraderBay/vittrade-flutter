@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/earn_core/domain/entities/earn_entities.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_community_governance_page.dart';
 import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_contingency_plan_page.dart';
 import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_emergency_actions_page.dart';
@@ -51,8 +54,11 @@ import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staki
 import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_validator_selection_page.dart';
 import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_withdrawal_policy_page.dart';
 
-List<RouteBase> earnStakingRoutes(ShellRenderMode shellRenderMode) {
-  return [
+List<RouteBase> earnStakingRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.earn,
       name: AppRouteNames.sc327StakingEarn,
@@ -322,4 +328,14 @@ List<RouteBase> earnStakingRoutes(ShellRenderMode shellRenderMode) {
     ),
     ...earnRiskOutgoingPlaceholders,
   ];
+  if (surface != AppSurface.tablet) return routes;
+  return buildTabletUtilityRouteFamily(
+    routes: routes,
+    title: 'Earn Staking',
+    subtitle: 'Staking, validator và quản trị rủi ro trên Tablet',
+    description:
+        'Không gian Tablet để theo dõi lợi suất staking, validator, bảo chứng và các chính sách liên quan.',
+    backPath: AppRoutePaths.earn,
+    icon: Icons.account_balance_outlined,
+  );
 }

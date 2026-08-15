@@ -80,7 +80,8 @@ List<RouteEntry> _collectRouteEntries(Directory appRoot) {
 
   for (final file
       in routeGroups.listSync().whereType<File>().where((file) {
-        return file.path.endsWith('.dart');
+        return file.path.endsWith('.dart') &&
+            !file.path.endsWith('surface_route_helpers.dart');
       }).toList()..sort(
         (a, b) => a.path
             .replaceAll(r'\', '/')

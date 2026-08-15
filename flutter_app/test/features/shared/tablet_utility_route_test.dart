@@ -103,4 +103,22 @@ void main() {
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Launchpad'), findsOneWidget);
   });
+
+  testWidgets('SC-329 Tablet uses the independent Savings composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.earnSavings);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Earn Savings'), findsOneWidget);
+  });
+
+  testWidgets('SC-327 Tablet uses the independent Staking composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.earn);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Earn Staking'), findsOneWidget);
+  });
 }

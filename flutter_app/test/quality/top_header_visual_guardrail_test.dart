@@ -71,26 +71,13 @@ void main() {
     expect(markdown, contains('screen_level_mismatches=0'));
     expect(csv, contains('screenLevel,expectedArchetype,screenLevelMismatch'));
 
-    for (final pageClass in ['StakingEarnPage']) {
-      expect(
-        csv,
-        matches(
-          RegExp(
-            '"[^"]+","[^"]+","$pageClass","[^"]+",'
-            '"auto_hide_header","vit_top_chrome_rootModule","rootModule",'
-            '"L1_productModuleHub","rootModule","no"',
-          ),
-        ),
-        reason:
-            '$pageClass must use rootModule and report no screen-level mismatch.',
-      );
-    }
-
     for (final routePath in [
       'AppRoutePaths.marketsPredictions',
       'AppRoutePaths.dca',
       'AppRoutePaths.arena',
       'AppRoutePaths.launchpad',
+      'AppRoutePaths.earn',
+      'AppRoutePaths.earnSavings',
     ]) {
       expect(
         csv,

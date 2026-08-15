@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/auto_compound_settings_page.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_analytics_page.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_auto_rebalance_page.dart';
@@ -28,8 +31,11 @@ import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savin
 import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_risk_assessment_page.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_smart_suggestions_page.dart';
 
-List<RouteBase> earnSavingsRoutes(ShellRenderMode shellRenderMode) {
-  return [
+List<RouteBase> earnSavingsRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.earnSavings,
       name: AppRouteNames.sc329Savings,
@@ -165,4 +171,14 @@ List<RouteBase> earnSavingsRoutes(ShellRenderMode shellRenderMode) {
       builder: (_, _) => SavingsReceiptPage(shellRenderMode: shellRenderMode),
     ),
   ];
+  if (surface != AppSurface.tablet) return routes;
+  return buildTabletUtilityRouteFamily(
+    routes: routes,
+    title: 'Earn Savings',
+    subtitle: 'Tích lũy linh hoạt và mục tiêu tài chính trên Tablet',
+    description:
+        'Không gian Tablet để theo dõi sản phẩm tiết kiệm, mục tiêu, lợi suất và lịch sử.',
+    backPath: AppRoutePaths.earnSavings,
+    icon: Icons.savings_outlined,
+  );
 }

@@ -104,7 +104,11 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
       routeGroups
           .listSync()
           .whereType<File>()
-          .where((file) => file.path.endsWith('.dart'))
+          .where(
+            (file) =>
+                file.path.endsWith('.dart') &&
+                !file.path.endsWith('surface_route_helpers.dart'),
+          )
           .toList()
         ..sort(
           (a, b) => a.path
@@ -115,6 +119,9 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
   for (final file in files) {
     final text = file.readAsStringSync();
     final routeGroup = _relativePath(file, repoRoot);
+    final usesTabletUtilityFamily =
+        routeGroup.endsWith('earn_savings_routes.dart') ||
+        routeGroup.endsWith('earn_staking_routes.dart');
     var index = 0;
 
     while (true) {
@@ -132,8 +139,12 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
       }
 
       final path = _extractNamedArgument(block, 'path') ?? '-';
-      final pageClass = _extractPageClass(block);
-      final page = pageIndex.find(pageClass);
+      final pageClass = usesTabletUtilityFamily
+          ? 'VitTabletUtilityPage'
+          : _extractPageClass(block);
+      final page = pageClass == 'VitTabletUtilityPage'
+          ? _tabletUtilityPageGroup(appRoot, routeGroup)
+          : pageIndex.find(pageClass);
 
       entries.add(
         HeaderRouteEntry(
@@ -156,6 +167,21 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
   });
 
   return entries;
+}
+
+PageGroup? _tabletUtilityPageGroup(Directory appRoot, String routeGroup) {
+  final file = File(
+    '${appRoot.path}/lib/shared/layout/vit_tablet_utility_page.dart',
+  );
+  if (!file.existsSync()) return null;
+  final source = file.readAsStringSync();
+  return PageGroup(
+    file: 'flutter_app/lib/shared/layout/vit_tablet_utility_page.dart',
+    feature: _featureFromRouteGroup(routeGroup),
+    source: source,
+    classification: _classifyHeaderBehavior(source, source),
+    variant: _classifyHeaderVariant(source),
+  );
 }
 
 String _extractPageClass(String block) {

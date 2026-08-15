@@ -55,3 +55,35 @@ Widget buildSurfaceAwareTabletRoute({
     AppSurface.phone || AppSurface.web || null => fallback,
   };
 }
+
+/// Converts a route family into Tablet-only utility compositions.
+///
+/// The source route list remains the Phone/Web fallback contract. Callers must
+/// select this family only when the active surface is [AppSurface.tablet].
+List<RouteBase> buildTabletUtilityRouteFamily({
+  required Iterable<GoRoute> routes,
+  required String title,
+  required String subtitle,
+  required String description,
+  required String backPath,
+  IconData icon = Icons.dashboard_customize_outlined,
+}) {
+  return [
+    for (final route in routes)
+      GoRoute(
+        path: route.path,
+        name: route.name,
+        builder: (context, _) => buildSurfaceAwareTabletRoute(
+          context: context,
+          surface: AppSurface.tablet,
+          semanticIdentifier: route.name ?? route.path,
+          title: title,
+          subtitle: subtitle,
+          description: description,
+          backPath: backPath,
+          fallback: const SizedBox.shrink(),
+          icon: icon,
+        ),
+      ),
+  ];
+}

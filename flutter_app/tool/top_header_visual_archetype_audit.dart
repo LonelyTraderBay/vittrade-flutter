@@ -276,7 +276,11 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
       routeGroups
           .listSync()
           .whereType<File>()
-          .where((file) => file.path.endsWith('.dart'))
+          .where(
+            (file) =>
+                file.path.endsWith('.dart') &&
+                !file.path.endsWith('surface_route_helpers.dart'),
+          )
           .toList()
         ..sort(
           (a, b) => a.path
@@ -287,6 +291,9 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
   for (final file in files) {
     final text = file.readAsStringSync();
     final routeGroup = _relativePath(file, repoRoot);
+    final usesTabletUtilityFamily =
+        routeGroup.endsWith('earn_savings_routes.dart') ||
+        routeGroup.endsWith('earn_staking_routes.dart');
     var index = 0;
 
     while (true) {
@@ -304,7 +311,9 @@ List<VisualHeaderRouteEntry> _collectVisualHeaderRouteEntries(
       }
 
       final path = _extractNamedArgument(block, 'path') ?? '-';
-      final pageClass = _extractPageClass(block);
+      final pageClass = usesTabletUtilityFamily
+          ? 'VitTabletUtilityPage'
+          : _extractPageClass(block);
       final page = pageClass == 'VitTabletUtilityPage'
           ? _tabletUtilityPageGroup(appRoot, routeGroup)
           : pageIndex.find(pageClass);
@@ -499,6 +508,8 @@ const _tabletProductHubPaths = <String>{
   'AppRoutePaths.dca',
   'AppRoutePaths.arena',
   'AppRoutePaths.launchpad',
+  'AppRoutePaths.earn',
+  'AppRoutePaths.earnSavings',
 };
 
 String? _transitiveTopChromeType({

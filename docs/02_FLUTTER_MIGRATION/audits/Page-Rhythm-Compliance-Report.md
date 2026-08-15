@@ -31,13 +31,9 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ## By module
 
-### app (117 routes, L2 warn 0, unknown 0)
+### app (187 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
-
-### earn_savings (24 routes, L2 warn 0, unknown 0)
-
-### earn_staking (46 routes, L2 warn 0, unknown 0)
 
 ### enterprise_states (2 routes, L2 warn 0, unknown 0)
 
