@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/trade_compliance/presentation/pages/client_money/arm_integration_status_page.dart';
 import 'package:vit_trade_flutter/features/trade_compliance/presentation/pages/governance/audit_trail_page.dart';
 import 'package:vit_trade_flutter/features/trade_compliance/presentation/pages/execution/best_execution_reports_page.dart';
@@ -31,9 +33,13 @@ import 'package:vit_trade_flutter/features/trade_compliance/presentation/pages/g
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> tradeComplianceRoutes(ShellRenderMode shellRenderMode) {
-  return [
+List<RouteBase> tradeComplianceRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.tradeCopyRegulatoryDisclosures,
       name: AppRouteNames.sc084RegulatoryDisclosures,
@@ -215,4 +221,14 @@ List<RouteBase> tradeComplianceRoutes(ShellRenderMode shellRenderMode) {
           LiveMarketDataAnalyticsPage(shellRenderMode: shellRenderMode),
     ),
   ];
+  if (surface != AppSurface.tablet) return routes;
+  return buildTabletUtilityRouteFamily(
+    routes: routes,
+    title: 'Tuân thủ giao dịch',
+    subtitle: 'Báo cáo, công bố và kiểm soát tuân thủ trên Tablet',
+    description:
+        'Không gian Tablet để theo dõi báo cáo thực thi, chi phí, khiếu nại và nghĩa vụ tuân thủ.',
+    backPath: AppRoutePaths.trade,
+    icon: Icons.gavel_outlined,
+  );
 }

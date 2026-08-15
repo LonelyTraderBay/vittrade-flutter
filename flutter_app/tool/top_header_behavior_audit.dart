@@ -121,7 +121,10 @@ List<HeaderRouteEntry> _collectHeaderRouteEntries(
     final routeGroup = _relativePath(file, repoRoot);
     final usesTabletUtilityFamily =
         routeGroup.endsWith('earn_savings_routes.dart') ||
-        routeGroup.endsWith('earn_staking_routes.dart');
+        routeGroup.endsWith('earn_staking_routes.dart') ||
+        routeGroup.endsWith('trade_bots_routes.dart') ||
+        routeGroup.endsWith('trade_copy_routes.dart') ||
+        routeGroup.endsWith('trade_compliance_routes.dart');
     var index = 0;
 
     while (true) {

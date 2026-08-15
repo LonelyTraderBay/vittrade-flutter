@@ -104,9 +104,9 @@ ShellRoute _appShellRoute(
       ...marketsRoutes(shellRenderMode, surface: surface),
       ...predictionRoutes(shellRenderMode, surface: surface),
       ...marketPairRoutes(shellRenderMode, surface: surface),
-      ...tradeComplianceRoutes(shellRenderMode),
-      ...tradeCopyRoutes(shellRenderMode),
-      ...tradeBotsRoutes(shellRenderMode),
+      ...tradeComplianceRoutes(shellRenderMode, surface: surface),
+      ...tradeCopyRoutes(shellRenderMode, surface: surface),
+      ...tradeBotsRoutes(shellRenderMode, surface: surface),
       // NOTE: `tradeTerminalRoutes` must stay BEFORE `tradeRoutes`: the
       // terminal group registers literal `/trade/...` paths (risk-management,
       // execution-quality, advanced-tools, ...) that would otherwise be

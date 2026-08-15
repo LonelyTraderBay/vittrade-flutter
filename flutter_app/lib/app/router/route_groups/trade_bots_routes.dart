@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/settings/bot_api_documentation_page.dart';
 import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/backtest/bot_backtesting_page.dart';
 import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/dashboard/bot_drawdown_analyzer_page.dart';
@@ -22,9 +24,13 @@ import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/hub/tra
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> tradeBotsRoutes(ShellRenderMode shellRenderMode) {
-  return [
+List<RouteBase> tradeBotsRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.tradeBots,
       name: AppRouteNames.sc059TradingBots,
@@ -130,4 +136,14 @@ List<RouteBase> tradeBotsRoutes(ShellRenderMode shellRenderMode) {
           BotApiDocumentationPage(shellRenderMode: shellRenderMode),
     ),
   ];
+  if (surface != AppSurface.tablet) return routes;
+  return buildTabletUtilityRouteFamily(
+    routes: routes,
+    title: 'Trading Bots',
+    subtitle: 'Tự động hóa giao dịch và kiểm soát rủi ro trên Tablet',
+    description:
+        'Không gian Tablet để theo dõi bot, hiệu suất, cấu hình và các điều kiện an toàn.',
+    backPath: AppRoutePaths.tradeBots,
+    icon: Icons.smart_toy_outlined,
+  );
 }

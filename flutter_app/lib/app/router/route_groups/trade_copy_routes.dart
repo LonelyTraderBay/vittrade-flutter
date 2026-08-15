@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade_copy/presentation/pages/hub/active_copies_page.dart';
 import 'package:vit_trade_flutter/features/trade_copy/presentation/pages/safety/copy_audit_log_page.dart';
@@ -27,9 +29,13 @@ import 'package:vit_trade_flutter/features/trade_copy/presentation/pages/provide
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
-List<RouteBase> tradeCopyRoutes(ShellRenderMode shellRenderMode) {
-  return [
+List<RouteBase> tradeCopyRoutes(
+  ShellRenderMode shellRenderMode, {
+  AppSurface? surface,
+}) {
+  final routes = <GoRoute>[
     GoRoute(
       path: AppRoutePaths.tradeCopyTrading,
       name: AppRouteNames.sc063CopyTrading,
@@ -205,4 +211,22 @@ List<RouteBase> tradeCopyRoutes(ShellRenderMode shellRenderMode) {
       ),
     ),
   ];
+  if (surface != AppSurface.tablet) return routes;
+  return buildTabletUtilityRouteFamily(
+    routes: routes,
+    title: 'Copy Trading',
+    subtitle: 'Theo dõi nhà giao dịch và quản trị sao chép trên Tablet',
+    description:
+        'Không gian Tablet để xem nhà cung cấp, đánh giá phù hợp, hiệu suất và các lớp an toàn Copy Trading.',
+    backPath: AppRoutePaths.tradeCopyTrading,
+    icon: Icons.copy_all_outlined,
+    wrapper: (route, child) =>
+        route.name == AppRouteNames.sc401CopyTradingCardDemo
+        ? InternalSurfaceGate(
+            kind: InternalSurfaceKind.qaDemo,
+            routePath: route.path,
+            child: child,
+          )
+        : child,
+  );
 }

@@ -121,4 +121,31 @@ void main() {
     expect(find.byType(VitTabletUtilityPage), findsOneWidget);
     expect(find.text('Earn Staking'), findsOneWidget);
   });
+
+  testWidgets('SC-059 Tablet uses the independent Trading Bots composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.tradeBots);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Trading Bots'), findsOneWidget);
+  });
+
+  testWidgets('SC-063 Tablet uses the independent Copy Trading composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.tradeCopyTrading);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Copy Trading'), findsOneWidget);
+  });
+
+  testWidgets('SC-084 Tablet uses the independent compliance composition', (
+    tester,
+  ) async {
+    await pumpTabletRoute(tester, AppRoutePaths.tradeCopyRegulatoryDisclosures);
+
+    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
+    expect(find.text('Tuân thủ giao dịch'), findsOneWidget);
+  });
 }

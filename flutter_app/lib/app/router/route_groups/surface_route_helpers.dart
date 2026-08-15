@@ -67,23 +67,27 @@ List<RouteBase> buildTabletUtilityRouteFamily({
   required String description,
   required String backPath,
   IconData icon = Icons.dashboard_customize_outlined,
+  Widget Function(GoRoute route, Widget child)? wrapper,
 }) {
   return [
     for (final route in routes)
       GoRoute(
         path: route.path,
         name: route.name,
-        builder: (context, _) => buildSurfaceAwareTabletRoute(
-          context: context,
-          surface: AppSurface.tablet,
-          semanticIdentifier: route.name ?? route.path,
-          title: title,
-          subtitle: subtitle,
-          description: description,
-          backPath: backPath,
-          fallback: const SizedBox.shrink(),
-          icon: icon,
-        ),
+        builder: (context, _) {
+          final child = buildSurfaceAwareTabletRoute(
+            context: context,
+            surface: AppSurface.tablet,
+            semanticIdentifier: route.name ?? route.path,
+            title: title,
+            subtitle: subtitle,
+            description: description,
+            backPath: backPath,
+            fallback: const SizedBox.shrink(),
+            icon: icon,
+          );
+          return wrapper?.call(route, child) ?? child;
+        },
       ),
   ];
 }
