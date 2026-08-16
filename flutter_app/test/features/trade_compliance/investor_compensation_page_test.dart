@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/trade_compliance/data/trade_compliance_repository.dart';
-import 'package:vit_trade_flutter/features/trade_compliance/presentation/pages/client_money/investor_compensation_page.dart';
+import 'package:vit_trade_flutter/features/trade_compliance/presentation/phone/pages/client_money/investor_compensation_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';

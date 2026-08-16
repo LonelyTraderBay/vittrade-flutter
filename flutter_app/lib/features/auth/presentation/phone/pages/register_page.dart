@@ -18,7 +18,7 @@ import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/auth_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/domain/validators/password_policy.dart';
 
-part '../../phone/widgets/register_page_sections.dart';
+part '../widgets/register_page_sections.dart';
 
 const _authPrimary = AppColors.primary;
 

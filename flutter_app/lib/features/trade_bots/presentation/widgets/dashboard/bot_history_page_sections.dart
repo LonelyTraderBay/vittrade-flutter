@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_history_page.dart';
+part of '../../phone/pages/dashboard/bot_history_page.dart';
 
 class _StatsCard extends StatelessWidget {
   const _StatsCard({

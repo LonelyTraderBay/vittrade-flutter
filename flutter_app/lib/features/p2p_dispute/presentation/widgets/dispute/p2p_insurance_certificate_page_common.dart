@@ -1,4 +1,4 @@
-part of '../../pages/dispute/p2p_insurance_certificate_page.dart';
+part of '../../phone/pages/dispute/p2p_insurance_certificate_page.dart';
 
 class _FeedbackBanner extends StatelessWidget {
   const _FeedbackBanner({required this.message});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_movers_page.dart';
+part of '../../phone/pages/tools/market_movers_page.dart';
 
 class _MoverListCard extends StatelessWidget {
   const _MoverListCard({

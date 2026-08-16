@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_insurance_page.dart';
+part of '../../phone/pages/staking/staking_insurance_page.dart';
 
 class _ClaimsTab extends StatelessWidget {
   const _ClaimsTab({required this.snapshot, required this.onFileClaim});

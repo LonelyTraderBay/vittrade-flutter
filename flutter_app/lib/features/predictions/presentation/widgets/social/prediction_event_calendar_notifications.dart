@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_event_calendar_page.dart';
+part of '../../phone/pages/social/prediction_event_calendar_page.dart';
 
 class _NotificationSettings extends StatelessWidget {
   @override

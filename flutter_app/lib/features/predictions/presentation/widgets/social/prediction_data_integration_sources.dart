@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_data_integration_page.dart';
+part of '../../phone/pages/social/prediction_data_integration_page.dart';
 
 class _DataIntegrationTabBar extends StatelessWidget {
   const _DataIntegrationTabBar({

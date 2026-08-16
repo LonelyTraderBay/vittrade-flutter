@@ -1,4 +1,4 @@
-part of '../../pages/complaints/complaint_submission_page.dart';
+part of '../../phone/pages/complaints/complaint_submission_page.dart';
 
 class _CategoryField extends StatelessWidget {
   const _CategoryField({

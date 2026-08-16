@@ -1,4 +1,4 @@
-part of '../pages/smart_alert_center_page.dart';
+part of '../phone/pages/smart_alert_center_page.dart';
 
 final class _ModuleVisual {
   const _ModuleVisual({

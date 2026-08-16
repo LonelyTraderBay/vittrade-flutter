@@ -1,4 +1,4 @@
-part of '../../pages/schedule/dca_schedule_config_page.dart';
+part of '../../phone/pages/schedule/dca_schedule_config_page.dart';
 
 class _LimitsCard extends StatelessWidget {
   const _LimitsCard({

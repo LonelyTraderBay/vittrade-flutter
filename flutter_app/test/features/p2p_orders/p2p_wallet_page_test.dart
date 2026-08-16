@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/p2p_core/data/p2p_repository.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_escrow_balance_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_fund_lock_history_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_transfer_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_balance_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_fund_lock_history_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_transfer_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';

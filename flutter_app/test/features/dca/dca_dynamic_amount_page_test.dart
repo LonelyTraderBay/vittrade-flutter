@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/dca/data/dca_repository.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/research/dca_dynamic_amount_page.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/hub/dca_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/research/dca_dynamic_amount_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/hub/dca_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -65,15 +65,15 @@ void main() {
 
   test('SC-175 keeps the Home-standard page foundation contract', () {
     final pageSource = File(
-      'lib/features/dca/presentation/pages/research/dca_dynamic_amount_page.dart',
+      'lib/features/dca/presentation/phone/pages/research/dca_dynamic_amount_page.dart',
     ).readAsStringSync();
     final source = [
       pageSource,
       File(
-        'lib/features/dca/presentation/pages/research/dca_dynamic_amount_page_hero_and_strategy.dart',
+        'lib/features/dca/presentation/phone/pages/research/dca_dynamic_amount_page_hero_and_strategy.dart',
       ).readAsStringSync(),
       File(
-        'lib/features/dca/presentation/pages/research/dca_dynamic_amount_page_history_and_config.dart',
+        'lib/features/dca/presentation/phone/pages/research/dca_dynamic_amount_page_history_and_config.dart',
       ).readAsStringSync(),
     ].join('\n');
 

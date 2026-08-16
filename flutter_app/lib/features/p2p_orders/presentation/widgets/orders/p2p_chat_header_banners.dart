@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_chat_page.dart';
+part of '../../phone/pages/orders/p2p_chat_page.dart';
 
 class _ChatHeader extends StatelessWidget {
   const _ChatHeader({required this.snapshot});

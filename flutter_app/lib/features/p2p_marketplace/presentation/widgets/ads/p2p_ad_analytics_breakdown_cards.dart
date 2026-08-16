@@ -1,4 +1,4 @@
-part of '../../pages/ads/p2p_ad_analytics_page.dart';
+part of '../../phone/pages/ads/p2p_ad_analytics_page.dart';
 
 class _VolumeCard extends StatelessWidget {
   const _VolumeCard({required this.points});

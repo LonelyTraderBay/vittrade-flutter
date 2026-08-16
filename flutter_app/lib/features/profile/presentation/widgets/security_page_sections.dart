@@ -1,4 +1,4 @@
-part of '../pages/security_page.dart';
+part of '../phone/pages/security_page.dart';
 
 class _ScoreCard extends StatelessWidget {
   const _ScoreCard({required this.snapshot});

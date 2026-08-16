@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_performance_analytics_page.dart';
+part of '../../phone/pages/dashboard/bot_performance_analytics_page.dart';
 
 class _KeyMetricsCard extends StatelessWidget {
   const _KeyMetricsCard({required this.metrics});

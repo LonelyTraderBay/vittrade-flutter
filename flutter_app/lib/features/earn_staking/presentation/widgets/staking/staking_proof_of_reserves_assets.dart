@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_proof_of_reserves_page.dart';
+part of '../../phone/pages/staking/staking_proof_of_reserves_page.dart';
 
 class _AssetsTab extends StatelessWidget {
   const _AssetsTab({required this.snapshot});

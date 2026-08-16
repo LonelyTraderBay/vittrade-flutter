@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/challenge/arena_challenge_detail_page.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/studio/arena_studio_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/studio/arena_studio_page.dart';
 import 'package:vit_trade_flutter/features/discovery/data/discovery_repository.dart';
-import 'package:vit_trade_flutter/features/discovery/presentation/pages/topic_hub_page.dart';
-import 'package:vit_trade_flutter/features/discovery/presentation/pages/unified_search_page.dart';
-import 'package:vit_trade_flutter/features/predictions/presentation/pages/event/prediction_event_detail_page.dart';
+import 'package:vit_trade_flutter/features/discovery/presentation/phone/pages/topic_hub_page.dart';
+import 'package:vit_trade_flutter/features/discovery/presentation/phone/pages/unified_search_page.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/phone/pages/event/prediction_event_detail_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

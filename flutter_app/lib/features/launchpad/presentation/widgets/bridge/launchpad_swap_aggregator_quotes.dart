@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_swap_aggregator_page.dart';
+part of '../../phone/pages/bridge/launchpad_swap_aggregator_page.dart';
 
 class _DexList extends StatelessWidget {
   const _DexList({

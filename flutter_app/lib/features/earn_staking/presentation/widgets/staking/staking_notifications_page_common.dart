@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_notifications_page.dart';
+part of '../../phone/pages/staking/staking_notifications_page.dart';
 
 class _FooterNote extends StatelessWidget {
   const _FooterNote({required this.text});

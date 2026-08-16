@@ -1,4 +1,4 @@
-part of '../pages/onboarding_flow_page.dart';
+part of '../phone/pages/onboarding_flow_page.dart';
 
 class _ProgressHeader extends StatelessWidget {
   const _ProgressHeader({required this.currentIndex, required this.total});

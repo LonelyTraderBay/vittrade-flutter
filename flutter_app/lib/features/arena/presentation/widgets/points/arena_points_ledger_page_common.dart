@@ -1,4 +1,4 @@
-part of '../../pages/points/arena_points_ledger_page.dart';
+part of '../../phone/pages/points/arena_points_ledger_page.dart';
 
 Color _entryColor(String typeId) {
   return switch (typeId) {

@@ -16,7 +16,7 @@ import 'package:vit_trade_flutter/shared/widgets/vit_info_row.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_input.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_sheet_handle.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/widgets/hub/wallet_formatters.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/phone/wallet_formatters.dart';
 
 part 'wallet_transfer_confirm_sheet.dart';
 part 'wallet_transfer_wallet_cards.dart';

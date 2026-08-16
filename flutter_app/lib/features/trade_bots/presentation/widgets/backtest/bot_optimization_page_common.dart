@@ -1,4 +1,4 @@
-part of '../../pages/backtest/bot_optimization_page.dart';
+part of '../../phone/pages/backtest/bot_optimization_page.dart';
 
 class _StartFooter extends StatelessWidget {
   const _StartFooter({required this.onStart});

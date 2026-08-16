@@ -1,4 +1,4 @@
-part of '../../pages/provider/provider_governance_page.dart';
+part of '../../phone/pages/provider/provider_governance_page.dart';
 
 class _MessagePanel extends StatelessWidget {
   const _MessagePanel({required this.onClose});

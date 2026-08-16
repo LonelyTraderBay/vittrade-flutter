@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_analytics_page.dart';
+part of '../../phone/pages/savings/savings_analytics_page.dart';
 
 class _SummaryHero extends StatelessWidget {
   const _SummaryHero({required this.summary});

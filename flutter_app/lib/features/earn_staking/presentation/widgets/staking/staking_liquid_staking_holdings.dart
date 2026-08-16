@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_liquid_staking_page.dart';
+part of '../../phone/pages/staking/staking_liquid_staking_page.dart';
 
 class _HoldingsTab extends StatelessWidget {
   const _HoldingsTab({required this.snapshot, required this.onStakeNow});

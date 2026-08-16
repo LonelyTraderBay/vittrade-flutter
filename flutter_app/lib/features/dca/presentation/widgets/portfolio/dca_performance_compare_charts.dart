@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/dca_performance_compare_page.dart';
+part of '../../phone/pages/portfolio/dca_performance_compare_page.dart';
 
 class _ComparisonChartCard extends StatelessWidget {
   const _ComparisonChartCard({required this.points});

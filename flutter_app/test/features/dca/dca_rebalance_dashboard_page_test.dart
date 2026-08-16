@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/dca/data/dca_repository.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/portfolio/dca_rebalance_dashboard_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/portfolio/dca_rebalance_dashboard_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {
@@ -57,7 +57,7 @@ void main() {
 
   test('SC-171 keeps the Home-standard page foundation contract', () {
     final pageSource = File(
-      'lib/features/dca/presentation/pages/portfolio/dca_rebalance_dashboard_page.dart',
+      'lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_dashboard_page.dart',
     ).readAsStringSync();
 
     expect(pageSource, contains('VitInsetScrollView'));

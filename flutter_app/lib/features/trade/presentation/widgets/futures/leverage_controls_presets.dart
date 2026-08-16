@@ -1,4 +1,4 @@
-part of '../../pages/futures/leverage_page.dart';
+part of '../../phone/pages/futures/leverage_page.dart';
 
 class _LeverageSlider extends StatelessWidget {
   const _LeverageSlider({

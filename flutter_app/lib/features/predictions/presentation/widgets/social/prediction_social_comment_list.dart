@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_social_page.dart';
+part of '../../phone/pages/social/prediction_social_page.dart';
 
 class _CommentsSection extends StatelessWidget {
   const _CommentsSection({required this.snapshot});

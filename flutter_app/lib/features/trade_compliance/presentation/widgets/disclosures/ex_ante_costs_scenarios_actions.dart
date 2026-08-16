@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/ex_ante_costs_page.dart';
+part of '../../phone/pages/disclosures/ex_ante_costs_page.dart';
 
 class _Scenarios extends StatelessWidget {
   const _Scenarios({

@@ -1,4 +1,4 @@
-// Pixel baseline for lib/features/trade/presentation/pages/hub/trade_page.dart
+// Pixel baseline for lib/features/trade/presentation/phone/pages/trade_page.dart
 // ("SC-048 Trade", see
 // docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md).
 // Pinned at 360x800 (minimum supported phone size, matches the convention

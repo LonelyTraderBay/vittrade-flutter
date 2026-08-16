@@ -92,7 +92,7 @@ mixin _DcaRepositoryMethodsPart04 on _MockDcaRepositoryBase {
       backRoute: '/home',
       componentName: 'DCAOverviewCard',
       componentLocation:
-          'flutter_app/lib/features/dca/presentation/pages/dca_overview_demo.dart',
+          'flutter_app/lib/features/dca/presentation/phone/pages/hub/dca_overview_demo.dart',
       contractNotes:
           'Reference/admin surface gated behind internal role or dev flag. Demo data mirrors DCA overview states; plan create, pause, rebalance and schedule actions remain mock-local until API wiring.',
       scenarios: [

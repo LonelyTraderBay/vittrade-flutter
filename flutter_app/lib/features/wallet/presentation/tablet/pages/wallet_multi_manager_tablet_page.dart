@@ -30,8 +30,7 @@ class WalletMultiManagerTabletPage extends ConsumerStatefulWidget {
       Key('sc148_multi_manager_wallet_tablet_$id');
   static Key revealKey(String id) =>
       Key('sc148_multi_manager_reveal_tablet_$id');
-  static Key copyKey(String id) =>
-      Key('sc148_multi_manager_copy_tablet_$id');
+  static Key copyKey(String id) => Key('sc148_multi_manager_copy_tablet_$id');
 
   @override
   ConsumerState<WalletMultiManagerTabletPage> createState() =>
@@ -158,9 +157,7 @@ class _WalletMultiManagerTabletPageState
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
       rhythm: VitPageRhythm.form,
-      children: [
-        for (final wallet in snapshot.wallets) _walletCard(wallet),
-      ],
+      children: [for (final wallet in snapshot.wallets) _walletCard(wallet)],
     );
   }
 
@@ -234,7 +231,9 @@ class _WalletMultiManagerTabletPageState
                 onPressed: () async {
                   await Clipboard.setData(ClipboardData(text: wallet.address));
                   if (!mounted) return;
-                  setState(() => _notice = 'Đã sao chép địa chỉ ${wallet.name}.');
+                  setState(
+                    () => _notice = 'Đã sao chép địa chỉ ${wallet.name}.',
+                  );
                 },
                 icon: const Icon(Icons.copy_outlined),
               ),
@@ -347,9 +346,7 @@ class _WalletMultiManagerTabletPageState
         ),
         VitCtaButton(
           key: WalletMultiManagerTabletPage.addWalletKey,
-          onPressed: () => setState(
-            () => _notice = 'Chưa kết nối tạo ví mới.',
-          ),
+          onPressed: () => setState(() => _notice = 'Chưa kết nối tạo ví mới.'),
           variant: VitCtaButtonVariant.secondary,
           leading: const Icon(Icons.add_rounded),
           child: const Text('Thêm ví'),

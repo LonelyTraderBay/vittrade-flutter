@@ -1,4 +1,4 @@
-part of '../pages/rewards_hub_page.dart';
+part of '../phone/pages/rewards_hub_page.dart';
 
 class _TaskSection extends StatelessWidget {
   const _TaskSection({

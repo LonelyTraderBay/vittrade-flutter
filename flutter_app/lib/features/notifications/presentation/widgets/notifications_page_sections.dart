@@ -1,4 +1,4 @@
-part of '../pages/notifications_page.dart';
+part of '../phone/pages/notifications_page.dart';
 
 class _NotificationFilterBand extends StatelessWidget {
   const _NotificationFilterBand({

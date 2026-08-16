@@ -1,4 +1,4 @@
-part of '../../pages/flow/copy_confirmation_page.dart';
+part of '../../phone/pages/flow/copy_confirmation_page.dart';
 
 class _CoolingOffCard extends StatelessWidget {
   const _CoolingOffCard({required this.hours});

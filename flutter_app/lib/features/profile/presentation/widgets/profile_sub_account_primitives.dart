@@ -1,4 +1,4 @@
-part of '../pages/sub_account_page.dart';
+part of '../phone/pages/sub_account_page.dart';
 
 class _AccountAvatar extends StatelessWidget {
   const _AccountAvatar({required this.initial, required this.color});

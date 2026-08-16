@@ -1,4 +1,4 @@
-part of '../../pages/claim/launchpad_claim_receipt_page.dart';
+part of '../../phone/pages/claim/launchpad_claim_receipt_page.dart';
 
 class _ClaimableBanner extends StatelessWidget {
   const _ClaimableBanner({required this.receipt, required this.onClaim});

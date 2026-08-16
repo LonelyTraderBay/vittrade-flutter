@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/performance_scenarios_page.dart';
+part of '../../phone/pages/disclosures/performance_scenarios_page.dart';
 
 class _WarningNotice extends StatelessWidget {
   const _WarningNotice();

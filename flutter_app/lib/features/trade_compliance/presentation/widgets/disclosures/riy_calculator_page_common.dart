@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/riy_calculator_page.dart';
+part of '../../phone/pages/disclosures/riy_calculator_page.dart';
 
 class _RiyChartPainter extends CustomPainter {
   const _RiyChartPainter(this.projections);

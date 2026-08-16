@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_my_orders_page.dart';
+part of '../../phone/pages/orders/p2p_my_orders_page.dart';
 
 class _StatsRow extends StatelessWidget {
   const _StatsRow({required this.snapshot});

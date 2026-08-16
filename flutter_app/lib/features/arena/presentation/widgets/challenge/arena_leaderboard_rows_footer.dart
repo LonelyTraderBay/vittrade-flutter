@@ -1,4 +1,4 @@
-part of '../../pages/challenge/arena_leaderboard_page.dart';
+part of '../../phone/pages/challenge/arena_leaderboard_page.dart';
 
 class _LeaderboardRow extends StatelessWidget {
   const _LeaderboardRow({

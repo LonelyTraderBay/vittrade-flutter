@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 
 /// SEC-S45 (A-Plus GĐ3): route không khớp phải ra trang lỗi tiếng Việt
 /// (errorBuilder), không phải ErrorScreen mặc định tiếng Anh của go_router,

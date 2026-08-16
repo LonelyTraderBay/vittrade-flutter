@@ -1,4 +1,4 @@
-part of '../../pages/backtest/bot_strategy_compare_page.dart';
+part of '../../phone/pages/backtest/bot_strategy_compare_page.dart';
 
 class _EquityChartCard extends StatelessWidget {
   const _EquityChartCard({required this.points, required this.strategies});

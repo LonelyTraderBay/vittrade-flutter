@@ -1,4 +1,4 @@
-part of '../../pages/execution/best_execution_reports_page.dart';
+part of '../../phone/pages/execution/best_execution_reports_page.dart';
 
 class _ComplianceNotice extends StatelessWidget {
   const _ComplianceNotice();

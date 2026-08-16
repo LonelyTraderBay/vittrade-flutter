@@ -1,4 +1,4 @@
-part of '../../pages/schedule/dca_smart_rules_page.dart';
+part of '../../phone/pages/schedule/dca_smart_rules_page.dart';
 
 class _TopTabs extends StatelessWidget {
   const _TopTabs({required this.activeTab, required this.onChanged});

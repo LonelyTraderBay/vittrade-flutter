@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_gas_tracker_page.dart';
+part of '../../phone/pages/tools/launchpad_gas_tracker_page.dart';
 
 const double _gasChartExtent =
     AppSpacing.x7 + AppSpacing.x6 + AppSpacing.x5 + AppSpacing.x4;

@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/reset_password_page.dart';
 import 'package:vit_trade_flutter/features/dev/data/dev_tools_repository.dart';
-import 'package:vit_trade_flutter/features/dev/presentation/pages/missing_screens_showcase_page.dart';
+import 'package:vit_trade_flutter/features/dev/presentation/phone/pages/missing_screens_showcase_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

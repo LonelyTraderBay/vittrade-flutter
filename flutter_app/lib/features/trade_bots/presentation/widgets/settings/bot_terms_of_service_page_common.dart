@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_terms_of_service_page.dart';
+part of '../../phone/pages/settings/bot_terms_of_service_page.dart';
 
 class _TermsCta extends StatelessWidget {
   const _TermsCta({

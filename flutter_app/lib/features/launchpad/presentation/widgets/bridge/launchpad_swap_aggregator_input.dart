@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_swap_aggregator_page.dart';
+part of '../../phone/pages/bridge/launchpad_swap_aggregator_page.dart';
 
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.activeTab, required this.onChanged});

@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_page.dart';
+part of '../../phone/pages/savings/savings_page.dart';
 
 List<SavingsProductDraft> _filteredProducts(
   SavingsController controller,

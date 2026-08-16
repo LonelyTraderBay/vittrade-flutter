@@ -1,4 +1,4 @@
-part of '../pages/device_management_page.dart';
+part of '../phone/pages/device_management_page.dart';
 
 class _MetaItem extends StatelessWidget {
   const _MetaItem({required this.icon, required this.value});

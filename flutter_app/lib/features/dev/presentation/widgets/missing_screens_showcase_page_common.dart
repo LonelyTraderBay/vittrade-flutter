@@ -1,4 +1,4 @@
-part of '../pages/missing_screens_showcase_page.dart';
+part of '../phone/pages/missing_screens_showcase_page.dart';
 
 class _IconBadge extends StatelessWidget {
   const _IconBadge({

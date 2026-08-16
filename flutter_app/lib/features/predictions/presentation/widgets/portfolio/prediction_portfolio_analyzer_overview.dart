@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_portfolio_analyzer_page.dart';
+part of '../../phone/pages/portfolio/prediction_portfolio_analyzer_page.dart';
 
 class _AnalyzerTabBar extends StatelessWidget {
   const _AnalyzerTabBar({required this.activeTab, required this.onChanged});

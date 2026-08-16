@@ -1,4 +1,4 @@
-part of '../pages/topic_hub_page.dart';
+part of '../phone/pages/topic_hub_page.dart';
 
 List<Widget> _withSectionGaps(List<Widget> children) {
   if (children.isEmpty) return const [];

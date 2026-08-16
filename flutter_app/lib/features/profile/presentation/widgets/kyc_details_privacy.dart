@@ -1,4 +1,4 @@
-part of '../pages/kyc_page.dart';
+part of '../phone/pages/kyc_page.dart';
 
 class _DetailsBlock extends StatelessWidget {
   const _DetailsBlock({

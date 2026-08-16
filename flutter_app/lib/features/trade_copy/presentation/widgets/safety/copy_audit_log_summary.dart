@@ -1,4 +1,4 @@
-part of '../../pages/safety/copy_audit_log_page.dart';
+part of '../../phone/pages/safety/copy_audit_log_page.dart';
 
 class _SummarySection extends StatelessWidget {
   const _SummarySection({required this.events});

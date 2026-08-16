@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_webhooks_page.dart';
+part of '../../phone/pages/tools/launchpad_webhooks_page.dart';
 
 final class _WebhookStats {
   const _WebhookStats({

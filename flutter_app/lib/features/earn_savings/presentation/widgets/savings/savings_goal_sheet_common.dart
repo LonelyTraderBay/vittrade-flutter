@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_goal_page.dart';
+part of '../../phone/pages/savings/savings_goal_page.dart';
 
 class _SheetFrame extends StatelessWidget {
   const _SheetFrame({required this.child, required this.heightFactor});

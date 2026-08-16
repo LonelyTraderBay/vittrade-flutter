@@ -1,4 +1,4 @@
-part of '../../pages/tools/portfolio_analytics_page.dart';
+part of '../../phone/pages/tools/portfolio_analytics_page.dart';
 
 class _PlaceholderAnalyticsView extends StatelessWidget {
   const _PlaceholderAnalyticsView({required this.view});

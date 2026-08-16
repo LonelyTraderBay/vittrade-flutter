@@ -1,4 +1,4 @@
-part of '../../pages/client_money/client_money_protection_page.dart';
+part of '../../phone/pages/client_money/client_money_protection_page.dart';
 
 class _Reconciliation extends StatelessWidget {
   const _Reconciliation();

@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_analytics_page.dart';
+part of '../../phone/pages/tools/advanced_analytics_page.dart';
 
 class _UnderlineTabs extends StatelessWidget {
   const _UnderlineTabs({required this.activeId, required this.onChanged});

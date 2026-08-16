@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_history_page.dart';
+part of '../../phone/pages/staking/staking_history_page.dart';
 
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({required this.snapshot});

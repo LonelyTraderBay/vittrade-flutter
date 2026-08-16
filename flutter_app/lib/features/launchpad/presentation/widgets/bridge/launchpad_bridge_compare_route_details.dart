@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_bridge_compare_page.dart';
+part of '../../phone/pages/bridge/launchpad_bridge_compare_page.dart';
 
 class _ExpandedRouteDetails extends StatelessWidget {
   const _ExpandedRouteDetails({required this.route, required this.comparison});

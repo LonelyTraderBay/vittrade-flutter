@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/widgets/hub/dca_currency_formatters.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/widgets/phone/dca_currency_formatters.dart';
 
 void main() {
   group('formatFullVnd', () {

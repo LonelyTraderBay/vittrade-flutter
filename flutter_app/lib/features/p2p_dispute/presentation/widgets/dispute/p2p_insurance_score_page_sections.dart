@@ -1,4 +1,4 @@
-part of '../../pages/dispute/p2p_insurance_score_page.dart';
+part of '../../phone/pages/dispute/p2p_insurance_score_page.dart';
 
 class _ScoreOverviewCard extends StatelessWidget {
   const _ScoreOverviewCard({required this.snapshot});

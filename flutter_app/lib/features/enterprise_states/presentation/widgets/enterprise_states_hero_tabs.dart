@@ -1,4 +1,4 @@
-part of '../pages/enterprise_states_page.dart';
+part of '../phone/pages/enterprise_states_page.dart';
 
 class _SectionTabs extends StatelessWidget {
   const _SectionTabs({

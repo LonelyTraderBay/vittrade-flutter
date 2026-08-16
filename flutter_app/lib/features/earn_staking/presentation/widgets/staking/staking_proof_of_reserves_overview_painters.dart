@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_proof_of_reserves_page.dart';
+part of '../../phone/pages/staking/staking_proof_of_reserves_page.dart';
 
 const double _reserveProgressRingExtent = AppSpacing.x7 * 2 + AppSpacing.x4;
 

@@ -1,4 +1,4 @@
-part of '../../pages/ads/p2p_ad_analytics_page.dart';
+part of '../../phone/pages/ads/p2p_ad_analytics_page.dart';
 
 class _AdIdentityCard extends StatelessWidget {
   const _AdIdentityCard({required this.snapshot});

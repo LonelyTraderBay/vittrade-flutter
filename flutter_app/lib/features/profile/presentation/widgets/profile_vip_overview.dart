@@ -1,4 +1,4 @@
-part of '../pages/vip_page.dart';
+part of '../phone/pages/vip_page.dart';
 
 class _OverviewTab extends StatelessWidget {
   const _OverviewTab({super.key, required this.snapshot});

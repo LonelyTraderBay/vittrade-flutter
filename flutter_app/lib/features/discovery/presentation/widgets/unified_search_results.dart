@@ -1,4 +1,4 @@
-part of '../pages/unified_search_page.dart';
+part of '../phone/pages/unified_search_page.dart';
 
 class _ResultsState extends StatelessWidget {
   const _ResultsState({required this.snapshot});

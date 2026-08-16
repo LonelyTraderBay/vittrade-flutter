@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_security_center_page.dart';
+part of '../../phone/pages/security/p2p_security_center_page.dart';
 
 class _WhitelistAction extends StatelessWidget {
   const _WhitelistAction({

@@ -1,4 +1,4 @@
-part of '../../pages/research/token_info_page.dart';
+part of '../../phone/pages/research/token_info_page.dart';
 
 class _OnchainTab extends StatelessWidget {
   const _OnchainTab({required this.snapshot});

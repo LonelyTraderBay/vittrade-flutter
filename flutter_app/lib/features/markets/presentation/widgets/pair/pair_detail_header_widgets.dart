@@ -1,4 +1,4 @@
-part of '../../pages/pair/pair_detail_page.dart';
+part of '../../phone/pages/pair/pair_detail_page.dart';
 
 class _PairHeader extends StatelessWidget {
   const _PairHeader({

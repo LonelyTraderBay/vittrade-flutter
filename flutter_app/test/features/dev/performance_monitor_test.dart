@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/dev/data/dev_tools_repository.dart';
-import 'package:vit_trade_flutter/features/dev/presentation/pages/performance_monitor.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/dev/presentation/phone/pages/performance_monitor.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

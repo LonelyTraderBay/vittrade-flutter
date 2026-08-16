@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_portfolio_analyzer_page.dart';
+part of '../../phone/pages/portfolio/prediction_portfolio_analyzer_page.dart';
 
 class _RiskMetricsSection extends StatelessWidget {
   const _RiskMetricsSection({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_trading_demo_page.dart';
+part of '../../phone/pages/tools/advanced_trading_demo_page.dart';
 
 class _AnalyticsTab extends StatelessWidget {
   const _AnalyticsTab({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_correlations_page.dart';
+part of '../../phone/pages/tools/market_correlations_page.dart';
 
 class _SortChips extends StatelessWidget {
   const _SortChips({required this.sortOrder, required this.onSelected});

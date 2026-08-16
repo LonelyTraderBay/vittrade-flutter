@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_multisig_page.dart';
+part of '../../phone/pages/tools/launchpad_multisig_page.dart';
 
 class _SafeSelector extends StatelessWidget {
   const _SafeSelector({

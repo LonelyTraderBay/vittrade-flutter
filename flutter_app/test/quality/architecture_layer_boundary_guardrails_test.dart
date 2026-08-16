@@ -48,7 +48,10 @@ void main() {
         ),
         pathFilter: (path) =>
             path.contains('/presentation/pages/') ||
-            path.contains('/presentation/widgets/'),
+            path.contains('/presentation/widgets/') ||
+            RegExp(
+              r'/presentation/(phone|tablet|web)/(pages|widgets)/',
+            ).hasMatch(path),
       );
 
       expect(

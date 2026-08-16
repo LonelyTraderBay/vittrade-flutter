@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/features/home/data/providers/home_repository_p
 import 'package:vit_trade_flutter/features/home/data/repositories/mock_home_repository.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/domain/repositories/home_repository.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/withdraw_page.dart';
 
 void main() {

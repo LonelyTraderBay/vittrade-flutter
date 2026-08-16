@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/providers/dca_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/dca/data/dca_repository.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -63,15 +63,15 @@ void main() {
 
   test('SC-170 keeps the Home-standard page foundation contract', () {
     final pageSource = File(
-      'lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page.dart',
+      'lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart',
     ).readAsStringSync();
     final source = [
       pageSource,
       File(
-        'lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page_allocation_strategy.dart',
+        'lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page_allocation_strategy.dart',
       ).readAsStringSync(),
       File(
-        'lib/features/dca/presentation/pages/portfolio/dca_rebalance_config_page_settings_and_preview.dart',
+        'lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page_settings_and_preview.dart',
       ).readAsStringSync(),
     ].join('\n');
 

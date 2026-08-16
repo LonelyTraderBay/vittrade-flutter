@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_order_proof_page.dart';
+part of '../../phone/pages/orders/p2p_order_proof_page.dart';
 
 class _OrderProofSummary extends StatelessWidget {
   const _OrderProofSummary({required this.order});

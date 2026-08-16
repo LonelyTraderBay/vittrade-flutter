@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_risk_calculator_page.dart';
+part of '../../phone/pages/portfolio/prediction_risk_calculator_page.dart';
 
 class _ScenariosTab extends StatelessWidget {
   const _ScenariosTab({required this.inputs, required this.metrics});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/network_status_page.dart';
+part of '../../phone/pages/tools/network_status_page.dart';
 
 class _LegendCard extends StatelessWidget {
   const _LegendCard();

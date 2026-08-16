@@ -108,7 +108,10 @@ void main() {
       ).listSync(recursive: true).whereType<File>()) {
         final path = file.path.replaceAll('\\', '/');
         if (!path.endsWith('.dart')) continue;
-        if (!path.contains('/presentation/pages/')) continue;
+        final isPage =
+            path.contains('/presentation/pages/') ||
+            RegExp(r'/presentation/(phone|tablet|web)/pages/').hasMatch(path);
+        if (!isPage) continue;
 
         final source = file.readAsStringSync();
         final hasMutableLateList = RegExp(

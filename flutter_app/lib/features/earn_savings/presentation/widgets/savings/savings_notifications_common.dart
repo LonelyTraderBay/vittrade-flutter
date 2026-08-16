@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_notifications_page.dart';
+part of '../../phone/pages/savings/savings_notifications_page.dart';
 
 class _ClearAllButton extends StatelessWidget {
   const _ClearAllButton({required this.onTap});

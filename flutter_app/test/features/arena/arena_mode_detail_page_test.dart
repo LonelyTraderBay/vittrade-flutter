@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/arena/data/arena_repository.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/challenge/arena_challenge_detail_page.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/studio/arena_creator_page.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/challenge/arena_mode_detail_page.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/studio/arena_studio_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/studio/arena_creator_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/challenge/arena_mode_detail_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/studio/arena_studio_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';

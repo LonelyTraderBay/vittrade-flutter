@@ -1,4 +1,4 @@
-part of '../pages/device_management_page.dart';
+part of '../phone/pages/device_management_page.dart';
 
 class _SecuritySummaryCard extends StatelessWidget {
   const _SecuritySummaryCard({

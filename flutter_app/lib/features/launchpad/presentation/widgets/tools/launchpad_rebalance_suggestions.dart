@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_rebalance_page.dart';
+part of '../../phone/pages/tools/launchpad_rebalance_page.dart';
 
 class LaunchpadRebalanceSuggestionsSection extends StatelessWidget {
   const LaunchpadRebalanceSuggestionsSection({

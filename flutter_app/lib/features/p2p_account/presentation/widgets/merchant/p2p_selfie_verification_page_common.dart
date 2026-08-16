@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_selfie_verification_page.dart';
+part of '../../phone/pages/merchant/p2p_selfie_verification_page.dart';
 
 class _LivenessActionTile extends StatelessWidget {
   const _LivenessActionTile({required this.action, required this.completed});

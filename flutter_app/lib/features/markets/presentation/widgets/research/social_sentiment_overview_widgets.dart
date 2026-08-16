@@ -1,4 +1,4 @@
-part of '../../pages/research/social_sentiment_page.dart';
+part of '../../phone/pages/research/social_sentiment_page.dart';
 
 class _SocialDominanceCard extends StatelessWidget {
   const _SocialDominanceCard({required this.global});

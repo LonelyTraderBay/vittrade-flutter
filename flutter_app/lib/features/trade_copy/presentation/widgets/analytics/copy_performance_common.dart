@@ -1,4 +1,4 @@
-part of '../../pages/analytics/copy_performance_page.dart';
+part of '../../phone/pages/analytics/copy_performance_page.dart';
 
 class _LineChartPainter extends CustomPainter {
   const _LineChartPainter({required this.points});

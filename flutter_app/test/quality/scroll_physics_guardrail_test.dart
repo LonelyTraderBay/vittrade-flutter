@@ -55,7 +55,7 @@ void main() {
       'lib/features/profile/presentation/widgets/device_management_page_sections.dart',
       'lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart',
       'lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart',
-      'lib/features/wallet/presentation/pages/assets/buy_crypto_page.dart',
+      'lib/features/wallet/presentation/phone/pages/assets/buy_crypto_page.dart',
       'lib/features/wallet/presentation/phone/pages/deposit_page.dart',
       'lib/features/wallet/presentation/phone/pages/transfer_page.dart',
       'lib/features/wallet/presentation/widgets/transfer/wallet_transfer_confirm_sheet.dart',

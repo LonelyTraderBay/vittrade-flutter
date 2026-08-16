@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_regulatory_framework_page.dart';
+part of '../../phone/pages/staking/staking_regulatory_framework_page.dart';
 
 class _LicenseDetailSheet extends StatelessWidget {
   const _LicenseDetailSheet({required this.license});

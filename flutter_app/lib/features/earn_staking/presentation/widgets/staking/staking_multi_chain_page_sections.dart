@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_multi_chain_page.dart';
+part of '../../phone/pages/staking/staking_multi_chain_page.dart';
 
 class _TotalStats extends StatelessWidget {
   const _TotalStats({required this.snapshot});

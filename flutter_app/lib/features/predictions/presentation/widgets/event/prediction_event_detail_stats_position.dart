@@ -1,4 +1,4 @@
-part of '../../pages/event/prediction_event_detail_page.dart';
+part of '../../phone/pages/event/prediction_event_detail_page.dart';
 
 class _StatsGrid extends StatelessWidget {
   const _StatsGrid({required this.event});

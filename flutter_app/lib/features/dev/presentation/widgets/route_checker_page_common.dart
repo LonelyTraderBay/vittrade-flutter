@@ -1,4 +1,4 @@
-part of '../pages/route_checker_page.dart';
+part of '../phone/pages/route_checker_page.dart';
 
 class _ActionsRow extends StatelessWidget {
   const _ActionsRow({

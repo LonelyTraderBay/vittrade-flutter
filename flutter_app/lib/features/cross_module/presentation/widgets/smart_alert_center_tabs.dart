@@ -1,4 +1,4 @@
-part of '../pages/smart_alert_center_page.dart';
+part of '../phone/pages/smart_alert_center_page.dart';
 
 class _SmartAlertTabs extends StatelessWidget {
   const _SmartAlertTabs({

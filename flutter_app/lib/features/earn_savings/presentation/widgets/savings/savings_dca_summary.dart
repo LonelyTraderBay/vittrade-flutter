@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_dca_page.dart';
+part of '../../phone/pages/savings/savings_dca_page.dart';
 
 class _DcaSummaryCard extends StatelessWidget {
   const _DcaSummaryCard({

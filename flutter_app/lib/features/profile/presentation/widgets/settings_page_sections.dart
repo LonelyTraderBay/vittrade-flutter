@@ -1,4 +1,4 @@
-part of '../pages/settings_page.dart';
+part of '../phone/pages/settings_page.dart';
 
 class _CurrencyCard extends StatelessWidget {
   const _CurrencyCard({

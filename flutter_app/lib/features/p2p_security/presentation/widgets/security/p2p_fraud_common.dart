@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_fraud_prevention_page.dart';
+part of '../../phone/pages/security/p2p_fraud_prevention_page.dart';
 
 class _Disclosure extends StatelessWidget {
   const _Disclosure({required this.text});

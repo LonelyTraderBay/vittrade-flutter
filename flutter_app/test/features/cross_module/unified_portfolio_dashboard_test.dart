@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/hub/arena_home_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/hub/arena_home_page.dart';
 import 'package:vit_trade_flutter/features/cross_module/data/unified_portfolio_repository.dart';
-import 'package:vit_trade_flutter/features/cross_module/presentation/pages/unified_portfolio_dashboard_page.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/hub/dca_page.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/hub/p2p_home_page.dart';
-import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/predictions_home_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_page.dart';
+import 'package:vit_trade_flutter/features/cross_module/presentation/phone/pages/unified_portfolio_dashboard_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/hub/dca_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/hub/p2p_home_page.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

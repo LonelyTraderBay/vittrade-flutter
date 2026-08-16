@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/earn_core/data/earn_repository.dart';
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_analytics_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_analytics_page.dart';
 import 'package:vit_trade_flutter/features/earn_core/presentation/widgets/earn_custody_risk_banner.dart';
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

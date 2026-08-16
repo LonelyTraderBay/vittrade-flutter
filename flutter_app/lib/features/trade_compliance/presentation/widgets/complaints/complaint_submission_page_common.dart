@@ -1,4 +1,4 @@
-part of '../../pages/complaints/complaint_submission_page.dart';
+part of '../../phone/pages/complaints/complaint_submission_page.dart';
 
 class _SubmissionFooter extends StatelessWidget {
   const _SubmissionFooter({required this.enabled, required this.onSubmit});

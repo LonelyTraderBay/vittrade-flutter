@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_tax_reporting_page.dart';
+part of '../../phone/pages/security/p2p_tax_reporting_page.dart';
 
 class _TaxHero extends StatelessWidget {
   const _TaxHero({required this.snapshot});

@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/admin/presentation/pages/admin_home_page.dart';
-import 'package:vit_trade_flutter/features/p2p_account/presentation/pages/payment/p2p_payment_methods_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart';
-import 'package:vit_trade_flutter/features/predictions/presentation/pages/hub/predictions_home_page.dart';
+import 'package:vit_trade_flutter/features/admin/presentation/phone/pages/admin_home_page.dart';
+import 'package:vit_trade_flutter/features/p2p_account/presentation/phone/pages/payment/p2p_payment_methods_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_page.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_book_page.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/hub/wallet_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
 
 void main() {
   Future<void> pumpRoute(WidgetTester tester, String initialLocation) async {

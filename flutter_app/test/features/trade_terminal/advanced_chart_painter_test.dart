@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/trade_terminal/domain/entities/trade_terminal_entities.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/advanced_chart_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/advanced_chart_page.dart';
 
 /// PERF-HN5: painter perf/repaint regression coverage for the advanced
 /// chart. `_AdvancedTradeChartPainter` and `_expandedCandlesFor` are private

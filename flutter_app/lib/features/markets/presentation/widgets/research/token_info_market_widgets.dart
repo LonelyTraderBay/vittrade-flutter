@@ -1,4 +1,4 @@
-part of '../../pages/research/token_info_page.dart';
+part of '../../phone/pages/research/token_info_page.dart';
 
 class _SupplyCard extends StatelessWidget {
   const _SupplyCard({required this.fundamentals, required this.supplyPct});

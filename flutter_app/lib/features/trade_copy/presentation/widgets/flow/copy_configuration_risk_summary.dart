@@ -1,4 +1,4 @@
-part of '../../pages/flow/copy_configuration_page.dart';
+part of '../../phone/pages/flow/copy_configuration_page.dart';
 
 class _RiskSection extends StatelessWidget {
   const _RiskSection({required this.draft, required this.onDraftChanged});

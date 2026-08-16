@@ -99,7 +99,7 @@ void main() {
     // same 4 regexes as the home-reference divergence scan above, scoped
     // to just the two evidence-vetted canonical pages and their bundles.
     const tabbedDetailBundle = <String>[
-      'lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart',
+      'lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart',
       'lib/features/wallet/presentation/widgets/tools/wallet_token_approval_badges.dart',
       'lib/features/wallet/presentation/widgets/tools/wallet_token_approval_tabs.dart',
       'lib/features/wallet/presentation/widgets/tools/wallet_token_revoke_sheet.dart',
@@ -140,7 +140,7 @@ void main() {
     }
 
     const structuralMarkers = <String, String>{
-      'lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart':
+      'lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart':
           'WalletTokenApprovalTabs(',
       'lib/features/wallet/presentation/phone/pages/address_add_page.dart':
           'AddressAddForm.sections(',
@@ -165,7 +165,7 @@ void main() {
     // needles as symbol-level substrings (not whole-line snippets) so a
     // `dart format` reflow doesn't spuriously break this test.
     const requiredNeedles = <String, List<String>>{
-      'lib/features/trade_copy/presentation/pages/provider/provider_leaderboard_page.dart':
+      'lib/features/trade_copy/presentation/phone/pages/provider/provider_leaderboard_page.dart':
           ['entry.\$1 != providers.length - 1', 'AppSpacing.rowGap'],
       'lib/app/theme/spacing/wallet_spacing_tokens.dart': [
         'walletManagerAllWalletGap = AppSpacing.rowGap',
@@ -177,7 +177,7 @@ void main() {
       'lib/app/theme/spacing/trade_spacing_tokens.dart': [
         'preCopyAssessmentCtaGap = 12',
       ],
-      'lib/features/trade_copy/presentation/pages/flow/pre_copy_assessment_page.dart':
+      'lib/features/trade_copy/presentation/phone/pages/flow/pre_copy_assessment_page.dart':
           [
             'question != snapshot.questions.last',
             'TradeSpacingTokens.preCopyAssessmentCtaGap',
@@ -185,9 +185,9 @@ void main() {
       'lib/app/theme/spacing/p2p_spacing_tokens.dart': [
         'p2pPaymentMethodsListSectionGap = AppSpacing.rowGap',
       ],
-      'lib/features/markets/presentation/pages/research/token_unlocks_page.dart':
+      'lib/features/markets/presentation/phone/pages/research/token_unlocks_page.dart':
           ['_unlockListGap = AppSpacing.rowGap'],
-      'lib/features/p2p_marketplace/presentation/pages/ads/p2p_my_ads_page.dart':
+      'lib/features/p2p_marketplace/presentation/phone/pages/ads/p2p_my_ads_page.dart':
           ['if (index > 0) const SizedBox(height: AppSpacing.rowGap)'],
       'lib/features/markets/presentation/widgets/research/market_news_page_sections.dart':
           ['item != news.last', 'SizedBox(height: AppSpacing.rowGap)'],

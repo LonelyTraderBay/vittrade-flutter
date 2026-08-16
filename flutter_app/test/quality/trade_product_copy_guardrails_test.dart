@@ -9,11 +9,11 @@ void main() {
     test('Trade copy high-risk flow keeps suitability review roles', () {
       final source = asciiFold(
         [
-          'lib/features/trade_copy/presentation/pages/hub/copy_trading_page.dart',
-          'lib/features/trade_copy/presentation/widgets/hub/copy_trading_hero.dart',
-          'lib/features/trade_copy/presentation/widgets/hub/copy_trading_list.dart',
-          'lib/features/trade_copy/presentation/widgets/hub/copy_trading_metrics_common.dart',
-          'lib/features/trade_copy/presentation/pages/flow/copy_confirmation_page.dart',
+          'lib/features/trade_copy/presentation/phone/pages/hub/copy_trading_page.dart',
+          'lib/features/trade_copy/presentation/widgets/phone/copy_trading_hero.dart',
+          'lib/features/trade_copy/presentation/widgets/phone/copy_trading_list.dart',
+          'lib/features/trade_copy/presentation/widgets/phone/copy_trading_metrics_common.dart',
+          'lib/features/trade_copy/presentation/phone/pages/flow/copy_confirmation_page.dart',
           'lib/features/trade_copy/presentation/widgets/flow/copy_confirmation_page_sections.dart',
           'lib/features/trade_copy/presentation/widgets/flow/copy_confirmation_page_common.dart',
           'lib/features/trade_terminal/presentation/controllers/trade_controller_models.dart',
@@ -53,9 +53,9 @@ void main() {
       final targets = [
         HighRiskCopyTarget(
           path:
-              'lib/features/trade/presentation/pages/futures/futures_page.dart',
+              'lib/features/trade/presentation/phone/pages/futures/futures_page.dart',
           paths: [
-            'lib/features/trade/presentation/pages/futures/futures_page.dart',
+            'lib/features/trade/presentation/phone/pages/futures/futures_page.dart',
             'lib/features/trade/presentation/widgets/futures/futures_page_state.dart',
             'lib/features/trade/presentation/widgets/futures/futures_page_form_controls.dart',
           ],
@@ -77,14 +77,14 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/trade/presentation/pages/margin/margin_trading_page.dart',
+              'lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart',
           paths: [
-            'lib/features/trade/presentation/pages/margin/margin_trading_page.dart',
+            'lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_simple_form.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_common.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_reserved.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_shared_helpers.dart',
-            'lib/features/trade/presentation/pages/margin/margin_trading_hub_page.dart',
+            'lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_hub_widgets.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_hub_hero_nav.dart',
             'lib/features/trade/presentation/widgets/margin/margin_trading_hub_cards.dart',

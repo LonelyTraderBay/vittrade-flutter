@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_address_book_page.dart';
+part of '../../phone/pages/tools/launchpad_address_book_page.dart';
 
 class _AddAddressSheet extends StatelessWidget {
   const _AddAddressSheet({required this.onClose});

@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/risk_indicator_explainer_page.dart';
+part of '../../phone/pages/disclosures/risk_indicator_explainer_page.dart';
 
 class _SriExplanationCard extends StatelessWidget {
   const _SriExplanationCard({required this.holdingPeriodYears});

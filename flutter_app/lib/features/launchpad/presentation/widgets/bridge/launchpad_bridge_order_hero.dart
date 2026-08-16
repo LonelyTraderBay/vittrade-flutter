@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_bridge_order_page.dart';
+part of '../../phone/pages/bridge/launchpad_bridge_order_page.dart';
 
 class _BridgeStatusHero extends StatelessWidget {
   const _BridgeStatusHero({required this.order});

@@ -1,4 +1,4 @@
-part of '../pages/help_center_page.dart';
+part of '../phone/pages/help_center_page.dart';
 
 class _HelpHero extends StatelessWidget {
   const _HelpHero({

@@ -1,4 +1,4 @@
-part of '../pages/sub_account_page.dart';
+part of '../phone/pages/sub_account_page.dart';
 
 List<Widget> _subAccountPageChildren({
   required BuildContext context,

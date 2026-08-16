@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_report_merchant_page.dart';
+part of '../../phone/pages/security/p2p_report_merchant_page.dart';
 
 class _MerchantSummaryCard extends StatelessWidget {
   const _MerchantSummaryCard({required this.snapshot});

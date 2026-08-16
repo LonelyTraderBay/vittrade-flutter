@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_institutional_page.dart';
+part of '../../phone/pages/staking/staking_institutional_page.dart';
 
 class _StatsCard extends StatelessWidget {
   const _StatsCard({required this.snapshot});

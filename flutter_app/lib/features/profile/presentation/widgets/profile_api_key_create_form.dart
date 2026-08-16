@@ -1,4 +1,4 @@
-part of '../pages/api_key_create_page.dart';
+part of '../phone/pages/api_key_create_page.dart';
 
 class _NameSection extends StatelessWidget {
   const _NameSection({required this.controller, required this.onChanged});

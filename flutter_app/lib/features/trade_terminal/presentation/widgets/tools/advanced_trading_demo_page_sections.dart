@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_trading_demo_page.dart';
+part of '../../phone/pages/tools/advanced_trading_demo_page.dart';
 
 class _PositionModeCard extends StatelessWidget {
   const _PositionModeCard({required this.activeMode, required this.onChanged});

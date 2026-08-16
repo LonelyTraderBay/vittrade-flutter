@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_page.dart';
+part of '../../phone/pages/savings/savings_page.dart';
 
 class _SavingsHero extends StatelessWidget {
   const _SavingsHero({required this.snapshot});

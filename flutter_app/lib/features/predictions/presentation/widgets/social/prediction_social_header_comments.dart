@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_social_page.dart';
+part of '../../phone/pages/social/prediction_social_page.dart';
 
 class _SocialTabBar extends StatelessWidget {
   const _SocialTabBar({required this.activeTab, required this.onChanged});

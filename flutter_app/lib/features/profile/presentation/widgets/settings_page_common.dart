@@ -1,4 +1,4 @@
-part of '../pages/settings_page.dart';
+part of '../phone/pages/settings_page.dart';
 
 class _AppInfoCard extends StatelessWidget {
   const _AppInfoCard({required this.rows});

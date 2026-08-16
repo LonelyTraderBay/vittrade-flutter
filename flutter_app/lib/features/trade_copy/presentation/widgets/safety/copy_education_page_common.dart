@@ -1,4 +1,4 @@
-part of '../../pages/safety/copy_education_page.dart';
+part of '../../phone/pages/safety/copy_education_page.dart';
 
 class _ConceptRow extends StatelessWidget {
   const _ConceptRow({required this.concept});

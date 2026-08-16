@@ -1,4 +1,4 @@
-part of '../../pages/governance/regulatory_inspection_ready_page.dart';
+part of '../../phone/pages/governance/regulatory_inspection_ready_page.dart';
 
 class _DocumentCard extends StatelessWidget {
   const _DocumentCard({required this.document});

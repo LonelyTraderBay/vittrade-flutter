@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_security_settings_page.dart';
+part of '../../phone/pages/settings/bot_security_settings_page.dart';
 
 class _ApiKeySheet extends StatefulWidget {
   const _ApiKeySheet({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_screener_page.dart';
+part of '../../phone/pages/tools/market_screener_page.dart';
 
 class _ScreenerEmptyState extends StatelessWidget {
   const _ScreenerEmptyState({required this.onReset});

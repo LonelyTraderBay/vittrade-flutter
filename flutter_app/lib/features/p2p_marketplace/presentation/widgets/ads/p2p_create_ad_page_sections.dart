@@ -1,4 +1,4 @@
-part of '../../pages/ads/p2p_create_ad_page.dart';
+part of '../../phone/pages/ads/p2p_create_ad_page.dart';
 
 class _TradeTypePicker extends StatelessWidget {
   const _TradeTypePicker({required this.value, required this.onChanged});

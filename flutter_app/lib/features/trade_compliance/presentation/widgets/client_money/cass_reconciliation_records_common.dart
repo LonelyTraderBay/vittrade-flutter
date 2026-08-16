@@ -1,4 +1,4 @@
-part of '../../pages/client_money/cass_reconciliation_page.dart';
+part of '../../phone/pages/client_money/cass_reconciliation_page.dart';
 
 class _RecordCard extends StatelessWidget {
   const _RecordCard({required this.record});

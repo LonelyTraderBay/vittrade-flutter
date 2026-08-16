@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_transaction_limits_page.dart';
+part of '../../phone/pages/security/p2p_transaction_limits_page.dart';
 
 class _TierHero extends StatelessWidget {
   const _TierHero({required this.tier});

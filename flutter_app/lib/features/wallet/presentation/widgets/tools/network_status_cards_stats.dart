@@ -1,4 +1,4 @@
-part of '../../pages/tools/network_status_page.dart';
+part of '../../phone/pages/tools/network_status_page.dart';
 
 class _NetworkCard extends StatelessWidget {
   const _NetworkCard({required this.network});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/risk_management_demo_page.dart';
+part of '../../phone/pages/tools/risk_management_demo_page.dart';
 
 class _RiskTabs extends StatelessWidget {
   const _RiskTabs({required this.active, required this.onChanged});

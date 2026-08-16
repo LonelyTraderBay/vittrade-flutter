@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_tournaments_page.dart';
+part of '../../phone/pages/social/prediction_tournaments_page.dart';
 
 class PredictionTournamentDetailPage extends ConsumerWidget {
   const PredictionTournamentDetailPage({

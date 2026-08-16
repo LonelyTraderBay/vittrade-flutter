@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_movers_page.dart';
+part of '../../phone/pages/tools/market_movers_page.dart';
 
 const double _marketMoverRowExtent = 64;
 const double _marketMoverSparklineExtent = 28;

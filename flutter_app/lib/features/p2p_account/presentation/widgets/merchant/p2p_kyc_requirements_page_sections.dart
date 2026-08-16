@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_kyc_requirements_page.dart';
+part of '../../phone/pages/merchant/p2p_kyc_requirements_page.dart';
 
 class _KycHero extends StatelessWidget {
   const _KycHero({required this.snapshot});

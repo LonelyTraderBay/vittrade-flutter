@@ -1,4 +1,4 @@
-part of '../../pages/tools/wallet_health_score_page.dart';
+part of '../../phone/pages/tools/wallet_health_score_page.dart';
 
 class _WalletHealthScorePageState extends ConsumerState<WalletHealthScorePage> {
   String _tab = _tabOverview;

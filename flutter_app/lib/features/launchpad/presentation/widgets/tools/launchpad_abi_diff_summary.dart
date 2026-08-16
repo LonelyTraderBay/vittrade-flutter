@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_abi_diff_page.dart';
+part of '../../phone/pages/tools/launchpad_abi_diff_page.dart';
 
 class _RiskHero extends StatelessWidget {
   const _RiskHero({required this.diff});

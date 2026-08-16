@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_regulatory_framework_page.dart';
+part of '../../phone/pages/staking/staking_regulatory_framework_page.dart';
 
 class _ProtectionTab extends StatelessWidget {
   const _ProtectionTab({required this.snapshot});

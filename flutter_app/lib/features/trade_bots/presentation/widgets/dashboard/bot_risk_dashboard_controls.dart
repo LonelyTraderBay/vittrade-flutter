@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_risk_dashboard_page.dart';
+part of '../../phone/pages/dashboard/bot_risk_dashboard_page.dart';
 
 class _SafetyControlsCard extends StatelessWidget {
   const _SafetyControlsCard({required this.controls});

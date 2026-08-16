@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_risk_disclosure_page.dart';
+part of '../../phone/pages/settings/bot_risk_disclosure_page.dart';
 
 class _HighRiskBanner extends StatelessWidget {
   const _HighRiskBanner({required this.snapshot});

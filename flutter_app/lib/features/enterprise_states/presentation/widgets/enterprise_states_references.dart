@@ -1,4 +1,4 @@
-part of '../pages/enterprise_states_page.dart';
+part of '../phone/pages/enterprise_states_page.dart';
 
 class _ReferenceBanner extends StatelessWidget {
   const _ReferenceBanner({required this.banner});

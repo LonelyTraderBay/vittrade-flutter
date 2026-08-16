@@ -1,4 +1,4 @@
-part of '../../pages/provider/trader_profile_page.dart';
+part of '../../phone/pages/provider/trader_profile_page.dart';
 
 class _StatsTab extends StatelessWidget {
   const _StatsTab({required this.trader});

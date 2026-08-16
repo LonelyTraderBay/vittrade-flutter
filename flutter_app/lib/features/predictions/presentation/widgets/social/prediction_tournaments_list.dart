@@ -1,4 +1,4 @@
-part of '../../pages/social/prediction_tournaments_page.dart';
+part of '../../phone/pages/social/prediction_tournaments_page.dart';
 
 class _TournamentTabBar extends StatelessWidget {
   const _TournamentTabBar({required this.activeTab, required this.onChanged});

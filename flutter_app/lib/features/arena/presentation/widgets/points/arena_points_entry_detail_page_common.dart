@@ -1,4 +1,4 @@
-part of '../../pages/points/arena_points_entry_detail_page.dart';
+part of '../../phone/pages/points/arena_points_entry_detail_page.dart';
 
 class _LinkedRow extends StatelessWidget {
   const _LinkedRow({

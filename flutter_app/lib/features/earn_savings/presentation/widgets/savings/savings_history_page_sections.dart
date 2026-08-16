@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_history_page.dart';
+part of '../../phone/pages/savings/savings_history_page.dart';
 
 class _SummaryMetrics extends StatelessWidget {
   const _SummaryMetrics({required this.snapshot});

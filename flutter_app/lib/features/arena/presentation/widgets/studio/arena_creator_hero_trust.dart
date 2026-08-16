@@ -1,4 +1,4 @@
-part of '../../pages/studio/arena_creator_page.dart';
+part of '../../phone/pages/studio/arena_creator_page.dart';
 
 class _CreatorHero extends StatelessWidget {
   const _CreatorHero({required this.creator, required this.onTrust});

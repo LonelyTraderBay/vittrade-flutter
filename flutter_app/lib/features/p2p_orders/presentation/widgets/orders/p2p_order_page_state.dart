@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_order_page.dart';
+part of '../../phone/pages/orders/p2p_order_page.dart';
 
 class _P2POrderPageState extends ConsumerState<P2POrderPage> {
   _P2POrderUiStep _step = _P2POrderUiStep.payment;

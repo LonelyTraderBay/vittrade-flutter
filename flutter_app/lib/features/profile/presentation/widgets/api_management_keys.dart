@@ -1,4 +1,4 @@
-part of '../pages/api_management_page.dart';
+part of '../phone/pages/api_management_page.dart';
 
 class _ApiKeyCard extends StatelessWidget {
   const _ApiKeyCard({

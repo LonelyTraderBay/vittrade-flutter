@@ -1,4 +1,4 @@
-part of '../../pages/governance/audit_trail_page.dart';
+part of '../../phone/pages/governance/audit_trail_page.dart';
 
 class _AuditEntryCard extends StatelessWidget {
   const _AuditEntryCard({required this.entry});

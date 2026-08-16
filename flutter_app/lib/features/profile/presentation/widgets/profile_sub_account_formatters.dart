@@ -1,4 +1,4 @@
-part of '../pages/sub_account_page.dart';
+part of '../phone/pages/sub_account_page.dart';
 
 Color _typeColor(String type) {
   return switch (type) {

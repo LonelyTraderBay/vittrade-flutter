@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_validator_health_monitor_page.dart';
+part of '../../phone/pages/staking/staking_validator_health_monitor_page.dart';
 
 class _SummaryStats extends StatelessWidget {
   const _SummaryStats({required this.snapshot});

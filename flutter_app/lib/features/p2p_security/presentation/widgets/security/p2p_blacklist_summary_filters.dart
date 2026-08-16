@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_blacklist_page.dart';
+part of '../../phone/pages/security/p2p_blacklist_page.dart';
 
 class _BlacklistStats extends StatelessWidget {
   const _BlacklistStats({required this.snapshot, required this.entries});

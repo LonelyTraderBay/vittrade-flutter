@@ -1,4 +1,4 @@
-part of '../pages/unified_search_page.dart';
+part of '../phone/pages/unified_search_page.dart';
 
 List<Widget> _unifiedSearchPageChildren({
   required UnifiedSearchSnapshot snapshot,

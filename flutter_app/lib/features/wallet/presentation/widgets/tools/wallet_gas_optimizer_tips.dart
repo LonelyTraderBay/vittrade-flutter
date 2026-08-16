@@ -1,4 +1,4 @@
-part of '../../pages/tools/wallet_gas_optimizer_page.dart';
+part of '../../phone/pages/tools/wallet_gas_optimizer_page.dart';
 
 class _TipsTab extends StatelessWidget {
   const _TipsTab({required this.snapshot, required this.onQuickAction});

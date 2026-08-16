@@ -1,4 +1,4 @@
-part of '../../pages/event/prediction_order_receipt_page.dart';
+part of '../../phone/pages/event/prediction_order_receipt_page.dart';
 
 class _SummaryRow extends StatelessWidget {
   const _SummaryRow({

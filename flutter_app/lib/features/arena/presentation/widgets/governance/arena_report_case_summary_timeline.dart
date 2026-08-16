@@ -1,4 +1,4 @@
-part of '../../pages/governance/arena_report_case_page.dart';
+part of '../../phone/pages/governance/arena_report_case_page.dart';
 
 class _CaseSummaryCard extends StatelessWidget {
   const _CaseSummaryCard({required this.reportCase});

@@ -1,4 +1,4 @@
-part of '../../pages/governance/client_categorization_page.dart';
+part of '../../phone/pages/governance/client_categorization_page.dart';
 
 class _HistoryTab extends StatelessWidget {
   const _HistoryTab({required this.categories, required this.history});

@@ -1,1 +1,1 @@
-part of '../../pages/margin/margin_trading_page.dart';
+part of '../../phone/pages/margin/margin_trading_page.dart';

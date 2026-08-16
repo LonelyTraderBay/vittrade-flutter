@@ -1,4 +1,4 @@
-part of '../../pages/claim/launchpad_claim_receipt_page.dart';
+part of '../../phone/pages/claim/launchpad_claim_receipt_page.dart';
 
 class _RewardHero extends StatelessWidget {
   const _RewardHero({required this.receipt});

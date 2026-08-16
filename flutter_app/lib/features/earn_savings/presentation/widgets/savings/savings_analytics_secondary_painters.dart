@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_analytics_page.dart';
+part of '../../phone/pages/savings/savings_analytics_page.dart';
 
 class _SecondaryTabContent extends StatelessWidget {
   const _SecondaryTabContent({required this.tab, required this.summary});

@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_order_page.dart';
+part of '../../phone/pages/orders/p2p_order_page.dart';
 
 class _QuickActionButton extends StatelessWidget {
   const _QuickActionButton({required this.action});

@@ -3,16 +3,16 @@ import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_fund_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_certificate_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_policy_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_score_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_detail_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_evidence_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_resolution_page.dart';
-import 'package:vit_trade_flutter/features/p2p_dispute/presentation/pages/dispute/p2p_disputes_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_insurance_fund_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_insurance_certificate_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_claim_detail_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_insurance_policy_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_insurance_score_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_dispute_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_dispute_detail_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_dispute_evidence_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_dispute_resolution_page.dart';
+import 'package:vit_trade_flutter/features/p2p_dispute/presentation/phone/pages/dispute/p2p_disputes_page.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart';
 
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';

@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_recommendations_page.dart';
+part of '../../phone/pages/savings/savings_recommendations_page.dart';
 
 class _CompareSheet extends StatelessWidget {
   const _CompareSheet({required this.strategies, required this.amount});

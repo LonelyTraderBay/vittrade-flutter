@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_earnings_calendar_page.dart';
+part of '../../phone/pages/staking/staking_earnings_calendar_page.dart';
 
 class _UpcomingList extends StatelessWidget {
   const _UpcomingList({required this.events});

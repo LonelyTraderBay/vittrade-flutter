@@ -20,7 +20,9 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
   const WithdrawLimitsTabletPage({super.key});
 
   static const contentKey = Key('sc153_withdraw_limits_tablet_content');
-  static const currentTierKey = Key('sc153_withdraw_limits_current_tier_tablet');
+  static const currentTierKey = Key(
+    'sc153_withdraw_limits_current_tier_tablet',
+  );
   static const dailyUsageKey = Key('sc153_withdraw_limits_daily_usage_tablet');
   static const monthlyUsageKey = Key(
     'sc153_withdraw_limits_monthly_usage_tablet',
@@ -92,11 +94,16 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Cấp KYC ${tier.level}', style: AppTextStyles.sectionTitle),
+                    Text(
+                      'Cấp KYC ${tier.level}',
+                      style: AppTextStyles.sectionTitle,
+                    ),
                     const SizedBox(height: AppSpacing.x1),
                     Text(
                       tier.name,
-                      style: AppTextStyles.caption.copyWith(color: AppColors.buy),
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.buy,
+                      ),
                     ),
                   ],
                 ),
@@ -147,7 +154,9 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
               Expanded(
                 child: Text(
                   'Rút số tiền lớn có thể cần xem xét thủ công hoặc xác minh bổ sung. Kiểm tra bước tiếp theo trước khi tạo lệnh.',
-                  style: AppTextStyles.caption.copyWith(color: AppColors.caution),
+                  style: AppTextStyles.caption.copyWith(
+                    color: AppColors.caution,
+                  ),
                 ),
               ),
             ],
@@ -228,11 +237,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
     );
   }
 
-  Widget _tierCard(
-    BuildContext context,
-    WalletKycTier tier,
-    int currentLevel,
-  ) {
+  Widget _tierCard(BuildContext context, WalletKycTier tier, int currentLevel) {
     final isCurrent = tier.level == currentLevel;
     final isLocked = tier.level > currentLevel;
     final stateLabel = isLocked
@@ -366,12 +371,18 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.x1),
                     Text(
                       snapshot.faqs[i].answer,
-                      style: AppTextStyles.micro.copyWith(color: AppColors.text2),
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text2,
+                      ),
                     ),
                     if (i != snapshot.faqs.length - 1) ...[
-                      const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+                      const SizedBox(
+                        height: AppSpacing.pageRhythmFormSectionGap,
+                      ),
                       const Divider(color: AppColors.divider),
-                      const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+                      const SizedBox(
+                        height: AppSpacing.pageRhythmFormSectionGap,
+                      ),
                     ],
                   ],
                 ],

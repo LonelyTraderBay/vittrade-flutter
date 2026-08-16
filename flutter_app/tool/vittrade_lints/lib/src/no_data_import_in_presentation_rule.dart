@@ -33,7 +33,10 @@ class NoDataImportInPresentationRule extends DartLintRule {
     final path = resolver.path.replaceAll('\\', '/');
     final isPresentationPageOrWidget =
         path.contains('/presentation/pages/') ||
-        path.contains('/presentation/widgets/');
+        path.contains('/presentation/widgets/') ||
+        RegExp(
+          r'/presentation/(phone|tablet|web)/(pages|widgets)/',
+        ).hasMatch(path);
     if (!isPresentationPageOrWidget) return;
 
     void checkDirective(NamespaceDirective node) {

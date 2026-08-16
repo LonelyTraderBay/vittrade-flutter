@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_liquid_staking_page.dart';
+part of '../../phone/pages/staking/staking_liquid_staking_page.dart';
 
 class _BenefitsGrid extends StatelessWidget {
   const _BenefitsGrid({required this.snapshot});

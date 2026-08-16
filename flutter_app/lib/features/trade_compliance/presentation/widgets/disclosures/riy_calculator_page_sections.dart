@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/riy_calculator_page.dart';
+part of '../../phone/pages/disclosures/riy_calculator_page.dart';
 
 class _InputCard extends StatelessWidget {
   const _InputCard({

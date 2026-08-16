@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_achievements_page.dart';
+part of '../../phone/pages/security/p2p_achievements_page.dart';
 
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({required this.snapshot});

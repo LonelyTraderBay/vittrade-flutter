@@ -1,4 +1,4 @@
-part of '../pages/onboarding_flow_page.dart';
+part of '../phone/pages/onboarding_flow_page.dart';
 
 class _WelcomeStep extends StatelessWidget {
   const _WelcomeStep({super.key, required this.welcome});

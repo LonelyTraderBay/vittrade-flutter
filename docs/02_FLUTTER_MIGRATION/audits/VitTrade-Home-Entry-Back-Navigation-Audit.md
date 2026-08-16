@@ -38,15 +38,15 @@ failed=0
 | HEB-027 | Matrix source | `lib/features/home/presentation/phone/pages/home_page_sections.dart` | PASS | line 64 | Market section pair source is present. |
 | HEB-C01 | Home outbound | `lib/features/home/presentation/phone/pages/home_page_state.dart` | PASS | line 18 | Home feature/product entries preserve route history. |
 | HEB-C02A | Trade pair entry | `lib/features/trade/presentation/phone/pages/trade_page_state.dart` | PASS | line 131 | Home opens /trade/:pair with Home history; direct entry falls back to Trade. |
-| HEB-C02B | Convert entry | `lib/features/trade/presentation/pages/convert/convert_page.dart` | PASS | line 145 | Convert pops to Home when Home-pushed and falls back to Trade directly. |
-| HEB-C02C | Margin entry | `lib/features/trade/presentation/pages/margin/margin_trading_page.dart` | PASS | line 83 | Margin keeps Trade as direct parent fallback. |
-| HEB-C02D | Bot entry | `lib/features/trade_bots/presentation/pages/hub/trading_bots_page.dart` | PASS | line 84 | Bot keeps Trade as direct parent fallback. |
-| HEB-C02E | Copy Trade entry | `lib/features/trade_copy/presentation/pages/hub/copy_trading_page.dart` | PASS | line 62 | Copy Trade keeps Trade as direct parent fallback. |
-| HEB-C02F | DCA entry | `lib/features/dca/presentation/pages/hub/dca_page_state_overview.dart` | PASS | line 205 | DCA is reached from Home but its safe direct parent remains Trade. |
-| HEB-C02G | Savings entry | `lib/features/earn_savings/presentation/pages/savings/savings_page.dart` | PASS | line 126 | Savings pops to Home when Home-pushed and falls back to Earn directly. |
-| HEB-C02H | Prediction Markets entry | `lib/features/predictions/presentation/pages/hub/predictions_home_page.dart` | PASS | line 128 | Prediction Markets falls back to Markets when opened directly. |
+| HEB-C02B | Convert entry | `lib/features/trade/presentation/phone/pages/convert/convert_page.dart` | PASS | line 145 | Convert pops to Home when Home-pushed and falls back to Trade directly. |
+| HEB-C02C | Margin entry | `lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` | PASS | line 83 | Margin keeps Trade as direct parent fallback. |
+| HEB-C02D | Bot entry | `lib/features/trade_bots/presentation/phone/pages/hub/trading_bots_page.dart` | PASS | line 84 | Bot keeps Trade as direct parent fallback. |
+| HEB-C02E | Copy Trade entry | `lib/features/trade_copy/presentation/phone/pages/hub/copy_trading_page.dart` | PASS | line 62 | Copy Trade keeps Trade as direct parent fallback. |
+| HEB-C02F | DCA entry | `lib/features/dca/presentation/phone/pages/hub/dca_page_state_overview.dart` | PASS | line 205 | DCA is reached from Home but its safe direct parent remains Trade. |
+| HEB-C02G | Savings entry | `lib/features/earn_savings/presentation/phone/pages/savings/savings_page.dart` | PASS | line 126 | Savings pops to Home when Home-pushed and falls back to Earn directly. |
+| HEB-C02H | Prediction Markets entry | `lib/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart` | PASS | line 128 | Prediction Markets falls back to Markets when opened directly. |
 | HEB-C02I | Wallet entry | `lib/features/wallet/presentation/phone/pages/wallet_page.dart` | PASS | line 76 | Wallet shows a back button only when Home/source history exists. |
 | HEB-C02J | Withdraw next action | `lib/features/wallet/presentation/phone/pages/withdraw_page.dart` | PASS | line 131 | Home next-action withdraw returns Home; direct withdraw falls back to Wallet. |
-| HEB-C02K | Pair detail entry | `lib/features/markets/presentation/pages/pair/pair_detail_page.dart` | PASS | line 122 | Home market rows return Home; direct pair detail falls back to Markets. |
+| HEB-C02K | Pair detail entry | `lib/features/markets/presentation/phone/pages/pair/pair_detail_page.dart` | PASS | line 122 | Home market rows return Home; direct pair detail falls back to Markets. |
 | HEB-C02L | Instrument chrome | `lib/shared/layout/vit_top_chrome.dart` | PASS | line 118 | Instrument headers can show both back and an instrument leading slot. |
 | HEB-C03 | Home source coverage | `lib/features/home/presentation/phone/pages/home_page_common.dart` | PASS | line 1 | Part 03 currently has no Home outgoing route; update matrix if this changes. |

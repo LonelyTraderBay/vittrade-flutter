@@ -5,15 +5,15 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('P2P security and compliance mutations require preview confirmation', () {
     const paths = <String>[
-      'lib/features/p2p_security/presentation/pages/security/'
+      'lib/features/p2p_security/presentation/phone/pages/security/'
           'p2p_anti_phishing_code_page.dart',
-      'lib/features/p2p_security/presentation/pages/security/'
+      'lib/features/p2p_security/presentation/phone/pages/security/'
           'p2p_blacklist_add_page.dart',
-      'lib/features/p2p_security/presentation/pages/security/'
+      'lib/features/p2p_security/presentation/phone/pages/security/'
           'p2p_source_of_funds_page.dart',
-      'lib/features/p2p_security/presentation/pages/security/'
+      'lib/features/p2p_security/presentation/phone/pages/security/'
           'p2p_large_transaction_justification_page.dart',
-      'lib/features/p2p_security/presentation/pages/security/'
+      'lib/features/p2p_security/presentation/phone/pages/security/'
           'p2p_report_merchant_page.dart',
     ];
 

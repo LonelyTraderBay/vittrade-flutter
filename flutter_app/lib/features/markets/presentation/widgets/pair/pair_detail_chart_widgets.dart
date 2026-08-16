@@ -1,4 +1,4 @@
-part of '../../pages/pair/pair_detail_page.dart';
+part of '../../phone/pages/pair/pair_detail_page.dart';
 
 String _pairViewKey(_PairView view) => switch (view) {
   _PairView.chart => 'chart',

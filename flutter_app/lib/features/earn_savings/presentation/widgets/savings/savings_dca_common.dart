@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_dca_page.dart';
+part of '../../phone/pages/savings/savings_dca_page.dart';
 
 class _AssetBadge extends StatelessWidget {
   const _AssetBadge({required this.asset, required this.color});

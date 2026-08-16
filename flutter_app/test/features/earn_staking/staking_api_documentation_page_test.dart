@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/earn_core/data/earn_repository.dart';
-import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_api_documentation_page.dart';
-import 'package:vit_trade_flutter/features/earn_staking/presentation/pages/staking/staking_earn_page.dart';
+import 'package:vit_trade_flutter/features/earn_staking/presentation/phone/pages/staking/staking_api_documentation_page.dart';
+import 'package:vit_trade_flutter/features/earn_staking/presentation/phone/pages/staking/staking_earn_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

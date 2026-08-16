@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_login_history_page.dart';
+part of '../../phone/pages/security/p2p_login_history_page.dart';
 
 class _LoginStats extends StatelessWidget {
   const _LoginStats({required this.snapshot});

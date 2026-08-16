@@ -1,4 +1,4 @@
-part of '../../pages/safety/dispute_resolution_page.dart';
+part of '../../phone/pages/safety/dispute_resolution_page.dart';
 
 class _FileComplaintTab extends StatelessWidget {
   const _FileComplaintTab({

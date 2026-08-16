@@ -1,4 +1,4 @@
-part of '../pages/activity_log_page.dart';
+part of '../phone/pages/activity_log_page.dart';
 
 class _DetailBlock extends StatelessWidget {
   const _DetailBlock({required this.label, required this.value, this.icon});

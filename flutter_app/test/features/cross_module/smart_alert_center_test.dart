@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/cross_module/data/smart_alerts_repository.dart';
-import 'package:vit_trade_flutter/features/cross_module/presentation/pages/smart_alert_center_page.dart';
+import 'package:vit_trade_flutter/features/cross_module/presentation/phone/pages/smart_alert_center_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/core/product_flow/contextual_support_contract.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/announcements_page.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/help_center_page.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/support_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/announcements_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/help_center_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/support_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 

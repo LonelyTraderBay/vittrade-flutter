@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_guide_page.dart';
+part of '../../phone/pages/staking/staking_guide_page.dart';
 
 class _HeroBanner extends StatelessWidget {
   const _HeroBanner({required this.snapshot});

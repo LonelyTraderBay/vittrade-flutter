@@ -20,7 +20,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/auth_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/widgets/auth_hero_icon_box.dart';
 import 'package:vit_trade_flutter/features/auth/domain/validators/password_policy.dart';
 
-part '../../phone/widgets/reset_password_page_sections.dart';
+part '../widgets/reset_password_page_sections.dart';
 
 const _authPrimary = AppColors.primary;
 const _authPrimary10 = AppColors.primary12;

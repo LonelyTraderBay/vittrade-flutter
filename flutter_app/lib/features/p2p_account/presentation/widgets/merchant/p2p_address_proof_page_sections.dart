@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_address_proof_page.dart';
+part of '../../phone/pages/merchant/p2p_address_proof_page.dart';
 
 class _AddressHero extends StatelessWidget {
   const _AddressHero({required this.snapshot});

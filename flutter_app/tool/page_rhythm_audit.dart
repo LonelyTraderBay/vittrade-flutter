@@ -195,7 +195,7 @@ const _tabRootPages = {
   'features/profile/presentation/phone/pages/profile_page.dart',
   'features/wallet/presentation/phone/pages/wallet_page.dart',
   'features/trade/presentation/phone/pages/trade_page.dart',
-  'features/predictions/presentation/pages/predictions_home_page.dart',
+  'features/predictions/presentation/phone/pages/predictions_home_page.dart',
 };
 
 /// Tab rhythm lives in layout widgets when the page file has no [VitPageContent].

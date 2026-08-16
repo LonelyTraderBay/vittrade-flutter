@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_screener_page.dart';
+part of '../../phone/pages/tools/market_screener_page.dart';
 
 class _ScreenerResults extends StatelessWidget {
   const _ScreenerResults({required this.pairs, required this.onPairTap});

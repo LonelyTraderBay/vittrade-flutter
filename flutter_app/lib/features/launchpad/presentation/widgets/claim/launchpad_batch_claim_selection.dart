@@ -1,4 +1,4 @@
-part of '../../pages/claim/launchpad_batch_claim_page.dart';
+part of '../../phone/pages/claim/launchpad_batch_claim_page.dart';
 
 class _SelectionHeader extends StatelessWidget {
   const _SelectionHeader({

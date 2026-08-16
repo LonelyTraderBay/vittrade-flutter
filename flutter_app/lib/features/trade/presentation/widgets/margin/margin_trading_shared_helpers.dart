@@ -1,4 +1,4 @@
-part of '../../pages/margin/margin_trading_page.dart';
+part of '../../phone/pages/margin/margin_trading_page.dart';
 
 class _Panel extends StatelessWidget {
   const _Panel({required this.child, this.padding});

@@ -1,4 +1,4 @@
-part of '../../pages/assets/asset_detail_page.dart';
+part of '../../phone/pages/assets/asset_detail_page.dart';
 
 class _AssetHero extends StatelessWidget {
   const _AssetHero({required this.snapshot});

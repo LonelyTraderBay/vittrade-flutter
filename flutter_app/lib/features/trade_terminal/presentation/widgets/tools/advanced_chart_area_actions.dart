@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_chart_page.dart';
+part of '../../phone/pages/tools/advanced_chart_page.dart';
 
 class _ChartArea extends StatelessWidget {
   const _ChartArea({

@@ -1,4 +1,4 @@
-// Pixel baseline for lib/features/p2p_marketplace/presentation/pages/hub/p2p_home_page.dart
+// Pixel baseline for lib/features/p2p_marketplace/presentation/phone/pages/hub/p2p_home_page.dart
 // ("SC-282 P2P Home", see
 // docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md).
 // Pinned at 360x800 (minimum supported phone size, matches the convention

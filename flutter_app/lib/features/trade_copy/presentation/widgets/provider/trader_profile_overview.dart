@@ -1,4 +1,4 @@
-part of '../../pages/provider/trader_profile_page.dart';
+part of '../../phone/pages/provider/trader_profile_page.dart';
 
 class _TraderTab {
   const _TraderTab({required this.id, required this.label});

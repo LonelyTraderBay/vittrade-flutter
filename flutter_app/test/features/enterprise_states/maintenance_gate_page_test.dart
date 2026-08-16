@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/core/config/app_environment.dart';
-import 'package:vit_trade_flutter/features/enterprise_states/presentation/pages/maintenance_gate_page.dart';
+import 'package:vit_trade_flutter/features/enterprise_states/presentation/phone/pages/maintenance_gate_page.dart';
 
 /// GĐ4-F1 kill-switch: SC-417 hiển thị đủ tiêu đề/mô tả/nút. Cờ
 /// `AppConfig.maintenanceMode` được bật khi pump vì redirect toàn cục (bài

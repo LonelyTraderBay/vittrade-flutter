@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/ex_post_costs_report_page.dart';
+part of '../../phone/pages/disclosures/ex_post_costs_report_page.dart';
 
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({

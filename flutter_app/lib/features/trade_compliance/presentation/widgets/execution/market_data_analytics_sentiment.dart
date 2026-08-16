@@ -1,4 +1,4 @@
-part of '../../pages/execution/market_data_analytics_page.dart';
+part of '../../phone/pages/execution/market_data_analytics_page.dart';
 
 class _SentimentTab extends StatelessWidget {
   const _SentimentTab({required this.snapshot});

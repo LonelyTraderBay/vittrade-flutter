@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_what_if_page.dart';
+part of '../../phone/pages/savings/savings_what_if_page.dart';
 
 class _LineChartPainter extends CustomPainter {
   const _LineChartPainter({required this.points});

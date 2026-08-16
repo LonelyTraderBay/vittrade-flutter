@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_auto_rebalance_page.dart';
+part of '../../phone/pages/savings/savings_auto_rebalance_page.dart';
 
 class _MetricCard extends StatelessWidget {
   const _MetricCard({

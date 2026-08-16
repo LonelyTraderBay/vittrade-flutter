@@ -1,4 +1,4 @@
-part of '../../pages/governance/my_arena_reports_page.dart';
+part of '../../phone/pages/governance/my_arena_reports_page.dart';
 
 class _ReportStatusPill extends StatelessWidget {
   const _ReportStatusPill({required this.status});

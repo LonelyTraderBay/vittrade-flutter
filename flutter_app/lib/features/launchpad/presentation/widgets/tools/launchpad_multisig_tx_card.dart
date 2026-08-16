@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_multisig_page.dart';
+part of '../../phone/pages/tools/launchpad_multisig_page.dart';
 
 class _TxCard extends StatelessWidget {
   const _TxCard({

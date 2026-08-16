@@ -1,4 +1,4 @@
-part of '../pages/admin_home_page.dart';
+part of '../phone/pages/admin_home_page.dart';
 
 class _MetricGrid extends StatelessWidget {
   const _MetricGrid({required this.metrics});

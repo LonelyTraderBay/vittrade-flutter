@@ -1,4 +1,4 @@
-part of '../../pages/analytics/copy_performance_page.dart';
+part of '../../phone/pages/analytics/copy_performance_page.dart';
 
 class _TradesTab extends StatelessWidget {
   const _TradesTab({required this.snapshot});

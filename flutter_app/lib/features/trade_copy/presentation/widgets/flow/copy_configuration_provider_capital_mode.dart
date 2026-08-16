@@ -1,4 +1,4 @@
-part of '../../pages/flow/copy_configuration_page.dart';
+part of '../../phone/pages/flow/copy_configuration_page.dart';
 
 class _ProviderCard extends StatelessWidget {
   const _ProviderCard({required this.provider});

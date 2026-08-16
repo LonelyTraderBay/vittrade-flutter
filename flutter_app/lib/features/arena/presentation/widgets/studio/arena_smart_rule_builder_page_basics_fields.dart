@@ -1,4 +1,4 @@
-part of '../../pages/studio/arena_smart_rule_builder_page.dart';
+part of '../../phone/pages/studio/arena_smart_rule_builder_page.dart';
 
 class _ClarityResult {
   const _ClarityResult(this.score);

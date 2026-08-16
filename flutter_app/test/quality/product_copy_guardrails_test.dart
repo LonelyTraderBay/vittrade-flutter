@@ -18,7 +18,7 @@ void main() {
     test('Arena and RewardsHub reward surfaces stay points-only', () {
       final files = [
         'lib/features/arena/data/repositories/mock_arena_repository.dart',
-        'lib/features/rewards/presentation/pages/rewards_hub_page.dart',
+        'lib/features/rewards/presentation/phone/pages/rewards_hub_page.dart',
         'lib/features/rewards/data/repositories/mock_rewards_repository.dart',
       ];
 
@@ -33,7 +33,7 @@ void main() {
       }
 
       final visibleRewardSurfaces = [
-        'lib/features/rewards/presentation/pages/rewards_hub_page.dart',
+        'lib/features/rewards/presentation/phone/pages/rewards_hub_page.dart',
         'lib/features/rewards/data/repositories/mock_rewards_repository.dart',
       ];
 
@@ -63,7 +63,9 @@ void main() {
     });
 
     test('Arena user-facing pages avoid prohibited financial terms', () {
-      final arenaPages = listDartFiles('lib/features/arena/presentation/pages');
+      final arenaPages = listDartFiles(
+        'lib/features/arena/presentation/phone/pages',
+      );
       final prohibited = RegExp(
         r'\b(wallet|profit|payout|stake|USDT|USD|cash|PnL|P/L|'
         '$viFinancialStems)\\b',
@@ -113,16 +115,16 @@ void main() {
     test('Arena governance, report, and challenge state stay points-only', () {
       final source = asciiFold(
         [
-          'lib/features/arena/presentation/pages/governance/arena_governance_gate_page.dart',
-          'lib/features/arena/presentation/pages/governance/arena_governance_gate_page_tier_style.dart',
-          'lib/features/arena/presentation/pages/governance/arena_report_case_page.dart',
-          'lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page.dart',
-          'lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page_overview_section.dart',
-          'lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page_tabs_and_panels.dart',
-          'lib/features/arena/presentation/pages/challenge/arena_challenge_detail_page_actions_and_shared_widgets.dart',
+          'lib/features/arena/presentation/phone/pages/governance/arena_governance_gate_page.dart',
+          'lib/features/arena/presentation/phone/pages/governance/arena_governance_gate_page_tier_style.dart',
+          'lib/features/arena/presentation/phone/pages/governance/arena_report_case_page.dart',
+          'lib/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page.dart',
+          'lib/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page_overview_section.dart',
+          'lib/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page_tabs_and_panels.dart',
+          'lib/features/arena/presentation/phone/pages/challenge/arena_challenge_detail_page_actions_and_shared_widgets.dart',
           'lib/features/arena/presentation/controllers/arena_controller.dart',
           'lib/features/arena/presentation/controllers/arena_creation_controller.dart',
-          'lib/features/arena/presentation/widgets/hub/arena_state_cards.dart',
+          'lib/features/arena/presentation/widgets/phone/arena_state_cards.dart',
         ].map(readSource).join('\n'),
       );
 
@@ -160,11 +162,11 @@ void main() {
           'lib/features/arena/data/fixtures/arena_flow_map_repository_methods.dart',
           'lib/features/arena/data/fixtures/arena_production_ecosystem_repository_methods.dart',
           'lib/features/arena/data/fixtures/arena_connected_guide_repository_methods.dart',
-          'lib/features/arena/presentation/pages/challenge/verified_challenges_page.dart',
-          'lib/features/arena/presentation/pages/hub/arena_production_ready_page_screens_states_section.dart',
-          'lib/features/arena/presentation/pages/hub/arena_production_ready_page_flows_registry_handoff.dart',
-          'lib/features/arena/presentation/pages/bridge/connected_ecosystem_production_page.dart',
-          'lib/features/arena/presentation/pages/bridge/connected_ecosystem_production_page_canonical_states_section.dart',
+          'lib/features/arena/presentation/phone/pages/challenge/verified_challenges_page.dart',
+          'lib/features/arena/presentation/phone/pages/hub/arena_production_ready_page_screens_states_section.dart',
+          'lib/features/arena/presentation/phone/pages/hub/arena_production_ready_page_flows_registry_handoff.dart',
+          'lib/features/arena/presentation/phone/pages/bridge/connected_ecosystem_production_page.dart',
+          'lib/features/arena/presentation/phone/pages/bridge/connected_ecosystem_production_page_canonical_states_section.dart',
         ].map(readSource).join('\n'),
       );
 

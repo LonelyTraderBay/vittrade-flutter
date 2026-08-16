@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_guide_page.dart';
+part of '../../phone/pages/staking/staking_guide_page.dart';
 
 class _StepDetail extends StatelessWidget {
   const _StepDetail({required this.step});

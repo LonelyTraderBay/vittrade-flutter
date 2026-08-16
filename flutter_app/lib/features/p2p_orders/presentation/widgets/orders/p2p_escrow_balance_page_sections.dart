@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_escrow_balance_page.dart';
+part of '../../phone/pages/orders/p2p_escrow_balance_page.dart';
 
 class _EscrowHeroCard extends StatelessWidget {
   const _EscrowHeroCard({required this.balance});

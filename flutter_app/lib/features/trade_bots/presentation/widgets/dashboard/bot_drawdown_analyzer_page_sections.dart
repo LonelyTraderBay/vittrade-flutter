@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_drawdown_analyzer_page.dart';
+part of '../../phone/pages/dashboard/bot_drawdown_analyzer_page.dart';
 
 class _MetricGrid extends StatelessWidget {
   const _MetricGrid({required this.summary});

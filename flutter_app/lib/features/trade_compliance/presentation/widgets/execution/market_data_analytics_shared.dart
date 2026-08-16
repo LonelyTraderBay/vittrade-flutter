@@ -1,4 +1,4 @@
-part of '../../pages/execution/market_data_analytics_page.dart';
+part of '../../phone/pages/execution/market_data_analytics_page.dart';
 
 class _MetricBubble extends StatelessWidget {
   const _MetricBubble({

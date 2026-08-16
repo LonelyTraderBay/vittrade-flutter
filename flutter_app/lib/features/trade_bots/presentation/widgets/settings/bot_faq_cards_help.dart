@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_faq_page.dart';
+part of '../../phone/pages/settings/bot_faq_page.dart';
 
 class _HelpCard extends StatelessWidget {
   const _HelpCard();

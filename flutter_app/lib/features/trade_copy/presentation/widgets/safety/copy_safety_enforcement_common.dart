@@ -1,4 +1,4 @@
-part of '../../pages/safety/copy_safety_center_page.dart';
+part of '../../phone/pages/safety/copy_safety_center_page.dart';
 
 class _EnforcementTab extends StatelessWidget {
   const _EnforcementTab({required this.actions});

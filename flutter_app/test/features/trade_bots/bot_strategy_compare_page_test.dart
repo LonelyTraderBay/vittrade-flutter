@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/trade_bots/data/trade_bots_repository.dart';
-import 'package:vit_trade_flutter/features/trade_bots/presentation/pages/backtest/bot_strategy_compare_page.dart';
+import 'package:vit_trade_flutter/features/trade_bots/presentation/phone/pages/backtest/bot_strategy_compare_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';

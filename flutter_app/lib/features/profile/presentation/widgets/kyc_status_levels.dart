@@ -1,4 +1,4 @@
-part of '../pages/kyc_page.dart';
+part of '../phone/pages/kyc_page.dart';
 
 class _KycStatusCard extends StatelessWidget {
   const _KycStatusCard({required this.snapshot});

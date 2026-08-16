@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/p2p_core/data/p2p_repository.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/hub/p2p_express_confirm_page.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/hub/p2p_express_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/hub/p2p_express_confirm_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/hub/p2p_express_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -35,7 +35,7 @@ void main() {
 
   test('SC-211 keeps the Home-standard page foundation contract', () async {
     final pageSource = File(
-      'lib/features/p2p_marketplace/presentation/widgets/hub/p2p_express_page_state.dart',
+      'lib/features/p2p_marketplace/presentation/widgets/phone/p2p_express_page_state.dart',
     ).readAsStringSync();
 
     expect(pageSource, contains('VitInsetScrollView'));

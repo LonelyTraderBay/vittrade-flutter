@@ -1,4 +1,4 @@
-part of '../../pages/provider/provider_leaderboard_page.dart';
+part of '../../phone/pages/provider/provider_leaderboard_page.dart';
 
 class _ProviderRankCard extends StatelessWidget {
   const _ProviderRankCard({

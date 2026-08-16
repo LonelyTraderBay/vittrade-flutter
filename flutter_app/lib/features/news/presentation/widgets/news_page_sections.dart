@@ -1,4 +1,4 @@
-part of '../pages/news_page.dart';
+part of '../phone/pages/news_page.dart';
 
 List<Widget> _newsPageChildren({
   required NewsScreenSnapshot snapshot,

@@ -1,4 +1,4 @@
-part of '../pages/route_checker_page.dart';
+part of '../phone/pages/route_checker_page.dart';
 
 class _IntroBlock extends StatelessWidget {
   const _IntroBlock({required this.snapshot});

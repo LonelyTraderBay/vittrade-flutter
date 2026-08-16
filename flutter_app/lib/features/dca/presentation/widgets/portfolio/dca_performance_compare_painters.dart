@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/dca_performance_compare_page.dart';
+part of '../../phone/pages/portfolio/dca_performance_compare_page.dart';
 
 class _PerformanceLinePainter extends CustomPainter {
   const _PerformanceLinePainter(this.points);

@@ -1,4 +1,4 @@
-part of '../../pages/safety/copy_safety_center_page.dart';
+part of '../../phone/pages/safety/copy_safety_center_page.dart';
 
 class _WarningCard extends StatelessWidget {
   const _WarningCard({required this.text});

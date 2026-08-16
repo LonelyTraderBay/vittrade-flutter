@@ -1,4 +1,4 @@
-part of '../../pages/futures/leverage_page.dart';
+part of '../../phone/pages/futures/leverage_page.dart';
 
 class _RiskMeter extends StatelessWidget {
   const _RiskMeter({required this.preview, required this.riskColor});

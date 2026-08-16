@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_contingency_plan_page.dart';
+part of '../../phone/pages/staking/staking_contingency_plan_page.dart';
 
 class _RecoveryMetrics extends StatelessWidget {
   const _RecoveryMetrics({required this.metrics});

@@ -1,4 +1,4 @@
-part of '../../pages/claim/launchpad_claim_receipt_page.dart';
+part of '../../phone/pages/claim/launchpad_claim_receipt_page.dart';
 
 class _VestingTimelineCard extends StatelessWidget {
   const _VestingTimelineCard({required this.receipt, required this.onClaim});

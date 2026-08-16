@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_drawdown_analyzer_page.dart';
+part of '../../phone/pages/dashboard/bot_drawdown_analyzer_page.dart';
 
 class _AnalysisCard extends StatelessWidget {
   const _AnalysisCard({required this.insights});

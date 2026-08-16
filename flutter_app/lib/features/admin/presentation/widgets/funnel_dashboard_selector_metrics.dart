@@ -1,4 +1,4 @@
-part of '../pages/funnel_dashboard_page.dart';
+part of '../phone/pages/funnel_dashboard_page.dart';
 
 class _FunnelSelector extends StatelessWidget {
   const _FunnelSelector({

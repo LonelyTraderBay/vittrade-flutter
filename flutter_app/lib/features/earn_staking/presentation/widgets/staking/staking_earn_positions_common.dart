@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_earn_page.dart';
+part of '../../phone/pages/staking/staking_earn_page.dart';
 
 class _PositionsList extends StatelessWidget {
   const _PositionsList({

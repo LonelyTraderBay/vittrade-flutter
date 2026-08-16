@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_notif_sound_page.dart';
+part of '../../phone/pages/tools/launchpad_notif_sound_page.dart';
 
 class _InlineSaveActions extends StatelessWidget {
   const _InlineSaveActions({

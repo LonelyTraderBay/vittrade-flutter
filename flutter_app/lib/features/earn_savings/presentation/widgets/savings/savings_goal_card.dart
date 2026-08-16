@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_goal_page.dart';
+part of '../../phone/pages/savings/savings_goal_page.dart';
 
 class _GoalCard extends StatelessWidget {
   const _GoalCard({required this.goal, required this.onTap});

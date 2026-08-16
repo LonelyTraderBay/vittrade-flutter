@@ -1,4 +1,4 @@
-part of '../../pages/transfer/withdraw_limits_page.dart';
+part of '../../phone/pages/transfer/withdraw_limits_page.dart';
 
 class _KycTierCard extends StatelessWidget {
   const _KycTierCard({required this.tier, required this.currentLevel});

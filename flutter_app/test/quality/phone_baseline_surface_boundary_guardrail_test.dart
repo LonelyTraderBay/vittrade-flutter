@@ -7,6 +7,8 @@ String _normalize(String path) => path.replaceAll('\\', '/');
 bool _isPhoneBaselinePage(File file) {
   final path = _normalize(file.path);
   if (!path.contains('/lib/features/')) return false;
+  // Canonical Phone-surface pages count as phone baseline too.
+  if (path.contains('/presentation/phone/pages/')) return true;
   if (!path.contains('/presentation/pages/')) return false;
 
   final relative = path.split('/presentation/pages/').last;

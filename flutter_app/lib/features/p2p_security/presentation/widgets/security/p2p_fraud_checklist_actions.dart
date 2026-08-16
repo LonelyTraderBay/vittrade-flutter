@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_fraud_prevention_page.dart';
+part of '../../phone/pages/security/p2p_fraud_prevention_page.dart';
 
 class _ChecklistCard extends StatelessWidget {
   const _ChecklistCard({

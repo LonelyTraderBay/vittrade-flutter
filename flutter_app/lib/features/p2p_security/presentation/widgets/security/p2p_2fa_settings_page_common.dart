@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_2fa_settings_page.dart';
+part of '../../phone/pages/security/p2p_2fa_settings_page.dart';
 
 class _SecurityRecommendation extends StatelessWidget {
   const _SecurityRecommendation({required this.text});

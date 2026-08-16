@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_risk_calculator_page.dart';
+part of '../../phone/pages/portfolio/prediction_risk_calculator_page.dart';
 
 class _RiskAnalysis extends StatelessWidget {
   const _RiskAnalysis({required this.metrics});

@@ -468,7 +468,8 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C02B',
     area: 'Convert entry',
-    file: 'lib/features/trade/presentation/pages/convert/convert_page.dart',
+    file:
+        'lib/features/trade/presentation/phone/pages/convert/convert_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.trade',
       'mode: BackNavigationMode.historyThenFallback',
@@ -480,7 +481,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02C',
     area: 'Margin entry',
     file:
-        'lib/features/trade/presentation/pages/margin/margin_trading_page.dart',
+        'lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.trade',
       'mode: BackNavigationMode.historyThenFallback',
@@ -491,7 +492,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02D',
     area: 'Bot entry',
     file:
-        'lib/features/trade_bots/presentation/pages/hub/trading_bots_page.dart',
+        'lib/features/trade_bots/presentation/phone/pages/hub/trading_bots_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.trade',
       'mode: BackNavigationMode.historyThenFallback',
@@ -502,7 +503,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02E',
     area: 'Copy Trade entry',
     file:
-        'lib/features/trade_copy/presentation/pages/hub/copy_trading_page.dart',
+        'lib/features/trade_copy/presentation/phone/pages/hub/copy_trading_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.trade',
       'mode: BackNavigationMode.historyThenFallback',
@@ -513,7 +514,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02F',
     area: 'DCA entry',
     file:
-        'lib/features/dca/presentation/pages/hub/dca_page_state_overview.dart',
+        'lib/features/dca/presentation/phone/pages/hub/dca_page_state_overview.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.trade',
       'mode: BackNavigationMode.historyThenFallback',
@@ -524,7 +525,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02G',
     area: 'Savings entry',
     file:
-        'lib/features/earn_savings/presentation/pages/savings/savings_page.dart',
+        'lib/features/earn_savings/presentation/phone/pages/savings/savings_page.dart',
     requiredSnippets: [
       'fallbackPath: snapshot.backRoute',
       'mode: BackNavigationMode.historyThenFallback',
@@ -536,7 +537,7 @@ const _homeEntryContractRules = [
     id: 'HEB-C02H',
     area: 'Prediction Markets entry',
     file:
-        'lib/features/predictions/presentation/pages/hub/predictions_home_page.dart',
+        'lib/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.markets',
       'mode: BackNavigationMode.historyThenFallback',
@@ -568,7 +569,8 @@ const _homeEntryContractRules = [
   HomeEntryBackRule(
     id: 'HEB-C02K',
     area: 'Pair detail entry',
-    file: 'lib/features/markets/presentation/pages/pair/pair_detail_page.dart',
+    file:
+        'lib/features/markets/presentation/phone/pages/pair/pair_detail_page.dart',
     requiredSnippets: [
       'fallbackPath: AppRoutePaths.markets',
       'mode: BackNavigationMode.historyThenFallback',

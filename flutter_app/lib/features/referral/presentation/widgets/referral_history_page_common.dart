@@ -1,4 +1,4 @@
-part of '../pages/referral_history_page.dart';
+part of '../phone/pages/referral_history_page.dart';
 
 class _FriendCard extends StatelessWidget {
   const _FriendCard({

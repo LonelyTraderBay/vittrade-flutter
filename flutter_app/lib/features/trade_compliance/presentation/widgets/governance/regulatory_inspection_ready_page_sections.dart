@@ -1,4 +1,4 @@
-part of '../../pages/governance/regulatory_inspection_ready_page.dart';
+part of '../../phone/pages/governance/regulatory_inspection_ready_page.dart';
 
 class _ComplianceScoreCard extends StatelessWidget {
   const _ComplianceScoreCard({required this.snapshot});

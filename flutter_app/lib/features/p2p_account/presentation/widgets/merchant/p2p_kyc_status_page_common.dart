@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_kyc_status_page.dart';
+part of '../../phone/pages/merchant/p2p_kyc_status_page.dart';
 
 class _SupportCard extends StatelessWidget {
   const _SupportCard({required this.snapshot});

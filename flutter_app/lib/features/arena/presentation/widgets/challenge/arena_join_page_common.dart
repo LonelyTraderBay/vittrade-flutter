@@ -1,4 +1,4 @@
-part of '../../pages/challenge/arena_join_page.dart';
+part of '../../phone/pages/challenge/arena_join_page.dart';
 
 class _AcknowledgementStack extends StatelessWidget {
   const _AcknowledgementStack({

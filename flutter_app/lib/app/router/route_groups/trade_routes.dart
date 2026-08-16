@@ -10,16 +10,16 @@ import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade_core/domain/entities/trade_core_entities.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/orders_history_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/orders_history_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/order_receipt_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_settings_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/position_dashboard_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/hub/trade_history_export_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/convert/convert_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/futures/futures_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/futures/leverage_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/margin/margin_trading_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/pages/margin/margin_trading_hub_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/trade_settings_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/position_dashboard_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/convert/convert_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/futures/futures_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/futures/leverage_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/margin/margin_trading_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';

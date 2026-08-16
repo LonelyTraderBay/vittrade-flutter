@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_contingency_plan_page.dart';
+part of '../../phone/pages/staking/staking_contingency_plan_page.dart';
 
 class _ValidationSection extends StatelessWidget {
   const _ValidationSection({required this.items, required this.body});

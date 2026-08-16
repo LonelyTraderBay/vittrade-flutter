@@ -1,4 +1,4 @@
-part of '../../pages/wallet/p2p_wallet_page.dart';
+part of '../../phone/pages/wallet/p2p_wallet_page.dart';
 
 class _WalletHero extends StatelessWidget {
   const _WalletHero({

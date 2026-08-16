@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_guide_page.dart';
+part of '../../phone/pages/settings/bot_guide_page.dart';
 
 class _IntroBanner extends StatelessWidget {
   const _IntroBanner();

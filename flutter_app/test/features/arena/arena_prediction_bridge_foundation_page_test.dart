@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/arena/data/arena_repository.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/bridge/arena_prediction_bridge_foundation_page.dart';
-import 'package:vit_trade_flutter/features/arena/presentation/pages/hub/my_arena_page.dart';
-import 'package:vit_trade_flutter/features/predictions/presentation/pages/portfolio/predictions_portfolio_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/bridge/arena_prediction_bridge_foundation_page.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/hub/my_arena_page.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/phone/pages/portfolio/predictions_portfolio_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';

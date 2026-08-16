@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_staking_page.dart';
+part of '../../phone/pages/tools/launchpad_staking_page.dart';
 
 class _ApyCalculator extends StatefulWidget {
   const _ApyCalculator({required this.pools});

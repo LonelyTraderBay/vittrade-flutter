@@ -265,9 +265,7 @@ class _WalletHealthScoreTabletPageState
                   value: '${snapshot.diversification[i].value}%',
                   leading: VitAssetAvatar(
                     label: snapshot.diversification[i].name,
-                    accentColor: Color(
-                      snapshot.diversification[i].colorHex,
-                    ),
+                    accentColor: Color(snapshot.diversification[i].colorHex),
                     size: AppSpacing.iconLg,
                   ),
                   density: VitDensity.compact,

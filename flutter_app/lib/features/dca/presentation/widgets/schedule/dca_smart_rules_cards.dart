@@ -1,4 +1,4 @@
-part of '../../pages/schedule/dca_smart_rules_page.dart';
+part of '../../phone/pages/schedule/dca_smart_rules_page.dart';
 
 class _RuleCard extends StatelessWidget {
   const _RuleCard({super.key, required this.rule, required this.onDelete});

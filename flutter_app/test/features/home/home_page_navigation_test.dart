@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/discovery/presentation/pages/unified_search_page.dart';
+import 'package:vit_trade_flutter/features/discovery/presentation/phone/pages/unified_search_page.dart';
 import 'package:vit_trade_flutter/features/home/data/home_mock_data.dart';
 import 'package:vit_trade_flutter/features/home/data/providers/home_repository_provider.dart';
 import 'package:vit_trade_flutter/features/home/data/repositories/mock_home_repository.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/domain/repositories/home_repository.dart';
-import 'package:vit_trade_flutter/features/home/presentation/pages/home_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/pages/pair/pair_detail_page.dart';
-import 'package:vit_trade_flutter/features/news/presentation/pages/news_page.dart';
-import 'package:vit_trade_flutter/features/notifications/presentation/pages/notifications_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/pair_detail_page.dart';
+import 'package:vit_trade_flutter/features/news/presentation/phone/pages/news_page.dart';
+import 'package:vit_trade_flutter/features/notifications/presentation/phone/pages/notifications_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_skeleton.dart';
 
 void main() {

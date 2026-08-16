@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/dca/data/dca_repository.dart';
-import 'package:vit_trade_flutter/features/dca/presentation/pages/portfolio/dca_performance_compare_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/phone/pages/portfolio/dca_performance_compare_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';

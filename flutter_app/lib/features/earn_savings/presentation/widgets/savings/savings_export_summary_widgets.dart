@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_export_page.dart';
+part of '../../phone/pages/savings/savings_export_page.dart';
 
 class _ExportSummary extends StatelessWidget {
   const _ExportSummary({

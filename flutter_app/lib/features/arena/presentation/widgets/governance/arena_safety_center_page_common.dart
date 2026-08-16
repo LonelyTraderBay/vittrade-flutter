@@ -1,4 +1,4 @@
-part of '../../pages/governance/arena_safety_center_page.dart';
+part of '../../phone/pages/governance/arena_safety_center_page.dart';
 
 class _QuickLinks extends StatelessWidget {
   const _QuickLinks({required this.links});

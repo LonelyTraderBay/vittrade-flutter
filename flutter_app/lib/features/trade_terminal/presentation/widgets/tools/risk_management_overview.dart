@@ -1,4 +1,4 @@
-part of '../../pages/tools/risk_management_demo_page.dart';
+part of '../../phone/pages/tools/risk_management_demo_page.dart';
 
 class _IntroCard extends StatelessWidget {
   const _IntroCard();

@@ -1,4 +1,4 @@
-part of '../pages/vip_page.dart';
+part of '../phone/pages/vip_page.dart';
 
 List<Widget> _vipPageChildren({
   required BuildContext context,

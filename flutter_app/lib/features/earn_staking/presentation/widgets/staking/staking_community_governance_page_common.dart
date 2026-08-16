@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_community_governance_page.dart';
+part of '../../phone/pages/staking/staking_community_governance_page.dart';
 
 class _VotingPower extends StatelessWidget {
   const _VotingPower({required this.power});

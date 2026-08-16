@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_multi_chain_page.dart';
+part of '../../phone/pages/staking/staking_multi_chain_page.dart';
 
 class _ChainPositionCard extends StatelessWidget {
   const _ChainPositionCard({

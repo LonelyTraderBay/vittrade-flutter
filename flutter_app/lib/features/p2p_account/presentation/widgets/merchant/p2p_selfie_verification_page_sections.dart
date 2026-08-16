@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_selfie_verification_page.dart';
+part of '../../phone/pages/merchant/p2p_selfie_verification_page.dart';
 
 class _GuideStep extends StatelessWidget {
   const _GuideStep({required this.snapshot, required this.onStart});

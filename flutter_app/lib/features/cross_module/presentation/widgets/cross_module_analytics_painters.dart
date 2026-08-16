@@ -1,4 +1,4 @@
-part of '../pages/cross_module_analytics_page.dart';
+part of '../phone/pages/cross_module_analytics_page.dart';
 
 class _ChartCard extends StatelessWidget {
   const _ChartCard({required this.title, required this.child});

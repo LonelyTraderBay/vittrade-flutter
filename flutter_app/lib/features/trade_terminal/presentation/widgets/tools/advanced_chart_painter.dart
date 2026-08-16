@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_chart_page.dart';
+part of '../../phone/pages/tools/advanced_chart_page.dart';
 
 // PERF-HN5: [candles] is expected to already be the expanded (3x
 // interpolated) series produced by [expandAdvancedTradeCandles] — the page

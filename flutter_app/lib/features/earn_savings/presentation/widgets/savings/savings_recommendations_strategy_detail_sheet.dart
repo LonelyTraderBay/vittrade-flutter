@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_recommendations_page.dart';
+part of '../../phone/pages/savings/savings_recommendations_page.dart';
 
 class _StrategyDetailSheet extends StatelessWidget {
   const _StrategyDetailSheet({

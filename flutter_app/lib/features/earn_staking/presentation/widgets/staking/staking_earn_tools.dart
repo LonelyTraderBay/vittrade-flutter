@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_earn_page.dart';
+part of '../../phone/pages/staking/staking_earn_page.dart';
 
 class _EarnCtaRow extends StatelessWidget {
   const _EarnCtaRow({required this.savingsRoute, required this.dashboardRoute});

@@ -19,7 +19,7 @@ import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/auth_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/widgets/auth_hero_icon_box.dart';
 
-part '../../phone/widgets/forgot_password_page_sections.dart';
+part '../widgets/forgot_password_page_sections.dart';
 
 const _authPrimary = AppColors.primary;
 const _authPrimary10 = AppColors.primary12;

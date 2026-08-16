@@ -10,9 +10,9 @@ void main() {
       final targets = [
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_orders/presentation/pages/orders/p2p_order_page.dart',
+              'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_order_page.dart',
           paths: [
-            'lib/features/p2p_orders/presentation/pages/orders/p2p_order_page.dart',
+            'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_order_page.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_order_page_state.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_order_content_cards.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_order_page_common.dart',
@@ -26,9 +26,9 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_orders/presentation/pages/orders/p2p_escrow_balance_page.dart',
+              'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_balance_page.dart',
           paths: [
-            'lib/features/p2p_orders/presentation/pages/orders/p2p_escrow_balance_page.dart',
+            'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_balance_page.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_escrow_balance_page_sections.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_escrow_balance_page_common.dart',
           ],
@@ -41,9 +41,9 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_orders/presentation/pages/orders/p2p_escrow_detail_page.dart',
+              'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_detail_page.dart',
           paths: [
-            'lib/features/p2p_orders/presentation/pages/orders/p2p_escrow_detail_page.dart',
+            'lib/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_detail_page.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_escrow_detail_status_address.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_escrow_detail_multisig_order.dart',
             'lib/features/p2p_orders/presentation/widgets/orders/p2p_escrow_detail_timeline_actions.dart',
@@ -59,9 +59,9 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart',
+              'lib/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_page.dart',
           paths: [
-            'lib/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart',
+            'lib/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_page.dart',
             'lib/features/p2p_orders/presentation/widgets/wallet/p2p_wallet_hero.dart',
             'lib/features/p2p_orders/presentation/widgets/wallet/p2p_wallet_balances.dart',
             'lib/features/p2p_orders/presentation/widgets/wallet/p2p_wallet_actions_history.dart',
@@ -153,9 +153,9 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart',
+              'lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart',
           paths: [
-            'lib/features/wallet/presentation/pages/tools/wallet_token_approval_page.dart',
+            'lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart',
             'lib/features/wallet/presentation/widgets/tools/wallet_token_revoke_sheet.dart',
             'lib/features/wallet/presentation/controllers/wallet_controller.dart',
           ],
@@ -174,7 +174,7 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_account/presentation/pages/payment/p2p_payment_method_add_page.dart',
+              'lib/features/p2p_account/presentation/phone/pages/payment/p2p_payment_method_add_page.dart',
           roles: {
             'preview': [RegExp(r'\bpreview\b|_PaymentPreview')],
             'confirm': [RegExp(r'confirmMessage|confirmTitle|\bconfirm\b')],
@@ -191,9 +191,9 @@ void main() {
         ),
         HighRiskCopyTarget(
           path:
-              'lib/features/p2p_marketplace/presentation/pages/ads/p2p_create_ad_page.dart',
+              'lib/features/p2p_marketplace/presentation/phone/pages/ads/p2p_create_ad_page.dart',
           paths: [
-            'lib/features/p2p_marketplace/presentation/pages/ads/p2p_create_ad_page.dart',
+            'lib/features/p2p_marketplace/presentation/phone/pages/ads/p2p_create_ad_page.dart',
             'lib/features/p2p_marketplace/presentation/widgets/ads/p2p_create_ad_sections.dart',
             'lib/features/p2p_core/presentation/controllers/p2p_controller.dart',
           ],

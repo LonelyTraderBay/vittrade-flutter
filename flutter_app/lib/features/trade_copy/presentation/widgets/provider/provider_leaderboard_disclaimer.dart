@@ -1,4 +1,4 @@
-part of '../../pages/provider/provider_leaderboard_page.dart';
+part of '../../phone/pages/provider/provider_leaderboard_page.dart';
 
 class _Disclaimer extends StatelessWidget {
   const _Disclaimer({required this.text});

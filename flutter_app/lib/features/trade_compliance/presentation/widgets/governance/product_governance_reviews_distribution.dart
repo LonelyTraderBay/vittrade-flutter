@@ -1,4 +1,4 @@
-part of '../../pages/governance/product_governance_page.dart';
+part of '../../phone/pages/governance/product_governance_page.dart';
 
 class _ReviewsTab extends StatelessWidget {
   const _ReviewsTab({required this.products});

@@ -1,4 +1,4 @@
-part of '../pages/notifications_page.dart';
+part of '../phone/pages/notifications_page.dart';
 
 final class _NotificationTypeStyle {
   const _NotificationTypeStyle({

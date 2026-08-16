@@ -1,4 +1,4 @@
-part of '../../pages/client_money/investor_compensation_page.dart';
+part of '../../phone/pages/client_money/investor_compensation_page.dart';
 
 class _WarningBox extends StatelessWidget {
   const _WarningBox({required this.text});

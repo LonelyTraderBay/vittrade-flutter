@@ -21,8 +21,8 @@ import 'package:vit_trade_flutter/features/auth/presentation/controllers/passwor
 import 'package:vit_trade_flutter/app/theme/spacing/auth_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/widgets/auth_hero_icon_box.dart';
 
-part '../../phone/widgets/otp_identity_intro.dart';
-part '../../phone/widgets/otp_input_status.dart';
+part '../widgets/otp_identity_intro.dart';
+part '../widgets/otp_input_status.dart';
 
 const _authPrimary = AppColors.primary;
 const _authPrimary10 = AppColors.primary12;

@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_blacklist_page.dart';
+part of '../../phone/pages/security/p2p_blacklist_page.dart';
 
 class _InfoNote extends StatelessWidget {
   const _InfoNote({required this.snapshot});

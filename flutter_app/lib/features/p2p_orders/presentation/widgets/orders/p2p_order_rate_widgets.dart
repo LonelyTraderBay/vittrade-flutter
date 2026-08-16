@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_order_rate_page.dart';
+part of '../../phone/pages/orders/p2p_order_rate_page.dart';
 
 class _MerchantSummary extends StatelessWidget {
   const _MerchantSummary({required this.order});

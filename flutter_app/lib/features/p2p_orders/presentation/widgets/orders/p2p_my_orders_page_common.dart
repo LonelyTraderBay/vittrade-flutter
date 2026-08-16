@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_my_orders_page.dart';
+part of '../../phone/pages/orders/p2p_my_orders_page.dart';
 
 final class _StatMeta {
   const _StatMeta(this.label, this.value, this.color);

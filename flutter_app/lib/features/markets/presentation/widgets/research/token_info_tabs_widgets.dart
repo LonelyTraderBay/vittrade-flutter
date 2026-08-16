@@ -1,4 +1,4 @@
-part of '../../pages/research/token_info_page.dart';
+part of '../../phone/pages/research/token_info_page.dart';
 
 String _tokenTabKey(_TokenInfoTab tab) => switch (tab) {
   _TokenInfoTab.overview => 'overview',

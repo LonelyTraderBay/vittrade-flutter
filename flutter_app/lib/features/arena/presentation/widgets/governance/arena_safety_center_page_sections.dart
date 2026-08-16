@@ -1,4 +1,4 @@
-part of '../../pages/governance/arena_safety_center_page.dart';
+part of '../../phone/pages/governance/arena_safety_center_page.dart';
 
 class _SafetyHero extends StatelessWidget {
   const _SafetyHero({required this.snapshot});

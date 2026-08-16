@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_chat_page.dart';
+part of '../../phone/pages/orders/p2p_chat_page.dart';
 
 class _DateSeparator extends StatelessWidget {
   const _DateSeparator();

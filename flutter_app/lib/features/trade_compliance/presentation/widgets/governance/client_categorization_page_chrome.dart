@@ -1,4 +1,4 @@
-part of '../../pages/governance/client_categorization_page.dart';
+part of '../../phone/pages/governance/client_categorization_page.dart';
 
 class _CurrentCategoryCard extends StatelessWidget {
   const _CurrentCategoryCard({required this.category});

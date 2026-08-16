@@ -1,4 +1,4 @@
-part of '../../pages/ads/p2p_order_book_page.dart';
+part of '../../phone/pages/ads/p2p_order_book_page.dart';
 
 class _DepthChartPainter extends CustomPainter {
   const _DepthChartPainter(this.snapshot);

@@ -1,4 +1,4 @@
-part of '../../pages/backtest/bot_backtesting_page.dart';
+part of '../../phone/pages/backtest/bot_backtesting_page.dart';
 
 class _StrategyGrid extends StatelessWidget {
   const _StrategyGrid({

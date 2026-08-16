@@ -1,4 +1,4 @@
-part of '../../pages/schedule/dca_schedule_config_page.dart';
+part of '../../phone/pages/schedule/dca_schedule_config_page.dart';
 
 class _StrategySection extends StatelessWidget {
   const _StrategySection({

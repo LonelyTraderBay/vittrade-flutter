@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/advanced_analytics_page.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/advanced_chart_page.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/advanced_tools_demo_page.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/advanced_trading_demo_page.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/execution_quality_demo_page.dart';
-import 'package:vit_trade_flutter/features/trade_terminal/presentation/pages/tools/risk_management_demo_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/advanced_analytics_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/advanced_chart_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/advanced_tools_demo_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/advanced_trading_demo_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/execution_quality_demo_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/phone/pages/tools/risk_management_demo_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';

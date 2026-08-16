@@ -3,19 +3,19 @@ import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_chat_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_escrow_balance_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_escrow_detail_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_fund_lock_history_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_my_orders_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_cancel_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_proof_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_rate_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_timeline_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_chat_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_balance_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_escrow_detail_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_fund_lock_history_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_my_orders_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_order_cancel_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_order_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_order_proof_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_order_rate_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/orders/p2p_order_timeline_page.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_page.dart';
-import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/wallet/p2p_wallet_transfer_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_page.dart';
+import 'package:vit_trade_flutter/features/p2p_orders/presentation/phone/pages/wallet/p2p_wallet_transfer_page.dart';
 
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 

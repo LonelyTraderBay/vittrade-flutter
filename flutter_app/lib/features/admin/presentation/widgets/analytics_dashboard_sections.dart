@@ -1,4 +1,4 @@
-part of '../pages/analytics_dashboard_page.dart';
+part of '../phone/pages/analytics_dashboard_page.dart';
 
 class _Controls extends StatelessWidget {
   const _Controls({

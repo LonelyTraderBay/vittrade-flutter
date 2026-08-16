@@ -1,4 +1,4 @@
-part of '../pages/referral_rules_page.dart';
+part of '../phone/pages/referral_rules_page.dart';
 
 class _TermsList extends StatelessWidget {
   const _TermsList({required this.snapshot});

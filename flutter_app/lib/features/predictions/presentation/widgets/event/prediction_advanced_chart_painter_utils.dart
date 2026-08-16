@@ -1,4 +1,4 @@
-part of '../../pages/event/prediction_advanced_chart_page.dart';
+part of '../../phone/pages/event/prediction_advanced_chart_page.dart';
 
 Path _seriesPath(
   Rect chart,

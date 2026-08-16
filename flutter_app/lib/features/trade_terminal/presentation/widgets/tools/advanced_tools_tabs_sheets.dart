@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_tools_demo_page.dart';
+part of '../../phone/pages/tools/advanced_tools_demo_page.dart';
 
 class _ToolsTabs extends StatelessWidget {
   const _ToolsTabs({required this.active, required this.onChanged});

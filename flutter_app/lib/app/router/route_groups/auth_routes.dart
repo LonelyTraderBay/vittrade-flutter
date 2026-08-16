@@ -16,9 +16,9 @@ import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/regist
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/reset_password_tablet_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/web/pages/auth_web_page.dart';
-import 'package:vit_trade_flutter/features/enterprise_states/presentation/pages/force_update_gate_page.dart';
-import 'package:vit_trade_flutter/features/enterprise_states/presentation/pages/maintenance_gate_page.dart';
-import 'package:vit_trade_flutter/features/onboarding/presentation/pages/onboarding_flow_page.dart';
+import 'package:vit_trade_flutter/features/enterprise_states/presentation/phone/pages/force_update_gate_page.dart';
+import 'package:vit_trade_flutter/features/enterprise_states/presentation/phone/pages/maintenance_gate_page.dart';
+import 'package:vit_trade_flutter/features/onboarding/presentation/phone/pages/onboarding_flow_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_web_utility_page.dart';
 

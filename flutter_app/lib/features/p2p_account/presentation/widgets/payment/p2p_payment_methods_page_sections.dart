@@ -1,4 +1,4 @@
-part of '../../pages/payment/p2p_payment_methods_page.dart';
+part of '../../phone/pages/payment/p2p_payment_methods_page.dart';
 
 class _ComplianceLinksRow extends StatelessWidget {
   const _ComplianceLinksRow();

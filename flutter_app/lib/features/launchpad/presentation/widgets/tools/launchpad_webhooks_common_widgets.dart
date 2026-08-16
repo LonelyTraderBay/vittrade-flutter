@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_webhooks_page.dart';
+part of '../../phone/pages/tools/launchpad_webhooks_page.dart';
 
 class _CopyButton extends StatelessWidget {
   const _CopyButton({

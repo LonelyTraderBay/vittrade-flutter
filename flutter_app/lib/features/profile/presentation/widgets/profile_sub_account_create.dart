@@ -1,4 +1,4 @@
-part of '../pages/sub_account_page.dart';
+part of '../phone/pages/sub_account_page.dart';
 
 class _CreateSubAccountButton extends StatelessWidget {
   const _CreateSubAccountButton({required this.isOpen, required this.onTap});

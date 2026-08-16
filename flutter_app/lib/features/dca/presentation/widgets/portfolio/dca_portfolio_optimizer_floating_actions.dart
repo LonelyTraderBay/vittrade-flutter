@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/dca_portfolio_optimizer_page.dart';
+part of '../../phone/pages/portfolio/dca_portfolio_optimizer_page.dart';
 
 class _OptimizerApplyAction extends StatelessWidget {
   const _OptimizerApplyAction({required this.snapshot, required this.onApply});

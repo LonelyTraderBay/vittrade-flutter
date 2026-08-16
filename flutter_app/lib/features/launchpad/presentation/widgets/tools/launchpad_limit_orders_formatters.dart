@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_limit_orders_page.dart';
+part of '../../phone/pages/tools/launchpad_limit_orders_page.dart';
 
 String _formatPrice(double value) => VitFormat.usd(value);
 

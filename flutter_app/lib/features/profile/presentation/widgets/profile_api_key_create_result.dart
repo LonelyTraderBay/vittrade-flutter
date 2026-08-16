@@ -1,4 +1,4 @@
-part of '../pages/api_key_create_page.dart';
+part of '../phone/pages/api_key_create_page.dart';
 
 class _FieldSection extends StatelessWidget {
   const _FieldSection({

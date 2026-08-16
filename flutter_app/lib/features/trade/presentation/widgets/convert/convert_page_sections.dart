@@ -1,4 +1,4 @@
-part of '../../pages/convert/convert_page.dart';
+part of '../../phone/pages/convert/convert_page.dart';
 
 class _ConvertRiskReviewPanel extends StatelessWidget {
   const _ConvertRiskReviewPanel({

@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_emergency_stop_page.dart';
+part of '../../phone/pages/settings/bot_emergency_stop_page.dart';
 
 class _StickyActions extends StatelessWidget {
   const _StickyActions({

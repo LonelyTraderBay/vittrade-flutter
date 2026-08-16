@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_risk_dashboard_page.dart';
+part of '../../phone/pages/dashboard/bot_risk_dashboard_page.dart';
 
 class _DrawdownChartCard extends StatefulWidget {
   const _DrawdownChartCard({required this.points, required this.limit});

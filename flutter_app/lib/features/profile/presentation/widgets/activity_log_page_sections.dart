@@ -1,4 +1,4 @@
-part of '../pages/activity_log_page.dart';
+part of '../phone/pages/activity_log_page.dart';
 
 class _ActivityFilterRow extends StatelessWidget {
   const _ActivityFilterRow({

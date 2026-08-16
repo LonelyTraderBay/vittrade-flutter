@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_audit_reports_page.dart';
+part of '../../phone/pages/staking/staking_audit_reports_page.dart';
 
 class _FeedbackNote extends StatelessWidget {
   const _FeedbackNote({required this.text});

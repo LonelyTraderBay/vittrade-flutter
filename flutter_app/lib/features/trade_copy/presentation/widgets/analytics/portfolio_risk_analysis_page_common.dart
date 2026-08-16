@@ -1,4 +1,4 @@
-part of '../../pages/analytics/portfolio_risk_analysis_page.dart';
+part of '../../phone/pages/analytics/portfolio_risk_analysis_page.dart';
 
 class _PlaceholderPanel extends StatelessWidget {
   const _PlaceholderPanel({required this.title, required this.description});

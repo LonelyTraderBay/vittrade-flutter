@@ -1,4 +1,4 @@
-part of '../../pages/governance/arena_governance_gate_page.dart';
+part of '../../phone/pages/governance/arena_governance_gate_page.dart';
 
 class _DescriptionField extends StatelessWidget {
   const _DescriptionField({required this.value, required this.onChanged});

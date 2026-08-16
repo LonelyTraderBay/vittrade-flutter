@@ -8,7 +8,7 @@ void main() {
   group('product copy guardrails - Predictions', () {
     test('Prediction and Wallet high-risk confirmations avoid unsafe copy', () {
       final predictionRisk = readSource(
-        'lib/features/predictions/presentation/pages/portfolio/'
+        'lib/features/predictions/presentation/phone/pages/portfolio/'
         'prediction_risk_calculator_page.dart',
       );
       expect(predictionRisk, isNot(contains('Total Bankroll')));
@@ -22,7 +22,7 @@ void main() {
       );
 
       final tokenApproval = readSource(
-        'lib/features/wallet/presentation/pages/tools/'
+        'lib/features/wallet/presentation/phone/pages/tools/'
         'wallet_token_approval_page.dart',
       );
       expect(
@@ -34,7 +34,7 @@ void main() {
     test('Prediction event and portfolio surfaces keep Arena boundary copy', () {
       final source = asciiFold(
         [
-          'lib/features/predictions/presentation/pages/event/prediction_event_detail_page.dart',
+          'lib/features/predictions/presentation/phone/pages/event/prediction_event_detail_page.dart',
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_activity_holders.dart',
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_chart.dart',
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_comments.dart',
@@ -47,7 +47,7 @@ void main() {
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_stats_position.dart',
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_trade_controls.dart',
           'lib/features/predictions/presentation/widgets/event/prediction_event_detail_trade_panel.dart',
-          'lib/features/predictions/presentation/pages/portfolio/predictions_portfolio_page.dart',
+          'lib/features/predictions/presentation/phone/pages/portfolio/predictions_portfolio_page.dart',
           'lib/features/predictions/presentation/controllers/predictions_controller.dart',
         ].map(readSource).join('\n'),
       );

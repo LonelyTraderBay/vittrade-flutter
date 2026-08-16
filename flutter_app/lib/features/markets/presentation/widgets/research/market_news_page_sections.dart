@@ -1,4 +1,4 @@
-part of '../../pages/research/market_news_page.dart';
+part of '../../phone/pages/research/market_news_page.dart';
 
 class _BreakingNewsCard extends StatelessWidget {
   const _BreakingNewsCard({required this.news});

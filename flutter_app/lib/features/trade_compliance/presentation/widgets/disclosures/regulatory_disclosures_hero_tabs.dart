@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/regulatory_disclosures_page.dart';
+part of '../../phone/pages/disclosures/regulatory_disclosures_page.dart';
 
 class _LegalTabs extends StatelessWidget {
   const _LegalTabs({

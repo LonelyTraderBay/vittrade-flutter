@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_social_feed_page.dart';
+part of '../../phone/pages/staking/staking_social_feed_page.dart';
 
 class _Composer extends StatelessWidget {
   const _Composer({required this.placeholder});

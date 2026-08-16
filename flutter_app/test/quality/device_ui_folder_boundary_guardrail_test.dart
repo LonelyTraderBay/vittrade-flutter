@@ -93,61 +93,40 @@ void main() {
     );
   });
 
-  test('legacy page paths remain export-only compatibility facades', () {
-    const legacyFiles = <String>[
-      'lib/features/home/presentation/pages/home_page.dart',
-      'lib/features/home/presentation/pages/home_tablet_page.dart',
-      'lib/features/markets/presentation/pages/hub/market_list_page.dart',
-      'lib/features/markets/presentation/pages/hub/markets_tablet_page.dart',
-      'lib/features/wallet/presentation/pages/hub/wallet_page.dart',
-      'lib/features/wallet/presentation/pages/hub/wallet_tablet_page.dart',
-      'lib/features/trade/presentation/pages/hub/trade_page.dart',
-      'lib/features/trade/presentation/pages/hub/trade_tablet_page.dart',
-      'lib/features/profile/presentation/pages/profile_page.dart',
-      'lib/features/profile/presentation/pages/profile_tablet_page.dart',
-      'lib/features/home/presentation/pages/phone/home_page.dart',
-      'lib/features/home/presentation/pages/tablet/home_tablet_page.dart',
-      'lib/features/markets/presentation/pages/phone/market_list_page.dart',
-      'lib/features/markets/presentation/pages/tablet/markets_tablet_page.dart',
-      'lib/features/wallet/presentation/pages/phone/wallet_page.dart',
-      'lib/features/wallet/presentation/pages/tablet/wallet_tablet_page.dart',
-      'lib/features/wallet/presentation/pages/transfer/deposit_page.dart',
-      'lib/features/wallet/presentation/pages/transfer/withdraw_page.dart',
-      'lib/features/wallet/presentation/pages/transfer/transfer_page.dart',
-      'lib/features/wallet/presentation/pages/address/address_add_page.dart',
-      'lib/features/wallet/presentation/pages/address/address_book_page.dart',
-      'lib/features/wallet/presentation/pages/history/transaction_history_page.dart',
-      'lib/features/wallet/presentation/pages/history/transaction_detail_page.dart',
-      'lib/features/wallet/presentation/pages/transfer/pending_deposits_page.dart',
-      'lib/features/trade/presentation/pages/phone/trade_page.dart',
-      'lib/features/trade/presentation/pages/phone/order_receipt_page.dart',
-      'lib/features/trade/presentation/pages/tablet/trade_tablet_page.dart',
-      'lib/features/trade/presentation/pages/tablet/trade_tablet_order_receipt_page.dart',
-      'lib/features/profile/presentation/pages/phone/profile_page.dart',
-      'lib/features/profile/presentation/pages/tablet/profile_tablet_page.dart',
-      'lib/features/auth/presentation/pages/login_page.dart',
-      'lib/features/auth/presentation/pages/register_page.dart',
-      'lib/features/auth/presentation/pages/otp_page.dart',
-      'lib/features/auth/presentation/pages/two_fa_setup_page.dart',
-      'lib/features/auth/presentation/pages/forgot_password_page.dart',
-      'lib/features/auth/presentation/pages/reset_password_page.dart',
-    ];
-
-    final violations = <String>[];
-    for (final path in legacyFiles) {
-      final file = File(path);
-      if (!file.existsSync()) {
-        violations.add('$path: thiếu compatibility facade');
-        continue;
+  test(
+    'legacy shared pages/widgets tree stays empty (phone migration ratchet)',
+    () {
+      // Phone-surface migration (2026-08-16) moved every legacy
+      // `presentation/pages/**` file into `presentation/phone/pages/**`
+      // (plus `presentation/tablet|web/pages/**` for the surface facades) and
+      // `presentation/widgets/hub/**` into `presentation/widgets/phone/**`.
+      // Both legacy locations must stay at zero — new screens belong in the
+      // per-surface trees.
+      final violations = <String>[];
+      for (final feature in Directory(
+        'lib/features',
+      ).listSync().whereType<Directory>()) {
+        final legacyPages = Directory('${feature.path}/presentation/pages');
+        if (legacyPages.existsSync()) {
+          violations.add('${feature.path}\\presentation\\pages');
+        }
+        final legacyHubWidgets = Directory(
+          '${feature.path}/presentation/widgets/hub',
+        );
+        if (legacyHubWidgets.existsSync()) {
+          violations.add('${feature.path}\\presentation\\widgets\\hub');
+        }
       }
-      final content = file.readAsStringSync();
-      if (!content.contains('export ') || content.contains('class ')) {
-        violations.add('$path: facade chứa logic UI thay vì chỉ export');
-      }
-    }
 
-    expect(violations, isEmpty, reason: violations.join('\n'));
-  });
+      expect(
+        violations,
+        isEmpty,
+        reason:
+            'Legacy presentation/pages|widgets/hub đã bị xóa sau Phone-surface '
+            'migration — thêm screen mới vào presentation/phone/pages: $violations',
+      );
+    },
+  );
 
   test('tablet UI never imports phone or legacy feature UI', () {
     const features = <String>[

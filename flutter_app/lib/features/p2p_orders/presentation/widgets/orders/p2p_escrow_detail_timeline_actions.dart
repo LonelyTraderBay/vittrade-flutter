@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_escrow_detail_page.dart';
+part of '../../phone/pages/orders/p2p_escrow_detail_page.dart';
 
 class _EscrowTimelineCard extends StatelessWidget {
   const _EscrowTimelineCard({required this.events});

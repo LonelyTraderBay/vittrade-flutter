@@ -1,4 +1,4 @@
-part of '../../pages/payment/p2p_payment_method_verification_page.dart';
+part of '../../phone/pages/payment/p2p_payment_method_verification_page.dart';
 
 class _MethodChooser extends StatelessWidget {
   const _MethodChooser({required this.snapshot, required this.onSelected});

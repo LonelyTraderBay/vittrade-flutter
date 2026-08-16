@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_analytics_page.dart';
+part of '../../phone/pages/staking/staking_analytics_page.dart';
 
 class _RoiTab extends StatelessWidget {
   const _RoiTab({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_score_calculator_page.dart';
+part of '../../phone/pages/staking/staking_risk_score_calculator_page.dart';
 
 class _ScenarioInputs extends StatelessWidget {
   const _ScenarioInputs({

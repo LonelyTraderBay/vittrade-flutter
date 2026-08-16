@@ -1,4 +1,4 @@
-part of '../../pages/safety/safety_education_page.dart';
+part of '../../phone/pages/safety/safety_education_page.dart';
 
 class _SeveritySection extends StatelessWidget {
   const _SeveritySection({

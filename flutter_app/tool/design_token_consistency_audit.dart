@@ -3,17 +3,17 @@ import 'dart:io';
 const String _generatedDate = '2026-06-12';
 
 const Set<String> _additionalRootPagePaths = <String>{
-  'lib/features/admin/presentation/pages/ab_test_dashboard_page.dart',
-  'lib/features/admin/presentation/pages/admin_home_page.dart',
-  'lib/features/admin/presentation/pages/analytics_dashboard_page.dart',
-  'lib/features/admin/presentation/pages/funnel_dashboard_page.dart',
-  'lib/features/dev/presentation/pages/performance_monitor.dart',
-  'lib/features/cross_module/presentation/pages/cross_module_analytics_page.dart',
-  'lib/features/cross_module/presentation/pages/smart_alert_center_page.dart',
-  'lib/features/cross_module/presentation/pages/tax_report_center_page.dart',
-  'lib/features/cross_module/presentation/pages/unified_portfolio_dashboard_page.dart',
-  'lib/features/onboarding/presentation/pages/onboarding_flow_page.dart',
-  'lib/features/trade_copy/presentation/pages/hub/copy_trading_card_demo.dart',
+  'lib/features/admin/presentation/phone/pages/ab_test_dashboard_page.dart',
+  'lib/features/admin/presentation/phone/pages/admin_home_page.dart',
+  'lib/features/admin/presentation/phone/pages/analytics_dashboard_page.dart',
+  'lib/features/admin/presentation/phone/pages/funnel_dashboard_page.dart',
+  'lib/features/dev/presentation/phone/pages/performance_monitor.dart',
+  'lib/features/cross_module/presentation/phone/pages/cross_module_analytics_page.dart',
+  'lib/features/cross_module/presentation/phone/pages/smart_alert_center_page.dart',
+  'lib/features/cross_module/presentation/phone/pages/tax_report_center_page.dart',
+  'lib/features/cross_module/presentation/phone/pages/unified_portfolio_dashboard_page.dart',
+  'lib/features/onboarding/presentation/phone/pages/onboarding_flow_page.dart',
+  'lib/features/trade_copy/presentation/phone/pages/hub/copy_trading_card_demo.dart',
 };
 
 const Map<String, int> _p0ModuleDebtBaselines = <String, int>{

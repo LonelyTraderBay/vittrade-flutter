@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_achievements_page.dart';
+part of '../../phone/pages/security/p2p_achievements_page.dart';
 
 class _TradingLevelLink extends StatelessWidget {
   const _TradingLevelLink({required this.snapshot});

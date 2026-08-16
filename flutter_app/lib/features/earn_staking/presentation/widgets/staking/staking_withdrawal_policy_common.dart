@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_withdrawal_policy_page.dart';
+part of '../../phone/pages/staking/staking_withdrawal_policy_page.dart';
 
 class _CalculationRow extends StatelessWidget {
   const _CalculationRow({required this.row});

@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/providers/earn_savings_controller_providers.dart';
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_portfolio_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_portfolio_page.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/widgets/savings/savings_portfolio_common.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/widgets/savings/savings_portfolio_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';

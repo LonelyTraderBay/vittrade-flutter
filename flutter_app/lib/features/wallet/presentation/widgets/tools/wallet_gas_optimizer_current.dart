@@ -1,4 +1,4 @@
-part of '../../pages/tools/wallet_gas_optimizer_page.dart';
+part of '../../phone/pages/tools/wallet_gas_optimizer_page.dart';
 
 class _GasTabs extends StatelessWidget {
   const _GasTabs({required this.activeTab, required this.onChanged});

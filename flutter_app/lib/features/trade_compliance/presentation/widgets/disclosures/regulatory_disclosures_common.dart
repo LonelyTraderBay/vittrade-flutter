@@ -1,1 +1,1 @@
-part of '../../pages/disclosures/regulatory_disclosures_page.dart';
+part of '../../phone/pages/disclosures/regulatory_disclosures_page.dart';

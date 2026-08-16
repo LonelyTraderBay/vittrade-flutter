@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_page.dart';
+part of '../../phone/pages/savings/savings_page.dart';
 
 class _SavingsTabs extends StatelessWidget {
   const _SavingsTabs({

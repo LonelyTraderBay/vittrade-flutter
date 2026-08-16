@@ -1,4 +1,4 @@
-part of '../../pages/dispute/p2p_insurance_score_page.dart';
+part of '../../phone/pages/dispute/p2p_insurance_score_page.dart';
 
 class _QuickActionRow extends StatelessWidget {
   const _QuickActionRow({required this.action});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/advanced_analytics_page.dart';
+part of '../../phone/pages/tools/advanced_analytics_page.dart';
 
 class _RiskAnalysisTab extends StatelessWidget {
   const _RiskAnalysisTab({required this.snapshot});

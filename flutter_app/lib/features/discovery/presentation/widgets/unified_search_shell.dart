@@ -1,4 +1,4 @@
-part of '../pages/unified_search_page.dart';
+part of '../phone/pages/unified_search_page.dart';
 
 class _SearchBand extends StatelessWidget {
   const _SearchBand({

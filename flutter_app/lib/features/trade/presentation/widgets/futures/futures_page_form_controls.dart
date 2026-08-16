@@ -1,4 +1,4 @@
-part of '../../pages/futures/futures_page.dart';
+part of '../../phone/pages/futures/futures_page.dart';
 
 class _MarginInput extends StatelessWidget {
   const _MarginInput({required this.controller, required this.onChanged});

@@ -1,4 +1,4 @@
-part of '../../pages/social/predictions_leaderboard_page.dart';
+part of '../../phone/pages/social/predictions_leaderboard_page.dart';
 
 class _RankingRow extends StatelessWidget {
   const _RankingRow({

@@ -213,7 +213,10 @@ class _WalletTokenApprovalTabletPageState
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(_riskIcon(approval.riskLevel), color: _riskColor(approval.riskLevel)),
+          Icon(
+            _riskIcon(approval.riskLevel),
+            color: _riskColor(approval.riskLevel),
+          ),
           const SizedBox(width: AppSpacing.x2),
           Expanded(
             child: Column(
@@ -301,7 +304,9 @@ class _WalletTokenApprovalTabletPageState
                 value: _warnUnlimited,
                 onChanged: (value) => setState(() => _warnUnlimited = value),
                 title: const Text('Cảnh báo quyền không giới hạn'),
-                subtitle: const Text('Hiển thị cảnh báo trong danh sách rủi ro.'),
+                subtitle: const Text(
+                  'Hiển thị cảnh báo trong danh sách rủi ro.',
+                ),
               ),
             ],
           ),

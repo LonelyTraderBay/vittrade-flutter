@@ -1,4 +1,4 @@
-part of '../pages/unified_search_page.dart';
+part of '../phone/pages/unified_search_page.dart';
 
 class _PredictionResultCard extends StatelessWidget {
   const _PredictionResultCard({required this.event});

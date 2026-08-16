@@ -1,4 +1,4 @@
-part of '../../pages/futures/leverage_page.dart';
+part of '../../phone/pages/futures/leverage_page.dart';
 
 class _ImpactCard extends StatelessWidget {
   const _ImpactCard({required this.margin, required this.preview});

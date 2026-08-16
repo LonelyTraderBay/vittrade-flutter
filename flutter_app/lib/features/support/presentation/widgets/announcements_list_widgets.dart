@@ -1,4 +1,4 @@
-part of '../pages/announcements_page.dart';
+part of '../phone/pages/announcements_page.dart';
 
 class _PinnedSection extends StatelessWidget {
   const _PinnedSection({

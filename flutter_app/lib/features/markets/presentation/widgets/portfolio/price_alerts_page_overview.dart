@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/price_alerts_page.dart';
+part of '../../phone/pages/portfolio/price_alerts_page.dart';
 
 class _AddAlertNotice extends StatelessWidget {
   const _AddAlertNotice();

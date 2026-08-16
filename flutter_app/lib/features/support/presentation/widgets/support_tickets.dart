@@ -1,4 +1,4 @@
-part of '../pages/support_page.dart';
+part of '../phone/pages/support_page.dart';
 
 class _TicketsPanel extends StatelessWidget {
   const _TicketsPanel({required this.activeTickets, required this.doneTickets});

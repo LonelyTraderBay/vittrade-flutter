@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/providers/earn_savings_controller_providers.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_autopilot_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_autopilot_page.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/earn_spacing_tokens.dart';
 
 import 'package:vit_trade_flutter/features/earn_savings/presentation/widgets/savings/savings_autopilot_formatters.dart';

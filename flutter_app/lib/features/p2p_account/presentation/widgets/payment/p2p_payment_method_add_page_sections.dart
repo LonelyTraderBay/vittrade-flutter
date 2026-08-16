@@ -1,4 +1,4 @@
-part of '../../pages/payment/p2p_payment_method_add_page.dart';
+part of '../../phone/pages/payment/p2p_payment_method_add_page.dart';
 
 class _TypeSelector extends StatelessWidget {
   const _TypeSelector({required this.value, required this.onChanged});

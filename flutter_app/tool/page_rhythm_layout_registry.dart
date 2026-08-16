@@ -11,7 +11,7 @@ const shellWidgetToVpcPath = <String, String>{
   'P2PTabletUtilitySurface':
       'features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart',
   'VitWalletDetailScaffold':
-      'features/wallet/presentation/widgets/hub/vit_wallet_detail_scaffold.dart',
+      'features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart',
   'VitP2PFlowScaffold':
       'features/p2p_core/presentation/widgets/vit_p2p_flow_scaffold.dart',
   'VitTradeHubScaffold':
@@ -74,13 +74,13 @@ const widgetClassPageOverrides = <String, String>{
   'OrderReceiptPage':
       'features/trade/presentation/phone/pages/order_receipt_page.dart',
   'ClientOptUpRequestPage':
-      'features/trade_compliance/presentation/pages/governance/client_categorization_opt_up_page.dart',
+      'features/trade_compliance/presentation/phone/pages/governance/client_categorization_opt_up_page.dart',
   'PredictionTournamentDetailPage':
-      'features/predictions/presentation/pages/prediction_tournaments_page.dart',
+      'features/predictions/presentation/phone/pages/prediction_tournaments_page.dart',
   'P2PWhitelistModePage':
-      'features/p2p_security/presentation/pages/security/p2p_security_center_page.dart',
+      'features/p2p_security/presentation/phone/pages/security/p2p_security_center_page.dart',
   'PredictionAdvancedChartPage':
-      'features/predictions/presentation/pages/prediction_advanced_chart_page.dart',
+      'features/predictions/presentation/phone/pages/prediction_advanced_chart_page.dart',
 };
 
 /// Surface-aware route builders are recorded as `switch` in the route truth
@@ -882,27 +882,27 @@ const authRouteNameToPage = <String, String>{
 /// [InternalSurfaceGate] routes → gated child page (rollup / audit target).
 const gateRouteNameToPage = <String, String>{
   'AppRouteNames.sc180AdminHome':
-      'features/admin/presentation/pages/admin_home_page.dart',
+      'features/admin/presentation/phone/pages/admin_home_page.dart',
   'AppRouteNames.sc181AnalyticsDashboard':
-      'features/admin/presentation/pages/analytics_dashboard_page.dart',
+      'features/admin/presentation/phone/pages/analytics_dashboard_page.dart',
   'AppRouteNames.sc182AbTestDashboard':
-      'features/admin/presentation/pages/ab_test_dashboard_page.dart',
+      'features/admin/presentation/phone/pages/ab_test_dashboard_page.dart',
   'AppRouteNames.sc183FunnelDashboard':
-      'features/admin/presentation/pages/funnel_dashboard_page.dart',
+      'features/admin/presentation/phone/pages/funnel_dashboard_page.dart',
   'AppRouteNames.sc410AdminSettings':
-      'features/admin/presentation/pages/admin_settings_page.dart',
+      'features/admin/presentation/phone/pages/admin_settings_page.dart',
   'AppRouteNames.sc325RouteChecker':
-      'features/dev/presentation/pages/route_checker_page.dart',
+      'features/dev/presentation/phone/pages/route_checker_page.dart',
   'AppRouteNames.sc326PerformanceMonitor':
-      'features/dev/presentation/pages/performance_monitor.dart',
+      'features/dev/presentation/phone/pages/performance_monitor.dart',
   'AppRouteNames.sc398MissingScreensShowcase':
-      'features/dev/presentation/pages/missing_screens_showcase_page.dart',
+      'features/dev/presentation/phone/pages/missing_screens_showcase_page.dart',
   'AppRouteNames.sc399DesignSystem':
-      'features/dev/presentation/pages/design_system_page.dart',
+      'features/dev/presentation/phone/pages/design_system_page.dart',
   'AppRouteNames.sc400DcaOverviewDemo':
-      'features/dca/presentation/pages/hub/dca_overview_demo.dart',
+      'features/dca/presentation/phone/pages/hub/dca_overview_demo.dart',
   'AppRouteNames.sc401CopyTradingCardDemo':
-      'features/trade_copy/presentation/pages/hub/copy_trading_card_demo.dart',
+      'features/trade_copy/presentation/phone/pages/hub/copy_trading_card_demo.dart',
 };
 
 /// Product-intent tier: declared tier matches UX role though path heuristics differ.

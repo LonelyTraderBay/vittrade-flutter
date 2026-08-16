@@ -1,4 +1,4 @@
-part of '../../pages/margin/margin_trading_hub_page.dart';
+part of '../../phone/pages/margin/margin_trading_hub_page.dart';
 
 class _NavigationCard extends StatelessWidget {
   const _NavigationCard({required this.items});

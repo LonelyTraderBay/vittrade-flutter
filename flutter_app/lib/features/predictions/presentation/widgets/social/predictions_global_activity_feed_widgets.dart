@@ -1,4 +1,4 @@
-part of '../../pages/social/predictions_global_activity_page.dart';
+part of '../../phone/pages/social/predictions_global_activity_page.dart';
 
 class _ActivityList extends StatelessWidget {
   const _ActivityList({required this.snapshot});

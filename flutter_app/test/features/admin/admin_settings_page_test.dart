@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/features/admin/presentation/pages/admin_home_page.dart';
+import 'package:vit_trade_flutter/features/admin/presentation/phone/pages/admin_home_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header_action_button.dart';
 
 void main() {

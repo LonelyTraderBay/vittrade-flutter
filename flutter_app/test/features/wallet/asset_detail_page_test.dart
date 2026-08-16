@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/data/wallet_repository.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/pages/assets/asset_detail_page.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/assets/asset_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transaction_detail_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transfer_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';

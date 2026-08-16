@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_security_center_page.dart';
+part of '../../phone/pages/security/p2p_security_center_page.dart';
 
 class _QuickActions extends StatelessWidget {
   const _QuickActions({required this.actions, required this.onOpen});

@@ -1,4 +1,4 @@
-part of '../../pages/studio/arena_studio_page.dart';
+part of '../../phone/pages/studio/arena_studio_page.dart';
 
 class _StudioStepper extends StatelessWidget {
   const _StudioStepper({required this.steps, required this.step});

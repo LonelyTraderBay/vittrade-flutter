@@ -1,4 +1,4 @@
-part of '../../pages/governance/audit_trail_page.dart';
+part of '../../phone/pages/governance/audit_trail_page.dart';
 
 class _StatsRow extends StatelessWidget {
   const _StatsRow({required this.stats});

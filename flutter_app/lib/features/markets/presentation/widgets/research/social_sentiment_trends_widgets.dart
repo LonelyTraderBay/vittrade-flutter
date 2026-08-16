@@ -1,4 +1,4 @@
-part of '../../pages/research/social_sentiment_page.dart';
+part of '../../phone/pages/research/social_sentiment_page.dart';
 
 class _TopicCloud extends StatelessWidget {
   const _TopicCloud({required this.tokens});

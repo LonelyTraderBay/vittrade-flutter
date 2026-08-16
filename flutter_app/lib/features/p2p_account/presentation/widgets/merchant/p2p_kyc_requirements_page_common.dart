@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_kyc_requirements_page.dart';
+part of '../../phone/pages/merchant/p2p_kyc_requirements_page.dart';
 
 class _LimitsGrid extends StatelessWidget {
   const _LimitsGrid({required this.limits, required this.color});

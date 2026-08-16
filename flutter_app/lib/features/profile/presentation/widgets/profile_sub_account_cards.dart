@@ -1,4 +1,4 @@
-part of '../pages/sub_account_page.dart';
+part of '../phone/pages/sub_account_page.dart';
 
 class _SubAccountCard extends StatelessWidget {
   const _SubAccountCard({

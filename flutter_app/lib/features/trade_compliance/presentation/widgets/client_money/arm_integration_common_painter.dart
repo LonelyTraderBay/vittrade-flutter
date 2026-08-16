@@ -1,4 +1,4 @@
-part of '../../pages/client_money/arm_integration_status_page.dart';
+part of '../../phone/pages/client_money/arm_integration_status_page.dart';
 
 class _ArmStatusStyle {
   const _ArmStatusStyle({

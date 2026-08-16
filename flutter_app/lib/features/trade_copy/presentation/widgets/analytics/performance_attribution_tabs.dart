@@ -1,4 +1,4 @@
-part of '../../pages/analytics/performance_attribution_page.dart';
+part of '../../phone/pages/analytics/performance_attribution_page.dart';
 
 class _DrawdownTab extends StatelessWidget {
   const _DrawdownTab({required this.snapshot});

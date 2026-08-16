@@ -1,4 +1,4 @@
-part of '../pages/performance_monitor.dart';
+part of '../phone/pages/performance_monitor.dart';
 
 class _PerformanceScoreCard extends StatelessWidget {
   const _PerformanceScoreCard({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/assets/dust_converter_page.dart';
+part of '../../phone/pages/assets/dust_converter_page.dart';
 
 class _PrimaryButton extends StatelessWidget {
   const _PrimaryButton({

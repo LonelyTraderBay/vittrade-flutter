@@ -1,4 +1,4 @@
-part of '../../pages/execution/execution_venue_analysis_page.dart';
+part of '../../phone/pages/execution/execution_venue_analysis_page.dart';
 
 class _SpeedTab extends StatelessWidget {
   const _SpeedTab({required this.venues});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/wallet_gas_optimizer_page.dart';
+part of '../../phone/pages/tools/wallet_gas_optimizer_page.dart';
 
 class _TrendsTab extends StatelessWidget {
   const _TrendsTab({required this.snapshot});

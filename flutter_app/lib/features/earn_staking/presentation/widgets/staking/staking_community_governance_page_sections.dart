@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_community_governance_page.dart';
+part of '../../phone/pages/staking/staking_community_governance_page.dart';
 
 class _OverviewCard extends StatelessWidget {
   const _OverviewCard({required this.title, required this.stats});

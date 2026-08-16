@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_assessment_page.dart';
+part of '../../phone/pages/staking/staking_risk_assessment_page.dart';
 
 class _ProgressHeader extends StatelessWidget {
   const _ProgressHeader({

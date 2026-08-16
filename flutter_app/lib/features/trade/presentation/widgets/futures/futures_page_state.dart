@@ -1,4 +1,4 @@
-part of '../../pages/futures/futures_page.dart';
+part of '../../phone/pages/futures/futures_page.dart';
 
 class _FuturesPageState extends ConsumerState<FuturesPage> {
   final _marginController = TextEditingController();

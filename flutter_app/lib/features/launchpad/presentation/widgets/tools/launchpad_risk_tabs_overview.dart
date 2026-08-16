@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_risk_analytics_page.dart';
+part of '../../phone/pages/tools/launchpad_risk_analytics_page.dart';
 
 class _OverallRiskCard extends StatelessWidget {
   const _OverallRiskCard({required this.project});

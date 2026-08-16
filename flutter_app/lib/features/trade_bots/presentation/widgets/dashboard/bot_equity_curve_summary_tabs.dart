@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_equity_curve_page.dart';
+part of '../../phone/pages/dashboard/bot_equity_curve_page.dart';
 
 class _SummaryRow extends StatelessWidget {
   const _SummaryRow({required this.summary});

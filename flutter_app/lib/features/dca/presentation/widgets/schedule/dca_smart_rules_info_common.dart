@@ -1,4 +1,4 @@
-part of '../../pages/schedule/dca_smart_rules_page.dart';
+part of '../../phone/pages/schedule/dca_smart_rules_page.dart';
 
 class _ImpactCard extends StatelessWidget {
   const _ImpactCard();

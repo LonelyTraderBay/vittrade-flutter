@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_limit_orders_page.dart';
+part of '../../phone/pages/tools/launchpad_limit_orders_page.dart';
 
 class _OrderPreview extends StatelessWidget {
   const _OrderPreview({

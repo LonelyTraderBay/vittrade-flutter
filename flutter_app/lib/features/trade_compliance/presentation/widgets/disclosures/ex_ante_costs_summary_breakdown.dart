@@ -1,4 +1,4 @@
-part of '../../pages/disclosures/ex_ante_costs_page.dart';
+part of '../../phone/pages/disclosures/ex_ante_costs_page.dart';
 
 class _Summary extends StatelessWidget {
   const _Summary({required this.snapshot});

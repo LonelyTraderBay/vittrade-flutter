@@ -1,4 +1,4 @@
-part of '../../pages/backtest/bot_optimization_page.dart';
+part of '../../phone/pages/backtest/bot_optimization_page.dart';
 
 class _IntroCard extends StatelessWidget {
   const _IntroCard();

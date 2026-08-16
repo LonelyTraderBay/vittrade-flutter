@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_guide_page.dart';
+part of '../../phone/pages/settings/bot_guide_page.dart';
 
 IconData _strategyIcon(String key) => switch (key) {
   'grid' => Icons.grid_view_rounded,

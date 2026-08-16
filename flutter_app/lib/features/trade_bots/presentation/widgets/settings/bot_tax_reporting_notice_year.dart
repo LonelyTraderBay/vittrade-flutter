@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_tax_reporting_page.dart';
+part of '../../phone/pages/settings/bot_tax_reporting_page.dart';
 
 class _TaxNotice extends StatelessWidget {
   const _TaxNotice();

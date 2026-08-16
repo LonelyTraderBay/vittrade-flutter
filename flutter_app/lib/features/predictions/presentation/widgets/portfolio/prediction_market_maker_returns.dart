@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_market_maker_page.dart';
+part of '../../phone/pages/portfolio/prediction_market_maker_page.dart';
 
 class _EstimatedReturns extends StatelessWidget {
   const _EstimatedReturns({required this.amount});

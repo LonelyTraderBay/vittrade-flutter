@@ -1,4 +1,4 @@
-part of '../pages/analytics_dashboard_page.dart';
+part of '../phone/pages/analytics_dashboard_page.dart';
 
 class _DistributionCard extends StatelessWidget {
   const _DistributionCard({required this.events});

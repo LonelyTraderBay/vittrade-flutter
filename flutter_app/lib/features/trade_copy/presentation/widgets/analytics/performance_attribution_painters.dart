@@ -1,4 +1,4 @@
-part of '../../pages/analytics/performance_attribution_page.dart';
+part of '../../phone/pages/analytics/performance_attribution_page.dart';
 
 class _LegendItem {
   const _LegendItem(this.label, this.color);

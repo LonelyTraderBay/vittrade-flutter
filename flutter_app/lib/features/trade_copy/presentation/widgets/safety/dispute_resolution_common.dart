@@ -1,4 +1,4 @@
-part of '../../pages/safety/dispute_resolution_page.dart';
+part of '../../phone/pages/safety/dispute_resolution_page.dart';
 
 class _CaseTimeline extends StatelessWidget {
   const _CaseTimeline({required this.disputeCase});

@@ -1,4 +1,4 @@
-part of '../../pages/governance/product_governance_page.dart';
+part of '../../phone/pages/governance/product_governance_page.dart';
 
 class _Stats extends StatelessWidget {
   const _Stats({required this.products});

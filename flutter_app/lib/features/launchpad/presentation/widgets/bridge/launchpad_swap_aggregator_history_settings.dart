@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_swap_aggregator_page.dart';
+part of '../../phone/pages/bridge/launchpad_swap_aggregator_page.dart';
 
 class _HistorySection extends StatelessWidget {
   const _HistorySection({required this.history});

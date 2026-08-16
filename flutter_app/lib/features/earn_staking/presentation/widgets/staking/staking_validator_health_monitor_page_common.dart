@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_validator_health_monitor_page.dart';
+part of '../../phone/pages/staking/staking_validator_health_monitor_page.dart';
 
 class _ActionRequiredCard extends StatelessWidget {
   const _ActionRequiredCard({required this.snapshot});

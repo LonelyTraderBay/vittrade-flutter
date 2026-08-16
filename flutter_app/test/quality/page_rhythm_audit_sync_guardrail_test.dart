@@ -128,7 +128,7 @@ const _tabRootPages = {
   'features/profile/presentation/phone/pages/profile_page.dart',
   'features/wallet/presentation/phone/pages/wallet_page.dart',
   'features/trade/presentation/phone/pages/trade_page.dart',
-  'features/predictions/presentation/pages/predictions_home_page.dart',
+  'features/predictions/presentation/phone/pages/predictions_home_page.dart',
 };
 
 bool _isTabRootPage(String path) {
@@ -382,12 +382,47 @@ bool _isTracked(String path) {
   return result.exitCode == 0;
 }
 
+Map<String, String>? _renameSources;
+
+// Pure `git mv` moves (Phone-surface migration) carry no authored changes —
+// diff them against their pre-move path so rename churn is not treated as
+// newly added page-rhythm debt.
+Map<String, String> _loadRenameSources() {
+  if (_renameSources != null) return _renameSources!;
+  _renameSources = {};
+  final result = Process.runSync('git', [
+    'diff',
+    'HEAD',
+    '-M',
+    '--name-status',
+    '--',
+    'lib',
+  ]);
+  if (result.exitCode == 0) {
+    for (final line in result.stdout.toString().split('\n')) {
+      final parts = line.trim().split('\t');
+      if (parts.length == 3 && parts[0].startsWith('R')) {
+        _renameSources![parts[2]] = parts[1];
+      }
+    }
+  }
+  return _renameSources!;
+}
+
 List<String> _collectAddedLines(String path, bool isUntracked) {
   if (isUntracked) {
     return File(path).readAsLinesSync();
   }
 
-  final result = Process.runSync('git', ['diff', 'HEAD', '--', path]);
+  final renameSource = _loadRenameSources()[path];
+  final result = Process.runSync('git', [
+    'diff',
+    'HEAD',
+    '-M',
+    '--',
+    ?renameSource,
+    path,
+  ]);
   if (result.exitCode != 0) return [];
 
   final added = <String>[];

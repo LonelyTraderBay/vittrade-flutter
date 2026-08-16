@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/prediction_market_maker_page.dart';
+part of '../../phone/pages/portfolio/prediction_market_maker_page.dart';
 
 class _PositionsTab extends StatelessWidget {
   const _PositionsTab({required this.snapshot});

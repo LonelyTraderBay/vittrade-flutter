@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_performance_analytics_page.dart';
+part of '../../phone/pages/dashboard/bot_performance_analytics_page.dart';
 
 /// Presentation slice of [TradeBotPerformanceAnalyticsSnapshot] for the
 /// active timeframe tab (mock-UI; no repo signature change).

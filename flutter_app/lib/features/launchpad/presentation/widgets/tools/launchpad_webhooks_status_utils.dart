@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_webhooks_page.dart';
+part of '../../phone/pages/tools/launchpad_webhooks_page.dart';
 
 String _statusLabel(LaunchpadWebhookStatus status) {
   return switch (status) {

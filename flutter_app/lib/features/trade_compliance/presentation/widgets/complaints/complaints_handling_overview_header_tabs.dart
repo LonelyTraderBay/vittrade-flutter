@@ -1,4 +1,4 @@
-part of '../../pages/complaints/complaints_handling_page.dart';
+part of '../../phone/pages/complaints/complaints_handling_page.dart';
 
 class _StatsRow extends StatelessWidget {
   const _StatsRow({required this.snapshot});

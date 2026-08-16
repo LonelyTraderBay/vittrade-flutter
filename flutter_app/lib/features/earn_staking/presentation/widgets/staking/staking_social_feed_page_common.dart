@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_social_feed_page.dart';
+part of '../../phone/pages/staking/staking_social_feed_page.dart';
 
 class _StatTile extends StatelessWidget {
   const _StatTile({required this.stat});

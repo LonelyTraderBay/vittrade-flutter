@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_device_management_page.dart';
+part of '../../phone/pages/security/p2p_device_management_page.dart';
 
 class _DeviceSection extends StatelessWidget {
   const _DeviceSection({

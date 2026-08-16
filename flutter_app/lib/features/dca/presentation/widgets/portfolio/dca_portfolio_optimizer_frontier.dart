@@ -1,4 +1,4 @@
-part of '../../pages/portfolio/dca_portfolio_optimizer_page.dart';
+part of '../../phone/pages/portfolio/dca_portfolio_optimizer_page.dart';
 
 class _FrontierContent extends StatelessWidget {
   const _FrontierContent({

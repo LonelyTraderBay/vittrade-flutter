@@ -1,4 +1,4 @@
-part of '../../pages/execution/slippage_monitoring_page.dart';
+part of '../../phone/pages/execution/slippage_monitoring_page.dart';
 
 class _RealtimeTab extends StatelessWidget {
   const _RealtimeTab({required this.events});

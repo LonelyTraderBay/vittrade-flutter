@@ -1,4 +1,4 @@
-part of '../../pages/dispute/p2p_insurance_certificate_page.dart';
+part of '../../phone/pages/dispute/p2p_insurance_certificate_page.dart';
 
 class _CertificateCard extends StatelessWidget {
   const _CertificateCard({required this.snapshot});

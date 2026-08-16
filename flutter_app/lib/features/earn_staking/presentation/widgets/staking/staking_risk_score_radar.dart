@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_score_calculator_page.dart';
+part of '../../phone/pages/staking/staking_risk_score_calculator_page.dart';
 
 class _RiskRadarChart extends StatelessWidget {
   const _RiskRadarChart({required this.axes, required this.color});

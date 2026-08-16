@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_correlations_page.dart';
+part of '../../phone/pages/tools/market_correlations_page.dart';
 
 class _CorrelationTabs extends StatelessWidget {
   const _CorrelationTabs({required this.activeTab, required this.onChanged});

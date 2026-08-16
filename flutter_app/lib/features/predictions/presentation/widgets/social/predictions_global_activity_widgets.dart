@@ -1,4 +1,4 @@
-part of '../../pages/social/predictions_global_activity_page.dart';
+part of '../../phone/pages/social/predictions_global_activity_page.dart';
 
 class _LiveStats extends StatelessWidget {
   const _LiveStats({required this.snapshot});

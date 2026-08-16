@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_bridge_compare_page.dart';
+part of '../../phone/pages/bridge/launchpad_bridge_compare_page.dart';
 
 class _RouteTags extends StatelessWidget {
   const _RouteTags({required this.route, required this.comparison});

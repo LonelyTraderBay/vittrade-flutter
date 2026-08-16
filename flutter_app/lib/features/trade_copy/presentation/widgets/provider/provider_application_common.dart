@@ -1,4 +1,4 @@
-part of '../../pages/provider/provider_application_page.dart';
+part of '../../phone/pages/provider/provider_application_page.dart';
 
 class _StepTitle extends StatelessWidget {
   const _StepTitle({required this.title});

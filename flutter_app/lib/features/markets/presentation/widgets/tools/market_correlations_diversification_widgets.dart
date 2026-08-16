@@ -1,4 +1,4 @@
-part of '../../pages/tools/market_correlations_page.dart';
+part of '../../phone/pages/tools/market_correlations_page.dart';
 
 class _DiversificationHero extends StatelessWidget {
   const _DiversificationHero({required this.score});

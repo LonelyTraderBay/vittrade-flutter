@@ -1,4 +1,4 @@
-part of '../../pages/savings/savings_recommendations_page.dart';
+part of '../../phone/pages/savings/savings_recommendations_page.dart';
 
 class _HeroCard extends StatelessWidget {
   const _HeroCard({required this.snapshot});

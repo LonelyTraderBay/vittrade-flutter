@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_analytics_page.dart';
+part of '../../phone/pages/staking/staking_analytics_page.dart';
 
 const double _stakingAnalyticsChartHeight = 164;
 const double _stakingAnalyticsInsightLineHeight = 1.22;

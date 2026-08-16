@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_equity_curve_page.dart';
+part of '../../phone/pages/dashboard/bot_equity_curve_page.dart';
 
 class _EquityChartCard extends StatelessWidget {
   const _EquityChartCard({required this.points});

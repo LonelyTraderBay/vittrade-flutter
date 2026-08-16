@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_dashboard_page.dart';
+part of '../../phone/pages/staking/staking_risk_dashboard_page.dart';
 
 class _MiniRiskMetric extends StatelessWidget {
   const _MiniRiskMetric({

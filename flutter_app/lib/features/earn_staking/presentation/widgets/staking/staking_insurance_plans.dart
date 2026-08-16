@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_insurance_page.dart';
+part of '../../phone/pages/staking/staking_insurance_page.dart';
 
 class _PlansTab extends StatelessWidget {
   const _PlansTab({required this.snapshot, required this.onOpenPlan});

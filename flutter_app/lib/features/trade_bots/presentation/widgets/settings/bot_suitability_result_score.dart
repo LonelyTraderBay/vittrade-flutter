@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_suitability_assessment_page.dart';
+part of '../../phone/pages/settings/bot_suitability_assessment_page.dart';
 
 class _ResultView extends StatelessWidget {
   const _ResultView({

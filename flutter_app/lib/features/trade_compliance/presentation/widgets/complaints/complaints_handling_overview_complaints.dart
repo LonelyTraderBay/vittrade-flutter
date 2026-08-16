@@ -1,4 +1,4 @@
-part of '../../pages/complaints/complaints_handling_page.dart';
+part of '../../phone/pages/complaints/complaints_handling_page.dart';
 
 class _OverviewContent extends StatelessWidget {
   const _OverviewContent({required this.snapshot});

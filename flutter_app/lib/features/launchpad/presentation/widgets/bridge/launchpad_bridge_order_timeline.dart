@@ -1,4 +1,4 @@
-part of '../../pages/bridge/launchpad_bridge_order_page.dart';
+part of '../../phone/pages/bridge/launchpad_bridge_order_page.dart';
 
 class _BridgeTimeline extends StatelessWidget {
   const _BridgeTimeline({required this.order});

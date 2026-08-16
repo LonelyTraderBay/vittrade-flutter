@@ -1,4 +1,4 @@
-part of '../../pages/event/prediction_event_detail_page.dart';
+part of '../../phone/pages/event/prediction_event_detail_page.dart';
 
 class _QuickLinks extends StatelessWidget {
   const _QuickLinks({required this.onRewards, required this.onActivity});

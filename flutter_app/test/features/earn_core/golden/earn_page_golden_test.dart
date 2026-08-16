@@ -1,5 +1,5 @@
 // Pixel baseline for
-// lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart
+// lib/features/earn_staking/presentation/phone/pages/staking/staking_earn_page.dart
 // ("SC-327 Staking & Earn", see
 // docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md).
 // Pinned at 360x800 (minimum supported phone size, matches the convention

@@ -1,4 +1,4 @@
-part of '../../pages/event/prediction_event_detail_page.dart';
+part of '../../phone/pages/event/prediction_event_detail_page.dart';
 
 class _RelatedMarketsSection extends StatelessWidget {
   const _RelatedMarketsSection({required this.snapshot});

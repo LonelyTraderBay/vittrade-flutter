@@ -1,4 +1,4 @@
-part of '../pages/ab_test_dashboard_page.dart';
+part of '../phone/pages/ab_test_dashboard_page.dart';
 
 class _ExpandedDetails extends StatelessWidget {
   const _ExpandedDetails({required this.test});

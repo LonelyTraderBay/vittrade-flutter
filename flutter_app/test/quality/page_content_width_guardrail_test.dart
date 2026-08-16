@@ -35,7 +35,7 @@ void main() {
 
     for (final path in referralPaths) {
       final p0Row = RegExp(
-        'referral,lib/features/referral/presentation/pages/$path,P0,double_horizontal_inset',
+        'referral,lib/features/referral/presentation/phone/pages/$path,P0,double_horizontal_inset',
       );
       expect(p0Row.hasMatch(csv), isFalse, reason: 'P0 double inset for $path');
     }

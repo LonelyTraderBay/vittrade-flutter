@@ -1,4 +1,4 @@
-part of '../../pages/margin/margin_trading_hub_page.dart';
+part of '../../phone/pages/margin/margin_trading_hub_page.dart';
 
 class _FeatureCard extends StatelessWidget {
   const _FeatureCard({required this.feature});

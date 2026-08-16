@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_auto_compound_page.dart';
+part of '../../phone/pages/staking/staking_auto_compound_page.dart';
 
 class _CompoundChartPainter extends CustomPainter {
   const _CompoundChartPainter({required this.points});

@@ -1,4 +1,4 @@
-// Pixel baseline for lib/features/wallet/presentation/pages/hub/wallet_page.dart
+// Pixel baseline for lib/features/wallet/presentation/phone/pages/wallet_page.dart
 // ("SC-135 Wallet", see
 // docs/02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md).
 // Pinned at 360x800 (minimum supported phone size, matches the convention

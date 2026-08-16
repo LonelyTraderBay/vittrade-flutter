@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_analytics_page.dart';
+part of '../../phone/pages/staking/staking_analytics_page.dart';
 
 class _ProductsTab extends StatelessWidget {
   const _ProductsTab({required this.snapshot});

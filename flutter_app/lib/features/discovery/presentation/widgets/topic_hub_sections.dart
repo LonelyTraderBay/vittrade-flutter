@@ -1,4 +1,4 @@
-part of '../pages/topic_hub_page.dart';
+part of '../phone/pages/topic_hub_page.dart';
 
 class _PredictionSection extends StatelessWidget {
   const _PredictionSection({required this.snapshot});

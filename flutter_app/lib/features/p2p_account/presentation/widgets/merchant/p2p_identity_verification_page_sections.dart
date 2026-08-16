@@ -1,4 +1,4 @@
-part of '../../pages/merchant/p2p_identity_verification_page.dart';
+part of '../../phone/pages/merchant/p2p_identity_verification_page.dart';
 
 class _IdentityHero extends StatelessWidget {
   const _IdentityHero({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/governance/arena_governance_gate_page.dart';
+part of '../../phone/pages/governance/arena_governance_gate_page.dart';
 
 class _GovernanceSummary extends StatelessWidget {
   const _GovernanceSummary({

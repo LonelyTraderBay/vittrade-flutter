@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_transaction_reporting_page.dart';
+part of '../../phone/pages/staking/staking_transaction_reporting_page.dart';
 
 class _MethodSheet extends StatelessWidget {
   const _MethodSheet({

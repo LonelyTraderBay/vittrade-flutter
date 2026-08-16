@@ -35,6 +35,7 @@ Tài liệu theo dõi thực thi [ADR-013](../../05_ARCHITECTURE/decisions/ADR-0
 | P7 | Web completion | Hoàn tất |
 | P8 | Xóa legacy | Hoàn tất |
 | P9 | Release gate và bàn giao | Hoàn tất |
+| P10 | Phone-surface tree 100% (xóa toàn bộ legacy `presentation/pages`) | Hoàn tất (2026-08-16) |
 
 ## Evidence thực thi đến P8
 
@@ -82,3 +83,27 @@ Route chỉ được đánh dấu `completed` khi builder, test và audit của 
 0 Web fallback sang Phone/Tablet UI ở route surface đã migrate
 analyze + focused tests + full tests + build đều PASS
 ```
+
+## P10 — Phone-surface tree 100% (2026-08-16)
+
+Scope: chuyển toàn bộ implementation còn nằm trong legacy
+`features/*/presentation/pages/**` về cây canonical
+`features/*/presentation/phone/pages/**` (giữ nguyên sub-structure
+`hub/`, `pair/`, `tools/`…). Không tạo facade trung gian — mọi tham chiếu
+(lib, test, tool) được rewrite thẳng tới path canonical.
+
+- 31/31 feature có `presentation/phone/pages/`; ~330 file page + ~110
+  file widget `widgets/hub/**` → `widgets/phone/**` được `git mv` (không
+  sửa nội dung, chỉ fix import path).
+- 34 facade export-only cũ (auth 6, home/markets/wallet/trade/profile
+  root + `pages/phone|tablet/`) đã xóa; `presentation/pages/` = 0 file
+  trên toàn lib, `widgets/hub/` = 0 — ratchet khóa tại
+  `device_ui_folder_boundary_guardrail_test.dart`.
+- Guardrail mở rộng theo path canonical: architecture layer boundary,
+  state management, phone baseline, IDE lint `no_data_import_in_presentation`
+  giờ phủ cả `presentation/(phone|tablet|web)/(pages|widgets)/`.
+- Page-rhythm diff guardrail nhận diện pure `git mv` rename (không tính
+  là debt mới); các audit artifact (Page-Rhythm, Page-Content-Width,
+  Home-Reference-Consistency, Navigation-Edges) đã regenerate theo path mới.
+- Verify: `flutter analyze` 0 issue; full `flutter test` PASS; route
+  coverage + navigation edge `--check` PASS.

@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_insurance_page.dart';
+part of '../../phone/pages/staking/staking_insurance_page.dart';
 
 extension on StakingInsuranceSnapshot {
   StakingInsurancePlanDraft? planById(String? id) {

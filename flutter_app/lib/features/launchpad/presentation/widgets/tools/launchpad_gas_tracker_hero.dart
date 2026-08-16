@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_gas_tracker_page.dart';
+part of '../../phone/pages/tools/launchpad_gas_tracker_page.dart';
 
 class _FeaturedGasCard extends StatelessWidget {
   const _FeaturedGasCard({required this.price});

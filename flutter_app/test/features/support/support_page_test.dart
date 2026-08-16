@@ -5,9 +5,9 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/core/product_flow/contextual_support_contract.dart';
 import 'package:vit_trade_flutter/features/support/data/support_repository.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/announcements_page.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/help_center_page.dart';
-import 'package:vit_trade_flutter/features/support/presentation/pages/support_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/announcements_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/help_center_page.dart';
+import 'package:vit_trade_flutter/features/support/presentation/phone/pages/support_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';

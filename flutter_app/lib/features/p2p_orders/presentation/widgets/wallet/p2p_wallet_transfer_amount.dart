@@ -1,4 +1,4 @@
-part of '../../pages/wallet/p2p_wallet_transfer_page.dart';
+part of '../../phone/pages/wallet/p2p_wallet_transfer_page.dart';
 
 class _AmountInput extends StatelessWidget {
   const _AmountInput({

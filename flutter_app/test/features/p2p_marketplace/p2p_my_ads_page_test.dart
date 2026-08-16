@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/p2p_core/data/p2p_repository.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/ads/p2p_ad_analytics_page.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/ads/p2p_create_ad_page.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/ads/p2p_my_ads_page.dart';
-import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/pages/hub/p2p_settings_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/ads/p2p_ad_analytics_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/ads/p2p_create_ad_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/ads/p2p_my_ads_page.dart';
+import 'package:vit_trade_flutter/features/p2p_marketplace/presentation/phone/pages/hub/p2p_settings_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {

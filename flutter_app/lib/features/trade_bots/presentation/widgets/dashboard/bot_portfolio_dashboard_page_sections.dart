@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_portfolio_dashboard_page.dart';
+part of '../../phone/pages/dashboard/bot_portfolio_dashboard_page.dart';
 
 const double _portfolioEquityChartExtent = AppSpacing.x7 * 3;
 const double _portfolioDistributionChartExtent =

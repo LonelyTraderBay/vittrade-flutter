@@ -1,4 +1,4 @@
-part of '../../pages/safety/copy_audit_log_page.dart';
+part of '../../phone/pages/safety/copy_audit_log_page.dart';
 
 class _AuditEventCard extends StatelessWidget {
   const _AuditEventCard({super.key, required this.event});

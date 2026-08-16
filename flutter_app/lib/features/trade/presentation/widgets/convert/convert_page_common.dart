@@ -1,1 +1,1 @@
-part of '../../pages/convert/convert_page.dart';
+part of '../../phone/pages/convert/convert_page.dart';

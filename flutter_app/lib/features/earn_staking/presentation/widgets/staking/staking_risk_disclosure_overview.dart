@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_disclosure_page.dart';
+part of '../../phone/pages/staking/staking_risk_disclosure_page.dart';
 
 class _WarningBanner extends StatelessWidget {
   const _WarningBanner({required this.snapshot});

@@ -1,4 +1,4 @@
-part of '../../pages/security/p2p_anti_phishing_code_page.dart';
+part of '../../phone/pages/security/p2p_anti_phishing_code_page.dart';
 
 class _StatusCard extends StatelessWidget {
   const _StatusCard({required this.snapshot});

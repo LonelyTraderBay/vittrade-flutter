@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_performance_analytics_page.dart';
+part of '../../phone/pages/dashboard/bot_performance_analytics_page.dart';
 
 class _AdvancedMetricsGrid extends StatelessWidget {
   const _AdvancedMetricsGrid({required this.metrics});

@@ -1,4 +1,4 @@
-part of '../../pages/tools/portfolio_analytics_page.dart';
+part of '../../phone/pages/tools/portfolio_analytics_page.dart';
 
 class _MetricsCard extends StatelessWidget {
   const _MetricsCard({required this.metrics});

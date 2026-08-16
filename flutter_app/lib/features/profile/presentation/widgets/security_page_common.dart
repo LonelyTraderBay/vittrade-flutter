@@ -1,4 +1,4 @@
-part of '../pages/security_page.dart';
+part of '../phone/pages/security_page.dart';
 
 class _AntiPhishingCard extends StatelessWidget {
   const _AntiPhishingCard({

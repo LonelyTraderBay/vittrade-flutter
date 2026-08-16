@@ -1,4 +1,4 @@
-part of '../../pages/tools/launchpad_event_log_page.dart';
+part of '../../phone/pages/tools/launchpad_event_log_page.dart';
 
 class _SmallActionButton extends StatelessWidget {
   const _SmallActionButton({

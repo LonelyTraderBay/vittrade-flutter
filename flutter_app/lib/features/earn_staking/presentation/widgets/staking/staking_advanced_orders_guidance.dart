@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_advanced_orders_page.dart';
+part of '../../phone/pages/staking/staking_advanced_orders_page.dart';
 
 class _HowItWorks extends StatelessWidget {
   const _HowItWorks({required this.snapshot});

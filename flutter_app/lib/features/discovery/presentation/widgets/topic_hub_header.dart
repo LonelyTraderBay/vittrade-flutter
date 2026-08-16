@@ -1,4 +1,4 @@
-part of '../pages/topic_hub_page.dart';
+part of '../phone/pages/topic_hub_page.dart';
 
 class _TopicRail extends StatelessWidget {
   const _TopicRail({

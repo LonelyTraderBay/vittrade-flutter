@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_api_documentation_page.dart';
+part of '../../phone/pages/settings/bot_api_documentation_page.dart';
 
 class _WebSocketView extends StatelessWidget {
   const _WebSocketView({required this.url, required this.events});

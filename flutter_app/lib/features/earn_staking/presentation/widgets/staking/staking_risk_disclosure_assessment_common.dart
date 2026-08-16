@@ -1,4 +1,4 @@
-part of '../../pages/staking/staking_risk_disclosure_page.dart';
+part of '../../phone/pages/staking/staking_risk_disclosure_page.dart';
 
 class _AssessmentTab extends StatelessWidget {
   const _AssessmentTab({required this.snapshot, required this.onStart});

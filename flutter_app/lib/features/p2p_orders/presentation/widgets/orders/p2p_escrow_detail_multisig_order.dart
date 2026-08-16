@@ -1,4 +1,4 @@
-part of '../../pages/orders/p2p_escrow_detail_page.dart';
+part of '../../phone/pages/orders/p2p_escrow_detail_page.dart';
 
 class _MultiSigCard extends StatelessWidget {
   const _MultiSigCard({required this.snapshot});

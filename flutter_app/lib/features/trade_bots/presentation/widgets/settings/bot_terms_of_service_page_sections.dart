@@ -1,4 +1,4 @@
-part of '../../pages/settings/bot_terms_of_service_page.dart';
+part of '../../phone/pages/settings/bot_terms_of_service_page.dart';
 
 class _TermsCard extends StatelessWidget {
   const _TermsCard({required this.snapshot, required this.controller});

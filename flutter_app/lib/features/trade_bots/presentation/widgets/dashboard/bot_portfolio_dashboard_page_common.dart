@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_portfolio_dashboard_page.dart';
+part of '../../phone/pages/dashboard/bot_portfolio_dashboard_page.dart';
 
 class _HealthCard extends StatelessWidget {
   const _HealthCard({required this.items});

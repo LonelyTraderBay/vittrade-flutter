@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/earn_core/data/earn_repository.dart';
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_history_page.dart';
-import 'package:vit_trade_flutter/features/earn_savings/presentation/pages/savings/savings_portfolio_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_history_page.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_portfolio_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -38,7 +38,7 @@ void main() {
 
   test('SC-333 keeps the Home-standard page foundation contract', () {
     final pageSource = File(
-      'lib/features/earn_savings/presentation/pages/savings/earn_portfolio_page.dart',
+      'lib/features/earn_savings/presentation/phone/pages/savings/earn_portfolio_page.dart',
     ).readAsStringSync();
 
     expect(pageSource, contains('VitInsetScrollView'));

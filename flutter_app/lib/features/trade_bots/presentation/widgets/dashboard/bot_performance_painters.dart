@@ -1,4 +1,4 @@
-part of '../../pages/dashboard/bot_performance_analytics_page.dart';
+part of '../../phone/pages/dashboard/bot_performance_analytics_page.dart';
 
 class _PnlChartPainter extends CustomPainter {
   const _PnlChartPainter(this.points, {this.progress = 1, this.scrubIndex});

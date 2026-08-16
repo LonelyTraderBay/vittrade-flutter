@@ -1,4 +1,4 @@
-part of '../pages/admin_home_page.dart';
+part of '../phone/pages/admin_home_page.dart';
 
 class _DashboardsSection extends StatelessWidget {
   const _DashboardsSection({required this.dashboards});

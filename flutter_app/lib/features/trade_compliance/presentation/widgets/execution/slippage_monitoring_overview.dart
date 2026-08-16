@@ -1,4 +1,4 @@
-part of '../../pages/execution/slippage_monitoring_page.dart';
+part of '../../phone/pages/execution/slippage_monitoring_page.dart';
 
 class _StatsGrid extends StatelessWidget {
   const _StatsGrid({required this.summary});
