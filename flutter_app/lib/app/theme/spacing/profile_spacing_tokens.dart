@@ -97,6 +97,9 @@ final class ProfileSpacingTokens {
   static const double profileEditCameraOffsetEnd = -1;
   static const double profileEditCameraOffsetBottom = 1;
   static const double profileEditAvatarCaptionGap = 10;
+  static const EdgeInsets profileEditActionPadding = EdgeInsets.all(
+    AppSpacing.x3,
+  );
   static const double profileEditFieldLabelGap = 10;
   static const double profileEditFieldNoteGap = 7;
   static const double profileEditAvatarCaptionLineHeight = 1.1;

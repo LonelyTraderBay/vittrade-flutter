@@ -68,7 +68,7 @@ class VitHighRiskStatePanel extends StatelessWidget {
         VitHighRiskUiState.error => VitErrorState(
           title: title,
           message: message,
-          actionLabel: actionLabel ?? 'Retry',
+          actionLabel: actionLabel ?? 'Thử lại',
           onAction: onAction,
         ),
         VitHighRiskUiState.offline => VitOfflineBanner(
@@ -83,11 +83,15 @@ class VitHighRiskStatePanel extends StatelessWidget {
           background: AppColors.primary08,
           border: AppColors.primary20,
           density: density,
-          trailing: const SizedBox(
-            width: AppSpacing.x4 + AppSpacing.x1,
-            height: AppSpacing.x4 + AppSpacing.x1,
-            child: CircularProgressIndicator(
-              strokeWidth: AppSpacing.hairlineStroke,
+          trailing: Semantics(
+            label: 'Đang xử lý',
+            liveRegion: true,
+            child: const SizedBox(
+              width: AppSpacing.x4 + AppSpacing.x1,
+              height: AppSpacing.x4 + AppSpacing.x1,
+              child: CircularProgressIndicator(
+                strokeWidth: AppSpacing.hairlineStroke,
+              ),
             ),
           ),
         ),

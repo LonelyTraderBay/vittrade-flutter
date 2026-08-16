@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
@@ -108,6 +109,7 @@ class P2PComplianceOverviewPage extends ConsumerWidget {
                         gap: VitContentGap.tight,
                         children: [
                           _ComplianceHero(snapshot: snapshot),
+                          _ComplianceSummary(snapshot: snapshot),
                           Text(
                             'Compliance Checklist',
                             style: AppTextStyles.baseMedium.copyWith(
@@ -143,63 +145,60 @@ class _ComplianceHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return VitModuleHeroCard(
       key: P2PComplianceOverviewPage.heroKey,
-      color: AppModuleAccents.p2p,
-      shape: const RoundedRectangleBorder(
-        borderRadius: AppRadii.cardLargeRadius,
-        side: BorderSide(color: AppModuleAccents.p2p),
-      ),
-      child: Padding(
-        padding: P2PSpacingTokens.p2pComplianceOverviewHeroPadding,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Material(
-              color: AppColors.onAccent.withValues(alpha: .20),
-              shape: const RoundedRectangleBorder(
-                borderRadius: AppRadii.lgRadius,
-              ),
-              child: const SizedBox(
-                width: AppSpacing.x6,
-                height: AppSpacing.x6,
-                child: Icon(
-                  Icons.shield_outlined,
-                  color: AppColors.onAccent,
-                  size: AppSpacing.iconSm,
+      accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const VitAccentIconBox(
+            icon: Icons.shield_outlined,
+            color: AppModuleAccents.p2p,
+            boxSize: AppSpacing.x7,
+            iconSize: AppSpacing.iconMd,
+          ),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  snapshot.heroTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.body.copyWith(
+                    fontWeight: AppTextStyles.bold,
+                  ),
                 ),
-              ),
+                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                Text(
+                  snapshot.heroSubtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
             ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    snapshot.heroTitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.sectionTitle.copyWith(
-                      color: AppColors.onAccent,
-                      fontWeight: AppTextStyles.bold,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.x1),
-                  Text(
-                    snapshot.heroSubtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.micro.copyWith(
-                      color: AppColors.onAccent.withValues(alpha: .90),
-                      fontWeight: AppTextStyles.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _ComplianceSummary extends StatelessWidget {
+  const _ComplianceSummary({required this.snapshot});
+
+  final P2PComplianceOverviewSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return VitMetricCard(
+      label: 'Mục tuân thủ',
+      value: '${snapshot.items.length}',
+      accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
     );
   }
 }

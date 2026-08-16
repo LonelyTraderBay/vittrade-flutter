@@ -138,6 +138,11 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pumpAndSettle();
 
+    expect(find.text('Xác nhận chặn người dùng P2P'), findsOneWidget);
+    await tester.tap(find.byKey(P2PBlacklistAddPage.confirmKey));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.pumpAndSettle();
+
     expect(find.byType(P2PBlacklistAddPage), findsNothing);
     expect(find.byType(P2PBlacklistPage), findsOneWidget);
   });

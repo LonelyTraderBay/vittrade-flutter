@@ -1546,6 +1546,8 @@ final class P2PSpacingTokens {
   static const double p2pMerchantCommerceAvatarSize = AppSpacing.x6;
   static const double p2pMerchantCommerceMerchantAvatarSize =
       AppSpacing.buttonHero;
+  static const EdgeInsets p2pMerchantCommerceOnlineIndicatorPadding =
+      EdgeInsets.only(right: AppSpacing.x1, bottom: AppSpacing.x1);
   static const double p2pMerchantCommerceOnlineDot = AppSpacing.x4;
   static const double p2pMerchantCommerceOnlineBorderWidth = 2;
   static const double p2pMerchantCommerceRatingIcon = 14;

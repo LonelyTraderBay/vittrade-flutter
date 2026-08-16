@@ -15,7 +15,7 @@ This keeps risk copy, iconography, and contract-id disclosure consistent
 across every high-risk flow instead of each module inventing its own warning
 chrome.
 
-## The 16 pages the guardrail checks
+## The 17 pages the guardrail checks
 
 `high_risk_state_primitives_guardrail_test.dart` hard-codes a fixed set of
 representative target files and fails if any of them is missing either the
@@ -29,6 +29,7 @@ disk (module rename / subfolder move); this table now matches the source:
 | `lib/features/trade/presentation/widgets/hub/trade_page_state.dart` | Trade | `riskReview` | Spot order risk (fees, slippage, balance) |
 | `lib/features/wallet/presentation/pages/transfer/withdraw_page.dart` | Wallet | `riskReview` | Withdrawal preview (address, network, amount, fee) |
 | `lib/features/p2p_marketplace/presentation/widgets/hub/p2p_home_page_state.dart` | P2P | `riskReview` | Offer → order → payment proof → dispute escrow contract |
+| `lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_resolution_page.dart` | P2P | `riskReview` | Dispute resolution result, refund amount, appeal status, and escrow contract |
 | `lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart` | Earn | `riskReview` | Terms, validator setup, risk preview, confirmation, receipt |
 | `lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_order_page.dart` | Launchpad | `success` | Bridge order status tracking |
 | `lib/features/predictions/presentation/pages/hub/predictions_home_page.dart` | Predictions | `riskReview` | Event setup, risk preview, confirmation, receipt |

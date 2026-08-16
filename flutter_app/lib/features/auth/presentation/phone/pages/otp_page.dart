@@ -232,62 +232,100 @@ class _OTPPageState extends ConsumerState<OTPPage> {
                 child: VitPageContent(
                   rhythm: VitPageRhythm.form,
                   children: [
-                    const Align(
-                      alignment: Alignment.center,
-                      child: AuthHeroIconBox(
-                        dimension: AuthSpacingTokens.authHeroIconBoxMd,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: AppRadii.cardLargeRadius,
-                          side: BorderSide(
-                            color: _authPrimary30,
-                            width: AppSpacing.borderWidth,
+                    const VitCard(
+                      variant: VitCardVariant.ghost,
+                      borderColor: _authPrimary30,
+                      padding: AuthSpacingTokens.authSurfaceCompactPadding,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: AuthHeroIconBox(
+                          dimension: AuthSpacingTokens.authHeroIconBoxMd,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: AppRadii.cardLargeRadius,
+                            side: BorderSide(
+                              color: _authPrimary30,
+                              width: AppSpacing.borderWidth,
+                            ),
+                          ),
+                          fillColor: _authPrimary10,
+                          child: Icon(
+                            Icons.gpp_good_outlined,
+                            color: _authPrimary,
+                            size: AuthSpacingTokens.authHeroIconLg,
                           ),
                         ),
-                        fillColor: _authPrimary10,
-                        child: Icon(
-                          Icons.gpp_good_outlined,
-                          color: _authPrimary,
-                          size: AuthSpacingTokens.authHeroIconLg,
-                        ),
                       ),
                     ),
-                    _OtpIntro(contact: widget.contact),
-                    _OtpDigitRow(
-                      controllers: _controllers,
-                      focusNodes: _focusNodes,
-                      hasError: _error.isNotEmpty,
-                      onChanged: _handleChanged,
-                      onKey: _handleKey,
-                    ),
-                    _OtpProgress(filled: filled),
-                    if (_error.isNotEmpty)
-                      VitBanner(
-                        variant: VitBannerVariant.error,
-                        message: _error,
+                    VitCard(
+                      padding: AuthSpacingTokens.authSurfacePadding,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _OtpIntro(contact: widget.contact),
+                          const Padding(
+                            padding: AuthSpacingTokens.authTopGapX4,
+                          ),
+                          _OtpDigitRow(
+                            controllers: _controllers,
+                            focusNodes: _focusNodes,
+                            hasError: _error.isNotEmpty,
+                            onChanged: _handleChanged,
+                            onKey: _handleKey,
+                          ),
+                          const Padding(
+                            padding: AuthSpacingTokens.authTopGapX3,
+                          ),
+                          _OtpProgress(filled: filled),
+                          if (_error.isNotEmpty) ...[
+                            const Padding(
+                              padding: AuthSpacingTokens.authTopGapX3,
+                            ),
+                            VitBanner(
+                              variant: VitBannerVariant.error,
+                              message: _error,
+                            ),
+                          ],
+                          const Padding(
+                            padding: AuthSpacingTokens.authTopGapX4,
+                          ),
+                          VitCtaButton(
+                            key: OTPPage.submitKey,
+                            onPressed: filled < 6 || _submitting
+                                ? null
+                                : _handleVerify,
+                            loading: _submitting,
+                            variant: VitCtaButtonVariant.auth,
+                            child: Text(
+                              _submitting ? 'Đang xác minh...' : 'Xác nhận',
+                            ),
+                          ),
+                        ],
                       ),
-                    VitCtaButton(
-                      key: OTPPage.submitKey,
-                      onPressed: filled < 6 || _submitting
-                          ? null
-                          : _handleVerify,
-                      loading: _submitting,
-                      variant: VitCtaButtonVariant.auth,
-                      child: Text(
-                        _submitting ? 'Đang xác minh...' : 'Xác nhận',
-                      ),
                     ),
-                    _ResendControl(
-                      canResend: _canResend,
-                      countdown: _countdown,
-                      onResend: _handleResend,
-                    ),
-                    Text(
-                      'Không nhận được? Kiểm tra thư mục Spam hoặc\n'
-                      'đảm bảo email / SĐT chính xác.',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text3,
-                        height: AuthSpacingTokens.authFooterLineHeight,
+                    VitCard(
+                      variant: VitCardVariant.ghost,
+                      borderColor: AppColors.cardBorder,
+                      padding: AuthSpacingTokens.authSurfaceCompactPadding,
+                      child: Column(
+                        children: [
+                          _ResendControl(
+                            canResend: _canResend,
+                            countdown: _countdown,
+                            onResend: _handleResend,
+                          ),
+                          const Padding(
+                            padding: AuthSpacingTokens.authTopGapX3,
+                          ),
+                          Text(
+                            'Không nhận được? Kiểm tra thư mục Spam hoặc\n'
+                            'đảm bảo email / SĐT chính xác.',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text3,
+                              height: AuthSpacingTokens.authFooterLineHeight,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

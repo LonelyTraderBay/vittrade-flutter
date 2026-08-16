@@ -44,6 +44,8 @@ class P2PReportMerchantPage extends ConsumerStatefulWidget {
   static const profileButtonKey = Key('sc229_p2p_report_profile');
   static const detailFieldKey = Key('sc229_p2p_report_detail');
   static const submitButtonKey = Key('sc229_p2p_report_submit');
+  static const confirmKey = Key('sc229_p2p_report_confirm');
+  static const cancelKey = Key('sc229_p2p_report_cancel');
 
   static Key reasonKey(String id) => Key('sc229_p2p_report_reason_$id');
 
@@ -239,6 +241,33 @@ class _P2PReportMerchantPageState extends ConsumerState<P2PReportMerchantPage> {
 
   Future<void> _submit(P2PReportMerchantSnapshot snapshot) async {
     if (_selectedReasonId.isEmpty || _submitting) return;
+
+    final reason = snapshot.reasons.firstWhere(
+      (item) => item.id == _selectedReasonId,
+      orElse: () => snapshot.reasons.first,
+    );
+    final confirmed = await showVitConfirmDialog(
+      context: context,
+      title: 'Xác nhận gửi báo cáo P2P',
+      message:
+          'Báo cáo sẽ được đội ngũ VitTrade xem xét. Kiểm tra người bán, lý do và bằng chứng trước khi gửi.',
+      rows: [
+        VitConfirmDialogRow(label: 'Người bán', value: snapshot.merchant.name),
+        VitConfirmDialogRow(label: 'Lý do', value: reason.label),
+        VitConfirmDialogRow(
+          label: 'Chi tiết bổ sung',
+          value: _detailController.text.trim().isEmpty
+              ? 'Không có'
+              : 'Đã nhập chi tiết',
+        ),
+      ],
+      confirmLabel: 'Gửi báo cáo',
+      confirmVariant: VitCtaButtonVariant.danger,
+      confirmKey: P2PReportMerchantPage.confirmKey,
+      cancelKey: P2PReportMerchantPage.cancelKey,
+    );
+    if (!mounted || !confirmed) return;
+
     unawaited(HapticFeedback.lightImpact());
     setState(() => _submitting = true);
     await Future<void>.delayed(const Duration(milliseconds: 280));

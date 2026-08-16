@@ -11,8 +11,8 @@ import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 class VitErrorState extends StatelessWidget {
   const VitErrorState({
     super.key,
-    this.title = 'Something went wrong',
-    this.message = 'Please try again or check your connection.',
+    this.title = 'Đã xảy ra lỗi',
+    this.message = 'Vui lòng thử lại hoặc kiểm tra kết nối.',
     this.icon = Icons.warning_amber_rounded,
     this.iconContainerSize =
         AppSpacing.buttonStandard + AppSpacing.contentPad + AppSpacing.x2,
@@ -24,7 +24,7 @@ class VitErrorState extends StatelessWidget {
     this.horizontalPadding = AppSpacing.x6,
     this.titleStyle,
     this.messageStyle,
-    this.actionLabel = 'Retry',
+    this.actionLabel = 'Thử lại',
     this.onAction,
     this.secondaryLabel,
     this.onSecondary,
@@ -55,61 +55,65 @@ class VitErrorState extends StatelessWidget {
             borderRadius: iconBorderRadius ?? AppRadii.cardLargeRadius,
           );
 
-    return Padding(
-      padding: EdgeInsetsDirectional.symmetric(
-        horizontal: horizontalPadding,
-        vertical: verticalPadding,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: iconContainerSize,
-            height: iconContainerSize,
-            child: DecoratedBox(
-              decoration: ShapeDecoration(
-                color: AppColors.sell10,
-                shape: iconShapeBorder,
-              ),
-              child: Center(
-                child: Icon(icon, color: AppColors.sell, size: iconSize),
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      child: Padding(
+        padding: EdgeInsetsDirectional.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalPadding,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: iconContainerSize,
+              height: iconContainerSize,
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: AppColors.sell10,
+                  shape: iconShapeBorder,
+                ),
+                child: Center(
+                  child: Icon(icon, color: AppColors.sell, size: iconSize),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.x4),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: titleStyle ?? AppTextStyles.baseMedium,
-          ),
-          const SizedBox(height: AppSpacing.x2),
-          Text(
-            message,
-            textAlign: TextAlign.center,
-            style: messageStyle ?? AppTextStyles.caption,
-          ),
-          if (onAction != null) ...[
             const SizedBox(height: AppSpacing.x4),
-            VitCtaButton(
-              onPressed: onAction,
-              variant: VitCtaButtonVariant.danger,
-              fullWidth: false,
-              height: AppSpacing.inputHeight - AppSpacing.x3,
-              leading: const Icon(Icons.refresh_rounded),
-              child: Text(actionLabel),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: titleStyle ?? AppTextStyles.baseMedium,
             ),
-          ],
-          if (secondaryLabel != null && onSecondary != null) ...[
-            const SizedBox(height: AppSpacing.x3),
-            VitCtaButton(
-              onPressed: onSecondary,
-              variant: VitCtaButtonVariant.ghost,
-              fullWidth: false,
-              height: AppSpacing.inputHeight - AppSpacing.x3,
-              child: Text(secondaryLabel!),
+            const SizedBox(height: AppSpacing.x2),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: messageStyle ?? AppTextStyles.caption,
             ),
+            if (onAction != null) ...[
+              const SizedBox(height: AppSpacing.x4),
+              VitCtaButton(
+                onPressed: onAction,
+                variant: VitCtaButtonVariant.danger,
+                fullWidth: false,
+                height: AppSpacing.inputHeight - AppSpacing.x3,
+                leading: const Icon(Icons.refresh_rounded),
+                child: Text(actionLabel),
+              ),
+            ],
+            if (secondaryLabel != null && onSecondary != null) ...[
+              const SizedBox(height: AppSpacing.x3),
+              VitCtaButton(
+                onPressed: onSecondary,
+                variant: VitCtaButtonVariant.ghost,
+                fullWidth: false,
+                height: AppSpacing.inputHeight - AppSpacing.x3,
+                child: Text(secondaryLabel!),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

@@ -135,7 +135,35 @@ void main() {
     await tester.tap(find.byKey(P2PAntiPhishingCodePage.saveKey));
     await tester.pumpAndSettle();
 
+    expect(find.text('Xác nhận thay đổi mã chống lừa đảo'), findsOneWidget);
+    expect(find.byKey(P2PAntiPhishingCodePage.saveConfirmKey), findsOneWidget);
+    expect(find.text('GU•••••26'), findsOneWidget);
+
+    await tester.tap(find.byKey(P2PAntiPhishingCodePage.saveConfirmKey));
+    await tester.pumpAndSettle();
+
     expect(find.text('GUARD2026'), findsOneWidget);
+  });
+
+  testWidgets('SC-256 cancel keeps edit mode and does not apply the code', (
+    tester,
+  ) async {
+    await pumpAntiPhishing(tester);
+
+    await tester.tap(find.byKey(P2PAntiPhishingCodePage.editKey));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(P2PAntiPhishingCodePage.inputKey),
+      'guard2026',
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(P2PAntiPhishingCodePage.saveKey));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(P2PAntiPhishingCodePage.saveCancelKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(P2PAntiPhishingCodePage.inputKey), findsOneWidget);
+    expect(find.text('Thiết lập code'), findsOneWidget);
   });
 
   testWidgets('SC-256 back returns to P2P security center', (tester) async {

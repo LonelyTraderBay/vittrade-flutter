@@ -184,121 +184,185 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
   }
 
   List<Widget> _formContent(PasswordResetChallenge challenge) => [
-    const _ResetHero(),
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        VitInput(
-          controller: _newPasswordController,
-          fieldKey: ResetPasswordPage.newPasswordFieldKey,
-          label: 'Mật khẩu mới',
-          hintText: '••••••••',
-          prefix: const Icon(Icons.lock_outline_rounded),
-          suffix: VitIconButton(
-            key: ResetPasswordPage.newPasswordToggleKey,
-            icon: _showNewPassword
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            tooltip: _showNewPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu',
-            onPressed: () {
-              setState(() => _showNewPassword = !_showNewPassword);
-            },
-            variant: VitIconButtonVariant.transparent,
-            size: VitIconButtonSize.sm,
+    const VitCard(
+      variant: VitCardVariant.hero,
+      radius: VitCardRadius.large,
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: _ResetHero(),
+    ),
+    VitCard(
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: VitPageSection(
+        customGap: AppSpacing.pageRhythmFormSectionGap,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              VitInput(
+                controller: _newPasswordController,
+                fieldKey: ResetPasswordPage.newPasswordFieldKey,
+                label: 'Mật khẩu mới',
+                hintText: '••••••••',
+                prefix: const Icon(Icons.lock_outline_rounded),
+                suffix: VitIconButton(
+                  key: ResetPasswordPage.newPasswordToggleKey,
+                  icon: _showNewPassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  tooltip: _showNewPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu',
+                  onPressed: () {
+                    setState(() => _showNewPassword = !_showNewPassword);
+                  },
+                  variant: VitIconButtonVariant.transparent,
+                  size: VitIconButtonSize.sm,
+                ),
+                errorText: _newPassword.isNotEmpty && !_allRulesPass
+                    ? ' '
+                    : null,
+                obscureText: !_showNewPassword,
+                textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.newPassword],
+                onChanged: (_) => _handleNewPasswordChanged(),
+              ),
+              const Padding(padding: AuthSpacingTokens.authOtpDigitTopPadding),
+              _PasswordRulesList(password: _newPassword),
+            ],
           ),
-          errorText: _newPassword.isNotEmpty && !_allRulesPass ? ' ' : null,
-          obscureText: !_showNewPassword,
-          textInputAction: TextInputAction.next,
-          autofillHints: const [AutofillHints.newPassword],
-          onChanged: (_) => _handleNewPasswordChanged(),
-        ),
-        const Padding(padding: AuthSpacingTokens.authOtpDigitTopPadding),
-        _PasswordRulesList(password: _newPassword),
-      ],
-    ),
-    VitInput(
-      controller: _confirmPasswordController,
-      fieldKey: ResetPasswordPage.confirmPasswordFieldKey,
-      label: 'Nhập lại mật khẩu',
-      hintText: '••••••••',
-      prefix: const Icon(Icons.lock_outline_rounded),
-      suffix: VitIconButton(
-        key: ResetPasswordPage.confirmPasswordToggleKey,
-        icon: _showConfirmPassword
-            ? Icons.visibility_off_outlined
-            : Icons.visibility_outlined,
-        tooltip: _showConfirmPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu',
-        onPressed: () {
-          setState(() => _showConfirmPassword = !_showConfirmPassword);
-        },
-        variant: VitIconButtonVariant.transparent,
-        size: VitIconButtonSize.sm,
+          VitInput(
+            controller: _confirmPasswordController,
+            fieldKey: ResetPasswordPage.confirmPasswordFieldKey,
+            label: 'Nhập lại mật khẩu',
+            hintText: '••••••••',
+            prefix: const Icon(Icons.lock_outline_rounded),
+            suffix: VitIconButton(
+              key: ResetPasswordPage.confirmPasswordToggleKey,
+              icon: _showConfirmPassword
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              tooltip: _showConfirmPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu',
+              onPressed: () {
+                setState(() => _showConfirmPassword = !_showConfirmPassword);
+              },
+              variant: VitIconButtonVariant.transparent,
+              size: VitIconButtonSize.sm,
+            ),
+            errorText: _showMismatch ? 'Mật khẩu không khớp' : null,
+            obscureText: !_showConfirmPassword,
+            textInputAction: TextInputAction.done,
+            autofillHints: const [AutofillHints.newPassword],
+            onChanged: (_) => _handleConfirmPasswordChanged(),
+            onSubmitted: (_) => _handleSubmit(),
+          ),
+          if (_showMatch) const _InlinePasswordState(success: true),
+          if (_error.isNotEmpty) _InlinePasswordState(error: _error),
+        ],
       ),
-      errorText: _showMismatch ? 'Mật khẩu không khớp' : null,
-      obscureText: !_showConfirmPassword,
-      textInputAction: TextInputAction.done,
-      autofillHints: const [AutofillHints.newPassword],
-      onChanged: (_) => _handleConfirmPasswordChanged(),
-      onSubmitted: (_) => _handleSubmit(),
     ),
-    if (_showMatch) const _InlinePasswordState(success: true),
-    if (_error.isNotEmpty) _InlinePasswordState(error: _error),
-    VitCtaButton(
-      key: ResetPasswordPage.submitKey,
-      onPressed: _canSubmit(challenge) ? _handleSubmit : null,
-      loading: _submitting,
-      variant: VitCtaButtonVariant.auth,
-      child: Text(_submitting ? 'Đang cập nhật...' : 'Cập nhật mật khẩu'),
-    ),
-    VitCtaButton(
-      key: ResetPasswordPage.loginKey,
-      onPressed: _submitting ? null : () => context.go(AppRoutePaths.authLogin),
-      variant: VitCtaButtonVariant.ghost,
-      fullWidth: false,
-      height: AuthSpacingTokens.authTextButtonHeightLg,
-      padding: AuthSpacingTokens.authInlineTextButtonPadding,
-      child: Text(
-        'Quay lại đăng nhập',
-        style: AppTextStyles.caption.copyWith(
-          color: _authPrimary,
-          fontWeight: AppTextStyles.medium,
-        ),
+    VitCard(
+      variant: VitCardVariant.ghost,
+      borderColor: AppColors.cardBorder,
+      padding: AuthSpacingTokens.authSurfaceCompactPadding,
+      child: Column(
+        children: [
+          VitCtaButton(
+            key: ResetPasswordPage.submitKey,
+            onPressed: _canSubmit(challenge) ? _handleSubmit : null,
+            loading: _submitting,
+            variant: VitCtaButtonVariant.auth,
+            child: Text(_submitting ? 'Đang cập nhật...' : 'Cập nhật mật khẩu'),
+          ),
+          const Padding(padding: AuthSpacingTokens.authTopGapX2),
+          VitCtaButton(
+            key: ResetPasswordPage.loginKey,
+            onPressed: _submitting
+                ? null
+                : () => context.go(AppRoutePaths.authLogin),
+            variant: VitCtaButtonVariant.ghost,
+            fullWidth: false,
+            height: AuthSpacingTokens.authTextButtonHeightLg,
+            padding: AuthSpacingTokens.authInlineTextButtonPadding,
+            child: Text(
+              'Quay lại đăng nhập',
+              style: AppTextStyles.caption.copyWith(
+                color: _authPrimary,
+                fontWeight: AppTextStyles.medium,
+              ),
+            ),
+          ),
+          const Padding(padding: AuthSpacingTokens.authTopGapX2),
+          Text(
+            'Mật khẩu mới cần được bảo vệ và không nên dùng lại ở nơi khác.',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+          ),
+        ],
       ),
     ),
   ];
 
   List<Widget> get _expiredContent => [
-    const _ResetExpired(),
-    VitCtaButton(
-      key: ResetPasswordPage.retryKey,
-      onPressed: () => context.go(AppRoutePaths.authForgotPassword),
-      variant: VitCtaButtonVariant.auth,
-      child: const Text('Xác minh lại'),
+    const VitCard(
+      variant: VitCardVariant.hero,
+      radius: VitCardRadius.large,
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: _ResetExpired(),
     ),
-    VitCtaButton(
-      key: ResetPasswordPage.loginKey,
-      onPressed: () => context.go(AppRoutePaths.authLogin),
-      variant: VitCtaButtonVariant.ghost,
-      fullWidth: false,
-      height: AuthSpacingTokens.authTextButtonHeightLg,
-      padding: AuthSpacingTokens.authInlineTextButtonPadding,
-      child: Text(
-        'Quay lại đăng nhập',
-        style: AppTextStyles.caption.copyWith(
-          color: _authPrimary,
-          fontWeight: AppTextStyles.medium,
+    VitCard(
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: VitCtaButton(
+        key: ResetPasswordPage.retryKey,
+        onPressed: () => context.go(AppRoutePaths.authForgotPassword),
+        variant: VitCtaButtonVariant.auth,
+        child: const Text('Xác minh lại'),
+      ),
+    ),
+    VitCard(
+      variant: VitCardVariant.ghost,
+      borderColor: AppColors.cardBorder,
+      padding: AuthSpacingTokens.authSurfaceCompactPadding,
+      child: VitCtaButton(
+        key: ResetPasswordPage.loginKey,
+        onPressed: () => context.go(AppRoutePaths.authLogin),
+        variant: VitCtaButtonVariant.ghost,
+        fullWidth: false,
+        height: AuthSpacingTokens.authTextButtonHeightLg,
+        padding: AuthSpacingTokens.authInlineTextButtonPadding,
+        child: Text(
+          'Quay lại đăng nhập',
+          style: AppTextStyles.caption.copyWith(
+            color: _authPrimary,
+            fontWeight: AppTextStyles.medium,
+          ),
         ),
       ),
     ),
   ];
 
   List<Widget> get _successContent => [
-    const _ResetSuccess(),
-    VitCtaButton(
-      key: ResetPasswordPage.loginKey,
-      onPressed: () => context.go(AppRoutePaths.authLogin),
-      variant: VitCtaButtonVariant.auth,
-      child: const Text('Đăng nhập'),
+    const VitCard(
+      variant: VitCardVariant.hero,
+      radius: VitCardRadius.large,
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: _ResetSuccess(),
+    ),
+    VitCard(
+      padding: AuthSpacingTokens.authSurfacePadding,
+      child: VitCtaButton(
+        key: ResetPasswordPage.loginKey,
+        onPressed: () => context.go(AppRoutePaths.authLogin),
+        variant: VitCtaButtonVariant.auth,
+        child: const Text('Đăng nhập'),
+      ),
+    ),
+    const VitCard(
+      variant: VitCardVariant.ghost,
+      borderColor: AppColors.cardBorder,
+      padding: AuthSpacingTokens.authSurfaceCompactPadding,
+      child: Text(
+        'Bạn có thể đăng nhập lại bằng mật khẩu mới ngay bây giờ.',
+        textAlign: TextAlign.center,
+        style: AppTextStyles.micro,
+      ),
     ),
   ];
 }

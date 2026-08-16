@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
@@ -25,8 +26,6 @@ const double _p2pRiskNativeNavClearance =
     _p2pRiskVisualNavClearance - AppSpacing.x4;
 const double _p2pRiskVisualClearance = AppSpacing.x3;
 const double _p2pRiskNativeClearance = AppSpacing.x2;
-const double _p2pRiskSectionGap = AppSpacing.x2;
-const double _p2pRiskScoreBox = AppSpacing.x7 + AppSpacing.x2;
 const double _p2pRiskInfoLineHeight = 1.34;
 const double _p2pRiskFactorIconBox = AppSpacing.buttonCompact;
 
@@ -111,6 +110,7 @@ class P2PRiskAssessmentPage extends ConsumerWidget {
                           gap: VitContentGap.tight,
                           children: [
                             _RiskScoreHero(snapshot: snapshot),
+                            _RiskSummary(snapshot: snapshot),
                             _RiskInfo(snapshot: snapshot),
                             Text(
                               snapshot.factorTitle,
@@ -150,53 +150,64 @@ class _RiskScoreHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return VitModuleHeroCard(
       key: P2PRiskAssessmentPage.scoreHeroKey,
-      color: AppModuleAccents.p2p,
-      shape: const RoundedRectangleBorder(
-        borderRadius: AppRadii.cardLargeRadius,
-        side: BorderSide(color: AppModuleAccents.p2p),
-      ),
-      child: Padding(
-        padding: P2PSpacingTokens.p2pRiskAssessmentHeroPadding,
-        child: Column(
-          children: [
-            SizedBox.square(
-              dimension: _p2pRiskScoreBox,
-              child: Material(
-                color: AppColors.onAccent.withValues(alpha: .20),
-                shape: const CircleBorder(),
-                child: Center(
-                  child: Text(
-                    '${snapshot.score}',
-                    style: AppTextStyles.heroNumber.copyWith(
-                      color: AppColors.onAccent,
-                      fontWeight: AppTextStyles.bold,
-                      fontFeatures: AppTextStyles.tabularFigures,
-                    ),
+      accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const VitAccentIconBox(
+            icon: Icons.shield_outlined,
+            color: AppModuleAccents.p2p,
+            boxSize: AppSpacing.x7,
+            iconSize: AppSpacing.iconMd,
+          ),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${snapshot.score}',
+                  style: AppTextStyles.heroNumber.copyWith(
+                    fontWeight: AppTextStyles.bold,
+                    fontFeatures: AppTextStyles.tabularFigures,
                   ),
                 ),
-              ),
+                const SizedBox(height: AppSpacing.x1),
+                Text(
+                  snapshot.scoreLabel,
+                  style: AppTextStyles.body.copyWith(
+                    fontWeight: AppTextStyles.bold,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.x1),
+                Text(
+                  snapshot.scoreSubtitle,
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
             ),
-            const SizedBox(height: _p2pRiskSectionGap),
-            Text(
-              snapshot.scoreLabel,
-              style: AppTextStyles.pageTitle.copyWith(
-                color: AppColors.onAccent,
-                fontWeight: AppTextStyles.bold,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x1),
-            Text(
-              snapshot.scoreSubtitle,
-              style: AppTextStyles.micro.copyWith(
-                color: AppColors.onAccent.withValues(alpha: .90),
-                fontWeight: AppTextStyles.bold,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _RiskSummary extends StatelessWidget {
+  const _RiskSummary({required this.snapshot});
+
+  final P2PRiskAssessmentSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return VitMetricCard(
+      label: 'Yếu tố được đánh giá',
+      value: '${snapshot.factors.length}',
+      accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
     );
   }
 }

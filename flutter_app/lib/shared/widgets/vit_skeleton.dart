@@ -132,20 +132,25 @@ class VitSkeletonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VitCard(
-      clip: true,
-      child: Column(
-        children: [
-          for (var i = 0; i < rows; i++) ...[
-            const VitSkeletonRow(),
-            if (i < rows - 1)
-              const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
-                color: AppColors.divider,
-              ),
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      label: 'Đang tải dữ liệu',
+      child: VitCard(
+        clip: true,
+        child: Column(
+          children: [
+            for (var i = 0; i < rows; i++) ...[
+              const VitSkeletonRow(),
+              if (i < rows - 1)
+                const Divider(
+                  height: AppSpacing.dividerHairline,
+                  thickness: AppSpacing.dividerHairline,
+                  color: AppColors.divider,
+                ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

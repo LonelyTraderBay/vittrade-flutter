@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
@@ -33,6 +34,7 @@ class P2PNotificationsSettingsPage extends ConsumerStatefulWidget {
   const P2PNotificationsSettingsPage({super.key, this.shellRenderMode});
 
   static const heroKey = Key('sc278_p2p_notifications_hero');
+  static const summaryKey = Key('sc278_p2p_notifications_summary');
   static const settingsKey = Key('sc278_p2p_notifications_settings');
 
   static Key channelKey(String settingId, String channelId) =>
@@ -118,6 +120,11 @@ class _P2PNotificationsSettingsPageState
                           gap: VitContentGap.tight,
                           children: [
                             _Hero(snapshot: snapshot),
+                            _EnabledChannelsSummary(
+                              key: P2PNotificationsSettingsPage.summaryKey,
+                              snapshot: snapshot,
+                              enabledChannels: _enabledChannels,
+                            ),
                             _SettingsCard(
                               snapshot: snapshot,
                               enabledChannels: _enabledChannels,
@@ -174,12 +181,71 @@ class _Hero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VitNextActionCard(
+    return VitModuleHeroCard(
       key: P2PNotificationsSettingsPage.heroKey,
-      icon: Icons.notifications_none_rounded,
-      title: snapshot.heroTitle,
-      subtitle: snapshot.heroSubtitle,
       accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
+      child: Row(
+        children: [
+          const VitAccentIconBox(
+            icon: Icons.notifications_none_rounded,
+            color: AppModuleAccents.p2p,
+            boxSize: AppSpacing.x7,
+            iconSize: AppSpacing.iconMd,
+          ),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  snapshot.heroTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.body.copyWith(
+                    color: AppColors.text1,
+                    fontWeight: AppTextStyles.bold,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                Text(
+                  snapshot.heroSubtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EnabledChannelsSummary extends StatelessWidget {
+  const _EnabledChannelsSummary({
+    super.key,
+    required this.snapshot,
+    required this.enabledChannels,
+  });
+
+  final P2PNotificationSettingsSnapshot snapshot;
+  final Map<String, Set<String>> enabledChannels;
+
+  @override
+  Widget build(BuildContext context) {
+    final enabledCount = snapshot.settings.fold<int>(
+      0,
+      (total, setting) => total + (enabledChannels[setting.id]?.length ?? 0),
+    );
+    final totalCount = snapshot.settings.length * _channels.length;
+
+    return VitMetricCard(
+      label: 'Kênh đang bật',
+      value: '$enabledCount/$totalCount',
+      accentColor: AppModuleAccents.p2p,
+      density: VitDensity.compact,
     );
   }
 }

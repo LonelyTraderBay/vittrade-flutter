@@ -46,7 +46,12 @@ class _PhoneAppShellState extends State<PhoneAppShell> {
   @override
   void didUpdateWidget(covariant PhoneAppShell oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.currentPath != oldWidget.currentPath && !_bottomNavVisible) {
+    final routeChanged = widget.currentPath != oldWidget.currentPath;
+    final bottomNavReenabled = !oldWidget.showBottomNav && widget.showBottomNav;
+    final autoHideDisabled =
+        oldWidget.renderMode != widget.renderMode && !_canAutoHideBottomNav;
+    if ((routeChanged || bottomNavReenabled || autoHideDisabled) &&
+        !_bottomNavVisible) {
       _bottomNavVisible = true;
     }
   }

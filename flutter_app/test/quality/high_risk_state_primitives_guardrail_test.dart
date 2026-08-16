@@ -10,6 +10,7 @@ void main() {
       'lib/features/trade/presentation/phone/pages/trade_page_state.dart',
       'lib/features/wallet/presentation/phone/pages/withdraw_page.dart',
       'lib/features/p2p_marketplace/presentation/widgets/hub/p2p_home_page_state.dart',
+      'lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_resolution_page.dart',
       'lib/features/earn_staking/presentation/pages/staking/staking_earn_page.dart',
       'lib/features/launchpad/presentation/pages/bridge/launchpad_bridge_order_page.dart',
       'lib/features/predictions/presentation/pages/hub/predictions_home_page.dart',

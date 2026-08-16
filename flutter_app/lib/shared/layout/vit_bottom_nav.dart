@@ -234,7 +234,7 @@ class _VitBottomNavButton extends StatelessWidget {
     const activeShadow = AppColors.primary;
     final semanticLabel =
         item.destination == VitBottomNavDestination.home && badgeCount > 0
-        ? '${item.label}, $badgeCount unread notifications'
+        ? '${item.label}, $badgeCount thông báo chưa đọc'
         : item.label;
 
     if (item.isCenter) {

@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/device_metrics.dart';
@@ -30,6 +30,7 @@ class P2POrderTimelinePage extends ConsumerWidget {
 
   static const contentKey = Key('sc212_p2p_order_timeline_content');
   static const emptyKey = Key('sc212_p2p_order_timeline_empty');
+  static const summaryKey = Key('sc212_p2p_order_timeline_summary');
 
   final String orderId;
   final ShellRenderMode? shellRenderMode;
@@ -109,6 +110,18 @@ class P2POrderTimelinePage extends ConsumerWidget {
                                 gap: VitContentGap.tight,
                                 children: [
                                   const _TimelineHeroCard(),
+                                  _TimelineSummary(
+                                    key: P2POrderTimelinePage.summaryKey,
+                                    snapshot: snapshot,
+                                  ),
+                                  if (snapshot.highRiskContractId != null)
+                                    VitHighRiskStatePanel(
+                                      state: VitHighRiskUiState.riskReview,
+                                      title: 'Theo dõi an toàn giao dịch',
+                                      message:
+                                          'Escrow, số tiền và các mốc thanh toán của đơn được theo dõi trong hợp đồng P2P. Kiểm tra trạng thái trước khi thực hiện bước tiếp theo.',
+                                      contractId: snapshot.highRiskContractId,
+                                    ),
                                   _TimelineList(events: snapshot.events),
                                 ],
                               ),
@@ -139,22 +152,16 @@ class _TimelineHeroCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VitCard(
-      borderColor: AppColors.primary20,
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+    return VitModuleHeroCard(
+      accentColor: AppColors.primary,
+      density: VitDensity.compact,
       child: Row(
         children: [
-          const SizedBox.square(
-            dimension: AppSpacing.buttonCompact,
-            child: Material(
-              color: AppColors.primary12,
-              borderRadius: AppRadii.smRadius,
-              child: Icon(
-                Icons.schedule_rounded,
-                color: AppColors.primary,
-                size: AppSpacing.iconSm,
-              ),
-            ),
+          const VitAccentIconBox(
+            icon: Icons.schedule_rounded,
+            color: AppColors.primary,
+            boxSize: AppSpacing.x7,
+            iconSize: AppSpacing.iconMd,
           ),
           const SizedBox(width: AppSpacing.x3),
           Expanded(
@@ -163,7 +170,7 @@ class _TimelineHeroCard extends StatelessWidget {
               children: [
                 Text(
                   'Tiến trình đơn hàng',
-                  style: AppTextStyles.baseMedium.copyWith(
+                  style: AppTextStyles.body.copyWith(
                     color: AppColors.primary,
                     fontWeight: AppTextStyles.bold,
                   ),
@@ -178,6 +185,22 @@ class _TimelineHeroCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _TimelineSummary extends StatelessWidget {
+  const _TimelineSummary({super.key, required this.snapshot});
+
+  final P2POrderTimelineSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return VitMetricCard(
+      label: 'Trạng thái hiện tại',
+      value: _localizedOrderStatus(snapshot.order.status),
+      accentColor: AppColors.primary,
+      density: VitDensity.compact,
     );
   }
 }
@@ -328,5 +351,15 @@ VitStatusPillStatus _pillStatus(P2POrderTimelineStatus status) {
     P2POrderTimelineStatus.completed => VitStatusPillStatus.success,
     P2POrderTimelineStatus.pending => VitStatusPillStatus.warning,
     P2POrderTimelineStatus.failed => VitStatusPillStatus.error,
+  };
+}
+
+String _localizedOrderStatus(String status) {
+  return switch (status) {
+    'awaiting_seller_confirmation' => 'Chờ người bán xác nhận',
+    'payment_pending' => 'Chờ thanh toán',
+    'completed' => 'Đã hoàn tất',
+    'cancelled' => 'Đã hủy',
+    _ => status,
   };
 }

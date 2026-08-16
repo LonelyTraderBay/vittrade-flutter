@@ -8,13 +8,17 @@ import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/secur
 import 'package:vit_trade_flutter/features/p2p_account/presentation/pages/merchant/p2p_kyc_status_page.dart';
 import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/security/p2p_transaction_limits_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
 
 void main() {
-  Future<void> pumpComplianceOverview(WidgetTester tester) async {
+  Future<void> pumpComplianceOverview(
+    WidgetTester tester, {
+    Size viewport = const Size(440, 956),
+  }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -72,6 +76,8 @@ void main() {
     expect(find.text('Compliance Overview'), findsOneWidget);
     expect(find.text('Tuân thủ · P2P'), findsOneWidget);
     expect(find.byKey(P2PComplianceOverviewPage.heroKey), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
     expect(find.text('Compliance Active'), findsOneWidget);
     expect(find.text('Tài khoản tuân thủ đầy đủ quy định'), findsOneWidget);
     expect(find.byKey(P2PComplianceOverviewPage.checklistKey), findsOneWidget);
@@ -84,6 +90,16 @@ void main() {
     expect(find.text('50M/ngày'), findsOneWidget);
     expect(find.text('Source of Funds'), findsOneWidget);
     expect(find.text('Đã khai báo'), findsOneWidget);
+  });
+
+  testWidgets('SC-267 remains stable at 360px phone baseline', (tester) async {
+    await pumpComplianceOverview(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2PComplianceOverviewPage), findsOneWidget);
+    expect(find.byKey(P2PComplianceOverviewPage.heroKey), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-267 first viewport reaches checklist actions', (

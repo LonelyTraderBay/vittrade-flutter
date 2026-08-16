@@ -39,6 +39,8 @@ class P2PAntiPhishingCodePage extends ConsumerStatefulWidget {
   static const inputKey = Key('sc256_p2p_anti_phishing_input');
   static const generateKey = Key('sc256_p2p_anti_phishing_generate');
   static const saveKey = Key('sc256_p2p_anti_phishing_save');
+  static const saveConfirmKey = Key('sc256_p2p_anti_phishing_save_confirm');
+  static const saveCancelKey = Key('sc256_p2p_anti_phishing_save_cancel');
 
   static Key exampleKey(String id) =>
       Key('sc256_p2p_anti_phishing_example_$id');
@@ -331,19 +333,51 @@ class _P2PAntiPhishingCodePageState
             variant: VitCtaButtonVariant.success,
             onPressed: _codeController!.text.trim().length < 6
                 ? null
-                : () {
-                    unawaited(HapticFeedback.selectionClick());
-                    setState(() {
-                      _code = _codeController!.text.trim().toUpperCase();
-                      _showCode = true;
-                      _editing = false;
-                    });
-                  },
+                : _confirmSaveCode,
             leading: const Icon(Icons.check_circle_outline_rounded),
             child: const Text('Lưu code'),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _confirmSaveCode() async {
+    final proposedCode = _codeController!.text.trim().toUpperCase();
+    if (proposedCode.length < 6) return;
+
+    final confirmed = await showVitConfirmDialog(
+      context: context,
+      title: 'Xác nhận thay đổi mã chống lừa đảo',
+      message:
+          'Mã mới sẽ dùng để nhận diện thông báo P2P chính thức. Không chia sẻ mã này và hãy kiểm tra lại trước khi áp dụng.',
+      rows: [
+        VitConfirmDialogRow(
+          label: 'Mã mới (đã che)',
+          value: _maskCode(proposedCode),
+        ),
+        const VitConfirmDialogRow(
+          label: 'Bước tiếp theo',
+          value: 'Kiểm tra mã trong email P2P tiếp theo',
+        ),
+      ],
+      confirmLabel: 'Áp dụng mã mới',
+      confirmKey: P2PAntiPhishingCodePage.saveConfirmKey,
+      cancelKey: P2PAntiPhishingCodePage.saveCancelKey,
+    );
+    if (!mounted || !confirmed) return;
+
+    unawaited(HapticFeedback.selectionClick());
+    setState(() {
+      _code = proposedCode;
+      _showCode = true;
+      _editing = false;
+    });
+  }
+
+  static String _maskCode(String code) {
+    if (code.length <= 4) return List.filled(code.length, '•').join();
+    final middle = List.filled(code.length - 4, '•').join();
+    return '${code.substring(0, 2)}$middle${code.substring(code.length - 2)}';
   }
 }

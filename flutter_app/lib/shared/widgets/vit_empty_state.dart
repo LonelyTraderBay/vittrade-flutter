@@ -38,85 +38,89 @@ class VitEmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final compact = density == VitDensity.compact;
-    return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x6,
-        vertical:
-            AppSpacing.buttonStandard +
-            AppSpacing.x3 +
-            AppSpacing.dividerHairline,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (compact)
-            Icon(icon, color: AppColors.borderSolid, size: AppSpacing.iconLg)
-          else
-            SizedBox(
-              width:
-                  AppSpacing.buttonStandard +
-                  AppSpacing.contentPad +
-                  AppSpacing.x2,
-              height:
-                  AppSpacing.buttonStandard +
-                  AppSpacing.contentPad +
-                  AppSpacing.x2,
-              child: DecoratedBox(
-                decoration: const ShapeDecoration(
-                  color: AppColors.surface2,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: AppColors.borderSolid),
-                    borderRadius: AppRadii.cardLargeRadius,
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: AppSpacing.x6,
+          vertical:
+              AppSpacing.buttonStandard +
+              AppSpacing.x3 +
+              AppSpacing.dividerHairline,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (compact)
+              Icon(icon, color: AppColors.borderSolid, size: AppSpacing.iconLg)
+            else
+              SizedBox(
+                width:
+                    AppSpacing.buttonStandard +
+                    AppSpacing.contentPad +
+                    AppSpacing.x2,
+                height:
+                    AppSpacing.buttonStandard +
+                    AppSpacing.contentPad +
+                    AppSpacing.x2,
+                child: DecoratedBox(
+                  decoration: const ShapeDecoration(
+                    color: AppColors.surface2,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: AppColors.borderSolid),
+                      borderRadius: AppRadii.cardLargeRadius,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Icon(
-                    icon,
-                    color: AppColors.borderSolid,
-                    size: AppSpacing.iconLg + AppSpacing.hairlineStroke,
+                  child: Center(
+                    child: Icon(
+                      icon,
+                      color: AppColors.borderSolid,
+                      size: AppSpacing.iconLg + AppSpacing.hairlineStroke,
+                    ),
                   ),
                 ),
               ),
+            SizedBox(
+              height: compact
+                  ? AppSpacing.pageRhythmCompactInnerGap
+                  : AppSpacing.x4,
             ),
-          SizedBox(
-            height: compact
-                ? AppSpacing.pageRhythmCompactInnerGap
-                : AppSpacing.x4,
-          ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: compact
-                ? AppTextStyles.caption.copyWith(color: AppColors.text3)
-                : AppTextStyles.baseMedium.copyWith(color: AppColors.text2),
-          ),
-          if (message != null) ...[
-            const SizedBox(height: AppSpacing.x2),
             Text(
-              message!,
+              title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+              style: compact
+                  ? AppTextStyles.caption.copyWith(color: AppColors.text3)
+                  : AppTextStyles.baseMedium.copyWith(color: AppColors.text2),
             ),
+            if (message != null) ...[
+              const SizedBox(height: AppSpacing.x2),
+              Text(
+                message!,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+              ),
+            ],
+            if (secondaryMessage != null) ...[
+              const SizedBox(height: AppSpacing.x1),
+              Text(
+                secondaryMessage!,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+              ),
+            ],
+            if (actionLabel != null && onAction != null) ...[
+              const SizedBox(height: AppSpacing.x4),
+              VitCtaButton(
+                key: actionKey,
+                onPressed: onAction,
+                fullWidth: false,
+                height: AppSpacing.inputHeight - AppSpacing.x3,
+                child: Text(actionLabel!),
+              ),
+            ],
           ],
-          if (secondaryMessage != null) ...[
-            const SizedBox(height: AppSpacing.x1),
-            Text(
-              secondaryMessage!,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.caption.copyWith(color: AppColors.text3),
-            ),
-          ],
-          if (actionLabel != null && onAction != null) ...[
-            const SizedBox(height: AppSpacing.x4),
-            VitCtaButton(
-              key: actionKey,
-              onPressed: onAction,
-              fullWidth: false,
-              height: AppSpacing.inputHeight - AppSpacing.x3,
-              child: Text(actionLabel!),
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }

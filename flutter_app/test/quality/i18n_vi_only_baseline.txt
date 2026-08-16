@@ -272,5 +272,4 @@ lib/shared/layout/vit_header.dart|VitHeader.showBack requires onBack so visible 
 lib/shared/layout/vit_top_chrome.dart|VitTopChrome.actions supports up to 3 actions. Use more overflow.
 lib/shared/layout/vit_top_chrome.dart|VitTopChrome.showBack requires onBack so visible back buttons are actionable.
 lib/shared/widgets/vit_carousel_dots.dart|Carousel has no pages
-lib/shared/widgets/vit_error_state.dart|Please try again or check your connection.
 lib/shared/widgets/vit_preset_chip_row.dart|Use $value% of available balance

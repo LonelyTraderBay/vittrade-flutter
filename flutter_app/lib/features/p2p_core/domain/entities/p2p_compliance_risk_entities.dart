@@ -226,6 +226,7 @@ final class P2PSourceOfFundsSnapshot {
     required this.successRoute,
     required this.emptyTitle,
     required this.contractNotes,
+    this.highRiskContractId,
   });
 
   final String endpoint;
@@ -244,6 +245,7 @@ final class P2PSourceOfFundsSnapshot {
   final String successRoute;
   final String emptyTitle;
   final String contractNotes;
+  final String? highRiskContractId;
 }
 
 /// A single selectable source-of-funds option.
@@ -281,6 +283,7 @@ final class P2PLargeTransactionJustificationSnapshot {
     required this.successRoute,
     required this.emptyTitle,
     required this.contractNotes,
+    this.highRiskContractId,
   });
 
   final String endpoint;
@@ -302,6 +305,7 @@ final class P2PLargeTransactionJustificationSnapshot {
   final String successRoute;
   final String emptyTitle;
   final String contractNotes;
+  final String? highRiskContractId;
 }
 
 /// A user's overall risk score and contributing factors for the risk assessment screen.

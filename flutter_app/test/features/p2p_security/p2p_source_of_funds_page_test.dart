@@ -8,14 +8,16 @@ import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/secur
 import 'package:vit_trade_flutter/features/p2p_account/presentation/pages/merchant/p2p_kyc_status_page.dart';
 import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/security/p2p_source_of_funds_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpSourceOfFunds(
     WidgetTester tester, {
     String initialLocation = AppRoutePaths.p2pComplianceSourceOfFunds,
+    Size viewport = const Size(440, 956),
   }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -46,6 +48,7 @@ void main() {
     expect(snapshot.sources.first.label, 'Lương/Thu nhập');
     expect(snapshot.parentRoute, AppRoutePaths.p2pComplianceOverview);
     expect(snapshot.successRoute, AppRoutePaths.p2pKycStatus);
+    expect(snapshot.highRiskContractId, 'p2p_source_of_funds_review');
     expect(snapshot.contractNotes, contains('P2P requires escrow'));
     expect(
       snapshot.supportedStates,
@@ -88,6 +91,16 @@ void main() {
     );
     expect(find.byKey(P2PSourceOfFundsPage.ctaKey), findsOneWidget);
     expect(find.text('Gửi khai báo'), findsOneWidget);
+    expect(find.byType(VitHighRiskStatePanel), findsOneWidget);
+  });
+
+  testWidgets('SC-269 remains stable at 360px phone baseline', (tester) async {
+    await pumpSourceOfFunds(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2PSourceOfFundsPage), findsOneWidget);
+    expect(find.byKey(P2PSourceOfFundsPage.heroKey), findsOneWidget);
+    expect(find.byType(VitHighRiskStatePanel), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-269 is reachable from compliance overview', (tester) async {
@@ -113,6 +126,10 @@ void main() {
     );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(P2PSourceOfFundsPage.ctaKey));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Xác nhận gửi khai báo nguồn vốn'), findsOneWidget);
+    await tester.tap(find.byKey(P2PSourceOfFundsPage.confirmKey));
     await tester.pumpAndSettle();
 
     expect(find.byType(P2PKycStatusPage), findsOneWidget);

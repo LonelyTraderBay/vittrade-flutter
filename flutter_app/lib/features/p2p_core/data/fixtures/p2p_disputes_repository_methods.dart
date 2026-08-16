@@ -89,6 +89,7 @@ mixin _MockP2PRepositoryDisputesMethods on _MockP2PRepositoryBase {
       emptyTitle: 'Chưa có kết quả giải quyết',
       emptySubtitle: 'Mediator sẽ cập nhật quyết định khi review hoàn tất.',
       contractNotes: 'P2P requires escrow, fraud, KYC, payment-state clarity.',
+      highRiskContractId: HighRiskFlowContractIds.p2pEscrowOrder,
     );
   }
 

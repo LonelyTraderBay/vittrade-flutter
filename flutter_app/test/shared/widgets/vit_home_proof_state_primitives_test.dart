@@ -47,11 +47,14 @@ void main() {
     expect(find.text('Live'), findsOneWidget);
     expect(find.text('3'), findsOneWidget);
     expect(find.text('No assets'), findsOneWidget);
-    expect(find.text('Offline. Showing latest cached data.'), findsOneWidget);
+    expect(
+      find.text('Ngoại tuyến. Đang hiển thị dữ liệu đã lưu gần nhất.'),
+      findsOneWidget,
+    );
 
-    await tester.ensureVisible(find.text('Retry'));
+    await tester.ensureVisible(find.text('Thử lại'));
     await tester.pump(const Duration(milliseconds: 100));
-    await tester.tap(find.text('Retry'));
+    await tester.tap(find.text('Thử lại'));
     await tester.pump();
 
     expect(retry, 1);

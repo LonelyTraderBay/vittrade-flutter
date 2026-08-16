@@ -8,14 +8,16 @@ import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/secur
 import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/security/p2p_large_transaction_justification_page.dart';
 import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_my_orders_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpLargeTransaction(
     WidgetTester tester, {
     String initialLocation = AppRoutePaths.p2pComplianceLargeTransaction,
+    Size viewport = const Size(440, 956),
   }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -49,6 +51,7 @@ void main() {
     expect(snapshot.purposes, hasLength(5));
     expect(snapshot.parentRoute, AppRoutePaths.p2pComplianceOverview);
     expect(snapshot.successRoute, AppRoutePaths.p2pMyOrders);
+    expect(snapshot.highRiskContractId, 'p2p_large_transaction_review');
     expect(snapshot.contractNotes, contains('P2P requires escrow'));
     expect(
       snapshot.supportedStates,
@@ -94,6 +97,19 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Gửi giải trình'), findsOneWidget);
+    expect(find.byType(VitHighRiskStatePanel), findsOneWidget);
+  });
+
+  testWidgets('SC-270 remains stable at 360px phone baseline', (tester) async {
+    await pumpLargeTransaction(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2PLargeTransactionJustificationPage), findsOneWidget);
+    expect(
+      find.byKey(P2PLargeTransactionJustificationPage.heroKey),
+      findsOneWidget,
+    );
+    expect(find.byType(VitHighRiskStatePanel), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-270 supports query amount in hero', (tester) async {
@@ -120,6 +136,12 @@ void main() {
     );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(P2PLargeTransactionJustificationPage.ctaKey));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Xác nhận gửi giải trình giao dịch lớn'), findsOneWidget);
+    await tester.tap(
+      find.byKey(P2PLargeTransactionJustificationPage.confirmKey),
+    );
     await tester.pumpAndSettle();
 
     expect(find.byType(P2PLargeTransactionJustificationPage), findsNothing);

@@ -182,6 +182,13 @@ const _financialSafetyFeatures = <String>{
   'predictions',
 };
 
+const _financialSafetyReadOnlyPages = <String>{
+  'P2PAchievementsPage',
+  'P2PAmlScreeningPage',
+  'P2PRiskAssessmentPage',
+  'P2PTaxReportingPage',
+};
+
 const _financialSafetyKeywords = <String>[
   'withdraw',
   'deposit',
@@ -523,6 +530,23 @@ SourceBundle _readSourceBundle(
     }
   }
 
+  // P2P L2 pages own the shared VitPageLayout/VitPageContent through the
+  // feature-local VitP2PFlowScaffold. Append that wrapper for body grading
+  // only; the route source files should still report the page-owned files.
+  var p2pFlowLayoutOverlay = '';
+  if (primaryJoined.contains('VitP2PFlowScaffold(')) {
+    final layoutFile = File(
+      _joinPath(
+        appRoot.path,
+        'lib/features/p2p_core/presentation/widgets/vit_p2p_flow_scaffold.dart'
+            .replaceAll('/', Platform.pathSeparator),
+      ),
+    );
+    if (layoutFile.existsSync()) {
+      p2pFlowLayoutOverlay = layoutFile.readAsStringSync();
+    }
+  }
+
   // Tablet wallet detail pages own their wide-screen VitPageLayout and
   // VitPageContent in WalletTabletDetailSurface. Append that shared surface
   // for grading only; keep it out of source_files so the route inventory does
@@ -587,6 +611,7 @@ SourceBundle _readSourceBundle(
       ...primarySources,
       ...widgetSources,
       if (tradeShellLayoutOverlay.isNotEmpty) tradeShellLayoutOverlay,
+      if (p2pFlowLayoutOverlay.isNotEmpty) p2pFlowLayoutOverlay,
       if (walletTabletSurfaceOverlay.isNotEmpty) walletTabletSurfaceOverlay,
     ].join('\n'),
     files: files,
@@ -685,6 +710,7 @@ String _layoutStatus({
 
   final hasSharedLayout = _containsAny(source, const [
     'VitPageLayout',
+    'VitAutoHidePageScaffold',
     'VitAutoHideHeaderScaffold',
     'RewardsArenaPointsBridge',
   ]);
@@ -709,6 +735,9 @@ String _surfaceStatus({
     'VitServiceTile',
     'VitModuleHeroCard',
     'VitMetricCard',
+    'VitNextActionCard',
+    'VitTradeSimpleHero',
+    'VitTradeSimpleOrderForm',
   ]);
 
   if (isTool) return sharedSurfaceCount > 0 ? 'pass' : 'warn';
@@ -1416,6 +1445,9 @@ String _renderSummary(List<BodyRouteEntry> entries) {
 
 bool _isFinancialSafetyCandidate(RouteInventoryEntry routeEntry, String lower) {
   if (!_financialSafetyFeatures.contains(routeEntry.feature)) return false;
+  if (_financialSafetyReadOnlyPages.contains(routeEntry.pageClass)) {
+    return false;
+  }
   final routeContext =
       '${routeEntry.feature} ${routeEntry.route} ${routeEntry.pageClass}'
           .toLowerCase()

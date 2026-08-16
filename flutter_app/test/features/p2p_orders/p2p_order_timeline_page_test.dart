@@ -6,13 +6,17 @@ import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/p2p_core/data/p2p_repository.dart';
 import 'package:vit_trade_flutter/features/p2p_orders/presentation/pages/orders/p2p_order_timeline_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
 
 void main() {
-  Future<void> pumpP2POrderTimeline(WidgetTester tester) async {
+  Future<void> pumpP2POrderTimeline(
+    WidgetTester tester, {
+    Size viewport = const Size(440, 956),
+  }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -66,6 +70,10 @@ void main() {
     expect(find.text('Tiến trình #p2p001'), findsOneWidget);
     expect(find.text('Đơn hàng - P2P'), findsOneWidget);
     expect(find.text('Tiến trình đơn hàng'), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byKey(P2POrderTimelinePage.summaryKey), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
+    expect(find.byType(VitHighRiskStatePanel), findsOneWidget);
     expect(
       find.text('Cập nhật trạng thái theo thời gian thực'),
       findsOneWidget,
@@ -110,6 +118,16 @@ void main() {
       actionLabel: 'the next useful timeline event',
       minVisibleHeight: 18,
     );
+  });
+
+  testWidgets('SC-212 remains stable at the 360px phone baseline', (
+    tester,
+  ) async {
+    await pumpP2POrderTimeline(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2POrderTimelinePage), findsOneWidget);
+    expect(find.byKey(P2POrderTimelinePage.summaryKey), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-212 back button returns to P2P order route', (tester) async {

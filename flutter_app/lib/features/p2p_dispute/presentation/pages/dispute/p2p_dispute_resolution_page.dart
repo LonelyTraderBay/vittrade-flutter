@@ -125,13 +125,14 @@ class _P2PDisputeResolutionPageState
                                 context.go(AppRoutePaths.p2pDisputes),
                             child: const Text('Quay về danh sách tranh chấp'),
                           ),
-                          const VitHighRiskStatePanel(
-                            state: VitHighRiskUiState.riskReview,
-                            title: 'Xem lại kết quả giải quyết',
-                            message:
-                                'Quyết định, số tiền hoàn, ghi chú hòa giải, trạng thái kháng cáo, danh sách tranh chấp và bước vụ việc tiếp theo đã được xem trước khi đóng.',
-                            contractId: 'p2p-dispute-resolution-review',
-                          ),
+                          if (snapshot.highRiskContractId != null)
+                            VitHighRiskStatePanel(
+                              state: VitHighRiskUiState.riskReview,
+                              title: 'Xem lại kết quả giải quyết',
+                              message:
+                                  'Quyết định, số tiền hoàn, ghi chú hòa giải, trạng thái kháng cáo, danh sách tranh chấp và bước vụ việc tiếp theo đã được xem trước khi đóng.',
+                              contractId: snapshot.highRiskContractId,
+                            ),
                         ],
                       ),
                     ),
@@ -158,12 +159,12 @@ class _DecisionHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.buy10,
-      shape: const RoundedRectangleBorder(
-        borderRadius: AppRadii.cardLargeRadius,
-        side: BorderSide(color: AppColors.buy15),
-      ),
+    return VitCard(
+      variant: VitCardVariant.ghost,
+      radius: VitCardRadius.large,
+      borderColor: AppColors.buy15,
+      background: const ColoredBox(color: AppColors.buy10),
+      clip: true,
       child: Padding(
         padding: P2PSpacingTokens.p2pDisputeResolutionCardPadding,
         child: Row(
@@ -304,12 +305,11 @@ class _AppealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.warn10,
-      shape: const RoundedRectangleBorder(
-        borderRadius: AppRadii.cardRadius,
-        side: BorderSide(color: AppColors.warn15),
-      ),
+    return VitCard(
+      variant: VitCardVariant.ghost,
+      borderColor: AppColors.warn15,
+      background: const ColoredBox(color: AppColors.warn10),
+      clip: true,
       child: Padding(
         padding: P2PSpacingTokens.p2pDisputeResolutionCardPadding,
         child: Row(

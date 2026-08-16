@@ -8,7 +8,7 @@ class VitOfflineBanner extends StatelessWidget {
   const VitOfflineBanner({
     super.key,
     this.variant = VitBannerVariant.warning,
-    this.message = 'Offline. Showing latest cached data.',
+    this.message = 'Ngoại tuyến. Đang hiển thị dữ liệu đã lưu gần nhất.',
     this.detail,
     this.reconnecting = false,
   });
@@ -20,11 +20,15 @@ class VitOfflineBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VitBanner(
-      variant: reconnecting ? VitBannerVariant.info : variant,
-      icon: reconnecting ? Icons.wifi_rounded : Icons.wifi_off_rounded,
-      message: reconnecting ? 'Reconnecting...' : message,
-      detail: reconnecting ? 'Retrying automatically.' : detail,
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      child: VitBanner(
+        variant: reconnecting ? VitBannerVariant.info : variant,
+        icon: reconnecting ? Icons.wifi_rounded : Icons.wifi_off_rounded,
+        message: reconnecting ? 'Đang kết nối lại...' : message,
+        detail: reconnecting ? 'Đang tự động thử lại.' : detail,
+      ),
     );
   }
 }

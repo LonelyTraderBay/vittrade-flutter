@@ -71,7 +71,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       background: _editBackground,
       header: VitHeader(
         title: 'Ch\u1EC9nh s\u1EEDa h\u1ED3 s\u01A1',
-        subtitle: 'Ch\u1EC9nh s\u1EEDa \u00B7 Profile',
+        subtitle: 'Ch\u1EC9nh s\u1EEDa \u00B7 T\u00E0i kho\u1EA3n',
         showBack: true,
         onBack: _close,
       ),
@@ -153,18 +153,22 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                     ],
                   ),
                 ),
-                KeyedSubtree(
-                  key: EditProfilePage.saveKey,
-                  child: VitCtaButton(
-                    variant: VitCtaButtonVariant.auth,
-                    density: VitDensity.compact,
-                    loading: _saving,
-                    onPressed: _canSave ? _save : null,
-                    leading: const Icon(Icons.save_rounded),
-                    child: Text(
-                      _saving
-                          ? '\u0110ang l\u01B0u...'
-                          : 'L\u01B0u thay \u0111\u1ED5i',
+                VitCard(
+                  density: VitDensity.compact,
+                  padding: ProfileSpacingTokens.profileEditActionPadding,
+                  child: KeyedSubtree(
+                    key: EditProfilePage.saveKey,
+                    child: VitCtaButton(
+                      variant: VitCtaButtonVariant.auth,
+                      density: VitDensity.compact,
+                      loading: _saving,
+                      onPressed: _canSave ? _save : null,
+                      leading: const Icon(Icons.save_rounded),
+                      child: Text(
+                        _saving
+                            ? '\u0110ang l\u01B0u...'
+                            : 'L\u01B0u thay \u0111\u1ED5i',
+                      ),
                     ),
                   ),
                 ),
@@ -238,7 +242,7 @@ class _AvatarEditor extends StatelessWidget {
                 icon: selected
                     ? Icons.check_rounded
                     : Icons.photo_camera_outlined,
-                tooltip: 'Change avatar',
+                tooltip: '\u0110\u1ED5i \u1EA3nh \u0111\u1EA1i di\u1EC7n',
                 onPressed: onTap,
                 variant: selected
                     ? VitIconButtonVariant.success

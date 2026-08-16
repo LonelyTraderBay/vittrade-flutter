@@ -127,30 +127,43 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     customGap: AppSpacing.zero,
                     fullBleed: true,
                     children: [
-                      const _LoginHero(),
+                      const VitCard(
+                        variant: VitCardVariant.hero,
+                        radius: VitCardRadius.large,
+                        padding: AuthSpacingTokens.authSurfacePadding,
+                        child: _LoginHero(),
+                      ),
                       const Padding(
                         padding: AuthSpacingTokens.authHeroFormTopPadding,
                       ),
-                      _LoginForm(
-                        identifierController: _identifierController,
-                        passwordController: _passwordController,
-                        showPassword: _showPassword,
-                        submitting: _submitting,
-                        showDemoLogin: showDemoLogin,
-                        error: _error,
-                        missingIdentifier: missingIdentifier,
-                        missingPassword: missingPassword,
-                        onChanged: _clearFieldError,
-                        onTogglePassword: () {
-                          setState(() => _showPassword = !_showPassword);
-                        },
-                        onLogin: _handleLogin,
-                        onDemoLogin: _handleDemoLogin,
+                      VitCard(
+                        padding: AuthSpacingTokens.authSurfacePadding,
+                        child: _LoginForm(
+                          identifierController: _identifierController,
+                          passwordController: _passwordController,
+                          showPassword: _showPassword,
+                          submitting: _submitting,
+                          showDemoLogin: showDemoLogin,
+                          error: _error,
+                          missingIdentifier: missingIdentifier,
+                          missingPassword: missingPassword,
+                          onChanged: _clearFieldError,
+                          onTogglePassword: () {
+                            setState(() => _showPassword = !_showPassword);
+                          },
+                          onLogin: _handleLogin,
+                          onDemoLogin: _handleDemoLogin,
+                        ),
                       ),
                       const Padding(
                         padding: AuthSpacingTokens.authFormFooterTopPadding,
                       ),
-                      const _LegalFooter(),
+                      const VitCard(
+                        variant: VitCardVariant.ghost,
+                        borderColor: AppColors.cardBorder,
+                        padding: AuthSpacingTokens.authSurfaceCompactPadding,
+                        child: _LegalFooter(),
+                      ),
                     ],
                   ),
                 ),
@@ -316,44 +329,60 @@ class _AuthLinkRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final forgotPassword = VitCtaButton(
+      key: LoginPage.forgotPasswordKey,
+      onPressed: submitting
+          ? null
+          : () => context.go(AppRoutePaths.authForgotPassword),
+      variant: VitCtaButtonVariant.ghost,
+      fullWidth: false,
+      height: AuthSpacingTokens.authTextButtonHeight,
+      padding: AuthSpacingTokens.authInlineTextButtonPadding,
+      child: Text(
+        'Quên mật khẩu?',
+        style: AppTextStyles.caption.copyWith(color: AppColors.primary),
+      ),
+    );
+    final register = VitCtaButton(
+      key: LoginPage.registerKey,
+      onPressed: submitting
+          ? null
+          : () => context.go(AppRoutePaths.authRegister),
+      variant: VitCtaButtonVariant.ghost,
+      fullWidth: false,
+      height: AuthSpacingTokens.authTextButtonHeight,
+      padding: AuthSpacingTokens.authInlineTextButtonPadding,
+      child: Text(
+        'Đăng ký',
+        style: AppTextStyles.caption.copyWith(
+          color: AppColors.primary,
+          fontWeight: AppTextStyles.medium,
+        ),
+      ),
+    );
+
+    if (MediaQuery.sizeOf(context).width < 400) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          forgotPassword,
+          Text(
+            'hoặc',
+            style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+          ),
+          register,
+        ],
+      );
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        VitCtaButton(
-          key: LoginPage.forgotPasswordKey,
-          onPressed: submitting
-              ? null
-              : () => context.go(AppRoutePaths.authForgotPassword),
-          variant: VitCtaButtonVariant.ghost,
-          fullWidth: false,
-          height: AuthSpacingTokens.authTextButtonHeight,
-          padding: AuthSpacingTokens.authInlineTextButtonPadding,
-          child: Text(
-            'Quên mật khẩu?',
-            style: AppTextStyles.caption.copyWith(color: AppColors.primary),
-          ),
-        ),
+        forgotPassword,
         Text(
           '|',
           style: AppTextStyles.caption.copyWith(color: AppColors.text3),
         ),
-        VitCtaButton(
-          key: LoginPage.registerKey,
-          onPressed: submitting
-              ? null
-              : () => context.go(AppRoutePaths.authRegister),
-          variant: VitCtaButtonVariant.ghost,
-          fullWidth: false,
-          height: AuthSpacingTokens.authTextButtonHeight,
-          padding: AuthSpacingTokens.authInlineTextButtonPadding,
-          child: Text(
-            'Đăng ký',
-            style: AppTextStyles.caption.copyWith(
-              color: AppColors.primary,
-              fontWeight: AppTextStyles.medium,
-            ),
-          ),
-        ),
+        register,
       ],
     );
   }

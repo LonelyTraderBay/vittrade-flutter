@@ -43,6 +43,8 @@ class P2PLargeTransactionJustificationPage extends ConsumerStatefulWidget {
   );
   static const detailsInputKey = Key('sc270_p2p_large_tx_details_input');
   static const ctaKey = Key('sc270_p2p_large_tx_cta');
+  static const confirmKey = Key('sc270_p2p_large_tx_confirm');
+  static const cancelKey = Key('sc270_p2p_large_tx_cancel');
 
   static Key purposeKey(String purpose) =>
       Key('sc270_p2p_large_tx_purpose_${purpose.hashCode}');
@@ -178,13 +180,18 @@ class _P2PLargeTransactionJustificationPageState
                             textInputAction: TextInputAction.done,
                             onChanged: (_) => setState(() {}),
                           ),
+                          if (snapshot.highRiskContractId != null)
+                            VitHighRiskStatePanel(
+                              state: VitHighRiskUiState.riskReview,
+                              title: 'Xem trước giải trình giao dịch lớn',
+                              message:
+                                  '${snapshot.heroTitle} cùng mục đích và giải trình chi tiết sẽ được kiểm tra theo quy định AML/CTF. Bước tiếp theo: chờ Compliance phản hồi trước khi tiếp tục giao dịch.',
+                              contractId: snapshot.highRiskContractId,
+                            ),
                           VitCtaButton(
                             key: P2PLargeTransactionJustificationPage.ctaKey,
                             onPressed: canSubmit
-                                ? () {
-                                    unawaited(HapticFeedback.mediumImpact());
-                                    context.go(snapshot.successRoute);
-                                  }
+                                ? () => _confirmSubmit(snapshot)
                                 : null,
                             trailing: const Icon(Icons.chevron_right_rounded),
                             child: Text(snapshot.ctaLabel),
@@ -200,6 +207,39 @@ class _P2PLargeTransactionJustificationPageState
         ),
       ),
     );
+  }
+
+  Future<void> _confirmSubmit(
+    P2PLargeTransactionJustificationSnapshot snapshot,
+  ) async {
+    final purpose = _purpose == _otherPurposeLabel
+        ? _customPurposeController.text.trim()
+        : _purpose ?? 'Chưa chọn';
+    final confirmed = await showVitConfirmDialog(
+      context: context,
+      title: 'Xác nhận gửi giải trình giao dịch lớn',
+      message:
+          'Hồ sơ sẽ được Compliance rà soát theo AML/CTF. Kiểm tra số tiền, mục đích, nội dung và bước tiếp theo trước khi gửi.',
+      rows: [
+        VitConfirmDialogRow(label: 'Giao dịch', value: snapshot.heroTitle),
+        VitConfirmDialogRow(label: 'Mục đích', value: purpose),
+        const VitConfirmDialogRow(
+          label: 'Nội dung giải trình',
+          value: 'Đã nhập nội dung',
+        ),
+        const VitConfirmDialogRow(
+          label: 'Bước tiếp theo',
+          value: 'Chờ Compliance phản hồi',
+        ),
+      ],
+      confirmLabel: 'Gửi giải trình',
+      confirmKey: P2PLargeTransactionJustificationPage.confirmKey,
+      cancelKey: P2PLargeTransactionJustificationPage.cancelKey,
+    );
+    if (!mounted || !confirmed) return;
+
+    unawaited(HapticFeedback.mediumImpact());
+    context.go(snapshot.successRoute);
   }
 }
 

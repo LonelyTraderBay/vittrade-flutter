@@ -15,10 +15,10 @@ import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/router/web/web_app_router.dart';
 import 'package:vit_trade_flutter/app/session_bootstrap.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/app_theme.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
-class VitTradeApp extends StatelessWidget {
+class VitTradeApp extends StatefulWidget {
   const VitTradeApp({
     super.key,
     this.routerConfig,
@@ -39,13 +39,45 @@ class VitTradeApp extends StatelessWidget {
   final List<Override> overrides;
 
   @override
+  State<VitTradeApp> createState() => _VitTradeAppState();
+}
+
+class _VitTradeAppState extends State<VitTradeApp> {
+  GoRouter? _generatedRouter;
+
+  @override
+  void didUpdateWidget(covariant VitTradeApp oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.routerConfig != widget.routerConfig &&
+        oldWidget.routerConfig == null) {
+      _disposeGeneratedRouter();
+    }
+    if (oldWidget.surface != widget.surface ||
+        oldWidget.shellRenderMode != widget.shellRenderMode) {
+      _disposeGeneratedRouter();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposeGeneratedRouter();
+    super.dispose();
+  }
+
+  void _disposeGeneratedRouter() {
+    _generatedRouter?.dispose();
+    _generatedRouter = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final resolvedShellRenderMode = shellRenderMode ?? defaultShellRenderMode();
+    final resolvedShellRenderMode =
+        widget.shellRenderMode ?? defaultShellRenderMode();
     final resolvedRouter =
-        routerConfig ?? _createSurfaceRouter(context, resolvedShellRenderMode);
+        widget.routerConfig ?? _resolveRouter(context, resolvedShellRenderMode);
 
     return ProviderScope(
-      overrides: [...authSessionNetworkOverrides(), ...overrides],
+      overrides: [...authSessionNetworkOverrides(), ...widget.overrides],
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           statusBarColor: AppColors.transparent,
@@ -69,7 +101,7 @@ class VitTradeApp extends StatelessWidget {
   ) {
     final viewportWidth = _viewportWidth(context);
     final selectedSurface =
-        surface ??
+        widget.surface ??
         AppSurfaceResolver.resolve(viewportWidth: viewportWidth, isWeb: kIsWeb);
     final host = SurfaceRouterHost(
       phoneRouter: () =>
@@ -80,6 +112,19 @@ class VitTradeApp extends StatelessWidget {
           createWebAppRouter(shellRenderMode: resolvedShellRenderMode),
     );
     return host.createRouter(selectedSurface);
+  }
+
+  GoRouter _resolveRouter(
+    BuildContext context,
+    ShellRenderMode resolvedShellRenderMode,
+  ) {
+    final router = _generatedRouter;
+    if (router != null) return router;
+
+    return _generatedRouter = _createSurfaceRouter(
+      context,
+      resolvedShellRenderMode,
+    );
   }
 
   double _viewportWidth(BuildContext context) {
@@ -125,38 +170,7 @@ class _VitTradeMaterialApp extends StatelessWidget {
       // không bảo vệ layout nào cả.
       builder: (context, child) =>
           MediaQuery.withClampedTextScaling(maxScaleFactor: 1.3, child: child!),
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.bg,
-        colorScheme: const ColorScheme.dark(
-          primary: AppColors.primary,
-          secondary: AppColors.accent,
-          surface: AppColors.surface,
-          error: AppColors.sell,
-          onPrimary: AppColors.navCenterIcon,
-          onSecondary: AppColors.text1,
-          onSurface: AppColors.text1,
-          onError: AppColors.navCenterIcon,
-        ),
-        textTheme: const TextTheme(
-          displayLarge: AppTextStyles.jumbo,
-          displayMedium: AppTextStyles.display,
-          displaySmall: AppTextStyles.amountLg,
-          headlineLarge: AppTextStyles.amountLg,
-          headlineMedium: AppTextStyles.heroNumber,
-          headlineSmall: AppTextStyles.sectionTitle,
-          titleLarge: AppTextStyles.sectionTitle,
-          titleMedium: AppTextStyles.baseMedium,
-          titleSmall: AppTextStyles.sectionTitleSm,
-          bodySmall: AppTextStyles.caption,
-          bodyMedium: AppTextStyles.body,
-          bodyLarge: AppTextStyles.base,
-          labelSmall: AppTextStyles.micro,
-          labelMedium: AppTextStyles.badge,
-          labelLarge: AppTextStyles.control,
-        ),
-      ),
+      theme: AppTheme.dark,
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/pages/profile_pa
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
 
@@ -16,9 +17,10 @@ void main() {
   Future<void> pumpEditProfile(
     WidgetTester tester, {
     String initialLocation = AppRoutePaths.profileEdit,
+    Size viewport = const Size(440, 956),
   }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -66,7 +68,10 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Ch\u1EC9nh s\u1EEDa h\u1ED3 s\u01A1'), findsOneWidget);
-    expect(find.text('Ch\u1EC9nh s\u1EEDa \u00B7 Profile'), findsOneWidget);
+    expect(
+      find.text('Ch\u1EC9nh s\u1EEDa \u00B7 T\u00E0i kho\u1EA3n'),
+      findsOneWidget,
+    );
     expect(find.text('H\u1ECC V\u00C0 T\u00CAN'), findsOneWidget);
     expect(find.text('EMAIL'), findsOneWidget);
     expect(find.text('S\u1ED0 \u0110I\u1EC6N THO\u1EA0I'), findsOneWidget);
@@ -79,6 +84,16 @@ void main() {
     );
     expect(find.text('L\u01B0u thay \u0111\u1ED5i'), findsOneWidget);
   });
+
+  testWidgets(
+    'SC-157 Phone keeps edit identity, form, and action on VitCard surfaces',
+    (tester) async {
+      await pumpEditProfile(tester, viewport: const Size(360, 800));
+
+      expect(find.byType(VitCard), findsNWidgets(3));
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('SC-157 first viewport reaches save action', (tester) async {
     await pumpEditProfile(tester);

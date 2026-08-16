@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void _setPhoneViewport(WidgetTester tester) {
   tester.view.devicePixelRatio = 1;
@@ -73,6 +74,22 @@ void main() {
     expect(find.text('Đăng nhập an toàn'), findsOneWidget);
     expect(find.text('Đăng nhập'), findsOneWidget);
   });
+
+  testWidgets(
+    'SC-001 Phone keeps hero, form, and legal content on VitCard surfaces',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(360, 800);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(_app());
+      await tester.pumpAndSettle();
+
+      expect(find.byType(VitCard), findsNWidgets(3));
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('/auth/login visual QA shell keeps fake status only', (
     tester,

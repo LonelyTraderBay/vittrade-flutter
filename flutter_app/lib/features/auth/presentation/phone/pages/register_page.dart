@@ -189,173 +189,197 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   child: VitPageContent(
                     rhythm: VitPageRhythm.form,
                     children: [
-                      VitSegmentedChoice.withPrimaryAccent(
-                        selected: _contactType,
-                        onChanged: _setContactType,
-                        height: AuthSpacingTokens.authSegmentedHeight,
-                        options: [
-                          const VitSegmentedChoiceOption(
-                            value: _RegisterContactType.email,
-                            label: 'Email',
-                            key: RegisterPage.emailTabKey,
-                          ),
-                          const VitSegmentedChoiceOption(
-                            value: _RegisterContactType.phone,
-                            label: 'Điện thoại',
-                            key: RegisterPage.phoneTabKey,
-                          ),
-                        ],
-                      ),
-                      VitInput(
-                        controller: _nameController,
-                        fieldKey: RegisterPage.nameFieldKey,
-                        label: 'Họ và tên',
-                        hintText: 'Nguyễn Văn A',
-                        prefix: const Icon(Icons.person_outline_rounded),
-                        errorText: _errors['name'],
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.name],
-                        onChanged: (_) => _clearError('name'),
-                      ),
-                      VitInput(
-                        controller: _contactController,
-                        fieldKey: RegisterPage.contactFieldKey,
-                        label: isEmail ? 'Email' : 'Số điện thoại',
-                        hintText: isEmail
-                            ? 'you@example.com'
-                            : '+84 912 345 678',
-                        prefix: Icon(
-                          isEmail
-                              ? Icons.mail_outline_rounded
-                              : Icons.phone_iphone_rounded,
+                      VitCard(
+                        variant: VitCardVariant.inner,
+                        padding: AuthSpacingTokens.authSurfaceCompactPadding,
+                        child: VitSegmentedChoice.withPrimaryAccent(
+                          selected: _contactType,
+                          onChanged: _setContactType,
+                          height: AuthSpacingTokens.authSegmentedHeight,
+                          options: [
+                            const VitSegmentedChoiceOption(
+                              value: _RegisterContactType.email,
+                              label: 'Email',
+                              key: RegisterPage.emailTabKey,
+                            ),
+                            const VitSegmentedChoiceOption(
+                              value: _RegisterContactType.phone,
+                              label: 'Điện thoại',
+                              key: RegisterPage.phoneTabKey,
+                            ),
+                          ],
                         ),
-                        errorText: _errors['contact'],
-                        keyboardType: isEmail
-                            ? TextInputType.emailAddress
-                            : TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: isEmail
-                            ? const [AutofillHints.email]
-                            : const [AutofillHints.telephoneNumber],
-                        onChanged: (_) => _clearError('contact'),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          VitInput(
-                            controller: _passwordController,
-                            fieldKey: RegisterPage.passwordFieldKey,
-                            label: 'Mật khẩu',
-                            hintText: '••••••••',
-                            prefix: const Icon(Icons.lock_outline_rounded),
-                            suffix: VitIconButton(
-                              key: RegisterPage.passwordToggleKey,
-                              icon: _showPassword
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                              tooltip: _showPassword
-                                  ? 'Ẩn mật khẩu'
-                                  : 'Hiện mật khẩu',
-                              onPressed: () {
-                                setState(() => _showPassword = !_showPassword);
+                      VitCard(
+                        padding: AuthSpacingTokens.authSurfacePadding,
+                        child: VitPageSection(
+                          customGap: AppSpacing.pageRhythmFormSectionGap,
+                          children: [
+                            VitInput(
+                              controller: _nameController,
+                              fieldKey: RegisterPage.nameFieldKey,
+                              label: 'Họ và tên',
+                              hintText: 'Nguyễn Văn A',
+                              prefix: const Icon(Icons.person_outline_rounded),
+                              errorText: _errors['name'],
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
+                              autofillHints: const [AutofillHints.name],
+                              onChanged: (_) => _clearError('name'),
+                            ),
+                            VitInput(
+                              controller: _contactController,
+                              fieldKey: RegisterPage.contactFieldKey,
+                              label: isEmail ? 'Email' : 'Số điện thoại',
+                              hintText: isEmail
+                                  ? 'you@example.com'
+                                  : '+84 912 345 678',
+                              prefix: Icon(
+                                isEmail
+                                    ? Icons.mail_outline_rounded
+                                    : Icons.phone_iphone_rounded,
+                              ),
+                              errorText: _errors['contact'],
+                              keyboardType: isEmail
+                                  ? TextInputType.emailAddress
+                                  : TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+                              autofillHints: isEmail
+                                  ? const [AutofillHints.email]
+                                  : const [AutofillHints.telephoneNumber],
+                              onChanged: (_) => _clearError('contact'),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                VitInput(
+                                  controller: _passwordController,
+                                  fieldKey: RegisterPage.passwordFieldKey,
+                                  label: 'Mật khẩu',
+                                  hintText: '••••••••',
+                                  prefix: const Icon(
+                                    Icons.lock_outline_rounded,
+                                  ),
+                                  suffix: VitIconButton(
+                                    key: RegisterPage.passwordToggleKey,
+                                    icon: _showPassword
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    tooltip: _showPassword
+                                        ? 'Ẩn mật khẩu'
+                                        : 'Hiện mật khẩu',
+                                    onPressed: () {
+                                      setState(
+                                        () => _showPassword = !_showPassword,
+                                      );
+                                    },
+                                    variant: VitIconButtonVariant.transparent,
+                                    size: VitIconButtonSize.sm,
+                                  ),
+                                  errorText: _errors['password'],
+                                  obscureText: !_showPassword,
+                                  textInputAction: TextInputAction.next,
+                                  autofillHints: const [
+                                    AutofillHints.newPassword,
+                                  ],
+                                  onChanged: (_) => _clearError('password'),
+                                ),
+                                if (_passwordController.text.isNotEmpty)
+                                  Padding(
+                                    padding: AuthSpacingTokens.authTopGapX3,
+                                    child: _PasswordStrength(
+                                      password: _passwordController.text,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            VitInput(
+                              controller: _confirmController,
+                              fieldKey: RegisterPage.confirmFieldKey,
+                              label: 'Xác nhận mật khẩu',
+                              hintText: '••••••••',
+                              prefix: const Icon(Icons.lock_outline_rounded),
+                              errorText: _errors['confirm'],
+                              obscureText: !_showPassword,
+                              textInputAction: TextInputAction.next,
+                              autofillHints: const [AutofillHints.newPassword],
+                              onChanged: (_) => _clearError('confirm'),
+                            ),
+                            VitInput(
+                              controller: _referralController,
+                              fieldKey: RegisterPage.referralFieldKey,
+                              label: 'Mã giới thiệu (tuỳ chọn)',
+                              hintText: 'VD: VITTA-A2B3C',
+                              textCapitalization: TextCapitalization.characters,
+                              inputFormatters: const [],
+                              textInputAction: TextInputAction.done,
+                              onChanged: (value) {
+                                _formatReferral(value);
+                                _clearError('referral');
                               },
-                              variant: VitIconButtonVariant.transparent,
-                              size: VitIconButtonSize.sm,
+                              onSubmitted: (_) => _handleRegister(),
                             ),
-                            errorText: _errors['password'],
-                            obscureText: !_showPassword,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: const [AutofillHints.newPassword],
-                            onChanged: (_) => _clearError('password'),
-                          ),
-                          if (_passwordController.text.isNotEmpty)
-                            Padding(
-                              padding: AuthSpacingTokens.authTopGapX3,
-                              child: _PasswordStrength(
-                                password: _passwordController.text,
+                            _AgreementRow(
+                              agreed: _agreed,
+                              error: _errors['agreed'],
+                              onTap: () {
+                                setState(() {
+                                  _agreed = !_agreed;
+                                  final nextErrors = {..._errors}
+                                    ..remove('agreed');
+                                  _errors = nextErrors;
+                                });
+                              },
+                            ),
+                            if (_errors['form'] case final formError?)
+                              VitBanner(
+                                variant: VitBannerVariant.error,
+                                message: formError,
+                                icon: Icons.error_outline_rounded,
                               ),
+                            VitCtaButton(
+                              key: RegisterPage.submitKey,
+                              onPressed: _submitting ? null : _handleRegister,
+                              loading: _submitting,
+                              variant: VitCtaButtonVariant.auth,
+                              child: const Text('Tiếp tục'),
                             ),
-                        ],
-                      ),
-                      VitInput(
-                        controller: _confirmController,
-                        fieldKey: RegisterPage.confirmFieldKey,
-                        label: 'Xác nhận mật khẩu',
-                        hintText: '••••••••',
-                        prefix: const Icon(Icons.lock_outline_rounded),
-                        errorText: _errors['confirm'],
-                        obscureText: !_showPassword,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.newPassword],
-                        onChanged: (_) => _clearError('confirm'),
-                      ),
-                      VitInput(
-                        controller: _referralController,
-                        fieldKey: RegisterPage.referralFieldKey,
-                        label: 'Mã giới thiệu (tuỳ chọn)',
-                        hintText: 'VD: VITTA-A2B3C',
-                        textCapitalization: TextCapitalization.characters,
-                        inputFormatters: const [],
-                        textInputAction: TextInputAction.done,
-                        onChanged: (value) {
-                          _formatReferral(value);
-                          _clearError('referral');
-                        },
-                        onSubmitted: (_) => _handleRegister(),
-                      ),
-                      _AgreementRow(
-                        agreed: _agreed,
-                        error: _errors['agreed'],
-                        onTap: () {
-                          setState(() {
-                            _agreed = !_agreed;
-                            final nextErrors = {..._errors}..remove('agreed');
-                            _errors = nextErrors;
-                          });
-                        },
-                      ),
-                      if (_errors['form'] case final formError?)
-                        VitBanner(
-                          variant: VitBannerVariant.error,
-                          message: formError,
-                          icon: Icons.error_outline_rounded,
+                          ],
                         ),
-                      VitCtaButton(
-                        key: RegisterPage.submitKey,
-                        onPressed: _submitting ? null : _handleRegister,
-                        loading: _submitting,
-                        variant: VitCtaButtonVariant.auth,
-                        child: const Text('Tiếp tục'),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Đã có tài khoản?',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
-                          ),
-                          VitCtaButton(
-                            key: RegisterPage.loginKey,
-                            onPressed: _submitting
-                                ? null
-                                : () => context.go(AppRoutePaths.authLogin),
-                            variant: VitCtaButtonVariant.ghost,
-                            fullWidth: false,
-                            height: AuthSpacingTokens.authTextButtonHeight,
-                            padding:
-                                AuthSpacingTokens.authInlineTextButtonPadding,
-                            child: Text(
-                              'Đăng nhập',
+                      VitCard(
+                        variant: VitCardVariant.ghost,
+                        borderColor: AppColors.cardBorder,
+                        padding: AuthSpacingTokens.authSurfaceCompactPadding,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Đã có tài khoản?',
                               style: AppTextStyles.caption.copyWith(
-                                color: _authPrimary,
-                                fontWeight: AppTextStyles.medium,
+                                color: AppColors.text2,
                               ),
                             ),
-                          ),
-                        ],
+                            VitCtaButton(
+                              key: RegisterPage.loginKey,
+                              onPressed: _submitting
+                                  ? null
+                                  : () => context.go(AppRoutePaths.authLogin),
+                              variant: VitCtaButtonVariant.ghost,
+                              fullWidth: false,
+                              height: AuthSpacingTokens.authTextButtonHeight,
+                              padding:
+                                  AuthSpacingTokens.authInlineTextButtonPadding,
+                              child: Text(
+                                'Đăng nhập',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: _authPrimary,
+                                  fontWeight: AppTextStyles.medium,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

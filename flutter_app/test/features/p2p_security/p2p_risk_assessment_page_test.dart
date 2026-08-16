@@ -7,11 +7,15 @@ import 'package:vit_trade_flutter/features/p2p_core/data/p2p_repository.dart';
 import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/security/p2p_compliance_overview_page.dart';
 import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/security/p2p_risk_assessment_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
-  Future<void> pumpRiskAssessment(WidgetTester tester) async {
+  Future<void> pumpRiskAssessment(
+    WidgetTester tester, {
+    Size viewport = const Size(440, 956),
+  }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -65,6 +69,8 @@ void main() {
     expect(find.text('Risk Assessment'), findsOneWidget);
     expect(find.text('Rủi ro · P2P'), findsOneWidget);
     expect(find.byKey(P2PRiskAssessmentPage.scoreHeroKey), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
     expect(find.text('15'), findsOneWidget);
     expect(find.text('Low Risk'), findsOneWidget);
     expect(find.text('Risk Score: 15/100'), findsOneWidget);
@@ -79,6 +85,16 @@ void main() {
     expect(find.text('+5'), findsOneWidget);
     expect(find.text('+3'), findsNWidgets(2));
     expect(find.text('+2'), findsNWidgets(2));
+  });
+
+  testWidgets('SC-271 remains stable at 360px phone baseline', (tester) async {
+    await pumpRiskAssessment(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2PRiskAssessmentPage), findsOneWidget);
+    expect(find.byKey(P2PRiskAssessmentPage.scoreHeroKey), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-271 back returns to compliance overview', (tester) async {

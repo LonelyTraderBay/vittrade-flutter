@@ -36,6 +36,8 @@ class P2PBlacklistAddPage extends ConsumerStatefulWidget {
   static const noteKey = Key('sc276_p2p_blacklist_add_note');
   static const warningKey = Key('sc276_p2p_blacklist_add_warning');
   static const submitKey = Key('sc276_p2p_blacklist_add_submit');
+  static const confirmKey = Key('sc276_p2p_blacklist_add_confirm');
+  static const cancelKey = Key('sc276_p2p_blacklist_add_cancel');
 
   static Key reasonKey(String id) => Key('sc276_p2p_blacklist_add_reason_$id');
 
@@ -61,11 +63,47 @@ class _P2PBlacklistAddPageState extends ConsumerState<P2PBlacklistAddPage> {
 
   Future<void> _submit(P2PBlacklistAddSnapshot snapshot) async {
     if (_usernameController.text.trim().isEmpty || _isSubmitting) return;
+
+    final username = _usernameController.text.trim();
+    final reason = snapshot.reasons.firstWhere(
+      (item) => item.id == _reasonId,
+      orElse: () => snapshot.reasons.first,
+    );
+    final confirmed = await showVitConfirmDialog(
+      context: context,
+      title: 'Xác nhận chặn người dùng P2P',
+      message:
+          'Thao tác này sẽ ngăn giao dịch P2P với người dùng đã chọn. Kiểm tra lại lý do và bước tiếp theo trước khi áp dụng.',
+      rows: [
+        VitConfirmDialogRow(
+          label: 'Người dùng',
+          value: _maskUsername(username),
+        ),
+        VitConfirmDialogRow(label: 'Lý do', value: reason.label),
+        VitConfirmDialogRow(
+          label: 'Ghi chú',
+          value: _noteController.text.trim().isEmpty
+              ? 'Không có'
+              : 'Đã nhập ghi chú',
+        ),
+      ],
+      confirmLabel: 'Chặn người dùng',
+      confirmVariant: VitCtaButtonVariant.destructive,
+      confirmKey: P2PBlacklistAddPage.confirmKey,
+      cancelKey: P2PBlacklistAddPage.cancelKey,
+    );
+    if (!mounted || !confirmed) return;
+
     unawaited(HapticFeedback.mediumImpact());
     setState(() => _isSubmitting = true);
     await Future<void>.delayed(const Duration(milliseconds: 250));
     if (!mounted) return;
     context.go(snapshot.blacklistRoute);
+  }
+
+  static String _maskUsername(String value) {
+    if (value.length <= 2) return '••••';
+    return '${value.substring(0, 1)}•••${value.substring(value.length - 1)}';
   }
 
   @override

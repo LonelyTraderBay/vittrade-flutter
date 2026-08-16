@@ -183,6 +183,7 @@ final class P2PDisputeResolutionSnapshot {
     required this.emptyTitle,
     required this.emptySubtitle,
     required this.contractNotes,
+    this.highRiskContractId,
   });
 
   final String endpoint;
@@ -199,6 +200,7 @@ final class P2PDisputeResolutionSnapshot {
   final String emptyTitle;
   final String emptySubtitle;
   final String contractNotes;
+  final String? highRiskContractId;
 }
 
 /// Form data for opening a new dispute on an order.

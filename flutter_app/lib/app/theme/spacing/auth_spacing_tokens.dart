@@ -33,6 +33,10 @@ final class AuthSpacingTokens {
   static const EdgeInsets authFormFooterTopPadding = EdgeInsets.only(
     top: authFormFooterGap,
   );
+  static const EdgeInsets authSurfacePadding = EdgeInsets.all(AppSpacing.x4);
+  static const EdgeInsets authSurfaceCompactPadding = EdgeInsets.all(
+    AppSpacing.x3,
+  );
   static const double authLogoBoxSize = 64;
   static const double authLogoMarkSize = 36;
   static const double authLogoElevation = AppSpacing.x3;

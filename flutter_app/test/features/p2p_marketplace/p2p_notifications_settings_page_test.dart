@@ -12,9 +12,12 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import '../../helpers/first_viewport_test_utils.dart';
 
 void main() {
-  Future<void> pumpNotifications(WidgetTester tester) async {
+  Future<void> pumpNotifications(
+    WidgetTester tester, {
+    Size viewport = const Size(440, 956),
+  }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = viewport;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -68,6 +71,8 @@ void main() {
     expect(find.text('Thông báo P2P'), findsOneWidget);
     expect(find.text('Thông báo · P2P'), findsOneWidget);
     expect(find.byKey(P2PNotificationsSettingsPage.heroKey), findsOneWidget);
+    expect(find.byType(VitModuleHeroCard), findsOneWidget);
+    expect(find.byType(VitMetricCard), findsOneWidget);
     expect(find.text('Cài đặt thông báo'), findsOneWidget);
     expect(find.text('Cập nhật đơn hàng'), findsOneWidget);
     expect(find.text('Đã nhận thanh toán'), findsOneWidget);
@@ -80,6 +85,16 @@ void main() {
       ),
       findsOneWidget,
     );
+  });
+
+  testWidgets('SC-278 remains stable at the 360px phone baseline', (
+    tester,
+  ) async {
+    await pumpNotifications(tester, viewport: const Size(360, 800));
+
+    expect(find.byType(P2PNotificationsSettingsPage), findsOneWidget);
+    expect(find.byKey(P2PNotificationsSettingsPage.summaryKey), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-278 first viewport reaches notification controls', (

@@ -11,9 +11,13 @@ import 'package:vit_trade_flutter/features/p2p_security/presentation/pages/secur
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 void main() {
-  Future<void> pumpP2PMerchantProfile(WidgetTester tester) async {
+  Future<void> pumpP2PMerchantProfile(
+    WidgetTester tester, {
+    double width = 440,
+    double height = 956,
+  }) async {
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(440, 956);
+    tester.view.physicalSize = Size(width, height);
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -94,6 +98,24 @@ void main() {
     expect(find.text('89.500.000'), findsOneWidget);
     expect(find.text('4.870.000'), findsOneWidget);
   });
+
+  testWidgets(
+    'SC-228 keeps merchant actions within the 360 px phone baseline',
+    (tester) async {
+      await pumpP2PMerchantProfile(tester, width: 360, height: 800);
+
+      for (final key in [
+        P2PMerchantProfilePage.followButtonKey,
+        P2PMerchantProfilePage.reportButtonKey,
+        P2PMerchantProfilePage.blockButtonKey,
+      ]) {
+        final rect = tester.getRect(find.byKey(key));
+        expect(rect.left, greaterThanOrEqualTo(0));
+        expect(rect.right, lessThanOrEqualTo(360));
+      }
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('SC-228 supports follow state and reviews tab', (tester) async {
     await pumpP2PMerchantProfile(tester);

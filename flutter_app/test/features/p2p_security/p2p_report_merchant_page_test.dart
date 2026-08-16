@@ -146,6 +146,11 @@ void main() {
     await tester.pump(const Duration(milliseconds: 320));
     await tester.pumpAndSettle();
 
+    expect(find.text('Xác nhận gửi báo cáo P2P'), findsOneWidget);
+    await tester.tap(find.byKey(P2PReportMerchantPage.confirmKey));
+    await tester.pump(const Duration(milliseconds: 320));
+    await tester.pumpAndSettle();
+
     expect(find.byType(P2PMerchantProfilePage), findsOneWidget);
     expect(find.text('Hồ sơ Merchant'), findsOneWidget);
   });

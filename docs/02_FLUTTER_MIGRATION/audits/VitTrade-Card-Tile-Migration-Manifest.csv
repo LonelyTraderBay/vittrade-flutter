@@ -446,6 +446,11 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/admin/presentation/widgets/analytics_dashboard_sections.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/admin/presentation/widgets/funnel_dashboard_selector_metrics.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/admin/presentation/widgets/funnel_dashboard_waterfall_details.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/pages/forgot_password_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/pages/login_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/pages/otp_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/pages/register_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/auth/presentation/phone/pages/reset_password_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_backup.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_qr.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/auth/presentation/phone/widgets/two_fa_setup_verify.dart,C,-,done,0,-
@@ -729,7 +734,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_claim_detail_page_state.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_evidence_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_page.dart,D,-,done,0,-
-06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_resolution_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_dispute_resolution_page.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_disputes_page.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_fund_claims_tour.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/p2p_dispute/presentation/pages/dispute/p2p_insurance_fund_overview_cards.dart,C,-,done,0,-

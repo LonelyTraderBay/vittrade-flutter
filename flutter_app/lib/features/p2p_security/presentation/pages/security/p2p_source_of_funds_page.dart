@@ -36,6 +36,8 @@ class P2PSourceOfFundsPage extends ConsumerStatefulWidget {
   static const sourceListKey = Key('sc269_p2p_sof_sources');
   static const inputKey = Key('sc269_p2p_sof_input');
   static const ctaKey = Key('sc269_p2p_sof_cta');
+  static const confirmKey = Key('sc269_p2p_sof_confirm');
+  static const cancelKey = Key('sc269_p2p_sof_cancel');
 
   static Key sourceKey(String id) => Key('sc269_p2p_sof_source_$id');
 
@@ -146,13 +148,18 @@ class _P2PSourceOfFundsPageState extends ConsumerState<P2PSourceOfFundsPage> {
                             textInputAction: TextInputAction.done,
                             onChanged: (_) => setState(() {}),
                           ),
+                          if (snapshot.highRiskContractId != null)
+                            VitHighRiskStatePanel(
+                              state: VitHighRiskUiState.riskReview,
+                              title: 'Xem trước khai báo nguồn vốn',
+                              message:
+                                  'Nguồn tiền, chi tiết bổ sung và bước rà soát KYC được kiểm tra trước khi gửi khai báo. Bước tiếp theo: chờ Compliance phản hồi trước khi tiếp tục giao dịch.',
+                              contractId: snapshot.highRiskContractId,
+                            ),
                           VitCtaButton(
                             key: P2PSourceOfFundsPage.ctaKey,
                             onPressed: canSubmit
-                                ? () {
-                                    unawaited(HapticFeedback.mediumImpact());
-                                    context.go(snapshot.successRoute);
-                                  }
+                                ? () => _confirmSubmit(snapshot)
                                 : null,
                             trailing: const Icon(Icons.chevron_right_rounded),
                             child: Text(snapshot.ctaLabel),
@@ -168,6 +175,37 @@ class _P2PSourceOfFundsPageState extends ConsumerState<P2PSourceOfFundsPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _confirmSubmit(P2PSourceOfFundsSnapshot snapshot) async {
+    final selected = snapshot.sources.firstWhere(
+      (source) => source.id == _selectedSource,
+      orElse: () => snapshot.sources.first,
+    );
+    final confirmed = await showVitConfirmDialog(
+      context: context,
+      title: 'Xác nhận gửi khai báo nguồn vốn',
+      message:
+          'Khai báo sẽ được chuyển đến Compliance để rà soát. Kiểm tra nguồn vốn, nội dung bổ sung và bước tiếp theo trước khi gửi.',
+      rows: [
+        VitConfirmDialogRow(label: 'Nguồn vốn', value: selected.label),
+        const VitConfirmDialogRow(
+          label: 'Chi tiết bổ sung',
+          value: 'Đã nhập nội dung',
+        ),
+        const VitConfirmDialogRow(
+          label: 'Bước tiếp theo',
+          value: 'Chờ Compliance phản hồi',
+        ),
+      ],
+      confirmLabel: 'Gửi khai báo',
+      confirmKey: P2PSourceOfFundsPage.confirmKey,
+      cancelKey: P2PSourceOfFundsPage.cancelKey,
+    );
+    if (!mounted || !confirmed) return;
+
+    unawaited(HapticFeedback.mediumImpact());
+    context.go(snapshot.successRoute);
   }
 }
 

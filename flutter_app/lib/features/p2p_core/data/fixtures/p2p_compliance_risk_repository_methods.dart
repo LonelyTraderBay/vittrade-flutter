@@ -129,6 +129,7 @@ mixin _MockP2PRepositoryComplianceRiskMethods on _MockP2PRepositoryBase {
       successRoute: '/p2p/kyc/status',
       emptyTitle: 'Chưa có khai báo nguồn vốn',
       contractNotes: 'P2P requires escrow, fraud, KYC, payment-state clarity.',
+      highRiskContractId: 'p2p_source_of_funds_review',
     );
   }
 
@@ -162,6 +163,7 @@ mixin _MockP2PRepositoryComplianceRiskMethods on _MockP2PRepositoryBase {
       successRoute: '/p2p/my-orders',
       emptyTitle: 'Chưa có giải trình giao dịch lớn',
       contractNotes: 'P2P requires escrow, fraud, KYC, payment-state clarity.',
+      highRiskContractId: 'p2p_large_transaction_review',
     );
   }
 

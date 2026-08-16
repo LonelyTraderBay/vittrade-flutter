@@ -118,43 +118,69 @@ class _ProfileHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: _p2pMerchantSectionGap),
-        Row(
-          children: [
-            Expanded(
-              child: VitCtaButton(
-                key: P2PMerchantProfilePage.followButtonKey,
-                onPressed: onFollow,
-                height: _p2pMerchantButtonHeight,
-                variant: following
-                    ? VitCtaButtonVariant.secondary
-                    : VitCtaButtonVariant.primary,
-                leading: Icon(
-                  following
-                      ? Icons.person_remove_alt_1_outlined
-                      : Icons.person_add_alt_1_outlined,
-                ),
-                child: Text(following ? 'Đã theo dõi' : 'Theo dõi'),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            VitCtaButton(
-              key: P2PMerchantProfilePage.reportButtonKey,
-              onPressed: onReport,
-              fullWidth: false,
+        LayoutBuilder(
+          builder: (context, constraints) {
+            VitCtaButton followButton() => VitCtaButton(
+              key: P2PMerchantProfilePage.followButtonKey,
+              onPressed: onFollow,
               height: _p2pMerchantButtonHeight,
-              variant: VitCtaButtonVariant.danger,
-              leading: const Icon(Icons.flag_outlined),
-              child: const Text('Báo cáo'),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            VitIconButton(
+              variant: following
+                  ? VitCtaButtonVariant.secondary
+                  : VitCtaButtonVariant.primary,
+              leading: Icon(
+                following
+                    ? Icons.person_remove_alt_1_outlined
+                    : Icons.person_add_alt_1_outlined,
+              ),
+              child: Text(following ? 'Đã theo dõi' : 'Theo dõi'),
+            );
+
+            VitCtaButton reportButton({required bool fullWidth}) =>
+                VitCtaButton(
+                  key: P2PMerchantProfilePage.reportButtonKey,
+                  onPressed: onReport,
+                  fullWidth: fullWidth,
+                  height: _p2pMerchantButtonHeight,
+                  variant: VitCtaButtonVariant.danger,
+                  leading: const Icon(Icons.flag_outlined),
+                  child: const Text('Báo cáo'),
+                );
+
+            VitIconButton blockButton() => VitIconButton(
               key: P2PMerchantProfilePage.blockButtonKey,
               icon: Icons.block_rounded,
               tooltip: 'Chặn merchant',
               variant: VitIconButtonVariant.ghost,
               onPressed: onBlock,
-            ),
-          ],
+            );
+
+            if (constraints.maxWidth < 400) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  followButton(),
+                  const SizedBox(height: _p2pMerchantSectionGap),
+                  Row(
+                    children: [
+                      Expanded(child: reportButton(fullWidth: true)),
+                      const SizedBox(width: AppSpacing.x3),
+                      blockButton(),
+                    ],
+                  ),
+                ],
+              );
+            }
+
+            return Row(
+              children: [
+                Expanded(child: followButton()),
+                const SizedBox(width: AppSpacing.x3),
+                reportButton(fullWidth: false),
+                const SizedBox(width: AppSpacing.x3),
+                blockButton(),
+              ],
+            );
+          },
         ),
       ],
     );
@@ -177,19 +203,21 @@ class _MerchantAvatar extends StatelessWidget {
           size: P2PSpacingTokens.p2pMerchantCommerceMerchantAvatarSize,
           radius: AppRadii.pillRadius,
         ),
-        Positioned(
-          right: AppSpacing.x1,
-          bottom: AppSpacing.x1,
-          child: Material(
-            color: merchant.isOnline ? AppColors.buy : AppColors.text3,
-            shape: const CircleBorder(
-              side: BorderSide(
-                color: AppColors.bg,
-                width: P2PSpacingTokens.p2pMerchantCommerceOnlineBorderWidth,
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: P2PSpacingTokens.p2pMerchantCommerceOnlineIndicatorPadding,
+            child: Material(
+              color: merchant.isOnline ? AppColors.buy : AppColors.text3,
+              shape: const CircleBorder(
+                side: BorderSide(
+                  color: AppColors.bg,
+                  width: P2PSpacingTokens.p2pMerchantCommerceOnlineBorderWidth,
+                ),
               ),
-            ),
-            child: const SizedBox.square(
-              dimension: P2PSpacingTokens.p2pMerchantCommerceOnlineDot,
+              child: const SizedBox.square(
+                dimension: P2PSpacingTokens.p2pMerchantCommerceOnlineDot,
+              ),
             ),
           ),
         ),

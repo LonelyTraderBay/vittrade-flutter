@@ -47,6 +47,7 @@ void main() {
       expect(snapshot.refundAmountLabel, '24.000.000');
       expect(snapshot.mediator, 'Support Team #A5');
       expect(snapshot.contractNotes, contains('escrow'));
+      expect(snapshot.highRiskContractId, 'p2p_escrow_order');
       expect(
         snapshot.supportedStates,
         containsAll([
