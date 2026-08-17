@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/portfolio/advanced_charts_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/derivatives_overview_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/comparison_tool_page.dart';
@@ -39,13 +38,11 @@ List<RouteBase> marketsRoutes(
       path: AppRoutePaths.markets,
       name: AppRouteNames.sc008MarketList,
       builder: (_, _) => switch (surface) {
-        AppSurface.phone => MarketListPage(shellRenderMode: shellRenderMode),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => MarketListPage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const MarketsTabletPage(),
-        AppSurface.web => MarketListPage(shellRenderMode: shellRenderMode),
-        null => ResponsiveSurfacePage(
-          phoneBuilder: (_) => MarketListPage(shellRenderMode: shellRenderMode),
-          tabletBuilder: (_) => const MarketsTabletPage(),
-        ),
       },
     ),
     GoRoute(

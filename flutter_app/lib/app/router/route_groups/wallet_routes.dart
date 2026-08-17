@@ -3,7 +3,6 @@ import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_add_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/address_book_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/assets/asset_detail_page.dart';
@@ -57,13 +56,11 @@ List<RouteBase> walletRoutes(
       path: AppRoutePaths.wallet,
       name: AppRouteNames.sc135Wallet,
       builder: (_, _) => switch (surface) {
-        AppSurface.phone => WalletPage(shellRenderMode: shellRenderMode),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => WalletPage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const WalletTabletPage(),
-        AppSurface.web => WalletPage(shellRenderMode: shellRenderMode),
-        null => ResponsiveSurfacePage(
-          phoneBuilder: (_) => WalletPage(shellRenderMode: shellRenderMode),
-          tabletBuilder: (_) => const WalletTabletPage(),
-        ),
       },
     ),
     GoRoute(

@@ -33,8 +33,8 @@ GoRouter createAppRouter({
     },
     routes: [
       // Explicit surface routers are fully independent. The null surface is
-      // retained only for the public compatibility API and keeps its
-      // responsive phone/tablet shell behavior for existing callers and QA.
+      // the public compatibility API of createAppRouter and renders the
+      // Phone composition at every viewport width (no runtime dispatch).
       ...topLevelRoutes(shellRenderMode, surface: surface),
       _appShellRoute(shellRenderMode, surface: surface),
     ],
@@ -61,7 +61,7 @@ ShellRoute _appShellRoute(
           }
 
           final appShell = switch (surface) {
-            AppSurface.phone => PhoneAppShell(
+            AppSurface.phone || null => PhoneAppShell(
               renderMode: shellRenderMode,
               currentPath: state.uri.path,
               activeDestination: activeDestination,
@@ -80,15 +80,6 @@ ShellRoute _appShellRoute(
             ),
             AppSurface.web => WebAppShell(
               renderMode: shellRenderMode,
-              activeDestination: activeDestination,
-              notificationBadgeCount: notificationBadgeCount,
-              statusBarTime: statusBarTime,
-              onDestinationSelected: onDestinationSelected,
-              child: child,
-            ),
-            null => VitAppShell(
-              renderMode: shellRenderMode,
-              currentPath: state.uri.path,
               activeDestination: activeDestination,
               notificationBadgeCount: notificationBadgeCount,
               statusBarTime: statusBarTime,

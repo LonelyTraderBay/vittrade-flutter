@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/edit_profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/activity_log_page.dart';
@@ -32,13 +31,11 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profile,
       name: AppRouteNames.sc156Profile,
       builder: (_, _) => switch (surface) {
-        AppSurface.phone => ProfilePage(shellRenderMode: shellRenderMode),
+        // Web surface composition is migrated in P7.
+        AppSurface.phone ||
+        AppSurface.web ||
+        null => ProfilePage(shellRenderMode: shellRenderMode),
         AppSurface.tablet => const ProfileTabletPage(),
-        AppSurface.web => ProfilePage(shellRenderMode: shellRenderMode),
-        null => ResponsiveSurfacePage(
-          phoneBuilder: (_) => ProfilePage(shellRenderMode: shellRenderMode),
-          tabletBuilder: (_) => const ProfileTabletPage(),
-        ),
       },
     ),
     GoRoute(

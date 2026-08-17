@@ -1,3 +1,3 @@
 module,classification,route_path_symbol,route_path_token,route_name_symbol,route_name_token,builder_evidence,source_file,source_line
-home,real_page,AppRoutePaths.home,home,AppRouteNames.sc007Home,sc007Home,switch,lib/app/router/route_groups/home_routes.dart,19
-home,real_page,AppRoutePaths.news,news,AppRouteNames.sc047News,sc047News,switch,lib/app/router/route_groups/home_routes.dart,32
+home,real_page,AppRoutePaths.home,home,AppRouteNames.sc007Home,sc007Home,switch,lib/app/router/route_groups/home_routes.dart,18
+home,real_page,AppRoutePaths.news,news,AppRouteNames.sc047News,sc047News,switch,lib/app/router/route_groups/home_routes.dart,27

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/device_metrics.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_app_shell.dart';
+import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_auto_hide_header_scaffold.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
@@ -220,7 +220,7 @@ Widget _scaffoldHarness({
   );
 
   final home = useShell
-      ? VitAppShell(renderMode: renderMode, showBottomNav: true, child: page)
+      ? PhoneAppShell(renderMode: renderMode, showBottomNav: true, child: page)
       : page;
 
   return MaterialApp(home: home);

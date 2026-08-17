@@ -60,5 +60,3 @@ class AuthRouteShell extends StatelessWidget {
     );
   }
 }
-
-final GoRouter appRouter = createAppRouter();

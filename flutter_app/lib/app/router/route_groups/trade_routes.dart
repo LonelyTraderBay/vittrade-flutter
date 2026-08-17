@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/bootstrap/responsive_surface_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
@@ -39,22 +38,12 @@ List<RouteBase> tradeRoutes(
           state.uri.queryParameters['side'],
         );
         return switch (surface) {
-          AppSurface.phone => TradePage(
+          // Web surface composition is migrated in P7.
+          AppSurface.phone || AppSurface.web || null => TradePage(
             initialSide: initialSide,
             shellRenderMode: shellRenderMode,
           ),
           AppSurface.tablet => TradeTabletPage(initialSide: initialSide),
-          AppSurface.web => TradePage(
-            initialSide: initialSide,
-            shellRenderMode: shellRenderMode,
-          ),
-          null => ResponsiveSurfacePage(
-            phoneBuilder: (_) => TradePage(
-              initialSide: initialSide,
-              shellRenderMode: shellRenderMode,
-            ),
-            tabletBuilder: (_) => TradeTabletPage(initialSide: initialSide),
-          ),
         };
       },
     ),

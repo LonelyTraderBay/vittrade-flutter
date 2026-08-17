@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/device_metrics.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_app_shell.dart';
+import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -112,7 +112,7 @@ void main() {
     expect(find.text('0'), findsNothing);
   });
 
-  testWidgets('VitAppShell native bottom nav hides and restores on scroll', (
+  testWidgets('PhoneAppShell native bottom nav hides and restores on scroll', (
     WidgetTester tester,
   ) async {
     await _setPhoneViewport(tester);
@@ -131,7 +131,7 @@ void main() {
     expect(_nativeBottomNavOffset(tester), Offset.zero);
   });
 
-  testWidgets('VitAppShell restores native bottom nav on route change', (
+  testWidgets('PhoneAppShell restores native bottom nav on route change', (
     WidgetTester tester,
   ) async {
     await _setPhoneViewport(tester);
@@ -150,7 +150,7 @@ void main() {
     expect(_nativeBottomNavOffset(tester), Offset.zero);
   });
 
-  testWidgets('VitAppShell visual QA bottom nav does not auto-hide', (
+  testWidgets('PhoneAppShell visual QA bottom nav does not auto-hide', (
     WidgetTester tester,
   ) async {
     await _setPhoneViewport(tester);
@@ -176,11 +176,9 @@ const _shellScrollKey = Key('vit_app_shell_scroll_test');
 
 void _noop() {}
 
-/// These bottom-nav-specific assertions need `VitAppShell` below
-/// `AppBreakpoints.tablet` (600) — Flutter's default test viewport
-/// (800x600 logical) is at/above that, which would otherwise silently
-/// render the tablet nav rail instead of the bottom nav these tests assert
-/// on.
+/// These bottom-nav assertions target the phone shell composition — pin a
+/// realistic phone viewport instead of Flutter's default 800x600 logical
+/// test surface so nav metrics match what devices actually render.
 Future<void> _setPhoneViewport(WidgetTester tester) async {
   tester.view.devicePixelRatio = 1;
   tester.view.physicalSize = const Size(440, 956);
@@ -190,7 +188,7 @@ Future<void> _setPhoneViewport(WidgetTester tester) async {
 
 Offset _nativeBottomNavOffset(WidgetTester tester) {
   return tester
-      .widget<AnimatedSlide>(find.byKey(VitAppShell.bottomNavHostKey))
+      .widget<AnimatedSlide>(find.byKey(PhoneAppShell.bottomNavHostKey))
       .offset;
 }
 
@@ -199,7 +197,7 @@ Widget _shellWithScrollableContent({
   String currentPath = '/home',
 }) {
   return MaterialApp(
-    home: VitAppShell(
+    home: PhoneAppShell(
       renderMode: renderMode,
       currentPath: currentPath,
       child: ListView.builder(

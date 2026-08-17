@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-08-15 (Codex workspace hardening; GĐ4-S4, ARCH-A4, DOC-D4)
+**Last Updated:** 2026-08-17 (dọn compat null-surface; UI Rules đồng bộ kiến trúc surface router)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -144,11 +144,22 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   and the exact command to check it locally — see
   `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` before
   creating a new page.
-- Phone-first at 360px is the baseline; `VitAppShell` is tablet-adaptive
-  app-wide from `AppBreakpoints.tablet` (600px, nav rail instead of bottom
-  nav). Per-screen tablet layout rolls out module by module, starting with
-  Home (SC-007, `HomeTabletPage`) — a module without its own tablet layout
-  yet still renders its existing phone content inside the tablet shell.
+- Phone-first at 360px is the baseline. The surface (Phone/Tablet/Web) is
+  resolved **once at bootstrap** by `AppSurfaceResolver`
+  (`lib/app/bootstrap/app_surface.dart`): web when `kIsWeb`, else tablet at
+  `AppBreakpoints.tablet` (600px), else phone. Each surface owns its router
+  (`lib/app/router/{phone,tablet,web}/`) and shell
+  (`lib/app/shell/{phone,tablet,web}/`); pages and shells never dispatch on
+  width at runtime. `createAppRouter()` without `surface:` renders the Phone
+  composition at every width — it is the compat API for tests, not a
+  responsive mode.
+- Per-feature tablet composition rolls out module by module (done: auth,
+  home, markets hub, trade, wallet, profile, và các trang tablet dùng chung
+  của P2P trong `p2p_core`). A module without its own tablet composition
+  routes to the `VitTabletUtilityPage` placeholder (`P2PTabletUtilityPage`
+  cho P2P) — tablet surface **không** render lại phone page. Real web pages
+  exist only for auth and home; mọi web route khác là placeholder
+  `VitWebUtilityPage`.
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens) live in

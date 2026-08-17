@@ -4,7 +4,7 @@ app,flutter_app/lib/app/router/route_error_page.dart,29,route_error_page.dart,V�
 app,flutter_app/lib/app/router/route_groups/auth_routes.dart,192,auth_routes.dart,Bước hiện tại | Trạng thái | Bước tiếp theo | Tiếp tục thiết lập,context.go,AppRoutePaths.home,/home,switch (/home),
 app,flutter_app/lib/app/router/route_groups/auth_routes.dart,216,auth_routes.dart,Trạng thái | Thao tác | Hệ thống đang bảo trì | Bảo trì · trạng thái dịch vụ,context.go,AppRoutePaths.home,/home,switch (/home),
 app,flutter_app/lib/app/router/route_groups/auth_routes.dart,241,auth_routes.dart,Trạng thái | Bước tiếp theo | Xem hướng dẫn cập nhật | Cần cập nhật ứng dụng,context.go,AppRoutePaths.home,/home,switch (/home),
-app,flutter_app/lib/app/router/route_groups/home_routes.dart,50,home_routes.dart,Nguồn tin | Phạm vi | Trạng thái | Tin tức thị trường,context.go,AppRoutePaths.home,/home,switch (/home),
+app,flutter_app/lib/app/router/route_groups/home_routes.dart,45,home_routes.dart,Nguồn tin | Phạm vi | Trạng thái | Tin tức thị trường,context.go,AppRoutePaths.home,/home,switch (/home),
 app,flutter_app/lib/app/router/route_groups/root_routes.dart,60,root_routes.dart,,context.go,destination.routePath,,,dynamic_route_expression
 app,flutter_app/lib/app/router/route_groups/surface_route_helpers.dart,45,surface_route_helpers.dart,Mã màn hình | Trạng thái | Bước tiếp theo,context.go,backPath,,,dynamic_route_expression
 app,flutter_app/lib/app/router/route_groups/surface_route_helpers.dart,65,surface_route_helpers.dart,Mã màn hình | Trạng thái | Bước tiếp theo,context.go,backPath,,,dynamic_route_expression

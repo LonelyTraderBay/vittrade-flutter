@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
@@ -37,7 +38,10 @@ void main() {
       ProviderScope(
         overrides: [homeRepositoryProvider.overrideWithValue(repository)],
         child: VitTradeApp(
-          routerConfig: createAppRouter(initialLocation: AppRoutePaths.home),
+          routerConfig: createAppRouter(
+            surface: AppSurface.tablet,
+            initialLocation: AppRoutePaths.home,
+          ),
         ),
       ),
     );
@@ -217,10 +221,11 @@ void main() {
   testWidgets('SC-007 shell is overflow-safe at 600px', (tester) async {
     await pumpTabletHome(tester, size: const Size(600, 820));
     expect(tester.takeException(), isNull);
-    // The persistent 96px rail leaves 504px for page content, so the
-    // dispatcher correctly keeps the phone reference at this edge width.
-    expect(find.byType(HomePage), findsOneWidget);
-    expect(find.byType(HomeTabletPage), findsNothing);
+    // Từ 600px bootstrap chọn surface Tablet: trang tablet tự fallback một
+    // cột khi nội dung hẹp (VitTwoColumnTabletDashboard dưới 900px) — không
+    // còn chế độ mixed tablet-shell + phone-content ở cạnh breakpoint.
+    expect(find.byType(HomeTabletPage), findsOneWidget);
+    expect(find.byType(HomePage), findsNothing);
   });
 
   testWidgets('SC-007 tablet page starts safely once content reaches 600px', (

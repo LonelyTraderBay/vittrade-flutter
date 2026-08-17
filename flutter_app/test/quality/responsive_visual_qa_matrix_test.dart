@@ -2,6 +2,7 @@
 // Guardrail này có lý do tồn tại riêng - đọc commit gốc ở trên trước khi nới lỏng hoặc xóa.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
@@ -48,9 +49,17 @@ Future<void> _scanRoute(
   FlutterError.onError = errors.add;
 
   try {
+    // Surface được pin theo viewport (bootstrap resolver dùng cùng ngưỡng
+    // AppBreakpoints.tablet) — QA matrix không phụ thuộc compat dispatch.
+    final surface = AppBreakpoints.isTablet(viewport.width.toDouble())
+        ? AppSurface.tablet
+        : AppSurface.phone;
     await tester.pumpWidget(
       VitTradeApp(
-        routerConfig: createAppRouter(initialLocation: route.location),
+        routerConfig: createAppRouter(
+          surface: surface,
+          initialLocation: route.location,
+        ),
       ),
     );
     await tester.pump();
@@ -66,16 +75,23 @@ Future<void> _scanRoute(
           widget is Semantics && widget.properties.label == route.semanticLabel,
       description: route.semanticLabel,
     );
-    if (semantics.evaluate().isEmpty) {
-      failures.add(
-        '- ${route.name} ${viewport.label}: missing ${route.semanticLabel}',
-      );
+    // Ở viewport tablet, chỉ các route đã có composition tablet thật expose
+    // cùng semantic label như phone. Route còn placeholder
+    // (VitTabletUtilityPage/P2PTabletUtilityPage) được đảm nhiệm bởi
+    // tablet_utility_route_test.dart — matrix vẫn quét layout error và nav
+    // chrome cho mọi route.
+    final isTabletViewport = AppBreakpoints.isTablet(viewport.width.toDouble());
+    if (!isTabletViewport || route.hasTabletComposition) {
+      if (semantics.evaluate().isEmpty) {
+        failures.add(
+          '- ${route.name} ${viewport.label}: missing ${route.semanticLabel}',
+        );
+      }
     }
 
-    // Above the tablet breakpoint, VitAppShell renders VitNavigationRail
+    // Above the tablet breakpoint, TabletAppShell renders VitNavigationRail
     // instead of VitBottomNav — check whichever chrome this viewport should
     // produce, not both at once.
-    final isTabletViewport = AppBreakpoints.isTablet(viewport.width.toDouble());
     final navChrome = isTabletViewport
         ? find.byType(VitNavigationRail)
         : find.byType(VitBottomNav);
@@ -133,14 +149,29 @@ const _responsiveViewports = [
 ];
 
 final _priorityRoutes = [
-  const _PriorityRoute('Home', AppRoutePaths.home, 'Trang chủ'),
-  const _PriorityRoute('Markets', AppRoutePaths.markets, 'Thị trường'),
+  const _PriorityRoute(
+    'Home',
+    AppRoutePaths.home,
+    'Trang chủ',
+    hasTabletComposition: true,
+  ),
+  const _PriorityRoute(
+    'Markets',
+    AppRoutePaths.markets,
+    'Thị trường',
+    hasTabletComposition: true,
+  ),
   _PriorityRoute(
     'Pair Detail',
     AppRoutePaths.pairDetail('btcusdt'),
     'Chi tiết cặp giao dịch',
   ),
-  const _PriorityRoute('Trade', AppRoutePaths.trade, 'Giao dịch Spot'),
+  const _PriorityRoute(
+    'Trade',
+    AppRoutePaths.trade,
+    'Giao dịch Spot',
+    hasTabletComposition: true,
+  ),
   const _PriorityRoute(
     'Orders History',
     AppRoutePaths.tradeOrdersHistory,
@@ -150,11 +181,13 @@ final _priorityRoutes = [
     'Order Receipt',
     AppRoutePaths.tradeOrderReceipt,
     'Chi tiết lệnh giao dịch',
+    hasTabletComposition: true,
   ),
   const _PriorityRoute(
     'Wallet',
     AppRoutePaths.wallet,
     'Ví - số dư minh bạch, bảo mật đa lớp',
+    hasTabletComposition: true,
   ),
   _PriorityRoute(
     'Asset Detail',
@@ -207,6 +240,7 @@ final _priorityRoutes = [
     'Profile',
     AppRoutePaths.profile,
     'Trang tài khoản: hồ sơ cá nhân, giới thiệu bạn bè và VIP',
+    hasTabletComposition: true,
   ),
   const _PriorityRoute(
     'Prediction Home',
@@ -331,9 +365,19 @@ class _ResponsiveViewport {
 }
 
 class _PriorityRoute {
-  const _PriorityRoute(this.name, this.location, this.semanticLabel);
+  const _PriorityRoute(
+    this.name,
+    this.location,
+    this.semanticLabel, {
+    this.hasTabletComposition = false,
+  });
 
   final String name;
   final String location;
   final String semanticLabel;
+
+  /// Composition tablet của route expose cùng semantic label như phone
+  /// (các wallet tablet detail page dùng label dạng '... trên tablet' nên
+  /// không thuộc nhóm này).
+  final bool hasTabletComposition;
 }

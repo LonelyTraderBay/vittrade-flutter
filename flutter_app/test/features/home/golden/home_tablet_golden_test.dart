@@ -1,7 +1,7 @@
-// Tablet visual reference for the Home route. The 600px frame intentionally
-// captures the shell's edge behavior: the 96px rail leaves 504px of content,
-// so the phone reference remains the safe layout until the page content is
-// 600px wide. The other frames exercise the dedicated Home Tablet page.
+// Tablet visual reference for the Home route. Every frame pins
+// AppSurface.tablet: at 600px the tablet page renders its single-column
+// fallback (VitTwoColumnTabletDashboard dưới 900px), wider frames exercise
+// the dedicated Home Tablet composition.
 //
 // Goldens are generated on Windows with the repository Flutter version:
 // `flutter test --update-goldens test/features/home/golden/home_tablet_golden_test.dart`.
@@ -10,6 +10,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/home/data/providers/home_repository_provider.dart';
@@ -32,7 +33,10 @@ void main() {
           ),
         ],
         child: VitTradeApp(
-          routerConfig: createAppRouter(initialLocation: AppRoutePaths.home),
+          routerConfig: createAppRouter(
+            surface: AppSurface.tablet,
+            initialLocation: AppRoutePaths.home,
+          ),
         ),
       ),
     );

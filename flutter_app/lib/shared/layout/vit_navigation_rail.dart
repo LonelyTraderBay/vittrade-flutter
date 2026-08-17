@@ -9,8 +9,9 @@ import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 /// Tablet-width sibling of [VitBottomNav]: the same five destinations and
 /// the same [VitBottomNavDestinationVisuals] icon/label source, rendered as
 /// a persistent left-side rail instead of a floating bottom capsule.
-/// [VitAppShell] picks between the two by screen width — the navigation
-/// model (`activeDestination`, `onDestinationSelected`) is identical.
+/// `TabletAppShell`/`WebAppShell` host this rail while `PhoneAppShell` hosts
+/// the bottom nav — the navigation model (`activeDestination`,
+/// `onDestinationSelected`) is identical.
 class VitNavigationRail extends StatelessWidget {
   const VitNavigationRail({
     super.key,
@@ -28,8 +29,9 @@ class VitNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // No internal SafeArea — matches VitBottomNav's own pattern of leaving
-    // safe-area handling to the caller (VitAppShell), since the correct
-    // inset side (left vs bottom) depends on which chrome is active.
+    // safe-area handling to the caller (the per-surface app shell), since
+    // the correct inset side (left vs bottom) depends on which chrome is
+    // active.
     return Material(
       color: AppColors.surface,
       child: SizedBox(
