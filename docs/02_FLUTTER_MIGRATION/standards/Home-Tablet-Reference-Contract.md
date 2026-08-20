@@ -71,7 +71,7 @@ copy, product content, or business data a template for other screens.
 | Empty | Shared `VitEmptyState` inside the affected market/recent section; keep the rest of the dashboard usable. |
 | Error | Shared `HomeErrorContent` / `VitErrorState` with an explicit retry action. |
 | Offline | Fail closed to the retryable error surface until the repository exposes a typed connectivity error; never fabricate balances or market data. |
-| Refresh | Re-invalidate `homeSnapshotProvider`, await its future, and preserve the current tab/balance-visibility UI state. |
+| Refresh | Pull-to-refresh on any dashboard column (the single-column fallback included), wired through `VitTwoColumnTabletDashboard.onRefresh`. Re-invalidate `homeSnapshotProvider`, await its future, and preserve the current tab/balance-visibility UI state. |
 
 ## 8. Typography hierarchy
 

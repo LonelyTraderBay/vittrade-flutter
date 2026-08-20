@@ -365,12 +365,12 @@ earn_staking,feature_widget,flutter_app/lib/features/earn_staking/presentation/w
 enterprise_states,feature_widget,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_hero_tabs.dart,0,0,0,0,0,0,0,0,no,-
 enterprise_states,feature_widget,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_preview_kit.dart,0,0,0,0,0,0,0,0,no,-
 enterprise_states,feature_widget,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_references.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_more_products_sheet.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_header.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_more_products_sheet.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_products_section.dart,0,0,0,0,0,0,0,0,no,-
@@ -379,7 +379,6 @@ home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/hom
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_formatters.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick

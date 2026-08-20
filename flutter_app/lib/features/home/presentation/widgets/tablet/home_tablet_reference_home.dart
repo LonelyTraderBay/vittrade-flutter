@@ -31,6 +31,9 @@ class HomeTabletReferenceHome extends StatelessWidget {
     required this.onDismissAnnouncement,
     required this.onDismissNextAction,
     required this.onMarketTabChanged,
+    this.onRefresh,
+    this.moreActionCount = 0,
+    this.onMore,
   });
 
   final HomeSnapshot snapshot;
@@ -45,6 +48,18 @@ class HomeTabletReferenceHome extends StatelessWidget {
   final ValueChanged<HomeAnnouncement> onDismissAnnouncement;
   final VoidCallback? onDismissNextAction;
   final ValueChanged<String> onMarketTabChanged;
+
+  /// Pull-to-refresh for both dashboard columns and the single-column
+  /// fallback (see [VitTwoColumnTabletDashboard.onRefresh]).
+  final RefreshCallback? onRefresh;
+
+  /// «Xem thêm (+N)» overflow count for the quick-actions header; zero
+  /// hides the action.
+  final int moreActionCount;
+
+  /// Opens the flat product catalog sheet (Margin, Copy Trade, Bot, …) that
+  /// does not fit the sidebar grid.
+  final VoidCallback? onMore;
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +100,9 @@ class HomeTabletReferenceHome extends StatelessWidget {
       HomeProductsSection(
         quickActions: snapshot.quickActions,
         maxVisibleQuickActions: snapshot.quickActions.length,
-        moreActionCount: 0,
+        moreActionCount: moreActionCount,
         onNavigate: onNavigate,
-        onMore: null,
+        onMore: onMore,
         density: VitDensity.standard,
       ),
       HomeRecentProductsSection(
@@ -102,6 +117,7 @@ class HomeTabletReferenceHome extends StatelessWidget {
       key: const Key('sc007_home_tablet_dashboard'),
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
+      onRefresh: onRefresh,
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
       secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
     );

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
@@ -142,4 +144,102 @@ void main() {
       );
     },
   );
+
+  testWidgets('a null onRefresh keeps the dashboard non-refreshable', (
+    tester,
+  ) async {
+    await pumpDashboard(tester, 1000);
+
+    expect(find.byType(RefreshIndicator), findsNothing);
+  });
+
+  testWidgets('onRefresh wraps both two-column scrollables and fires on an '
+      'overscroll in either column', (tester) async {
+    final refreshGate = Completer<void>();
+    var refreshCalls = 0;
+
+    Future<void> pumpWithRefresh(double width) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = Size(width, 900);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: VitTwoColumnTabletDashboard(
+              onRefresh: () async {
+                refreshCalls++;
+                await refreshGate.future;
+              },
+              primaryChildren: const [Text('Primary content')],
+              secondaryChildren: const [Text('Secondary content')],
+            ),
+          ),
+        ),
+      );
+    }
+
+    await pumpWithRefresh(1000);
+
+    expect(find.byType(RefreshIndicator), findsNWidgets(2));
+
+    // Both columns hold less content than the viewport, so the pull only
+    // works because the refreshable path scrolls always-scrollable.
+    await tester.fling(
+      find.text('Primary content'),
+      const Offset(0, 400),
+      1000,
+    );
+    await tester.pump();
+    expect(find.byType(RefreshProgressIndicator), findsOneWidget);
+
+    refreshGate.complete();
+    await tester.pumpAndSettle();
+    expect(refreshCalls, 1);
+
+    await tester.fling(
+      find.text('Secondary content'),
+      const Offset(0, 400),
+      1000,
+    );
+    await tester.pump();
+    await tester.pumpAndSettle();
+    expect(refreshCalls, 2);
+  });
+
+  testWidgets('onRefresh also covers the single-column fallback', (
+    tester,
+  ) async {
+    var refreshCalls = 0;
+
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(700, 900);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: VitTwoColumnTabletDashboard(
+            onRefresh: () async => refreshCalls++,
+            primaryChildren: const [Text('Primary content')],
+            secondaryChildren: const [Text('Secondary content')],
+          ),
+        ),
+      ),
+    );
+
+    expect(find.byType(RefreshIndicator), findsOneWidget);
+
+    await tester.fling(
+      find.text('Primary content'),
+      const Offset(0, 400),
+      1000,
+    );
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    expect(refreshCalls, 1);
+  });
 }

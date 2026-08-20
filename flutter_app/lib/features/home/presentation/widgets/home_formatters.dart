@@ -1,14 +1,16 @@
-// Phone-specific home composition helpers.
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Shared quick-action tile builder used by both the home grid
-/// (`HomeQuickActionsGrid`) and the "more products" sheet
-/// (`HomeMoreProductsSheet`) so the icon/accent/badge mapping from
-/// [HomeQuickAction] to [VitServiceTile] is defined in exactly one place.
+/// Home composition helpers shared by the phone and tablet surfaces — one
+/// definition so the two compositions cannot drift apart.
+
+/// Shared quick-action tile builder used by the home grids (phone and
+/// tablet) and the "more products" sheet (`HomeMoreProductsSheet`) so the
+/// icon/accent/badge mapping from [HomeQuickAction] to [VitServiceTile] is
+/// defined in exactly one place.
 Widget buildHomeQuickActionTile(
   HomeQuickAction action,
   VitServiceTileDensity tileDensity,

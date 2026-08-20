@@ -81,19 +81,9 @@ class _HomePageState extends ConsumerState<HomePage> {
         )
         .toList(growable: false);
     announcements.sort(
-      (a, b) =>
-          _announcementSortKey(a.type).compareTo(_announcementSortKey(b.type)),
+      (a, b) => a.type.homePriority.compareTo(b.type.homePriority),
     );
     return announcements;
-  }
-
-  int _announcementSortKey(HomeAnnouncementType type) {
-    return switch (type) {
-      HomeAnnouncementType.security => 0,
-      HomeAnnouncementType.risk => 1,
-      HomeAnnouncementType.campaign => 2,
-      HomeAnnouncementType.info => 3,
-    };
   }
 
   HomeDensityVariant _homeDensityVariant(double screenWidth) {

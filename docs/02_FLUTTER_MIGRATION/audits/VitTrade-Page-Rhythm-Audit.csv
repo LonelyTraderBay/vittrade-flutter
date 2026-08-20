@@ -495,12 +495,12 @@ enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widget
 enterprise_states,flutter_app/lib/features/enterprise_states/presentation/widgets/enterprise_states_references.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/phone/pages/home_page_state.dart,compact,compact,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,compact,relaxed,0,,0,,0,0,pass
+home,flutter_app/lib/features/home/presentation/widgets/home_formatters.dart,standard,,0,,0,,0,0,pass
+home,flutter_app/lib/features/home/presentation/widgets/home_more_products_sheet.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/home_tablet_reference_home.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_announcement_banner.dart,standard,,0,,0,,0,0,pass
-home,flutter_app/lib/features/home/presentation/widgets/phone/home_formatters.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_header.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_market_ticker_section.dart,standard,,0,,0,,0,0,pass
-home,flutter_app/lib/features/home/presentation/widgets/phone/home_more_products_sheet.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_next_action_section.dart,standard,,0,,0,,1,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_products_section.dart,standard,,0,,0,,1,0,pass
@@ -509,7 +509,6 @@ home,flutter_app/lib/features/home/presentation/widgets/phone/home_scroll_shell.
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,compact,compact,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,standard,,0,,0,,1,0,pass
-home,flutter_app/lib/features/home/presentation/widgets/tablet/home_formatters.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,standard,,0,,0,,1,0,pass
@@ -517,7 +516,7 @@ home,flutter_app/lib/features/home/presentation/widgets/tablet/home_next_action_
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_products_section.dart,standard,,0,,0,,1,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,standard,,0,,0,,1,0,pass
-home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,compact,compact,0,,0,,0,0,pass
+home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart,standard,,0,,0,,0,0,pass
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart,standard,,0,,0,,0,0,pass
 launchpad,flutter_app/lib/features/launchpad/presentation/phone/pages/bridge/launchpad_bridge_compare_page.dart,standard,standard,0,,0,,0,0,pass

@@ -12,6 +12,18 @@ extension HomeAnnouncementTypeX on HomeAnnouncementType {
       HomeAnnouncementType.info => false,
     };
   }
+
+  /// Sort key for the home carousel: security and risk surface before
+  /// campaigns. One shared definition so the phone and tablet compositions
+  /// cannot drift apart (locked by tests on both surfaces).
+  int get homePriority {
+    return switch (this) {
+      HomeAnnouncementType.security => 0,
+      HomeAnnouncementType.risk => 1,
+      HomeAnnouncementType.campaign => 2,
+      HomeAnnouncementType.info => 3,
+    };
+  }
 }
 
 /// A single announcement banner shown in the home screen carousel.

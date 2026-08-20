@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
-import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_formatters.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 /// Tablet main-column equivalent of Home's private phone market section.

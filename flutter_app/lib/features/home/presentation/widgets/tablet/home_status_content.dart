@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-// Mirrors the loaded page's block order (portfolio, next action, products
-// grid, recent products, market) so the first paint doesn't pop/reflow once
-// data resolves.
+// Mirrors the loaded dashboard's composition — primary: portfolio, ticker,
+// watchlist; sidebar: next action, quick actions, recent — through the same
+// shared scaffold, so resolving data never reflows the page shape (including
+// the single-column → two-column switch at the dashboard's own threshold).
 class HomeLoadingContent extends StatelessWidget {
-  const HomeLoadingContent({super.key});
+  const HomeLoadingContent({super.key, this.onRefresh});
+
+  final RefreshCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
-    return const VitPageContent(
-      padding: VitContentPadding.compact,
-      rhythm: VitPageRhythm.compact,
-      children: [
+    return VitTwoColumnTabletDashboard(
+      onRefresh: onRefresh,
+      primaryChildren: const [
         HomePortfolioSkeleton(),
+        HomeMarketTickerSkeleton(),
+        HomeMarketSkeleton(),
+      ],
+      secondaryChildren: const [
         HomeNextActionSkeleton(),
         HomeProductsSkeleton(),
         HomeRecentProductsSkeleton(),
-        HomeMarketSkeleton(),
       ],
+      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
+      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
     );
   }
 }
@@ -120,23 +126,58 @@ class HomeNextActionSkeleton extends StatelessWidget {
 }
 
 class HomeProductsSkeleton extends StatelessWidget {
-  const HomeProductsSkeleton({
-    super.key,
-    this.crossAxisCount = AppSpacing.serviceTileCrossAxisCount,
-  });
-
-  final int crossAxisCount;
+  const HomeProductsSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return VitActionTileGrid(
       density: VitDensity.compact,
       itemCount: HomeSpacingTokens.homeQuickActionCompactCount,
-      crossAxisCount: crossAxisCount,
+      crossAxisCount: AppSpacing.serviceTileCrossAxisCount,
       itemBuilder: (context, index, tileDensity) => const VitSkeleton(
         width: double.infinity,
         height: double.infinity,
         borderRadius: AppRadii.cardRadius,
+      ),
+    );
+  }
+}
+
+/// Matches the loaded ticker strip's three top-mover cards so the primary
+/// column keeps its block order while loading.
+class HomeMarketTickerSkeleton extends StatelessWidget {
+  const HomeMarketTickerSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: SharedSpacingTokens.homeMarketTickerCardMinHeight,
+      child: Row(
+        children: [
+          Expanded(
+            child: VitSkeleton(
+              width: double.infinity,
+              height: double.infinity,
+              borderRadius: AppRadii.cardRadius,
+            ),
+          ),
+          SizedBox(width: AppSpacing.x2),
+          Expanded(
+            child: VitSkeleton(
+              width: double.infinity,
+              height: double.infinity,
+              borderRadius: AppRadii.cardRadius,
+            ),
+          ),
+          SizedBox(width: AppSpacing.x2),
+          Expanded(
+            child: VitSkeleton(
+              width: double.infinity,
+              height: double.infinity,
+              borderRadius: AppRadii.cardRadius,
+            ),
+          ),
+        ],
       ),
     );
   }

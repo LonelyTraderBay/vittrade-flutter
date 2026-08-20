@@ -34,9 +34,9 @@ void main() {
       // is asserted directly.
       'lib/features/home/presentation/widgets/phone/home_products_section.dart':
           'buildHomeQuickActionTile(',
-      'lib/features/home/presentation/widgets/phone/home_more_products_sheet.dart':
+      'lib/features/home/presentation/widgets/home_more_products_sheet.dart':
           'buildHomeQuickActionTile(',
-      'lib/features/home/presentation/widgets/phone/home_formatters.dart':
+      'lib/features/home/presentation/widgets/home_formatters.dart':
           'VitServiceTile.fromAction(',
       'lib/features/home/presentation/widgets/phone/home_portfolio_card.dart':
           'VitBalanceBreakdownRow(',

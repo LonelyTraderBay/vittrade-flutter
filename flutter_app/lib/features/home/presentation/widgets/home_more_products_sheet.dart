@@ -1,14 +1,14 @@
-// Phone-specific home product sheet.
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
-import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
-import 'package:vit_trade_flutter/features/home/presentation/widgets/phone/home_formatters.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Flat catalog sheet — no group headers on Home or in this sheet.
+/// Flat catalog sheet — no group headers on Home or in this sheet. Shared by
+/// the phone and tablet surfaces; each call site constrains the sheet to its
+/// own surface's comfortable width.
 class HomeMoreProductsSheet extends StatelessWidget {
   const HomeMoreProductsSheet({
     super.key,
@@ -17,6 +17,11 @@ class HomeMoreProductsSheet extends StatelessWidget {
     required this.density,
   });
 
+  /// Same key value the phone page exposes as
+  /// `HomePage.moreProductsSheetKey` — kept identical so surface-agnostic
+  /// tests can find the sheet regardless of which page opened it.
+  static const Key sheetKey = Key('sc007_home_more_products_sheet');
+
   final List<HomeQuickAction> actions;
   final ValueChanged<String> onNavigate;
   final VitDensity density;
@@ -24,7 +29,7 @@ class HomeMoreProductsSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitSheetPanel(
-      key: HomePage.moreProductsSheetKey,
+      key: sheetKey,
       title: 'Thêm hành động',
       child: VitActionTileGrid(
         density: density,

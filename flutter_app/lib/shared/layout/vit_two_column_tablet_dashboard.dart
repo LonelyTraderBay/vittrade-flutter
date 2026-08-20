@@ -80,6 +80,7 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
     super.key,
     required this.primaryChildren,
     required this.secondaryChildren,
+    this.onRefresh,
     this.twoColumnMinWidth = TabletDashboardWidths.twoColumnMinWidth,
     this.primaryColumnMaxWidth = TabletDashboardWidths.primaryColumnMaxWidth,
     this.secondaryColumnMaxWidth =
@@ -96,6 +97,15 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
   /// Sidebar-panel content. Framed in a `VitCard` at the two-column width
   /// (R7); appended after [primaryChildren] in the single-column fallback.
   final List<Widget> secondaryChildren;
+
+  /// Optional pull-to-refresh callback (the tablet equivalent of the phone
+  /// scroll-shell's `RefreshIndicator`). When non-null, every scrollable
+  /// path — both two-column columns and the single-column fallback — wraps
+  /// in a `RefreshIndicator` and scrolls always-scrollable so the overscroll
+  /// gesture works even when a column's content is shorter than the
+  /// viewport. Null (the default) keeps the historical non-refreshable
+  /// behavior for pages that have no refresh semantics.
+  final RefreshCallback? onRefresh;
 
   /// Below this content width, falls back to a single scrolling column
   /// (R3). Defaults to [TabletDashboardWidths.twoColumnMinWidth] — only
@@ -125,17 +135,26 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
   /// tablet root screens share one end-of-content standard.
   final double bottomContentInset;
 
+  /// Null keeps each column's default physics; a refreshable column must
+  /// always allow overscroll so the pull gesture works even when its content
+  /// is shorter than the viewport.
+  ScrollPhysics? get _physics =>
+      onRefresh == null ? null : const AlwaysScrollableScrollPhysics();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < twoColumnMinWidth) {
-          return SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: bottomContentInset),
-            child: VitPageContent(
-              padding: VitContentPadding.compact,
-              rhythm: VitPageRhythm.compact,
-              children: [...primaryChildren, ...secondaryChildren],
+          return _wrapRefresh(
+            SingleChildScrollView(
+              physics: _physics,
+              padding: EdgeInsets.only(bottom: bottomContentInset),
+              child: VitPageContent(
+                padding: VitContentPadding.compact,
+                rhythm: VitPageRhythm.compact,
+                children: [...primaryChildren, ...secondaryChildren],
+              ),
             ),
           );
         }
@@ -149,13 +168,16 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.only(bottom: bottomContentInset),
-                    child: VitPageContent(
-                      padding: VitContentPadding.relaxed,
-                      rhythm: VitPageRhythm.relaxed,
-                      customGap: primaryContentGap,
-                      children: primaryChildren,
+                  child: _wrapRefresh(
+                    SingleChildScrollView(
+                      physics: _physics,
+                      padding: EdgeInsets.only(bottom: bottomContentInset),
+                      child: VitPageContent(
+                        padding: VitContentPadding.relaxed,
+                        rhythm: VitPageRhythm.relaxed,
+                        customGap: primaryContentGap,
+                        children: primaryChildren,
+                      ),
                     ),
                   ),
                 ),
@@ -164,33 +186,36 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                 // own capped content ever uses.
                 SizedBox(
                   width: secondaryColumnMaxWidth,
-                  child: SingleChildScrollView(
-                    child: VitCard(
-                      variant: VitCardVariant.inner,
-                      radius: VitCardRadius.standard,
-                      padding: EdgeInsets.zero,
-                      // Inner-variant cards default to a borderless fill
-                      // (see VitCard._decoration) — fine for a card nested
-                      // inside another surface, but on its own against the
-                      // page background that fill alone reads too close in
-                      // value to register as a distinct sidebar panel (R7).
-                      // Confirmed on-device: the standard card border token
-                      // (AppColors.cardBorder, ~7% white) was tried first and
-                      // was imperceptible at this size against surface2, so
-                      // this uses the stronger, still-existing borderSolid
-                      // token (already used for the same "give this surface
-                      // a visible edge" purpose elsewhere, e.g.
-                      // two_fa_setup_backup.dart) — a call-site override, not
-                      // a change to any of the ~250 other inner-variant call
-                      // sites app-wide.
-                      borderColor: AppColors.borderSolid,
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: bottomContentInset),
-                        child: VitPageContent(
-                          padding: VitContentPadding.relaxed,
-                          rhythm: VitPageRhythm.relaxed,
-                          customGap: secondaryContentGap,
-                          children: secondaryChildren,
+                  child: _wrapRefresh(
+                    SingleChildScrollView(
+                      physics: _physics,
+                      child: VitCard(
+                        variant: VitCardVariant.inner,
+                        radius: VitCardRadius.standard,
+                        padding: EdgeInsets.zero,
+                        // Inner-variant cards default to a borderless fill
+                        // (see VitCard._decoration) — fine for a card nested
+                        // inside another surface, but on its own against the
+                        // page background that fill alone reads too close in
+                        // value to register as a distinct sidebar panel (R7).
+                        // Confirmed on-device: the standard card border token
+                        // (AppColors.cardBorder, ~7% white) was tried first and
+                        // was imperceptible at this size against surface2, so
+                        // this uses the stronger, still-existing borderSolid
+                        // token (already used for the same "give this surface
+                        // a visible edge" purpose elsewhere, e.g.
+                        // two_fa_setup_backup.dart) — a call-site override, not
+                        // a change to any of the ~250 other inner-variant call
+                        // sites app-wide.
+                        borderColor: AppColors.borderSolid,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: bottomContentInset),
+                          child: VitPageContent(
+                            padding: VitContentPadding.relaxed,
+                            rhythm: VitPageRhythm.relaxed,
+                            customGap: secondaryContentGap,
+                            children: secondaryChildren,
+                          ),
                         ),
                       ),
                     ),
@@ -202,5 +227,11 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _wrapRefresh(Widget scroll) {
+    final onRefresh = this.onRefresh;
+    if (onRefresh == null) return scroll;
+    return RefreshIndicator(onRefresh: onRefresh, child: scroll);
   }
 }
