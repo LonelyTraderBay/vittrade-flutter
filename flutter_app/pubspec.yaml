@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  go_router: ^17.3.0
+  go_router: ^17.5.0
   # DEP-LOCK: 3.4.x yêu cầu Dart SDK ^3.12 (Flutter 3.47) — toolchain dự án
   # (CI pin 3.41.9 + dev) còn Dart 3.11.5, solver sẽ fail nếu lock vượt 3.3.x
   # (PR Dependabot #104). Nới room khi nâng toolchain lên Dart >=3.12.
