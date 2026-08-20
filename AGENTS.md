@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-08-17 (dọn compat null-surface; UI Rules đồng bộ kiến trúc surface router)
+**Last Updated:** 2026-08-21 (thêm mục Working Style — quy định phân tích → phương án → triển khai → test cho mọi tác vụ code)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -181,6 +181,31 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   stake-return language for Arena.
 - Prediction Markets may use positions, probability, receipt, rewards, and P/L;
   avoid hype or casino language.
+
+## Working Style — Phân tích, phương án, triển khai
+
+Chuẩn chốt 2026-08-21; áp dụng bắt buộc cho mọi tác vụ tạo/sửa code, user
+không cần nhắc lại trong prompt:
+
+- **Phân tích trước, sửa sau:** luôn đi theo trình tự hiện trạng →
+  vấn đề (là gì, chi tiết, vì sao xảy ra) → phương án → triển khai.
+  Không sửa code khi chưa nêu rõ vấn đề.
+- **Phương án tối ưu cân bằng + best-effort:** chọn phương án đơn giản
+  nhất vẫn giải quyết triệt để yêu cầu — không over-engineer (bám quy
+  tắc Minimal diff / Ponytail-lite: không trừu tượng hoá cho một
+  caller, không thêm dependency mới), không hack tạm bợ. Có nhiều
+  phương án thì nêu ngắn trade-off của từng cái và **chỉ định một
+  phương án đề xuất**.
+- **Trình bày dễ hiểu, logic rõ:** mô tả vấn đề và chỗ cần sửa bằng
+  tiếng Việt có dấu, đơn giản, có logic rõ ràng; nêu rõ file/vị trí
+  cần sửa và lý do từng chỗ.
+- **Triển khai bám phương án đã trình bày:** chỉ implement đúng scope
+  của phương án; phần phát sinh thêm phải được đánh dấu "ngoài phương
+  án" và giải trình trước khi làm.
+- **Test đầy đủ:** sau khi sửa luôn chạy kiểm chứng theo quy tắc mục
+  Commands (focused test cho module chạm, full test cho
+  router/shared/repository/structural change); báo kết quả thật, kể cả
+  khi fail.
 
 ## Commands
 

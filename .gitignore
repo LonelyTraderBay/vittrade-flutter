@@ -48,3 +48,6 @@ output/
 # AgentsRoom — machine-local MCP + caches (absolute paths; never commit)
 .mcp.json
 .agentsroom/
+
+# Mimosa security-scan scratch (finding ledger, history, reports) — never commit
+.mimosa/
