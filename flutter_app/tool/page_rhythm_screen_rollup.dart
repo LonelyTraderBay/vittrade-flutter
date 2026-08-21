@@ -133,11 +133,17 @@ void main(List<String> args) {
       declaredTier = shellTier;
       suggestedTier = shellTier;
     }
-    final tierStat = tierStatus(
-      declaredTier,
-      suggestedTier,
-      routeName: route.name,
-    );
+    // Utility placeholder pages (VitTabletUtilityPage and per-feature
+    // *utility_page.dart) render "coming soon" surfaces for routes whose
+    // Tablet/Web UI is not built yet. They declare no product tier of their
+    // own, so tier comparison stays neutral — strict layout keeps auditing
+    // real pages instead of counting every pending route as an exception.
+    final isUtilityPlaceholder =
+        pageFile != null &&
+        pageFile.split('/').last.endsWith('utility_page.dart');
+    final tierStat = isUtilityPlaceholder
+        ? ''
+        : tierStatus(declaredTier, suggestedTier, routeName: route.name);
 
     var notes = complianceNote(
       pattern: pattern,

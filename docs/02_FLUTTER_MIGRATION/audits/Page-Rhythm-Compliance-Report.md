@@ -1,6 +1,6 @@
 # Page Rhythm Compliance Report
 
-Generated: 2026-08-15
+Generated: 2026-08-21
 
 Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
