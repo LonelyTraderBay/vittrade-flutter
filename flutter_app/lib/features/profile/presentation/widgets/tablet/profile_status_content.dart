@@ -7,10 +7,10 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Mirrors the loaded Profile dashboard — banner: identity hero; primary:
-/// the account menu sections; sidebar: security score, Prediction/Arena
-/// summary and product shortcuts — through the same shared scaffold, so
-/// resolving data never reflows the page shape (including the
+/// Mirrors the loaded Profile dashboard — primary column: identity hero
+/// card then the account menu sections; sidebar: security score,
+/// Prediction/Arena summary and product shortcuts — through the same shared
+/// scaffold, so resolving data never reflows the page shape (including the
 /// single-column → two-column switch at the dashboard's own threshold).
 class ProfileLoadingContent extends StatelessWidget {
   const ProfileLoadingContent({super.key, this.onRefresh});
@@ -20,9 +20,10 @@ class ProfileLoadingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitTwoColumnTabletDashboard(
-      banner: const _AccountHeroSkeleton(key: ProfileTabletKeys.loading),
       onRefresh: onRefresh,
       primaryChildren: const [
+        _AccountHeroSkeleton(key: ProfileTabletKeys.loading),
+        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         VitSectionSkeleton(),
         SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         VitSectionSkeleton(),

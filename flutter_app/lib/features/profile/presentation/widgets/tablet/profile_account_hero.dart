@@ -11,16 +11,17 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Identity-hero banner spanning both dashboard columns (SC-156 tablet,
-/// banner slot of `VitTwoColumnTabletDashboard`). Profile is an identity
-/// surface, not a market monitor — so instead of the flat KPI-strip idiom the
-/// other root tabs use, it takes the app's hero vocabulary
-/// ([VitCardVariant.hero] portfolio gradient + [VitHeroGlow], same as
-/// `HomePortfolioCard`): avatar and the member's name as the page's real
-/// title, tier pills (VIP/KYC with the verify CTA when action is needed),
-/// UID/referral ghost fact boxes, and the VIP progress as a runway bar
-/// across the hero's foot. Email stays masked through [VitFormat.email] per
-/// the sensitive-data policy.
+/// Identity-hero card opening the Profile tablet dashboard's primary column
+/// as its first *scrolling* card (SC-156 tablet — the Home tablet pattern
+/// for tall hero cards like `HomePortfolioCard`; a locked banner-slot hero
+/// would eat a third of an 800dp-tall landscape screen). Profile is an
+/// identity surface, not a market monitor — so instead of the flat KPI-strip
+/// idiom the other root tabs use, it takes the app's hero vocabulary
+/// ([VitCardVariant.hero] portfolio gradient + [VitHeroGlow]): avatar and
+/// the member's name as the page's real title, tier pills (VIP/KYC with the
+/// verify CTA when action is needed), UID/referral ghost fact boxes, and the
+/// VIP progress as a runway bar across the hero's foot. Email stays masked
+/// through [VitFormat.email] per the sensitive-data policy.
 class ProfileAccountHero extends StatelessWidget {
   const ProfileAccountHero({
     super.key,

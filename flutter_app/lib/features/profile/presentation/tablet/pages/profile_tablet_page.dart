@@ -30,11 +30,12 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// Tablet composition of Profile (SC-156) — same route, same
 /// [profileSnapshotProvider] data and the same public Profile widgets as
 /// [ProfilePage], but laid out as a persistent two-column dashboard instead
-/// of one scrolling phone column: an identity-hero banner (gradient hero
+/// of one scrolling phone column: an identity-hero card (gradient hero
 /// vocabulary, not the monitor KPI-strip the other root tabs use — Profile
-/// is an identity surface), the account menu sections in the primary column,
-/// and a status rail in the secondary column led by the security score.
-/// Does not touch `profile_page.dart` or its `part` family — reached via
+/// is an identity surface) opening the primary column as its first
+/// scrolling card, the account menu sections below it, and a status rail in
+/// the secondary column led by the security score. Does not touch
+/// `profile_page.dart` or its `part` family — reached via
 /// `createTabletAppRouter`/surface bootstrap. Fifth reference implementation
 /// for `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
 class ProfileTabletPage extends ConsumerStatefulWidget {
@@ -157,6 +158,25 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
     required bool showOfflineBanner,
   }) {
     final primaryChildren = [
+      // The identity hero opens the primary column as its first *scrolling*
+      // card (the Home tablet pattern for tall hero cards like
+      // `HomePortfolioCard`), not the dashboard's fixed banner slot — a
+      // ~230px locked banner eats a third of an 800dp-tall landscape screen
+      // and starves the working columns (user feedback 2026-08-22). It
+      // scrolls away with the menu instead.
+      ProfileAccountHero(
+        snapshot: snapshot,
+        copiedReferral: _copiedReferral,
+        onEdit: () => context.go(AppRoutePaths.profileEdit),
+        onCopyReferral: () {
+          unawaited(
+            Clipboard.setData(ClipboardData(text: snapshot.user.referralCode)),
+          );
+          setState(() => _copiedReferral = true);
+        },
+        onVerifyKyc: () => context.go(AppRoutePaths.profileKyc),
+        onVip: () => context.go(AppRoutePaths.profileVip),
+      ),
       if (showOfflineBanner)
         const VitOfflineBanner(
           key: ProfileTabletKeys.offline,
@@ -242,19 +262,6 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
     ];
 
     return VitTwoColumnTabletDashboard(
-      banner: ProfileAccountHero(
-        snapshot: snapshot,
-        copiedReferral: _copiedReferral,
-        onEdit: () => context.go(AppRoutePaths.profileEdit),
-        onCopyReferral: () {
-          unawaited(
-            Clipboard.setData(ClipboardData(text: snapshot.user.referralCode)),
-          );
-          setState(() => _copiedReferral = true);
-        },
-        onVerifyKyc: () => context.go(AppRoutePaths.profileKyc),
-        onVip: () => context.go(AppRoutePaths.profileVip),
-      ),
       onRefresh: _refreshProfile,
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,

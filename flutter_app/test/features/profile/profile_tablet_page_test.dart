@@ -101,7 +101,8 @@ void main() {
   ) async {
     await pumpTabletProfile(tester);
 
-    // Banner: the identity hero compresses identity/UID/referral/KYC/VIP.
+    // Primary column: the identity hero opens it as the first scrolling
+    // card, compressing identity/UID/referral/KYC/VIP.
     expect(find.byType(ProfileAccountHero), findsOneWidget);
     // Primary column: grouped menu sections.
     expect(find.byType(ProfileMenuPanel), findsWidgets);
@@ -118,6 +119,16 @@ void main() {
     await pumpTabletProfile(tester);
 
     expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+    // The hero scrolls with the primary column — it must NOT be locked as
+    // fixed chrome above the dashboard (it would eat a third of an 800dp
+    // landscape screen; user feedback 2026-08-22).
+    expect(
+      find.ancestor(
+        of: find.byKey(ProfileTabletKeys.accountHero),
+        matching: find.byType(SingleChildScrollView),
+      ),
+      findsWidgets,
+    );
     expect(find.text('UID'), findsOneWidget);
     expect(find.text('Mã giới thiệu'), findsOneWidget);
     // Tier pills: VIP level and KYC level (mock: 'VIP 1', 'Cấp 1').
@@ -265,8 +276,8 @@ void main() {
     expect(repository.profileFetchCount, 1);
     expect(repository.securityFetchCount, 1);
 
-    // Fling inside the primary scrolling column — the identity hero is
-    // fixed and never scrolls.
+    // Fling inside the primary scrolling column — the identity hero scrolls
+    // with that column (it is not locked chrome).
     final primaryColumn = find.byType(SingleChildScrollView).first;
     await tester.fling(primaryColumn, const Offset(0, 400), 1000);
     await tester.pump();
