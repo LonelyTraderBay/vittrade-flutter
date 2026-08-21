@@ -44,7 +44,7 @@ class TradeTickerStrip extends StatelessWidget {
 
     return VitCard(
       key: TradeTabletKeys.tickerStrip,
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       child: IntrinsicHeight(
         child: Row(

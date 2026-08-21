@@ -48,7 +48,7 @@ class _AccountStripSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitCard(
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

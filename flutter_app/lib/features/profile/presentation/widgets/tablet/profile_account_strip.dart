@@ -152,7 +152,7 @@ class ProfileAccountStrip extends StatelessWidget {
         final compact = constraints.maxWidth < _compactBreakpoint;
         final card = VitCard(
           key: ProfileTabletKeys.accountStrip,
-          radius: VitCardRadius.large,
+          radius: VitCardRadius.standard,
           clip: true,
           padding: ProfileSpacingTokens.profileHeroInfoPadding,
           child: compact

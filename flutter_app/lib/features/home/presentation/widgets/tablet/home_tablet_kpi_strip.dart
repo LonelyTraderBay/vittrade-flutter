@@ -140,7 +140,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
     if (compact) {
       return VitCard(
         key: HomeTabletKeys.portfolioCard,
-        radius: VitCardRadius.large,
+        radius: VitCardRadius.standard,
         clip: true,
         padding: SharedSpacingTokens.homeCardPaddingDefault,
         child: Column(
@@ -180,7 +180,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
 
     return VitCard(
       key: HomeTabletKeys.portfolioCard,
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       padding: SharedSpacingTokens.homeCardPaddingDefault,
       child: IntrinsicHeight(
@@ -207,7 +207,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
   Widget _buildEmptyStrip(BuildContext context) {
     return VitCard(
       key: HomeTabletKeys.portfolioCard,
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       padding: SharedSpacingTokens.homeCardPaddingDefault,
       child: Row(

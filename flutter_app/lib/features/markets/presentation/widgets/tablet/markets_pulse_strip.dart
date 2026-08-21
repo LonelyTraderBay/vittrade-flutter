@@ -96,7 +96,7 @@ class MarketsPulseStrip extends StatelessWidget {
 
     if (compact) {
       return VitCard(
-        radius: VitCardRadius.large,
+        radius: VitCardRadius.standard,
         clip: true,
         padding: MarketsSpacingTokens.marketListPairCompactHeaderPadding,
         child: Column(
@@ -132,7 +132,7 @@ class MarketsPulseStrip extends StatelessWidget {
     }
 
     return VitCard(
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       padding: MarketsSpacingTokens.marketListPairCompactHeaderPadding,
       child: IntrinsicHeight(

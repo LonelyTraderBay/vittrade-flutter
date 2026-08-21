@@ -70,7 +70,7 @@ class HomeKpiStripSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       padding: SharedSpacingTokens.homeCardPaddingDefault,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

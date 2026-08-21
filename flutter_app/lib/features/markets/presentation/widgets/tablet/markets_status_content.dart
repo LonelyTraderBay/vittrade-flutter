@@ -54,7 +54,7 @@ class _PulseStripSkeleton extends StatelessWidget {
       ],
     );
     return const VitCard(
-      radius: VitCardRadius.large,
+      radius: VitCardRadius.standard,
       clip: true,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
