@@ -11,6 +11,7 @@ final class ProfileTabletKeys {
   static const error = Key('sc156_profile_error');
   static const offline = Key('sc156_profile_offline');
   static const empty = Key('sc156_profile_empty');
+  static const accountStrip = Key('sc156_profile_account_strip');
   static const copyReferral = Key('sc156_profile_copy_referral');
   static const editProfile = Key('sc156_profile_edit');
   static const logout = Key('sc156_profile_logout');

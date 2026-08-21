@@ -13,14 +13,13 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_strip.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_hero_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_banner_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_status_content.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_top_chrome.dart';
@@ -62,16 +61,14 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           ),
           Expanded(
             child: snapshotAsync.when(
-              loading: () => const SingleChildScrollView(
-                child: VitSkeletonList(key: ProfileTabletKeys.loading),
-              ),
+              loading: () => ProfileLoadingContent(onRefresh: _refreshProfile),
               error: (error, stackTrace) => SingleChildScrollView(
                 child: VitErrorState(
                   key: ProfileTabletKeys.error,
                   title: 'Không tải được dữ liệu',
                   message: 'Vui lòng thử lại.',
                   actionLabel: 'Thử lại',
-                  onAction: () => ref.invalidate(profileSnapshotProvider),
+                  onAction: _refreshProfile,
                 ),
               ),
               data: _buildScreenState,
@@ -80,6 +77,11 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _refreshProfile() async {
+    ref.invalidate(profileSnapshotProvider);
+    await ref.read(profileSnapshotProvider.future);
   }
 
   // Mirrors `_profilePageChildren`'s switch on `snapshot.screenState`
@@ -91,8 +93,8 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
   // `WalletTabletPage` uses for `WalletUnavailableBanner`.
   Widget _buildScreenState(ProfileSnapshot snapshot) {
     return switch (snapshot.screenState) {
-      ProfileScreenState.loading => const SingleChildScrollView(
-        child: VitSkeletonList(key: ProfileTabletKeys.loading, rows: 4),
+      ProfileScreenState.loading => ProfileLoadingContent(
+        onRefresh: _refreshProfile,
       ),
       ProfileScreenState.error => SingleChildScrollView(
         child: VitErrorState(
@@ -137,21 +139,6 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           message: 'Đang ngoại tuyến',
           detail: 'Hiển thị dữ liệu tài khoản đã lưu gần nhất.',
         ),
-      ProfileHeroPanel(
-        user: snapshot.user,
-        copiedReferral: _copiedReferral,
-        onEdit: () => context.go(AppRoutePaths.profileEdit),
-        onCopyReferral: () {
-          unawaited(
-            Clipboard.setData(ClipboardData(text: snapshot.user.referralCode)),
-          );
-          setState(() => _copiedReferral = true);
-        },
-      ),
-      if (snapshot.user.kycNeedsAction)
-        ProfileKycBannerPanel(
-          onVerify: () => context.go(AppRoutePaths.profileKyc),
-        ),
       if (snapshot.sections.isEmpty)
         const VitEmptyState(
           title: 'Chưa có mục tài khoản',
@@ -185,17 +172,13 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
         },
       ),
       Text(
-        'VitTrade v2.4.1 • Tham gia từ ${snapshot.user.joinDate}',
+        'VitTrade v2.4.1',
         textAlign: TextAlign.center,
         style: AppTextStyles.micro.copyWith(color: AppColors.text3),
       ),
     ];
 
     final secondaryChildren = [
-      ProfileVipCardPanel(
-        vip: snapshot.vip,
-        onTap: () => context.go(AppRoutePaths.profileVip),
-      ),
       VitPageSection(
         label: 'Dự đoán & Thách đấu',
         accentColor: AppColors.accent,
@@ -234,6 +217,20 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
     ];
 
     return VitTwoColumnTabletDashboard(
+      banner: ProfileAccountStrip(
+        snapshot: snapshot,
+        copiedReferral: _copiedReferral,
+        onEdit: () => context.go(AppRoutePaths.profileEdit),
+        onCopyReferral: () {
+          unawaited(
+            Clipboard.setData(ClipboardData(text: snapshot.user.referralCode)),
+          );
+          setState(() => _copiedReferral = true);
+        },
+        onVerifyKyc: () => context.go(AppRoutePaths.profileKyc),
+        onVip: () => context.go(AppRoutePaths.profileVip),
+      ),
+      onRefresh: _refreshProfile,
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,

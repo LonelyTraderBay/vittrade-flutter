@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-import 'package:vit_trade_flutter/features/markets/domain/entities/market_entities.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -12,40 +11,9 @@ const double _marketCategoryCompactGap = AppSpacing.x2;
 const EdgeInsets _marketFilterCompactPadding =
     MarketsSpacingTokens.marketListFilterCompactPadding;
 
-class MarketListSortSheet extends StatelessWidget {
-  const MarketListSortSheet({
-    super.key,
-    required this.sortOptions,
-    required this.activeSort,
-    required this.onSelected,
-  });
-
-  final List<MarketSortOption> sortOptions;
-  final String activeSort;
-  final ValueChanged<String> onSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return VitCard(
-      padding: MarketsSpacingTokens.marketFilterSheetPadding,
-      child: Wrap(
-        spacing: MarketsSpacingTokens.marketFilterGap,
-        runSpacing: MarketsSpacingTokens.marketFilterGap,
-        children: [
-          for (final option in sortOptions)
-            VitFilterChip(
-              label: option.label,
-              active: option.id == activeSort,
-              onTap: () => onSelected(option.id),
-              color: marketListPrimary,
-              height: _marketCategoryCompactHeight,
-              padding: _marketFilterCompactPadding,
-            ),
-        ],
-      ),
-    );
-  }
-}
+// Sorting moved onto the pair table's column headers
+// (`MarketListTableHeader`) — the phone-only sort chip sheet has no tablet
+// counterpart anymore.
 
 class MarketListCategoryTabs extends StatelessWidget {
   const MarketListCategoryTabs({

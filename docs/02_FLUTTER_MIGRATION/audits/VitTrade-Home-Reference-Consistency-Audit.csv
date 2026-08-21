@@ -534,6 +534,8 @@ markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tab
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_common.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,0,0,0,0,0,0,0,0,no,-
@@ -785,6 +787,7 @@ profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/sec
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/settings_page_common.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_strip.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart,0,0,0,0,0,0,0,0,no,-
@@ -792,6 +795,7 @@ profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tab
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,0,0,0,0,0,0,0,0,no,-
@@ -847,7 +851,9 @@ trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/v
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-

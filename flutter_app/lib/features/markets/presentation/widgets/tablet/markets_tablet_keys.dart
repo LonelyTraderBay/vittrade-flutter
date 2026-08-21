@@ -7,7 +7,9 @@ final class MarketsTabletKeys {
   static const content = Key('sc008_markets_scroll_content');
   static const search = Key('sc008_markets_search');
   static const sortToggle = Key('sc008_markets_sort_toggle');
+  static const pulseStrip = Key('sc008_markets_pulse_strip');
 
   static Key category(String category) => Key('sc008_category_$category');
   static Key pair(String id) => Key('sc008_pair_$id');
+  static Key sortColumn(String columnId) => Key('sc008_sort_$columnId');
 }

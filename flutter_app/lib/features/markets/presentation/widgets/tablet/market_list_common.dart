@@ -106,3 +106,12 @@ String marketListFormatVolume(double value) {
   }
   return '\$${value.toStringAsFixed(0)}';
 }
+
+/// [marketListFormatVolume] extended one tier (trillions) for market-cap
+/// figures on the tablet pair table and pulse banner.
+String marketListFormatMarketCap(double value) {
+  if (value >= 1e12) {
+    return '\$${(value / 1e12).toStringAsFixed(2)}T';
+  }
+  return marketListFormatVolume(value);
+}

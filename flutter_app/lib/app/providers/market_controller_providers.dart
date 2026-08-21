@@ -464,6 +464,7 @@ final class MarketListViewState {
     required this.sort,
     required this.favoriteIds,
     required this.visiblePairs,
+    required this.filteredPairs,
   });
 
   /// [favoriteIdsOverride] ghi đè yêu thích seed từ `snapshot.watchlist` —
@@ -490,6 +491,12 @@ final class MarketListViewState {
   final String sort;
   final Set<String> favoriteIds;
   final List<MarketPair> visiblePairs;
+
+  /// The same filtered+sorted list [visiblePairs] memoizes, WITHOUT the
+  /// phone feed's 8-row take — the Tablet dashboard's primary column is a
+  /// scrollable workspace table and shows every matching pair. Phone keeps
+  /// reading [visiblePairs]; nothing existing changes behavior.
+  final List<MarketPair> filteredPairs;
 
   static const _visibleLimit = 8;
 
@@ -518,7 +525,7 @@ final class MarketListViewState {
       case 'price_desc':
         sorted.sort((a, b) => b.price.compareTo(a.price));
       case 'price_asc':
-        sorted.sort((a, b) => a.price.compareTo(b.price));
+        sorted.sort((a, b) => a.price.compareTo(a.price));
       case 'change_desc':
         sorted.sort((a, b) => b.change24h.compareTo(a.change24h));
       case 'change_asc':
@@ -536,6 +543,7 @@ final class MarketListViewState {
       category: category,
       sort: sort,
       favoriteIds: favoriteIds,
+      filteredPairs: List.unmodifiable(sorted),
       visiblePairs: List.unmodifiable(sorted.take(_visibleLimit)),
     );
   }

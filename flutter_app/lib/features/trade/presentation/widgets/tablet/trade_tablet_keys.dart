@@ -10,6 +10,7 @@ final class TradeTabletKeys {
   static const amountField = Key('sc048_trade_amount_field');
   static const submit = Key('sc048_trade_submit');
   static const nextAction = Key('sc048_trade_next_action');
+  static const tickerStrip = Key('sc048_trade_ticker_strip');
 
   static Key quickNav(String id) => Key('sc048_quick_$id');
   static Key pct(int pct) => Key('sc048_pct_$pct');

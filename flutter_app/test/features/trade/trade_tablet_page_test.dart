@@ -11,18 +11,35 @@ import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_positions_panel.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_module_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
+class _CountingTradeRepository implements TradeRepository {
+  _CountingTradeRepository(this._inner);
+
+  final TradeRepository _inner;
+  int screenFetchCount = 0;
+
+  @override
+  Future<TradeScreenSnapshot> getTrade({String pairId = 'btcusdt'}) {
+    screenFetchCount++;
+    return _inner.getTrade(pairId: pairId);
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   Future<void> pumpTabletTrade(
     WidgetTester tester, {
     Size size = const Size(820, 1180),
     String initialLocation = AppRoutePaths.trade,
+    TradeRepository? repository,
   }) async {
     // Default: iPad Air portrait — above AppBreakpoints.tablet (600) but
     // below the dashboard's own two-column threshold, so this exercises the
@@ -40,7 +57,7 @@ void main() {
           // 300ms loadDelay leaves an orphaned pending timer when the old
           // draft autodisposes before its Future resolves.
           tradeRepositoryProvider.overrideWithValue(
-            const MockTradeRepository(loadDelay: Duration.zero),
+            repository ?? const MockTradeRepository(loadDelay: Duration.zero),
           ),
         ],
         child: VitTradeApp(
@@ -79,8 +96,11 @@ void main() {
   ) async {
     await pumpTabletTrade(tester);
 
+    // Fixed banner: the instrument ticker strip (price facts stay visible
+    // regardless of either column's scroll offset).
+    expect(find.byType(TradeTickerStrip), findsOneWidget);
+    expect(find.byKey(TradeTabletKeys.tickerStrip), findsOneWidget);
     // Primary column: order-entry backbone.
-    expect(find.byType(VitTradeSimpleHero), findsOneWidget);
     expect(find.byType(VitTradeSimpleOrderForm), findsOneWidget);
     // Secondary column: glanceable/cross-sell content.
     expect(find.text('Tiếp theo'), findsOneWidget);
@@ -127,7 +147,7 @@ void main() {
       await pumpTabletTrade(tester, size: const Size(1180, 820));
 
       expect(tester.takeException(), isNull);
-      expect(find.byType(VitTradeSimpleHero), findsOneWidget);
+      expect(find.byType(TradeTickerStrip), findsOneWidget);
       expect(
         find.ancestor(
           of: find.text('Tài sản của bạn'),
@@ -171,7 +191,7 @@ void main() {
     (tester) async {
       await pumpTabletTrade(tester, size: const Size(1180, 820));
 
-      final hero = tester.getRect(find.byType(VitTradeSimpleHero));
+      final ticker = tester.getRect(find.byType(TradeTickerStrip));
       final orderForm = tester.getRect(find.byType(VitTradeSimpleOrderForm));
       final nextSection = tester.getRect(
         find.ancestor(
@@ -186,14 +206,41 @@ void main() {
         ),
       );
 
-      expect(
-        orderForm.top - hero.bottom,
-        closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
-      );
+      // The fixed ticker banner sits above the scrollable columns, and the
+      // order form still lives below it in the primary column.
+      expect(orderForm.top, greaterThan(ticker.bottom));
       expect(
         assetsSection.top - nextSection.bottom,
         closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
       );
     },
   );
+
+  testWidgets('SC-048 tablet pull-to-refresh re-fetches the trade screen', (
+    tester,
+  ) async {
+    final repository = _CountingTradeRepository(
+      const MockTradeRepository(loadDelay: Duration.zero),
+    );
+    await pumpTabletTrade(
+      tester,
+      size: const Size(1180, 820),
+      repository: repository,
+    );
+
+    expect(repository.screenFetchCount, 1);
+
+    // Fling inside the primary scrolling column — the ticker banner is
+    // fixed and never scrolls.
+    final primaryColumn = find.byType(SingleChildScrollView).first;
+    await tester.fling(primaryColumn, const Offset(0, 400), 1000);
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    expect(repository.screenFetchCount, 2);
+    expect(find.byType(TradeTabletPage), findsOneWidget);
+    // The refreshed dashboard still carries the full tablet composition.
+    expect(find.byKey(TradeTabletKeys.tickerStrip), findsOneWidget);
+    expect(find.byType(VitTradeSimpleOrderForm), findsOneWidget);
+  });
 }

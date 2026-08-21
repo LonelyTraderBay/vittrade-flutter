@@ -51,6 +51,18 @@ use that compatibility dispatcher.
 
 R4-R8 are implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`) — a new tablet page calls it (`primaryChildren`/`secondaryChildren` in, the whole threshold/Row/Align/ConstrainedBox/VitCard tree handled internally) rather than re-implementing these rules by hand. They stay documented here as the contract that widget's own doc comment carries in full, and as the standard R1-R3/R9 still hold a page to directly.
 
+## Dashboard composition playbook (established by the Home tablet redesign, 2026-08)
+
+Beyond the scaffold rules, all root-tab tablet dashboards follow the same
+monitor-first composition, established on `home_tablet_page.dart` and rolled
+out to Markets/Profile/Trade in the same pass:
+
+1. **Full-width KPI banner** via the scaffold's `banner:` slot — one `VitCard(radius: large)` strip of metric blocks separated by hairline dividers (identity/market/order facts per surface). The strip reflows to two rows below ~760px (its own compact breakpoint, mirroring `HomeTabletKpiStrip`), and never scrolls with either column.
+2. **Dense primary workspace** — the main column carries the surface's working table/form at tablet density (e.g. Markets' 6-column sortable pair table), not a copy of the phone feed. Phone-only clipping (row caps like `visiblePairs`' 8-row take, `showMarketSummary` gates) stays phone-side; the tablet reads the un-clipped data through a surface-appropriate accessor.
+3. **Pull-to-refresh** — pass `onRefresh` (invalidate + await the page's snapshot provider) so every scrollable path — both columns and the single-column fallback — refreshes.
+4. **Skeleton mirrors the dashboard** — the loading state renders through the same `VitTwoColumnTabletDashboard` (banner + column skeletons mirroring the loaded blocks), so resolving data never reflows the page shape. Generic one-column `VitSkeletonList` loading is the phone idiom.
+5. **Sensitive data masked in the banner** — emails/phones go through `VitFormat` masking helpers even in summary strips.
+
 ## Step checklist (new tablet page)
 
 1. Confirm the screen qualifies — see "When to build a dedicated tablet page."

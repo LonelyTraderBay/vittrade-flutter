@@ -16,8 +16,9 @@ import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_positions_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_status_content.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_formatters.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_high_risk_status_ui.dart';
@@ -76,6 +77,11 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
   void dispose() {
     _amountController.dispose();
     super.dispose();
+  }
+
+  Future<void> _refreshScreen() async {
+    ref.invalidate(tradeScreenProvider(widget.pairId));
+    await ref.read(tradeScreenProvider(widget.pairId).future);
   }
 
   Future<void> _submitOrder(TradeOrderControllerRequest request) async {
@@ -201,15 +207,13 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           ),
           Expanded(
             child: screenAsync.when(
-              loading: () =>
-                  const SingleChildScrollView(child: VitSkeletonList()),
+              loading: () => TradeLoadingContent(onRefresh: _refreshScreen),
               error: (error, stackTrace) => SingleChildScrollView(
                 child: VitErrorState(
                   title: 'Không tải được màn hình giao dịch',
                   message: 'Vui lòng kiểm tra kết nối và thử lại.',
                   actionLabel: 'Thử lại',
-                  onAction: () =>
-                      ref.invalidate(tradeScreenProvider(widget.pairId)),
+                  onAction: _refreshScreen,
                 ),
               ),
               data: _buildDashboard,
@@ -258,6 +262,9 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     // — it's page-primary navigation for the order flow happening in that
     // column, not shared context for the secondary column's nudge/positions
     // content, and R9 doesn't establish a pattern for a second chrome tier.
+    // The instrument hero moved the other way: its price facts became the
+    // fixed full-width ticker banner so they stay visible regardless of
+    // either column's scroll offset.
     final primaryChildren = tradeShellWithProductTabs(
       context: context,
       showProductTabs: true,
@@ -266,16 +273,6 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
       quickNavKey: TradeTabletKeys.quickNav,
       navigationBuilder: buildTradeProductNavigation,
       children: [
-        VitTradeSimpleHero(
-          symbol: pair.symbol,
-          priceLabel: marketPrice,
-          changePct: pair.changePct,
-          sparklineValues: daySnapshot.sparkline,
-          highLabel: daySnapshot.highLabel,
-          lowLabel: daySnapshot.lowLabel,
-          volumeLabel: daySnapshot.volumeLabel,
-          availableBalanceLabel: availableBalanceLabel,
-        ),
         VitTradeSimpleOrderForm(
           side: _side,
           pair: pair,
@@ -367,6 +364,17 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     ];
 
     return VitTwoColumnTabletDashboard(
+      banner: TradeTickerStrip(
+        symbol: pair.symbol,
+        priceLabel: marketPrice,
+        changePct: pair.changePct,
+        highLabel: daySnapshot.highLabel,
+        lowLabel: daySnapshot.lowLabel,
+        volumeLabel: daySnapshot.volumeLabel,
+        sparklineValues: daySnapshot.sparkline,
+        availableBalanceLabel: availableBalanceLabel,
+      ),
+      onRefresh: _refreshScreen,
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,

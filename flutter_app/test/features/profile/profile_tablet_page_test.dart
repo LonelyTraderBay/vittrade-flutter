@@ -5,24 +5,44 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/features/profile/data/providers/profile_repository_provider.dart';
+import 'package:vit_trade_flutter/features/profile/data/repositories/mock_profile_repository.dart';
+import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
+import 'package:vit_trade_flutter/features/profile/domain/repositories/profile_repository.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_strip.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_hero_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
+class _CountingProfileRepository implements ProfileRepository {
+  _CountingProfileRepository(this._inner);
+
+  final ProfileRepository _inner;
+  int profileFetchCount = 0;
+
+  @override
+  Future<ProfileSnapshot> getProfile() {
+    profileFetchCount++;
+    return _inner.getProfile();
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   Future<void> pumpTabletProfile(
     WidgetTester tester, {
     Size size = const Size(820, 1180),
+    ProfileRepository? repository,
   }) async {
     // Default: iPad Air portrait — above AppBreakpoints.tablet (600) but
     // below the dashboard's own two-column threshold, so this exercises the
@@ -34,6 +54,10 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [
+          if (repository != null)
+            profileRepositoryProvider.overrideWithValue(repository),
+        ],
         child: VitTradeApp(
           routerConfig: createAppRouter(
             surface: AppSurface.tablet,
@@ -70,13 +94,29 @@ void main() {
   ) async {
     await pumpTabletProfile(tester);
 
-    // Primary column: identity hero + grouped menu sections.
-    expect(find.byType(ProfileHeroPanel), findsOneWidget);
+    // Banner: the account strip compresses identity/UID/referral/KYC/VIP.
+    expect(find.byType(ProfileAccountStrip), findsOneWidget);
+    // Primary column: grouped menu sections.
     expect(find.byType(ProfileMenuPanel), findsWidgets);
-    // Secondary column: VIP progress card + Prediction/Arena summary
-    // sidebar section.
-    expect(find.byType(ProfileVipCardPanel), findsOneWidget);
+    // Secondary column: Prediction/Arena summary + product shortcuts.
     expect(find.text('Dự đoán & Thách đấu'), findsOneWidget);
+    expect(find.byType(ProfileProductHubPanel), findsOneWidget);
+  });
+
+  testWidgets('SC-156 tablet account strip carries the identity facts', (
+    tester,
+  ) async {
+    await pumpTabletProfile(tester);
+
+    expect(find.byKey(ProfileTabletKeys.accountStrip), findsOneWidget);
+    expect(find.text('UID'), findsOneWidget);
+    expect(find.text('Mã giới thiệu'), findsOneWidget);
+    expect(find.text('Trạng thái KYC'), findsOneWidget);
+    expect(find.text('Tiến độ VIP'), findsOneWidget);
+    // The masked email never renders the raw address (sensitive-data rule);
+    // the mask itself is visible instead.
+    expect(find.textContaining('nguyenvana@email.com'), findsNothing);
+    expect(find.textContaining('@email.com'), findsOneWidget);
   });
 
   testWidgets(
@@ -112,7 +152,7 @@ void main() {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
       expect(tester.takeException(), isNull);
-      expect(find.byType(ProfileHeroPanel), findsOneWidget);
+      expect(find.byType(ProfileAccountStrip), findsOneWidget);
       expect(
         find.ancestor(
           of: find.text('Dự đoán & Thách đấu'),
@@ -146,7 +186,7 @@ void main() {
       // actually distinguishing columns, not vacuously true.
       expect(
         find.ancestor(
-          of: find.byType(ProfileVipCardPanel),
+          of: find.byType(ProfileProductHubPanel),
           matching: find.byType(VitCard),
         ),
         findsWidgets,
@@ -185,4 +225,32 @@ void main() {
       );
     },
   );
+
+  testWidgets('SC-156 tablet pull-to-refresh re-fetches the profile', (
+    tester,
+  ) async {
+    final repository = _CountingProfileRepository(
+      const MockProfileRepository(loadDelay: Duration.zero),
+    );
+    await pumpTabletProfile(
+      tester,
+      size: const Size(1180, 820),
+      repository: repository,
+    );
+
+    expect(repository.profileFetchCount, 1);
+
+    // Fling inside the primary scrolling column — the account strip is
+    // fixed and never scrolls.
+    final primaryColumn = find.byType(SingleChildScrollView).first;
+    await tester.fling(primaryColumn, const Offset(0, 400), 1000);
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    expect(repository.profileFetchCount, 2);
+    expect(find.byType(ProfileTabletPage), findsOneWidget);
+    // The refreshed dashboard still carries the full tablet composition.
+    expect(find.byKey(ProfileTabletKeys.accountStrip), findsOneWidget);
+    expect(find.byType(ProfileMenuPanel), findsWidgets);
+  });
 }

@@ -8,9 +8,10 @@ import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/m
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_filters.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_header.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_movers.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_pairs.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_tools.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_status_content.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
@@ -20,10 +21,12 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// Tablet composition of Markets (SC-008) — same route, same
 /// [marketListSnapshotProvider]/[marketListStateControllerProvider] data and
 /// the same public Markets widgets as [MarketListPage], but laid out as a
-/// persistent two-column dashboard instead of one scrolling phone column:
-/// filter/sort/pair list on the left, market snapshot (top movers, tools,
-/// discover) on the right. Does not touch `market_list_page.dart` — reached
-/// via `createTabletAppRouter`/surface bootstrap. Third reference implementation for
+/// monitor-first dashboard: a full-width market-pulse banner (market cap,
+/// 24h volume, gainers/losers split, top movers) above a dense sortable
+/// pair table in the primary column and the market snapshot (top movers,
+/// tools, discover) framed as the sidebar. Does not touch
+/// `market_list_page.dart` — reached via `createTabletAppRouter`/surface
+/// bootstrap. Third reference implementation for
 /// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md` (see
 /// `home_tablet_page.dart`, `wallet_tablet_page.dart` for the first two).
 class MarketsTabletPage extends ConsumerStatefulWidget {
@@ -35,7 +38,6 @@ class MarketsTabletPage extends ConsumerStatefulWidget {
 
 class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
   final _searchController = TextEditingController();
-  bool _showSort = false;
 
   @override
   void dispose() {
@@ -48,6 +50,11 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
   void _resetFilters() {
     _searchController.clear();
     ref.read(marketListStateControllerProvider.notifier).resetFilters();
+  }
+
+  Future<void> _refreshMarkets() async {
+    ref.invalidate(marketListSnapshotProvider);
+    await ref.read(marketListSnapshotProvider.future);
   }
 
   @override
@@ -69,14 +76,15 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
           ),
           Expanded(
             child: listAsync.when(
-              loading: () =>
-                  const SingleChildScrollView(child: VitSkeletonList()),
-              error: (error, stackTrace) => SingleChildScrollView(
+              loading: () => MarketsLoadingContent(onRefresh: _refreshMarkets),
+              error: (error, stackTrace) => VitInsetScrollView(
+                key: MarketsTabletKeys.content,
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: VitErrorState(
                   title: 'Không tải được thị trường',
                   message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
                   actionLabel: 'Thử lại',
-                  onAction: () => ref.invalidate(marketListSnapshotProvider),
+                  onAction: _refreshMarkets,
                 ),
               ),
               data: (_) => _buildDashboard(snapshot),
@@ -102,27 +110,19 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
         controller: _searchController,
         placeholder: 'Tìm kiếm BTC, ETH...',
         variant: VitSearchBarVariant.compact,
-        filterActive: _showSort || sort != 'default',
+        // The sheet toggle is gone — column headers own sorting now, so the
+        // filter dot only reflects a non-default sort or a leftover query.
+        filterActive: sort != snapshot.screenFilters.defaultSort,
         filterInline: true,
         onChanged: notifier.setQuery,
         onClear: () => notifier.setQuery(''),
-        onFilterTap: () => setState(() => _showSort = !_showSort),
+        onFilterTap: () => _resetFilters(),
       ),
-      if (_showSort)
-        MarketListSortSheet(
-          sortOptions: snapshot.screenFilters.sortOptions,
-          activeSort: sort,
-          onSelected: (value) {
-            notifier.setSort(value);
-            setState(() => _showSort = false);
-          },
-        ),
       MarketListCategoryTabs(
         categories: snapshot.screenFilters.categories,
         activeCategory: category,
         onSelected: notifier.setCategory,
       ),
-      MarketListColumnHeader(lastUpdatedLabel: snapshot.lastUpdatedLabel),
       MarketListPairsPanel(onNavigate: _go, onResetFilters: _resetFilters),
     ];
 
@@ -149,6 +149,12 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
     ];
 
     return VitTwoColumnTabletDashboard(
+      banner: MarketsPulseStrip(
+        key: MarketsTabletKeys.pulseStrip,
+        pairs: snapshot.marketPairs,
+        lastUpdatedLabel: snapshot.lastUpdatedLabel,
+      ),
+      onRefresh: _refreshMarkets,
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,

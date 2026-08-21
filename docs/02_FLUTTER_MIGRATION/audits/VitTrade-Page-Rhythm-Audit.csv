@@ -710,6 +710,8 @@ markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_common.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,standard,,0,,0,,0,0,pass
@@ -1046,6 +1048,7 @@ profile,flutter_app/lib/features/profile/presentation/widgets/security_page_sect
 profile,flutter_app/lib/features/profile/presentation/widgets/settings_page_common.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,standard,,0,,0,,0,0,pass
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_strip.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart,standard,,0,,0,,0,0,pass
@@ -1053,6 +1056,7 @@ profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,standard,,0,,0,,0,0,pass
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,standard,,0,,0,,0,0,pass
@@ -1130,7 +1134,9 @@ trade,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart,standard,,0,,0,,0,0,pass
