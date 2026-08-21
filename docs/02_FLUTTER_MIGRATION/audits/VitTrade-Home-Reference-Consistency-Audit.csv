@@ -802,6 +802,7 @@ profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tab
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,0,0,0,0,0,0,0,0,no,-
 referral,feature_widget,flutter_app/lib/features/referral/presentation/widgets/referral_history_page_common.dart,0,0,0,0,0,0,0,0,no,-
 referral,feature_widget,flutter_app/lib/features/referral/presentation/widgets/referral_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-

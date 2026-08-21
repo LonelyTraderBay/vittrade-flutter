@@ -375,6 +375,31 @@ void main() {
     },
   );
 
+  testWidgets(
+    'SC-164 VIP pane renders the tier hero, tabs and comparison table',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('vip')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: current tier VIP 1 of the
+      // Standard→VIP 4 ladder, segment tabs and the comparison table.
+      expect(find.byKey(ProfileTabletKeys.vipPane), findsOneWidget);
+      expect(find.text('VIP 1'), findsWidgets);
+      expect(find.byKey(ProfileTabletKeys.vipTier(4)), findsOneWidget);
+      expect(find.text('So sánh các cấp VIP'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // Switching to the benefits tab shows per-tier cards and, since the
+      // next tier exists, the upgrade CTA.
+      await tester.tap(find.byKey(ProfileTabletKeys.vipTab('benefits')));
+      await tester.pumpAndSettle();
+      expect(find.text('Nâng cấp lên VIP 2'), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.vipTradeCta), findsOneWidget);
+    },
+  );
+
   testWidgets('SC-156 tablet pull-to-refresh re-fetches the profile', (
     tester,
   ) async {

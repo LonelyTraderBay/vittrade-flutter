@@ -56,6 +56,15 @@ final class ProfileTabletKeys {
 
   static Key securityItem(String id) => Key('sc158_security_pane_item_$id');
 
+  // VIP detail pane (SC-164 tablet port).
+  static const vipPane = Key('sc164_vip_pane');
+  static const vipPaneError = Key('sc164_vip_pane_error');
+  static const vipTradeCta = Key('sc164_vip_pane_trade_cta');
+
+  static Key vipTab(String id) => Key('sc164_vip_pane_tab_$id');
+
+  static Key vipTier(int level) => Key('sc164_vip_pane_tier_$level');
+
   static Key productShortcut(String id) => Key('sc156_profile_product_$id');
   static Key menu(String id) => Key('sc156_profile_menu_$id');
   static Key legalGroup(String id) => Key('sc156_profile_legal_group_$id');

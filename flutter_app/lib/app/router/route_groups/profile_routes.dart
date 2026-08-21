@@ -15,6 +15,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/pro
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/sub_account_page.dart';
@@ -206,23 +207,8 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileVip,
       name: AppRouteNames.sc164Vip,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-164',
-          title: 'Thành viên VIP',
-          subtitle: 'Cấp độ · đặc quyền · tiến độ',
-          description:
-              'Theo dõi cấp VIP, tiến độ và các đặc quyền dành riêng cho tài khoản.',
-          facts: const [
-            ProfileTabletFact(label: 'Cấp hiện tại', value: 'VIP 2'),
-            ProfileTabletFact(label: 'Tiến độ', value: '68%'),
-            ProfileTabletFact(
-              label: 'Đặc quyền tiếp theo',
-              value: 'Phí giao dịch ưu đãi',
-              valueColor: AppColors.primary,
-            ),
-          ],
-          actionLabel: 'Xem đặc quyền',
-        ),
+        // Master-detail tablet renders the real VIP pane beside the menu.
+        AppSurface.tablet => const ProfileVipPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => VIPPage(shellRenderMode: shellRenderMode),
