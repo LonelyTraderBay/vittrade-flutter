@@ -26,6 +26,16 @@ final class ProfileTabletKeys {
   static const legalScaffold = Key('sc156_profile_legal_scaffold');
   static const legalSearch = Key('sc156_profile_legal_search');
 
+  // KYC detail pane (SC-159 tablet port).
+  static const kycPane = Key('sc159_kyc_pane');
+  static const kycPaneError = Key('sc159_kyc_pane_error');
+  static const kycStatusCard = Key('sc159_kyc_pane_status_card');
+  static const kycPrivacyCard = Key('sc159_kyc_pane_privacy_card');
+
+  static Key kycLevel(int level) => Key('sc159_kyc_pane_level_$level');
+
+  static Key kycStart(int level) => Key('sc159_kyc_pane_start_$level');
+
   static Key productShortcut(String id) => Key('sc156_profile_product_$id');
   static Key menu(String id) => Key('sc156_profile_menu_$id');
   static Key legalGroup(String id) => Key('sc156_profile_legal_group_$id');

@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/prof
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/sub_account_page.dart';
@@ -74,28 +75,8 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileKyc,
       name: AppRouteNames.sc159Kyc,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-159',
-          title: 'Xác minh danh tính',
-          subtitle: 'KYC · cấp độ và hạn mức',
-          description:
-              'Rà soát cấp KYC, quyền giao dịch và tài liệu cần thiết trước khi nộp hồ sơ.',
-          facts: const [
-            ProfileTabletFact(label: 'Cấp hiện tại', value: 'Cấp 2'),
-            ProfileTabletFact(
-              label: 'Hạn mức giao dịch',
-              value: 'Theo cấp xác minh',
-            ),
-            ProfileTabletFact(
-              label: 'Bước tiếp theo',
-              value: 'Kiểm tra hồ sơ',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Bắt đầu xác minh',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận bắt đầu xác minh',
-        ),
+        // Master-detail tablet renders the real KYC pane beside the menu.
+        AppSurface.tablet => const ProfileKycPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => KYCPage(shellRenderMode: shellRenderMode),

@@ -6,6 +6,7 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 
 void main() {
   Future<void> pumpTabletRoute(WidgetTester tester, String location) async {
@@ -39,11 +40,17 @@ void main() {
     expect(find.byKey(const Key('SC-158-tablet-cancel')), findsOneWidget);
   });
 
-  testWidgets('SC-159 Tablet uses independent KYC composition', (tester) async {
+  testWidgets('SC-159 Tablet uses the real KYC pane composition', (
+    tester,
+  ) async {
+    // The KYC sub-route migrated off the placeholder into the master-detail
+    // real pane (2026-08) — deep-linking straight to it still lands on the
+    // full verification content inside the shell.
     await pumpTabletRoute(tester, AppRoutePaths.profileKyc);
 
-    expect(find.byType(ProfileTabletUtilityPage), findsOneWidget);
+    expect(find.byType(ProfileKycPane), findsOneWidget);
+    expect(find.byType(ProfileTabletUtilityPage), findsNothing);
     expect(find.text('Xác minh danh tính'), findsOneWidget);
-    expect(find.text('Cấp hiện tại'), findsOneWidget);
+    expect(find.text('KYC Cấp 2 — Đã xác minh'), findsOneWidget);
   });
 }

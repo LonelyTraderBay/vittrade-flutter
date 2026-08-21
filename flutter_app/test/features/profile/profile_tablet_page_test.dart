@@ -210,9 +210,8 @@ void main() {
       await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
       await tester.pumpAndSettle();
 
-      // The detail pane now carries the KYC route's content (the
-      // transitional placeholder until the real KYC pane lands)…
-      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+      // The detail pane now carries the real KYC pane content…
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
       // …while the master menu stays visible beside it.
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
       expect(find.byType(ProfileMenuPanel), findsWidgets);
@@ -227,14 +226,14 @@ void main() {
 
       await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
       await tester.pumpAndSettle();
-      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
 
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
 
       // Back pops within the shell branch: the overview pane returns and
       // the menu never left.
-      expect(find.byKey(const Key('SC-159-tablet-content')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsNothing);
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
     },
@@ -255,7 +254,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);
-      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
 
       await tester.binding.handlePopRoute();
@@ -317,6 +316,33 @@ void main() {
         productHub.top - productTitle.bottom,
         closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
       );
+    },
+  );
+
+  testWidgets(
+    'SC-159 KYC pane renders the real verification content beside the menu',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: fully verified at level 2
+      // of the 3-level ladder, with the AES-256 privacy note.
+      expect(find.byKey(ProfileTabletKeys.kycStatusCard), findsOneWidget);
+      expect(find.text('KYC Cấp 2 — Đã xác minh'), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycLevel(0)), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycLevel(2)), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycPrivacyCard), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // Expanding a level reveals its limits; every level is already done,
+      // so no start CTA renders (only the level right above the current
+      // one would be startable).
+      await tester.tap(find.byKey(ProfileTabletKeys.kycLevel(1)));
+      await tester.pumpAndSettle();
+      expect(find.text('Giới hạn giao dịch:'), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycStart(1)), findsNothing);
     },
   );
 
