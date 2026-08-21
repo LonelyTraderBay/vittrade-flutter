@@ -21,7 +21,6 @@ import 'package:flutter_test/flutter_test.dart';
 const _allowlist = {
   'lib/features/auth/presentation/phone/pages/otp_page.dart',
   'lib/features/home/presentation/widgets/phone/home_announcement_banner.dart',
-  'lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart',
 };
 
 List<String> _timerPeriodicViolations() {

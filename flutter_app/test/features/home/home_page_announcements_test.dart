@@ -16,6 +16,7 @@ void main() {
     WidgetTester tester, {
     HomeSnapshot? snapshot,
     bool simulateError = false,
+    bool settle = true,
   }) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(440, 956);
@@ -39,7 +40,11 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    if (settle) {
+      await tester.pumpAndSettle();
+    } else {
+      await tester.pump();
+    }
   }
 
   testWidgets('SC-007 campaign announcement hides after session scroll', (
@@ -133,6 +138,46 @@ void main() {
 
     expect(find.text('Campaign test'), findsOneWidget);
   });
+
+  testWidgets(
+    'SC-007 announcement auto-advance keeps its cadence across unrelated '
+    'rebuilds',
+    (tester) async {
+      await pumpHome(
+        tester,
+        settle: false,
+        snapshot: _homeSnapshotWithAnnouncements(const [
+          HomeAnnouncement(
+            id: 'security-test',
+            text: 'Security test',
+            type: HomeAnnouncementType.security,
+          ),
+          HomeAnnouncement(
+            id: 'campaign-test',
+            text: 'Campaign test',
+            type: HomeAnnouncementType.campaign,
+          ),
+        ]),
+      );
+      // Resolve the zero-delay snapshot and start the carousel timer.
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(find.text('Security test'), findsOneWidget);
+
+      // 4s into the 5s cycle: not advanced yet.
+      await tester.pump(const Duration(seconds: 4));
+      expect(find.text('Security test'), findsOneWidget);
+
+      // Unrelated parent rebuild (balance toggle) — same announcements, so
+      // the countdown must keep running from its original start.
+      await tester.tap(find.byTooltip('Ẩn số dư'));
+      await tester.pump();
+
+      // 5.1s from the carousel start: advanced exactly once.
+      await tester.pump(const Duration(milliseconds: 1100));
+      expect(find.text('Campaign test'), findsOneWidget);
+      expect(find.text('Security test'), findsNothing);
+    },
+  );
 
   testWidgets('SC-007 opens the next action route from Home', (tester) async {
     await pumpHome(tester);

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/home/data/home_mock_data.dart';
 import 'package:vit_trade_flutter/features/home/data/providers/home_repository_provider.dart';
@@ -12,6 +13,7 @@ import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.da
 import 'package:vit_trade_flutter/features/home/domain/repositories/home_repository.dart';
 import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/tablet/pages/home_tablet_page.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/home_more_products_sheet.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_status_content.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart';
@@ -95,32 +97,32 @@ void main() {
     },
   );
 
-  testWidgets('SC-007 tablet uses compact spacing between primary sections', (
-    tester,
-  ) async {
-    await pumpTabletHome(tester, size: const Size(1024, 820));
+  testWidgets(
+    'SC-007 tablet KPI strip banner spans above the watchlist on one gap '
+    'line (monitor-first composition)',
+    (tester) async {
+      await pumpTabletHome(tester, size: const Size(1024, 820));
 
-    final portfolio = tester.getRect(find.byKey(HomeTabletKeys.portfolioCard));
-    final ticker = tester.getRect(find.byKey(HomeTabletKeys.marketTicker));
-    final marketHeader = tester.getRect(
-      find.ancestor(
-        of: find.descendant(
-          of: find.byType(VitSectionHeader),
-          matching: find.text('Thị trường'),
+      final kpiStrip = tester.getRect(find.byKey(HomeTabletKeys.portfolioCard));
+      final marketHeader = tester.getRect(
+        find.ancestor(
+          of: find.descendant(
+            of: find.byType(VitSectionHeader),
+            matching: find.text('Thị trường'),
+          ),
+          matching: find.byType(VitSectionHeader),
         ),
-        matching: find.byType(VitSectionHeader),
-      ),
-    );
+      );
 
-    expect(
-      ticker.top - portfolio.bottom,
-      closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
-    );
-    expect(
-      marketHeader.top - ticker.bottom,
-      closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
-    );
-  });
+      // The banner sits one shared block gap above the columns.
+      expect(
+        marketHeader.top - kpiStrip.bottom,
+        closeTo(TabletDashboardWidths.blockVerticalGap, 0.01),
+      );
+      // No phone ticker strip in the monitor-first composition.
+      expect(find.byKey(HomeTabletKeys.marketTicker), findsNothing);
+    },
+  );
 
   testWidgets('SC-007 tablet uses compact spacing between sidebar sections', (
     tester,
@@ -198,7 +200,9 @@ void main() {
     },
   );
 
-  testWidgets('SC-007 tablet announcement cycles on tap', (tester) async {
+  testWidgets('SC-007 tablet notice line navigates on tap instead of cycling', (
+    tester,
+  ) async {
     await pumpTabletHome(
       tester,
       repository: _StaticHomeRepository(
@@ -207,6 +211,7 @@ void main() {
             id: 'security-test',
             text: 'Security test',
             type: HomeAnnouncementType.security,
+            routePath: '/settings/security',
           ),
           HomeAnnouncement(
             id: 'campaign-test',
@@ -217,12 +222,17 @@ void main() {
       ),
     );
 
+    // Static single-announcement notice — the carousel is gone.
     expect(find.text('Security test'), findsOneWidget);
+    expect(find.text('Campaign test'), findsNothing);
 
     await tester.tap(find.byKey(HomeTabletKeys.announcement));
     await tester.pumpAndSettle();
 
-    expect(find.text('Campaign test'), findsOneWidget);
+    // Tapping acts on the announcement: it navigates to its route
+    // (settings renders its own tablet page, not Home's dashboard).
+    expect(find.byType(HomeTabletPage), findsNothing);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('SC-007 tablet exposes a loading state before data resolves', (
@@ -252,7 +262,32 @@ void main() {
 
       expect(find.byType(HomeLoadingContent), findsOneWidget);
       expect(find.byType(VitTwoColumnTabletDashboard), findsOneWidget);
-      expect(find.byType(HomeMarketTickerSkeleton), findsOneWidget);
+      // Banner KPI skeleton spans above the columns; the primary column is
+      // the watchlist skeleton alone.
+      expect(find.byType(HomeKpiStripSkeleton), findsOneWidget);
+      expect(find.byType(HomeMarketSkeleton), findsOneWidget);
+      // The sidebar skeleton mirrors the loaded block order: notice →
+      // next action → quick actions → recent → discovery.
+      expect(find.byType(HomeAnnouncementSkeleton), findsOneWidget);
+      expect(find.byType(HomeDiscoverySkeleton), findsOneWidget);
+      double topOf(Type widgetType) =>
+          tester.getTopLeft(find.byType(widgetType)).dy;
+      expect(
+        topOf(HomeAnnouncementSkeleton),
+        lessThan(topOf(HomeNextActionSkeleton)),
+      );
+      expect(
+        topOf(HomeNextActionSkeleton),
+        lessThan(topOf(HomeProductsSkeleton)),
+      );
+      expect(
+        topOf(HomeProductsSkeleton),
+        lessThan(topOf(HomeRecentProductsSkeleton)),
+      );
+      expect(
+        topOf(HomeRecentProductsSkeleton),
+        lessThan(topOf(HomeDiscoverySkeleton)),
+      );
       // One RefreshIndicator per independently scrolling column.
       expect(find.byType(RefreshIndicator), findsNWidgets(2));
       expect(tester.takeException(), isNull);
@@ -278,11 +313,10 @@ void main() {
 
     expect(repository.fetchCount, 1);
 
-    await tester.fling(
-      find.text('Tổng tài sản ước tính'),
-      const Offset(0, 400),
-      1000,
-    );
+    // Fling inside the primary scrolling column — the KPI banner is fixed
+    // and never scrolls.
+    final primaryColumn = find.byType(SingleChildScrollView).first;
+    await tester.fling(primaryColumn, const Offset(0, 400), 1000);
     await tester.pump();
     await tester.pumpAndSettle();
 
@@ -292,11 +326,7 @@ void main() {
     // balance stays masked after a refresh cycle.
     await tester.tap(find.byTooltip('Ẩn số dư'));
     await tester.pumpAndSettle();
-    await tester.fling(
-      find.text('Tổng tài sản ước tính'),
-      const Offset(0, 400),
-      1000,
-    );
+    await tester.fling(primaryColumn, const Offset(0, 400), 1000);
     await tester.pump();
     await tester.pumpAndSettle();
 
@@ -305,7 +335,7 @@ void main() {
     expect(find.text('••••••'), findsAtLeastNWidgets(1));
   });
 
-  testWidgets('SC-007 tablet «Xem thêm» opens the catalog sheet without grid '
+  testWidgets('SC-007 tablet «Xem thêm» opens the catalog dialog without grid '
       'duplicates', (tester) async {
     await pumpTabletHome(tester);
 
@@ -315,13 +345,41 @@ void main() {
     await tester.tap(moreAction);
     await tester.pumpAndSettle();
 
+    // Tablet presents the catalog as a centered dialog, not the phone
+    // bottom sheet.
+    expect(find.byType(AlertDialog), findsOneWidget);
+    expect(find.byType(HomeMoreProductsSheet), findsNothing);
+    // …and as compact list rows, not the old tile grid.
+    expect(
+      find.descendant(
+        of: find.byKey(HomePage.moreProductsSheetKey),
+        matching: find.byType(VitActionTileGrid),
+      ),
+      findsNothing,
+    );
     expect(find.text('Thêm hành động'), findsOneWidget);
     expect(find.text('Margin'), findsOneWidget);
     expect(find.text('Copy Trade'), findsOneWidget);
     expect(find.text('Bot'), findsOneWidget);
     // «Chủ đề» twice: the tile label plus its state badge share the text.
     expect(find.text('Chủ đề'), findsNWidgets(2));
-    // Products already visible in the sidebar grid stay out of the sheet.
+    // The 3x3 grid holds all 9 quick actions — Launchpad included — so the
+    // catalog carries only the product groups beyond them.
+    expect(
+      find.descendant(
+        of: find.byKey(HomeTabletKeys.productsSection),
+        matching: find.text('Launchpad'),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(HomePage.moreProductsSheetKey),
+        matching: find.text('Launchpad'),
+      ),
+      findsNothing,
+    );
+    // Products already visible in the sidebar grid stay out of the catalog.
     expect(
       find.descendant(
         of: find.byKey(HomePage.moreProductsSheetKey),
@@ -335,6 +393,40 @@ void main() {
 
     expect(find.byKey(HomePage.moreProductsSheetKey), findsNothing);
   });
+
+  testWidgets(
+    'SC-007 tablet «Gần đây» renders vertical rows and navigates on tap',
+    (tester) async {
+      await pumpTabletHome(tester);
+
+      // Vertical sidebar rows (tablet idiom), not the phone horizontal strip.
+      expect(find.byType(VitCompactProductCard), findsNothing);
+      final recentSection = find.byKey(HomeTabletKeys.recentProductsSection);
+      expect(
+        find.descendant(
+          of: recentSection,
+          matching: find.byType(VitIconListRow),
+        ),
+        findsAtLeastNWidgets(3),
+      );
+      expect(
+        find.descendant(of: recentSection, matching: find.text('BTC/USDT')),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(of: recentSection, matching: find.text('P2P USDT/VND')),
+        findsOneWidget,
+      );
+
+      final row = find.byKey(HomeTabletKeys.recentProduct('spot-btc'));
+      await tester.ensureVisible(row);
+      await tester.tap(row);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(HomeTabletPage), findsNothing);
+      expect(find.byType(VitTwoColumnTabletDashboard), findsOneWidget);
+    },
+  );
 
   testWidgets('SC-007 tablet exposes a retryable error state', (tester) async {
     await pumpTabletHome(

@@ -5,14 +5,16 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_products_section.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-// Mirrors the loaded dashboard's composition — primary: portfolio, ticker,
-// watchlist; sidebar: next action, quick actions, recent — through the same
-// shared scaffold, so resolving data never reflows the page shape (including
-// the single-column → two-column switch at the dashboard's own threshold).
+// Mirrors the loaded monitor-first dashboard — banner: KPI strip; primary:
+// the dense watchlist; sidebar: notice line, next action, quick actions,
+// recent, discovery — through the same shared scaffold, so resolving data
+// never reflows the page shape (including the single-column → two-column
+// switch at the dashboard's own threshold).
 class HomeLoadingContent extends StatelessWidget {
   const HomeLoadingContent({super.key, this.onRefresh});
 
@@ -21,16 +23,15 @@ class HomeLoadingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitTwoColumnTabletDashboard(
+      banner: const HomeKpiStripSkeleton(),
       onRefresh: onRefresh,
-      primaryChildren: const [
-        HomePortfolioSkeleton(),
-        HomeMarketTickerSkeleton(),
-        HomeMarketSkeleton(),
-      ],
+      primaryChildren: const [HomeMarketSkeleton()],
       secondaryChildren: const [
+        HomeAnnouncementSkeleton(),
         HomeNextActionSkeleton(),
         HomeProductsSkeleton(),
         HomeRecentProductsSkeleton(),
+        HomeDiscoverySkeleton(),
       ],
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
       secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
@@ -58,27 +59,59 @@ class HomeErrorContent extends StatelessWidget {
   }
 }
 
-class HomePortfolioSkeleton extends StatelessWidget {
-  const HomePortfolioSkeleton({super.key});
+/// Mirrors the loaded KPI strip banner: one wide card holding three metric
+/// blocks plus the trailing action toolbar.
+class HomeKpiStripSkeleton extends StatelessWidget {
+  const HomeKpiStripSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const VitCard(
       radius: VitCardRadius.large,
       padding: SharedSpacingTokens.homeCardPaddingDefault,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: Row(
         children: [
-          VitSkeleton(
-            width: HomeSpacingTokens.skeletonTitleWidth,
-            height: AppSpacing.x3,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VitSkeleton(
+                  width: HomeSpacingTokens.skeletonTitleWidth,
+                  height: HomeSpacingTokens.skeletonLineHeightLg,
+                ),
+                SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                VitSkeleton(width: 200, height: AppSpacing.x6),
+              ],
+            ),
           ),
-          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
-          VitSkeleton(width: double.infinity, height: AppSpacing.x6),
-          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
-          VitSkeleton(
-            width: HomeSpacingTokens.skeletonSubtitleWidth,
-            height: AppSpacing.x3,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VitSkeleton(
+                  width: HomeSpacingTokens.skeletonSubtitleWidth,
+                  height: HomeSpacingTokens.skeletonLineHeightLg,
+                ),
+                SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                VitSkeleton(width: 160, height: AppSpacing.x5),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VitSkeleton(
+                  width: HomeSpacingTokens.skeletonSubtitleWidth,
+                  height: HomeSpacingTokens.skeletonLineHeightLg,
+                ),
+                SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                VitSkeleton(
+                  width: double.infinity,
+                  height: SharedSpacingTokens.homeSparklineHeight,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -91,18 +124,126 @@ class HomeNextActionSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const VitCard(
-      padding: EdgeInsetsDirectional.all(
-        SharedSpacingTokens.homeNextActionCardPadding,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        VitSkeleton(
+          width: HomeSpacingTokens.skeletonSubtitleWidth,
+          height: AppSpacing.x4,
+        ),
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitCard(
+          padding: EdgeInsetsDirectional.all(
+            SharedSpacingTokens.homeNextActionCardPadding,
+          ),
+          child: Row(
+            children: [
+              VitSkeleton(
+                width: SharedSpacingTokens.homeNextActionIconContainer,
+                height: SharedSpacingTokens.homeNextActionIconContainer,
+                borderRadius: AppRadii.smRadius,
+              ),
+              SizedBox(width: SharedSpacingTokens.homeCommandRowSpacing),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    VitSkeleton(
+                      width: HomeSpacingTokens.skeletonTitleWidth,
+                      height: HomeSpacingTokens.skeletonLineHeightLg,
+                    ),
+                    SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                    VitSkeleton(
+                      width: HomeSpacingTokens.skeletonLineWidthLg,
+                      height: HomeSpacingTokens.skeletonLineHeightSm,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Sidebar grid skeleton: mirrors the loaded 3-column × 3-row capacity.
+class HomeProductsSkeleton extends StatelessWidget {
+  const HomeProductsSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const VitSkeleton(
+          width: HomeSpacingTokens.skeletonSubtitleWidth,
+          height: AppSpacing.x4,
+        ),
+        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitActionTileGrid(
+          density: VitDensity.standard,
+          itemCount: HomeProductsSection.gridCapacity,
+          crossAxisCount: 3,
+          itemBuilder: (context, index, tileDensity) => const VitSkeleton(
+            width: double.infinity,
+            height: double.infinity,
+            borderRadius: AppRadii.cardRadius,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Mirrors the loaded «Gần đây» card: three vertical icon rows (the mock
+/// catalog's size), each an accent-icon box plus a two-line text column.
+class HomeRecentProductsSkeleton extends StatelessWidget {
+  const HomeRecentProductsSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        VitSkeleton(
+          width: HomeSpacingTokens.skeletonSubtitleWidth,
+          height: AppSpacing.x4,
+        ),
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitCard(
+          child: Column(
+            children: [
+              _HomeRecentProductRowSkeleton(),
+              _HomeRecentProductRowSkeleton(),
+              _HomeRecentProductRowSkeleton(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HomeRecentProductRowSkeleton extends StatelessWidget {
+  const _HomeRecentProductRowSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsetsDirectional.symmetric(
+        horizontal: HomeSpacingTokens.homeListRowPadding,
+        vertical: AppSpacing.x3,
       ),
       child: Row(
         children: [
           VitSkeleton(
-            width: SharedSpacingTokens.homeNextActionIconContainer,
-            height: SharedSpacingTokens.homeNextActionIconContainer,
+            width: AppSpacing.accentIconBoxSize,
+            height: AppSpacing.accentIconBoxSize,
             borderRadius: AppRadii.smRadius,
           ),
-          SizedBox(width: SharedSpacingTokens.homeCommandRowSpacing),
+          SizedBox(width: AppSpacing.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +254,7 @@ class HomeNextActionSkeleton extends StatelessWidget {
                 ),
                 SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
                 VitSkeleton(
-                  width: HomeSpacingTokens.skeletonLineWidthLg,
+                  width: HomeSpacingTokens.skeletonSubtitleWidth,
                   height: HomeSpacingTokens.skeletonLineHeightSm,
                 ),
               ],
@@ -125,57 +266,37 @@ class HomeNextActionSkeleton extends StatelessWidget {
   }
 }
 
-class HomeProductsSkeleton extends StatelessWidget {
-  const HomeProductsSkeleton({super.key});
+/// Mirrors the compact announcement banner card (icon + single-line message
+/// + dismiss affordance). The loaded banner's carousel-dots row (~one x3
+/// gap tall) is intentionally not mirrored — that delta is absorbed by the
+/// section gap.
+class HomeAnnouncementSkeleton extends StatelessWidget {
+  const HomeAnnouncementSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return VitActionTileGrid(
-      density: VitDensity.compact,
-      itemCount: HomeSpacingTokens.homeQuickActionCompactCount,
-      crossAxisCount: AppSpacing.serviceTileCrossAxisCount,
-      itemBuilder: (context, index, tileDensity) => const VitSkeleton(
-        width: double.infinity,
-        height: double.infinity,
-        borderRadius: AppRadii.cardRadius,
-      ),
-    );
-  }
-}
-
-/// Matches the loaded ticker strip's three top-mover cards so the primary
-/// column keeps its block order while loading.
-class HomeMarketTickerSkeleton extends StatelessWidget {
-  const HomeMarketTickerSkeleton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: SharedSpacingTokens.homeMarketTickerCardMinHeight,
+    return const VitCard(
+      radius: VitCardRadius.standard,
+      padding: SharedSpacingTokens.homeAnnouncementCardPaddingCompact,
       child: Row(
         children: [
+          VitSkeleton(
+            width: SharedSpacingTokens.homeAnnouncementIcon,
+            height: SharedSpacingTokens.homeAnnouncementIcon,
+            borderRadius: AppRadii.smRadius,
+          ),
+          SizedBox(width: SharedSpacingTokens.homeAnnouncementIconGap),
           Expanded(
             child: VitSkeleton(
               width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
+              height: HomeSpacingTokens.skeletonLineHeightLg,
             ),
           ),
-          SizedBox(width: AppSpacing.x2),
-          Expanded(
-            child: VitSkeleton(
-              width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
-            ),
-          ),
-          SizedBox(width: AppSpacing.x2),
-          Expanded(
-            child: VitSkeleton(
-              width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
-            ),
+          SizedBox(width: SharedSpacingTokens.homeAnnouncementArrowGap),
+          VitSkeleton(
+            width: SharedSpacingTokens.homeAnnouncementChevron,
+            height: SharedSpacingTokens.homeAnnouncementChevron,
+            borderRadius: AppRadii.smRadius,
           ),
         ],
       ),
@@ -183,36 +304,66 @@ class HomeMarketTickerSkeleton extends StatelessWidget {
   }
 }
 
-class HomeRecentProductsSkeleton extends StatelessWidget {
-  const HomeRecentProductsSkeleton({super.key});
+/// Mirrors the loaded discovery card: section header + ONE framed card
+/// holding two discovery rows and the disclaimer line.
+class HomeDiscoverySkeleton extends StatelessWidget {
+  const HomeDiscoverySkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: SharedSpacingTokens.homeRecentProductHeight,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        VitSkeleton(
+          width: HomeSpacingTokens.skeletonSubtitleWidth,
+          height: AppSpacing.x4,
+        ),
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitCard(
+          child: Column(
+            children: [
+              _HomeDiscoveryRowSkeleton(),
+              _HomeDiscoveryRowSkeleton(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HomeDiscoveryRowSkeleton extends StatelessWidget {
+  const _HomeDiscoveryRowSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsetsDirectional.symmetric(
+        horizontal: HomeSpacingTokens.homeListRowPadding,
+        vertical: AppSpacing.x4,
+      ),
       child: Row(
         children: [
-          Expanded(
-            child: VitSkeleton(
-              width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
-            ),
+          VitSkeleton(
+            width: AppSpacing.accentIconBoxSize,
+            height: AppSpacing.accentIconBoxSize,
+            borderRadius: AppRadii.smRadius,
           ),
           SizedBox(width: AppSpacing.x3),
           Expanded(
-            child: VitSkeleton(
-              width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
-            ),
-          ),
-          SizedBox(width: AppSpacing.x3),
-          Expanded(
-            child: VitSkeleton(
-              width: double.infinity,
-              height: double.infinity,
-              borderRadius: AppRadii.cardRadius,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VitSkeleton(
+                  width: HomeSpacingTokens.skeletonSubtitleWidth,
+                  height: HomeSpacingTokens.skeletonLineHeightLg,
+                ),
+                SizedBox(height: AppSpacing.x1),
+                VitSkeleton(
+                  width: HomeSpacingTokens.skeletonLineWidthLg,
+                  height: HomeSpacingTokens.skeletonLineHeightSm,
+                ),
+              ],
             ),
           ),
         ],

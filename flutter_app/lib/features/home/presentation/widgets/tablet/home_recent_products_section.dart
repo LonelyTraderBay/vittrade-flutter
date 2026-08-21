@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 
-const double _recentProductExtent = SharedSpacingTokens.homeRecentProductHeight;
-const double _recentProductWidth = HomeSpacingTokens.homeRecentProductWidth;
-
+/// Tablet sidebar renders «Gần đây» as full-width vertical rows — a
+/// horizontal fixed-width strip inside a narrow scrolling sidebar is the
+/// phone idiom (nested scroll axes, only ~2 cards visible). Phone keeps its
+/// horizontal strip; each surface owns its composition.
 class HomeRecentProductsSection extends StatelessWidget {
   const HomeRecentProductsSection({
     super.key,
@@ -44,21 +47,24 @@ class HomeRecentProductsSection extends StatelessWidget {
             onAction: () => onNavigate('/markets'),
           )
         else
-          SizedBox(
+          VitCard(
             key: HomeTabletKeys.recentProducts,
-            height: _recentProductExtent,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              clipBehavior: Clip.none,
-              itemCount: recentProducts.length,
-              separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.x3),
-              itemBuilder: (context, index) {
-                final product = recentProducts[index];
-                return _HomeRecentProductTile(
-                  product: product,
-                  onTap: () => onNavigate(product.routePath),
-                );
-              },
+            clip: true,
+            child: Column(
+              children: [
+                for (var i = 0; i < recentProducts.length; i++) ...[
+                  _HomeRecentProductRow(
+                    product: recentProducts[i],
+                    onTap: () => onNavigate(recentProducts[i].routePath),
+                  ),
+                  if (i < recentProducts.length - 1)
+                    const Divider(
+                      height: AppSpacing.dividerHairline,
+                      thickness: AppSpacing.dividerHairline,
+                      color: AppColors.divider,
+                    ),
+                ],
+              ],
             ),
           ),
       ],
@@ -66,25 +72,44 @@ class HomeRecentProductsSection extends StatelessWidget {
   }
 }
 
-class _HomeRecentProductTile extends StatelessWidget {
-  const _HomeRecentProductTile({required this.product, required this.onTap});
+class _HomeRecentProductRow extends StatelessWidget {
+  const _HomeRecentProductRow({required this.product, required this.onTap});
 
   final HomeRecentProduct product;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: _recentProductWidth,
-      height: _recentProductExtent,
-      child: VitCompactProductCard(
-        key: HomeTabletKeys.recentProduct(product.id),
+    return VitIconListRow(
+      key: HomeTabletKeys.recentProduct(product.id),
+      onTap: onTap,
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: HomeSpacingTokens.homeListRowPadding,
+        vertical: AppSpacing.x3,
+      ),
+      leading: VitAccentIconBox(
         icon: HomeActionTokens.icon(product.icon),
-        title: product.label,
-        subtitle: product.contextLabel,
-        accentColor: HomeActionTokens.accent(product.accentKey),
-        badgeLabel: product.stateLabel,
-        onTap: onTap,
+        color: HomeActionTokens.accent(product.accentKey),
+      ),
+      title: Text(
+        product.label,
+        style: AppTextStyles.body.copyWith(color: AppColors.text1),
+      ),
+      subtitle: Text(
+        product.contextLabel,
+        style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          VitStatusPill(label: product.stateLabel, size: VitStatusPillSize.sm),
+          const SizedBox(width: AppSpacing.x2),
+          const Icon(
+            Icons.chevron_right_rounded,
+            size: SharedSpacingTokens.homeSectionActionChevronSize,
+            color: AppColors.text3,
+          ),
+        ],
       ),
     );
   }

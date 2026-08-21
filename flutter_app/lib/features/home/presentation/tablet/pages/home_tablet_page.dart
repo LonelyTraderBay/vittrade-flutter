@@ -6,15 +6,12 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/home_controller_providers.dart';
 import 'package:vit_trade_flutter/app/providers/notifications_controller_providers.dart';
-import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
-import 'package:vit_trade_flutter/features/home/presentation/widgets/home_more_products_sheet.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_header.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_more_products_dialog.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_products_section.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_status_content.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
-import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 /// Tablet composition of Home (SC-007). It shares route/data contracts with
 /// phone Home, but renders a dedicated tablet command center and header.
@@ -78,25 +75,15 @@ class _HomeTabletPageState extends ConsumerState<HomeTabletPage> {
     if (actions.isEmpty) return;
 
     unawaited(
-      showVitBottomSheet<void>(
+      showDialog<void>(
         context: context,
-        isScrollControlled: true,
-        backgroundColor: AppColors.bg,
-        barrierColor: AppColors.modalScrim,
-        // Full-width phone sheet stretches badly at tablet widths; cap it
-        // at the dashboard's main-column width so it reads as the same
-        // content column.
-        constraints: const BoxConstraints(
-          maxWidth: TabletDashboardWidths.primaryColumnMaxWidth,
-        ),
-        builder: (sheetContext) {
-          return HomeMoreProductsSheet(
+        builder: (dialogContext) {
+          return HomeMoreProductsDialog(
             actions: actions,
             onNavigate: (path) {
-              Navigator.of(sheetContext).pop();
+              Navigator.of(dialogContext).pop();
               unawaited(rootContext.push(path));
             },
-            density: VitDensity.standard,
           );
         },
       ),
@@ -132,12 +119,13 @@ class _HomeTabletPageState extends ConsumerState<HomeTabletPage> {
     final controller = HomeController(state: HomeViewState(snapshot: snapshot));
     final visibleAnnouncements = _visibleAnnouncements(snapshot);
     final visibleNextAction = _visibleNextAction(snapshot.nextAction);
-    final marketTickerPairs = controller.gainers
-        .take(3)
-        .toList(growable: false);
-    // The sidebar grid renders every quick action, so the «Xem thêm» sheet
-    // only carries catalog products not already visible there.
+    // The watchlist panel is this surface's main workspace — show every
+    // pair the snapshot offers (phone keeps its 5-row feed).
+    final marketPairs = controller.tabPairs(_marketTab, limit: 10);
+    // The sidebar grid renders 2×4 quick actions; the rest flows to the
+    // «Xem thêm» catalog dialog.
     final gridRoutes = snapshot.quickActions
+        .take(HomeProductsSection.gridCapacity)
         .map((action) => action.routePath)
         .toSet();
     final moreCatalogActions = _flatMoreCatalogActions(
@@ -146,15 +134,16 @@ class _HomeTabletPageState extends ConsumerState<HomeTabletPage> {
     );
     return HomeTabletReferenceHome(
       snapshot: snapshot,
-      visibleAnnouncements: visibleAnnouncements,
+      notice: visibleAnnouncements.isNotEmpty
+          ? visibleAnnouncements.first
+          : null,
       visibleNextAction: visibleNextAction,
-      marketTickerPairs: marketTickerPairs,
-      marketPairs: controller.tabPairs(_marketTab),
+      marketPairs: marketPairs,
       marketTab: _marketTab,
       balanceHidden: _balanceHidden,
       onToggleBalance: _toggleBalanceHidden,
       onNavigate: _go,
-      onDismissAnnouncement: _dismissAnnouncement,
+      onDismissNotice: _dismissAnnouncement,
       onDismissNextAction: visibleNextAction == null
           ? null
           : () => _dismissNextAction(visibleNextAction),
