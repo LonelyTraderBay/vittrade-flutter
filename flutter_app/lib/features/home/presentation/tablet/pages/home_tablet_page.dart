@@ -122,8 +122,9 @@ class _HomeTabletPageState extends ConsumerState<HomeTabletPage> {
     // The watchlist panel is this surface's main workspace — show every
     // pair the snapshot offers (phone keeps its 5-row feed).
     final marketPairs = controller.tabPairs(_marketTab, limit: 10);
-    // The sidebar grid renders 2×4 quick actions; the rest flows to the
-    // «Xem thêm» catalog dialog.
+    // The sidebar grid renders its full 3×3 capacity (9 quick actions);
+    // only product-group items beyond them flow to the «Xem thêm» catalog
+    // dialog.
     final gridRoutes = snapshot.quickActions
         .take(HomeProductsSection.gridCapacity)
         .map((action) => action.routePath)

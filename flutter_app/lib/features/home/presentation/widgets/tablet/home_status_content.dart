@@ -59,50 +59,33 @@ class HomeErrorContent extends StatelessWidget {
   }
 }
 
-/// Mirrors the loaded KPI strip banner: one wide card holding three metric
-/// blocks plus the trailing action toolbar.
+/// Mirrors the loaded KPI strip banner: one wide card holding the four KPI
+/// blocks (balance, PnL, 7-day trend, wallet breakdown) plus the trailing
+/// Nạp/Rút/Ví action toolbar. Bars inside the flex blocks stretch
+/// (`double.infinity`) so the skeleton never overflows the narrow
+/// single-column fallback width.
 class HomeKpiStripSkeleton extends StatelessWidget {
   const HomeKpiStripSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const VitCard(
+    return VitCard(
       radius: VitCardRadius.large,
       padding: SharedSpacingTokens.homeCardPaddingDefault,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          Expanded(flex: 3, child: _labelValuePair(valueHeight: AppSpacing.x6)),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(flex: 3, child: _labelValuePair(valueHeight: AppSpacing.x5)),
+          const SizedBox(width: AppSpacing.x3),
+          const Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 VitSkeleton(
-                  width: HomeSpacingTokens.skeletonTitleWidth,
-                  height: HomeSpacingTokens.skeletonLineHeightLg,
-                ),
-                SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-                VitSkeleton(width: 200, height: AppSpacing.x6),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VitSkeleton(
-                  width: HomeSpacingTokens.skeletonSubtitleWidth,
-                  height: HomeSpacingTokens.skeletonLineHeightLg,
-                ),
-                SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-                VitSkeleton(width: 160, height: AppSpacing.x5),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VitSkeleton(
-                  width: HomeSpacingTokens.skeletonSubtitleWidth,
+                  width: double.infinity,
                   height: HomeSpacingTokens.skeletonLineHeightLg,
                 ),
                 SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
@@ -113,8 +96,73 @@ class HomeKpiStripSkeleton extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const VitSkeleton(
+                  width: double.infinity,
+                  height: HomeSpacingTokens.skeletonLineHeightLg,
+                ),
+                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                for (var i = 0; i < 3; i++) ...[
+                  const VitSkeleton(
+                    width: double.infinity,
+                    height: HomeSpacingTokens.skeletonLineHeightSm,
+                  ),
+                  if (i < 2)
+                    const SizedBox(
+                      height: AppSpacing.pageRhythmCompactInnerGap,
+                    ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+          const _KpiActionsSkeleton(),
         ],
       ),
+    );
+  }
+
+  Widget _labelValuePair({required double valueHeight}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const VitSkeleton(
+          width: double.infinity,
+          height: HomeSpacingTokens.skeletonLineHeightLg,
+        ),
+        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitSkeleton(width: double.infinity, height: valueHeight),
+      ],
+    );
+  }
+}
+
+/// Three compact button ghosts — same count and height class as the loaded
+/// strip's toolbar (`buttonCompact + x3`, see `HomeTabletKpiStrip`).
+class _KpiActionsSkeleton extends StatelessWidget {
+  const _KpiActionsSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    const buttonGhost = VitSkeleton(
+      width: 64,
+      height: AppSpacing.buttonCompact + AppSpacing.x3,
+      borderRadius: AppRadii.cardRadius,
+    );
+    return const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buttonGhost,
+        SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        buttonGhost,
+        SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        buttonGhost,
+      ],
     );
   }
 }

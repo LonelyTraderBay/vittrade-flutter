@@ -6,7 +6,6 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
-import 'package:vit_trade_flutter/shared/widgets/vit_module_components.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 /// Tablet presentation of the «Xem thêm (+N)» catalog: a centered dialog
@@ -17,7 +16,9 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// catalog shape is the shared contract.
 ///
 /// Dialog chrome follows the house style of `showVitConfirmDialog`
-/// (`AlertDialog` + `AppColors.surface` + `AppRadii.cardRadius`).
+/// (`AlertDialog` + `AppColors.surface` + `AppRadii.cardRadius`), with a
+/// trailing «Đóng» action using the same compact `VitCtaButton` idiom — an
+/// explicit dismiss affordance beats relying on outside-tap/Esc alone.
 class HomeMoreProductsDialog extends StatelessWidget {
   const HomeMoreProductsDialog({
     super.key,
@@ -45,7 +46,7 @@ class HomeMoreProductsDialog extends StatelessWidget {
       surfaceTintColor: AppColors.surface,
       shape: const RoundedRectangleBorder(borderRadius: AppRadii.cardRadius),
       title: Text(
-        'Thêm hành động',
+        'Tất cả sản phẩm',
         style: AppTextStyles.baseMedium.copyWith(color: AppColors.text1),
       ),
       content: SizedBox(
@@ -70,6 +71,15 @@ class HomeMoreProductsDialog extends StatelessWidget {
           ),
         ),
       ),
+      actions: [
+        VitCtaButton(
+          onPressed: () => Navigator.of(context).pop(),
+          variant: VitCtaButtonVariant.secondary,
+          height: AppSpacing.buttonCompact,
+          fullWidth: false,
+          child: const Text('Đóng'),
+        ),
+      ],
     );
   }
 }

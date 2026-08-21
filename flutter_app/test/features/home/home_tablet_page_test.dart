@@ -357,7 +357,8 @@ void main() {
       ),
       findsNothing,
     );
-    expect(find.text('Thêm hành động'), findsOneWidget);
+    expect(find.text('Tất cả sản phẩm'), findsOneWidget);
+    expect(find.text('Đóng'), findsOneWidget);
     expect(find.text('Margin'), findsOneWidget);
     expect(find.text('Copy Trade'), findsOneWidget);
     expect(find.text('Bot'), findsOneWidget);
@@ -389,6 +390,22 @@ void main() {
     );
 
     await tester.tap(find.text('Copy Trade'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(HomePage.moreProductsSheetKey), findsNothing);
+  });
+
+  testWidgets('SC-007 tablet catalog dialog closes via «Đóng»', (tester) async {
+    await pumpTabletHome(tester);
+
+    final moreAction = find.textContaining('Xem thêm');
+    await tester.ensureVisible(moreAction);
+    await tester.tap(moreAction);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(HomePage.moreProductsSheetKey), findsOneWidget);
+
+    await tester.tap(find.text('Đóng'));
     await tester.pumpAndSettle();
 
     expect(find.byKey(HomePage.moreProductsSheetKey), findsNothing);
