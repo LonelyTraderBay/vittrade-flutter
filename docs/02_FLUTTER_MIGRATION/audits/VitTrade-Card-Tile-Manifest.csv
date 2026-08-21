@@ -5,6 +5,9 @@ home,E,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections
 home,C,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,file_summary,home_scan,0,-,-,pass,-
 home,E,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,file_summary,home_scan,0,-,-,pass,-
 home,D,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,file_summary,home_scan,0,-,-,pass,-
+home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,file_summary,home_scan,0,-,-,pass,-
 home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,file_summary,home_scan,0,-,-,pass,-
 home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,file_summary,home_scan,0,-,-,pass,-
-home,D,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,file_summary,home_scan,0,-,-,pass,-
+home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,file_summary,home_scan,0,-,-,pass,-
+home,C,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,file_summary,home_scan,0,-,-,pass,-
+home,E,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_kpi_strip.dart,file_summary,home_scan,0,-,-,pass,-

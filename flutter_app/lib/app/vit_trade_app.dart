@@ -42,8 +42,14 @@ class VitTradeApp extends StatefulWidget {
   State<VitTradeApp> createState() => _VitTradeAppState();
 }
 
-class _VitTradeAppState extends State<VitTradeApp> {
+class _VitTradeAppState extends State<VitTradeApp> with WidgetsBindingObserver {
   GoRouter? _generatedRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   @override
   void didUpdateWidget(covariant VitTradeApp oldWidget) {
@@ -60,8 +66,25 @@ class _VitTradeAppState extends State<VitTradeApp> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _disposeGeneratedRouter();
     super.dispose();
+  }
+
+  /// Cold-start race (reproduced on an Android tablet emulator): the first
+  /// build can run before the engine has received real view metrics, so the
+  /// viewport width reads 0 — resolving the surface from that would lock the
+  /// Phone composition in for the whole session on tablet-sized devices,
+  /// because the surface router is created once and never re-resolved.
+  /// While bootstrap is still waiting for valid metrics, a metrics
+  /// notification is the only thing that can unblock it; afterwards (surface
+  /// locked, or the caller supplied the router) metric changes such as
+  /// rotation must be ignored.
+  @override
+  void didChangeMetrics() {
+    if (_generatedRouter == null && widget.routerConfig == null) {
+      setState(() {});
+    }
   }
 
   void _disposeGeneratedRouter() {
@@ -89,7 +112,9 @@ class _VitTradeAppState extends State<VitTradeApp> {
         // GĐ4-F1: khôi phục phiên đăng nhập từ SecureStore ngay khi cây
         // widget dựng — phải nằm DƯỚI ProviderScope để đọc được provider.
         child: SessionBootstrap(
-          child: _VitTradeMaterialApp(routerConfig: resolvedRouter),
+          child: resolvedRouter == null
+              ? const ColoredBox(color: AppColors.bg)
+              : _VitTradeMaterialApp(routerConfig: resolvedRouter),
         ),
       ),
     );
@@ -114,12 +139,18 @@ class _VitTradeAppState extends State<VitTradeApp> {
     return host.createRouter(selectedSurface);
   }
 
-  GoRouter _resolveRouter(
+  GoRouter? _resolveRouter(
     BuildContext context,
     ShellRenderMode resolvedShellRenderMode,
   ) {
     final router = _generatedRouter;
     if (router != null) return router;
+
+    // An explicit surface does not depend on viewport metrics — resolve
+    // immediately. Otherwise wait for the first valid metrics (unblocked by
+    // didChangeMetrics): resolving from width 0 would permanently lock the
+    // wrong surface for the whole session.
+    if (widget.surface == null && _viewportWidth(context) <= 0) return null;
 
     return _generatedRouter = _createSurfaceRouter(
       context,
@@ -138,9 +169,9 @@ class _VitTradeAppState extends State<VitTradeApp> {
 }
 
 class _VitTradeMaterialApp extends StatelessWidget {
-  const _VitTradeMaterialApp({this.routerConfig});
+  const _VitTradeMaterialApp({required this.routerConfig});
 
-  final GoRouter? routerConfig;
+  final GoRouter routerConfig;
 
   @override
   Widget build(BuildContext context) {

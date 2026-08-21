@@ -26,13 +26,29 @@ final class HomeController {
     return pairs.take(5).toList();
   }
 
-  List<HomeCryptoPair> tabPairs(String marketTab) {
+  /// Pairs for a market tab. Phone keeps the default 5-row feed; a denser
+  /// surface (tablet watchlist panel) passes a higher [limit].
+  List<HomeCryptoPair> tabPairs(String marketTab, {int limit = 5}) {
     return switch (marketTab) {
-      'gainers' => gainers,
-      'losers' => losers,
-      'new' => state.snapshot.pairs.reversed.take(5).toList(),
-      _ => hotPairs,
+      'gainers' => _sortedByChange(descending: true).take(limit).toList(),
+      'losers' => _sortedByChange(descending: false).take(limit).toList(),
+      'new' => state.snapshot.pairs.reversed.take(limit).toList(),
+      _ =>
+        state.snapshot.pairs
+            .where((pair) => pair.isFavorite)
+            .take(limit)
+            .toList(),
     };
+  }
+
+  List<HomeCryptoPair> _sortedByChange({required bool descending}) {
+    final pairs = [...state.snapshot.pairs];
+    pairs.sort(
+      (a, b) => descending
+          ? b.change24h.compareTo(a.change24h)
+          : a.change24h.compareTo(b.change24h),
+    );
+    return pairs;
   }
 }
 

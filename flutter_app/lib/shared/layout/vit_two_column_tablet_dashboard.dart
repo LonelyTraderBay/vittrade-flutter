@@ -80,11 +80,15 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
     super.key,
     required this.primaryChildren,
     required this.secondaryChildren,
+    this.banner,
     this.onRefresh,
     this.twoColumnMinWidth = TabletDashboardWidths.twoColumnMinWidth,
     this.primaryColumnMaxWidth = TabletDashboardWidths.primaryColumnMaxWidth,
     this.secondaryColumnMaxWidth =
         TabletDashboardWidths.secondaryColumnMaxWidth,
+    this.outerHorizontalMargin = TabletDashboardWidths.outerHorizontalMargin,
+    this.columnGutter = TabletDashboardWidths.columnGutter,
+    this.blockVerticalGap = TabletDashboardWidths.blockVerticalGap,
     this.primaryContentGap,
     this.secondaryContentGap,
     this.bottomContentInset = AppSpacing.contentPad,
@@ -97,6 +101,12 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
   /// Sidebar-panel content. Framed in a `VitCard` at the two-column width
   /// (R7); appended after [primaryChildren] in the single-column fallback.
   final List<Widget> secondaryChildren;
+
+  /// Optional full-width content above both columns (e.g. a KPI strip),
+  /// fixed — it never scrolls with either column. Sits inside the same
+  /// outer-margin/width-cap system as the columns, on one shared top gap
+  /// line, separated from the columns by [blockVerticalGap].
+  final Widget? banner;
 
   /// Optional pull-to-refresh callback (the tablet equivalent of the phone
   /// scroll-shell's `RefreshIndicator`). When non-null, every scrollable
@@ -120,6 +130,25 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
   /// Caps the secondary column's own width at/above [twoColumnMinWidth]
   /// (R8).
   final double secondaryColumnMaxWidth;
+
+  /// Outer breathing room on each side of the dashboard block. The
+  /// two-column path reserves it inside the pair cap (the column caps stay
+  /// untouched); the single-column fallback wraps in the same margin —
+  /// without it the block fills nearly edge-to-edge at common landscape
+  /// widths and reads as pressed against the screen.
+  final double outerHorizontalMargin;
+
+  /// Explicit horizontal gutter between the primary column and the sidebar
+  /// panel. Both columns sit on the same content plane (see
+  /// [outerHorizontalMargin]), so separation must come from this reserved
+  /// gap rather than from per-column padding.
+  final double columnGutter;
+
+  /// Vertical breathing room above and below the two-column block — the
+  /// top gap aligns both columns' first frame on one line below the fixed
+  /// header; the bottom gap keeps the scrollable columns off the viewport's
+  /// bottom edge.
+  final double blockVerticalGap;
 
   /// Optional vertical gap between primary-column sections. When null, the
   /// column keeps the rhythm selected below for backward compatibility.
@@ -146,82 +175,141 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < twoColumnMinWidth) {
-          return _wrapRefresh(
-            SingleChildScrollView(
-              physics: _physics,
-              padding: EdgeInsets.only(bottom: bottomContentInset),
-              child: VitPageContent(
-                padding: VitContentPadding.compact,
-                rhythm: VitPageRhythm.compact,
-                children: [...primaryChildren, ...secondaryChildren],
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (banner != null) ...[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    outerHorizontalMargin,
+                    blockVerticalGap,
+                    outerHorizontalMargin,
+                    0,
+                  ),
+                  child: banner,
+                ),
+                SizedBox(height: blockVerticalGap),
+              ],
+              Expanded(
+                child: _wrapRefresh(
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: outerHorizontalMargin,
+                    ),
+                    child: SingleChildScrollView(
+                      physics: _physics,
+                      padding: EdgeInsets.only(bottom: bottomContentInset),
+                      child: VitPageContent(
+                        padding: VitContentPadding.compact,
+                        rhythm: VitPageRhythm.compact,
+                        children: [...primaryChildren, ...secondaryChildren],
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           );
         }
 
         return Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: primaryColumnMaxWidth + secondaryColumnMaxWidth,
+              maxWidth:
+                  primaryColumnMaxWidth +
+                  secondaryColumnMaxWidth +
+                  2 * outerHorizontalMargin +
+                  columnGutter,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _wrapRefresh(
-                    SingleChildScrollView(
-                      physics: _physics,
-                      padding: EdgeInsets.only(bottom: bottomContentInset),
-                      child: VitPageContent(
-                        padding: VitContentPadding.relaxed,
-                        rhythm: VitPageRhythm.relaxed,
-                        customGap: primaryContentGap,
-                        children: primaryChildren,
-                      ),
-                    ),
-                  ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: outerHorizontalMargin),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: blockVerticalGap,
+                  bottom: blockVerticalGap,
                 ),
-                // Fixed width, not Expanded — see R5 above: a flex share
-                // would let this column over-claim width beyond what its
-                // own capped content ever uses.
-                SizedBox(
-                  width: secondaryColumnMaxWidth,
-                  child: _wrapRefresh(
-                    SingleChildScrollView(
-                      physics: _physics,
-                      child: VitCard(
-                        variant: VitCardVariant.inner,
-                        radius: VitCardRadius.standard,
-                        padding: EdgeInsets.zero,
-                        // Inner-variant cards default to a borderless fill
-                        // (see VitCard._decoration) — fine for a card nested
-                        // inside another surface, but on its own against the
-                        // page background that fill alone reads too close in
-                        // value to register as a distinct sidebar panel (R7).
-                        // Confirmed on-device: the standard card border token
-                        // (AppColors.cardBorder, ~7% white) was tried first and
-                        // was imperceptible at this size against surface2, so
-                        // this uses the stronger, still-existing borderSolid
-                        // token (already used for the same "give this surface
-                        // a visible edge" purpose elsewhere, e.g.
-                        // two_fa_setup_backup.dart) — a call-site override, not
-                        // a change to any of the ~250 other inner-variant call
-                        // sites app-wide.
-                        borderColor: AppColors.borderSolid,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: bottomContentInset),
-                          child: VitPageContent(
-                            padding: VitContentPadding.relaxed,
-                            rhythm: VitPageRhythm.relaxed,
-                            customGap: secondaryContentGap,
-                            children: secondaryChildren,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (banner != null) ...[
+                      banner!,
+                      SizedBox(height: blockVerticalGap),
+                    ],
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
+                            child: _wrapRefresh(
+                              SingleChildScrollView(
+                                physics: _physics,
+                                padding: EdgeInsets.only(
+                                  bottom: bottomContentInset,
+                                ),
+                                // No horizontal padding of its own: the primary
+                                // column's cards and the sidebar frame must sit on
+                                // ONE content plane (both inset by exactly
+                                // [outerHorizontalMargin]); separation between the
+                                // columns comes from the explicit gutter below.
+                                child: VitPageContent(
+                                  padding: VitContentPadding.none,
+                                  fullBleed: true,
+                                  rhythm: VitPageRhythm.relaxed,
+                                  customGap: primaryContentGap,
+                                  children: primaryChildren,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          SizedBox(width: columnGutter),
+                          // Fixed width, not Expanded — see R5 above: a flex share
+                          // would let this column over-claim width beyond what its
+                          // own capped content ever uses.
+                          SizedBox(
+                            width: secondaryColumnMaxWidth,
+                            child: _wrapRefresh(
+                              SingleChildScrollView(
+                                physics: _physics,
+                                child: VitCard(
+                                  variant: VitCardVariant.inner,
+                                  radius: VitCardRadius.standard,
+                                  padding: EdgeInsets.zero,
+                                  // Inner-variant cards default to a borderless fill
+                                  // (see VitCard._decoration) — fine for a card nested
+                                  // inside another surface, but on its own against the
+                                  // page background that fill alone reads too close in
+                                  // value to register as a distinct sidebar panel (R7).
+                                  // Confirmed on-device: the standard card border token
+                                  // (AppColors.cardBorder, ~7% white) was tried first and
+                                  // was imperceptible at this size against surface2, so
+                                  // this uses the stronger, still-existing borderSolid
+                                  // token (already used for the same "give this surface
+                                  // a visible edge" purpose elsewhere, e.g.
+                                  // two_fa_setup_backup.dart) — a call-site override, not
+                                  // a change to any of the ~250 other inner-variant call
+                                  // sites app-wide.
+                                  borderColor: AppColors.borderSolid,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: bottomContentInset,
+                                    ),
+                                    child: VitPageContent(
+                                      padding: VitContentPadding.relaxed,
+                                      rhythm: VitPageRhythm.relaxed,
+                                      customGap: secondaryContentGap,
+                                      children: secondaryChildren,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );

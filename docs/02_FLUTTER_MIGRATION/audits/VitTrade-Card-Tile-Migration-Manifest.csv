@@ -25,9 +25,12 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 02_home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,C,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,D,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,E,-,done,0,-
 02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,E,-,done,0,-
-02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,D,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,E,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,C,-,done,0,-
+02_home,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_kpi_strip.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/bridge/arena_prediction_bridge_foundation_page_examples_and_shared_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/bridge/arena_prediction_bridge_foundation_page_principles_section.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/bridge/arena_prediction_bridge_foundation_page_topics_boundary_bridge_sections.dart,C,-,done,0,-

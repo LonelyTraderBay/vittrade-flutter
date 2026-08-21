@@ -44,7 +44,23 @@ class _HomeAnnouncementBannerState extends State<HomeAnnouncementBanner> {
     } else if (_activeIndex >= widget.announcements.length) {
       _activeIndex = 0;
     }
-    _startAutoAdvance();
+    // Restart the countdown only when the announcement set actually changed;
+    // an unrelated parent rebuild (scroll auto-hide, badge count) must not
+    // reset the carousel cadence mid-cycle.
+    if (!_sameAnnouncements(oldWidget.announcements, widget.announcements)) {
+      _startAutoAdvance();
+    }
+  }
+
+  bool _sameAnnouncements(
+    List<HomeAnnouncement> oldAnnouncements,
+    List<HomeAnnouncement> announcements,
+  ) {
+    if (oldAnnouncements.length != announcements.length) return false;
+    for (var i = 0; i < announcements.length; i++) {
+      if (oldAnnouncements[i].id != announcements[i].id) return false;
+    }
+    return true;
   }
 
   @override

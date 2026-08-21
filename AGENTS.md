@@ -282,6 +282,7 @@ boundaries always take precedence over generic skill guidance.
 | Debug / test failure / blocked batch | `.codex/skills/debugging-and-error-recovery/SKILL.md` |
 | Performance / jank / profiling | `.codex/skills/performance-optimization/SKILL.md` |
 | Trade module debt scan (sprint) | `.codex/skills/ponytail-audit/SKILL.md` |
+| UI/UX design intelligence (reference) | `.codex/skills/ui-ux-pro-max/SKILL.md` — tra cứu style/UX guidance; LUÔN thua DESIGN.md + tokens + Vit* ladder khi xung đột (xem install note trong SKILL.md) |
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence

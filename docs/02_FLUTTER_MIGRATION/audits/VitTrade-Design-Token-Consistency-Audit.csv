@@ -377,17 +377,19 @@ feature_widget,,flutter_app/lib/features/home/presentation/widgets/phone/home_pr
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/phone/home_recent_products_section.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/phone/home_scroll_shell.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
-feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
+feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_more_products_dialog.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_next_action_section.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_notice_line.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_products_section.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
-feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,warn,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_kpi_strip.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/launchpad/presentation/widgets/bridge/launchpad_bridge_compare_common.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/launchpad/presentation/widgets/bridge/launchpad_bridge_compare_confirm.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
@@ -1172,7 +1174,7 @@ shared_layout,,flutter_app/lib/shared/layout/vit_phone_frame.dart,pass,0,0,0,0,0
 shared_layout,,flutter_app/lib/shared/layout/vit_status_bar.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_top_chrome.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
-shared_layout,,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,warn,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,3,no,-
+shared_layout,,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,fail,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,7,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_web_utility_page.dart,warn,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,no,-
 shared_widget,,flutter_app/lib/shared/widgets/vit_accent_icon_box.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_widget,,flutter_app/lib/shared/widgets/vit_accent_pill.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-

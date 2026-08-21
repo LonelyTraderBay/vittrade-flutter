@@ -379,9 +379,12 @@ home,flutter_app/lib/features/home/presentation/phone/pages/home_page_sections.d
 home,flutter_app/lib/features/home/presentation/web/pages/home_web_page.dart,4,0,0,C,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_portfolio_card.dart,2,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,2,0,0,D,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,1,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,1,0,0,E,0,0,0,pass,-
 home,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,2,0,0,E,0,0,0,pass,-
-home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,2,0,0,D,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,1,0,0,E,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,5,0,0,C,0,0,0,pass,-
+home,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_kpi_strip.dart,3,0,0,E,0,0,0,pass,-
 launchpad,flutter_app/lib/features/launchpad/presentation/phone/pages/bridge/launchpad_ido_bridge_page.dart,5,0,0,D,0,0,0,pass,-
 launchpad,flutter_app/lib/features/launchpad/presentation/phone/pages/hub/launchpad_contract_page.dart,6,0,0,D,0,0,0,pass,-
 launchpad,flutter_app/lib/features/launchpad/presentation/phone/pages/hub/launchpad_detail_page.dart,3,0,0,D,0,0,0,pass,-

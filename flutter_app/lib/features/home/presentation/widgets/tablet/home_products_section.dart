@@ -7,7 +7,13 @@ import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Primary quick-action grid only. Full catalog opens via «Xem thêm».
+/// Sidebar tile columns — 3 columns, the shared service-tile density; a
+/// 2-wide-tile grid left too much empty tile face on this sidebar.
+const int _kSidebarGridCrossAxisCount = 3;
+
+/// Sidebar quick-action grid: 3 columns × 3 rows — all quick actions fit
+/// exactly, keeping the block dense; only product-group items beyond them
+/// flow to the «Xem thêm» catalog dialog.
 class HomeProductsSection extends StatelessWidget {
   const HomeProductsSection({
     super.key,
@@ -18,6 +24,10 @@ class HomeProductsSection extends StatelessWidget {
     required this.onMore,
     required this.density,
   });
+
+  /// 3 columns × 3 rows — keep in sync with the page's catalog-exclusion
+  /// set so the dialog never repeats a grid tile.
+  static const int gridCapacity = 9;
 
   final List<HomeQuickAction> quickActions;
   final int maxVisibleQuickActions;
@@ -80,7 +90,7 @@ class HomeQuickActionsGrid extends StatelessWidget {
       density: density,
       itemCount: actions.length,
       maxVisibleItems: maxVisibleItems,
-      crossAxisCount: AppSpacing.serviceTileCrossAxisCount,
+      crossAxisCount: _kSidebarGridCrossAxisCount,
       itemBuilder: (context, index, tileDensity) {
         return buildHomeQuickActionTile(
           actions[index],

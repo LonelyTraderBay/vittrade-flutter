@@ -6,9 +6,10 @@ import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.da
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Flat catalog sheet — no group headers on Home or in this sheet. Shared by
-/// the phone and tablet surfaces; each call site constrains the sheet to its
-/// own surface's comfortable width.
+/// Flat catalog sheet — no group headers on Home or in this sheet. Phone
+/// presentation; the tablet surface opens the same flat catalog as a
+/// centered dialog (`HomeMoreProductsDialog`). The catalog shape is the
+/// shared contract, the modality is per-surface.
 class HomeMoreProductsSheet extends StatelessWidget {
   const HomeMoreProductsSheet({
     super.key,

@@ -386,10 +386,13 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Android SDK platform 37
+      # Package SDK publish dưới tên "android-37.0" (major.minor) — không có
+      # "platforms;android-37" thường, sdkmanager sẽ fail "Failed to find
+      # package" nếu ghi thiếu đuôi .0.
+      - name: Install Android SDK platform 37.0
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-37"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-37.0"
 
       - name: Cache pub dependencies
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
