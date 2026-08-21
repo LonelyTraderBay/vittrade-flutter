@@ -14,6 +14,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/pro
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/sub_account_page.dart';
@@ -86,29 +87,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileSecurity,
       name: AppRouteNames.sc158Security,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-158',
-          title: 'Bảo mật tài khoản',
-          subtitle: '2FA · thiết bị · mã chống lừa đảo',
-          description:
-              'Kiểm tra điểm bảo mật và các lớp bảo vệ quan trọng trước khi cập nhật tài khoản.',
-          facts: const [
-            ProfileTabletFact(
-              label: 'Điểm bảo mật',
-              value: '82/100',
-              valueColor: AppColors.buy,
-            ),
-            ProfileTabletFact(
-              label: '2FA',
-              value: 'Đang bật',
-              valueColor: AppColors.buy,
-            ),
-            ProfileTabletFact(label: 'Thiết bị tin cậy', value: '3 thiết bị'),
-          ],
-          actionLabel: 'Mở cài đặt bảo mật',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận mở cài đặt bảo mật',
-        ),
+        // Master-detail tablet renders the real security pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileSecurityPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => SecurityPage(shellRenderMode: shellRenderMode),
@@ -317,25 +298,10 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.settingsSecurity,
       name: AppRouteNames.sc413SettingsSecurity,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => const ProfileTabletUtilityPage(
-          semanticIdentifier: 'SC-413',
-          title: 'Cài đặt bảo mật',
-          subtitle: 'Bảo mật · tài khoản',
-          description:
-              'Kiểm tra lại phương thức xác thực và thông tin bảo vệ trước khi thay đổi cài đặt.',
-          facts: [
-            ProfileTabletFact(label: 'Phương thức hiện tại', value: 'Đang bật'),
-            ProfileTabletFact(label: 'Thiết bị tin cậy', value: '3'),
-            ProfileTabletFact(
-              label: 'Bước tiếp theo',
-              value: 'Xác nhận thay đổi',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Xem trước thay đổi',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận thay đổi bảo mật',
-        ),
+        // Same security content as /profile/security — the account menu's
+        // «Bảo mật & 2FA» row routes here, so the master-detail tablet
+        // renders the real pane instead of the old placeholder.
+        AppSurface.tablet => const ProfileSecurityPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => SecurityPage(shellRenderMode: shellRenderMode),

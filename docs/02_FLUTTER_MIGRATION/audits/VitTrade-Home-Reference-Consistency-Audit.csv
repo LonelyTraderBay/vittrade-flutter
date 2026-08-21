@@ -797,6 +797,7 @@ profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tab
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,0,0,0,0,0,0,0,0,no,-
+profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_summary.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-

@@ -36,6 +36,26 @@ final class ProfileTabletKeys {
 
   static Key kycStart(int level) => Key('sc159_kyc_pane_start_$level');
 
+  // Security detail pane (SC-158 tablet port).
+  static const securityPane = Key('sc158_security_pane');
+  static const securityPaneError = Key('sc158_security_pane_error');
+  static const securityPaneScore = Key('sc158_security_pane_score');
+  static const securityAntiPhishingField = Key(
+    'sc158_security_pane_anti_phishing_field',
+  );
+  static const securityAntiPhishingSave = Key(
+    'sc158_security_pane_anti_phishing_save',
+  );
+  static const securityAntiPhishingConfirm = Key(
+    'sc158_security_pane_anti_phishing_confirm',
+  );
+  static const securityAntiPhishingCancel = Key(
+    'sc158_security_pane_anti_phishing_cancel',
+  );
+  static const securitySupport = Key('sc158_security_pane_support');
+
+  static Key securityItem(String id) => Key('sc158_security_pane_item_$id');
+
   static Key productShortcut(String id) => Key('sc156_profile_product_$id');
   static Key menu(String id) => Key('sc156_profile_menu_$id');
   static Key legalGroup(String id) => Key('sc156_profile_legal_group_$id');

@@ -346,6 +346,35 @@ void main() {
     },
   );
 
+  testWidgets(
+    'SC-158 security pane renders the checklist and expands the device list',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('security-center')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: score 3/4 with the
+      // checklist rows and the anti-phishing card.
+      expect(find.byKey(ProfileTabletKeys.securityPaneScore), findsOneWidget);
+      expect(find.text('Cao (3/4)'), findsOneWidget);
+      expect(
+        find.byKey(ProfileTabletKeys.securityItem('two-factor')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ProfileTabletKeys.securityAntiPhishingField),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+
+      // Tapping the devices row expands the logged-in device list in place.
+      await tester.tap(find.byKey(ProfileTabletKeys.securityItem('devices')));
+      await tester.pumpAndSettle();
+      expect(find.text('THIẾT BỊ ĐĂNG NHẬP'), findsOneWidget);
+    },
+  );
+
   testWidgets('SC-156 tablet pull-to-refresh re-fetches the profile', (
     tester,
   ) async {

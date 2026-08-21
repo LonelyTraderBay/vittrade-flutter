@@ -7,6 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 
 void main() {
   Future<void> pumpTabletRoute(WidgetTester tester, String location) async {
@@ -28,16 +29,18 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('SC-158 Tablet uses independent security composition', (
+  testWidgets('SC-158 Tablet uses the real security pane composition', (
     tester,
   ) async {
+    // The security sub-route migrated off the placeholder into the
+    // master-detail real pane (2026-08) — deep-linking straight to it still
+    // lands on the full security content inside the shell.
     await pumpTabletRoute(tester, AppRoutePaths.profileSecurity);
 
-    expect(find.byType(ProfileTabletUtilityPage), findsOneWidget);
-    expect(find.text('Bảo mật tài khoản'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('SC-158-tablet-action')));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('SC-158-tablet-cancel')), findsOneWidget);
+    expect(find.byType(ProfileSecurityPane), findsOneWidget);
+    expect(find.byType(ProfileTabletUtilityPage), findsNothing);
+    expect(find.text('Bảo mật'), findsWidgets);
+    expect(find.text('Cao (3/4)'), findsOneWidget);
   });
 
   testWidgets('SC-159 Tablet uses the real KYC pane composition', (
