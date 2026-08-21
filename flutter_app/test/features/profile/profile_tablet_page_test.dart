@@ -11,7 +11,7 @@ import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entit
 import 'package:vit_trade_flutter/features/profile/domain/repositories/profile_repository.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_strip.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_hero.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
@@ -27,11 +27,18 @@ class _CountingProfileRepository implements ProfileRepository {
 
   final ProfileRepository _inner;
   int profileFetchCount = 0;
+  int securityFetchCount = 0;
 
   @override
   Future<ProfileSnapshot> getProfile() {
     profileFetchCount++;
     return _inner.getProfile();
+  }
+
+  @override
+  Future<ProfileSecuritySnapshot> getSecurity() {
+    securityFetchCount++;
+    return _inner.getSecurity();
   }
 
   @override
@@ -94,29 +101,46 @@ void main() {
   ) async {
     await pumpTabletProfile(tester);
 
-    // Banner: the account strip compresses identity/UID/referral/KYC/VIP.
-    expect(find.byType(ProfileAccountStrip), findsOneWidget);
+    // Banner: the identity hero compresses identity/UID/referral/KYC/VIP.
+    expect(find.byType(ProfileAccountHero), findsOneWidget);
     // Primary column: grouped menu sections.
     expect(find.byType(ProfileMenuPanel), findsWidgets);
-    // Secondary column: Prediction/Arena summary + product shortcuts.
+    // Secondary column: security score + Prediction/Arena summary + product
+    // shortcuts.
+    expect(find.text('Điểm bảo mật'), findsOneWidget);
     expect(find.text('Dự đoán & Thách đấu'), findsOneWidget);
     expect(find.byType(ProfileProductHubPanel), findsOneWidget);
   });
 
-  testWidgets('SC-156 tablet account strip carries the identity facts', (
+  testWidgets('SC-156 tablet identity hero carries the identity facts', (
     tester,
   ) async {
     await pumpTabletProfile(tester);
 
-    expect(find.byKey(ProfileTabletKeys.accountStrip), findsOneWidget);
+    expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
     expect(find.text('UID'), findsOneWidget);
     expect(find.text('Mã giới thiệu'), findsOneWidget);
-    expect(find.text('Trạng thái KYC'), findsOneWidget);
+    // Tier pills: VIP level and KYC level (mock: 'VIP 1', 'Cấp 1').
+    expect(find.text('VIP 1'), findsOneWidget);
+    expect(find.text('KYC Cấp 1'), findsOneWidget);
+    // VIP runway across the hero's foot.
     expect(find.text('Tiến độ VIP'), findsOneWidget);
     // The masked email never renders the raw address (sensitive-data rule);
     // the mask itself is visible instead.
     expect(find.textContaining('nguyenvana@email.com'), findsNothing);
     expect(find.textContaining('@email.com'), findsOneWidget);
+  });
+
+  testWidgets('SC-156 tablet sidebar leads with the security score block', (
+    tester,
+  ) async {
+    // Mirrors the phone Security page's score card semantics against the
+    // production mock: score 3 of 4, label 'Cao', green accent.
+    await pumpTabletProfile(tester);
+
+    expect(find.byKey(ProfileTabletKeys.securityScore), findsOneWidget);
+    expect(find.text('Cao (3/4)'), findsOneWidget);
+    expect(find.text('Nâng cấp bảo mật'), findsOneWidget);
   });
 
   testWidgets(
@@ -152,7 +176,7 @@ void main() {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
       expect(tester.takeException(), isNull);
-      expect(find.byType(ProfileAccountStrip), findsOneWidget);
+      expect(find.byType(ProfileAccountHero), findsOneWidget);
       expect(
         find.ancestor(
           of: find.text('Dự đoán & Thách đấu'),
@@ -239,8 +263,9 @@ void main() {
     );
 
     expect(repository.profileFetchCount, 1);
+    expect(repository.securityFetchCount, 1);
 
-    // Fling inside the primary scrolling column — the account strip is
+    // Fling inside the primary scrolling column — the identity hero is
     // fixed and never scrolls.
     final primaryColumn = find.byType(SingleChildScrollView).first;
     await tester.fling(primaryColumn, const Offset(0, 400), 1000);
@@ -248,9 +273,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(repository.profileFetchCount, 2);
+    // The secondary security snapshot refreshes with the page, not just the
+    // profile snapshot.
+    expect(repository.securityFetchCount, 2);
     expect(find.byType(ProfileTabletPage), findsOneWidget);
     // The refreshed dashboard still carries the full tablet composition.
-    expect(find.byKey(ProfileTabletKeys.accountStrip), findsOneWidget);
+    expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
     expect(find.byType(ProfileMenuPanel), findsWidgets);
   });
 }

@@ -64,7 +64,7 @@ void main() {
       'lib/features/trade/presentation/phone/pages/order_receipt_page.dart',
       'lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart',
       'lib/features/profile/presentation/widgets/common/profile_icon_registry.dart',
-      'lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart',
+      'lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart',
       'lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart',
       'lib/features/auth/presentation/phone/pages/login_page.dart',
       'lib/features/auth/presentation/phone/pages/register_page.dart',

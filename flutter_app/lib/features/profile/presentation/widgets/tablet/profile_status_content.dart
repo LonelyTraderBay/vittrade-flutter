@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Mirrors the loaded Profile dashboard — banner: account strip; primary:
-/// the account menu sections; sidebar: Prediction/Arena summary and product
-/// shortcuts — through the same shared scaffold, so resolving data never
-/// reflows the page shape (including the single-column → two-column switch
-/// at the dashboard's own threshold).
+/// Mirrors the loaded Profile dashboard — banner: identity hero; primary:
+/// the account menu sections; sidebar: security score, Prediction/Arena
+/// summary and product shortcuts — through the same shared scaffold, so
+/// resolving data never reflows the page shape (including the
+/// single-column → two-column switch at the dashboard's own threshold).
 class ProfileLoadingContent extends StatelessWidget {
   const ProfileLoadingContent({super.key, this.onRefresh});
 
@@ -18,7 +20,7 @@ class ProfileLoadingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitTwoColumnTabletDashboard(
-      banner: const _AccountStripSkeleton(key: ProfileTabletKeys.loading),
+      banner: const _AccountHeroSkeleton(key: ProfileTabletKeys.loading),
       onRefresh: onRefresh,
       primaryChildren: const [
         VitSectionSkeleton(),
@@ -26,6 +28,8 @@ class ProfileLoadingContent extends StatelessWidget {
         VitSectionSkeleton(),
       ],
       secondaryChildren: const [
+        ProfileSecuritySummarySkeleton(),
+        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         _SidebarHeadingSkeleton(),
         SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
         _SidebarCardSkeleton(),
@@ -40,69 +44,121 @@ class ProfileLoadingContent extends StatelessWidget {
   }
 }
 
-/// One wide card holding the identity row plus the trailing UID/referral/
-/// KYC/VIP blocks.
-class _AccountStripSkeleton extends StatelessWidget {
-  const _AccountStripSkeleton({super.key});
+/// Mirrors [ProfileSecuritySummary] while the security snapshot resolves —
+/// same card slot so the sidebar doesn't reflow when data lands.
+class ProfileSecuritySummarySkeleton extends StatelessWidget {
+  const ProfileSecuritySummarySkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const VitCard(
-      radius: VitCardRadius.standard,
-      clip: true,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      density: VitDensity.compact,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(flex: 4, child: _IdentitySkeleton()),
-          SizedBox(width: AppSpacing.x3),
-          Expanded(flex: 2, child: _StripValueSkeleton()),
-          SizedBox(width: AppSpacing.x3),
-          Expanded(flex: 2, child: _StripValueSkeleton()),
-          SizedBox(width: AppSpacing.x3),
-          Expanded(flex: 2, child: _StripValueSkeleton()),
-          SizedBox(width: AppSpacing.x3),
-          Expanded(flex: 3, child: _StripValueSkeleton()),
+          Row(
+            children: [
+              Expanded(child: VitSkeleton(width: double.infinity, height: 14)),
+              SizedBox(width: AppSpacing.x3),
+              VitSkeleton(width: 72, height: 14),
+            ],
+          ),
+          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          VitSkeleton(width: double.infinity, height: 7),
+          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          VitSkeleton(width: double.infinity, height: AppSpacing.buttonCompact),
         ],
       ),
     );
   }
 }
 
-class _IdentitySkeleton extends StatelessWidget {
-  const _IdentitySkeleton();
+/// One wide hero card holding the identity block plus the trailing
+/// UID/referral fact boxes and the VIP runway.
+class _AccountHeroSkeleton extends StatelessWidget {
+  const _AccountHeroSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        VitSkeleton(width: 48, height: 48),
-        SizedBox(width: AppSpacing.x2),
-        Expanded(
-          child: Column(
+    return const VitCard(
+      radius: VitCardRadius.large,
+      clip: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VitSkeleton(width: double.infinity, height: 14),
-              SizedBox(height: AppSpacing.x1),
-              VitSkeleton(width: double.infinity, height: 10),
+              Expanded(
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        VitSkeleton(
+                          width: ProfileSpacingTokens.profileHeroAvatar,
+                          height: ProfileSpacingTokens.profileHeroAvatar,
+                        ),
+                        SizedBox(width: AppSpacing.x4),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              VitSkeleton(width: double.infinity, height: 20),
+                              SizedBox(height: AppSpacing.x1),
+                              VitSkeleton(width: 180, height: 10),
+                              SizedBox(height: AppSpacing.x1),
+                              VitSkeleton(width: 140, height: 10),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                    Row(
+                      children: [
+                        VitSkeleton(width: 64, height: 22),
+                        SizedBox(width: AppSpacing.pageRhythmStandardInnerGap),
+                        VitSkeleton(width: 88, height: 22),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: AppSpacing.x4),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _FactBoxSkeleton(),
+                    SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                    _FactBoxSkeleton(),
+                  ],
+                ),
+              ),
             ],
           ),
-        ),
-      ],
+          SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          VitSkeleton(width: double.infinity, height: AppSpacing.x3),
+        ],
+      ),
     );
   }
 }
 
-class _StripValueSkeleton extends StatelessWidget {
-  const _StripValueSkeleton();
+class _FactBoxSkeleton extends StatelessWidget {
+  const _FactBoxSkeleton();
 
   @override
   Widget build(BuildContext context) {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VitSkeleton(width: double.infinity, height: 12),
+        VitSkeleton(width: 80, height: 10),
         SizedBox(height: AppSpacing.x1),
-        VitSkeleton(width: double.infinity, height: 16),
+        VitSkeleton(width: double.infinity, height: 14),
       ],
     );
   }

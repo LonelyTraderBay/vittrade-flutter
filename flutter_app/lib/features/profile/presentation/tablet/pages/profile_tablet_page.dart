@@ -13,11 +13,12 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_strip.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_hero.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_summary.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_status_content.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -29,12 +30,13 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// Tablet composition of Profile (SC-156) — same route, same
 /// [profileSnapshotProvider] data and the same public Profile widgets as
 /// [ProfilePage], but laid out as a persistent two-column dashboard instead
-/// of one scrolling phone column: identity, KYC prompt and menu sections in
-/// the primary column; VIP progress, Prediction/Arena summary and product
-/// shortcuts framed as a sidebar in the secondary column. Does not touch
-/// `profile_page.dart` or its `part` family — reached via
-/// `createTabletAppRouter`/surface bootstrap. Fifth reference implementation for
-/// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
+/// of one scrolling phone column: an identity-hero banner (gradient hero
+/// vocabulary, not the monitor KPI-strip the other root tabs use — Profile
+/// is an identity surface), the account menu sections in the primary column,
+/// and a status rail in the secondary column led by the security score.
+/// Does not touch `profile_page.dart` or its `part` family — reached via
+/// `createTabletAppRouter`/surface bootstrap. Fifth reference implementation
+/// for `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
 class ProfileTabletPage extends ConsumerStatefulWidget {
   const ProfileTabletPage({super.key});
 
@@ -81,7 +83,9 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
 
   Future<void> _refreshProfile() async {
     ref.invalidate(profileSnapshotProvider);
+    ref.invalidate(profileSecuritySnapshotProvider);
     await ref.read(profileSnapshotProvider.future);
+    await ref.read(profileSecuritySnapshotProvider.future);
   }
 
   // Mirrors `_profilePageChildren`'s switch on `snapshot.screenState`
@@ -127,6 +131,26 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
   // `TradeTabletPage`, all of which confirmed the same values empirically.
   // Pass constructor overrides on the call below instead of editing the
   // shared widths if Profile's content ever needs a different number.
+
+  /// Security-score block leading the secondary status rail. The dashboard
+  /// itself renders from `profileSnapshotProvider` — the security snapshot is
+  /// a secondary, additive watch: while it loads its skeleton holds the
+  /// block's slot, and on error the block is simply omitted (the rest of the
+  /// rail and the page stay fully usable) rather than failing the page.
+  List<Widget> _securityRailBlock() {
+    return ref
+        .watch(profileSecuritySnapshotProvider)
+        .when<List<Widget>>(
+          loading: () => const [ProfileSecuritySummarySkeleton()],
+          error: (error, stackTrace) => const [],
+          data: (security) => [
+            ProfileSecuritySummary(
+              snapshot: security,
+              onUpgrade: () => context.go(AppRoutePaths.settingsSecurity),
+            ),
+          ],
+        );
+  }
 
   Widget _buildDashboard(
     ProfileSnapshot snapshot, {
@@ -179,6 +203,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
     ];
 
     final secondaryChildren = [
+      ..._securityRailBlock(),
       VitPageSection(
         label: 'Dự đoán & Thách đấu',
         accentColor: AppColors.accent,
@@ -217,7 +242,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
     ];
 
     return VitTwoColumnTabletDashboard(
-      banner: ProfileAccountStrip(
+      banner: ProfileAccountHero(
         snapshot: snapshot,
         copiedReferral: _copiedReferral,
         onEdit: () => context.go(AppRoutePaths.profileEdit),
