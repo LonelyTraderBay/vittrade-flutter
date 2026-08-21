@@ -5,39 +5,32 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_hero.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_menu_panel.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_summary.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_status_content.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_top_chrome.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Tablet composition of Profile (SC-156) — same route, same
-/// [profileSnapshotProvider] data and the same public Profile widgets as
-/// [ProfilePage], but laid out as a persistent two-column dashboard instead
-/// of one scrolling phone column: an identity-hero card (gradient hero
-/// vocabulary, not the monitor KPI-strip the other root tabs use — Profile
-/// is an identity surface) opening the primary column as its first
-/// scrolling card, the account menu sections below it, and a status rail in
-/// the secondary column led by the security score. Does not touch
-/// `profile_page.dart` or its `part` family — reached via
-/// `createTabletAppRouter`/surface bootstrap. Fifth reference implementation
-/// for `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
+/// Overview pane of the Profile tablet master-detail shell (SC-156) — the
+/// `/profile` route's detail content: the identity hero, the security-score
+/// status block, Prediction/Arena summaries and product shortcuts in one
+/// scrolling column. The account menu lives in the shell's master column
+/// (`ProfileTabletMasterShell`); sub-routes render their panes in place of
+/// this one. Same route contract and same [profileSnapshotProvider] data as
+/// the phone [ProfilePage] — reached via `createTabletAppRouter`/surface
+/// bootstrap. Reference implementation for the master-detail pattern in
+/// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
 class ProfileTabletPage extends ConsumerStatefulWidget {
   const ProfileTabletPage({super.key});
 
@@ -52,33 +45,21 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
   Widget build(BuildContext context) {
     final snapshotAsync = ref.watch(profileSnapshotProvider);
 
-    return VitPageLayout(
-      variant: VitPageVariant.flush,
-      semanticLabel: 'Trang tài khoản: hồ sơ cá nhân, giới thiệu bạn bè và VIP',
-      semanticIdentifier: 'SC-156',
-      child: Column(
-        children: [
-          const VitTopChrome(
-            type: VitTopChromeType.rootModule,
-            title: 'Tài khoản',
-          ),
-          Expanded(
-            child: snapshotAsync.when(
-              loading: () => ProfileLoadingContent(onRefresh: _refreshProfile),
-              error: (error, stackTrace) => SingleChildScrollView(
-                child: VitErrorState(
-                  key: ProfileTabletKeys.error,
-                  title: 'Không tải được dữ liệu',
-                  message: 'Vui lòng thử lại.',
-                  actionLabel: 'Thử lại',
-                  onAction: _refreshProfile,
-                ),
-              ),
-              data: _buildScreenState,
-            ),
+    return snapshotAsync.when(
+      loading: () => ProfileLoadingContent(onRefresh: _refreshProfile),
+      error: (error, stackTrace) => ProfilePaneScaffold(
+        onRefresh: _refreshProfile,
+        rhythm: VitPageRhythm.standard,
+        children: const [
+          VitErrorState(
+            key: ProfileTabletKeys.error,
+            title: 'Không tải được dữ liệu',
+            message: 'Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
           ),
         ],
       ),
+      data: _buildScreenState,
     );
   }
 
@@ -90,55 +71,125 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
   }
 
   // Mirrors `_profilePageChildren`'s switch on `snapshot.screenState`
-  // (profile_home_menu_actions.dart) ahead of the dashboard build. Only
-  // `offline` isn't a literal "instead of the dashboard" swap: the phone
+  // (profile_home_menu_actions.dart) ahead of the overview build. Only
+  // `offline` isn't a literal "instead of the overview" swap: the phone
   // branch renders the banner *and then* the full ready sections in the same
-  // scroll, so here the banner becomes the first primary-column item above
-  // the dashboard rather than replacing it — same precedent
-  // `WalletTabletPage` uses for `WalletUnavailableBanner`.
+  // scroll, so here the banner becomes the first overview item.
   Widget _buildScreenState(ProfileSnapshot snapshot) {
     return switch (snapshot.screenState) {
       ProfileScreenState.loading => ProfileLoadingContent(
         onRefresh: _refreshProfile,
       ),
-      ProfileScreenState.error => SingleChildScrollView(
-        child: VitErrorState(
-          key: ProfileTabletKeys.error,
-          title: 'Không tải được hồ sơ',
-          message: 'Kiểm tra kết nối và thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => context.go(AppRoutePaths.profile),
-        ),
+      ProfileScreenState.error => ProfilePaneScaffold(
+        rhythm: VitPageRhythm.standard,
+        children: [
+          VitErrorState(
+            key: ProfileTabletKeys.error,
+            title: 'Không tải được hồ sơ',
+            message: 'Kiểm tra kết nối và thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: _refreshProfile,
+          ),
+        ],
       ),
-      ProfileScreenState.empty => const SingleChildScrollView(
-        child: VitEmptyState(
-          key: ProfileTabletKeys.empty,
-          title: 'Chưa có dữ liệu tài khoản',
-          message: 'Hồ sơ sẽ hiển thị sau khi đăng nhập và đồng bộ.',
-          icon: Icons.account_circle_outlined,
-        ),
+      ProfileScreenState.empty => const ProfilePaneScaffold(
+        rhythm: VitPageRhythm.standard,
+        children: [
+          VitEmptyState(
+            key: ProfileTabletKeys.empty,
+            title: 'Chưa có dữ liệu tài khoản',
+            message: 'Hồ sơ sẽ hiển thị sau khi đăng nhập và đồng bộ.',
+            icon: Icons.account_circle_outlined,
+          ),
+        ],
       ),
-      ProfileScreenState.offline => _buildDashboard(
+      ProfileScreenState.offline => _buildOverview(
         snapshot,
         showOfflineBanner: true,
       ),
-      _ => _buildDashboard(snapshot, showOfflineBanner: false),
+      _ => _buildOverview(snapshot, showOfflineBanner: false),
     };
   }
 
-  // Two-column threshold and per-column width caps are owned by
-  // [VitTwoColumnTabletDashboard] (`TabletDashboardWidths` defaults) —
-  // shared with `HomeTabletPage`/`WalletTabletPage`/`MarketsTabletPage`/
-  // `TradeTabletPage`, all of which confirmed the same values empirically.
-  // Pass constructor overrides on the call below instead of editing the
-  // shared widths if Profile's content ever needs a different number.
+  Widget _buildOverview(
+    ProfileSnapshot snapshot, {
+    required bool showOfflineBanner,
+  }) {
+    return ProfilePaneScaffold(
+      onRefresh: _refreshProfile,
+      rhythm: VitPageRhythm.standard,
+      children: [
+        if (showOfflineBanner)
+          const VitOfflineBanner(
+            key: ProfileTabletKeys.offline,
+            message: 'Đang ngoại tuyến',
+            detail: 'Hiển thị dữ liệu tài khoản đã lưu gần nhất.',
+          ),
+        ProfileAccountHero(
+          snapshot: snapshot,
+          copiedReferral: _copiedReferral,
+          onEdit: () =>
+              openProfileDetailRoute(context, AppRoutePaths.profileEdit),
+          onCopyReferral: () {
+            unawaited(
+              Clipboard.setData(
+                ClipboardData(text: snapshot.user.referralCode),
+              ),
+            );
+            setState(() => _copiedReferral = true);
+          },
+          onVerifyKyc: () =>
+              openProfileDetailRoute(context, AppRoutePaths.profileKyc),
+          onVip: () =>
+              openProfileDetailRoute(context, AppRoutePaths.profileVip),
+        ),
+        ..._securityBlock(),
+        VitPageSection(
+          label: 'Dự đoán & Thách đấu',
+          accentColor: AppColors.accent,
+          headerVariant: VitSectionHeaderVariant.accentBar,
+          headerDensity: VitDensity.compact,
+          innerGap: AppSpacing.pageRhythmCompactInnerGap,
+          customGap: AppSpacing.pageRhythmStandardInnerGap,
+          children: [
+            ProfilePredictionCard(
+              prediction: snapshot.prediction,
+              onTap: () =>
+                  context.go(AppRoutePaths.marketsPredictionsPortfolio),
+            ),
+            ProfileArenaCard(
+              arena: snapshot.arena,
+              onTap: () => context.go(AppRoutePaths.arenaMy),
+            ),
+          ],
+        ),
+        VitPageSection(
+          label: 'LỐI TẮT SẢN PHẨM',
+          accentColor: AppColors.warn,
+          headerVariant: VitSectionHeaderVariant.accentBar,
+          headerDensity: VitDensity.compact,
+          innerGap: AppSpacing.pageRhythmCompactInnerGap,
+          children: [
+            if (snapshot.productShortcuts.isEmpty)
+              const VitEmptyState(
+                title: 'Chưa có sản phẩm',
+                message: 'Các shortcut sản phẩm sẽ hiển thị khi khả dụng.',
+                icon: Icons.explore_outlined,
+              )
+            else
+              ProfileProductHubPanel(shortcuts: snapshot.productShortcuts),
+          ],
+        ),
+      ],
+    );
+  }
 
-  /// Security-score block leading the secondary status rail. The dashboard
-  /// itself renders from `profileSnapshotProvider` — the security snapshot is
-  /// a secondary, additive watch: while it loads its skeleton holds the
-  /// block's slot, and on error the block is simply omitted (the rest of the
-  /// rail and the page stay fully usable) rather than failing the page.
-  List<Widget> _securityRailBlock() {
+  /// Security-score status block on the overview. The pane renders from
+  /// `profileSnapshotProvider` — the security snapshot is a secondary,
+  /// additive watch: while it loads its skeleton holds the block's slot,
+  /// and on error the block is simply omitted (the rest of the overview
+  /// stays fully usable) rather than failing the pane.
+  List<Widget> _securityBlock() {
     return ref
         .watch(profileSecuritySnapshotProvider)
         .when<List<Widget>>(
@@ -147,126 +198,12 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           data: (security) => [
             ProfileSecuritySummary(
               snapshot: security,
-              onUpgrade: () => context.go(AppRoutePaths.settingsSecurity),
+              onUpgrade: () => openProfileDetailRoute(
+                context,
+                AppRoutePaths.settingsSecurity,
+              ),
             ),
           ],
         );
-  }
-
-  Widget _buildDashboard(
-    ProfileSnapshot snapshot, {
-    required bool showOfflineBanner,
-  }) {
-    final primaryChildren = [
-      // The identity hero opens the primary column as its first *scrolling*
-      // card (the Home tablet pattern for tall hero cards like
-      // `HomePortfolioCard`), not the dashboard's fixed banner slot — a
-      // ~230px locked banner eats a third of an 800dp-tall landscape screen
-      // and starves the working columns (user feedback 2026-08-22). It
-      // scrolls away with the menu instead.
-      ProfileAccountHero(
-        snapshot: snapshot,
-        copiedReferral: _copiedReferral,
-        onEdit: () => context.go(AppRoutePaths.profileEdit),
-        onCopyReferral: () {
-          unawaited(
-            Clipboard.setData(ClipboardData(text: snapshot.user.referralCode)),
-          );
-          setState(() => _copiedReferral = true);
-        },
-        onVerifyKyc: () => context.go(AppRoutePaths.profileKyc),
-        onVip: () => context.go(AppRoutePaths.profileVip),
-      ),
-      if (showOfflineBanner)
-        const VitOfflineBanner(
-          key: ProfileTabletKeys.offline,
-          message: 'Đang ngoại tuyến',
-          detail: 'Hiển thị dữ liệu tài khoản đã lưu gần nhất.',
-        ),
-      if (snapshot.sections.isEmpty)
-        const VitEmptyState(
-          title: 'Chưa có mục tài khoản',
-          message: 'Các cài đặt profile sẽ hiển thị sau khi tải xong.',
-          icon: Icons.account_circle_outlined,
-        )
-      else
-        for (final section in snapshot.sections) ...[
-          VitPageSection(
-            label: section.label,
-            accentColor: Color(section.accentHex),
-            headerVariant: VitSectionHeaderVariant.accentBar,
-            headerDensity: VitDensity.compact,
-            innerGap: AppSpacing.pageRhythmCompactInnerGap,
-            children: [
-              if (section.id == 'legal')
-                const ProfileLegalAccordionPanel()
-              else
-                ProfileMenuPanel(section: section),
-            ],
-          ),
-        ],
-      ProfileActivityButton(
-        onTap: () => context.go(AppRoutePaths.profileActivity),
-      ),
-      ProfileLogoutButton(
-        onTap: () async {
-          final navContext = context;
-          await ref.read(authSessionControllerProvider.notifier).logout();
-          if (navContext.mounted) navContext.go(AppRoutePaths.authLogin);
-        },
-      ),
-      Text(
-        'VitTrade v2.4.1',
-        textAlign: TextAlign.center,
-        style: AppTextStyles.micro.copyWith(color: AppColors.text3),
-      ),
-    ];
-
-    final secondaryChildren = [
-      ..._securityRailBlock(),
-      VitPageSection(
-        label: 'Dự đoán & Thách đấu',
-        accentColor: AppColors.accent,
-        headerVariant: VitSectionHeaderVariant.accentBar,
-        headerDensity: VitDensity.compact,
-        innerGap: AppSpacing.pageRhythmCompactInnerGap,
-        customGap: AppSpacing.pageRhythmStandardInnerGap,
-        children: [
-          ProfilePredictionCard(
-            prediction: snapshot.prediction,
-            onTap: () => context.go(AppRoutePaths.marketsPredictionsPortfolio),
-          ),
-          ProfileArenaCard(
-            arena: snapshot.arena,
-            onTap: () => context.go(AppRoutePaths.arenaMy),
-          ),
-        ],
-      ),
-      VitPageSection(
-        label: 'LỐI TẮT SẢN PHẨM',
-        accentColor: AppColors.warn,
-        headerVariant: VitSectionHeaderVariant.accentBar,
-        headerDensity: VitDensity.compact,
-        innerGap: AppSpacing.pageRhythmCompactInnerGap,
-        children: [
-          if (snapshot.productShortcuts.isEmpty)
-            const VitEmptyState(
-              title: 'Chưa có sản phẩm',
-              message: 'Các shortcut sản phẩm sẽ hiển thị khi khả dụng.',
-              icon: Icons.explore_outlined,
-            )
-          else
-            ProfileProductHubPanel(shortcuts: snapshot.productShortcuts),
-        ],
-      ),
-    ];
-
-    return VitTwoColumnTabletDashboard(
-      onRefresh: _refreshProfile,
-      primaryChildren: primaryChildren,
-      secondaryChildren: secondaryChildren,
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-    );
   }
 }

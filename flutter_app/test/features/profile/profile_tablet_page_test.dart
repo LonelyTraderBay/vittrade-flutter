@@ -96,18 +96,17 @@ void main() {
     },
   );
 
-  testWidgets('SC-156 tablet dashboard renders both dashboard columns', (
+  testWidgets('SC-156 tablet renders the master menu beside the overview', (
     tester,
   ) async {
     await pumpTabletProfile(tester);
 
-    // Primary column: the identity hero opens it as the first scrolling
-    // card, compressing identity/UID/referral/KYC/VIP.
-    expect(find.byType(ProfileAccountHero), findsOneWidget);
-    // Primary column: grouped menu sections.
+    // Master column: grouped menu sections under a compact identity line.
+    expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
     expect(find.byType(ProfileMenuPanel), findsWidgets);
-    // Secondary column: security score + Prediction/Arena summary + product
-    // shortcuts.
+    // Detail pane (overview): identity hero, security score, Prediction/
+    // Arena summary and product shortcuts in one scrolling column.
+    expect(find.byType(ProfileAccountHero), findsOneWidget);
     expect(find.text('Điểm bảo mật'), findsOneWidget);
     expect(find.text('Dự đoán & Thách đấu'), findsOneWidget);
     expect(find.byType(ProfileProductHubPanel), findsOneWidget);
@@ -131,9 +130,10 @@ void main() {
     );
     expect(find.text('UID'), findsOneWidget);
     expect(find.text('Mã giới thiệu'), findsOneWidget);
-    // Tier pills: VIP level and KYC level (mock: 'VIP 1', 'Cấp 1').
-    expect(find.text('VIP 1'), findsOneWidget);
-    expect(find.text('KYC Cấp 1'), findsOneWidget);
+    // Tier pills: hero pill + the master menu's compact identity line both
+    // carry them (mock: 'VIP 1', 'Cấp 1').
+    expect(find.text('VIP 1'), findsWidgets);
+    expect(find.text('KYC Cấp 1'), findsWidgets);
     // VIP runway across the hero's foot.
     expect(find.text('Tiến độ VIP'), findsOneWidget);
     // The masked email never renders the raw address (sensitive-data rule);
@@ -178,19 +178,22 @@ void main() {
   });
 
   testWidgets(
-    'SC-156 wide tablet renders the true two-column dashboard without '
-    'overflow, secondary column framed as a distinct panel',
+    'SC-156 wide tablet renders the master-detail split without overflow, '
+    'master menu framed as a distinct panel',
     (tester) async {
-      // Landscape tablet, above ProfileTabletPage's own two-column threshold
-      // (900) — the width-capped Align+ConstrainedBox+VitCard layout only
-      // engages at/above this width.
+      // Landscape tablet, above the master-detail threshold (900) — the
+      // width-capped pair of framed menu (400) + detail pane renders
+      // side-by-side only at/above this width.
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
       expect(tester.takeException(), isNull);
       expect(find.byType(ProfileAccountHero), findsOneWidget);
+      // The master menu column sits inside its framed VitCard (the R7
+      // sidebar idiom), while the detail pane's overview content stays
+      // flush against the page background.
       expect(
         find.ancestor(
-          of: find.text('Dự đoán & Thách đấu'),
+          of: find.byType(ProfileMenuPanel).first,
           matching: find.byType(VitCard),
         ),
         findsWidgets,
@@ -199,13 +202,78 @@ void main() {
   );
 
   testWidgets(
-    'SC-156 wide tablet keeps the legal accordion in the primary column, '
-    'not inside the secondary column card',
+    'SC-156 master-detail: tapping a menu item renders the pane beside the '
+    'menu, not a full-page replacement',
     (tester) async {
-      // Direct evidence for the deliberate column split documented on
-      // ProfileTabletPage: the 39-item GOM legal/compliance accordion stays
-      // with the rest of the account menu in the primary column instead of
-      // drifting into the secondary column's VitCard(inner) sidebar wrapper.
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      // The detail pane now carries the KYC route's content (the
+      // transitional placeholder until the real KYC pane lands)…
+      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+      // …while the master menu stays visible beside it.
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byType(ProfileMenuPanel), findsWidgets);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master-detail: system back returns from a pane to the overview',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      // Back pops within the shell branch: the overview pane returns and
+      // the menu never left.
+      expect(find.byKey(const Key('SC-159-tablet-content')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master-detail narrow fallback: a pane takes the full width and '
+    'its header back returns to the overview',
+    (tester) async {
+      // Portrait tablet below the master-detail threshold: the hub stacks
+      // the menu above the overview; a sub-route pane goes full-width with
+      // its own back header (the menu column would leave no usable height).
+      await pumpTabletProfile(tester);
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+      expect(find.byKey(const Key('SC-159-tablet-content')), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master-detail keeps the legal accordion in the framed master '
+    'menu, not in the overview pane',
+    (tester) async {
+      // The GOM legal/compliance accordion stays with the rest of the
+      // account menu inside the framed master column, while the detail
+      // pane's overview content renders flush — the frame-vs-flush split
+      // is the R7 sidebar idiom carried over to the master-detail shell.
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
       expect(find.byType(ProfileLegalAccordionPanel), findsOneWidget);
@@ -214,38 +282,29 @@ void main() {
           of: find.byType(ProfileLegalAccordionPanel),
           matching: find.byType(VitCard),
         ),
-        findsNothing,
+        findsWidgets,
       );
-      // Differentiator sanity check: secondary column content does sit
-      // inside the VitCard(inner) wrapper, so the assertion above is
-      // actually distinguishing columns, not vacuously true.
       expect(
         find.ancestor(
           of: find.byType(ProfileProductHubPanel),
           matching: find.byType(VitCard),
         ),
-        findsWidgets,
+        findsNothing,
       );
     },
   );
 
   testWidgets(
-    'SC-156 wide tablet keeps compact rhythm without stacked header gaps',
+    'SC-156 overview pane keeps compact rhythm without stacked header gaps',
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      final accountTitle = tester.getRect(find.text('TÀI KHOẢN'));
-      final menu = tester.getRect(find.byType(ProfileMenuPanel).first);
       final predictionTitle = tester.getRect(find.text('Dự đoán & Thách đấu'));
       final prediction = tester.getRect(find.byType(ProfilePredictionCard));
       final arena = tester.getRect(find.byType(ProfileArenaCard));
       final productTitle = tester.getRect(find.text('LỐI TẮT SẢN PHẨM'));
       final productHub = tester.getRect(find.byType(ProfileProductHubPanel));
 
-      expect(
-        menu.top - accountTitle.bottom,
-        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
-      );
       expect(
         prediction.top - predictionTitle.bottom,
         closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
@@ -276,10 +335,15 @@ void main() {
     expect(repository.profileFetchCount, 1);
     expect(repository.securityFetchCount, 1);
 
-    // Fling inside the primary scrolling column — the identity hero scrolls
-    // with that column (it is not locked chrome).
-    final primaryColumn = find.byType(SingleChildScrollView).first;
-    await tester.fling(primaryColumn, const Offset(0, 400), 1000);
+    // Fling inside the overview pane's own scrollable — the master menu
+    // column has its own scroll and never refreshes.
+    final overviewScroll = find
+        .ancestor(
+          of: find.byKey(ProfileTabletKeys.accountHero),
+          matching: find.byType(SingleChildScrollView),
+        )
+        .first;
+    await tester.fling(overviewScroll, const Offset(0, 400), 1000);
     await tester.pump();
     await tester.pumpAndSettle();
 

@@ -12,6 +12,7 @@ final class ProfileTabletKeys {
   static const offline = Key('sc156_profile_offline');
   static const empty = Key('sc156_profile_empty');
   static const accountHero = Key('sc156_profile_account_hero');
+  static const masterMenu = Key('sc156_profile_master_menu');
   static const heroPills = Key('sc156_profile_hero_pills');
   static const vipRunway = Key('sc156_profile_vip_runway');
   static const securityScore = Key('sc156_profile_security_score');

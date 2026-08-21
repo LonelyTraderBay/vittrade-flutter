@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
@@ -8,6 +7,7 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_icon_registry.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -15,11 +15,18 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// Tablet-dashboard public port of Profile's private `_MenuSection`
 /// (`profile_home_menu_actions.dart`, phone-only — not importable outside
 /// `profile_page.dart`'s `part` family). Same grouped, navigable menu rows
-/// (already built on the shared [VitIconListRow] primitive).
+/// (already built on the shared [VitIconListRow] primitive); in the
+/// master-detail shell, [selectedRoute] tints the row whose route currently
+/// renders in the detail pane.
 class ProfileMenuPanel extends StatelessWidget {
-  const ProfileMenuPanel({super.key, required this.section});
+  const ProfileMenuPanel({
+    super.key,
+    required this.section,
+    this.selectedRoute,
+  });
 
   final ProfileMenuSection section;
+  final String? selectedRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,11 @@ class ProfileMenuPanel extends StatelessWidget {
       child: Column(
         children: [
           for (final item in section.items) ...[
-            _MenuRow(item: item, accent: accent),
+            _MenuRow(
+              item: item,
+              accent: accent,
+              selected: item.route == selectedRoute,
+            ),
             if (item != section.items.last)
               const Divider(
                 height: AppSpacing.dividerHairline,
@@ -44,18 +55,23 @@ class ProfileMenuPanel extends StatelessWidget {
 }
 
 class _MenuRow extends StatelessWidget {
-  const _MenuRow({required this.item, required this.accent});
+  const _MenuRow({
+    required this.item,
+    required this.accent,
+    this.selected = false,
+  });
 
   final ProfileMenuItem item;
   final Color accent;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.transparent,
+      color: selected ? accent.withValues(alpha: .08) : AppColors.transparent,
       child: InkWell(
         key: ProfileTabletKeys.menu(item.id),
-        onTap: () => context.go(item.route),
+        onTap: () => openProfileDetailRoute(context, item.route),
         child: VitIconListRow(
           minHeight: VitDensity.standard.controlHeight,
           padding: ProfileSpacingTokens.profileMenuRowPadding,

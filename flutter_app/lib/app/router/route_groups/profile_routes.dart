@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/kyc_
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/sub_account_page.dart';
@@ -428,6 +429,22 @@ List<RouteBase> profileRoutes(
       backPath: AppRoutePaths.home,
       icon: Icons.manage_accounts_outlined,
     );
+  }
+  // Tablet master-detail (iPad-Settings style): one shell route keeps the
+  // account menu framed beside whichever `/profile/...` sub-route is active.
+  // Same paths/names/builders as the flat list — the GoRoute blocks stay
+  // byte-compatible for the static route audits — only the tablet arm wraps
+  // them; phone keeps the flat full-page navigation.
+  if (surface == AppSurface.tablet) {
+    return [
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) => ProfileTabletMasterShell(
+          navigationShell: navigationShell,
+          currentPath: state.uri.path,
+        ),
+        branches: [StatefulShellBranch(routes: routes)],
+      ),
+    ];
   }
   return routes;
 }

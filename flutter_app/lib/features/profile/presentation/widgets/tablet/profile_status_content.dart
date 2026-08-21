@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Mirrors the loaded Profile dashboard — primary column: identity hero
-/// card then the account menu sections; sidebar: security score,
-/// Prediction/Arena summary and product shortcuts — through the same shared
-/// scaffold, so resolving data never reflows the page shape (including the
-/// single-column → two-column switch at the dashboard's own threshold).
+/// Mirrors the loaded Profile overview pane — identity hero, security score
+/// block, Prediction/Arena summary and product shortcuts in one scrolling
+/// column — through the same pane scaffold, so resolving data never reflows
+/// the pane shape while the master menu stays framed beside it.
 class ProfileLoadingContent extends StatelessWidget {
   const ProfileLoadingContent({super.key, this.onRefresh});
 
@@ -19,34 +19,23 @@ class ProfileLoadingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VitTwoColumnTabletDashboard(
+    return ProfilePaneScaffold(
+      scrollKey: ProfileTabletKeys.loading,
       onRefresh: onRefresh,
-      primaryChildren: const [
-        _AccountHeroSkeleton(key: ProfileTabletKeys.loading),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-        VitSectionSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-        VitSectionSkeleton(),
-      ],
-      secondaryChildren: const [
+      rhythm: VitPageRhythm.standard,
+      children: const [
+        _AccountHeroSkeleton(),
+        SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
         ProfileSecuritySummarySkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-        _SidebarHeadingSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        _SidebarCardSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-        _SidebarHeadingSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        _SidebarCardSkeleton(),
+        SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        VitSectionSkeleton(),
       ],
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
     );
   }
 }
 
 /// Mirrors [ProfileSecuritySummary] while the security snapshot resolves —
-/// same card slot so the sidebar doesn't reflow when data lands.
+/// same block slot so the pane doesn't reflow when data lands.
 class ProfileSecuritySummarySkeleton extends StatelessWidget {
   const ProfileSecuritySummarySkeleton({super.key});
 
@@ -74,10 +63,10 @@ class ProfileSecuritySummarySkeleton extends StatelessWidget {
   }
 }
 
-/// One wide hero card holding the identity block plus the trailing
-/// UID/referral fact boxes and the VIP runway.
+/// Identity hero card skeleton — avatar + name/email lines + pill row + the
+/// trailing UID/referral fact boxes and the VIP runway.
 class _AccountHeroSkeleton extends StatelessWidget {
-  const _AccountHeroSkeleton({super.key});
+  const _AccountHeroSkeleton();
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +154,9 @@ class _FactBoxSkeleton extends StatelessWidget {
   }
 }
 
-/// Mirrors a `VitPageSection`: heading bar + a card of menu rows.
+/// Mirrors a `VitPageSection`: heading bar + a card of menu rows. Also used
+/// by the master-detail shell's menu column while the profile snapshot
+/// resolves.
 class VitSectionSkeleton extends StatelessWidget {
   const VitSectionSkeleton({super.key});
 
@@ -179,23 +170,5 @@ class VitSectionSkeleton extends StatelessWidget {
         VitCard(child: VitSkeletonList(rows: 4)),
       ],
     );
-  }
-}
-
-class _SidebarHeadingSkeleton extends StatelessWidget {
-  const _SidebarHeadingSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    return const VitSkeleton(width: 160, height: AppSpacing.x4);
-  }
-}
-
-class _SidebarCardSkeleton extends StatelessWidget {
-  const _SidebarCardSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    return const VitCard(child: VitSkeletonList(rows: 2));
   }
 }
