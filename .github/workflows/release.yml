@@ -48,10 +48,11 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Android SDK platform 37
+      # Platform publish dưới tên "android-37.0" (không có "android-37" thường).
+      - name: Install Android SDK platform 37.0
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-37"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-37.0"
 
       - name: Install dependencies
         run: flutter pub get
