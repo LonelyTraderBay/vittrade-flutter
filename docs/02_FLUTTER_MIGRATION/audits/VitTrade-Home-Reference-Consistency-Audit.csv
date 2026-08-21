@@ -377,17 +377,19 @@ home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/hom
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_recent_products_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_scroll_shell.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/phone/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_announcement_banner.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_discovery_panel.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_more_products_dialog.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_notice_line.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_products_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_recent_products_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_status_content.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_kpi_strip.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart,0,0,0,0,0,0,0,0,no,-
 launchpad,feature_widget,flutter_app/lib/features/launchpad/presentation/widgets/bridge/launchpad_bridge_compare_common.dart,0,0,0,0,0,0,0,0,no,-
 launchpad,feature_widget,flutter_app/lib/features/launchpad/presentation/widgets/bridge/launchpad_bridge_compare_confirm.dart,0,0,0,0,0,0,0,0,no,-
