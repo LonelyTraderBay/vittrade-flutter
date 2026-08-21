@@ -63,6 +63,47 @@ out to Markets/Profile/Trade in the same pass:
 4. **Skeleton mirrors the dashboard** — the loading state renders through the same `VitTwoColumnTabletDashboard` (banner + column skeletons mirroring the loaded blocks), so resolving data never reflows the page shape. Generic one-column `VitSkeletonList` loading is the phone idiom.
 5. **Sensitive data masked in the banner** — emails/phones go through `VitFormat` masking helpers even in summary strips.
 
+## Master-detail shell pattern (route-based split view — Profile reference, 2026-08-22)
+
+For settings-style surfaces whose sub-screens are many flat sibling routes
+(Profile: KYC, security, VIP, devices, API, activity, settings,
+sub-accounts…), the dashboard shape gives way to an iPad-Settings
+master-detail: a persistent framed menu column beside a detail pane that
+renders the active sub-route in place. Reference implementation:
+`ProfileTabletMasterShell` + `profileRoutes()`'s tablet arm.
+
+1. **Route via `StatefulShellRoute.indexedStack`, one branch.** The tablet
+   arm returns `[StatefulShellRoute.indexedStack(branches:
+   [StatefulShellBranch(routes: <the feature's existing flat GoRoutes>])]`;
+   phone/web keep the flat list untouched. Keep every `GoRoute`'s
+   `path`/`name` byte-identical — the static route audits
+   (`route_coverage_audit`, `navigation_edge_audit`) parse those blocks from
+   source and stay green through the wrap.
+2. **Back-stack semantics, not `go`.** With flat sibling routes, plain
+   `context.go` builds a one-page stack, so the system back button would
+   exit the tab. Menu rows/CTAs that open a pane use the
+   push-first-then-replace helper (`profile_pane_navigation.dart`):
+   overview → pane is a `push`, pane → other pane is a `pushReplacement` —
+   back always lands on the overview.
+3. **Shell owns header and framing; panes own their scroll.** The shell
+   renders the fixed `VitTopChrome` (R9) and the R4–R8 width idioms
+   (`TabletDashboardWidths` 900/800/400/20/24: outer cap + centered pair,
+   master framed `VitCard(inner)` at 400, detail `Expanded`), reusing the
+   standard's proven numbers rather than `VitTwoColumnTabletDashboard`
+   itself (whose static children lists don't fit a routing outlet). Each
+   pane is a content-only widget on `ProfilePaneScaffold` (optional header,
+   back shown only below 900px, own `SingleChildScrollView` + optional
+   `onRefresh`).
+4. **Content ports per R2.** A pane = a public tablet port of the phone
+   page's part-family content (see `ProfileKycPane`, `ProfileSecurityPane`,
+   `ProfileVipPane`), watching the same screen provider; not-yet-ported
+   sub-routes keep building their old placeholder page inside the pane —
+   migration is incremental and the architecture never re-opens.
+5. **Single-column fallback (<900):** hub route stacks menu above the
+   overview pane (independent scrolls, `Expanded` shares); a sub-route pane
+   takes the full width with its own back header — the menu column would
+   leave no usable detail height beside it.
+
 ## Step checklist (new tablet page)
 
 1. Confirm the screen qualifies — see "When to build a dedicated tablet page."

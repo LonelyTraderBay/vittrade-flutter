@@ -3,9 +3,9 @@
 Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
-total_routed_screens=412
+total_routed_screens=409
 fixed_vit_header_remaining=169
-auto_hide_header=103
+auto_hide_header=100
 custom_scroll_header=1
 no_top_header=25
 unresolved=114
@@ -299,14 +299,11 @@ unresolved=114
 | profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
 | profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |
 | profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
-| profile | `AppRoutePaths.profileKyc` | `KYCPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/kyc_page.dart` |
-| profile | `AppRoutePaths.profileSecurity` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/security_page.dart` |
+| profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
+| profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
 | profile | `AppRoutePaths.profileSettings` | `SettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` |
 | profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` |
-| profile | `AppRoutePaths.profileVip` | `VIPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` |
-| profile | `AppRoutePaths.settingsSecurity` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityBiometric` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityChangePassword` | `ProfileTabletUtilityPage` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
+| profile | `AppRoutePaths.profileVip` | `ProfileVipPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` |
 | support | `AppRoutePaths.support` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportAnnouncements` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportHelp` | `unresolved` | unresolved | unresolved | `unresolved` |

@@ -101,7 +101,7 @@ class _ProfileKycPaneState extends ConsumerState<ProfileKycPane> {
                 },
                 onStart: () => _startVerification(level.level),
               ),
-          const _PrivacyCard(),
+          const _KycPrivacyCard(),
         ],
       ),
     );
@@ -436,8 +436,8 @@ class _DetailsBlock extends StatelessWidget {
   }
 }
 
-class _PrivacyCard extends StatelessWidget {
-  const _PrivacyCard();
+class _KycPrivacyCard extends StatelessWidget {
+  const _KycPrivacyCard();
 
   @override
   Widget build(BuildContext context) {

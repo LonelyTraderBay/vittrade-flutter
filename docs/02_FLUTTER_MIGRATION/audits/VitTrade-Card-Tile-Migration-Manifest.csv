@@ -139,8 +139,10 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/research/token_info_market_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/research/token_info_tabs_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,E,-,done,0,-
-03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_filters.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,D,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,E,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,E,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_tokens.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/market_calendar_events.dart,E,-,done,0,-
@@ -241,6 +243,8 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 04_financial,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,E,-,done,0,-
+04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,C,-,done,0,-
+04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,E,-,done,0,-
 04_financial,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart,C,-,done,0,-
 04_financial,flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart,C,-,done,0,-
@@ -846,6 +850,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_menu_actions.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/phone/pages/profile_home_vip_prediction.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,C,-,done,0,-
@@ -867,12 +872,17 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/profile/presentation/widgets/settings_page_common.dart,D,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,C,-,done,0,-
-06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart,D,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart,E,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_summary.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_components.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart,C,-,done,0,-

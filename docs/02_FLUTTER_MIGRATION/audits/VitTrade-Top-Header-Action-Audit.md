@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=402
+vit_header_total=403
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0

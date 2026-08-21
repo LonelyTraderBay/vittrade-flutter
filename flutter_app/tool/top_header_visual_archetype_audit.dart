@@ -146,6 +146,18 @@ const _noHeaderDecisions = <String, _NoHeaderDecision>{
     'Profile root module must move page identity into VitTopChrome.',
     issue: 'root_title_in_content',
   ),
+  'ProfileKycPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileSecurityPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileVipPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
 };
 
 void main(List<String> args) {

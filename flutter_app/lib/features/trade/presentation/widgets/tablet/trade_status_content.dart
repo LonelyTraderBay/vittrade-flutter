@@ -118,7 +118,7 @@ class _OrderFormSkeleton extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
         VitSkeleton(width: double.infinity, height: AppSpacing.x7),
-        SizedBox(height: AppSpacing.x2),
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
         Row(
           children: [
             VitSkeleton(width: 56, height: AppSpacing.buttonCompact),

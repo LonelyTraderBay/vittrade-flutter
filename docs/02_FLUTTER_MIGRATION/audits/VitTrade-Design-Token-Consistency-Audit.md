@@ -16,7 +16,7 @@ generated=2026-06-12
 status_fail=1
 status_warn=21
 status_exception=104
-rows=1244
+rows=1255
 ```
 
 ## CI Baseline Gates
@@ -103,7 +103,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_balance_sections.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_segmented_choice.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/phone/launchpad_receipt_states_success.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/tools/launchpad_address_book_controls.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_helpers.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_models.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_privacy_clarity.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -740,6 +740,8 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_common.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -971,7 +973,6 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_api_key_create_form.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_api_key_create_result.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_discovery_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_hero_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_kyc_banner_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_legal_accordion_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/profile_menu_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -991,15 +992,23 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/settings_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_hero_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_banner_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_master_menu.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_summary.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_card_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/referral/presentation/widgets/referral_history_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/referral/presentation/widgets/referral_history_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -1053,7 +1062,9 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart` | warn | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_simple_hero.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

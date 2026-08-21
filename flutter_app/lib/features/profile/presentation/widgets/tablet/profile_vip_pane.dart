@@ -85,7 +85,7 @@ class _ProfileVipPaneState extends ConsumerState<ProfileVipPane> {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 180),
             child: switch (_selectedTab) {
-              _VipTab.overview => _OverviewTab(
+              _VipTab.overview => _VipOverviewTab(
                 key: const ValueKey('overview'),
                 snapshot: snapshot,
               ),
@@ -298,8 +298,8 @@ class _VipTabs extends StatelessWidget {
   }
 }
 
-class _OverviewTab extends StatelessWidget {
-  const _OverviewTab({super.key, required this.snapshot});
+class _VipOverviewTab extends StatelessWidget {
+  const _VipOverviewTab({super.key, required this.snapshot});
 
   final ProfileVipSnapshot snapshot;
 
@@ -308,10 +308,10 @@ class _OverviewTab extends StatelessWidget {
     final nextTier = snapshot.nextTier;
     final children = <Widget>[];
     if (nextTier != null) {
-      children.add(_ProgressCard(snapshot: snapshot, nextTier: nextTier));
+      children.add(_VipProgressCard(snapshot: snapshot, nextTier: nextTier));
       children.add(SizedBox(height: VitDensity.compact.pageContentGap));
     }
-    children.add(_TierTable(snapshot: snapshot));
+    children.add(_VipTierTable(snapshot: snapshot));
     children.add(SizedBox(height: VitDensity.compact.pageContentGap));
     children.add(const _FeeSavingsCard());
 
@@ -322,8 +322,8 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-class _ProgressCard extends StatelessWidget {
-  const _ProgressCard({required this.snapshot, required this.nextTier});
+class _VipProgressCard extends StatelessWidget {
+  const _VipProgressCard({required this.snapshot, required this.nextTier});
 
   final ProfileVipSnapshot snapshot;
   final ProfileVipTier nextTier;
@@ -440,8 +440,8 @@ class _ProgressCard extends StatelessWidget {
   }
 }
 
-class _TierTable extends StatelessWidget {
-  const _TierTable({required this.snapshot});
+class _VipTierTable extends StatelessWidget {
+  const _VipTierTable({required this.snapshot});
 
   final ProfileVipSnapshot snapshot;
 
@@ -468,13 +468,16 @@ class _TierTable extends StatelessWidget {
             height: AppSpacing.dividerHairline,
             color: AppColors.divider,
           ),
-          const _TableHeader(),
+          const _VipTableHeader(),
           for (final tier in snapshot.tiers) ...[
             const Divider(
               height: AppSpacing.dividerHairline,
               color: AppColors.divider,
             ),
-            _TierRow(tier: tier, active: tier.level == snapshot.currentLevel),
+            _VipTierRow(
+              tier: tier,
+              active: tier.level == snapshot.currentLevel,
+            ),
           ],
         ],
       ),
@@ -482,8 +485,8 @@ class _TierTable extends StatelessWidget {
   }
 }
 
-class _TableHeader extends StatelessWidget {
-  const _TableHeader();
+class _VipTableHeader extends StatelessWidget {
+  const _VipTableHeader();
 
   @override
   Widget build(BuildContext context) {
@@ -491,13 +494,13 @@ class _TableHeader extends StatelessWidget {
       padding: ProfileSpacingTokens.profileVipTableHeaderPadding,
       child: Row(
         children: [
-          _TableCell(flex: 28, child: Text('Cấp độ', style: _headerStyle)),
-          _TableCell(
+          _VipTableCell(flex: 28, child: Text('Cấp độ', style: _headerStyle)),
+          _VipTableCell(
             flex: 26,
             child: Text('Volume/tháng', style: _headerStyle),
           ),
-          _TableCell(flex: 22, child: Text('Maker', style: _headerStyle)),
-          _TableCell(flex: 22, child: Text('Taker', style: _headerStyle)),
+          _VipTableCell(flex: 22, child: Text('Maker', style: _headerStyle)),
+          _VipTableCell(flex: 22, child: Text('Taker', style: _headerStyle)),
         ],
       ),
     );
@@ -509,8 +512,8 @@ class _TableHeader extends StatelessWidget {
   );
 }
 
-class _TierRow extends StatelessWidget {
-  const _TierRow({required this.tier, required this.active});
+class _VipTierRow extends StatelessWidget {
+  const _VipTierRow({required this.tier, required this.active});
 
   final ProfileVipTier tier;
   final bool active;
@@ -527,7 +530,7 @@ class _TierRow extends StatelessWidget {
         padding: ProfileSpacingTokens.profileVipTableRowPadding,
         child: Row(
           children: [
-            _TableCell(
+            _VipTableCell(
               flex: 28,
               child: Row(
                 children: [
@@ -564,7 +567,7 @@ class _TierRow extends StatelessWidget {
                 ],
               ),
             ),
-            _TableCell(
+            _VipTableCell(
               flex: 26,
               child: Text(
                 tier.monthlyVolume == 0
@@ -573,11 +576,11 @@ class _TierRow extends StatelessWidget {
                 style: AppTextStyles.micro.copyWith(color: AppColors.text2),
               ),
             ),
-            _TableCell(
+            _VipTableCell(
               flex: 22,
               child: Text(_formatFee(tier.makerFee), style: _feeStyle(active)),
             ),
-            _TableCell(
+            _VipTableCell(
               flex: 22,
               child: Text(_formatFee(tier.takerFee), style: _feeStyle(active)),
             ),
@@ -596,8 +599,8 @@ class _TierRow extends StatelessWidget {
   }
 }
 
-class _TableCell extends StatelessWidget {
-  const _TableCell({required this.flex, required this.child});
+class _VipTableCell extends StatelessWidget {
+  const _VipTableCell({required this.flex, required this.child});
 
   final int flex;
   final Widget child;
@@ -1077,19 +1080,10 @@ IconData _iconForTier(String key) {
 
 String _formatFee(double value) {
   if (value == 0) return '0%';
-  return '${value.toStringAsFixed(2)}%';
+  return VitFormat.percent(value);
 }
 
-String _formatUsd(double value) => '\$${_formatNumber(value)}.00';
+String _formatUsd(double value) => VitFormat.usd(value);
 
-String _formatCompactUsd(double value) {
-  if (value >= 1000000) {
-    return '\$${(value / 1000000).toStringAsFixed(0)}M';
-  }
-  if (value >= 1000) {
-    return '\$${(value / 1000).toStringAsFixed(0)}K';
-  }
-  return '\$${value.toStringAsFixed(0)}';
-}
-
-String _formatNumber(double value) => VitFormat.count(value.round());
+String _formatCompactUsd(double value) =>
+    VitFormat.compactSuffix(value, prefix: '\$', stripTrailingZero: true);

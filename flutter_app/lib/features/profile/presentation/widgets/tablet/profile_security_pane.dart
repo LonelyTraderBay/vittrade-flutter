@@ -78,7 +78,7 @@ class _ProfileSecurityPaneState extends ConsumerState<ProfileSecurityPane> {
           ),
         ],
         data: (snapshot) => [
-          _ScoreCard(snapshot: snapshot),
+          _SecurityScoreCard(snapshot: snapshot),
           if (snapshot.highRiskContractId != null)
             VitHighRiskStatePanel(
               state: VitHighRiskUiState.riskReview,
@@ -144,8 +144,8 @@ class _ProfileSecurityPaneState extends ConsumerState<ProfileSecurityPane> {
   }
 }
 
-class _ScoreCard extends StatelessWidget {
-  const _ScoreCard({required this.snapshot});
+class _SecurityScoreCard extends StatelessWidget {
+  const _SecurityScoreCard({required this.snapshot});
 
   final ProfileSecuritySnapshot snapshot;
 

@@ -6,9 +6,9 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 334 |
-| Files with shared widgets | 301 |
-| Compliance pass | 231 |
+| Audit rows | 335 |
+| Files with shared widgets | 302 |
+| Compliance pass | 232 |
 | Compliance warn | 0 |
 | Compliance review | 103 |
 | Interactive local classes | 0 |
@@ -18,12 +18,12 @@
 
 | Family | Call sites |
 | --- | ---: |
-| VitTabBar | 129 |
+| VitTabBar | 130 |
 | VitChoicePill | 125 |
 | VitSegmentedChoice | 89 |
 | VitSegmentedTabBar | 26 |
 | VitPresetChipRow | 30 |
-| VitFilterChip | 58 |
+| VitFilterChip | 57 |
 
 ## Module heat map
 
@@ -50,7 +50,7 @@
 | p2p_orders | 9 |
 | p2p_security | 8 |
 | predictions | 22 |
-| profile | 5 |
+| profile | 6 |
 | referral | 2 |
 | rewards | 1 |
 | support | 2 |

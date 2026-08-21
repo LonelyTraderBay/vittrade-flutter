@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_visual_archetype_audit.dart`.
 
 ```text
-total_routed_screens=412
+total_routed_screens=409
 strict_visual_issues=0
 screen_level_mismatches=0
 uses_vit_top_chrome=4
@@ -38,7 +38,7 @@ hard_coded_offline_banner=0
 | Screen level | Routes |
 | --- | ---: |
 | L2_detail | 185 |
-| L2_utilityDetail | 71 |
+| L2_utilityDetail | 68 |
 | L3_transactionFlow | 55 |
 | L2_entityDetail | 40 |
 | L1_utilityHub | 23 |
@@ -55,7 +55,7 @@ hard_coded_offline_banner=0
 
 | Archetype | Routes |
 | --- | ---: |
-| detail | 395 |
+| detail | 392 |
 | rootModule | 10 |
 | instrument | 4 |
 | authOnboarding | 1 |
@@ -348,14 +348,11 @@ hard_coded_offline_banner=0
 | profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
 | profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |
 | profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
-| profile | `AppRoutePaths.profileKyc` | `KYCPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/kyc_page.dart` |
-| profile | `AppRoutePaths.profileSecurity` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/security_page.dart` |
+| profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | detail | L3_transactionFlow | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
+| profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | detail | L2_detail | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
 | profile | `AppRoutePaths.profileSettings` | `SettingsPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` |
 | profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | content | state_driven | offlineNoCache | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` |
-| profile | `AppRoutePaths.profileVip` | `VIPPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | content | state_driven | offlineNoCache | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` |
-| profile | `AppRoutePaths.settingsSecurity` | `ProfileTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityBiometric` | `ProfileTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityChangePassword` | `ProfileTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
+| profile | `AppRoutePaths.profileVip` | `ProfileVipPane` | no_top_header | no_top_header | detail | L2_detail | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` |
 | support | `AppRoutePaths.support` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | support | `AppRoutePaths.supportAnnouncements` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
