@@ -20,7 +20,7 @@ copy, product content, or business data a template for other screens.
 - The page body owns horizontal insets through `VitPageContent`.
 - At the two-column tier, center the complete dashboard block with the shared
   `VitTwoColumnTabletDashboard` width cap.
-- Default caps are `760px` primary plus `440px` secondary. Do not add local
+- Default caps are `800px` primary plus `400px` secondary. Do not add local
   width caps or a new breakpoint tier without empirical evidence.
 
 ## 3. Grid, columns, and scroll ownership
@@ -106,7 +106,7 @@ copy, product content, or business data a template for other screens.
 | `< 600px` | Phone reference remains in the shell. At a 600px physical viewport, the 96px rail leaves 504px of content, so this is expected. |
 | `600–899px` | Home Tablet page uses a single compact scroll column once the dispatcher receives at least 600px of content. |
 | `>= 900px` | Home Tablet page uses the shared two-column dashboard with independent scroll ownership. |
-| `>= 1200px` | Keep the centered 760/440 block; do not stretch cards to fill the shell. |
+| `>= 1200px` | Keep the centered 800/400 block; do not stretch cards to fill the shell. |
 
 ## 12. Reusable patterns
 

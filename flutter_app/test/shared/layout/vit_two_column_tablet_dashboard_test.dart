@@ -72,15 +72,121 @@ void main() {
   );
 
   testWidgets('the two-column block width-caps at primaryColumnMaxWidth + '
-      'secondaryColumnMaxWidth (R5) instead of stretching to fill a much '
-      'wider shell', (tester) async {
+      'secondaryColumnMaxWidth + gutter (R5) instead of stretching to fill a '
+      'much wider shell', (tester) async {
     await pumpDashboard(tester, 1600);
 
     expect(
       tester.getSize(find.byType(Row)).width,
       TabletDashboardWidths.primaryColumnMaxWidth +
-          TabletDashboardWidths.secondaryColumnMaxWidth,
+          TabletDashboardWidths.secondaryColumnMaxWidth +
+          TabletDashboardWidths.columnGutter,
     );
+  });
+
+  testWidgets(
+    'the two-column tier sits on one symmetric content plane: equal outer '
+    'margins, an explicit gutter, and vertical breathing on both edges',
+    (tester) async {
+      await pumpDashboard(tester, 1184);
+
+      final viewport = tester.view.physicalSize / tester.view.devicePixelRatio;
+      final scrolls = find.byType(SingleChildScrollView);
+      final primaryScroll = tester.getRect(scrolls.first);
+      final sidebarCard = tester.getRect(
+        find.ancestor(
+          of: find.text('Secondary content'),
+          matching: find.byType(VitCard),
+        ),
+      );
+
+      // Cards and the sidebar frame share ONE inset from each screen edge.
+      expect(primaryScroll.left, TabletDashboardWidths.outerHorizontalMargin);
+      expect(
+        viewport.width - sidebarCard.right,
+        TabletDashboardWidths.outerHorizontalMargin,
+      );
+      // Columns separate through the reserved gutter, not stacked padding.
+      expect(
+        sidebarCard.left - primaryScroll.right,
+        TabletDashboardWidths.columnGutter,
+      );
+      // Both columns start on one line below the header and stay off the
+      // viewport's bottom edge.
+      expect(primaryScroll.top, TabletDashboardWidths.blockVerticalGap);
+      expect(sidebarCard.top, TabletDashboardWidths.blockVerticalGap);
+      expect(
+        viewport.height - primaryScroll.bottom,
+        TabletDashboardWidths.blockVerticalGap,
+      );
+    },
+  );
+
+  testWidgets(
+    'an optional banner spans both columns on the shared width system and '
+    'stays fixed above them',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1184, 900);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: VitTwoColumnTabletDashboard(
+              banner: Text('KPI banner'),
+              primaryChildren: [Text('Primary content')],
+              secondaryChildren: [Text('Secondary content')],
+            ),
+          ),
+        ),
+      );
+
+      final viewport = tester.view.physicalSize / tester.view.devicePixelRatio;
+      final banner = tester.getRect(find.text('KPI banner'));
+      final scrolls = find.byType(SingleChildScrollView);
+
+      // Same outer margins as the columns, one shared top gap line, one
+      // block gap down to the columns.
+      expect(banner.left, TabletDashboardWidths.outerHorizontalMargin);
+      expect(
+        viewport.width - banner.right,
+        TabletDashboardWidths.outerHorizontalMargin,
+      );
+      expect(banner.top, TabletDashboardWidths.blockVerticalGap);
+      expect(
+        tester.getTopLeft(scrolls.first).dy - banner.bottom,
+        TabletDashboardWidths.blockVerticalGap,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('the banner also spans the single-column fallback with the same '
+      'margins and top gap', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(700, 900);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: VitTwoColumnTabletDashboard(
+            banner: Text('KPI banner'),
+            primaryChildren: [Text('Primary content')],
+            secondaryChildren: [Text('Secondary content')],
+          ),
+        ),
+      ),
+    );
+
+    final banner = tester.getRect(find.text('KPI banner'));
+    expect(banner.left, TabletDashboardWidths.outerHorizontalMargin);
+    expect(banner.top, TabletDashboardWidths.blockVerticalGap);
+    expect(find.byType(Row), findsNothing);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('both tablet columns reserve the standard bottom content inset', (
