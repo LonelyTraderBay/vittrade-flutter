@@ -19,6 +19,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -236,6 +237,36 @@ void main() {
       expect(find.byKey(ProfileTabletKeys.kycPane), findsNothing);
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master-detail: pane headers hide the back action while the menu '
+    'stays beside them, and show it in the narrow fallback',
+    (tester) async {
+      // Wide: the shell keeps the framed master menu beside the pane, so a
+      // pane back arrow would duplicate it — even though the pane's own
+      // column (720dp on a 1280dp tablet) sits below twoColumnMinWidth. The
+      // decision belongs to the SHELL's width (screen minus the nav rail),
+      // not the pane's (emulator verification 2026-08-23).
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byType(VitHeaderActionButton), findsNothing);
+
+      // Narrow fallback: the menu is stacked away, so the pane header must
+      // carry its own back action to return to the overview.
+      await pumpTabletProfile(tester);
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
+      expect(find.byType(VitHeaderActionButton), findsOneWidget);
     },
   );
 

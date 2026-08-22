@@ -5,6 +5,7 @@ import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 
 /// Scroll scaffold shared by the Profile tablet master-detail detail panes:
@@ -65,13 +66,17 @@ class ProfilePaneScaffold extends StatelessWidget {
     return Column(
       children: [
         if (headerTitle != null)
-          LayoutBuilder(
-            builder: (context, constraints) {
-              // The master menu stays visible beside the pane at/above the
-              // dashboard threshold, so a back action is only needed in the
-              // single-column fallback territory.
+          Builder(
+            builder: (context) {
+              // The back action is needed only where the master menu is no
+              // longer beside the pane — that is decided by the SHELL's
+              // width (screen minus the nav rail), not the pane's own
+              // column width: on a 1280dp tablet the pane itself is 720dp
+              // (< twoColumnMinWidth) while the shell still renders the
+              // framed menu beside it, so a back arrow there duplicates the
+              // always-visible menu (§Master-detail #3).
               final narrow =
-                  constraints.maxWidth <
+                  MediaQuery.sizeOf(context).width - VitNavigationRail.width <
                   TabletDashboardWidths.twoColumnMinWidth;
               return VitHeader(
                 title: headerTitle,
