@@ -30,6 +30,7 @@ class VitHeader extends StatelessWidget {
     this.action = VitHeaderAction.none,
     this.badgeCount = 0,
     this.transparent = false,
+    this.horizontalPadding,
     this.backKey,
     this.onBack,
     this.onAction,
@@ -45,6 +46,12 @@ class VitHeader extends StatelessWidget {
   final VitHeaderAction action;
   final int badgeCount;
   final bool transparent;
+
+  /// Horizontal inset override. Null (the default) keeps
+  /// [AppTopHeaderTokens.horizontalPadding]; a pane living inside a shell
+  /// that already owns the outer inset passes `AppSpacing.zero` so the
+  /// header aligns with full-bleed content in the same column.
+  final double? horizontalPadding;
   final Key? backKey;
   final VoidCallback? onBack;
   final VoidCallback? onAction;
@@ -83,7 +90,7 @@ class VitHeader extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsetsDirectional.symmetric(
-            horizontal: AppTopHeaderTokens.horizontalPadding,
+            horizontal: horizontalPadding ?? AppTopHeaderTokens.horizontalPadding,
             vertical: hasSubtitle
                 ? AppTopHeaderTokens.detailVerticalPaddingWithSubtitle
                 : 0,

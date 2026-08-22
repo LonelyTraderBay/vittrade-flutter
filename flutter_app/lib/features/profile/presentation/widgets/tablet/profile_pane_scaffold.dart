@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -40,6 +41,11 @@ class ProfilePaneScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The shell's gutter already separates the pane from the master menu,
+    // so the pane bleeds horizontally to sit flush with the gutter —
+    // otherwise the pane's own content pad stacks onto the 24dp gutter and
+    // the detail side reads twice as far from the menu as the menu does
+    // from the navigation rail.
     Widget body = SingleChildScrollView(
       key: scrollKey,
       physics: onRefresh == null ? null : const AlwaysScrollableScrollPhysics(),
@@ -47,6 +53,7 @@ class ProfilePaneScaffold extends StatelessWidget {
         rhythm: rhythm,
         padding: padding,
         density: VitDensity.compact,
+        fullBleed: true,
         children: children,
       ),
     );
@@ -71,6 +78,7 @@ class ProfilePaneScaffold extends StatelessWidget {
                 subtitle: subtitle,
                 showBack: narrow && onBack != null,
                 onBack: onBack,
+                horizontalPadding: AppSpacing.zero,
               );
             },
           ),
