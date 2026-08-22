@@ -90,7 +90,8 @@ class VitHeader extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsetsDirectional.symmetric(
-            horizontal: horizontalPadding ?? AppTopHeaderTokens.horizontalPadding,
+            horizontal:
+                horizontalPadding ?? AppTopHeaderTokens.horizontalPadding,
             vertical: hasSubtitle
                 ? AppTopHeaderTokens.detailVerticalPaddingWithSubtitle
                 : 0,

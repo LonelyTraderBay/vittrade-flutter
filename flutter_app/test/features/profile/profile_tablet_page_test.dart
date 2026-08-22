@@ -274,9 +274,7 @@ void main() {
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      await tester.ensureVisible(
-        find.byKey(ProfileTabletKeys.menu('devices')),
-      );
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('devices')));
       await tester.tap(find.byKey(ProfileTabletKeys.menu('devices')));
       await tester.pumpAndSettle();
 

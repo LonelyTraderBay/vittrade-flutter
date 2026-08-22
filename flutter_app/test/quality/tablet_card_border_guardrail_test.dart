@@ -74,11 +74,11 @@ Set<String> _scanViolations() {
     if (entity is! File) continue;
     final normalized = entity.path.replaceAll('\\', '/');
     final fileName = normalized.split('/').last;
-      final isTabletSurface =
-          normalized.contains('/tablet/') || fileName.contains('tablet');
-      if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
-      // Token layer exemption — app/theme may declare BorderSide tokens.
-      if (normalized.contains('/app/theme/')) continue;
+    final isTabletSurface =
+        normalized.contains('/tablet/') || fileName.contains('tablet');
+    if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
+    // Token layer exemption — app/theme may declare BorderSide tokens.
+    if (normalized.contains('/app/theme/')) continue;
 
     final lines = entity.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {
