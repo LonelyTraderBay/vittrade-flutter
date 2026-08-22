@@ -212,6 +212,7 @@ không cần nhắc lại trong prompt:
 Run from `flutter_app/`:
 
 ```bash
+dart run tool/preflight_check.dart
 flutter pub get
 dart format --output=none --set-exit-if-changed .
 dart run tool/route_coverage_audit.dart --check
@@ -220,6 +221,14 @@ flutter analyze
 flutter test --reporter=compact
 flutter run
 ```
+
+Trước khi commit + push, chạy `dart run tool/preflight_check.dart` — một
+lệnh duy nhất mô phỏng trọn chuỗi kiểm tra tĩnh của CI: dart format,
+flutter analyze, mọi lệnh audit `--check` đọc trực tiếp từ
+`.github/workflows/flutter-ci.yml` (chạy trên bản checkout sạch tái tạo
+từ index sắp commit — bắt đúng lớp lỗi "artifact audit commit từ cây có
+code chưa đồng bộ" mà chạy audit trên working tree không lộ), và full
+test suite (flag `--fast` để bỏ test khi chỉ cần kiểm nhanh giữa chừng).
 
 Use focused tests for touched modules and full tests for router, shared layout,
 repository, or broad structural changes.
