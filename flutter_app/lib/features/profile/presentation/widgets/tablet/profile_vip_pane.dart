@@ -51,7 +51,7 @@ class _ProfileVipPaneState extends ConsumerState<ProfileVipPane> {
 
   void _openTrade() {
     unawaited(HapticFeedback.selectionClick());
-    context.go(AppRoutePaths.tradePair('btcusdt'));
+    unawaited(context.push(AppRoutePaths.tradePair('btcusdt')));
   }
 
   @override
@@ -227,39 +227,35 @@ class _HeroFeeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
+    return VitCard(
+      variant: VitCardVariant.ghost,
+      radius: VitCardRadius.standard,
+      clip: true,
       constraints: BoxConstraints(minHeight: VitDensity.compact.controlHeight),
-      child: Material(
-        color: AppColors.onAccent.withValues(alpha: .08),
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadii.cardRadius,
-          side: BorderSide(color: AppColors.onAccent.withValues(alpha: .08)),
-        ),
-        child: Padding(
-          padding: ProfileSpacingTokens.profileHeroInfoPadding,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: AppTextStyles.caption.copyWith(
-                  color: AppColors.portfolioTextMuted,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              SizedBox(height: VitDensity.compact.verticalSpace),
-              Text(
-                value,
-                style: AppTextStyles.sectionTitle.copyWith(
-                  color: _ProfileVipPaneState._vipSuccess,
-                  fontWeight: AppTextStyles.heavy,
-                  fontFeatures: AppTextStyles.tabularFigures,
-                ),
-              ),
-            ],
+      borderColor: AppColors.onAccent.withValues(alpha: .12),
+      background: ColoredBox(color: AppColors.onAccent.withValues(alpha: .08)),
+      padding: ProfileSpacingTokens.profileHeroInfoPadding,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.portfolioTextMuted,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
+          SizedBox(height: VitDensity.compact.verticalSpace),
+          Text(
+            value,
+            style: AppTextStyles.sectionTitle.copyWith(
+              color: _ProfileVipPaneState._vipSuccess,
+              fontWeight: AppTextStyles.heavy,
+              fontFeatures: AppTextStyles.tabularFigures,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -617,7 +613,7 @@ class _FeeSavingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      borderColor: _ProfileVipPaneState._vipSuccess.withValues(alpha: .24),
+      borderColor: _ProfileVipPaneState._vipSuccess.withValues(alpha: .22),
       density: VitDensity.compact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -758,7 +754,7 @@ class _BenefitTierCard extends StatelessWidget {
     return Opacity(
       opacity: unlocked ? 1 : .68,
       child: VitCard(
-        borderColor: accent.withValues(alpha: unlocked ? .34 : .14),
+        borderColor: accent.withValues(alpha: unlocked ? .34 : .12),
         clip: true,
         child: Column(
           children: [
@@ -968,7 +964,7 @@ class _UpgradeCta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      borderColor: _ProfileVipPaneState._vipAccent.withValues(alpha: .24),
+      borderColor: _ProfileVipPaneState._vipAccent.withValues(alpha: .22),
       padding: ProfileSpacingTokens.profileVipUpgradePadding,
       child: Row(
         children: [

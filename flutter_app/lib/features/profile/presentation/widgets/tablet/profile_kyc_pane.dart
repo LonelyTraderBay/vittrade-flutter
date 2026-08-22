@@ -125,7 +125,7 @@ class _KycStatusCard extends StatelessWidget {
     return VitCard(
       key: ProfileTabletKeys.kycStatusCard,
       density: VitDensity.compact,
-      borderColor: _ProfileKycPaneState._kycGreen.withValues(alpha: .45),
+      borderColor: _ProfileKycPaneState._kycGreen.withValues(alpha: .34),
       child: VitIconListRow(
         gap: ProfileSpacingTokens.kycStatusGap,
         leading: SizedBox(
@@ -200,7 +200,7 @@ class _KycLevelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final accent = Color(level.colorHex);
-    final border = done ? accent.withValues(alpha: .44) : AppColors.borderSolid;
+    final border = done ? accent.withValues(alpha: .34) : AppColors.borderSolid;
 
     return VitCard(
       borderColor: border,
@@ -303,18 +303,20 @@ class _LevelIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Bordered box state chip — a VitCard frame with a ready token border
+    // (Tablet-Card-Border-Standard R1/R3), tinted fill only when completed.
     return SizedBox(
       width: ProfileSpacingTokens.kycLevelIconBox,
       height: ProfileSpacingTokens.kycLevelIconBox,
-      child: Material(
-        color: done ? accent.withValues(alpha: .13) : AppColors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadii.lgRadius,
-          side: BorderSide(
-            color: done ? accent : AppColors.borderSolid,
-            width: ProfileSpacingTokens.kycLevelIconBorder,
-          ),
-        ),
+      child: VitCard(
+        variant: VitCardVariant.ghost,
+        radius: VitCardRadius.tight,
+        clip: true,
+        padding: EdgeInsets.zero,
+        borderColor: done ? accent : AppColors.borderSolid,
+        background: done
+            ? ColoredBox(color: accent.withValues(alpha: .12))
+            : null,
         child: Center(
           child: done
               ? Icon(
@@ -363,6 +365,7 @@ class _ExpandedLevelDetails extends StatelessWidget {
           title: 'Tính năng mở khóa:',
           lines: level.features,
           done: done,
+          checkmarks: true,
         ),
         if (canStart) ...[
           const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
@@ -386,11 +389,16 @@ class _DetailsBlock extends StatelessWidget {
     required this.title,
     required this.lines,
     this.done = true,
+    this.checkmarks = false,
   });
 
   final String title;
   final List<String> lines;
   final bool done;
+
+  /// Feature lists render a check glyph per line; plain limit lists keep the
+  /// bullet.
+  final bool checkmarks;
 
   @override
   Widget build(BuildContext context) {
@@ -405,7 +413,7 @@ class _DetailsBlock extends StatelessWidget {
         for (final line in lines) ...[
           Row(
             children: [
-              if (title.startsWith('T'))
+              if (checkmarks)
                 Icon(
                   Icons.check_circle_rounded,
                   color: done
@@ -444,7 +452,7 @@ class _KycPrivacyCard extends StatelessWidget {
     return VitCard(
       key: ProfileTabletKeys.kycPrivacyCard,
       density: VitDensity.compact,
-      borderColor: _ProfileKycPaneState._kycPrimary.withValues(alpha: .24),
+      borderColor: _ProfileKycPaneState._kycPrimary.withValues(alpha: .22),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

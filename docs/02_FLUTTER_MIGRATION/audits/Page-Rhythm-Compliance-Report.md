@@ -1,12 +1,12 @@
 # Page Rhythm Compliance Report
 
-Generated: 2026-08-22
+Generated: 2026-08-23
 
 Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
 ## Summary
 
-Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0, documented exceptions 6.
+Screen rollup: 409 real_page routes, L1 pass 399, L2 pass 399 warn 0, unknown 10, documented exceptions 6.
 | Level | Meaning |
 | --- | --- |
 | L1 | Wiring: rhythm, orphan gaps, nested VPC |
@@ -28,6 +28,16 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 | Screen | Page | Pattern |
 | --- | --- | --- |
+| AppRouteNames.sc161ActivityLog | `switch` | shared_shell |
+| AppRouteNames.sc163ApiManagement | `switch` | shared_shell |
+| AppRouteNames.sc162ApiKeyCreate | `switch` | shared_shell |
+| AppRouteNames.sc165DeviceManagement | `switch` | shared_shell |
+| AppRouteNames.sc157EditProfile | `switch` | shared_shell |
+| AppRouteNames.sc159Kyc | `switch` | shared_shell |
+| AppRouteNames.sc158Security | `switch` | shared_shell |
+| AppRouteNames.sc160Settings | `switch` | shared_shell |
+| AppRouteNames.sc166SubAccount | `switch` | shared_shell |
+| AppRouteNames.sc164Vip | `switch` | shared_shell |
 
 ## By module
 
@@ -41,7 +51,7 @@ Screen rollup: 412 real_page routes, L1 pass 412, L2 pass 412 warn 0, unknown 0,
 
 ### p2p_core (76 routes, L2 warn 0, unknown 0)
 
-### profile (14 routes, L2 warn 0, unknown 0)
+### profile (11 routes, L2 warn 0, unknown 10)
 
 ### trade (13 routes, L2 warn 0, unknown 0)
 

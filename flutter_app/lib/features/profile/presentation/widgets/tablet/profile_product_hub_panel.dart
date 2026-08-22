@@ -56,7 +56,7 @@ class _ProfileProductTile extends StatelessWidget {
     final accent = Color(shortcut.accentHex);
     return VitCard(
       key: ProfileTabletKeys.productShortcut(shortcut.id),
-      onTap: () => context.go(shortcut.route),
+      onTap: () => context.push(shortcut.route),
       density: VitDensity.compact,
       borderColor: accent.withValues(alpha: .22),
       child: VitIconListRow(

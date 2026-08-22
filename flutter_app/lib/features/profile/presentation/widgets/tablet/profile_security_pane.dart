@@ -14,6 +14,7 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/common/profile_icon_registry.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -110,7 +111,10 @@ class _ProfileSecurityPaneState extends ConsumerState<ProfileSecurityPane> {
       return;
     }
     if (item.route != null) {
-      context.go(item.route!);
+      // In-shell rows (activity) and cross-module rows (2FA, password) both
+      // need the master-detail helper's back semantics — plain `go` would
+      // strand the system back button outside the shell.
+      openProfileDetailRoute(context, item.route!);
     }
   }
 
@@ -191,40 +195,40 @@ class _SecurityScoreCard extends StatelessWidget {
             borderRadius: AppRadii.pillRadius,
           ),
           const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
-          Material(
-            color: _ProfileSecurityPaneState._securityAmber.withValues(
-              alpha: .12,
+          // Nested inside the standard-tier score card — tight radius keeps
+          // the concentric −8 rule (Tablet-Card-Border-Standard R4).
+          VitCard(
+            variant: VitCardVariant.ghost,
+            radius: VitCardRadius.tight,
+            clip: true,
+            borderColor: _ProfileSecurityPaneState._securityAmber.withValues(
+              alpha: .22,
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: AppRadii.cardRadius,
-              side: BorderSide(
-                color: _ProfileSecurityPaneState._securityAmber.withValues(
-                  alpha: .28,
-                ),
+            background: ColoredBox(
+              color: _ProfileSecurityPaneState._securityAmber.withValues(
+                alpha: .12,
               ),
             ),
-            child: Padding(
-              padding: ProfileSpacingTokens.securityScoreAlertPadding,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    Icons.warning_amber_rounded,
-                    color: _ProfileSecurityPaneState._securityAmber,
-                    size: ProfileSpacingTokens.securitySmallIcon,
-                  ),
-                  const SizedBox(width: ProfileSpacingTokens.securityIconGap),
-                  Expanded(
-                    child: Text(
-                      'Bật tất cả tính năng bảo mật để bảo vệ tài sản của bạn tốt nhất.',
-                      style: AppTextStyles.numericMicro.copyWith(
-                        color: _ProfileSecurityPaneState._securityAmber,
-                        fontWeight: AppTextStyles.bold,
-                      ),
+            padding: ProfileSpacingTokens.securityScoreAlertPadding,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.warning_amber_rounded,
+                  color: _ProfileSecurityPaneState._securityAmber,
+                  size: ProfileSpacingTokens.securitySmallIcon,
+                ),
+                const SizedBox(width: ProfileSpacingTokens.securityIconGap),
+                Expanded(
+                  child: Text(
+                    'Bật tất cả tính năng bảo mật để bảo vệ tài sản của bạn tốt nhất.',
+                    style: AppTextStyles.numericMicro.copyWith(
+                      color: _ProfileSecurityPaneState._securityAmber,
+                      fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -542,7 +546,7 @@ class _SecuritySupportCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       key: ProfileTabletKeys.securitySupport,
-      onTap: () => context.go(supportRoute),
+      onTap: () => context.push(supportRoute),
       density: VitDensity.compact,
       borderColor: _ProfileSecurityPaneState._securityBorder,
       child: VitIconListRow(

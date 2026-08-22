@@ -271,54 +271,50 @@ class _HeroFactBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
+    return VitCard(
+      variant: VitCardVariant.ghost,
+      radius: VitCardRadius.standard,
+      clip: true,
       constraints: BoxConstraints(minHeight: VitDensity.compact.controlHeight),
-      child: Material(
-        color: AppColors.onAccent.withValues(alpha: .08),
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadii.cardRadius,
-          side: BorderSide(color: AppColors.onAccent.withValues(alpha: .08)),
-        ),
-        child: Padding(
-          padding: ProfileSpacingTokens.profileHeroInfoPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+      borderColor: AppColors.onAccent.withValues(alpha: .12),
+      background: ColoredBox(color: AppColors.onAccent.withValues(alpha: .08)),
+      padding: ProfileSpacingTokens.profileHeroInfoPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.badge.copyWith(
+              color: AppColors.portfolioTextMuted,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.x1),
+          Row(
             children: [
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.badge.copyWith(
-                  color: AppColors.portfolioTextMuted,
+              Flexible(
+                child: Text(
+                  value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.control.copyWith(
+                    color: valueColor,
+                    fontWeight: AppTextStyles.bold,
+                    fontFeatures: AppTextStyles.tabularFigures,
+                  ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.x1),
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      value,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.control.copyWith(
-                        color: valueColor,
-                        fontWeight: AppTextStyles.bold,
-                        fontFeatures: AppTextStyles.tabularFigures,
-                      ),
-                    ),
-                  ),
-                  if (trailing != null) ...[
-                    const SizedBox(
-                      width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-                    ),
-                    trailing!,
-                  ],
-                ],
-              ),
+              if (trailing != null) ...[
+                const SizedBox(
+                  width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
+                ),
+                trailing!,
+              ],
             ],
           ),
-        ),
+        ],
       ),
     );
   }

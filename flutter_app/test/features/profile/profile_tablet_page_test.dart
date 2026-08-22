@@ -269,6 +269,79 @@ void main() {
   );
 
   testWidgets(
+    'SC-156 master-detail: the Prediction summary card is pushed so back can '
+    'return to the overview',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      // Cross-module discovery cards leave the shell for a full page — they
+      // must be pushed (not go) so the shell stays on the stack and the
+      // system back returns to Tài khoản.
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.predictionCard));
+      await tester.tap(find.byKey(ProfileTabletKeys.predictionCard));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-158 security pane: the activity row switches panes in place and back '
+    'lands on the overview',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('security-center')));
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.securityItem('activity')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.securityItem('activity')));
+      await tester.pumpAndSettle();
+
+      // In-shell switch: the placeholder renders inside the shell (menu
+      // stays framed) and replaces the security pane…
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byKey(const Key('SC-161-tablet-content')), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.securityPane), findsNothing);
+
+      // …so a single back lands on the overview, not a dead-end stack.
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('SC-161-tablet-content')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 product shortcuts are pushed so back can return to the shell',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.productShortcut('wallet')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.productShortcut('wallet')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'SC-156 master-detail: an unported utility route rides the shared pane '
     'scaffold inside the shell',
     (tester) async {

@@ -155,11 +155,11 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
             ProfilePredictionCard(
               prediction: snapshot.prediction,
               onTap: () =>
-                  context.go(AppRoutePaths.marketsPredictionsPortfolio),
+                  context.push(AppRoutePaths.marketsPredictionsPortfolio),
             ),
             ProfileArenaCard(
               arena: snapshot.arena,
-              onTap: () => context.go(AppRoutePaths.arenaMy),
+              onTap: () => context.push(AppRoutePaths.arenaMy),
             ),
           ],
         ),

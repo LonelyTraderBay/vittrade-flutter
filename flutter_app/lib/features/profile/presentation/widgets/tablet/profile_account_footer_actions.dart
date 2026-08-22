@@ -51,7 +51,7 @@ class ProfileLogoutButton extends StatelessWidget {
       onTap: onTap,
       density: VitDensity.compact,
       alignment: Alignment.center,
-      borderColor: AppColors.sell.withValues(alpha: .28),
+      borderColor: AppColors.sell.withValues(alpha: .22),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: VitDensity.compact.controlHeight,

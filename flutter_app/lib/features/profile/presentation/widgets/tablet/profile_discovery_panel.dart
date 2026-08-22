@@ -34,7 +34,7 @@ class ProfilePredictionCard extends StatelessWidget {
       key: ProfileTabletKeys.predictionCard,
       onTap: onTap,
       density: VitDensity.compact,
-      borderColor: AppColors.accent.withValues(alpha: .38),
+      borderColor: AppColors.accent.withValues(alpha: .34),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
