@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 
-/// Tablet shell that owns the shared page rhythm for Profile utility routes.
+/// Tablet scaffold for Profile utility routes that still await a real
+/// pane port — rides the shared master-detail [ProfilePaneScaffold] so the
+/// placeholder keeps the same gutter-flush rhythm, narrow-only back
+/// header, and semantics wrapper as the ported panes.
 class ProfileTabletUtilitySurface extends StatelessWidget {
   const ProfileTabletUtilitySurface({
     super.key,
@@ -33,26 +35,14 @@ class ProfileTabletUtilitySurface extends StatelessWidget {
       variant: VitPageVariant.flush,
       semanticLabel: semanticLabel,
       semanticIdentifier: semanticIdentifier,
-      child: Column(
-        children: [
-          VitHeader(
-            title: title,
-            subtitle: subtitle,
-            showBack: true,
-            onBack: onBack,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              key: contentKey,
-              child: VitPageContent(
-                rhythm: VitPageRhythm.form,
-                padding: VitContentPadding.compact,
-                density: VitDensity.compact,
-                children: children,
-              ),
-            ),
-          ),
-        ],
+      child: ProfilePaneScaffold(
+        title: title,
+        subtitle: subtitle,
+        onBack: onBack,
+        scrollKey: contentKey,
+        rhythm: VitPageRhythm.form,
+        padding: VitContentPadding.compact,
+        children: children,
       ),
     );
   }

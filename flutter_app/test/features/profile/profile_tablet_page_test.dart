@@ -240,6 +240,58 @@ void main() {
   );
 
   testWidgets(
+    'SC-156 master-detail: a cross-module menu row is pushed so back can '
+    'return to the open pane',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+
+      // Cross-module rows leave the shell for a full page — they must be
+      // pushed (not replace) so the shell and its open pane stay on the
+      // stack and the system back returns to the pane.
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.menu('referral-home')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('referral-home')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master-detail: an unported utility route rides the shared pane '
+    'scaffold inside the shell',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.menu('devices')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('devices')));
+      await tester.pumpAndSettle();
+
+      // The placeholder renders in the detail pane (menu stays framed)…
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byKey(const Key('SC-165-tablet-content')), findsOneWidget);
+      // …and back returns to the overview exactly like the ported panes.
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
+      expect(find.byKey(const Key('SC-165-tablet-content')), findsNothing);
+    },
+  );
+
+  testWidgets(
     'SC-156 master-detail narrow fallback: a pane takes the full width and '
     'its header back returns to the overview',
     (tester) async {

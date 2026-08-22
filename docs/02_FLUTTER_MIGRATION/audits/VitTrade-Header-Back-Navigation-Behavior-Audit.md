@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=536
+visible_header_back_entries=535
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 471 |
+| parent_route_only | 470 |
 | history_then_fallback | 65 |
 
 ## Strict Issue Counts
@@ -533,7 +533,6 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` | 67 | `_SettingsPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
 | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` | 75 | `_SubAccountPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
 | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` | 81 | `_VIPPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
-| `flutter_app/lib/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart` | 38 | `ProfileTabletUtilitySurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/profile/presentation/widgets/profile_api_key_create_result.dart` | 132 | `_SimpleStepScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | yes | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart` | 76 | `ProfilePaneScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/referral/presentation/phone/pages/referral_friend_detail_page.dart` | 36 | `ReferralFriendDetailPage` | `VitHeader` | parent_route_only | parent_route_only | `-` | no | - | Back goes to an explicit parent route. |

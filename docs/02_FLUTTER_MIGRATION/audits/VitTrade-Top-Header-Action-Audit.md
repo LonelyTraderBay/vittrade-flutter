@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=403
+vit_header_total=402
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -17,7 +17,7 @@ action_groups_over_limit=0
 
 | Classification | Count |
 | --- | ---: |
-| canonical | 385 |
+| canonical | 384 |
 
 ## Action Inventory
 
@@ -386,7 +386,6 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` | 67 | `_SettingsPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` | 75 | `_SubAccountPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` | 81 | `_VIPPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart` | 38 | `ProfileTabletUtilitySurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/referral/presentation/phone/pages/referral_friend_detail_page.dart` | 36 | `ReferralFriendDetailPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/referral/presentation/phone/pages/referral_history_page.dart` | 87 | `_ReferralHistoryPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/referral/presentation/phone/pages/referral_home_page.dart` | 85 | `_ReferralHomePageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
