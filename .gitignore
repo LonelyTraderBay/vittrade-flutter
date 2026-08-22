@@ -51,3 +51,6 @@ output/
 
 # Mimosa security-scan scratch (finding ledger, history, reports) — never commit
 .mimosa/
+
+# ZCode session artifacts (plan-mode files, session scratch) — never commit
+.zcode/
