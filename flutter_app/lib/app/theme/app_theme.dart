@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_tablet_theme_extension.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// App-wide Material theme contract shared by the Phone bootstrap and future
@@ -40,5 +41,9 @@ final class AppTheme {
       labelMedium: AppTextStyles.badge,
       labelLarge: AppTextStyles.control,
     ),
+    // Read-facade over the static token layer — registered so widgets can
+    // reach tablet spacing/border tokens via Theme.of(context); the static
+    // classes remain the single source of truth (facade owns no numbers).
+    extensions: const <ThemeExtension<dynamic>>[AppTabletThemeExtension()],
   );
 }

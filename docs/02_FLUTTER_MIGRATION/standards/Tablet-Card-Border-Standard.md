@@ -2,7 +2,7 @@
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Tokens · [AGENTS.md](../../../AGENTS.md) UI rules · [Tablet-Adaptive-Standard.md](./Tablet-Adaptive-Standard.md)
 **Enforcement:** `dart run tool/tablet_card_border_audit.dart --check` · `test/quality/tablet_card_border_guardrail_test.dart` (ratchet baseline `test/quality/tablet_card_border_baseline.txt`)
-**Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet` — shared tablet scaffolds included). Phone surface keeps its current rules; a later phase may adopt this standard repo-wide.
+**Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet` — shared tablet scaffolds included). The `lib/app/theme/` token layer is **exempt**: it is the sanctioned home for BorderSide color tokens (`app_tablet_theme_extension.dart`), the way `app_radii.dart` owns radii. Phone surface keeps its current rules; a later phase may adopt this standard repo-wide.
 **Born:** 2026-08-22 — after the Profile master-detail rollout exposed unregulated border drift (see "Why this standard exists").
 
 ## Why this standard exists

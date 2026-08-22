@@ -53,6 +53,10 @@ void main(List<String> args) {
     final isTabletSurface =
         normalized.contains('/tablet/') || fileName.contains('tablet');
     if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
+    // The app/theme folder is the token layer — the one sanctioned home for
+    // BorderSide color tokens (like app_radii owns radii). Presentation
+    // rules must not fire there.
+    if (normalized.contains('/app/theme/')) continue;
 
     final lines = entity.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {
