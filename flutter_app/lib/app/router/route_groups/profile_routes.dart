@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/edit_profile_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/activity_log_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/api_management_page.dart';
@@ -51,22 +50,8 @@ List<RouteBase> profileRoutes(
           title: 'Chỉnh sửa hồ sơ',
           subtitle: 'Thông tin cá nhân · liên hệ',
           description:
-              'Cập nhật thông tin hồ sơ trong bố cục Tablet rõ ràng, dễ rà soát trước khi lưu.',
-          facts: const [
-            ProfileTabletFact(
-              label: 'Tên hiển thị',
-              value: 'Người dùng VitTrade',
-            ),
-            ProfileTabletFact(label: 'Email', value: 'n•••@vittrade.vn'),
-            ProfileTabletFact(
-              label: 'Trạng thái',
-              value: 'Đã xác minh',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Lưu hồ sơ',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận cập nhật hồ sơ',
+              'Cập nhật tên hiển thị và thông tin liên hệ của tài khoản.',
+          icon: Icons.person_outline_rounded,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -105,13 +90,8 @@ List<RouteBase> profileRoutes(
           title: 'Cài đặt tài khoản',
           subtitle: 'Thông báo · riêng tư · hiển thị',
           description:
-              'Điều chỉnh các tùy chọn tài khoản với vùng nội dung rộng và các nhóm cài đặt rõ ràng.',
-          facts: const [
-            ProfileTabletFact(label: 'Thông báo giao dịch', value: 'Đang bật'),
-            ProfileTabletFact(label: 'Ngôn ngữ', value: 'Tiếng Việt'),
-            ProfileTabletFact(label: 'Thiết bị', value: 'Tablet'),
-          ],
-          actionLabel: 'Lưu cài đặt',
+              'Điều chỉnh thông báo, quyền riêng tư và tùy chọn hiển thị.',
+          icon: Icons.settings_outlined,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -126,21 +106,8 @@ List<RouteBase> profileRoutes(
           semanticIdentifier: 'SC-161',
           title: 'Nhật ký hoạt động',
           subtitle: 'Đăng nhập · thay đổi · xác nhận',
-          description:
-              'Đối chiếu các hoạt động tài khoản gần đây và trạng thái xác nhận trên Tablet.',
-          facts: const [
-            ProfileTabletFact(label: 'Hoạt động hôm nay', value: '6'),
-            ProfileTabletFact(
-              label: 'Đăng nhập gần nhất',
-              value: 'Hôm nay, 09:42',
-            ),
-            ProfileTabletFact(
-              label: 'Cảnh báo',
-              value: 'Không có',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Lọc nhật ký',
+          description: 'Đối chiếu các đăng nhập và thay đổi tài khoản gần đây.',
+          icon: Icons.assignment_outlined,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -157,18 +124,7 @@ List<RouteBase> profileRoutes(
           subtitle: 'Khóa API · quyền · hoạt động',
           description:
               'Rà soát các khóa API, phạm vi quyền và trạng thái truy cập trước khi quản lý.',
-          facts: const [
-            ProfileTabletFact(label: 'Khóa đang hoạt động', value: '2'),
-            ProfileTabletFact(
-              label: 'Quyền rút tiền',
-              value: 'Đã khóa',
-              valueColor: AppColors.buy,
-            ),
-            ProfileTabletFact(label: 'Lần sử dụng gần nhất', value: 'Hôm qua'),
-          ],
-          actionLabel: 'Mở quản lý API',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận quản lý API',
+          icon: Icons.key_rounded,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -185,18 +141,7 @@ List<RouteBase> profileRoutes(
           subtitle: 'Tên khóa · quyền truy cập · an toàn',
           description:
               'Chọn đúng phạm vi quyền và kiểm tra lại trước khi tạo khóa API mới.',
-          facts: const [
-            ProfileTabletFact(label: 'Tên khóa', value: 'Khóa mới'),
-            ProfileTabletFact(label: 'Quyền mặc định', value: 'Đọc dữ liệu'),
-            ProfileTabletFact(
-              label: 'Quyền rút tiền',
-              value: 'Tắt',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Xem trước khóa API',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận tạo khóa API',
+          icon: Icons.key_rounded,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -224,18 +169,7 @@ List<RouteBase> profileRoutes(
           subtitle: 'Thiết bị tin cậy · phiên đăng nhập',
           description:
               'Xem thiết bị đang truy cập và thu hồi phiên lạ sau khi kiểm tra thông tin.',
-          facts: const [
-            ProfileTabletFact(label: 'Thiết bị tin cậy', value: '3'),
-            ProfileTabletFact(label: 'Phiên đang hoạt động', value: '2'),
-            ProfileTabletFact(
-              label: 'Cảnh báo mới',
-              value: 'Không có',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Rà soát thiết bị',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận rà soát thiết bị',
+          icon: Icons.phone_android_rounded,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -251,19 +185,8 @@ List<RouteBase> profileRoutes(
           title: 'Tài khoản phụ',
           subtitle: 'Quyền truy cập · hạn mức · hoạt động',
           description:
-              'Quản lý tài khoản phụ và phạm vi quyền trong một bảng điều khiển Tablet.',
-          facts: const [
-            ProfileTabletFact(label: 'Tài khoản phụ', value: '1'),
-            ProfileTabletFact(
-              label: 'Trạng thái',
-              value: 'Đang hoạt động',
-              valueColor: AppColors.buy,
-            ),
-            ProfileTabletFact(label: 'Quyền rút tiền', value: 'Đã khóa'),
-          ],
-          actionLabel: 'Mở tài khoản phụ',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận mở tài khoản phụ',
+              'Quản lý tài khoản phụ, phạm vi quyền và hạn mức từng tài khoản.',
+          icon: Icons.groups_outlined,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -301,20 +224,8 @@ List<RouteBase> profileRoutes(
           semanticIdentifier: 'SC-405',
           title: 'Sinh trắc học',
           subtitle: 'Xác thực · thiết bị',
-          description:
-              'Kiểm tra lại phương thức xác thực và thông tin bảo vệ trước khi thay đổi cài đặt.',
-          facts: [
-            ProfileTabletFact(label: 'Phương thức hiện tại', value: 'Đang bật'),
-            ProfileTabletFact(label: 'Thiết bị tin cậy', value: '3'),
-            ProfileTabletFact(
-              label: 'Bước tiếp theo',
-              value: 'Xác nhận thay đổi',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Xem trước thay đổi',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận thay đổi bảo mật',
+          description: 'Bật hoặc tắt xác thực sinh trắc học cho thiết bị này.',
+          icon: Icons.fingerprint,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -330,19 +241,8 @@ List<RouteBase> profileRoutes(
           title: 'Đổi mật khẩu',
           subtitle: 'Mật khẩu · xác nhận',
           description:
-              'Kiểm tra lại phương thức xác thực và thông tin bảo vệ trước khi thay đổi cài đặt.',
-          facts: [
-            ProfileTabletFact(label: 'Phương thức hiện tại', value: 'Đang bật'),
-            ProfileTabletFact(label: 'Thiết bị tin cậy', value: '3'),
-            ProfileTabletFact(
-              label: 'Bước tiếp theo',
-              value: 'Xác nhận thay đổi',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Xem trước thay đổi',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận thay đổi bảo mật',
+              'Đặt mật khẩu mới và xác minh qua bước bảo mật tiếp theo.',
+          icon: Icons.lock_outline_rounded,
         ),
         AppSurface.phone ||
         AppSurface.web ||
@@ -387,19 +287,13 @@ ProfileTabletUtilityPage _profileTabletUtility({
   required String title,
   required String subtitle,
   required String description,
-  required List<ProfileTabletFact> facts,
-  String? actionLabel,
-  bool requiresConfirmation = false,
-  String? confirmationTitle,
+  required IconData icon,
 }) {
   return ProfileTabletUtilityPage(
     semanticIdentifier: semanticIdentifier,
     title: title,
     subtitle: subtitle,
     description: description,
-    facts: facts,
-    actionLabel: actionLabel,
-    requiresConfirmation: requiresConfirmation,
-    confirmationTitle: confirmationTitle,
+    icon: icon,
   );
 }

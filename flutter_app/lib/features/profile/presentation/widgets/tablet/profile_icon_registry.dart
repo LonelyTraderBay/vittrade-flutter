@@ -18,6 +18,7 @@ IconData profileIconFor(String key) {
     'key' => Icons.key_rounded,
     'phone' => Icons.phone_android_rounded,
     'users' => Icons.groups_outlined,
+    'user' => Icons.person_outline_rounded,
     'clipboard' => Icons.assignment_outlined,
     'globe' => Icons.language_rounded,
     'settings' => Icons.settings_outlined,
