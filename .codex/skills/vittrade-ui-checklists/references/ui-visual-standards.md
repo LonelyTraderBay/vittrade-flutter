@@ -28,6 +28,7 @@ complete domain map and exact command flags. Common checks are:
 | Content width | `standards/Page-Content-Width-Standard.md` | `dart run tool/page_content_width_audit.dart --check` |
 | Card tiles | `standards/Card-Tile-Standard.md` | `dart run tool/card_tile_audit.dart --check --strict-full` |
 | Card & border (tablet) | `standards/Tablet-Card-Border-Standard.md` | `dart run tool/tablet_card_border_audit.dart --check` |
+| Spacing & gutters (tablet) | `standards/Tablet-Spacing-Gutter-Standard.md` | `dart run tool/tablet_spacing_audit.dart --check` |
 | Segment pills | `standards/Segment-Pill-Standard.md` | `dart run tool/segment_pill_audit.dart --check --strict-full` |
 | Scroll auto-hide | `standards/Scroll-Auto-Hide-Standard.md` | `flutter test test/quality/scroll_auto_hide_guardrail_test.dart` |
 | Notice acknowledgement | `standards/Notice-Acknowledgement-Standard.md` | `flutter test test/quality/notice_acknowledgement_guardrail_test.dart` |

@@ -44,7 +44,10 @@ class _ReceiptCard extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(height: 1, color: AppColors.divider),
+            const Divider(
+              height: AppSpacing.dividerHairline,
+              color: AppColors.divider,
+            ),
             VitInfoRow(
               label: 'Mã lệnh',
               value: receipt.orderId,
@@ -71,7 +74,10 @@ class _ReceiptCard extends StatelessWidget {
               density: VitDensity.tool,
               valueColor: AppColors.receiptTextMuted,
             ),
-            const Divider(height: 1, color: AppColors.divider),
+            const Divider(
+              height: AppSpacing.dividerHairline,
+              color: AppColors.divider,
+            ),
             VitInfoRow(
               label: 'Thành tiền',
               value: '\$${formatTradeMoney(receipt.total)}',
@@ -98,7 +104,10 @@ class _ReceiptCard extends StatelessWidget {
               valueColor: AppColors.receiptTextMuted,
             ),
             if (receipt.tpPrice != null || receipt.slPrice != null) ...[
-              const Divider(height: 1, color: AppColors.divider),
+              const Divider(
+                height: AppSpacing.dividerHairline,
+                color: AppColors.divider,
+              ),
               Padding(
                 padding: VitDensity.tool.cardPadding,
                 child: Column(

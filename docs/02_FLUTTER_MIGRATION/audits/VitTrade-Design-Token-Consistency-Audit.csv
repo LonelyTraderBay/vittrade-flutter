@@ -854,7 +854,7 @@ feature_widget,,flutter_app/lib/features/trade/presentation/widgets/phone/vit_tr
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
-feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,warn,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,3,no,-
+feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
