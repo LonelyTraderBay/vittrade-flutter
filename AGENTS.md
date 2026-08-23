@@ -164,7 +164,8 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens, phone + tablet
   composition archetypes, input states hover/focus, motion durations/easing,
-  typography roles + tabular figures, financial data tables)
+  typography roles + tabular figures, financial data tables, tablet
+  orientation policy — zero orientation dispatch, WCAG contrast floor)
   live in
   `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
   the matching files under `docs/02_FLUTTER_MIGRATION/standards/` — read the

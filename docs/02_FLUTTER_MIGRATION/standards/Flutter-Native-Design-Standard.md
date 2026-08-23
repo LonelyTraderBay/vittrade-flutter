@@ -51,6 +51,37 @@ This file defines the active Flutter-native UI standard for VitTrade.
 - Open Arena: use Arena Points, pool diem, chot ket qua, thu thach; do not use
   wallet value, payout USD, profit, or stake-return language.
 
+## Contrast floor (WCAG token pairs — locked 2026-08-24)
+
+Text readability on the single dark canvas is a token property, not a
+per-page concern. `test/quality/contrast_floor_guardrail_test.dart` parses
+the literal color tokens from `app_colors.dart`, computes WCAG 2.x contrast
+ratios for the core fg/bg pairs actually composed in the UI, and fails CI
+when:
+
+- a **standard pair** (text1/text2 on every surface, `primary`/`buy`/`sell`
+  as text on surface) drops below **4.5:1** — someone changed a token value
+  and silently made text unreadable; or
+- a **known deviation** drops below its locked current floor (ratchet: may
+  only improve; improving past 4.5 removes it from the debt list); or
+- a listed token no longer resolves (rename/alias would silently gut the
+  audit).
+
+Current ratios (2026-08-24): text1/surface 17.2, text2/surface 8.4,
+primary/surface 7.0, buy/surface 7.3, sell/surface 4.9 — all pass. The three
+locked deviations:
+
+| Pair | Ratio | Why it's debt, not a pass |
+| --- | --- | --- |
+| `text3` on `surface` | 3.71 (floor 3.6) | Tertiary/placeholder text below 4.5 — pay by lightening `text3` |
+| `navCenterIcon` (white `onAccent`) on `primary` | 2.64 (floor 2.6) | White on the amber CTA — promotion candidate: dark text on amber, or a darker amber |
+| `textDisabled` on `surface` | 2.95 (floor 2.85) | Disabled-control text is WCAG-exempt (inactive UI); floor exists only to block silent worsening |
+
+Rule for new pairings: a **new** fg/bg token pairing intended for text
+either meets 4.5:1 or enters the deviation list with a reason and a locked
+floor — never ships silently below the floor. Large-text roles (≥18pt or
+14pt bold) may argue 3.0:1 instead, stated in the pair entry.
+
 ## Verification
 
 For UI changes:
@@ -58,6 +89,7 @@ For UI changes:
 ```bash
 cd flutter_app
 flutter analyze
+flutter test test/quality/contrast_floor_guardrail_test.dart --reporter=compact
 flutter test
 ```
 

@@ -18,6 +18,16 @@
 //                             root, the legacy phone pages that predate
 //                             surface routers). New surface code never uses
 //                             the compatibility dispatcher.
+//   R1c orientation-dispatch — an `OrientationBuilder(` or
+//                             `MediaQuery.orientationOf(` in tablet
+//                             PRESENTATION code. Tablet layout decisions are
+//                             WIDTH-driven only (TabletDashboardWidths tiers
+//                             via LayoutBuilder); querying orientation
+//                             re-derives a device fact the width tiers
+//                             already encode and opens untested quadrants
+//                             (narrow-landscape / tall-portrait). Locked
+//                             absolute from day zero (2026-08-24 — the
+//                             surface shipped with zero usages).
 //
 // Out of scope on purpose (stays prose + test, documented in the standard):
 // the router files' per-route `switch (surface)` arms — including their
@@ -39,6 +49,9 @@ const _artifactPath =
 final _surfaceBreakpointRe = RegExp(r'\bAppBreakpoints\.');
 final _compatDispatcherRe = RegExp(
   r'responsive_surface_page|ResponsiveSurfacePage',
+);
+final _orientationDispatchRe = RegExp(
+  r'\bOrientationBuilder\s*\(|\borientationOf\s*\(',
 );
 
 /// Folders where the compat dispatcher is sanctioned (the composition root
@@ -85,6 +98,9 @@ void main(List<String> args) {
       if (!compatSanctioned && _compatDispatcherRe.hasMatch(line)) {
         rows.add(RouteRow(rel, i + 1, 'R1b-compat-dispatcher', line.trim()));
       }
+      if (!isRouterOrTheme && _orientationDispatchRe.hasMatch(line)) {
+        rows.add(RouteRow(rel, i + 1, 'R1c-orientation-dispatch', line.trim()));
+      }
     }
   }
 
@@ -129,6 +145,9 @@ void _selfTest() {
     if (_compatDispatcherRe.hasMatch(line)) {
       actual = actual == null ? 'R1b' : '$actual+R1b';
     }
+    if (_orientationDispatchRe.hasMatch(line)) {
+      actual = actual == null ? 'R1c' : '$actual+R1c';
+    }
     if (actual != expected) {
       stderr.writeln(
         'Route-surface self-test FAILED ($label): '
@@ -157,6 +176,21 @@ void _selfTest() {
     'compat reference',
     'child: ResponsiveSurfacePage(phone: A, tablet: B),',
     'R1b',
+  );
+  expectRule(
+    'orientation builder',
+    'return OrientationBuilder(builder: (context, orientation) {',
+    'R1c',
+  );
+  expectRule(
+    'orientation query',
+    'final wide = MediaQuery.orientationOf(context) == Orientation.landscape;',
+    'R1c',
+  );
+  expectRule(
+    'width-driven layout stays clean',
+    'final twoColumns = constraints.maxWidth >= TabletDashboardWidths.twoColumnMinWidth;',
+    null,
   );
 }
 

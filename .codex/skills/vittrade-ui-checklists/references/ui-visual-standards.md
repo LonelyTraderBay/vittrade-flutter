@@ -34,7 +34,9 @@ complete domain map and exact command flags. Common checks are:
 | Motion (tablet absolute + phone ratchet) | `standards/Motion-Standard.md` | `dart run tool/motion_audit.dart --check` |
 | Typography roles + tabular figures | `standards/Typography-Standard.md` | `flutter test test/quality/typography_scale_guardrail_test.dart` |
 | Financial data tables | `standards/Data-Table-Standard.md` | See the standard's Verify block |
+| Contrast floor (WCAG pairs) | `standards/Flutter-Native-Design-Standard.md` (Contrast floor section) | `flutter test test/quality/contrast_floor_guardrail_test.dart` |
 | Surface dispatch (tablet) | `standards/Tablet-Adaptive-Standard.md` (R1) | `dart run tool/tablet_route_surface_audit.dart --check` |
+| Orientation (tablet) | `standards/Tablet-Adaptive-Standard.md` (R1c + orientation policy) | `dart run tool/tablet_route_surface_audit.dart --check` + `flutter test test/quality/tablet_rotation_guardrail_test.dart` |
 | Segment pills | `standards/Segment-Pill-Standard.md` | `dart run tool/segment_pill_audit.dart --check --strict-full` |
 | Phone composition | `standards/Phone-Composition-Standard.md` | `dart run tool/home_reference_consistency_audit.dart --check` + page-rhythm audits |
 | Scroll auto-hide | `standards/Scroll-Auto-Hide-Standard.md` | `flutter test test/quality/scroll_auto_hide_guardrail_test.dart` |
@@ -68,6 +70,12 @@ reference wins when this compact table and a standard disagree.
 - Animation durations/easings are `AppMotion.*` tokens — no inline
   `Duration(`/`Curves.` in tablet presentation; resolve reduced motion via
   `AppMotion.respect(context, …)`.
+- Tablet presentation never queries device orientation — no
+  `OrientationBuilder`, no `MediaQuery.orientationOf`; layout decisions are
+  width-tier only (`TabletDashboardWidths` via `LayoutBuilder`).
+- New text/bg token pairings must meet WCAG 4.5:1 or enter the locked
+  deviation list in `contrast_floor_guardrail_test.dart` with a reason —
+  never ship silently below the floor.
 - Never use `BorderRadius.circular()` outside `app_radii.dart`.
 
 ## Radius and tile guidance

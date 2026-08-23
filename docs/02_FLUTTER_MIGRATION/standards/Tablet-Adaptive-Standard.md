@@ -1,7 +1,7 @@
 # Tablet-Adaptive Standard (mandatory for any screen with a dedicated tablet layout)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · `AGENTS.md` UI Rules · Reference screen: Home (SC-007)
-**Enforcement:** R1's sharpest teeth are now static: `tool/tablet_route_surface_audit.dart` + `test/quality/tablet_route_surface_guardrail_test.dart` lock tablet presentation against re-dispatching the surface (`AppBreakpoints.` queries, compat `ResponsiveSurfacePage` references — absolute, zero baseline; router/theme layers exempt as the sanctioned homes, including the router's compat `null` arm). R4-R8's scaffold is implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`), so a page using it satisfies those rules by construction rather than by manual review. `page_rhythm_audit.dart`'s `_hasTradeRhythmScaffold` allowlist recognizes the shared widget so structural page-rhythm coverage isn't lost. What's still manually verified per page: R2 (phone reference untouched) and R3 (threshold choice) and R9 (header promotion) — plus (a) the page's own widget test at/above its two-column threshold, (b) the existing whole-repo structural audits (page rhythm, card tile, page content width), which already scan every file under `lib/features/**/presentation` regardless of phone/tablet.
+**Enforcement:** R1's sharpest teeth are now static: `tool/tablet_route_surface_audit.dart` + `test/quality/tablet_route_surface_guardrail_test.dart` lock tablet presentation against re-dispatching the surface (`AppBreakpoints.` queries, compat `ResponsiveSurfacePage` references, and — R1c, 2026-08-24 — `OrientationBuilder`/`MediaQuery.orientationOf` orientation dispatch; all absolute, zero baseline; router/theme layers exempt as the sanctioned homes, including the router's compat `null` arm). The orientation policy's behavioral half (rotation relayout) is locked by `test/quality/tablet_rotation_guardrail_test.dart`. R4-R8's scaffold is implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`), so a page using it satisfies those rules by construction rather than by manual review. `page_rhythm_audit.dart`'s `_hasTradeRhythmScaffold` allowlist recognizes the shared widget so structural page-rhythm coverage isn't lost. What's still manually verified per page: R2 (phone reference untouched) and R3 (threshold choice) and R9 (header promotion) — plus (a) the page's own widget test at/above its two-column threshold, (b) the existing whole-repo structural audits (page rhythm, card tile, page content width), which already scan every file under `lib/features/**/presentation` regardless of phone/tablet.
 **Reference screens:** all 5 app root tabs now have a dedicated tablet page, all delegating their two-column body to `VitTwoColumnTabletDashboard`: `home_tablet_page.dart` (first, R1-R9 originally established here); `wallet_tablet_page.dart` (confirmed R9's header-promotion pattern generalizes); `markets_tablet_page.dart` (confirmed a phone-only content gate, like Markets' `showMarketSummary`, can be safely dropped in the tablet secondary column when the gated widgets' own data doesn't depend on the filter state; see R7); `trade_tablet_page.dart` (confirmed a financial-safety column-placement invariant — the risk panel staying in the primary column — survives being expressed as plain child-list ordering, no special-casing needed in the shared widget); `profile_tablet_page.dart` (confirmed a nested inner screen-state switch upstream of the two-column body doesn't need to interact with the shared widget at all). After all 5 confirmed the identical scaffold, it was extracted into `VitTwoColumnTabletDashboard` (own test: `test/shared/layout/vit_two_column_tablet_dashboard_test.dart`) and all 5 pages migrated onto it — see "Upgrade path" below.
 
 ## Scope
@@ -136,6 +136,53 @@ renders the active sub-route in place. Reference implementation:
    overview pane (independent scrolls, `Expanded` shares); a sub-route pane
    takes the full width with its own back header — the menu column would
    leave no usable detail height beside it.
+6. **Selection is route-derived, never a parallel local state.** The menu's
+   selected row comes from the routing outlet itself
+   (`ProfileMasterMenu.selectedRoute`, matched against the sub-route
+   currently rendered in the detail pane) — never a local index/enum/tab
+   controller duplicated beside the router. Selection *is* the location,
+   which is what makes rule 2's back-stack semantics and the orientation
+   policy's rotation survival true for free (there is no second state to
+   sync or lose). A non-routed split view (none exists today) must still own
+   selection in exactly one place above the split, reset it when the
+   selected id leaves the source list, and render a real empty state
+   (`VitEmptyState`) when nothing is selected — never a blank detail pane,
+   and never a selection derived from scroll position.
+
+## Orientation policy (both orientations, zero orientation dispatch — locked 2026-08-24)
+
+The tablet surface supports **both orientations** — nothing in the app locks
+or favors one. The whole layout contract is **width-driven**: the
+`TabletDashboardWidths` tiers (single-column <900, two-column ≥900,
+centered 800/400 ≥1200) already answer every question orientation could.
+
+1. **Presentation never queries orientation (R1c, absolute).** No
+   `OrientationBuilder`, no `MediaQuery.orientationOf` in any tablet
+   presentation file — locked at zero since 2026-08-24 by
+   `tool/tablet_route_surface_audit.dart` (rule R1c, the same scanner as
+   R1a/R1b). If a layout "needs to know orientation", it actually needs a
+   width tier — add or override a `TabletDashboardWidths` value instead.
+   Dispatching on both width and orientation creates four quadrant states
+   (narrow/wide × portrait/landscape) of which only two are ever tested;
+   width-only keeps every state reachable by a fixed viewport size.
+2. **Rotation is a relayout, not a rebuild.** Rotating must not lose state:
+   route-derived state (master-detail selection, shell pattern rule 6)
+   survives because the router owns it; column scroll positions are widget
+   state and survive the relayout. Locked behaviorally by
+   `test/quality/tablet_rotation_guardrail_test.dart`: every
+   tablet-composed root rotates portrait↔landscape and back with zero
+   layout errors, exactly one navigation rail, and its own semantic content
+   intact at every stop.
+3. **Landscape-specific hazards are width-tier hazards.** A 1112×834
+   landscape tablet is only ~834dp tall — the composition playbook's banner
+   rule already encodes the surviving constraint (fixed banners stay thin,
+   tall heroes scroll with the primary column). A portrait tablet
+   (~800–834dp wide) rides the same single-column fallback a 768px tablet
+   already exercises — no new tier, no portrait-only code path.
+4. **QA sizes** (fixed-viewport matrix in
+   `responsive_visual_qa_matrix_test.dart` + the rotation pairs above):
+   portrait 768×1024 / 800×1280 / 834×1112; landscape 1024×768 / 1280×800 /
+   1112×834.
 
 ## Step checklist (new tablet page)
 
@@ -146,7 +193,7 @@ renders the active sub-route in place. Reference implementation:
 5. Build `primaryChildren`/`secondaryChildren` lists from the page's own content, then `return VitTwoColumnTabletDashboard(primaryChildren: ..., secondaryChildren: ...)` — R4-R8 satisfied automatically. Header promoted to a fixed `Column` sibling above it (R9, still page-specific — the shared widget has no opinion on headers).
 6. Register any route/page override needed by the structural audits; do not add a feature-specific responsive dispatcher (R1).
 7. Add a widget test that pumps at the page's own two-column width and asserts `tester.takeException()` is `null` (the overflow guard) plus both columns' key content is present — the phone-width tests in the same file do **not** exercise this path. The shared widget's own generic mechanics (fallback threshold, `Row` shape, `VitCard` framing) already have dedicated coverage in `test/shared/layout/vit_two_column_tablet_dashboard_test.dart` — the page-level test only needs to prove *this page's* content lands in the right column, not re-verify the scaffold itself.
-8. Run the check suite (§5 of `Flutter-Design-System-Reference.md`) — the tablet-specific audits below are part of it; a new tablet file is scanned by the same page-rhythm/card-tile/content-width audits as any phone file **plus** the five tablet locks (spacing, card border, input, motion, route-surface).
+8. Run the check suite (§5 of `Flutter-Design-System-Reference.md`) — the tablet-specific audits below are part of it; a new tablet file is scanned by the same page-rhythm/card-tile/content-width audits as any phone file **plus** the six tablet locks (spacing, card border, input, motion, route-surface incl. R1c orientation, rotation relayout).
 
 ## Anti-patterns
 
@@ -162,7 +209,7 @@ renders the active sub-route in place. Reference implementation:
 
 ## Limitations
 
-- R1's runtime-dispatch half has a static audit (`tablet_route_surface_audit.dart`, 2026-08-23); its route-wiring half plus R2/R3/R9 stay prose plus a required widget-test pattern, not a `tool/*_audit.dart` script. R4-R8 no longer need one: they're enforced by construction now that every tablet page delegates its two-column body to `VitTwoColumnTabletDashboard` rather than hand-rolling it, so they can't independently drift per page.
+- R1's runtime-dispatch half has a static audit (`tablet_route_surface_audit.dart`, 2026-08-23; R1c orientation-dispatch added 2026-08-24, still zero usages); the orientation policy's behavioral half (rotation relayout keeps state and composition) is locked by `tablet_rotation_guardrail_test.dart`, not a scanner. R1's route-wiring half plus R2/R3/R9 stay prose plus a required widget-test pattern, not a `tool/*_audit.dart` script. Master-detail selection (shell pattern rule 6) stays prose — it is route-derived by construction in the one reference shell, and a static scanner can't classify "is a split view" reliably (same verdict as Flutter-Page-Archetype-Standard's curated-list approach). R4-R8 no longer need one: they're enforced by construction now that every tablet page delegates its two-column body to `VitTwoColumnTabletDashboard` rather than hand-rolling it, so they can't independently drift per page.
 - Five reference implementations (`HomeTabletPage`, `WalletTabletPage`, `MarketsTabletPage`, `TradeTabletPage`, `ProfileTabletPage`) as of writing — all five app root tabs. R8's 900 threshold and 440 secondary cap held unchanged for all five, across genuinely varied content shapes (a financial order-entry form, a nested inner screen-state switch, a search-filterable list); the 640 primary cap held structurally (no overflow) but was later found too conservative on a wide physical tablet — raised to 760 (R5/R8) after on-device verification, not just a desk-check. Re-validate before assuming any of these numbers hold for a screen with meaningfully different content density than these five, and pass constructor overrides on `VitTwoColumnTabletDashboard` rather than editing the shared defaults if they don't.
 
 ## Upgrade path
@@ -177,12 +224,13 @@ renders the active sub-route in place. Reference implementation:
 cd flutter_app
 flutter analyze <touched tablet page file>
 flutter test <touched tablet page test file> --reporter=compact
-# The five tablet locks (all absolute-zero since 2026-08-23):
+# The six tablet locks (all absolute-zero as of 2026-08-24):
 dart run tool/tablet_spacing_audit.dart --check
 dart run tool/tablet_card_border_audit.dart --check
 dart run tool/tablet_input_audit.dart --check
 dart run tool/motion_audit.dart --check
-dart run tool/tablet_route_surface_audit.dart --check
+dart run tool/tablet_route_surface_audit.dart --check # incl. R1c orientation
+flutter test test/quality/tablet_rotation_guardrail_test.dart --reporter=compact
 # Whole-repo structural audits (scan every presentation file):
 dart run tool/page_rhythm_audit.dart --check --strict-full
 dart run tool/card_tile_audit.dart --check --strict-full
