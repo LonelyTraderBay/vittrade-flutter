@@ -33,6 +33,7 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | [Flutter-Native-Design-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md) | Native UI rules |
 | [Flutter-Module-Identity-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md) | Module accents |
 | [Flutter-Page-Archetype-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Page-Archetype-Standard.md) | Tabbed-detail / form-wizard page patterns |
+| [Phone-Composition-Standard.md](02_FLUTTER_MIGRATION/standards/Phone-Composition-Standard.md) | Mandatory phone composition: one-column grammar + module composition archetypes (foundation cứng vs khác biệt theo nghề module) |
 | [Tablet-Adaptive-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md) | Mandatory dedicated tablet layouts (R1–R9 + module composition archetype table) |
 | [Tablet-Spacing-Gutter-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Spacing-Gutter-Standard.md) | Mandatory tablet token-locked spacing/gutters (S1–S4, absolute) |
 | [Tablet-Card-Border-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Card-Border-Standard.md) | Mandatory tablet card frames + 3-step border tints (R1–R3, absolute) |

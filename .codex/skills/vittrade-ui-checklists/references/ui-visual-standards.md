@@ -34,6 +34,7 @@ complete domain map and exact command flags. Common checks are:
 | Motion (phase 1 = tablet) | `standards/Motion-Standard.md` | `dart run tool/motion_audit.dart --check` |
 | Surface dispatch (tablet) | `standards/Tablet-Adaptive-Standard.md` (R1) | `dart run tool/tablet_route_surface_audit.dart --check` |
 | Segment pills | `standards/Segment-Pill-Standard.md` | `dart run tool/segment_pill_audit.dart --check --strict-full` |
+| Phone composition | `standards/Phone-Composition-Standard.md` | `dart run tool/home_reference_consistency_audit.dart --check` + page-rhythm audits |
 | Scroll auto-hide | `standards/Scroll-Auto-Hide-Standard.md` | `flutter test test/quality/scroll_auto_hide_guardrail_test.dart` |
 | Notice acknowledgement | `standards/Notice-Acknowledgement-Standard.md` | `flutter test test/quality/notice_acknowledgement_guardrail_test.dart` |
 | Tablet-adaptive layout | `standards/Tablet-Adaptive-Standard.md` | The page's two-column widget test |

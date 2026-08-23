@@ -162,8 +162,9 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   `VitWebUtilityPage`.
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
-  badges, task cards, accent icon boxes, radius tokens, tablet layout
-  archetypes, input states hover/focus, motion durations/easing) live in
+  badges, task cards, accent icon boxes, radius tokens, phone + tablet
+  composition archetypes, input states hover/focus, motion durations/easing)
+  live in
   `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
   the matching files under `docs/02_FLUTTER_MIGRATION/standards/` — read the
   applicable standard before touching presentation code; do not duplicate its

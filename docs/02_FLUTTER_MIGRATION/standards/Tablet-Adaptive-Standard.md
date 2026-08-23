@@ -30,7 +30,10 @@ Every module obeys the **same absolute foundation** (tokens, spacing S1–S4,
 card frames R1–R3, input states I1–I5, motion M1–M5, header/nav rules) —
 modules never differ in those. What *legitimately* differs is the
 **composition grammar**, and it is chosen by the module's actual job, not by
-taste. Pick the row that matches the screen's work before writing any code:
+taste. Pick the row that matches the screen's work before writing any code.
+(The phone surface carries the same two-layer model with its own one-column
+grammar — see `Phone-Composition-Standard.md`, including a phone↔tablet
+mapping per job.)
 
 | Archetype (module's job) | Composition grammar | Reference | What differs between modules |
 | --- | --- | --- | --- |
