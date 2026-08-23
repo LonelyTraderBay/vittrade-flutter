@@ -15,6 +15,13 @@ import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 /// scroll (never nested inside another scrollable), and an optional
 /// pull-to-refresh wrapping it — same refresh contract as
 /// `VitTwoColumnTabletDashboard`'s `onRefresh`.
+///
+/// Top-level [children] must stay FLAT: the inner `VitPageContent(rhythm:)`
+/// already inserts the rhythm's section gap between every pair of
+/// children, so a manual `SizedBox(height:)` standing as an element of
+/// `children` stacks onto those gaps (e.g. 16+8+16=40dp instead of 16dp)
+/// and breaks the pane's vertical rhythm. Inner gaps belong inside child
+/// widgets, never between them — locked by `tablet_spacing_audit` rule S4.
 class ProfilePaneScaffold extends StatelessWidget {
   const ProfilePaneScaffold({
     super.key,

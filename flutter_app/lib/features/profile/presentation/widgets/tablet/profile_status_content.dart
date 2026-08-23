@@ -23,11 +23,12 @@ class ProfileLoadingContent extends StatelessWidget {
       scrollKey: ProfileTabletKeys.loading,
       onRefresh: onRefresh,
       rhythm: VitPageRhythm.standard,
+      // Flat children: the scaffold's rhythm already inserts the section
+      // gap between blocks — a manual SizedBox separator here stacks onto
+      // it (13+13+13=39dp) and is flagged by tablet_spacing_audit S4.
       children: const [
         _AccountHeroSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
         ProfileSecuritySummarySkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
         VitSectionSkeleton(),
       ],
     );
