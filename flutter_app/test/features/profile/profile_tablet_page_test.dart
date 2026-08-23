@@ -381,20 +381,18 @@ void main() {
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      await tester.ensureVisible(
-        find.byKey(ProfileTabletKeys.menu('sub-accounts')),
-      );
-      await tester.tap(find.byKey(ProfileTabletKeys.menu('sub-accounts')));
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('edit')));
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('edit')));
       await tester.pumpAndSettle();
 
       // The placeholder renders in the detail pane (menu stays framed)…
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
-      expect(find.byKey(const Key('SC-166-tablet-content')), findsOneWidget);
+      expect(find.byKey(const Key('SC-157-tablet-content')), findsOneWidget);
       // …and back returns to the overview exactly like the ported panes.
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
-      expect(find.byKey(const Key('SC-166-tablet-content')), findsNothing);
+      expect(find.byKey(const Key('SC-157-tablet-content')), findsNothing);
     },
   );
 
@@ -774,6 +772,49 @@ void main() {
       expect(find.byKey(ProfileTabletKeys.apiPane), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.apiCreatePane), findsNothing);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-166 sub-accounts pane renders the totals and expands a card',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.menu('sub-accounts')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('sub-accounts')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: hero totals with the
+      // balance-hide toggle, create button, and the account cards list.
+      expect(find.byKey(ProfileTabletKeys.subAccountsPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.subAccountsSummary), findsOneWidget);
+      expect(
+        find.byKey(ProfileTabletKeys.subAccountsBalanceToggle),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ProfileTabletKeys.subAccountsCreateButton),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+
+      // Expanding an account card reveals its 30d metrics and permissions.
+      final card = find.byKey(ProfileTabletKeys.subAccountsExpand('sub001'));
+      await tester.ensureVisible(card);
+      await tester.tap(card);
+      await tester.pumpAndSettle();
+      expect(find.text('Volume 30d'), findsOneWidget);
+      expect(find.text('Quyền hạn:'), findsOneWidget);
+
+      // Hiding balances masks every money figure in the pane.
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.subAccountsBalanceToggle),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.subAccountsBalanceToggle));
+      await tester.pumpAndSettle();
+      expect(find.text('••••••'), findsOneWidget);
     },
   );
 

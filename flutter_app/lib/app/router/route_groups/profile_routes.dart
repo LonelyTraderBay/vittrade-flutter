@@ -19,6 +19,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_settings_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
@@ -160,14 +161,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileSubAccounts,
       name: AppRouteNames.sc166SubAccount,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-166',
-          title: 'Tài khoản phụ',
-          subtitle: 'Quyền truy cập · hạn mức · hoạt động',
-          description:
-              'Quản lý tài khoản phụ, phạm vi quyền và hạn mức từng tài khoản.',
-          icon: Icons.groups_outlined,
-        ),
+        // Master-detail tablet renders the real sub-accounts pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileSubAccountsPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => SubAccountPage(shellRenderMode: shellRenderMode),

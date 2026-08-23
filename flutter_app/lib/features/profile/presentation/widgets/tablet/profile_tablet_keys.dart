@@ -133,4 +133,24 @@ final class ProfileTabletKeys {
 
   static Key apiCreateExpiry(String id) =>
       Key('sc162_api_create_pane_expiry_$id');
+
+  // Sub-accounts detail pane (SC-166 tablet port).
+  static const subAccountsPane = Key('sc166_sub_accounts_pane');
+  static const subAccountsPaneError = Key('sc166_sub_accounts_pane_error');
+  static const subAccountsSummary = Key('sc166_sub_accounts_pane_summary');
+  static const subAccountsBalanceToggle = Key(
+    'sc166_sub_accounts_pane_balance_toggle',
+  );
+  static const subAccountsCreateButton = Key(
+    'sc166_sub_accounts_pane_create_button',
+  );
+  static const subAccountsCreateForm = Key(
+    'sc166_sub_accounts_pane_create_form',
+  );
+
+  static Key subAccountsCard(String id) =>
+      Key('sc166_sub_accounts_pane_card_$id');
+
+  static Key subAccountsExpand(String id) =>
+      Key('sc166_sub_accounts_pane_expand_$id');
 }

@@ -231,6 +231,7 @@ profile,profile/presentation/widgets/settings_page_sections.dart,VitPresetChipRo
 profile,profile/presentation/widgets/tablet/profile_activity_pane.dart,VitChoicePill,chip,1,44,hug,-,pass,
 profile,profile/presentation/widgets/tablet/profile_api_create_pane.dart,VitChoicePill,chip,1,44,hug,-,pass,
 profile,profile/presentation/widgets/tablet/profile_settings_pane.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
+profile,profile/presentation/widgets/tablet/profile_sub_accounts_pane_sections.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 profile,profile/presentation/widgets/tablet/profile_vip_pane.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 referral,referral/presentation/phone/pages/referral_rewards_page_ledger_sections.dart,VitSegmentedChoice,primaryAccent,2,44,equal_expanded,-,pass,
 referral,referral/presentation/widgets/referral_history_page_sections.dart,VitChoicePill,chip,1,44,hug,-,pass,

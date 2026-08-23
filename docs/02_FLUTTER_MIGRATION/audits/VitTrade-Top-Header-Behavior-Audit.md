@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=409
 fixed_vit_header_remaining=169
-auto_hide_header=95
+auto_hide_header=94
 custom_scroll_header=1
-no_top_header=30
+no_top_header=31
 unresolved=114
 ```
 
@@ -302,7 +302,7 @@ unresolved=114
 | profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
 | profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
 | profile | `AppRoutePaths.profileSettings` | `ProfileSettingsPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart` |
-| profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` |
+| profile | `AppRoutePaths.profileSubAccounts` | `ProfileSubAccountsPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart` |
 | profile | `AppRoutePaths.profileVip` | `ProfileVipPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` |
 | support | `AppRoutePaths.support` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportAnnouncements` | `unresolved` | unresolved | unresolved | `unresolved` |
