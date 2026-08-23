@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=409
 fixed_vit_header_remaining=169
-auto_hide_header=99
+auto_hide_header=98
 custom_scroll_header=1
-no_top_header=26
+no_top_header=27
 unresolved=114
 ```
 
@@ -294,7 +294,7 @@ unresolved=114
 | predictions | `AppRoutePaths.marketsPredictionsSocial` | `unresolved` | unresolved | unresolved | `unresolved` |
 | predictions | `AppRoutePaths.marketsPredictionsTournaments` | `unresolved` | unresolved | unresolved | `unresolved` |
 | profile | `AppRoutePaths.profile` | `ProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
-| profile | `AppRoutePaths.profileActivity` | `ActivityLogPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/activity_log_page.dart` |
+| profile | `AppRoutePaths.profileActivity` | `ProfileActivityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` |
 | profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart` |
 | profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
 | profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |

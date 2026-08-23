@@ -82,4 +82,13 @@ final class ProfileTabletKeys {
       Key('sc160_settings_pane_language_$id');
 
   static Key settingsToggle(String id) => Key('sc160_settings_pane_toggle_$id');
+
+  // Activity log detail pane (SC-161 tablet port).
+  static const activityPane = Key('sc161_activity_pane');
+  static const activityPaneError = Key('sc161_activity_pane_error');
+  static const activityWarning = Key('sc161_activity_pane_warning');
+
+  static Key activityFilter(String id) => Key('sc161_activity_pane_filter_$id');
+
+  static Key activityLog(String id) => Key('sc161_activity_pane_log_$id');
 }

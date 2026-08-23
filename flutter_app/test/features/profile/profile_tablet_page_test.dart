@@ -340,16 +340,16 @@ void main() {
       await tester.tap(find.byKey(ProfileTabletKeys.securityItem('activity')));
       await tester.pumpAndSettle();
 
-      // In-shell switch: the placeholder renders inside the shell (menu
+      // In-shell switch: the activity pane renders inside the shell (menu
       // stays framed) and replaces the security pane…
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
-      expect(find.byKey(const Key('SC-161-tablet-content')), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.activityPane), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.securityPane), findsNothing);
 
       // …so a single back lands on the overview, not a dead-end stack.
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
-      expect(find.byKey(const Key('SC-161-tablet-content')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.activityPane), findsNothing);
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
     },
   );
@@ -610,6 +610,42 @@ void main() {
       expect(
         store.getBool('${KeyValueStoreKeys.settingsTogglePrefix}news'),
         true,
+      );
+    },
+  );
+
+  testWidgets(
+    'SC-161 activity pane renders the log entries beside the menu and '
+    'filters them',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.menu('activity')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('activity')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: 7 entries with 1 suspicious
+      // login from Singapore, the warning banner leads the pane.
+      expect(find.byKey(ProfileTabletKeys.activityPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.activityWarning), findsOneWidget);
+      expect(find.text('Phát hiện 1 hoạt động đáng ngờ'), findsOneWidget);
+      expect(
+        find.byKey(ProfileTabletKeys.activityLog('act001')),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+
+      // The login filter keeps only login/logout entries (mock has 3) and
+      // drops the security ones (password change, 2FA, KYC).
+      await tester.tap(find.byKey(ProfileTabletKeys.activityFilter('login')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.activityLog('act003')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.activityLog('act005')), findsNothing);
+      expect(
+        find.byKey(ProfileTabletKeys.activityLog('act001')),
+        findsOneWidget,
       );
     },
   );

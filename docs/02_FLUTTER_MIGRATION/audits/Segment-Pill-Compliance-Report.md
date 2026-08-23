@@ -6,9 +6,9 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 336 |
-| Files with shared widgets | 303 |
-| Compliance pass | 233 |
+| Audit rows | 337 |
+| Files with shared widgets | 304 |
+| Compliance pass | 234 |
 | Compliance warn | 0 |
 | Compliance review | 103 |
 | Interactive local classes | 0 |
@@ -19,7 +19,7 @@
 | Family | Call sites |
 | --- | ---: |
 | VitTabBar | 130 |
-| VitChoicePill | 125 |
+| VitChoicePill | 126 |
 | VitSegmentedChoice | 89 |
 | VitSegmentedTabBar | 26 |
 | VitPresetChipRow | 31 |
@@ -50,7 +50,7 @@
 | p2p_orders | 9 |
 | p2p_security | 8 |
 | predictions | 22 |
-| profile | 7 |
+| profile | 8 |
 | referral | 2 |
 | rewards | 1 |
 | support | 2 |

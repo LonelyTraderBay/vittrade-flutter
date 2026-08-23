@@ -16,7 +16,7 @@ generated=2026-06-12
 status_fail=1
 status_warn=20
 status_exception=104
-rows=1252
+rows=1253
 ```
 
 ## CI Baseline Gates
@@ -102,7 +102,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_balance_sections.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_segmented_choice.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/tools/launchpad_abi_diff_summary.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/tools/launchpad_address_book_cards.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_field_controls.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_helpers.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_models.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -991,6 +991,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

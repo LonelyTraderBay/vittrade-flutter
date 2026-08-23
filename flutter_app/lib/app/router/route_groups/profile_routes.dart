@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/prof
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_activity_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_settings_pane.dart';
@@ -98,13 +99,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileActivity,
       name: AppRouteNames.sc161ActivityLog,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-161',
-          title: 'Nhật ký hoạt động',
-          subtitle: 'Đăng nhập · thay đổi · xác nhận',
-          description: 'Đối chiếu các đăng nhập và thay đổi tài khoản gần đây.',
-          icon: Icons.assignment_outlined,
-        ),
+        // Master-detail tablet renders the real activity pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileActivityPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => ActivityLogPage(shellRenderMode: shellRenderMode),

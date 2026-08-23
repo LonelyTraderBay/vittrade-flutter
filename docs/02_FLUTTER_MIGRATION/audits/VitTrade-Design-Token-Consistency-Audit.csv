@@ -785,6 +785,7 @@ feature_widget,,flutter_app/lib/features/profile/presentation/widgets/settings_p
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/settings_page_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_icon_registry.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
