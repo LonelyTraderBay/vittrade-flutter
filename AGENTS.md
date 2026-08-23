@@ -163,7 +163,8 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens, phone + tablet
-  composition archetypes, input states hover/focus, motion durations/easing)
+  composition archetypes, input states hover/focus, motion durations/easing,
+  typography roles + tabular figures, financial data tables)
   live in
   `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
   the matching files under `docs/02_FLUTTER_MIGRATION/standards/` — read the

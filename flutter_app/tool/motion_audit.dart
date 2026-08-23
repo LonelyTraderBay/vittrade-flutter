@@ -1,11 +1,13 @@
-// Motion Standard — audit scanner (phase 1: tablet surface, absolute).
+// Motion Standard — audit scanner.
 //
-// Locks the static half of
-// docs/02_FLUTTER_MIGRATION/standards/Motion-Standard.md across every
-// tablet-surface Dart file under lib/ (path contains "/tablet/", or the file
-// name mentions "tablet"). The tablet surface starts at ZERO literal motion
-// (2026-08-23 sweep migrated the last two 180ms literals) — these rules are
-// absolute (no baseline, no ratchet): any new literal fails CI outright.
+//   Tablet surface  — ABSOLUTE lock (phase 1, 2026-08-23): zero literal
+//                     motion, no baseline. Any violation fails the run.
+//   Phone surface   — RATCHET lock (phase 2, 2026-08-24): every
+//                     Dart file under lib/ outside the tablet set and the
+//                     token layer. Existing debt is pinned in
+//                     test/quality/motion_phone_baseline.txt (regen only via
+//                     --regen-baseline); new violations fail CI, entries must
+//                     disappear as files are touched.
 //
 //   M1 literal-duration — an animation `duration: <Duration literal>` (incl.
 //                          transitionDuration/reverseDuration) must reference
@@ -13,32 +15,45 @@
 //                          network delays (`Future.delayed(const Duration…`,
 //                          no `duration:` argument position) are NOT motion
 //                          and never match.
-//   M2 literal-curve    — a `Curves.` reference in tablet presentation code;
+//   M2 literal-curve    — a `Curves.` reference in presentation code;
 //                          easing comes from AppMotion.enter/emphasized/exit.
 //
-// M3 (reduced-motion via AppMotion.respect), M4 (tokens only — enforced by
-// M1/M2), and M5 (skeleton respects reduced motion) are behavioral: prose +
-// widget tests, out of static reach.
-//
-// Phase 2 (roadmap, not this tool yet): phone surface keeps its current
-// rules; adopting tokens there lands with its own ratchet baseline.
+// `lib/app/theme/` is exempt on both scopes — it is the token layer
+// (AppMotion itself is the sanctioned home for Duration/Curves values).
+// M3 (reduced motion), M4's shared-widget half, and M5 (skeleton behavior)
+// are behavioral: prose + widget tests, out of static reach.
 //
 // Usage (from flutter_app/):
-//   dart run tool/motion_audit.dart            # regen artifact
-//   dart run tool/motion_audit.dart --check    # CI staleness
+//   dart run tool/motion_audit.dart                   # regen artifact
+//   dart run tool/motion_audit.dart --check           # CI: artifact + baseline
+//   dart run tool/motion_audit.dart --regen-baseline  # only when retiring debt
 import 'dart:io';
 
 const _artifactPath =
     '../docs/02_FLUTTER_MIGRATION/audits/VitTrade-Motion-Audit.csv';
+const _phoneBaselinePath = 'test/quality/motion_phone_baseline.txt';
 
 final _literalDurationRe = RegExp(r'[dD]uration:\s*(?:const\s+)?Duration\s*\(');
 final _literalCurveRe = RegExp(r'\bCurves\.');
 
+bool _isTabletSurface(String normalizedPath) {
+  final fileName = normalizedPath.split('/').last;
+  return normalizedPath.contains('/tablet/') || fileName.contains('tablet');
+}
+
+/// The phone scope: every Dart file under lib/ except the tablet set and
+/// the token layer — presentation, shared widgets, shared layout.
+bool _isPhoneSurface(String normalizedPath) =>
+    !_isTabletSurface(normalizedPath) &&
+    !normalizedPath.contains('/app/theme/');
+
 void main(List<String> args) {
   _selfTest();
   final checkOnly = args.contains('--check');
+  final regenBaseline = args.contains('--regen-baseline');
 
-  final rows = <MotionRow>[];
+  final tabletRows = <MotionRow>[];
+  final phoneRows = <MotionRow>[];
   final libDir = Directory('lib');
   if (!libDir.existsSync()) {
     stderr.writeln('Run from flutter_app/ — lib/ not found.');
@@ -47,59 +62,100 @@ void main(List<String> args) {
   for (final entity in libDir.listSync(recursive: true)) {
     if (entity is! File) continue;
     final normalized = entity.path.replaceAll('\\', '/');
-    final fileName = normalized.split('/').last;
-    final isTabletSurface =
-        normalized.contains('/tablet/') || fileName.contains('tablet');
-    if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
-    // The theme folder is the token layer — AppMotion itself (and any future
-    // motion token file) is the sanctioned home for Duration/Curves values,
-    // the same exemption the card border audit gives app/theme/.
-    if (normalized.contains('/app/theme/')) continue;
+    if (!normalized.endsWith('.dart')) continue;
 
+    final isTablet = _isTabletSurface(normalized);
+    if (!isTablet && !_isPhoneSurface(normalized)) continue;
+
+    final rel = normalized.replaceFirst('lib/', '');
     final lines = entity.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       if (line.trimLeft().startsWith('//')) continue;
-      final rel = normalized.replaceFirst('lib/', '');
       if (_literalDurationRe.hasMatch(line)) {
-        rows.add(MotionRow(rel, i + 1, 'M1-literal-duration', line.trim()));
+        (isTablet ? tabletRows : phoneRows).add(
+          MotionRow(rel, i + 1, 'M1-literal-duration', line.trim()),
+        );
       }
       if (_literalCurveRe.hasMatch(line)) {
-        rows.add(MotionRow(rel, i + 1, 'M2-literal-curve', line.trim()));
+        (isTablet ? tabletRows : phoneRows).add(
+          MotionRow(rel, i + 1, 'M2-literal-curve', line.trim()),
+        );
       }
     }
   }
 
-  rows.sort((a, b) {
-    final byPath = a.path.compareTo(b.path);
-    if (byPath != 0) return byPath;
-    return a.line.compareTo(b.line);
-  });
+  // Phase 1 — tablet absolute: any violation fails the run outright.
+  if (tabletRows.isNotEmpty) {
+    stderr.writeln(
+      'Motion audit: ${tabletRows.length} TABLET violations (absolute lock, '
+      'no baseline):\n${tabletRows.map((r) => '${r.path}|${r.line}|${r.rule}').join('\n')}\n'
+      'Move to AppMotion tokens — the tablet surface stays at zero.',
+    );
+    exit(2);
+  }
 
-  final artifact = _renderArtifact(rows);
+  phoneRows.sort(_byPathThenLine);
+
+  if (regenBaseline) {
+    File(_phoneBaselinePath).writeAsStringSync(_renderBaseline(phoneRows));
+    stdout.writeln('Wrote $_phoneBaselinePath (${phoneRows.length} entries).');
+  }
+
   if (checkOnly) {
+    // Artifact currency.
+    final rendered = _renderArtifact(phoneRows);
     final existing = File(_artifactPath).existsSync()
         ? File(_artifactPath).readAsStringSync()
         : null;
-    if (existing == null || existing != artifact) {
+    if (existing == null || existing != rendered) {
       stderr.writeln(
         'Motion audit artifact is stale. '
         'Run `dart run tool/motion_audit.dart` from flutter_app/.',
       );
       exit(1);
     }
-    stdout.writeln('Motion audit artifact is current.');
+    // Phone ratchet: every current entry must already be pinned.
+    final baseline = _readBaseline();
+    final newDebt = phoneRows
+        .map((r) => '${r.path}|${r.line}|${r.rule}')
+        .where((entry) => !baseline.contains(entry))
+        .toList();
+    if (newDebt.isNotEmpty) {
+      stderr.writeln(
+        'Motion audit: ${newDebt.length} new PHONE violations outside the '
+        'ratchet baseline:\n${newDebt.join('\n')}\n'
+        'Use AppMotion tokens (never baseline new debt by hand).',
+      );
+      exit(1);
+    }
+    stdout.writeln(
+      'Motion audit current: tablet 0, phone ${phoneRows.length} pinned.',
+    );
   } else {
-    File(_artifactPath).writeAsStringSync(artifact);
+    File(_artifactPath).writeAsStringSync(_renderArtifact(phoneRows));
     stdout.writeln('Wrote $_artifactPath');
   }
 
   stdout.writeln(
-    rows.isEmpty
-        ? 'Motion audit: 0 violations (absolute lock — no baseline).'
-        : 'Motion audit: ${rows.length} violations (absolute lock — move to '
-              'AppMotion tokens, never baseline them).',
+    'Motion audit: tablet 0 violations (absolute); phone ${phoneRows.length} '
+    'ratcheted entries (only shrink — migrate to AppMotion as files are '
+    'touched).',
   );
+}
+
+int _byPathThenLine(MotionRow a, MotionRow b) {
+  final byPath = a.path.compareTo(b.path);
+  return byPath != 0 ? byPath : a.line.compareTo(b.line);
+}
+
+Set<String> _readBaseline() {
+  final file = File(_phoneBaselinePath);
+  if (!file.existsSync()) return <String>{};
+  return file
+      .readAsLinesSync()
+      .where((line) => line.isNotEmpty && !line.startsWith('#'))
+      .toSet();
 }
 
 /// Locks the scanner regexes against regressions — runs on every invocation,
@@ -153,12 +209,28 @@ String _renderArtifact(List<MotionRow> rows) {
   final buffer = StringBuffer()
     ..writeln('path,line,rule,source')
     ..writeln(
-      '# Generated by tool/motion_audit.dart — regenerate after touching tablet presentation files.',
+      '# Generated by tool/motion_audit.dart — phone-surface motion debt (ratchet). Tablet surface is absolute-zero and never listed here.',
     );
   for (final row in rows) {
     buffer.writeln(
       '${row.path},${row.line},${row.rule},"${row.source.replaceAll('"', '""')}"',
     );
+  }
+  return buffer.toString();
+}
+
+String _renderBaseline(List<MotionRow> rows) {
+  final buffer = StringBuffer()
+    ..writeln(
+      '# Phone motion debt baseline — ratchet: entries may only be REMOVED.',
+    )
+    ..writeln('# Regenerate intentionally via:')
+    ..writeln('#   dart run tool/motion_audit.dart --regen-baseline')
+    ..writeln(
+      '# Never add entries by hand; new UI uses AppMotion tokens outright.',
+    );
+  for (final row in rows) {
+    buffer.writeln('${row.path}|${row.line}|${row.rule}');
   }
   return buffer.toString();
 }

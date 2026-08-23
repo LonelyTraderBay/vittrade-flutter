@@ -31,7 +31,9 @@ complete domain map and exact command flags. Common checks are:
 | Card & border (tablet) | `standards/Tablet-Card-Border-Standard.md` | `dart run tool/tablet_card_border_audit.dart --check` |
 | Spacing & gutters (tablet) | `standards/Tablet-Spacing-Gutter-Standard.md` | `dart run tool/tablet_spacing_audit.dart --check` |
 | Input states (tablet) | `standards/Tablet-Input-Standard.md` | `dart run tool/tablet_input_audit.dart --check` |
-| Motion (phase 1 = tablet) | `standards/Motion-Standard.md` | `dart run tool/motion_audit.dart --check` |
+| Motion (tablet absolute + phone ratchet) | `standards/Motion-Standard.md` | `dart run tool/motion_audit.dart --check` |
+| Typography roles + tabular figures | `standards/Typography-Standard.md` | `flutter test test/quality/typography_scale_guardrail_test.dart` |
+| Financial data tables | `standards/Data-Table-Standard.md` | See the standard's Verify block |
 | Surface dispatch (tablet) | `standards/Tablet-Adaptive-Standard.md` (R1) | `dart run tool/tablet_route_surface_audit.dart --check` |
 | Segment pills | `standards/Segment-Pill-Standard.md` | `dart run tool/segment_pill_audit.dart --check --strict-full` |
 | Phone composition | `standards/Phone-Composition-Standard.md` | `dart run tool/home_reference_consistency_audit.dart --check` + page-rhythm audits |

@@ -67,8 +67,8 @@ Loading skeletons shimmer at `feedback` cadence and resolve without reflow (the 
 
 ## Enforcement & phases
 
-- **Phase 1 (this standard, 2026-08-23):** tablet surface absolute lock, born at 0 violations (the last two literals migrated in the same commit); `lib/app/theme/` exempt as the token layer.
-- **Phase 2 (roadmap):** phone surface adopts the same tokens with a ratchet baseline (its literal count is larger; retiring it happens file-by-file as pages are touched, the Card & Border debt model). No new standard will be written for phase 2 — this doc simply widens scope.
+- **Phase 1 (2026-08-23):** tablet surface absolute lock, born at 0 violations (the last two literals migrated in the same commit); `lib/app/theme/` exempt as the token layer.
+- **Phase 2 (2026-08-24, shipped):** the phone surface joins with a **ratchet baseline** — `test/quality/motion_phone_baseline.txt` pins the 55 pre-existing literals (durations + curves across presentation/shared code); new violations fail CI, and entries must disappear as files are touched (migrate to `AppMotion` tokens, then `--regen-baseline`). No new standard was written — this doc simply widened scope, as planned.
 
 ## Verify
 

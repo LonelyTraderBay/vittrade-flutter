@@ -153,6 +153,10 @@ Import from `package:vit_trade_flutter/app/theme/`.
 
 ## Colors
 
+**One dark theme, deliberately.** Dark-only is a locked product decision for
+this trading app — no light theme, no mode toggle. See
+`Flutter-Native-Design-Standard.md` (Global UI Rules).
+
 The palette uses layered dark surfaces with a single warm primary accent.
 
 - **Background (#07090D):** deepest canvas — `AppColors.bg`.
