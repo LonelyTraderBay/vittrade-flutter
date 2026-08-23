@@ -16,6 +16,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_devices_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_edit_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_settings_pane.dart';
@@ -51,14 +52,8 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileEdit,
       name: AppRouteNames.sc157EditProfile,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-157',
-          title: 'Chỉnh sửa hồ sơ',
-          subtitle: 'Thông tin cá nhân · liên hệ',
-          description:
-              'Cập nhật tên hiển thị và thông tin liên hệ của tài khoản.',
-          icon: Icons.person_outline_rounded,
-        ),
+        // Master-detail tablet renders the real edit pane beside the menu.
+        AppSurface.tablet => const ProfileEditPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => EditProfilePage(shellRenderMode: shellRenderMode),
@@ -256,20 +251,4 @@ List<RouteBase> profileRoutes(
     ];
   }
   return routes;
-}
-
-ProfileTabletUtilityPage _profileTabletUtility({
-  required String semanticIdentifier,
-  required String title,
-  required String subtitle,
-  required String description,
-  required IconData icon,
-}) {
-  return ProfileTabletUtilityPage(
-    semanticIdentifier: semanticIdentifier,
-    title: title,
-    subtitle: subtitle,
-    description: description,
-    icon: icon,
-  );
 }

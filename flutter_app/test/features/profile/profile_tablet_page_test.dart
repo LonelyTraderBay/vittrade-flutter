@@ -376,23 +376,34 @@ void main() {
   );
 
   testWidgets(
-    'SC-156 master-detail: an unported utility route rides the shared pane '
-    'scaffold inside the shell',
+    'SC-157 edit pane edits fields, saves, and returns to the overview',
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('edit')));
-      await tester.tap(find.byKey(ProfileTabletKeys.menu('edit')));
+      await tester.tap(find.byKey(ProfileTabletKeys.editProfile));
       await tester.pumpAndSettle();
 
-      // The placeholder renders in the detail pane (menu stays framed)…
-      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
-      expect(find.byKey(const Key('SC-157-tablet-content')), findsOneWidget);
-      // …and back returns to the overview exactly like the ported panes.
-      await tester.binding.handlePopRoute();
+      // Same production mock as the phone page: avatar editor, name and
+      // phone editable, email locked read-only with its note.
+      expect(find.byKey(ProfileTabletKeys.editPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.editCamera), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.editNameField), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.editPhoneField), findsOneWidget);
+      expect(find.text('Email không thể thay đổi'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // Saving returns to the overview pane inside the shell.
+      await tester.enterText(
+        find.byKey(ProfileTabletKeys.editNameField),
+        'Nguyễn Văn B',
+      );
       await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.editSave));
+      await tester.tap(find.byKey(ProfileTabletKeys.editSave));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.editPane), findsNothing);
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
-      expect(find.byKey(const Key('SC-157-tablet-content')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
     },
   );
 

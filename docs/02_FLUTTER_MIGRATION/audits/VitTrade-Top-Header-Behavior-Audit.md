@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=409
 fixed_vit_header_remaining=169
-auto_hide_header=94
+auto_hide_header=93
 custom_scroll_header=1
-no_top_header=31
+no_top_header=32
 unresolved=114
 ```
 
@@ -298,7 +298,7 @@ unresolved=114
 | profile | `AppRoutePaths.profileApi` | `ProfileApiPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_pane.dart` |
 | profile | `AppRoutePaths.profileApiCreate` | `ProfileApiCreatePane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart` |
 | profile | `AppRoutePaths.profileDevices` | `ProfileDevicesPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart` |
-| profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
+| profile | `AppRoutePaths.profileEdit` | `ProfileEditPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_edit_pane.dart` |
 | profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
 | profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
 | profile | `AppRoutePaths.profileSettings` | `ProfileSettingsPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart` |

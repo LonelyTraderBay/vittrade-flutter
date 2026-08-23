@@ -153,4 +153,12 @@ final class ProfileTabletKeys {
 
   static Key subAccountsExpand(String id) =>
       Key('sc166_sub_accounts_pane_expand_$id');
+
+  // Edit profile detail pane (SC-157 tablet port).
+  static const editPane = Key('sc157_edit_pane');
+  static const editPaneError = Key('sc157_edit_pane_error');
+  static const editCamera = Key('sc157_edit_pane_camera');
+  static const editNameField = Key('sc157_edit_pane_name_field');
+  static const editPhoneField = Key('sc157_edit_pane_phone_field');
+  static const editSave = Key('sc157_edit_pane_save');
 }
