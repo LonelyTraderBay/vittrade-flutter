@@ -9,6 +9,7 @@ import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dar
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -259,7 +260,7 @@ class _KycLevelCard extends StatelessWidget {
                     ),
               trailing: AnimatedRotation(
                 turns: expanded ? .25 : 0,
-                duration: const Duration(milliseconds: 180),
+                duration: AppMotion.element,
                 child: const Icon(
                   Icons.chevron_right_rounded,
                   color: AppColors.text3,

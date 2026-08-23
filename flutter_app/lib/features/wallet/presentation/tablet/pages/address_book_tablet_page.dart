@@ -370,60 +370,75 @@ class _AddressTabletCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Phone-anatomy layout (proven at 330px on the phone card): content row
+    // with the whitelist pill inline beside the label in a WIDE row, then a
+    // full-width action row below. The previous side-by-side shape (actions
+    // in a fixed right column) left the left column ~17px narrower than the
+    // pill at the 1024-wide two-column tier — caught by the responsive QA
+    // matrix's 1024x768 viewport (2026-08-23).
     return VitCard(
       density: VitDensity.compact,
       borderColor: AppColors.overlayStroke,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(
-            Icons.shield_outlined,
-            color: address.isWhitelisted ? AppColors.buy : AppColors.text3,
-          ),
-          const SizedBox(width: AppSpacing.x2),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.shield_outlined,
+                color: address.isWhitelisted ? AppColors.buy : AppColors.text3,
+              ),
+              const SizedBox(width: AppSpacing.x2),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Text(
-                        address.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.baseMedium.copyWith(
-                          fontWeight: AppTextStyles.bold,
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            address.label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.baseMedium.copyWith(
+                              fontWeight: AppTextStyles.bold,
+                            ),
+                          ),
                         ),
+                        if (address.isWhitelisted) ...[
+                          const SizedBox(width: AppSpacing.x2),
+                          const VitStatusPill(
+                            label: 'Danh sách trắng',
+                            icon: Icons.check_rounded,
+                            status: VitStatusPillStatus.success,
+                            size: VitStatusPillSize.sm,
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.x1),
+                    Text(
+                      '${address.network} · ${address.asset}',
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text3,
                       ),
                     ),
-                    if (address.isWhitelisted)
-                      const VitStatusPill(
-                        label: 'Danh sách trắng',
-                        icon: Icons.check_rounded,
-                        status: VitStatusPillStatus.success,
-                        size: VitStatusPillSize.sm,
+                    const SizedBox(height: AppSpacing.x1),
+                    Text(
+                      maskAddress(address.address),
+                      style: AppTextStyles.numericMicro.copyWith(
+                        color: AppColors.text3,
                       ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x1),
-                Text(
-                  '${address.network} · ${address.asset}',
-                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
-                ),
-                const SizedBox(height: AppSpacing.x1),
-                Text(
-                  maskAddress(address.address),
-                  style: AppTextStyles.numericMicro.copyWith(
-                    color: AppColors.text3,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const SizedBox(width: AppSpacing.x2),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          Row(
             children: [
               VitChoicePill(
                 key: AddressBookTabletPage.copyKey(address.id),
@@ -444,44 +459,42 @@ class _AddressTabletCard extends StatelessWidget {
                 height: WalletSpacingTokens.walletAddressCopyHeight,
                 accentColor: AppColors.primary,
               ),
-              const SizedBox(height: AppSpacing.x1),
-              Row(
-                children: [
-                  VitIconButton(
-                    key: AddressBookTabletPage.favoriteKey(address.id),
-                    icon: address.isFavorite
-                        ? Icons.star_rounded
-                        : Icons.star_outline_rounded,
-                    tooltip: 'Yêu thích địa chỉ',
-                    onPressed: () => ref
-                        .read(addressBookStateControllerProvider.notifier)
-                        .toggleFavorite(address.id),
-                    size: VitIconButtonSize.md,
-                    variant: address.isFavorite
-                        ? VitIconButtonVariant.primary
-                        : VitIconButtonVariant.ghost,
-                  ),
-                  VitIconButton(
-                    key: AddressBookTabletPage.editKey(address.id),
-                    icon: Icons.edit_rounded,
-                    tooltip: 'Sửa địa chỉ',
-                    onPressed: () => showVitNoticeSheet(
-                      context: context,
-                      title: 'Thông báo',
-                      message: 'Chỉnh sửa địa chỉ sẽ mở trong bước kế tiếp.',
-                    ),
-                    size: VitIconButtonSize.md,
-                    variant: VitIconButtonVariant.ghost,
-                  ),
-                  VitIconButton(
-                    key: AddressBookTabletPage.deleteKey(address.id),
-                    icon: Icons.delete_outline_rounded,
-                    tooltip: 'Xóa địa chỉ',
-                    onPressed: () => _delete(context, ref, address),
-                    size: VitIconButtonSize.md,
-                    variant: VitIconButtonVariant.danger,
-                  ),
-                ],
+              const Spacer(),
+              VitIconButton(
+                key: AddressBookTabletPage.favoriteKey(address.id),
+                icon: address.isFavorite
+                    ? Icons.star_rounded
+                    : Icons.star_outline_rounded,
+                tooltip: 'Yêu thích địa chỉ',
+                onPressed: () => ref
+                    .read(addressBookStateControllerProvider.notifier)
+                    .toggleFavorite(address.id),
+                size: VitIconButtonSize.md,
+                variant: address.isFavorite
+                    ? VitIconButtonVariant.primary
+                    : VitIconButtonVariant.ghost,
+              ),
+              const SizedBox(width: AppSpacing.x1),
+              VitIconButton(
+                key: AddressBookTabletPage.editKey(address.id),
+                icon: Icons.edit_rounded,
+                tooltip: 'Sửa địa chỉ',
+                onPressed: () => showVitNoticeSheet(
+                  context: context,
+                  title: 'Thông báo',
+                  message: 'Chỉnh sửa địa chỉ sẽ mở trong bước kế tiếp.',
+                ),
+                size: VitIconButtonSize.md,
+                variant: VitIconButtonVariant.ghost,
+              ),
+              const SizedBox(width: AppSpacing.x1),
+              VitIconButton(
+                key: AddressBookTabletPage.deleteKey(address.id),
+                icon: Icons.delete_outline_rounded,
+                tooltip: 'Xóa địa chỉ',
+                onPressed: () => _delete(context, ref, address),
+                size: VitIconButtonSize.md,
+                variant: VitIconButtonVariant.danger,
               ),
             ],
           ),

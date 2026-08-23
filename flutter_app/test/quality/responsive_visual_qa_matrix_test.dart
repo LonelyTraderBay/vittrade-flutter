@@ -146,6 +146,13 @@ const _responsiveViewports = [
   _ResponsiveViewport('440x956 QA phone', 440, 956),
   _ResponsiveViewport('480x1040 large phone', 480, 1040),
   _ResponsiveViewport('768x1024 minimum tablet', 768, 1024),
+  // Tablet layout tiers from the Home tablet reference contract's responsive
+  // table: single-column tablet fallback (600–899), two-column at/above the
+  // dashboard's own 900 threshold, and the ≥1200 wide tier (centered 800/400
+  // block — nothing stretches).
+  _ResponsiveViewport('834x1112 portrait tablet fallback', 834, 1112),
+  _ResponsiveViewport('1024x768 two-column tablet', 1024, 768),
+  _ResponsiveViewport('1280x800 wide tablet', 1280, 800),
 ];
 
 final _priorityRoutes = [

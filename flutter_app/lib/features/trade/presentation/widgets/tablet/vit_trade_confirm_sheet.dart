@@ -87,7 +87,7 @@ class VitTradeConfirmSheet extends StatelessWidget {
             variant: VitCardVariant.inner,
             radius: VitCardRadius.tight,
             density: VitDensity.tool,
-            borderColor: AppColors.warn.withValues(alpha: .24),
+            borderColor: AppColors.warn.withValues(alpha: .22),
             child: Text(
               riskMessage,
               style: AppTextStyles.micro.copyWith(color: AppColors.text2),

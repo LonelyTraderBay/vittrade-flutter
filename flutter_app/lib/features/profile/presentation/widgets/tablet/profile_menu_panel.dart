@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -72,6 +73,8 @@ class _MenuRow extends StatelessWidget {
       child: InkWell(
         key: ProfileTabletKeys.menu(item.id),
         onTap: () => openProfileDetailRoute(context, item.route),
+        hoverColor: AppInputStates.hoverOverlay,
+        focusColor: AppInputStates.focusOverlay,
         child: VitIconListRow(
           minHeight: VitDensity.standard.controlHeight,
           padding: ProfileSpacingTokens.profileMenuRowPadding,

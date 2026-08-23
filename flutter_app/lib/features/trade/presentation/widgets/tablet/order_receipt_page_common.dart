@@ -97,7 +97,7 @@ class _OrderSupportLink extends StatelessWidget {
         horizontal: AppSpacing.x3,
         vertical: AppSpacing.x2,
       ),
-      borderColor: AppColors.primary.withValues(alpha: .18),
+      borderColor: AppColors.primary.withValues(alpha: .12),
       child: Row(
         children: [
           const Icon(

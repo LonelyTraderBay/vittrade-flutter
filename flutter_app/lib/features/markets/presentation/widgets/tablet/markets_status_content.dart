@@ -19,16 +19,16 @@ class MarketsLoadingContent extends StatelessWidget {
     return VitTwoColumnTabletDashboard(
       banner: const _PulseStripSkeleton(),
       onRefresh: onRefresh,
+      // Children stay flat (S4): the scaffold's customGap already inserts
+      // the section gap between every pair — a separator SizedBox here
+      // stacks onto it (13+13) and breaks the skeleton↔loaded mirror.
       primaryChildren: const [
         VitSkeleton(width: double.infinity, height: AppSpacing.buttonCompact),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
         _PairTableSkeleton(),
       ],
       secondaryChildren: const [
         _MoverStripSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         _ToolsSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         _DiscoverSkeleton(),
       ],
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,

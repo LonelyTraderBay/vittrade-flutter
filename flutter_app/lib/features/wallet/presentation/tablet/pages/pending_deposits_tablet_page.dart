@@ -304,7 +304,7 @@ class _SummaryCard extends StatelessWidget {
     final color = hasPending ? AppColors.caution : AppColors.buy;
     return VitCard(
       variant: VitCardVariant.hero,
-      borderColor: color.withValues(alpha: .28),
+      borderColor: color.withValues(alpha: .22),
       child: Row(
         children: [
           VitAccentIconBox(
@@ -421,7 +421,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
         deposit.status == 'confirming' || deposit.status == 'processing';
     return VitCard(
       density: VitDensity.compact,
-      borderColor: config.color.withValues(alpha: .24),
+      borderColor: config.color.withValues(alpha: .22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

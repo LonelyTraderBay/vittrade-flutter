@@ -17,16 +17,20 @@
 //                         <number>` must use AppSpacing.dividerHairline /
 //                         token references.
 //   S4 pane separator   — a `SizedBox` standing as a DIRECT element of a
-//                         ProfilePaneScaffold `children:` expression. The
-//                         scaffold already wraps children in
-//                         VitPageContent(rhythm:), which inserts the
-//                         section gap between every pair of children, so an
-//                         element-level SizedBox stacks onto those gaps
-//                         (16+8+16=40dp instead of 16dp) and breaks the
-//                         pane's rhythm. Children must stay flat — inner
-//                         gaps belong inside child widgets, not between
-//                         them. S4 is a token-blind rule: even a tokenized
-//                         SizedBox is a violation at children level.
+//                         rhythm-owning scaffold's children expression:
+//                         `ProfilePaneScaffold(children:)` or
+//                         `VitTwoColumnTabletDashboard(primaryChildren:/
+//                         secondaryChildren:)`. Both scaffolds already wrap
+//                         their children in VitPageContent(rhythm:) (the
+//                         dashboard's columns do so per-column), which
+//                         inserts the section gap between every pair of
+//                         children, so an element-level SizedBox stacks onto
+//                         those gaps (16+8+16=40dp instead of 16dp) and
+//                         breaks the pane's rhythm. Children must stay flat
+//                         — inner gaps belong inside child widgets, not
+//                         between them. S4 is a token-blind rule: even a
+//                         tokenized SizedBox is a violation at children
+//                         level.
 //
 // Usage (from flutter_app/):
 //   dart run tool/tablet_spacing_audit.dart            # regen artifact
@@ -42,8 +46,21 @@ final _literalInsetRe = RegExp(
 );
 final _literalStrokeRe = RegExp(r'thickness:\s*\d');
 
-const _paneScaffoldMarker = 'ProfilePaneScaffold(';
-const _childrenArg = 'children:';
+/// Rhythm-owning scaffolds whose children expressions S4 guards. Both wrap
+/// their children in VitPageContent(rhythm:) — the dashboard does so per
+/// column — so an element-level separator SizedBox always stacks onto the
+/// rhythm's own section gaps.
+const _paneScaffoldMarkers = <String>[
+  'ProfilePaneScaffold(',
+  'VitTwoColumnTabletDashboard(',
+];
+
+/// Children argument names the S4 scanner recognizes on those scaffolds.
+const _childrenArgs = <String>[
+  'children:',
+  'primaryChildren:',
+  'secondaryChildren:',
+];
 
 void main(List<String> args) {
   _selfTest();
@@ -81,9 +98,9 @@ void main(List<String> args) {
       }
     }
     // S4 needs whole-file context (the children expression spans lines),
-    // so it runs per file rather than per line — only on panes that
-    // actually mount the shared scaffold.
-    if (lines.any((line) => line.contains(_paneScaffoldMarker))) {
+    // so it runs per file rather than per line — only on files that
+    // actually mount one of the rhythm-owning scaffolds.
+    if (lines.any((line) => _paneScaffoldMarkers.any(line.contains))) {
       final rel = normalized.replaceFirst('lib/', '');
       final stripped = [
         for (final line in lines) _stripLineComments(line),
@@ -142,7 +159,10 @@ void main(List<String> args) {
 // ---------------------------------------------------------------------------
 
 /// Returns the source indexes of every `SizedBox` token standing as a
-/// direct element of a `ProfilePaneScaffold(children:)` expression.
+/// direct element of a rhythm-owning scaffold's children expression —
+/// checked against EVERY children argument of the occurrence
+/// (`children:`/`primaryChildren:`/`secondaryChildren:`), not just the
+/// first.
 ///
 /// The children expression may be an inline list, a `snapshot.when(...)`
 /// whose branches each return a list, or a helper call — only inline lists
@@ -150,26 +170,30 @@ void main(List<String> args) {
 /// functions are out of this rule's reach (and of its false-positive risk).
 List<int> findHighLevelPaneSeparators(String source) {
   final hits = <int>[];
-  for (final match in _paneScaffoldMarker.allMatches(source)) {
-    final range = _childrenExpressionRange(source, match.end);
-    if (range == null) continue;
-    hits.addAll(_elementLevelSizedBoxes(source, range.$1, range.$2));
+  for (final marker in _paneScaffoldMarkers) {
+    for (final match in marker.allMatches(source)) {
+      for (final range in _childrenExpressionRanges(source, match.end)) {
+        hits.addAll(_elementLevelSizedBoxes(source, range.$1, range.$2));
+      }
+    }
   }
   return hits;
 }
 
-/// Locates the `children:` argument expression inside the constructor
-/// argument list that opens right before [argsStart]. Returns
-/// `(contentStart, contentEnd)` — the expression between `children:` and
-/// the following `,`/`)` at argument depth — or null when this
-/// `ProfilePaneScaffold(` occurrence declares (rather than passes) the
-/// parameter, or has no inline children expression.
-(int, int)? _childrenExpressionRange(String source, int argsStart) {
+/// Locates every children argument expression (`children:`,
+/// `primaryChildren:`, `secondaryChildren:`) inside the constructor
+/// argument list that opens right before [argsStart]. Each returned
+/// `(contentStart, contentEnd)` covers one argument's expression, from
+/// after the argument name to the following `,`/`)` at argument depth.
+/// An occurrence that declares (rather than passes) the parameter, or has
+/// only helper-call children, yields no range for that argument.
+List<(int, int)> _childrenExpressionRanges(String source, int argsStart) {
   // Depth counts every bracket kind: a `,` between list elements must sit
   // at depth 2+ (inside the `[...]`), so only the argument-level `,`/`)`
-  // that FOLLOWS the children expression can terminate the scan.
+  // that FOLLOWS a children expression can close it.
   var depth = 1; // inside the constructor's parentheses
   var childrenStart = -1;
+  final ranges = <(int, int)>[];
   var i = argsStart;
   while (i < source.length && depth > 0) {
     final ch = source[i];
@@ -179,21 +203,21 @@ List<int> findHighLevelPaneSeparators(String source) {
     }
     if (ch == '(' || ch == '[' || ch == '{') depth++;
     if (ch == ')' || ch == ']' || ch == '}') depth--;
-    if (depth == 1 &&
-        childrenStart < 0 &&
-        source.startsWith(_childrenArg, i) &&
-        _atArgumentBoundary(source, i)) {
-      childrenStart = i + _childrenArg.length;
+    if (depth == 1 && childrenStart < 0 && _atArgumentBoundary(source, i)) {
+      for (final arg in _childrenArgs) {
+        if (source.startsWith(arg, i)) {
+          childrenStart = i + arg.length;
+          break;
+        }
+      }
     }
-    if (childrenStart >= 0 &&
-        depth == 1 &&
-        (ch == ',' || ch == ')') &&
-        i > childrenStart) {
-      return (childrenStart, i);
+    if (childrenStart >= 0 && depth == 1 && (ch == ',' || ch == ')')) {
+      if (i > childrenStart) ranges.add((childrenStart, i));
+      childrenStart = -1; // keep looking for the next children argument
     }
     i++;
   }
-  return null;
+  return ranges;
 }
 
 /// Returns the indexes of `SizedBox` tokens at element level within
@@ -401,6 +425,74 @@ void _selfTest() {
   ],
 );''',
     [3],
+  );
+
+  // 8. The dashboard scaffold is guarded too: a separator SizedBox in
+  //    primaryChildren is caught at that list's element level.
+  expectHits(
+    'dashboard primary separator',
+    '''return VitTwoColumnTabletDashboard(
+  primaryChildren: [
+    _Portfolio(),
+    SizedBox(height: AppSpacing.cardGap),
+  ],
+  secondaryChildren: [
+    _Sidebar(),
+  ],
+);''',
+    [4],
+  );
+
+  // 9. ...and so is one standing in secondaryChildren.
+  expectHits(
+    'dashboard secondary separator',
+    '''return VitTwoColumnTabletDashboard(
+  primaryChildren: [_Main()],
+  secondaryChildren: [
+    _Sidebar(),
+    const SizedBox(height: AppSpacing.x1),
+  ],
+);''',
+    [5],
+  );
+
+  // 10. A SizedBox nested inside a dashboard child widget is a legal inner
+  //     gap, in either column.
+  expectHits('dashboard inner gap legal', '''return VitTwoColumnTabletDashboard(
+  primaryChildren: [
+    _Card(
+      child: Column(
+        children: [
+          Text('a'),
+          SizedBox(height: AppSpacing.x1),
+        ],
+      ),
+    ),
+  ],
+  secondaryChildren: const [VitSkeleton()],
+);''', []);
+
+  // 11. Both columns are checked independently — a long primary list must
+  //     not shadow separators standing in secondaryChildren (the shape that
+  //     exposed the first-arg-only scanner bug), and a short primary must
+  //     not leak the scan past its own list either.
+  expectHits(
+    'both columns independently',
+    '''return VitTwoColumnTabletDashboard(
+  primaryChildren: [
+    _ProductTabsSkeleton(),
+    SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+    VitCard(child: _OrderFormSkeleton()),
+    SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+    _RiskPanelSkeleton(),
+  ],
+  secondaryChildren: [
+    _SidebarHeadingSkeleton(),
+    SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+    VitCard(child: VitSkeletonList(rows: 2)),
+  ],
+);''',
+    [4, 6, 11],
   );
 }
 

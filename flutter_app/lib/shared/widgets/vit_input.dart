@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Standard text field surface: label, prefix/suffix slots, error text, and
 /// accessible semantics label/hint driven by [label]/[errorText].
-class VitInput extends StatelessWidget {
+///
+/// The field border highlights with [AppInputStates.focusInputBorder] while
+/// focused (Tablet-Input-Standard I2) — a stateful border, not an overlay, so
+/// the caret remains the only bright element inside the field. An error
+/// border wins over the focus border.
+class VitInput extends StatefulWidget {
   const VitInput({
     super.key,
     required this.controller,
@@ -56,28 +62,72 @@ class VitInput extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
 
-  bool get _hasError => errorText != null;
+  @override
+  State<VitInput> createState() => _VitInputState();
+}
 
-  bool get _showErrorText => errorText != null && errorText!.trim().isNotEmpty;
+class _VitInputState extends State<VitInput> {
+  FocusNode? _internalNode;
+  bool _focused = false;
+
+  FocusNode get _effectiveNode =>
+      widget.focusNode ?? (_internalNode ??= FocusNode());
+
+  @override
+  void initState() {
+    super.initState();
+    _effectiveNode.addListener(_handleFocusChanged);
+  }
+
+  @override
+  void didUpdateWidget(VitInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final oldNode = oldWidget.focusNode ?? _internalNode;
+    final newNode = widget.focusNode ?? _internalNode;
+    if (oldNode != newNode) {
+      oldNode?.removeListener(_handleFocusChanged);
+      newNode?.addListener(_handleFocusChanged);
+      _handleFocusChanged();
+    }
+  }
+
+  @override
+  void dispose() {
+    _internalNode?.removeListener(_handleFocusChanged);
+    _internalNode?.dispose();
+    super.dispose();
+  }
+
+  void _handleFocusChanged() {
+    final focused = _effectiveNode.hasFocus;
+    if (focused != _focused) {
+      setState(() => _focused = focused);
+    }
+  }
+
+  bool get _hasError => widget.errorText != null;
+
+  bool get _showErrorText =>
+      widget.errorText != null && widget.errorText!.trim().isNotEmpty;
 
   String? get _resolvedSemanticLabel {
     final parts = <String>[];
-    final explicit = semanticLabel?.trim();
-    final visual = label?.trim();
+    final explicit = widget.semanticLabel?.trim();
+    final visual = widget.label?.trim();
     if (explicit != null && explicit.isNotEmpty) {
       parts.add(explicit);
     } else if (visual != null && visual.isNotEmpty) {
       parts.add(visual);
     }
     if (_showErrorText) {
-      parts.add('Error: ${errorText!.trim()}');
+      parts.add('Error: ${widget.errorText!.trim()}');
     }
     return parts.isEmpty ? null : parts.join('. ');
   }
 
   String? get _resolvedSemanticHint {
-    if (_showErrorText) return errorText!.trim();
-    final hint = hintText?.trim();
+    if (_showErrorText) return widget.errorText!.trim();
+    final hint = widget.hintText?.trim();
     return hint == null || hint.isEmpty ? null : hint;
   }
 
@@ -90,7 +140,11 @@ class VitInput extends StatelessWidget {
           color: AppColors.surface2,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: _hasError ? AppColors.sell : AppColors.borderSolid,
+              color: _hasError
+                  ? AppColors.sell
+                  : _focused
+                  ? AppInputStates.focusInputBorder
+                  : AppColors.borderSolid,
               width: AppSpacing.borderWidth,
             ),
             borderRadius: AppRadii.inputRadius,
@@ -102,45 +156,45 @@ class VitInput extends StatelessWidget {
           ),
           child: Row(
             children: [
-              if (prefix != null) ...[
+              if (widget.prefix != null) ...[
                 IconTheme(
                   data: const IconThemeData(
                     color: AppColors.text3,
                     size: AppSpacing.inputPrefixIcon,
                   ),
-                  child: prefix!,
+                  child: widget.prefix!,
                 ),
                 const SizedBox(width: AppSpacing.x3),
               ],
               Expanded(
                 child: TextField(
-                  key: fieldKey,
-                  controller: controller,
-                  focusNode: focusNode,
-                  enabled: enabled,
-                  autofocus: autofocus,
-                  obscureText: obscureText,
-                  keyboardType: keyboardType,
-                  textInputAction: textInputAction,
-                  textCapitalization: textCapitalization,
-                  inputFormatters: inputFormatters,
-                  autofillHints: autofillHints,
-                  textAlign: textAlign,
+                  key: widget.fieldKey,
+                  controller: widget.controller,
+                  focusNode: _effectiveNode,
+                  enabled: widget.enabled,
+                  autofocus: widget.autofocus,
+                  obscureText: widget.obscureText,
+                  keyboardType: widget.keyboardType,
+                  textInputAction: widget.textInputAction,
+                  textCapitalization: widget.textCapitalization,
+                  inputFormatters: widget.inputFormatters,
+                  autofillHints: widget.autofillHints,
+                  textAlign: widget.textAlign,
                   cursorColor: AppColors.primary,
-                  style: textStyle ?? AppTextStyles.control,
-                  onChanged: onChanged,
-                  onSubmitted: onSubmitted,
+                  style: widget.textStyle ?? AppTextStyles.control,
+                  onChanged: widget.onChanged,
+                  onSubmitted: widget.onSubmitted,
                   decoration: InputDecoration.collapsed(
-                    hintText: hintText,
+                    hintText: widget.hintText,
                     hintStyle: AppTextStyles.control.copyWith(
                       color: AppColors.text3,
                     ),
                   ),
                 ),
               ),
-              if (suffix != null) ...[
+              if (widget.suffix != null) ...[
                 const SizedBox(width: AppSpacing.x3),
-                suffix!,
+                widget.suffix!,
               ],
             ],
           ),
@@ -151,9 +205,9 @@ class VitInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (label != null) ...[
+        if (widget.label != null) ...[
           Text(
-            label!,
+            widget.label!,
             style: AppTextStyles.caption.copyWith(color: AppColors.text2),
           ),
           const SizedBox(height: AppSpacing.formFieldLabelGap),
@@ -162,13 +216,13 @@ class VitInput extends StatelessWidget {
           textField: true,
           label: _resolvedSemanticLabel,
           hint: _resolvedSemanticHint,
-          enabled: enabled,
+          enabled: widget.enabled,
           child: input,
         ),
         if (_showErrorText) ...[
           const SizedBox(height: AppSpacing.x2),
           Text(
-            errorText!,
+            widget.errorText!,
             style: AppTextStyles.micro.copyWith(color: AppColors.sell),
           ),
         ],

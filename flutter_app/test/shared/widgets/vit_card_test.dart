@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -106,5 +107,23 @@ void main() {
       (contentBox.top - cardBox.top).round(),
       (cardBox.bottom - contentBox.bottom).round(),
     );
+  });
+
+  testWidgets('interactive VitCard carries token hover/focus overlays', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        VitCard(
+          padding: const EdgeInsets.all(16),
+          onTap: () {},
+          child: const Text('tappable card'),
+        ),
+      ),
+    );
+
+    final inkWell = tester.widget<InkWell>(find.byType(InkWell));
+    expect(inkWell.hoverColor, AppInputStates.hoverOverlay);
+    expect(inkWell.focusColor, AppInputStates.focusOverlay);
   });
 }

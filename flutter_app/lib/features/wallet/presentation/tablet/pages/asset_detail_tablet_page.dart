@@ -85,7 +85,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
       children: [
         VitCard(
           variant: VitCardVariant.hero,
-          borderColor: accent.withValues(alpha: .26),
+          borderColor: accent.withValues(alpha: .22),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

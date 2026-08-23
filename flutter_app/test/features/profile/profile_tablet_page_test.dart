@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/core/storage/key_value_store.dart';
@@ -897,5 +898,17 @@ void main() {
     // The refreshed dashboard still carries the full tablet composition.
     expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
     expect(find.byType(ProfileMenuPanel), findsWidgets);
+  });
+
+  testWidgets('menu hàng master-detail mang token hover/focus chuẩn input', (
+    tester,
+  ) async {
+    await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+    final menuRow = tester.widget<InkWell>(
+      find.byKey(ProfileTabletKeys.menu('kyc')),
+    );
+    expect(menuRow.hoverColor, AppInputStates.hoverOverlay);
+    expect(menuRow.focusColor, AppInputStates.focusOverlay);
   });
 }

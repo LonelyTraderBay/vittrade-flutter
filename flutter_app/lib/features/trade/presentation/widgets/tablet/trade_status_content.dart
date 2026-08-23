@@ -19,21 +19,18 @@ class TradeLoadingContent extends StatelessWidget {
     return VitTwoColumnTabletDashboard(
       banner: const _TickerStripSkeleton(),
       onRefresh: onRefresh,
+      // Children stay flat (S4): the scaffold's customGap already inserts
+      // the section gap between every pair. The sidebar's heading→card
+      // pairs live INSIDE one section child (mirroring the loaded
+      // sidebar's VitTradeSection), so their tighter gap is an inner gap.
       primaryChildren: const [
         _ProductTabsSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         VitCard(child: _OrderFormSkeleton()),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
         _RiskPanelSkeleton(),
       ],
       secondaryChildren: const [
-        _SidebarHeadingSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        VitCard(child: VitSkeletonList(rows: 2)),
-        SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-        _SidebarHeadingSkeleton(),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        VitCard(child: VitSkeletonList(rows: 3)),
+        _SidebarSectionSkeleton(rows: 2),
+        _SidebarSectionSkeleton(rows: 3),
       ],
       primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
       secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
@@ -161,5 +158,27 @@ class _SidebarHeadingSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitSkeleton(width: 100, height: AppSpacing.x4);
+  }
+}
+
+/// Heading + list card as ONE child: the section skeleton mirrors the
+/// loaded sidebar's `VitTradeSection` (heading bound to its content), so
+/// the heading→card gap is an inner gap of the section, never an
+/// element-level separator between scaffold children (S4).
+class _SidebarSectionSkeleton extends StatelessWidget {
+  const _SidebarSectionSkeleton({required this.rows});
+
+  final int rows;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const _SidebarHeadingSkeleton(),
+        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitCard(child: VitSkeletonList(rows: rows)),
+      ],
+    );
   }
 }

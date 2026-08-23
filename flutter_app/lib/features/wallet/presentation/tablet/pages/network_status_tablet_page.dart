@@ -193,7 +193,7 @@ class _NetworkStatusTabletPageState
                 height: AppSpacing.iconLg,
                 variant: VitCardVariant.ghost,
                 radius: VitCardRadius.standard,
-                borderColor: summaryColor.withValues(alpha: .42),
+                borderColor: summaryColor.withValues(alpha: .34),
                 background: ColoredBox(
                   color: summaryColor.withValues(alpha: .08),
                 ),
@@ -392,7 +392,7 @@ class _SummaryStat extends StatelessWidget {
         variant: VitCardVariant.inner,
         height: AppSpacing.buttonStandard,
         alignment: Alignment.center,
-        borderColor: color.withValues(alpha: .32),
+        borderColor: color.withValues(alpha: .34),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

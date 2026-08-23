@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -68,5 +69,75 @@ void main() {
     expect(shape.side.width, AppSpacing.borderWidth);
 
     controller.dispose();
+  });
+
+  testWidgets('border đổi màu theo token focus khi trường được focus', (
+    tester,
+  ) async {
+    final controller = TextEditingController();
+    final node = FocusNode();
+    addTearDown(controller.dispose);
+    addTearDown(node.dispose);
+
+    await tester.pumpWidget(
+      _wrap(
+        VitInput(controller: controller, focusNode: node, hintText: 'Email'),
+      ),
+    );
+
+    RoundedRectangleBorder borderShape() {
+      final shell = tester.widget<DecoratedBox>(
+        find
+            .ancestor(
+              of: find.byType(TextField),
+              matching: find.byType(DecoratedBox),
+            )
+            .first,
+      );
+      return (shell.decoration as ShapeDecoration).shape
+          as RoundedRectangleBorder;
+    }
+
+    expect(borderShape().side.color, AppColors.borderSolid);
+
+    node.requestFocus();
+    await tester.pump();
+    expect(borderShape().side.color, AppInputStates.focusInputBorder);
+
+    node.unfocus();
+    await tester.pump();
+    expect(borderShape().side.color, AppColors.borderSolid);
+  });
+
+  testWidgets('border lỗi thắng ưu tiên so với border focus', (tester) async {
+    final controller = TextEditingController();
+    final node = FocusNode();
+    addTearDown(controller.dispose);
+    addTearDown(node.dispose);
+
+    await tester.pumpWidget(
+      _wrap(
+        VitInput(
+          controller: controller,
+          focusNode: node,
+          errorText: 'Bắt buộc',
+        ),
+      ),
+    );
+
+    node.requestFocus();
+    await tester.pump();
+
+    final shell = tester.widget<DecoratedBox>(
+      find
+          .ancestor(
+            of: find.byType(TextField),
+            matching: find.byType(DecoratedBox),
+          )
+          .first,
+    );
+    final shape =
+        (shell.decoration as ShapeDecoration).shape as RoundedRectangleBorder;
+    expect(shape.side.color, AppColors.sell);
   });
 }

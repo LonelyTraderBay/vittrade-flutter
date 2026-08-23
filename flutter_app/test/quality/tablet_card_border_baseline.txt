@@ -2,13 +2,3 @@
 # Regenerate intentionally via:
 #   dart run tool/tablet_card_border_audit.dart --regen-baseline
 # Never add entries by hand; new tablet UI must follow the standard outright.
-features/trade/presentation/widgets/tablet/order_receipt_page_common.dart|100|R2-adhoc-tint(.18)
-features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart|90|R2-adhoc-tint(.24)
-features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart|88|R2-adhoc-tint(.26)
-features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|196|R2-adhoc-tint(.42)
-features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|395|R2-adhoc-tint(.32)
-features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart|307|R2-adhoc-tint(.28)
-features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart|424|R2-adhoc-tint(.24)
-features/wallet/presentation/widgets/tablet/wallet_page_balance_sections.dart|41|R2-adhoc-tint(.20)
-features/wallet/presentation/widgets/tablet/wallet_page_dca_tool_sections.dart|21|R2-adhoc-tint(.28)
-features/wallet/presentation/widgets/tablet/wallet_page_dca_tool_sections.dart|158|R2-adhoc-tint(.18)

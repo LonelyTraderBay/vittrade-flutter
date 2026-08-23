@@ -10,6 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -86,7 +87,7 @@ class _ProfileVipPaneState extends ConsumerState<ProfileVipPane> {
             onChanged: (tab) => setState(() => _selectedTab = tab),
           ),
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 180),
+            duration: AppMotion.element,
             child: switch (_selectedTab) {
               _VipTab.overview => _VipOverviewTab(
                 key: const ValueKey('overview'),

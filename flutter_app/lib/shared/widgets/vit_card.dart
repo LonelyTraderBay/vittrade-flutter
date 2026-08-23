@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_gradients.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 
@@ -172,6 +173,8 @@ class VitCard extends StatelessWidget {
             : InkWell(
                 onTap: onTap,
                 borderRadius: _borderRadius,
+                hoverColor: AppInputStates.hoverOverlay,
+                focusColor: AppInputStates.focusOverlay,
                 child: content,
               ),
       ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_gradients.dart';
+import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
+import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -146,6 +148,8 @@ class VitCtaButton extends StatelessWidget {
           child: InkWell(
             onTap: _enabled ? onPressed : null,
             borderRadius: AppRadii.inputRadius,
+            hoverColor: AppInputStates.hoverOverlay,
+            focusColor: AppInputStates.focusOverlay,
             child: Padding(
               padding: padding,
               child: Row(
@@ -206,7 +210,7 @@ class VitCtaButton extends StatelessWidget {
       button: true,
       enabled: _enabled,
       child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 150),
+        duration: AppMotion.element,
         opacity: _enabled || loading ? 1 : 0.55,
         child: button,
       ),

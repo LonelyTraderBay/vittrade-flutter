@@ -57,6 +57,7 @@ In tablet files, every dimension must be a token reference:
 - `SizedBox(height: 12)` → `SizedBox(height: AppSpacing.…)` (S1)
 - `EdgeInsets.all(16)` / `EdgeInsets.only(top: 24)` → token-based insets (S2)
 - `thickness: 2`, `Divider(height: 1)` → `AppSpacing.dividerHairline` (S3)
+- **No element-level separator SizedBox in a rhythm-owning scaffold's children (S4, token-blind):** `ProfilePaneScaffold(children:)` and `VitTwoColumnTabletDashboard(primaryChildren:/secondaryChildren:)` wrap their children in `VitPageContent(rhythm:)`, which already inserts the section gap between every pair — a `SizedBox` standing as a direct child of those lists stacks onto it (13+13). Children stay flat; a heading/content pair with a tighter inner gap is ONE child widget (the loaded sidebar's `VitTradeSection` pattern), never two children with a SizedBox between them. The scanner checks every children argument of every scaffold occurrence and is token-blind — even a tokenized separator is a violation.
 
 The guardrail is **zero-tolerance with no baseline** — the surface is clean today and any new literal fails CI outright. (Token references like `AppSpacing.x5` never trip the scanner: the digit is glued to a word character.)
 

@@ -38,7 +38,7 @@ class WalletBalanceHero extends StatelessWidget {
       radius: VitCardRadius.large,
       clip: true,
       padding: VitDensity.compact.cardPadding,
-      borderColor: _walletPrimary.withValues(alpha: .20),
+      borderColor: _walletPrimary.withValues(alpha: .12),
       background: const VitHeroGlow(center: Alignment(0, -0.96)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

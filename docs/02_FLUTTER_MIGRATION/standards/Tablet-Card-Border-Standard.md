@@ -82,7 +82,7 @@ To keep inner frames from crowding or visually "cutting" the content of their pa
 
 ## Enforcement & ratchet
 
-- **R1 raw-border** and **R2 ad-hoc tint** violations are pinned in `test/quality/tablet_card_border_baseline.txt` (20 entries at birth: 4 × R1, 16 × R2). New violations fail CI; entries must be removed from the baseline as files are touched — debt only shrinks.
+- **R1 raw-border** and **R2 ad-hoc tint** reached **zero on 2026-08-23** (the last 10 tint debts were mapped onto the sanctioned scale in one sweep: `≤.20 → .12` · `.21–.28 → .22` · `≥.32 → .34`) — the baseline file is now **empty** and any new violation fails CI outright, same absolute lock as the spacing standard. The baseline file itself is kept (empty) so the ratchet plumbing stays in place; it must never gain entries again.
 - **R3 literal radius** has **zero tolerance** (no baseline — lib/ is already clean and stays clean).
 - The audit artifact (`VitTrade-Tablet-Card-Border-Audit.csv`) must stay current, same as the other audit tools.
 
