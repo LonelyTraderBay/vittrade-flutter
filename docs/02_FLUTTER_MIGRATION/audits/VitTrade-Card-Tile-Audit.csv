@@ -744,7 +744,10 @@ profile,flutter_app/lib/features/profile/presentation/widgets/settings_page_sect
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart,2,1,0,E,0,0,0,warn,fixed_height_baseline
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart,3,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart,3,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart,1,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane_sections.dart,7,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_pane_sections.dart,4,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane_sections.dart,3,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart,5,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,1,0,0,C,0,0,0,pass,-

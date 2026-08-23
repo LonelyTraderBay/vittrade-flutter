@@ -59,19 +59,18 @@ void main() {
   });
 
   testWidgets(
-    'SC-163 placeholder pane renders one hero card without legacy scaffolding',
+    'SC-166 placeholder pane renders one hero card without legacy scaffolding',
     (tester) async {
       // Trimmed placeholder template: the pane carries the route's business
       // description, its topic icon (mirroring the account menu row), and a
       // completion note — no static facts table, fake CTA flow, or duplicate
       // risk/confirmation scaffolding.
-      await pumpTabletRoute(tester, AppRoutePaths.profileApi);
+      await pumpTabletRoute(tester, AppRoutePaths.profileSubAccounts);
 
       expect(find.byType(ProfileTabletUtilityPage), findsOneWidget);
       expect(
         find.text(
-          'Rà soát các khóa API, phạm vi quyền và trạng thái truy cập trước '
-          'khi quản lý.',
+          'Quản lý tài khoản phụ, phạm vi quyền và hạn mức từng tài khoản.',
         ),
         findsOneWidget,
       );
@@ -82,7 +81,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(ProfileTabletUtilityPage),
-          matching: find.byIcon(Icons.key_rounded),
+          matching: find.byIcon(Icons.groups_outlined),
         ),
         findsOneWidget,
       );

@@ -5,9 +5,9 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 ```text
 total_routed_screens=409
 fixed_vit_header_remaining=169
-auto_hide_header=97
+auto_hide_header=95
 custom_scroll_header=1
-no_top_header=28
+no_top_header=30
 unresolved=114
 ```
 
@@ -295,8 +295,8 @@ unresolved=114
 | predictions | `AppRoutePaths.marketsPredictionsTournaments` | `unresolved` | unresolved | unresolved | `unresolved` |
 | profile | `AppRoutePaths.profile` | `ProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
 | profile | `AppRoutePaths.profileActivity` | `ProfileActivityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` |
-| profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart` |
-| profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
+| profile | `AppRoutePaths.profileApi` | `ProfileApiPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_pane.dart` |
+| profile | `AppRoutePaths.profileApiCreate` | `ProfileApiCreatePane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart` |
 | profile | `AppRoutePaths.profileDevices` | `ProfileDevicesPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart` |
 | profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
 | profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |

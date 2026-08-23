@@ -381,18 +381,20 @@ void main() {
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('api')));
-      await tester.tap(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.menu('sub-accounts')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('sub-accounts')));
       await tester.pumpAndSettle();
 
       // The placeholder renders in the detail pane (menu stays framed)…
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
-      expect(find.byKey(const Key('SC-163-tablet-content')), findsOneWidget);
+      expect(find.byKey(const Key('SC-166-tablet-content')), findsOneWidget);
       // …and back returns to the overview exactly like the ported panes.
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
-      expect(find.byKey(const Key('SC-163-tablet-content')), findsNothing);
+      expect(find.byKey(const Key('SC-166-tablet-content')), findsNothing);
     },
   );
 
@@ -680,6 +682,98 @@ void main() {
         find.byKey(ProfileTabletKeys.deviceCard('dev002')),
         findsOneWidget,
       );
+    },
+  );
+
+  testWidgets(
+    'SC-163 API pane renders the key list, reveals a secret, and pushes the '
+    'create pane from the header action',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: 3 keys (2 active), masked
+      // until revealed, with the create action on the pane header.
+      expect(find.byKey(ProfileTabletKeys.apiPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.apiCreate), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.apiKeyCard('key1')), findsOneWidget);
+      expect(find.textContaining('••••'), findsWidgets);
+      expect(tester.takeException(), isNull);
+
+      // Revealing a secret unmasks it in place.
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.apiKeyReveal('key1')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.apiKeyReveal('key1')));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('sk_live_VI_DU_KHONG_THAT'), findsOneWidget);
+
+      // The header "+" action opens the create pane inside the shell.
+      await tester.tap(find.byKey(ProfileTabletKeys.apiCreate));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.apiCreatePane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-162 create-key pane walks form → confirm → result and returns to '
+    'the API pane',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(ProfileTabletKeys.apiCreate));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.apiCreatePane), findsOneWidget);
+
+      // The continue CTA stays disabled until the name reaches 3 chars.
+      expect(
+        tester
+            .widget<VitCtaButton>(
+              find.byKey(ProfileTabletKeys.apiCreateContinue),
+            )
+            .onPressed,
+        isNull,
+      );
+      await tester.enterText(
+        find.byKey(ProfileTabletKeys.apiCreateNameField),
+        'Bot nghiệm thu',
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<VitCtaButton>(
+              find.byKey(ProfileTabletKeys.apiCreateContinue),
+            )
+            .onPressed,
+        isNotNull,
+      );
+
+      // Form → confirm carries the name; confirm → result reveals the
+      // one-time keys. (The CTA sits below the fold on a 820dp-tall pane.)
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.apiCreateContinue),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.apiCreateContinue));
+      await tester.pumpAndSettle();
+      expect(find.text('Xác nhận tạo API Key'), findsWidgets);
+      expect(find.textContaining('Bot nghiệm thu'), findsOneWidget);
+      await tester.tap(find.byKey(ProfileTabletKeys.apiCreateConfirm));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('sk_live_demo_only_once'), findsOneWidget);
+
+      // The done CTA returns to the API pane inside the shell.
+      await tester.tap(find.byKey(ProfileTabletKeys.apiCreateDone));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.apiPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.apiCreatePane), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
     },
   );
 

@@ -13,6 +13,8 @@ import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/pro
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_activity_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_devices_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
@@ -112,14 +114,8 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileApi,
       name: AppRouteNames.sc163ApiManagement,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-163',
-          title: 'Quản lý API',
-          subtitle: 'Khóa API · quyền · hoạt động',
-          description:
-              'Rà soát các khóa API, phạm vi quyền và trạng thái truy cập trước khi quản lý.',
-          icon: Icons.key_rounded,
-        ),
+        // Master-detail tablet renders the real API pane beside the menu.
+        AppSurface.tablet => const ProfileApiPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => ApiManagementPage(shellRenderMode: shellRenderMode),
@@ -129,14 +125,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileApiCreate,
       name: AppRouteNames.sc162ApiKeyCreate,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-162',
-          title: 'Tạo khóa API',
-          subtitle: 'Tên khóa · quyền truy cập · an toàn',
-          description:
-              'Chọn đúng phạm vi quyền và kiểm tra lại trước khi tạo khóa API mới.',
-          icon: Icons.key_rounded,
-        ),
+        // Master-detail tablet renders the real create-key pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileApiCreatePane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => ApiKeyCreatePage(shellRenderMode: shellRenderMode),

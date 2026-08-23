@@ -23,6 +23,7 @@ class ProfilePaneScaffold extends StatelessWidget {
     this.subtitle,
     this.onBack,
     this.onRefresh,
+    this.headerActions,
     this.rhythm = VitPageRhythm.form,
     this.padding = VitContentPadding.relaxed,
     this.scrollKey,
@@ -36,6 +37,10 @@ class ProfilePaneScaffold extends StatelessWidget {
   final String? subtitle;
   final VoidCallback? onBack;
   final RefreshCallback? onRefresh;
+
+  /// Header action buttons rendered beside the title (e.g. the API pane's
+  /// "create key" action). Only shown when [title] renders a header.
+  final List<VitHeaderActionItem>? headerActions;
   final VitPageRhythm rhythm;
   final VitContentPadding padding;
   final Key? scrollKey;
@@ -83,6 +88,7 @@ class ProfilePaneScaffold extends StatelessWidget {
                 subtitle: subtitle,
                 showBack: narrow && onBack != null,
                 onBack: onBack,
+                actions: headerActions ?? const [],
                 horizontalPadding: AppSpacing.zero,
               );
             },

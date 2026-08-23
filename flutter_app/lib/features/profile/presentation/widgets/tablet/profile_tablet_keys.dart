@@ -105,4 +105,32 @@ final class ProfileTabletKeys {
   static Key deviceTrust(String id) => Key('sc165_devices_pane_trust_$id');
 
   static Key deviceLogout(String id) => Key('sc165_devices_pane_logout_$id');
+
+  // API management detail pane (SC-163 tablet port).
+  static const apiPane = Key('sc163_api_pane');
+  static const apiPaneError = Key('sc163_api_pane_error');
+  static const apiCreate = Key('sc163_api_pane_create');
+
+  static Key apiKeyCard(String id) => Key('sc163_api_pane_card_$id');
+
+  static Key apiKeyToggle(String id) => Key('sc163_api_pane_toggle_$id');
+
+  static Key apiKeyReveal(String id) => Key('sc163_api_pane_reveal_$id');
+
+  static Key apiKeyDelete(String id) => Key('sc163_api_pane_delete_$id');
+
+  // API key create detail pane (SC-162 tablet port).
+  static const apiCreatePane = Key('sc162_api_create_pane');
+  static const apiCreatePaneError = Key('sc162_api_create_pane_error');
+  static const apiCreateNameField = Key('sc162_api_create_pane_name_field');
+  static const apiCreateIpField = Key('sc162_api_create_pane_ip_field');
+  static const apiCreateContinue = Key('sc162_api_create_pane_continue');
+  static const apiCreateConfirm = Key('sc162_api_create_pane_confirm');
+  static const apiCreateDone = Key('sc162_api_create_pane_done');
+
+  static Key apiCreatePermission(String id) =>
+      Key('sc162_api_create_pane_permission_$id');
+
+  static Key apiCreateExpiry(String id) =>
+      Key('sc162_api_create_pane_expiry_$id');
 }
