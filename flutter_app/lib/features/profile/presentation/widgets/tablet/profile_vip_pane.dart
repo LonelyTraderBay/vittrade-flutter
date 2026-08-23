@@ -76,8 +76,11 @@ class _ProfileVipPaneState extends ConsumerState<ProfileVipPane> {
           ),
         ],
         data: (snapshot) => [
+          // Top-level blocks stay flat: VitPageContent(rhythm: form) inside
+          // ProfilePaneScaffold already inserts one 16dp section gap between
+          // each pair of children. A manual SizedBox separator here stacks
+          // onto those gaps (16+8+16=40dp) and breaks the pane's rhythm.
           _VipHero(snapshot: snapshot),
-          SizedBox(height: VitDensity.compact.verticalSpace),
           _VipTabs(
             active: _selectedTab,
             onChanged: (tab) => setState(() => _selectedTab = tab),
@@ -305,10 +308,10 @@ class _VipOverviewTab extends StatelessWidget {
     final children = <Widget>[];
     if (nextTier != null) {
       children.add(_VipProgressCard(snapshot: snapshot, nextTier: nextTier));
-      children.add(SizedBox(height: VitDensity.compact.pageContentGap));
+      children.add(const SizedBox(height: AppSpacing.cardGap));
     }
     children.add(_VipTierTable(snapshot: snapshot));
-    children.add(SizedBox(height: VitDensity.compact.pageContentGap));
+    children.add(const SizedBox(height: AppSpacing.cardGap));
     children.add(const _FeeSavingsCard());
 
     return Column(
@@ -732,7 +735,7 @@ class _BenefitsTab extends StatelessWidget {
             tier: tier,
             unlocked: snapshot.currentLevel >= tier.level,
           ),
-          SizedBox(height: VitDensity.compact.pageContentGap),
+          const SizedBox(height: AppSpacing.cardGap),
         ],
         if (nextTier != null) _UpgradeCta(nextTier: nextTier, onTrade: onTrade),
       ],

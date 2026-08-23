@@ -569,6 +569,39 @@ void main() {
   );
 
   testWidgets(
+    'SC-164 VIP pane keeps exactly one rhythm section gap between the hero '
+    'and the tabs (no stacked separator)',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('vip')));
+      await tester.pumpAndSettle();
+
+      // ProfilePaneScaffold's VitPageContent(rhythm: form) owns the vertical
+      // rhythm between top-level blocks, so hero→tabs must measure exactly
+      // one pageRhythmFormSectionGap. A manual SizedBox separator between
+      // the pane's children stacks onto the rhythm gaps (16+8+16=40dp) and
+      // breaks the pane's rhythm — the bug caught by the 2026-08-23
+      // emulator acceptance screenshot.
+      final pane = find.byKey(ProfileTabletKeys.vipPane);
+      final hero = find.descendant(
+        of: pane,
+        matching: find.byType(VitModuleHeroCard),
+      );
+      final tabs = find.descendant(of: pane, matching: find.byType(VitTabBar));
+      expect(hero, findsOneWidget);
+      expect(tabs, findsOneWidget);
+
+      final heroBottom = tester.getBottomLeft(hero).dy;
+      final tabsTop = tester.getTopLeft(tabs).dy;
+      expect(
+        tabsTop - heroBottom,
+        closeTo(AppSpacing.pageRhythmFormSectionGap, 0.1),
+      );
+    },
+  );
+
+  testWidgets(
     'SC-160 settings pane renders the real settings content beside the menu '
     'and persists toggles',
     (tester) async {
