@@ -5,6 +5,7 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/core/storage/key_value_store.dart';
 import 'package:vit_trade_flutter/features/profile/data/providers/profile_repository_provider.dart';
 import 'package:vit_trade_flutter/features/profile/data/repositories/mock_profile_repository.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -51,6 +52,7 @@ void main() {
     WidgetTester tester, {
     Size size = const Size(820, 1180),
     ProfileRepository? repository,
+    KeyValueStore? store,
   }) async {
     // Default: iPad Air portrait — above AppBreakpoints.tablet (600) but
     // below the dashboard's own two-column threshold, so this exercises the
@@ -65,6 +67,7 @@ void main() {
         overrides: [
           if (repository != null)
             profileRepositoryProvider.overrideWithValue(repository),
+          if (store != null) keyValueStoreProvider.overrideWithValue(store),
         ],
         child: VitTradeApp(
           routerConfig: createAppRouter(
@@ -551,6 +554,63 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Nâng cấp lên VIP 2'), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.vipTradeCta), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-160 settings pane renders the real settings content beside the menu '
+    'and persists toggles',
+    (tester) async {
+      final store = InMemoryKeyValueStore();
+      await pumpTabletProfile(
+        tester,
+        size: const Size(1180, 820),
+        store: store,
+      );
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('settings')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: 4 currencies, 2 languages,
+      // 3 trade-security rows (1 read-only), 6 notification toggles and the
+      // app-info card.
+      expect(find.byKey(ProfileTabletKeys.settingsPane), findsOneWidget);
+      expect(
+        find.byKey(ProfileTabletKeys.settingsCurrency('VND')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ProfileTabletKeys.settingsLanguage('en')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ProfileTabletKeys.settingsToggle('biometric')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(ProfileTabletKeys.settingsToggle('news')),
+        findsOneWidget,
+      );
+      expect(find.byKey(ProfileTabletKeys.settingsAppInfo), findsOneWidget);
+      expect(find.text('THÔNG TIN ỨNG DỤNG'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // Switching currency persists through the KeyValueStore (GĐ4-F1),
+      // mirroring the phone page's behavior.
+      await tester.tap(find.byKey(ProfileTabletKeys.settingsCurrency('VND')));
+      await tester.pumpAndSettle();
+      expect(store.getString(KeyValueStoreKeys.settingsCurrency), 'VND');
+
+      // Toggling a notification row flips its state and persists.
+      await tester.ensureVisible(
+        find.byKey(ProfileTabletKeys.settingsToggle('news')),
+      );
+      await tester.tap(find.byKey(ProfileTabletKeys.settingsToggle('news')));
+      await tester.pumpAndSettle();
+      expect(
+        store.getBool('${KeyValueStoreKeys.settingsTogglePrefix}news'),
+        true,
+      );
     },
   );
 

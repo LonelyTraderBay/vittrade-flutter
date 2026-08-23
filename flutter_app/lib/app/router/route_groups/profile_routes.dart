@@ -14,6 +14,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/pro
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_settings_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/security_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/phone/pages/settings_page.dart';
@@ -85,14 +86,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileSettings,
       name: AppRouteNames.sc160Settings,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-160',
-          title: 'Cài đặt tài khoản',
-          subtitle: 'Thông báo · riêng tư · hiển thị',
-          description:
-              'Điều chỉnh thông báo, quyền riêng tư và tùy chọn hiển thị.',
-          icon: Icons.settings_outlined,
-        ),
+        // Master-detail tablet renders the real settings pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileSettingsPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => SettingsPage(shellRenderMode: shellRenderMode),

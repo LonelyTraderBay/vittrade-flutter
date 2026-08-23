@@ -750,6 +750,7 @@ profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_men
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart,7,0,0,E,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_summary.dart,1,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart,5,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,3,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart,7,1,0,C,0,0,0,warn,fixed_height_baseline
 profile,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,1,0,0,C,0,0,0,pass,-

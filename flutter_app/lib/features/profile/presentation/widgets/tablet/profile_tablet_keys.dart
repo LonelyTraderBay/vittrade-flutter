@@ -69,4 +69,17 @@ final class ProfileTabletKeys {
   static Key menu(String id) => Key('sc156_profile_menu_$id');
   static Key legalGroup(String id) => Key('sc156_profile_legal_group_$id');
   static Key legalItem(String id) => Key('sc156_profile_legal_item_$id');
+
+  // Settings detail pane (SC-160 tablet port).
+  static const settingsPane = Key('sc160_settings_pane');
+  static const settingsPaneError = Key('sc160_settings_pane_error');
+  static const settingsAppInfo = Key('sc160_settings_pane_app_info');
+
+  static Key settingsCurrency(String currency) =>
+      Key('sc160_settings_pane_currency_$currency');
+
+  static Key settingsLanguage(String id) =>
+      Key('sc160_settings_pane_language_$id');
+
+  static Key settingsToggle(String id) => Key('sc160_settings_pane_toggle_$id');
 }

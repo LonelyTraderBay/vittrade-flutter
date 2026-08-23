@@ -1056,6 +1056,7 @@ profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pan
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_summary.dart,standard,,0,,0,,0,0,pass
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart,standard,,0,,0,,0,0,pass

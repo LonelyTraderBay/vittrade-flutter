@@ -158,6 +158,34 @@ const _noHeaderDecisions = <String, _NoHeaderDecision>{
     'detail',
     'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
   ),
+  'ProfileSettingsPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileActivityPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileDevicesPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileApiPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileApiCreatePane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileSubAccountsPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
+  'ProfileEditPane': _NoHeaderDecision(
+    'detail',
+    'Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome.',
+  ),
 };
 
 void main(List<String> args) {

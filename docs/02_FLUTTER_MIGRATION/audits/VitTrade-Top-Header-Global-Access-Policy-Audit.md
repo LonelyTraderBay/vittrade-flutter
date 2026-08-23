@@ -8,7 +8,7 @@ module_search_actions=2
 content_search_controls=17
 global_notification_actions=2
 context_notification_actions=2
-content_notification_icons=36
+content_notification_icons=37
 policy_violations=0
 ```
 
