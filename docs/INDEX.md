@@ -33,6 +33,12 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | [Flutter-Native-Design-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md) | Native UI rules |
 | [Flutter-Module-Identity-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Module-Identity-Standard.md) | Module accents |
 | [Flutter-Page-Archetype-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Page-Archetype-Standard.md) | Tabbed-detail / form-wizard page patterns |
+| [Tablet-Adaptive-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md) | Mandatory dedicated tablet layouts (R1–R9 + module composition archetype table) |
+| [Tablet-Spacing-Gutter-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Spacing-Gutter-Standard.md) | Mandatory tablet token-locked spacing/gutters (S1–S4, absolute) |
+| [Tablet-Card-Border-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Card-Border-Standard.md) | Mandatory tablet card frames + 3-step border tints (R1–R3, absolute) |
+| [Tablet-Input-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Input-Standard.md) | Mandatory tablet hover/focus/traversal tokens (I1–I5, absolute) |
+| [Motion-Standard.md](02_FLUTTER_MIGRATION/standards/Motion-Standard.md) | Mandatory motion duration/easing tokens + reduced motion (M1–M5; phase 1 = tablet) |
+| [Home-Tablet-Reference-Contract.md](02_FLUTTER_MIGRATION/standards/Home-Tablet-Reference-Contract.md) | Tablet reference contract extracted from Home (reusable vs Home-only patterns) |
 | [Flutter-Port-Master-Plan.md](02_FLUTTER_MIGRATION/Flutter-Port-Master-Plan.md) | Screen coverage tracker |
 | [Flutter-Migration-Execution-Runbook.md](02_FLUTTER_MIGRATION/checklists/Flutter-Migration-Execution-Runbook.md) | Standard workflow |
 | [Flutter-Design-Tokens.md](02_FLUTTER_MIGRATION/Flutter-Design-Tokens.md) | Token file map |

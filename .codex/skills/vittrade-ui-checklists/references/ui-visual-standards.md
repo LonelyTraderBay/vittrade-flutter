@@ -13,9 +13,10 @@ Prefer shared primitives before local widgets: `VitAppShell`,
 `VitServiceTile`, `VitAccentIconBox`, `VitCommunityRulesLink`, and
 `VitStatusPill`.
 
-Use theme tokens only: `AppColors`, `AppSpacing`, `AppRadii`, and
-`AppTextStyles`. Dark theme is the baseline; phone-first starts at 360 px and
-the tablet-adaptive shell starts at `AppBreakpoints.tablet` (600 px).
+Use theme tokens only: `AppColors`, `AppSpacing`, `AppRadii`,
+`AppTextStyles`, `AppInputStates` (hover/focus), and `AppMotion`
+(durations/easing). Dark theme is the baseline; phone-first starts at 360 px
+and the tablet-adaptive shell starts at `AppBreakpoints.tablet` (600 px).
 
 ## Domain contracts and verification
 
@@ -29,6 +30,9 @@ complete domain map and exact command flags. Common checks are:
 | Card tiles | `standards/Card-Tile-Standard.md` | `dart run tool/card_tile_audit.dart --check --strict-full` |
 | Card & border (tablet) | `standards/Tablet-Card-Border-Standard.md` | `dart run tool/tablet_card_border_audit.dart --check` |
 | Spacing & gutters (tablet) | `standards/Tablet-Spacing-Gutter-Standard.md` | `dart run tool/tablet_spacing_audit.dart --check` |
+| Input states (tablet) | `standards/Tablet-Input-Standard.md` | `dart run tool/tablet_input_audit.dart --check` |
+| Motion (phase 1 = tablet) | `standards/Motion-Standard.md` | `dart run tool/motion_audit.dart --check` |
+| Surface dispatch (tablet) | `standards/Tablet-Adaptive-Standard.md` (R1) | `dart run tool/tablet_route_surface_audit.dart --check` |
 | Segment pills | `standards/Segment-Pill-Standard.md` | `dart run tool/segment_pill_audit.dart --check --strict-full` |
 | Scroll auto-hide | `standards/Scroll-Auto-Hide-Standard.md` | `flutter test test/quality/scroll_auto_hide_guardrail_test.dart` |
 | Notice acknowledgement | `standards/Notice-Acknowledgement-Standard.md` | `flutter test test/quality/notice_acknowledgement_guardrail_test.dart` |
@@ -55,6 +59,12 @@ reference wins when this compact table and a standard disagree.
   the flow requires them.
 - Post-action acknowledgement uses `showVitNoticeSheet`; sticky footers are
   only for in-progress form or wizard CTAs.
+- Hover/focus come from shared widgets + `AppInputStates` tokens — no
+  page-local `MouseRegion`/`onHover`, no off-token `hoverColor:`/
+  `focusColor:`, no `skipTraversal`. Fills never shift layout.
+- Animation durations/easings are `AppMotion.*` tokens — no inline
+  `Duration(`/`Curves.` in tablet presentation; resolve reduced motion via
+  `AppMotion.respect(context, …)`.
 - Never use `BorderRadius.circular()` outside `app_radii.dart`.
 
 ## Radius and tile guidance

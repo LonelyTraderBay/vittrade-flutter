@@ -24,6 +24,36 @@ layout would be extra surface with no real information-density gain. When in
 doubt, ship without one: adding it later is cheap, removing a shipped one
 that turned out unnecessary is not.
 
+## Module composition archetypes — same foundation, different by *job*
+
+Every module obeys the **same absolute foundation** (tokens, spacing S1–S4,
+card frames R1–R3, input states I1–I5, motion M1–M5, header/nav rules) —
+modules never differ in those. What *legitimately* differs is the
+**composition grammar**, and it is chosen by the module's actual job, not by
+taste. Pick the row that matches the screen's work before writing any code:
+
+| Archetype (module's job) | Composition grammar | Reference | What differs between modules |
+| --- | --- | --- | --- |
+| **Monitor dashboard** — watch state and act fast (Home, Markets, Trade) | `VitTwoColumnTabletDashboard` (R4–R8) + thin banner strip + fixed header sibling (R9) | `home_tablet_page.dart`, `markets_tablet_page.dart`, `trade_tablet_page.dart` | *What goes in the columns* (portfolio vs sortable pair table vs order form + risk panel) and the banner's metric grammar |
+| **Settings master-detail** — many flat sibling sub-screens (Profile) | `StatefulShellRoute.indexedStack` + framed 400px master menu + per-pane scroll (`ProfileTabletMasterShell`) | `profile_tablet_page.dart` | Menu grouping by account-domain; each pane's content ports the phone page (R2) |
+| **Money-movement detail** — high-risk flows needing focus + context (Wallet deposit/withdraw/transfer/address) | `WalletTabletDetailSurface`: own header + back, single scroll, primary:flex7 / secondary:flex5 — not a two-column dashboard | `wallet_tablet_detail_surface.dart` | The flow's preview/confirm content and safety copy (financial-safety rules are non-negotiable here) |
+| **Linear detail / content page** — one thing to read or confirm (pair detail, order receipt, prediction event) | **No dedicated tablet page** — renders in the shared nav-rail shell; the module's tablet dashboard links into it | receipt/event pages under `presentation/tablet/pages/` | Content only; the layout is the shell's |
+| **Wizard / form flow** — step-by-step entry (KYC, create API key) | Form rhythm inside a master-detail pane or a single-column page; sticky footer CTA; never a two-column dashboard | `profile_kyc_pane.dart`, API-key create flow | Steps, fields, and per-step validation of the domain |
+
+**What may never vary between modules:** spacing/radius/border/motion/input
+tokens and their audits (S/R/I/M rules), the shared widget ladder, header
+and back-navigation contracts, masking and financial-safety rules, skeleton-
+mirrors-page discipline.
+
+**Where legitimate difference comes from — and only from:**
+1. the module's **archetype row above** (composition grammar),
+2. the module's **accent identity** (`Flutter-Module-Identity-Standard.md`),
+3. the module's **own data and workflow** (what the columns/panes contain).
+
+If a proposed difference doesn't trace to one of those three, it is drift —
+cut it. This is the rule that keeps "mỗi module một kiểu" impossible while
+keeping "mọi module giống hệt nhau" (cookie-cutter) equally impossible.
+
 ## Invariant
 
 ```text
@@ -113,7 +143,7 @@ renders the active sub-route in place. Reference implementation:
 5. Build `primaryChildren`/`secondaryChildren` lists from the page's own content, then `return VitTwoColumnTabletDashboard(primaryChildren: ..., secondaryChildren: ...)` — R4-R8 satisfied automatically. Header promoted to a fixed `Column` sibling above it (R9, still page-specific — the shared widget has no opinion on headers).
 6. Register any route/page override needed by the structural audits; do not add a feature-specific responsive dispatcher (R1).
 7. Add a widget test that pumps at the page's own two-column width and asserts `tester.takeException()` is `null` (the overflow guard) plus both columns' key content is present — the phone-width tests in the same file do **not** exercise this path. The shared widget's own generic mechanics (fallback threshold, `Row` shape, `VitCard` framing) already have dedicated coverage in `test/shared/layout/vit_two_column_tablet_dashboard_test.dart` — the page-level test only needs to prove *this page's* content lands in the right column, not re-verify the scaffold itself.
-8. Run the existing check suite (§5 of `Flutter-Design-System-Reference.md`) — a new tablet file is scanned by the same page-rhythm/card-tile/content-width audits as any phone file; no separate command exists yet.
+8. Run the check suite (§5 of `Flutter-Design-System-Reference.md`) — the tablet-specific audits below are part of it; a new tablet file is scanned by the same page-rhythm/card-tile/content-width audits as any phone file **plus** the five tablet locks (spacing, card border, input, motion, route-surface).
 
 ## Anti-patterns
 
@@ -144,6 +174,13 @@ renders the active sub-route in place. Reference implementation:
 cd flutter_app
 flutter analyze <touched tablet page file>
 flutter test <touched tablet page test file> --reporter=compact
+# The five tablet locks (all absolute-zero since 2026-08-23):
+dart run tool/tablet_spacing_audit.dart --check
+dart run tool/tablet_card_border_audit.dart --check
+dart run tool/tablet_input_audit.dart --check
+dart run tool/motion_audit.dart --check
+dart run tool/tablet_route_surface_audit.dart --check
+# Whole-repo structural audits (scan every presentation file):
 dart run tool/page_rhythm_audit.dart --check --strict-full
 dart run tool/card_tile_audit.dart --check --strict-full
 dart run tool/page_content_width_audit.dart --check

@@ -242,6 +242,31 @@ Depth is conveyed through **surface layering and borders**, not heavy shadows.
 - Modals use `modalScrim` / `modalScrimStrong` scrims.
 - Do not add drop shadows unless an existing shared primitive already defines them.
 
+## Interaction States & Motion
+
+Pointer-hover, keyboard-focus, and animation values are tokens — never
+hand-rolled per page. On the tablet surface both are absolute CI locks
+(`Tablet-Input-Standard.md` I1–I5, `Motion-Standard.md` M1–M5); shared
+widgets consume them everywhere.
+
+| Role | Token | Visual |
+| --- | --- | --- |
+| Pointer hover on a control | `AppInputStates.hoverOverlay` | 5% white fill |
+| Keyboard focus on a control | `AppInputStates.focusOverlay` | 12% primary fill |
+| Keyboard focus on a text input | `AppInputStates.focusInputBorder` | border → primary (error wins) |
+| Micro feedback duration | `AppMotion.feedback` | 100ms |
+| Element state duration | `AppMotion.element` | 180ms |
+| Surface (sheet/dialog) duration | `AppMotion.surface` | 240ms |
+| Scene transition duration | `AppMotion.scene` | 320ms |
+| Easing enter / emphasized / exit | `AppMotion.enter` / `emphasized` / `exit` | easeOutCubic / easeInOutCubicEmphasized / easeInCubic |
+
+- Hover/focus come from shared widgets (`VitCard`, `VitCtaButton`, rows,
+  `VitInput`) — no page-local `MouseRegion`/`onHover`, no off-token
+  `hoverColor:`/`focusColor:`; fills never shift layout.
+- Animation durations/easings are `AppMotion.*` references — no inline
+  `Duration(`/`Curves.` in tablet presentation; respect reduced motion via
+  `AppMotion.respect(context, …)`.
+
 ## Shapes
 
 Canonical radius tiers — **do not use `BorderRadius.circular()` outside
