@@ -91,4 +91,18 @@ final class ProfileTabletKeys {
   static Key activityFilter(String id) => Key('sc161_activity_pane_filter_$id');
 
   static Key activityLog(String id) => Key('sc161_activity_pane_log_$id');
+
+  // Devices detail pane (SC-165 tablet port).
+  static const devicesPane = Key('sc165_devices_pane');
+  static const devicesPaneError = Key('sc165_devices_pane_error');
+  static const devicesSummary = Key('sc165_devices_pane_summary');
+  static const devicesLogoutAll = Key('sc165_devices_pane_logout_all');
+  static const devicesLogoutConfirm = Key('sc165_devices_pane_logout_confirm');
+  static const devicesLogoutCancel = Key('sc165_devices_pane_logout_cancel');
+
+  static Key deviceCard(String id) => Key('sc165_devices_pane_card_$id');
+
+  static Key deviceTrust(String id) => Key('sc165_devices_pane_trust_$id');
+
+  static Key deviceLogout(String id) => Key('sc165_devices_pane_logout_$id');
 }

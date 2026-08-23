@@ -381,18 +381,18 @@ void main() {
     (tester) async {
       await pumpTabletProfile(tester, size: const Size(1180, 820));
 
-      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('devices')));
-      await tester.tap(find.byKey(ProfileTabletKeys.menu('devices')));
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('api')));
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('api')));
       await tester.pumpAndSettle();
 
       // The placeholder renders in the detail pane (menu stays framed)…
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
-      expect(find.byKey(const Key('SC-165-tablet-content')), findsOneWidget);
+      expect(find.byKey(const Key('SC-163-tablet-content')), findsOneWidget);
       // …and back returns to the overview exactly like the ported panes.
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
-      expect(find.byKey(const Key('SC-165-tablet-content')), findsNothing);
+      expect(find.byKey(const Key('SC-163-tablet-content')), findsNothing);
     },
   );
 
@@ -645,6 +645,39 @@ void main() {
       expect(find.byKey(ProfileTabletKeys.activityLog('act005')), findsNothing);
       expect(
         find.byKey(ProfileTabletKeys.activityLog('act001')),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    'SC-165 devices pane renders the session list and confirms a device '
+    'logout',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.menu('devices')));
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('devices')));
+      await tester.pumpAndSettle();
+
+      // Same production mock as the phone page: 4 devices (1 current + 3
+      // others), trust summary metrics leading the pane.
+      expect(find.byKey(ProfileTabletKeys.devicesPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.devicesSummary), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.devicesLogoutAll), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // Logging a device out is high-risk: the confirm dialog must appear
+      // and cancelling keeps the device listed.
+      final otherCard = find.byKey(ProfileTabletKeys.deviceLogout('dev002'));
+      await tester.ensureVisible(otherCard);
+      await tester.tap(otherCard);
+      await tester.pumpAndSettle();
+      expect(find.byKey(ProfileTabletKeys.devicesLogoutCancel), findsOneWidget);
+      await tester.tap(find.byKey(ProfileTabletKeys.devicesLogoutCancel));
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(ProfileTabletKeys.deviceCard('dev002')),
         findsOneWidget,
       );
     },

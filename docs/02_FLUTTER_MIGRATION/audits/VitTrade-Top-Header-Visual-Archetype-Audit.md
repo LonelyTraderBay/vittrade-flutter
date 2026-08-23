@@ -37,8 +37,8 @@ hard_coded_offline_banner=0
 
 | Screen level | Routes |
 | --- | ---: |
-| L2_detail | 185 |
-| L2_utilityDetail | 68 |
+| L2_detail | 186 |
+| L2_utilityDetail | 67 |
 | L3_transactionFlow | 55 |
 | L2_entityDetail | 40 |
 | L1_utilityHub | 23 |
@@ -346,7 +346,7 @@ hard_coded_offline_banner=0
 | profile | `AppRoutePaths.profileActivity` | `ProfileActivityPane` | no_top_header | no_top_header | detail | L2_detail | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` |
 | profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 1 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart` |
 | profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
-| profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |
+| profile | `AppRoutePaths.profileDevices` | `ProfileDevicesPane` | no_top_header | no_top_header | detail | L2_detail | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart` |
 | profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
 | profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | detail | L3_transactionFlow | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
 | profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | detail | L2_detail | detail | no | no | no | `-` | Tablet master-detail pane; the owning ProfileTabletMasterShell renders the module chrome. | none | none | none | 0 | - | - | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |

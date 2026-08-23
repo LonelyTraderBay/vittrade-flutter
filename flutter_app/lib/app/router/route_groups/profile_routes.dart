@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/pro
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_activity_pane.dart';
+import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_devices_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_security_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_settings_pane.dart';
@@ -156,14 +157,9 @@ List<RouteBase> profileRoutes(
       path: AppRoutePaths.profileDevices,
       name: AppRouteNames.sc165DeviceManagement,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _profileTabletUtility(
-          semanticIdentifier: 'SC-165',
-          title: 'Quản lý thiết bị',
-          subtitle: 'Thiết bị tin cậy · phiên đăng nhập',
-          description:
-              'Xem thiết bị đang truy cập và thu hồi phiên lạ sau khi kiểm tra thông tin.',
-          icon: Icons.phone_android_rounded,
-        ),
+        // Master-detail tablet renders the real devices pane beside the
+        // menu.
+        AppSurface.tablet => const ProfileDevicesPane(),
         AppSurface.phone ||
         AppSurface.web ||
         null => DeviceManagementPage(shellRenderMode: shellRenderMode),

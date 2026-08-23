@@ -874,6 +874,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_account_hero.dart,E,allow_start_baseline,pending,2,fixed_height_baseline
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart,C,-,done,0,-
+06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart,C,-,done,0,-
 06_other,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,C,-,done,0,-
