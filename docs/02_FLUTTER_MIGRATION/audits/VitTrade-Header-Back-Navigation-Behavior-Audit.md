@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=535
+visible_header_back_entries=536
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 470 |
+| parent_route_only | 471 |
 | history_then_fallback | 65 |
 
 ## Strict Issue Counts
@@ -371,6 +371,7 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/markets/presentation/phone/pages/tools/market_screener_page.dart` | 199 | `_MarketScreenerPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.markets` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/markets/presentation/phone/pages/tools/market_sectors_page.dart` | 81 | `_MarketSectorsPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.marketsSectors` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/markets/presentation/widgets/pair/pair_detail_header_widgets.dart` | 3 | `_PairHeader` | `VitHeaderActionButton` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
+| `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart` | 74 | `MarketsPaneScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/news/presentation/phone/pages/news_page.dart` | 90 | `_NewsPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/notifications/presentation/phone/pages/notifications_page.dart` | 79 | `_NotificationsPageState` | `VitHeader` | parent_route_only | parent_route_only | `snapshot.backRoute` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/p2p_account/presentation/phone/pages/merchant/p2p_address_proof_page.dart` | 82 | `_P2PAddressProofPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.p2pKycStatus` | yes | - | Back goes to an explicit parent route. |

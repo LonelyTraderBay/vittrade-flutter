@@ -1,10 +1,96 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
 
 const marketListPrimary = AppColors.primary;
 const marketListPredictionAccent = AppColors.accent;
 const marketListArenaAccent = AppColors.caution;
+
+/// Sort column ids → the state controller's sort values (`MarketSortOption`
+/// ids). `volume` has no ascending option in the shared sort set, so its
+/// cycle is default → desc → default.
+const marketListSortCycle = <String, List<String>>{
+  'price': ['price_desc', 'price_asc'],
+  'change': ['change_desc', 'change_asc'],
+  'volume': ['volume_desc'],
+};
+
+/// Next sort value when the user taps the sort header [columnId] while
+/// [activeSort] is current. Tapping an inactive column starts at that
+/// column's first step; tapping through the cycle's end falls back to
+/// `'default'`.
+String nextSortForColumn(String columnId, String activeSort) {
+  final cycle = marketListSortCycle[columnId] ?? const <String>[];
+  if (cycle.isEmpty) return activeSort;
+  if (!cycle.contains(activeSort)) return cycle.first;
+  final index = cycle.indexOf(activeSort);
+  return index + 1 < cycle.length ? cycle[index + 1] : 'default';
+}
+
+/// One tappable sort header cell (label + direction icon). Shared by the
+/// terminal master list's compact sort row; carries the input-state tokens
+/// (`AppInputStates`) via its `InkWell` so hover/focus never go off-token.
+class MarketListSortHeaderCell extends StatelessWidget {
+  const MarketListSortHeaderCell({
+    super.key,
+    required this.columnId,
+    required this.label,
+    required this.activeSort,
+    required this.onSortSelected,
+  });
+
+  final String columnId;
+  final String label;
+  final String activeSort;
+  final ValueChanged<String> onSortSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final cycle = marketListSortCycle[columnId] ?? const <String>[];
+    final active = cycle.contains(activeSort);
+    final ascending = active && activeSort.endsWith('_asc');
+    return Semantics(
+      button: true,
+      label: 'Sắp xếp theo $label',
+      child: Tooltip(
+        message: 'Sắp xếp theo $label',
+        child: InkWell(
+          key: MarketsTabletKeys.sortColumn(columnId),
+          onTap: () => onSortSelected(nextSortForColumn(columnId, activeSort)),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.end,
+                  style: AppTextStyles.micro.copyWith(
+                    color: active ? AppColors.text1 : AppColors.text3,
+                    fontWeight: active ? AppTextStyles.bold : null,
+                  ),
+                ),
+              ),
+              Icon(
+                active
+                    ? (ascending
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded)
+                    : Icons.unfold_more_rounded,
+                size: AppSpacing.iconSm,
+                color: active ? AppColors.text1 : AppColors.text3,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class MarketListSparklinePainter extends CustomPainter {
   const MarketListSparklinePainter({required this.values, required this.color});

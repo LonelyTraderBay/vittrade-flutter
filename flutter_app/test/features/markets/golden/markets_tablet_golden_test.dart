@@ -1,8 +1,8 @@
 // Tablet visual reference for the Markets route. Every frame pins
-// AppSurface.tablet: at 600px the tablet page renders its single-column
-// fallback (VitTwoColumnTabletDashboard dưới 900px), wider frames exercise
-// the dedicated Markets Tablet composition (pulse banner + pair table +
-// snapshot sidebar).
+// AppSurface.tablet: at 600px the terminal master-detail shell renders its
+// single-column fallback (master list stacked above the overview pane, dưới
+// 900px), wider frames exercise the dedicated Markets terminal composition
+// (framed master pair list + overview detail pane).
 //
 // Goldens are generated on Windows with the repository Flutter version:
 // `flutter test --update-goldens test/features/markets/golden/markets_tablet_golden_test.dart`.

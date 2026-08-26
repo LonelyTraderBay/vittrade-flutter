@@ -24,6 +24,10 @@ import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/rese
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/token_info_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/token_unlocks_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/hub/watchlist_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_token_info_pane.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
@@ -154,17 +158,37 @@ List<RouteBase> marketsRoutes(
     );
   }
   if (surface != AppSurface.tablet) return routes;
+  // Tablet terminal master-detail (Binance-iPad style): một shell route giữ
+  // danh sách cặp khung trái (search + «Yêu thích» + sort), detail pane bên
+  // phải render `/markets` (tổng quan) hay `/pair/...` đang hoạt động qua
+  // StatefulNavigationShell. Cùng paths/names như danh sách flat — GoRoute
+  // blocks giữ byte-compatible cho static route audits; phone giữ
+  // navigation full-page như cũ. Pair routes gia nhập branch của shell
+  // (root mount bỏ qua chúng trên tablet để không đăng ký trùng path).
   return [
-    routes.first,
-    ...buildTabletUtilityRouteFamily(
-      routes: routes.skip(1),
-      surface: surface!,
-      title: 'Công cụ thị trường',
-      subtitle: 'Phân tích, nghiên cứu và cảnh báo trên Tablet',
-      description:
-          'Không gian Tablet để theo dõi xu hướng, dữ liệu chuyên sâu, nghiên cứu và công cụ quản trị thị trường.',
-      backPath: AppRoutePaths.markets,
-      icon: Icons.query_stats_outlined,
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) => MarketsTabletMasterShell(
+        navigationShell: navigationShell,
+        currentPath: state.uri.path,
+      ),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            routes.first,
+            ...buildTabletUtilityRouteFamily(
+              routes: routes.skip(1),
+              surface: surface!,
+              title: 'Công cụ thị trường',
+              subtitle: 'Phân tích, nghiên cứu và cảnh báo trên Tablet',
+              description:
+                  'Không gian Tablet để theo dõi xu hướng, dữ liệu chuyên sâu, nghiên cứu và công cụ quản trị thị trường.',
+              backPath: AppRoutePaths.markets,
+              icon: Icons.query_stats_outlined,
+            ),
+            ...marketPairRoutes(shellRenderMode, surface: surface),
+          ],
+        ),
+      ],
     ),
   ];
 }
@@ -179,17 +203,16 @@ List<RouteBase> marketPairRoutes(
       name: AppRouteNames.sc044PairDetail,
       builder: (context, state) {
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
-        return _tabletMarketPairRoute(
-          context: context,
-          surface: surface,
-          semanticIdentifier: AppRouteNames.sc044PairDetail,
-          backPath: AppRoutePaths.markets,
-          fallback: PairDetailPage(
+        return switch (surface) {
+          // Terminal master-detail: pane phân tích thật trong detail column
+          // bên cạnh master list.
+          AppSurface.tablet => MarketsPairDetailPane(pairId: pairId),
+          AppSurface.phone || AppSurface.web || null => PairDetailPage(
             // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
             pairId: pairId,
             shellRenderMode: shellRenderMode,
           ),
-        );
+        };
       },
     ),
     GoRoute(
@@ -197,17 +220,16 @@ List<RouteBase> marketPairRoutes(
       name: AppRouteNames.sc045TokenInfo,
       builder: (context, state) {
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
-        return _tabletMarketPairRoute(
-          context: context,
-          surface: surface,
-          semanticIdentifier: AppRouteNames.sc045TokenInfo,
-          backPath: AppRoutePaths.pairDetail(pairId),
-          fallback: TokenInfoPage(
+        return switch (surface) {
+          // Terminal master-detail: pane thông tin token thật trong detail
+          // column.
+          AppSurface.tablet => MarketsTokenInfoPane(pairId: pairId),
+          AppSurface.phone || AppSurface.web || null => TokenInfoPage(
             // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
             pairId: pairId,
             shellRenderMode: shellRenderMode,
           ),
-        );
+        };
       },
     ),
     GoRoute(
@@ -217,39 +239,17 @@ List<RouteBase> marketPairRoutes(
         // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
         final returnTo = state.uri.queryParameters['returnTo'];
-        return _tabletMarketPairRoute(
-          context: context,
-          surface: surface,
-          semanticIdentifier: AppRouteNames.sc046PairDepth,
-          backPath: returnTo ?? AppRoutePaths.pairDetail(pairId),
-          fallback: MarketDepthPage(
+        return switch (surface) {
+          // Terminal master-detail: pane độ sâu thị trường thật trong
+          // detail column (back luôn về pair detail pane).
+          AppSurface.tablet => MarketsPairDepthPane(pairId: pairId),
+          AppSurface.phone || AppSurface.web || null => MarketDepthPage(
             pairId: pairId,
             backPath: returnTo ?? AppRoutePaths.pairDetail(pairId),
             shellRenderMode: shellRenderMode,
           ),
-        );
+        };
       },
     ),
   ];
-}
-
-Widget _tabletMarketPairRoute({
-  required BuildContext context,
-  required AppSurface? surface,
-  required String semanticIdentifier,
-  required String backPath,
-  required Widget fallback,
-}) {
-  return buildSurfaceAwareTabletRoute(
-    context: context,
-    surface: surface,
-    semanticIdentifier: semanticIdentifier,
-    title: 'Chi tiết thị trường',
-    subtitle: 'Phân tích cặp giao dịch trên Tablet',
-    description:
-        'Không gian Tablet dành cho dữ liệu giá, thanh khoản và thông tin tài sản.',
-    backPath: backPath,
-    fallback: fallback,
-    icon: Icons.show_chart_rounded,
-  );
 }

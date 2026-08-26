@@ -1,38 +1,106 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Mirrors the loaded Markets dashboard — banner: market pulse strip;
-/// primary: search + category tabs + the pair table; sidebar: movers,
-/// tools, discover — through the same shared scaffold, so resolving data
-/// never reflows the page shape (including the single-column → two-column
-/// switch at the dashboard's own threshold).
+/// Mirrors the loaded Markets terminal master-detail — master list: search +
+/// chips + compact pair rows; overview pane: pulse strip card + movers,
+/// tools, discover sections — so resolving data never reflows the page
+/// shape (skeleton-mirrors-page discipline).
 class MarketsLoadingContent extends StatelessWidget {
-  const MarketsLoadingContent({super.key, this.onRefresh});
-
-  final RefreshCallback? onRefresh;
+  const MarketsLoadingContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return VitTwoColumnTabletDashboard(
-      banner: const _PulseStripSkeleton(),
-      onRefresh: onRefresh,
-      // Children stay flat (S4): the scaffold's customGap already inserts
-      // the section gap between every pair — a separator SizedBox here
-      // stacks onto it (13+13) and breaks the skeleton↔loaded mirror.
-      primaryChildren: const [
-        VitSkeleton(width: double.infinity, height: AppSpacing.buttonCompact),
-        _PairTableSkeleton(),
+    return const VitInsetScrollView(
+      child: VitPageContent(
+        rhythm: VitPageRhythm.relaxed,
+        padding: VitContentPadding.relaxed,
+        children: [
+          _PulseStripSkeleton(),
+          _MoverStripSkeleton(),
+          _ToolsSkeleton(),
+          _DiscoverSkeleton(),
+        ],
+      ),
+    );
+  }
+}
+
+/// Master-list skeleton: search bar + chips row + sort header + vài hàng
+/// cặp compact — mirror đúng `MarketsMasterList` đã load.
+class MarketsMasterSkeleton extends StatelessWidget {
+  const MarketsMasterSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Cuộn được ngay trong khung loading: ở khung tablet hẹp, master share
+    // (flex5) không đủ chỗ cho đủ 6 hàng skeleton — skeleton phải co chứ
+    // không tràn (skeleton-mirrors-page discipline).
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const VitSkeleton(
+              width: double.infinity,
+              height: AppSpacing.buttonCompact,
+            ),
+            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const VitSkeleton(width: 220, height: AppSpacing.buttonCompact),
+            const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+            const VitSkeleton(width: 180, height: AppSpacing.x4),
+            ...List<Widget>.generate(6, (_) => const _MasterRowSkeleton()),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Một hàng cặp compact skeleton: khoảng cách dọc + hàng 4 cụm flex.
+class _MasterRowSkeleton extends StatelessWidget {
+  const _MasterRowSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        Row(
+          children: [
+            VitSkeleton(width: 16, height: 16),
+            SizedBox(width: AppSpacing.x2),
+            VitSkeleton(width: 28, height: 28),
+            SizedBox(width: AppSpacing.x2),
+            Expanded(flex: 5, child: VitSkeleton(width: 90, height: 24)),
+            Expanded(flex: 4, child: VitSkeleton(width: 72, height: 14)),
+            Expanded(flex: 3, child: VitSkeleton(width: 44, height: 18)),
+            Expanded(flex: 4, child: VitSkeleton(width: 64, height: 14)),
+          ],
+        ),
       ],
-      secondaryChildren: const [
-        _MoverStripSkeleton(),
-        _ToolsSkeleton(),
-        _DiscoverSkeleton(),
-      ],
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
+    );
+  }
+}
+
+/// Overview pane mang full error state; cột master chỉ cần giữ nguyên khung
+/// và báo ngắn gọn — idiom `_MasterMenuError` của Profile master shell.
+class MarketsMasterError extends StatelessWidget {
+  const MarketsMasterError({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: VitEmptyState(
+        title: 'Không tải được danh sách cặp',
+        message: 'Kéo để làm mới ở phần tổng quan.',
+        icon: Icons.search_off_rounded,
+      ),
     );
   }
 }
@@ -74,86 +142,19 @@ class _PulseStripSkeleton extends StatelessWidget {
   }
 }
 
-/// Table header row + the first few pair rows, all in one clipped card.
-class _PairTableSkeleton extends StatelessWidget {
-  const _PairTableSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    return VitCard(
-      clip: true,
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.x3,
-              vertical: AppSpacing.x2,
-            ),
-            child: Row(
-              children: [
-                VitSkeleton(width: 16, height: 12),
-                SizedBox(width: AppSpacing.x3),
-                Expanded(flex: 5, child: VitSkeleton(width: 80, height: 12)),
-                Expanded(flex: 4, child: VitSkeleton(width: 64, height: 12)),
-                Expanded(flex: 3, child: VitSkeleton(width: 40, height: 12)),
-                Expanded(flex: 4, child: VitSkeleton(width: 56, height: 12)),
-                Expanded(flex: 3, child: VitSkeleton(width: 40, height: 12)),
-                Expanded(flex: 3, child: VitSkeleton(width: 40, height: 12)),
-                SizedBox(width: AppSpacing.x7),
-              ],
-            ),
-          ),
-          for (var i = 0; i < 6; i++) ...[
-            const Divider(height: AppSpacing.dividerHairline),
-            const Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.x3,
-                vertical: AppSpacing.x3,
-              ),
-              child: Row(
-                children: [
-                  VitSkeleton(width: 16, height: 16),
-                  SizedBox(width: AppSpacing.x2),
-                  VitSkeleton(width: 28, height: 28),
-                  SizedBox(width: AppSpacing.x3),
-                  Expanded(flex: 5, child: VitSkeleton(width: 90, height: 24)),
-                  Expanded(flex: 4, child: VitSkeleton(width: 72, height: 14)),
-                  Expanded(flex: 3, child: VitSkeleton(width: 44, height: 18)),
-                  Expanded(flex: 4, child: VitSkeleton(width: 64, height: 14)),
-                  Expanded(flex: 3, child: VitSkeleton(width: 48, height: 14)),
-                  Expanded(flex: 3, child: VitSkeleton(width: 44, height: 14)),
-                  SizedBox(
-                    width: AppSpacing.x7,
-                    height: AppSpacing.x5 + AppSpacing.x2,
-                    child: VitSkeleton(
-                      width: double.infinity,
-                      height: AppSpacing.x5 + AppSpacing.x2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
 /// Mirrors the movers strip: one short card split by a center divider.
 class _MoverStripSkeleton extends StatelessWidget {
   const _MoverStripSkeleton();
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: AppSpacing.buttonCompact,
-      child: VitCard(
-        child: VitSkeleton(
-          width: double.infinity,
-          height: AppSpacing.buttonCompact,
-        ),
-      ),
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        VitSkeleton(width: 140, height: AppSpacing.x4),
+        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        VitCard(child: VitSkeletonList(rows: 4)),
+      ],
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:vit_trade_flutter/features/auth/presentation/web/pages/auth_web_
 import 'package:vit_trade_flutter/features/home/presentation/web/pages/home_web_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_web_utility_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart';
 
 void main() {
   Future<void> pumpSurfaceRoute(
@@ -83,8 +84,10 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.pairDetail('btcusdt'));
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Chi tiết thị trường'), findsOneWidget);
+    // Terminal master-detail: pair detail giờ là pane phân tích thật trong
+    // shell — không còn utility placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(MarketsPairDetailPane), findsOneWidget);
   });
 
   testWidgets('SC-169 Tablet uses the independent DCA composition', (

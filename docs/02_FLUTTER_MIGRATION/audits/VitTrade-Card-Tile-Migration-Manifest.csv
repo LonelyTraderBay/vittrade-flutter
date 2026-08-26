@@ -114,6 +114,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 03_tab_roots,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_card_analysis_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_schedule_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_upcoming_widgets.dart,C,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_chart.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_common.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_order_book.dart,E,-,done,0,-
@@ -140,9 +141,11 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/research/token_info_tabs_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,D,-,done,0,-
-03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,E,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,C,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,C,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_sections.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_tokens.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tools/market_calendar_events.dart,E,-,done,0,-

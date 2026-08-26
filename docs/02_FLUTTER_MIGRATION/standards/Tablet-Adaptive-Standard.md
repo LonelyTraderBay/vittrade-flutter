@@ -2,7 +2,7 @@
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · `AGENTS.md` UI Rules · Reference screen: Home (SC-007)
 **Enforcement:** R1's sharpest teeth are now static: `tool/tablet_route_surface_audit.dart` + `test/quality/tablet_route_surface_guardrail_test.dart` lock tablet presentation against re-dispatching the surface (`AppBreakpoints.` queries, compat `ResponsiveSurfacePage` references, and — R1c, 2026-08-24 — `OrientationBuilder`/`MediaQuery.orientationOf` orientation dispatch; all absolute, zero baseline; router/theme layers exempt as the sanctioned homes, including the router's compat `null` arm). The orientation policy's behavioral half (rotation relayout) is locked by `test/quality/tablet_rotation_guardrail_test.dart`. R4-R8's scaffold is implemented once in `VitTwoColumnTabletDashboard` (`lib/shared/layout/vit_two_column_tablet_dashboard.dart`), so a page using it satisfies those rules by construction rather than by manual review. `page_rhythm_audit.dart`'s `_hasTradeRhythmScaffold` allowlist recognizes the shared widget so structural page-rhythm coverage isn't lost. What's still manually verified per page: R2 (phone reference untouched) and R3 (threshold choice) and R9 (header promotion) — plus (a) the page's own widget test at/above its two-column threshold, (b) the existing whole-repo structural audits (page rhythm, card tile, page content width), which already scan every file under `lib/features/**/presentation` regardless of phone/tablet.
-**Reference screens:** all 5 app root tabs now have a dedicated tablet page, all delegating their two-column body to `VitTwoColumnTabletDashboard`: `home_tablet_page.dart` (first, R1-R9 originally established here); `wallet_tablet_page.dart` (confirmed R9's header-promotion pattern generalizes); `markets_tablet_page.dart` (confirmed a phone-only content gate, like Markets' `showMarketSummary`, can be safely dropped in the tablet secondary column when the gated widgets' own data doesn't depend on the filter state; see R7); `trade_tablet_page.dart` (confirmed a financial-safety column-placement invariant — the risk panel staying in the primary column — survives being expressed as plain child-list ordering, no special-casing needed in the shared widget); `profile_tablet_page.dart` (confirmed a nested inner screen-state switch upstream of the two-column body doesn't need to interact with the shared widget at all). After all 5 confirmed the identical scaffold, it was extracted into `VitTwoColumnTabletDashboard` (own test: `test/shared/layout/vit_two_column_tablet_dashboard_test.dart`) and all 5 pages migrated onto it — see "Upgrade path" below.
+**Reference screens:** all 5 app root tabs now have a dedicated tablet page, all delegating their two-column body to `VitTwoColumnTabletDashboard`: `home_tablet_page.dart` (first, R1-R9 originally established here); `wallet_tablet_page.dart` (confirmed R9's header-promotion pattern generalizes); `markets_tablet_page.dart` (was the third dashboard reference until 2026-08-24, when Markets moved to the Analysis-terminal master-detail shell below — before the move it had confirmed a phone-only content gate like `showMarketSummary` can be safely dropped in a tablet column when the gated widgets' own data doesn't depend on the filter state; see R7); `trade_tablet_page.dart` (confirmed a financial-safety column-placement invariant — the risk panel staying in the primary column — survives being expressed as plain child-list ordering, no special-casing needed in the shared widget); `profile_tablet_page.dart` (confirmed a nested inner screen-state switch upstream of the two-column body doesn't need to interact with the shared widget at all). After all 5 confirmed the identical scaffold, it was extracted into `VitTwoColumnTabletDashboard` (own test: `test/shared/layout/vit_two_column_tablet_dashboard_test.dart`) and all 5 pages migrated onto it — see "Upgrade path" below.
 
 ## Scope
 
@@ -37,8 +37,9 @@ mapping per job.)
 
 | Archetype (module's job) | Composition grammar | Reference | What differs between modules |
 | --- | --- | --- | --- |
-| **Monitor dashboard** — watch state and act fast (Home, Markets, Trade) | `VitTwoColumnTabletDashboard` (R4–R8) + thin banner strip + fixed header sibling (R9) | `home_tablet_page.dart`, `markets_tablet_page.dart`, `trade_tablet_page.dart` | *What goes in the columns* (portfolio vs sortable pair table vs order form + risk panel) and the banner's metric grammar |
+| **Monitor dashboard** — watch state and act fast (Home, Trade) | `VitTwoColumnTabletDashboard` (R4–R8) + thin banner strip + fixed header sibling (R9) | `home_tablet_page.dart`, `trade_tablet_page.dart` | *What goes in the columns* (portfolio vs order form + risk panel) and the banner's metric grammar |
 | **Settings master-detail** — many flat sibling sub-screens (Profile) | `StatefulShellRoute.indexedStack` + framed 400px master menu + per-pane scroll (`ProfileTabletMasterShell`) | `profile_tablet_page.dart` | Menu grouping by account-domain; each pane's content ports the phone page (R2) |
+| **Analysis terminal** — browse a live list while inspecting the selection side-by-side (Markets) | Same `StatefulShellRoute` shell idiom, but the master is a *working list* (search + watchlist-first category chips + sort row + compact rows), not a settings menu (`MarketsTabletMasterShell`) | `markets_tablet_master_shell.dart` | What the master list filters/sorts by, and which analysis panes the detail column renders (`/markets` overview, `/pair/...`) |
 | **Money-movement detail** — high-risk flows needing focus + context (Wallet deposit/withdraw/transfer/address) | `WalletTabletDetailSurface`: own header + back, single scroll, primary:flex7 / secondary:flex5 — not a two-column dashboard | `wallet_tablet_detail_surface.dart` | The flow's preview/confirm content and safety copy (financial-safety rules are non-negotiable here) |
 | **Linear detail / content page** — one thing to read or confirm (pair detail, order receipt, prediction event) | **No dedicated tablet page** — renders in the shared nav-rail shell; the module's tablet dashboard links into it | receipt/event pages under `presentation/tablet/pages/` | Content only; the layout is the shell's |
 | **Wizard / form flow** — step-by-step entry (KYC, create API key) | Form rhythm inside a master-detail pane or a single-column page; sticky footer CTA; never a two-column dashboard | `profile_kyc_pane.dart`, API-key create flow | Steps, fields, and per-step validation of the domain |
@@ -96,14 +97,19 @@ out to Markets/Profile/Trade in the same pass:
 4. **Skeleton mirrors the dashboard** — the loading state renders through the same `VitTwoColumnTabletDashboard` (banner + column skeletons mirroring the loaded blocks), so resolving data never reflows the page shape. Generic one-column `VitSkeletonList` loading is the phone idiom.
 5. **Sensitive data masked in the banner** — emails/phones go through `VitFormat` masking helpers even in summary strips.
 
-## Master-detail shell pattern (route-based split view — Profile reference, 2026-08-22)
+## Master-detail shell pattern (route-based split view — Profile 2026-08-22, Markets 2026-08-24)
 
-For settings-style surfaces whose sub-screens are many flat sibling routes
-(Profile: KYC, security, VIP, devices, API, activity, settings,
-sub-accounts…), the dashboard shape gives way to an iPad-Settings
-master-detail: a persistent framed menu column beside a detail pane that
-renders the active sub-route in place. Reference implementation:
-`ProfileTabletMasterShell` + `profileRoutes()`'s tablet arm.
+Two modules share this shell idiom for different jobs: Profile
+(settings-style — many flat sibling sub-routes: KYC, security, VIP, devices,
+API, activity, settings, sub-accounts…) and Markets (analysis terminal — a
+live, searchable pair list beside the pair being inspected; decided
+2026-08-24, Binance-iPad job). The dashboard shape gives way to a split
+view: a persistent framed master column beside a detail pane that renders
+the active sub-route in place. Reference implementations:
+`ProfileTabletMasterShell` + `profileRoutes()`'s tablet arm (settings),
+`MarketsTabletMasterShell` + `marketsRoutes()`'s tablet arm (terminal — note
+it folds the separate `marketPairRoutes()` group into the shell's single
+branch, and root_routes mounts that group only for phone/web).
 
 1. **Route via `StatefulShellRoute.indexedStack`, one branch.** The tablet
    arm returns `[StatefulShellRoute.indexedStack(branches:
@@ -214,6 +220,7 @@ centered 800/400 ≥1200) already answer every question orientation could.
 
 ## Upgrade path
 
+Markets left the dashboard-reference set on 2026-08-24 for the Analysis-terminal master-detail shell — `VitTwoColumnTabletDashboard` retains four reference consumers (Home, Wallet, Trade, Profile).
 1. ~~When a second dedicated tablet screen ships, extract its width constants into a shared file if they match the first screen's.~~ Done — `lib/app/theme/tablet_dashboard_widths.dart`, after `WalletTabletPage` confirmed `HomeTabletPage`'s numbers unchanged. ~~When a third screen ships, evaluate whether a dedicated audit tool is worth building.~~ Resolved differently once a third, fourth, and fifth screen (Trade, Profile) all confirmed the identical scaffold: extracted it into `VitTwoColumnTabletDashboard` (`lib/shared/layout/`) instead of building a separate audit tool to check five hand-rolled copies stayed in sync — a shared widget makes the copies impossible rather than merely checked. All 5 existing pages migrated onto it in the same rollout.
 2. If a screen needs a width tier beyond `AppBreakpoints.tablet`, promote it to a real global breakpoint only once ≥2 screens independently need the same cutoff.
 3. A 6th tablet page (or beyond) is now a pure consumer of `VitTwoColumnTabletDashboard` — no new scaffold code, no new audit-registry entries beyond R1's existing two (`page_rhythm_layout_registry.dart`, `top_header_visual_archetype_audit.dart`). If a future page's content genuinely can't fit the two-column shape (e.g. needs three columns, or an asymmetric split that isn't primary/secondary), that's a signal for a second shared widget alongside this one, not for hand-rolling around it.

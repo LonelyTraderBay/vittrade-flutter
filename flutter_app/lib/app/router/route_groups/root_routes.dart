@@ -97,7 +97,10 @@ ShellRoute _appShellRoute(
       ...homeRoutes(shellRenderMode, surface: surface),
       ...marketsRoutes(shellRenderMode, surface: surface),
       ...predictionRoutes(shellRenderMode, surface: surface),
-      ...marketPairRoutes(shellRenderMode, surface: surface),
+      // Markets terminal master-detail shell (tablet) đã gộp pair routes
+      // vào branch của nó — root chỉ mount riêng cho phone/web.
+      if (surface != AppSurface.tablet)
+        ...marketPairRoutes(shellRenderMode, surface: surface),
       ...tradeComplianceRoutes(shellRenderMode, surface: surface),
       ...tradeCopyRoutes(shellRenderMode, surface: surface),
       ...tradeBotsRoutes(shellRenderMode, surface: surface),

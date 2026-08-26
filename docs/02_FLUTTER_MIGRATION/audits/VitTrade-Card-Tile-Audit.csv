@@ -475,6 +475,7 @@ markets,flutter_app/lib/features/markets/presentation/phone/pages/research/socia
 markets,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_card_analysis_widgets.dart,6,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_schedule_widgets.dart,2,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/phone/pages/research/token_unlocks_page_upcoming_widgets.dart,1,0,0,C,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart,1,0,0,E,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_chart.dart,3,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_common.dart,1,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_order_book.dart,1,0,0,E,0,0,0,pass,-
@@ -501,9 +502,11 @@ markets,flutter_app/lib/features/markets/presentation/widgets/research/token_inf
 markets,flutter_app/lib/features/markets/presentation/widgets/research/token_info_tabs_widgets.dart,2,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,1,0,0,E,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,1,1,0,D,0,0,0,pass,-
-markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_pairs_panel.dart,1,0,0,E,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,3,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,2,0,0,E,0,0,0,pass,-
-markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,5,0,0,C,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,4,0,0,C,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,6,0,0,C,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_sections.dart,4,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,5,1,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_tokens.dart,2,1,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tools/market_calendar_events.dart,1,0,0,E,0,0,0,pass,-

@@ -19,7 +19,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/widgets/phone/market_formatters.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/market_formatters.dart';
 part '../../../widgets/tools/market_movers_filters.dart';
 part '../../../widgets/tools/market_movers_results.dart';
 part '../../../widgets/tools/market_movers_row_common.dart';
