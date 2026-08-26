@@ -80,16 +80,19 @@ class ProfilePaneScaffold extends StatelessWidget {
         if (headerTitle != null)
           Builder(
             builder: (context) {
-              // The back action is needed only where the master menu is no
-              // longer beside the pane — that is decided by the SHELL's
-              // width (screen minus the nav rail), not the pane's own
-              // column width: on a 1280dp tablet the pane itself is 720dp
-              // (< twoColumnMinWidth) while the shell still renders the
-              // framed menu beside it, so a back arrow there duplicates the
-              // always-visible menu (§Master-detail #3).
+              // The back action is needed only where the framed master
+              // menu is no longer beside the pane — that is decided by the
+              // SHELL's width (screen minus the nav rail) against the
+              // master-detail SPLIT threshold, not the pane's own column
+              // width. Both split tiers (wide ≥900 centered, portrait
+              // 680–899 with the narrow 320 master) keep the menu beside
+              // the pane, so a back arrow there would duplicate the
+              // always-visible menu (§Master-detail #3); only the stacked
+              // fallback below the split threshold renders full-width
+              // panes that need their own way back.
               final narrow =
                   MediaQuery.sizeOf(context).width - VitNavigationRail.width <
-                  TabletDashboardWidths.twoColumnMinWidth;
+                  TabletDashboardWidths.masterDetailSplitMinWidth;
               return VitHeader(
                 title: headerTitle,
                 subtitle: subtitle,

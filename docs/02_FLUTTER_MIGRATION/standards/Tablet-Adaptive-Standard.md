@@ -38,7 +38,7 @@ mapping per job.)
 | Archetype (module's job) | Composition grammar | Reference | What differs between modules |
 | --- | --- | --- | --- |
 | **Monitor dashboard** — watch state and act fast (Home, Trade) | `VitTwoColumnTabletDashboard` (R4–R8) + thin banner strip + fixed header sibling (R9) | `home_tablet_page.dart`, `trade_tablet_page.dart` | *What goes in the columns* (portfolio vs order form + risk panel) and the banner's metric grammar |
-| **Settings master-detail** — many flat sibling sub-screens (Profile) | `StatefulShellRoute.indexedStack` + framed 400px master menu + per-pane scroll (`ProfileTabletMasterShell`) | `profile_tablet_page.dart` | Menu grouping by account-domain; each pane's content ports the phone page (R2) |
+| **Settings master-detail** — many flat sibling sub-screens (Profile) | `StatefulShellRoute.indexedStack` + framed master menu (400 wide tier / 320 portrait split tier) + per-pane scroll (`ProfileTabletMasterShell`) | `profile_tablet_page.dart` | Menu grouping by account-domain; each pane's content ports the phone page (R2) |
 | **Analysis terminal** — browse a live list while inspecting the selection side-by-side (Markets) | Same `StatefulShellRoute` shell idiom, but the master is a *working list* (search + watchlist-first category chips + sort row + compact rows), not a settings menu (`MarketsTabletMasterShell`) | `markets_tablet_master_shell.dart` | What the master list filters/sorts by, and which analysis panes the detail column renders (`/markets` overview, `/pair/...`) |
 | **Money-movement detail** — high-risk flows needing focus + context (Wallet deposit/withdraw/transfer/address) | `WalletTabletDetailSurface`: own header + back, single scroll, primary:flex7 / secondary:flex5 — not a two-column dashboard | `wallet_tablet_detail_surface.dart` | The flow's preview/confirm content and safety copy (financial-safety rules are non-negotiable here) |
 | **Linear detail / content page** — one thing to read or confirm (pair detail, order receipt, prediction event) | **No dedicated tablet page** — renders in the shared nav-rail shell; the module's tablet dashboard links into it | receipt/event pages under `presentation/tablet/pages/` | Content only; the layout is the shell's |
@@ -131,17 +131,28 @@ branch, and root_routes mounts that group only for phone/web).
    standard's proven numbers rather than `VitTwoColumnTabletDashboard`
    itself (whose static children lists don't fit a routing outlet). Each
    pane is a content-only widget on `ProfilePaneScaffold` (optional header,
-   back shown only below 900px, own `SingleChildScrollView` + optional
-   `onRefresh`).
+   back shown only below `masterDetailSplitMinWidth` (680) — every tier
+   that keeps the menu beside the pane needs no duplicate way back — own
+   `SingleChildScrollView` + optional `onRefresh`).
 4. **Content ports per R2.** A pane = a public tablet port of the phone
    page's part-family content (see `ProfileKycPane`, `ProfileSecurityPane`,
    `ProfileVipPane`), watching the same screen provider; not-yet-ported
    sub-routes keep building their old placeholder page inside the pane —
    migration is incremental and the architecture never re-opens.
-5. **Single-column fallback (<900):** hub route stacks menu above the
+5. **Portrait keeps the split; the stacked fallback is resize-only
+   (2026-08-27).** Between `masterDetailSplitMinWidth` (680) and
+   `twoColumnMinWidth` (900) — real-tablet portrait — the shell KEEPS the
+   split with a narrower master column
+   (`masterDetailNarrowMasterWidth` = 320 + 24 gutter + the rest detail):
+   iPad-Settings portrait semantics, so rotation relayouts sizes without
+   ever changing the composition or swapping to full-page pushes (which
+   the 2026-08-27 emulator acceptance had flagged as unprofessional).
+   Pane content already renders at phone width by design (R2), so the
+   narrower detail (~360dp on an 800dp-logical portrait tablet) is within
+   proven bounds. Below 680 (window-resize territory, not real tablets)
+   the old stacked fallback applies: hub route stacks menu above the
    overview pane (independent scrolls, `Expanded` shares); a sub-route pane
-   takes the full width with its own back header — the menu column would
-   leave no usable detail height beside it.
+   takes the full width with its own back header.
 6. **Selection is route-derived, never a parallel local state.** The menu's
    selected row comes from the routing outlet itself
    (`ProfileMasterMenu.selectedRoute`, matched against the sub-route
@@ -160,7 +171,9 @@ branch, and root_routes mounts that group only for phone/web).
 The tablet surface supports **both orientations** — nothing in the app locks
 or favors one. The whole layout contract is **width-driven**: the
 `TabletDashboardWidths` tiers (single-column <900, two-column ≥900,
-centered 800/400 ≥1200) already answer every question orientation could.
+centered 800/400 ≥1200 — plus the master-detail shells' own portrait split
+tier 680–899 with the 320 master, rule 5 of the shell pattern above)
+already answer every question orientation could.
 
 1. **Presentation never queries orientation (R1c, absolute).** No
    `OrientationBuilder`, no `MediaQuery.orientationOf` in any tablet

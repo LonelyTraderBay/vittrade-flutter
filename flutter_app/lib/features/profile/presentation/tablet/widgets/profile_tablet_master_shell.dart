@@ -24,12 +24,17 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// `context.go`, so deep links and the system back button keep working
 /// exactly as before.
 ///
-/// Widths follow the tablet standard's proven idioms (R4–R8): at/above
-/// [TabletDashboardWidths.twoColumnMinWidth] the menu/detail pair is capped
-/// and centered as one block (master fixed 400 + detail Expanded), mirroring
-/// `VitTwoColumnTabletDashboard`'s outer cap; below it the shell falls back
-/// to a single column — the menu stacked above the overview pane on the hub
-/// route, and the detail pane full-width (with its own back header) on
+/// Widths follow the tablet standard's proven idioms (R4–R8), in three
+/// tiers: at/above [TabletDashboardWidths.twoColumnMinWidth] the
+/// menu/detail pair is capped and centered as one block (master fixed 400 +
+/// detail Expanded), mirroring `VitTwoColumnTabletDashboard`'s outer cap;
+/// between [TabletDashboardWidths.masterDetailSplitMinWidth] and that tier
+/// — real-tablet portrait — the shell KEEPS the split with a narrower
+/// master column (320), iPad-Settings portrait semantics, so rotation
+/// relayouts sizes without ever changing the composition or swapping to
+/// full-page pushes; below the split threshold (window-resize territory)
+/// it falls back to a single column — menu stacked above the overview pane
+/// on the hub route, detail pane full-width with its own back header on
 /// sub-routes. The shell owns the fixed header (R9); panes never render
 /// their own top chrome.
 class ProfileTabletMasterShell extends ConsumerWidget {
@@ -59,12 +64,25 @@ class ProfileTabletMasterShell extends ConsumerWidget {
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final wide =
-                    constraints.maxWidth >=
-                    TabletDashboardWidths.twoColumnMinWidth;
-                return wide
-                    ? _buildWideShell(snapshotAsync)
-                    : _buildNarrowShell(snapshotAsync);
+                final width = constraints.maxWidth;
+                if (width >= TabletDashboardWidths.twoColumnMinWidth) {
+                  return _buildSplitShell(
+                    snapshotAsync,
+                    masterWidth: TabletDashboardWidths.secondaryColumnMaxWidth,
+                    maxBlockWidth:
+                        TabletDashboardWidths.primaryColumnMaxWidth +
+                        TabletDashboardWidths.secondaryColumnMaxWidth +
+                        TabletDashboardWidths.columnGutter,
+                  );
+                }
+                if (width >= TabletDashboardWidths.masterDetailSplitMinWidth) {
+                  return _buildSplitShell(
+                    snapshotAsync,
+                    masterWidth:
+                        TabletDashboardWidths.masterDetailNarrowMasterWidth,
+                  );
+                }
+                return _buildNarrowShell(snapshotAsync);
               },
             ),
           ),
@@ -73,42 +91,49 @@ class ProfileTabletMasterShell extends ConsumerWidget {
     );
   }
 
-  Widget _buildWideShell(AsyncValue<ProfileSnapshot> snapshotAsync) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth:
-              TabletDashboardWidths.primaryColumnMaxWidth +
-              TabletDashboardWidths.secondaryColumnMaxWidth +
-              TabletDashboardWidths.columnGutter,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: TabletDashboardWidths.outerHorizontalMargin,
-            vertical: TabletDashboardWidths.blockVerticalGap,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                width: TabletDashboardWidths.secondaryColumnMaxWidth,
-                child: _masterColumn(snapshotAsync),
-              ),
-              const SizedBox(width: TabletDashboardWidths.columnGutter),
-              Expanded(child: navigationShell),
-            ],
-          ),
-        ),
+  /// The split composition shared by both split tiers: framed master
+  /// column of [masterWidth] + gutter + detail [Expanded]. [maxBlockWidth]
+  /// caps and centers the pair on the wide tier (R8); the portrait tier
+  /// passes null — its width is already the viewport's, and centering a
+  /// 704dp block would only add dead margins around a split that should
+  /// fill edge to edge.
+  Widget _buildSplitShell(
+    AsyncValue<ProfileSnapshot> snapshotAsync, {
+    required double masterWidth,
+    double? maxBlockWidth,
+  }) {
+    Widget block = Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: TabletDashboardWidths.outerHorizontalMargin,
+        vertical: TabletDashboardWidths.blockVerticalGap,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(width: masterWidth, child: _masterColumn(snapshotAsync)),
+          const SizedBox(width: TabletDashboardWidths.columnGutter),
+          Expanded(child: navigationShell),
+        ],
       ),
     );
+    if (maxBlockWidth != null) {
+      block = Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxBlockWidth),
+          child: block,
+        ),
+      );
+    }
+    return block;
   }
 
   Widget _buildNarrowShell(AsyncValue<ProfileSnapshot> snapshotAsync) {
-    // Single-column fallback. The hub route stacks the menu above the
-    // overview pane (each independently scrollable, bounded by its own
-    // Expanded); a sub-route takes the full width and relies on its pane's
-    // own back header to return — beside a 400px menu there would be no
-    // usable detail height left below the tablet threshold.
+    // Single-column fallback — only below masterDetailSplitMinWidth
+    // (window-resize territory; real tablets keep the split even in
+    // portrait). The hub route stacks the menu above the overview pane
+    // (each independently scrollable, bounded by its own Expanded); a
+    // sub-route takes the full width and relies on its pane's own back
+    // header to return.
     final onHubRoute = currentPath == AppRoutePaths.profile;
     if (!onHubRoute) {
       return Padding(

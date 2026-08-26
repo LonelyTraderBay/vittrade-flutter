@@ -262,15 +262,59 @@ void main() {
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
       expect(find.byType(VitHeaderActionButton), findsNothing);
 
-      // Narrow fallback: the menu is stacked away, so the pane header must
-      // carry its own back action to return to the overview.
+      // Portrait split tier (820 screen = 724 shell ≥ 680): the shell keeps
+      // the narrow 320 master BESIDE the pane — still no back arrow.
       await pumpTabletProfile(tester);
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+      expect(find.byType(VitHeaderActionButton), findsNothing);
+
+      // Stacked fallback (<680): the menu is stacked away, so the pane
+      // header must carry its own back action to return to the overview.
+      await pumpTabletProfile(tester, size: const Size(700, 900));
       await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
       await tester.pumpAndSettle();
 
       expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsNothing);
       expect(find.byType(VitHeaderActionButton), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 portrait split: an 820dp tablet keeps the framed menu beside '
+    'the pane instead of stacking or full-page pushes',
+    (tester) async {
+      // iPad-Settings portrait semantics (2026-08-27): between
+      // masterDetailSplitMinWidth (680) and twoColumnMinWidth (900) the
+      // shell splits with the narrow 320 master — rotation changes sizes,
+      // never the composition. Opening a pane must NOT swap to a full-page
+      // push that hides the menu.
+      await pumpTabletProfile(tester, size: const Size(820, 1180));
+
+      final menuBefore = find.byKey(ProfileTabletKeys.masterMenu);
+      expect(menuBefore, findsOneWidget);
+      final menuBeforeTop = tester.getTopLeft(menuBefore).dy;
+
+      await tester.tap(find.byKey(ProfileTabletKeys.menu('kyc')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.kycPane), findsOneWidget);
+      final menu = find.byKey(ProfileTabletKeys.masterMenu);
+      expect(menu, findsOneWidget);
+
+      // Same row, not stacked: the framed menu's top stays at the block's
+      // top beside the pane, and the pane content starts to the RIGHT of
+      // the menu's trailing edge.
+      expect(tester.getTopLeft(menu).dy, closeTo(menuBeforeTop, 1));
+      final menuRight = tester.getTopRight(menu).dx;
+      final paneLeft = tester
+          .getTopLeft(find.byKey(ProfileTabletKeys.kycPane))
+          .dx;
+      expect(paneLeft, greaterThan(menuRight));
     },
   );
 
@@ -412,10 +456,11 @@ void main() {
     'SC-156 master-detail narrow fallback: a pane takes the full width and '
     'its header back returns to the overview',
     (tester) async {
-      // Portrait tablet below the master-detail threshold: the hub stacks
-      // the menu above the overview; a sub-route pane goes full-width with
-      // its own back header (the menu column would leave no usable height).
-      await pumpTabletProfile(tester);
+      // Below the portrait SPLIT threshold (window-resize territory — real
+      // tablets keep the split even in portrait): the hub stacks the menu
+      // above the overview; a sub-route pane goes full-width with its own
+      // back header (the menu column would leave no usable height).
+      await pumpTabletProfile(tester, size: const Size(700, 900));
 
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
 
