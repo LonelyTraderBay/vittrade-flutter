@@ -171,12 +171,37 @@ void main() {
   );
 
   testWidgets(
-    'SC-008 narrow tablet stacks the master list above the overview pane '
-    'without overflow',
+    'SC-008 portrait split keeps the master list beside the overview pane '
+    '(no stacking, no full-page push)',
     (tester) async {
-      // Portrait tablet below the 900 threshold — the shell's own
-      // single-column fallback (master flex5 above overview flex6).
+      // iPad-Settings portrait semantics (2026-08-27): between
+      // masterDetailSplitMinWidth (680) and twoColumnMinWidth (900) the
+      // shell keeps the split with the narrow 320 master — rotation
+      // changes sizes, never the composition.
       await pumpTabletMarkets(tester, size: const Size(820, 1180));
+
+      expect(tester.takeException(), isNull);
+      expect(find.byType(MarketsMasterList), findsOneWidget);
+      expect(find.byKey(MarketsTabletKeys.pulseStrip), findsOneWidget);
+      // Master sits BESIDE the overview: the search bar starts to the
+      // left of the pane's pulse strip.
+      expect(
+        tester.getTopLeft(find.byKey(MarketsTabletKeys.search)).dx,
+        lessThan(
+          tester.getTopLeft(find.byKey(MarketsTabletKeys.pulseStrip)).dx,
+        ),
+      );
+    },
+  );
+
+  testWidgets(
+    'SC-008 stacked fallback below the split threshold stacks the master '
+    'list above the overview pane without overflow',
+    (tester) async {
+      // Below the portrait split threshold (window-resize territory —
+      // real tablets keep the split even in portrait): the shell's own
+      // single-column fallback (master flex5 above overview flex6).
+      await pumpTabletMarkets(tester, size: const Size(700, 900));
 
       expect(tester.takeException(), isNull);
       expect(find.byType(MarketsMasterList), findsOneWidget);

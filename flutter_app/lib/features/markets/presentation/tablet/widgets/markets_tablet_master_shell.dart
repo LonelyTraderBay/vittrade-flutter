@@ -21,12 +21,17 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// [StatefulNavigationShell]. Navigation vẫn là `context.go` thường nên
 /// deep link và nút back hệ thống hoạt động y như trước.
 ///
-/// Widths theo idiom đã kiểm chứng của tablet standard (R4–R8): tại/ngưỡng
-/// [TabletDashboardWidths.twoColumnMinWidth] thì cặp master/detail được cap
-/// và căn giữa thành một khối (master cố định 400 + detail Expanded); dưới
-/// ngưỡng shell rơi về một cột — hub xếp master trên overview pane, sub-route
-/// chiếm toàn chiều rộng (pane tự có back header). Shell sở hữu header cố
-/// định (R9); panes không tự render top chrome.
+/// Widths theo idiom đã kiểm chứng của tablet standard (R4–R8), chia 3
+/// tầng: tại/ngưỡng [TabletDashboardWidths.twoColumnMinWidth] thì cặp
+/// master/detail được cap và căn giữa thành một khối (master cố định 400 +
+/// detail Expanded); giữa [TabletDashboardWidths.masterDetailSplitMinWidth]
+/// và ngưỡng đó — tablet portrait thật — shell VẪN GIỮ split với master
+/// hẹp 320 (iPad-Settings portrait semantics: xoay chỉ relayout kích
+/// thước, không đổi composition, không đổi sang full-page push); dưới
+/// ngưỡng split (khi resize cửa sổ) shell rơi về một cột — hub xếp master
+/// trên overview pane, sub-route chiếm toàn chiều rộng (pane tự có back
+/// header). Shell sở hữu header cố định (R9); panes không tự render top
+/// chrome.
 class MarketsTabletMasterShell extends ConsumerWidget {
   const MarketsTabletMasterShell({
     super.key,
@@ -59,12 +64,29 @@ class MarketsTabletMasterShell extends ConsumerWidget {
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final wide =
-                    constraints.maxWidth >=
-                    TabletDashboardWidths.twoColumnMinWidth;
-                return wide
-                    ? _buildWideShell(context, ref, snapshotAsync)
-                    : _buildNarrowShell(context, ref, snapshotAsync);
+                final width = constraints.maxWidth;
+                if (width >= TabletDashboardWidths.twoColumnMinWidth) {
+                  return _buildSplitShell(
+                    context,
+                    ref,
+                    snapshotAsync,
+                    masterWidth: TabletDashboardWidths.secondaryColumnMaxWidth,
+                    maxBlockWidth:
+                        TabletDashboardWidths.primaryColumnMaxWidth +
+                        TabletDashboardWidths.secondaryColumnMaxWidth +
+                        TabletDashboardWidths.columnGutter,
+                  );
+                }
+                if (width >= TabletDashboardWidths.masterDetailSplitMinWidth) {
+                  return _buildSplitShell(
+                    context,
+                    ref,
+                    snapshotAsync,
+                    masterWidth:
+                        TabletDashboardWidths.masterDetailNarrowMasterWidth,
+                  );
+                }
+                return _buildNarrowShell(context, ref, snapshotAsync);
               },
             ),
           ),
@@ -73,38 +95,43 @@ class MarketsTabletMasterShell extends ConsumerWidget {
     );
   }
 
-  Widget _buildWideShell(
+  /// Composition split dùng chung cho cả 2 tầng split: cột master khung
+  /// [masterWidth] + gutter + detail [Expanded]. [maxBlockWidth] cap và căn
+  /// giữa cặp ở tầng wide (R8); tầng portrait truyền null — width đã là
+  /// viewport, căn giữa khối ~704dp chỉ thêm dead margin hai bên.
+  Widget _buildSplitShell(
     BuildContext context,
     WidgetRef ref,
-    AsyncValue<MarketListSnapshot> snapshotAsync,
-  ) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth:
-              TabletDashboardWidths.primaryColumnMaxWidth +
-              TabletDashboardWidths.secondaryColumnMaxWidth +
-              TabletDashboardWidths.columnGutter,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: TabletDashboardWidths.outerHorizontalMargin,
-            vertical: TabletDashboardWidths.blockVerticalGap,
+    AsyncValue<MarketListSnapshot> snapshotAsync, {
+    required double masterWidth,
+    double? maxBlockWidth,
+  }) {
+    Widget block = Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: TabletDashboardWidths.outerHorizontalMargin,
+        vertical: TabletDashboardWidths.blockVerticalGap,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            width: masterWidth,
+            child: _masterColumn(context, ref, snapshotAsync),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                width: TabletDashboardWidths.secondaryColumnMaxWidth,
-                child: _masterColumn(context, ref, snapshotAsync),
-              ),
-              const SizedBox(width: TabletDashboardWidths.columnGutter),
-              Expanded(child: navigationShell),
-            ],
-          ),
-        ),
+          const SizedBox(width: TabletDashboardWidths.columnGutter),
+          Expanded(child: navigationShell),
+        ],
       ),
     );
+    if (maxBlockWidth != null) {
+      block = Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxBlockWidth),
+          child: block,
+        ),
+      );
+    }
+    return block;
   }
 
   Widget _buildNarrowShell(
@@ -112,10 +139,12 @@ class MarketsTabletMasterShell extends ConsumerWidget {
     WidgetRef ref,
     AsyncValue<MarketListSnapshot> snapshotAsync,
   ) {
-    // Single-column fallback. Hub route xếp master list trên overview pane
-    // (mỗi phần tự scroll, bounded bởi Expanded riêng); sub-route chiếm toàn
-    // chiều rộng và dựa vào back header của pane để quay lại — cạnh một menu
-    // 400px sẽ không còn chiều cao đủ dùng cho detail dưới ngưỡng tablet.
+    // Single-column fallback — chỉ dưới masterDetailSplitMinWidth (khi
+    // resize cửa sổ; tablet thật giữ split cả portrait). Hub route xếp
+    // master list trên overview pane (mỗi phần tự scroll, bounded bằng
+    // Expanded riêng); sub-route chiếm toàn chiều rộng và dựa vào back
+    // header của pane để quay lại — cạnh một menu 400px sẽ không còn
+    // chiều cao đủ dùng cho detail.
     final onHubRoute = currentPath == AppRoutePaths.markets;
     if (!onHubRoute) {
       return Padding(

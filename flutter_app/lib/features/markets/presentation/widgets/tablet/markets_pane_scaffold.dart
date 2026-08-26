@@ -64,13 +64,16 @@ class MarketsPaneScaffold extends StatelessWidget {
           Builder(
             builder: (context) {
               // Back chỉ cần nơi master list không còn nằm kề pane — do
-              // độ RỘNG CỦA SHELL quyết định (màn hình trừ nav rail), không
-              // phải độ rộng cột pane: trên tablet 1280dp pane chỉ ~720dp
-              // (< twoColumnMinWidth) nhưng shell vẫn render master list
-              // kề nó, mũi tên back ở đó trùng lặp với danh sách luôn hiện.
+              // độ RỘNG CỦA SHELL quyết định (màn hình trừ nav rail) đối
+              // chiếu với ngưỡng SPLIT của master-detail, không phải độ
+              // rộng cột pane: cả hai tầng split (wide ≥900 căn giữa,
+              // portrait 680–899 với master hẹp 320) đều giữ master list
+              // kề pane, mũi tên back ở đó trùng lặp với danh sách luôn
+              // hiện; chỉ tầng stacked fallback dưới ngưỡng split render
+              // pane toàn chiều rộng cần đường quay lại riêng.
               final narrow =
                   MediaQuery.sizeOf(context).width - VitNavigationRail.width <
-                  TabletDashboardWidths.twoColumnMinWidth;
+                  TabletDashboardWidths.masterDetailSplitMinWidth;
               return VitHeader(
                 title: headerTitle,
                 subtitle: subtitle,
