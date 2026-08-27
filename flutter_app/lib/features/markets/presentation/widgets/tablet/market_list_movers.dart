@@ -24,9 +24,13 @@ class MarketListTopMovers extends StatelessWidget {
     final losers = pairs.where((pair) => pair.change24h < 0).toList()
       ..sort((a, b) => a.change24h.compareTo(b.change24h));
 
-    // card-tile: allow-start — fixed surface, not horizontal strip tile
+    // card-tile: allow-start — fixed surface, not horizontal strip tile.
+    // Bar cao control (34dp) — radius theo role là tight 8, không phải
+    // standard 16: 16/34 ≈ pill tròn mắt trong khi card nội dung cao hơn
+    // cùng 16 trông vuông hơn (Chuẩn Card-Border, role control surface).
     return VitCard(
       height: _marketMoverStripHeight,
+      radius: VitCardRadius.tight,
       padding: _marketMoverStripPadding,
       child: Row(
         children: [

@@ -90,7 +90,12 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
                 innerGap: AppSpacing.pageRhythmCompactInnerGap,
                 children: [MarketListTools(onNavigate: _go, tablet: true)],
               ),
-              const MarketListDiscoverMoreSection(),
+              const VitPageSection(
+                label: 'Lối tắt từ Markets',
+                headerVariant: VitSectionHeaderVariant.plain,
+                innerGap: AppSpacing.pageRhythmCompactInnerGap,
+                children: [MarketListDiscoverMoreSection()],
+              ),
             ],
           ),
         ),

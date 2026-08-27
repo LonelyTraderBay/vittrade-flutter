@@ -23,6 +23,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 
 part 'markets_pair_detail_pane_sections.dart';
+part 'markets_pair_detail_pane_tables.dart';
 
 /// Ba khung nhìn của pane phân tích cặp — mirror `_PairView` của trang
 /// Phone, đặt public để test tablet khóa theo key chuỗi.

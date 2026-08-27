@@ -15,45 +15,36 @@ class MarketListDiscoverMoreSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const VitSectionHeader(
-          title: 'Lối tắt từ Markets',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
-          variant: VitSectionHeaderVariant.accentBar,
-          accentColor: marketListPredictionAccent,
-        ),
-        VitCard(
-          clip: true,
-          padding: AppSpacing.zeroInsets,
-          child: Column(
-            children: [
-              _DiscoverRow(
-                icon: Icons.gps_fixed_rounded,
-                title: 'Dự đoán thị trường',
-                subtitle: 'Lối tắt từ Markets · Xác suất · Vị thế',
-                badge: 'Lối tắt',
-                color: marketListPredictionAccent,
-                onTap: () => context.go(AppRoutePaths.marketsPredictions),
-              ),
-              const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
-                color: AppColors.divider,
-              ),
-              _DiscoverRow(
-                icon: Icons.sports_esports_outlined,
-                title: 'Open Arena',
-                subtitle: 'Lối tắt từ Markets · ưu tiên Home · Điểm Arena',
-                badge: 'Lối tắt',
-                color: marketListArenaAccent,
-                onTap: () => context.go(AppRoutePaths.arena),
-              ),
-            ],
+    // Section header do trang sở hữu (VitPageSection ở markets_tablet_page)
+    // — mọi section của pane tổng quan dùng một idiom header duy nhất.
+    return VitCard(
+      clip: true,
+      padding: AppSpacing.zeroInsets,
+      child: Column(
+        children: [
+          _DiscoverRow(
+            icon: Icons.gps_fixed_rounded,
+            title: 'Dự đoán thị trường',
+            subtitle: 'Lối tắt từ Markets · Xác suất · Vị thế',
+            badge: 'Lối tắt',
+            color: marketListPredictionAccent,
+            onTap: () => context.go(AppRoutePaths.marketsPredictions),
           ),
-        ),
-      ],
+          const Divider(
+            height: AppSpacing.dividerHairline,
+            thickness: AppSpacing.dividerHairline,
+            color: AppColors.divider,
+          ),
+          _DiscoverRow(
+            icon: Icons.sports_esports_outlined,
+            title: 'Open Arena',
+            subtitle: 'Lối tắt từ Markets · ưu tiên Home · Điểm Arena',
+            badge: 'Lối tắt',
+            color: marketListArenaAccent,
+            onTap: () => context.go(AppRoutePaths.arena),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -86,9 +77,11 @@ class _DiscoverRow extends StatelessWidget {
           child: Row(
             children: [
               Material(
+                // Surface lồng trong card 16 — quy tắc khung lồng: radius con
+                // = radius cha − 8 ⇒ smRadius (mdRadius còn deprecated).
                 color: color.withValues(alpha: 0.12),
                 shape: const RoundedRectangleBorder(
-                  borderRadius: AppRadii.mdRadius,
+                  borderRadius: AppRadii.smRadius,
                 ),
                 child: SizedBox(
                   width: MarketsSpacingTokens.marketDiscoverIconBox,

@@ -286,7 +286,7 @@ class _InfoRow extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(row.icon, size: 14, color: row.iconColor),
+              Icon(row.icon, size: AppSpacing.iconSm, color: row.iconColor),
               const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
               Expanded(
                 child: Text(

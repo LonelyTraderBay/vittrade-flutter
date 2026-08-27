@@ -143,7 +143,7 @@ class MarketsTabletMasterShell extends ConsumerWidget {
     // resize cửa sổ; tablet thật giữ split cả portrait). Hub route xếp
     // master list trên overview pane (mỗi phần tự scroll, bounded bằng
     // Expanded riêng); sub-route chiếm toàn chiều rộng và dựa vào back
-    // header của pane để quay lại — cạnh một menu 400px sẽ không còn
+    // header của pane để quay lại — cạnh một menu 308dp sẽ không còn
     // chiều cao đủ dùng cho detail.
     final onHubRoute = currentPath == AppRoutePaths.markets;
     if (!onHubRoute) {

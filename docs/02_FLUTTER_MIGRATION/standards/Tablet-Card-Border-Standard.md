@@ -1,7 +1,7 @@
 # Tablet Card & Border Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Tokens · [AGENTS.md](../../../AGENTS.md) UI rules · [Tablet-Adaptive-Standard.md](./Tablet-Adaptive-Standard.md)
-**Enforcement:** `dart run tool/tablet_card_border_audit.dart --check` · `test/quality/tablet_card_border_guardrail_test.dart` (ratchet baseline `test/quality/tablet_card_border_baseline.txt`)
+**Enforcement:** `dart run tool/tablet_card_border_audit.dart --check` · `test/quality/tablet_card_border_guardrail_test.dart` (ratchet baseline `test/quality/tablet_card_border_baseline.txt` — R1–R4 absolute, R5 ratchet)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet` — shared tablet scaffolds included). The `lib/app/theme/` token layer is **exempt**: it is the sanctioned home for BorderSide color tokens (`app_tablet_theme_extension.dart`), the way `app_radii.dart` owns radii. Phone surface keeps its current rules; a later phase may adopt this standard repo-wide.
 **Born:** 2026-08-22 — after the Profile master-detail rollout exposed unregulated border drift (see "Why this standard exists").
 
@@ -31,6 +31,8 @@ Every card-shaped frame on the tablet surface is a `VitCard` (`lib/shared/widget
 
 - Pick the tier by the card's **role in the layout**, not by how round you feel like making it.
 - Never introduce a fourth tier or a numeric radius; `BorderRadius.circular()` stays at zero everywhere in lib/ (locked, no baseline).
+- **A `VitCard` that fixes its own `height:` is a control surface, not a content card → `tight`.** Machine-enforced since 2026-08-27 as **R5-fixed-height-card** (the movers-strip bug: a 34dp bar at `standard` 16 reads as a pill — 16/34 ≈ half the height — next to taller sibling cards at the same 16). Declaring `radius: VitCardRadius.tight` on fixed-height cards is the only passing state; 5 legacy wallet tiles are pinned in the baseline and migrate on touch.
+- **Deprecated radius tokens stay dead**: `AppRadii.mdRadius` / `xsRadius` / `headerActionRadius` must not appear in tablet files (**R4-deprecated-radius**, absolute — they predate this standard; `cardRadius`/`smRadius` are the sanctioned pair).
 
 ## Rule 3 — Border color follows the variant default; tint only through the 3-step scale
 
@@ -68,6 +70,8 @@ To keep inner frames from crowding or visually "cutting" the content of their pa
 | Private color (`_paneAccent`) only used for a border | Border color must trace to a semantic token |
 | `Container(decoration: BoxDecoration(border: Border.all(...)))` in tablet UI | Bypasses VitCard variant/audit surface |
 | Same role, different radius per page | Radius is role-based (Rule 2) |
+| `VitCard(height: 34)` on default `standard` radius | 16/34 ≈ pill — fixed height means control surface → `tight` (R5) |
+| `AppRadii.mdRadius` in tablet code | @Deprecated token — use `cardRadius`/`smRadius` (R4) |
 | Inner card radius == parent radius | Breaks concentric nesting (Rule 4) |
 | Shrinking card padding to fit a border in | Border never crowds content (Rule 4) |
 | Copying a pane's border recipe to a new pane | This standard is the recipe |
@@ -82,8 +86,10 @@ To keep inner frames from crowding or visually "cutting" the content of their pa
 
 ## Enforcement & ratchet
 
-- **R1 raw-border** and **R2 ad-hoc tint** reached **zero on 2026-08-23** (the last 10 tint debts were mapped onto the sanctioned scale in one sweep: `≤.20 → .12` · `.21–.28 → .22` · `≥.32 → .34`) — the baseline file is now **empty** and any new violation fails CI outright, same absolute lock as the spacing standard. The baseline file itself is kept (empty) so the ratchet plumbing stays in place; it must never gain entries again.
+- **R1 raw-border** and **R2 ad-hoc tint** reached **zero on 2026-08-23** (the last 10 tint debts were mapped onto the sanctioned scale in one sweep: `≤.20 → .12` · `.21–.28 → .22` · `≥.32 → .34`) — any new violation fails CI outright, same absolute lock as the spacing standard.
 - **R3 literal radius** has **zero tolerance** (no baseline — lib/ is already clean and stays clean).
+- **R4-deprecated-radius** (added 2026-08-27): absolute zero — `mdRadius`/`xsRadius`/`headerActionRadius` banned from tablet files.
+- **R5-fixed-height-card** (added 2026-08-27): a `VitCard` fixing its own `height:` must declare `radius: VitCardRadius.tight`. The baseline holds **5 legacy wallet tiles** (network-status ×4, transaction-history ×1) pinned on 2026-08-27 — migrate on touch, never add. The scanner reads only the card's own top-level `height:` argument, so a `SizedBox(height:)` buried in the child subtree never trips it.
 - The audit artifact (`VitTrade-Tablet-Card-Border-Audit.csv`) must stay current, same as the other audit tools.
 
 ## Verify

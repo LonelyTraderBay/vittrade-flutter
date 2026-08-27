@@ -23,6 +23,10 @@ final _borderColorTintRe = RegExp(
 final _literalRadiusRe = RegExp(
   r'BorderRadius\.circular\(|\bRadius\.circular\(',
 );
+final _deprecatedRadiusRe = RegExp(
+  r'AppRadii\.(mdRadius|xsRadius|headerActionRadius)\b',
+);
+final _vitCardStartRe = RegExp(r'\bVitCard\s*\(');
 
 void main() {
   test('tablet card border debt only shrinks (ratchet vs baseline)', () {
@@ -81,10 +85,10 @@ Set<String> _scanViolations() {
     if (normalized.contains('/app/theme/')) continue;
 
     final lines = entity.readAsLinesSync();
+    final rel = normalized.replaceFirst('lib/', '');
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       if (line.trimLeft().startsWith('//')) continue;
-      final rel = normalized.replaceFirst('lib/', '');
       if (_rawBorderRe.hasMatch(line)) {
         violations.add('$rel|${i + 1}|R1-raw-border');
         continue;
@@ -98,10 +102,91 @@ Set<String> _scanViolations() {
       }
       if (_literalRadiusRe.hasMatch(line)) {
         violations.add('$rel|${i + 1}|R3-literal-radius');
+        continue;
       }
+      if (_deprecatedRadiusRe.hasMatch(line)) {
+        violations.add('$rel|${i + 1}|R4-deprecated-radius');
+      }
+    }
+
+    // R5 — VitCard tự cố định height ⇒ phải khai báo radius tight.
+    final content = entity.readAsStringSync();
+    for (final match in _vitCardStartRe.allMatches(content)) {
+      final openParen = content.indexOf('(', match.start);
+      final closeParen = _matchingParen(content, openParen);
+      if (closeParen < 0) continue;
+      final args = _topLevelArgs(content.substring(openParen + 1, closeParen));
+      if (!args.any((a) => a.startsWith('height:'))) continue;
+      String? radiusArg;
+      for (final a in args) {
+        if (a.startsWith('radius:')) {
+          radiusArg = a;
+          break;
+        }
+      }
+      if (radiusArg != null && radiusArg.contains('VitCardRadius.tight')) {
+        continue;
+      }
+      final lineNo =
+          '\n'.allMatches(content.substring(0, match.start)).length + 1;
+      violations.add('$rel|$lineNo|R5-fixed-height-card');
     }
   }
   return violations;
+}
+
+int _matchingParen(String text, int open) {
+  var depth = 0;
+  var inStr = false;
+  var quote = ' ';
+  for (var i = open; i < text.length; i++) {
+    final c = text[i];
+    if (inStr) {
+      if (c == quote && (i == 0 || text[i - 1] != r'\')) inStr = false;
+      continue;
+    }
+    if (c == "'" || c == '"') {
+      inStr = true;
+      quote = c;
+      continue;
+    }
+    if (c == '(') depth++;
+    if (c == ')') {
+      depth--;
+      if (depth == 0) return i;
+    }
+  }
+  return -1;
+}
+
+List<String> _topLevelArgs(String body) {
+  final out = <String>[];
+  var depth = 0;
+  var start = 0;
+  var inStr = false;
+  var quote = ' ';
+  for (var i = 0; i < body.length; i++) {
+    final c = body[i];
+    if (inStr) {
+      if (c == quote && (i == 0 || body[i - 1] != r'\')) inStr = false;
+      continue;
+    }
+    if (c == "'" || c == '"') {
+      inStr = true;
+      quote = c;
+      continue;
+    }
+    if (c == '(' || c == '[' || c == '{') {
+      depth++;
+    } else if (c == ')' || c == ']' || c == '}') {
+      depth--;
+    } else if (c == ',' && depth == 0) {
+      out.add(body.substring(start, i));
+      start = i + 1;
+    }
+  }
+  out.add(body.substring(start));
+  return out.map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
 }
 
 Set<String> _loadBaseline() {

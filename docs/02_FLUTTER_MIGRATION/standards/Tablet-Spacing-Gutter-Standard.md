@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -58,6 +58,7 @@ In tablet files, every dimension must be a token reference:
 - `EdgeInsets.all(16)` / `EdgeInsets.only(top: 24)` → token-based insets (S2)
 - `thickness: 2`, `Divider(height: 1)` → `AppSpacing.dividerHairline` (S3)
 - **No element-level separator SizedBox in a rhythm-owning scaffold's children (S4, token-blind):** `ProfilePaneScaffold(children:)` and `VitTwoColumnTabletDashboard(primaryChildren:/secondaryChildren:)` wrap their children in `VitPageContent(rhythm:)`, which already inserts the section gap between every pair — a `SizedBox` standing as a direct child of those lists stacks onto it (13+13). Children stay flat; a heading/content pair with a tighter inner gap is ONE child widget (the loaded sidebar's `VitTradeSection` pattern), never two children with a SizedBox between them. The scanner checks every children argument of every scaffold occurrence and is token-blind — even a tokenized separator is a violation.
+- **Icon size must be a token (S5):** `Icon(size: 14)`-style literals were a scanner blind spot (S1–S3 cover only SizedBox/EdgeInsets/thickness) — found live in Markets token-info (14/14/15 while the scale is iconSm 13 / iconMd 21). Enforced by `test/quality/tablet_icon_size_guardrail_test.dart`: any `size:` numeric literal in a tablet file fails CI, except 4 legacy hero-status icons (auth 56/72, wallet 144) pinned in the test's exact-set baseline — migrate on touch, never add.
 
 The guardrail is **zero-tolerance with no baseline** — the surface is clean today and any new literal fails CI outright. (Token references like `AppSpacing.x5` never trip the scanner: the digit is glued to a word character.)
 
@@ -126,6 +127,7 @@ cd flutter_app
 dart run tool/tablet_spacing_audit.dart            # regenerate audit CSV
 dart run tool/tablet_spacing_audit.dart --check    # CI: artifact current
 flutter test test/quality/tablet_spacing_guardrail_test.dart --reporter=compact
+flutter test test/quality/tablet_icon_size_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_token_override_guardrail_test.dart --reporter=compact
 ```
 

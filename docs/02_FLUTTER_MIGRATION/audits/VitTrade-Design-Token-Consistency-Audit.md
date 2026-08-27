@@ -15,8 +15,8 @@ Generated from `flutter_app/tool/design_token_consistency_audit.dart`.
 generated=2026-06-12
 status_fail=1
 status_warn=20
-status_exception=108
-rows=1269
+status_exception=109
+rows=1270
 ```
 
 ## CI Baseline Gates
@@ -742,6 +742,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

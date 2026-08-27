@@ -67,7 +67,7 @@ class MarketsPaneScaffold extends StatelessWidget {
               // độ RỘNG CỦA SHELL quyết định (màn hình trừ nav rail) đối
               // chiếu với ngưỡng SPLIT của master-detail, không phải độ
               // rộng cột pane: cả hai tầng split (wide ≥900 căn giữa,
-              // portrait 680–899 với master hẹp 320) đều giữ master list
+              // portrait 680–899 với master hẹp 308) đều giữ master list
               // kề pane, mũi tên back ở đó trùng lặp với danh sách luôn
               // hiện; chỉ tầng stacked fallback dưới ngưỡng split render
               // pane toàn chiều rộng cần đường quay lại riêng.

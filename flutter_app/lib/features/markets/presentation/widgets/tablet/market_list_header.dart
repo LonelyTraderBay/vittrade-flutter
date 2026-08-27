@@ -17,21 +17,20 @@ class MarketListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitTopChrome(
       type: VitTopChromeType.rootModule,
-      title: 'Th\u1ECB tr\u01B0\u1EDDng',
-      subtitle:
-          'Theo d\u00F5i th\u1ECB tr\u01B0\u1EDDng \u00B7 C\u1EADp nh\u1EADt $lastUpdatedLabel',
+      title: 'Thị trường',
+      subtitle: 'Theo dõi thị trường · Cập nhật $lastUpdatedLabel',
       // STEP-P2.2: keep HUB chrome only — «Ngành» is ẨN (deep link / overflow).
       actions: [
         VitHeaderActionItem(
           type: VitHeaderActionType.overview,
           size: VitHeaderActionSize.sm,
-          tooltip: 'T\u1ED5ng quan th\u1ECB tr\u01B0\u1EDDng',
+          tooltip: 'Tổng quan thị trường',
           onPressed: () => onNavigate('/markets/overview'),
         ),
         VitHeaderActionItem(
           type: VitHeaderActionType.analytics,
           size: VitHeaderActionSize.sm,
-          tooltip: 'Bi\u1EBFn \u0111\u1ED9ng',
+          tooltip: 'Biến động',
           onPressed: () => onNavigate('/markets/movers'),
         ),
       ],

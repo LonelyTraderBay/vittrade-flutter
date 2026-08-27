@@ -8,15 +8,15 @@ import 'package:vit_trade_flutter/features/markets/domain/entities/market_entiti
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Full-width market-pulse banner spanning both dashboard columns (SC-008
-/// tablet, banner slot of `VitTwoColumnTabletDashboard`). Aggregates the
-/// same `snapshot.marketPairs` the pair table renders — total market cap,
-/// 24h volume, the gainers/losers split and the session's top mover on each
-/// side — so the tablet opens with a one-line market overview before the
-/// user scans the dense table below. Same KPI-strip idiom as the Home
-/// tablet's portfolio banner: horizontal metric blocks, hairline dividers,
-/// reflow to two rows below [_compactBreakpoint] (the single-column
-/// fallback width).
+/// Market-pulse banner — section mở đầu của pane tổng quan SC-008 tablet
+/// (section đầu trong danh sách children có nhịp của overview pane, terminal
+/// master-detail). Aggregates the same `snapshot.marketPairs` the pair
+/// table renders — total market cap, 24h volume, the gainers/losers split
+/// and the session's top mover on each side — so the tablet opens with a
+/// one-line market overview before the user scans the dense table below.
+/// Same KPI-strip idiom as the Home tablet's portfolio banner: horizontal
+/// metric blocks, hairline dividers, reflow to two rows below
+/// [_compactBreakpoint] (the single-column fallback width).
 class MarketsPulseStrip extends StatelessWidget {
   const MarketsPulseStrip({
     super.key,

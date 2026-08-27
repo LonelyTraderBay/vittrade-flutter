@@ -14,6 +14,14 @@
 //   R3 literal radius— `BorderRadius.circular(`/`Radius.circular(` are
 //                      forbidden outright (0 tolerance; the whole lib/ is
 //                      already at zero — keep it there).
+//   R4 deprecated    — `AppRadii.mdRadius`/`xsRadius`/`headerActionRadius`
+//                      (all @Deprecated) must not appear in tablet files.
+//   R5 fixed-height  — a `VitCard` that fixes its own `height:` is a
+//                      control surface, not a content card: radius role must
+//                      be `VitCardRadius.tight` (standard 16 on a ~34dp bar
+//                      reads as a pill — the movers-strip bug of 2026-08-27).
+//                      Legacy wallet tiles are pinned in the baseline;
+//                      migrate on touch, never add.
 //
 // Usage (from flutter_app/):
 //   dart run tool/tablet_card_border_audit.dart              # regen artifact
@@ -35,6 +43,10 @@ final _borderColorTintRe = RegExp(
 final _literalRadiusRe = RegExp(
   r'BorderRadius\.circular\(|\bRadius\.circular\(',
 );
+final _deprecatedRadiusRe = RegExp(
+  r'AppRadii\.(mdRadius|xsRadius|headerActionRadius)\b',
+);
+final _vitCardStartRe = RegExp(r'\bVitCard\s*\(');
 
 void main(List<String> args) {
   final checkOnly = args.contains('--check');
@@ -59,10 +71,10 @@ void main(List<String> args) {
     if (normalized.contains('/app/theme/')) continue;
 
     final lines = entity.readAsLinesSync();
+    final rel = normalized.replaceFirst('lib/', '');
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       if (line.trimLeft().startsWith('//')) continue;
-      final rel = normalized.replaceFirst('lib/', '');
       if (_rawBorderRe.hasMatch(line)) {
         rows.add(BorderRow(rel, i + 1, 'R1-raw-border', line.trim()));
         continue;
@@ -83,7 +95,38 @@ void main(List<String> args) {
       }
       if (_literalRadiusRe.hasMatch(line)) {
         rows.add(BorderRow(rel, i + 1, 'R3-literal-radius', line.trim()));
+        continue;
       }
+      if (_deprecatedRadiusRe.hasMatch(line)) {
+        rows.add(BorderRow(rel, i + 1, 'R4-deprecated-radius', line.trim()));
+      }
+    }
+
+    // R5 needs the whole file (a VitCard constructor spans lines, and the
+    // `height:` that matters is the card's OWN argument — never one buried
+    // in a child subtree).
+    final content = entity.readAsStringSync();
+    for (final match in _vitCardStartRe.allMatches(content)) {
+      final openParen = content.indexOf('(', match.start);
+      final closeParen = _matchingParen(content, openParen);
+      if (closeParen < 0) continue;
+      final args = _topLevelArgs(content.substring(openParen + 1, closeParen));
+      final fixesHeight = args.any((a) => a.startsWith('height:'));
+      if (!fixesHeight) continue;
+      String? radiusArg;
+      for (final a in args) {
+        if (a.startsWith('radius:')) {
+          radiusArg = a;
+          break;
+        }
+      }
+      if (radiusArg != null && radiusArg.contains('VitCardRadius.tight')) {
+        continue;
+      }
+      final lineNo =
+          '\n'.allMatches(content.substring(0, match.start)).length + 1;
+      final lineText = lines[lineNo - 1].trim();
+      rows.add(BorderRow(rel, lineNo, 'R5-fixed-height-card', lineText));
     }
   }
 
@@ -156,6 +199,65 @@ String _renderBaseline(List<BorderRow> rows) {
     buffer.writeln('${row.path}|${row.line}|${row.rule}');
   }
   return buffer.toString();
+}
+
+/// Index of the `)` matching the `(` at [open], skipping string literals;
+/// -1 when unbalanced (truncated generated code, macros…).
+int _matchingParen(String text, int open) {
+  var depth = 0;
+  var inStr = false;
+  var quote = ' ';
+  for (var i = open; i < text.length; i++) {
+    final c = text[i];
+    if (inStr) {
+      if (c == quote && (i == 0 || text[i - 1] != r'\')) inStr = false;
+      continue;
+    }
+    if (c == "'" || c == '"') {
+      inStr = true;
+      quote = c;
+      continue;
+    }
+    if (c == '(') depth++;
+    if (c == ')') {
+      depth--;
+      if (depth == 0) return i;
+    }
+  }
+  return -1;
+}
+
+/// Top-level (depth-0) named arguments of a constructor body — commas
+/// inside nested `()`/`[]`/`{}` or string literals do not split. `height:`
+/// buried in a child subtree lands at depth > 0 and is therefore ignored.
+List<String> _topLevelArgs(String body) {
+  final out = <String>[];
+  var depth = 0;
+  var start = 0;
+  var inStr = false;
+  var quote = ' ';
+  for (var i = 0; i < body.length; i++) {
+    final c = body[i];
+    if (inStr) {
+      if (c == quote && (i == 0 || body[i - 1] != r'\')) inStr = false;
+      continue;
+    }
+    if (c == "'" || c == '"') {
+      inStr = true;
+      quote = c;
+      continue;
+    }
+    if (c == '(' || c == '[' || c == '{') {
+      depth++;
+    } else if (c == ')' || c == ']' || c == '}') {
+      depth--;
+    } else if (c == ',' && depth == 0) {
+      out.add(body.substring(start, i));
+      start = i + 1;
+    }
+  }
+  out.add(body.substring(start));
+  return out.map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
 }
 
 class BorderRow {

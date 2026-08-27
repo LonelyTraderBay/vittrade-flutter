@@ -108,7 +108,7 @@ class _PriceRecordCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 14, color: color),
+              Icon(icon, size: AppSpacing.iconSm, color: color),
               const SizedBox(width: AppSpacing.x1),
               Text(
                 label,
@@ -166,8 +166,9 @@ class _ChartLink extends StatelessWidget {
             width: AppSpacing.buttonCompact,
             height: AppSpacing.buttonCompact,
             child: Material(
+              // Surface lồng trong card 16 — quy tắc khung lồng −8 ⇒ 8.
               color: AppColors.primary.withValues(alpha: 0.12),
-              borderRadius: AppRadii.cardRadius,
+              borderRadius: AppRadii.smRadius,
               child: const Icon(
                 Icons.bar_chart_rounded,
                 color: AppColors.primary,
@@ -267,7 +268,7 @@ class _OnchainTab extends StatelessWidget {
                     child: _MiniStat(
                       label: 'TVL',
                       value: f.tvl == null
-                          ? 'N/A'
+                          ? 'Không có'
                           : formatMarketCompact(f.tvl!, prefix: r'$'),
                     ),
                   ),
@@ -504,7 +505,7 @@ class _LinkRow extends StatelessWidget {
           const Icon(
             Icons.open_in_new_rounded,
             color: AppColors.text3,
-            size: 15,
+            size: AppSpacing.iconSm,
           ),
         ],
       ),

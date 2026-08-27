@@ -703,7 +703,7 @@ markets,flutter_app/lib/features/markets/presentation/widgets/research/token_inf
 markets,flutter_app/lib/features/markets/presentation/widgets/research/token_info_market_widgets.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/research/token_info_tabs_widgets.dart,standard,,0,,0,,4,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_common.dart,standard,,0,,0,,0,0,pass
-markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,standard,,0,,0,,1,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_discover.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_filters.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_header.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,standard,,0,,0,,0,0,pass
@@ -712,6 +712,7 @@ markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_mas
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart,compact,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,standard,,0,,0,,0,0,pass
