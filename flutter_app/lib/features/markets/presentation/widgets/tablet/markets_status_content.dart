@@ -128,6 +128,8 @@ class _PulseStripSkeleton extends StatelessWidget {
     return const VitCard(
       radius: VitCardRadius.standard,
       clip: true,
+      // Mirror card pulse đã load: cùng 8dp đều (CB-R7 — tường minh padding).
+      padding: EdgeInsetsDirectional.all(AppSpacing.x3),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -157,7 +159,12 @@ class _MoverStripSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(width: 140, height: AppSpacing.x4),
         SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        VitCard(child: VitSkeletonList(rows: 4)),
+        // Mirror movers strip đã load: card tight + 8dp đều.
+        VitCard(
+          radius: VitCardRadius.tight,
+          padding: EdgeInsetsDirectional.all(AppSpacing.x3),
+          child: VitSkeletonList(rows: 4),
+        ),
       ],
     );
   }
@@ -191,7 +198,12 @@ class _DiscoverSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(width: 140, height: AppSpacing.x4),
         SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-        VitCard(child: VitSkeletonList(rows: 2)),
+        // Mirror discover card đã load: khung clip zero-inset tường minh.
+        VitCard(
+          clip: true,
+          padding: AppSpacing.zeroInsets,
+          child: VitSkeletonList(rows: 2),
+        ),
       ],
     );
   }

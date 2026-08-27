@@ -61,6 +61,7 @@ To keep inner frames from crowding or visually "cutting" the content of their pa
 - **Concentric radius:** an inner card's radius must be at least **8px smaller** than its parent's (`24 → 16`, `16 → 8`). Inside a `large` hero, nest `standard` cards; inside a `standard` card, nest `tight`/`inner` surfaces — never equal radii.
 - **Inset:** an inner card keeps ≥ `AppSpacing.x3` (12px) breathing room from its parent's border on every side (the parent's default padding already provides this — do not shrink it to "reclaim" space).
 - **Content vs border:** never let text touch a tinted border — content padding comes from `VitCard`'s variant/density defaults; only *increase* it, never below the default, on cards carrying a visible border. A border is a container's edge, not a divider through content.
+- **Card padding must be explicit and role-correct (2026-08-28, machine-enforced):** `VitCard` with both `padding:` and `density:` null renders **zero** padding (the API trap behind the pulse-card "card bó sát" bug — omitting padding is not "default 8dp"). Enforced by `test/quality/tablet_card_padding_guardrail_test.dart`: **CB-R6** — a card's `padding:` must not reference child-element role tokens (`…Header…Padding` / `…Row…Padding` / `…Cell…Padding`); **CB-R7** — every VitCard must declare `padding:` or `density:` explicitly (99 legacy implicit cards across 33 files pinned by per-file count; full-bleed frames declare `padding: AppSpacing.zeroInsets`).
 
 ## Rule 5 — Anti-patterns
 
@@ -72,6 +73,8 @@ To keep inner frames from crowding or visually "cutting" the content of their pa
 | Same role, different radius per page | Radius is role-based (Rule 2) |
 | `VitCard(height: 34)` on default `standard` radius | 16/34 ≈ pill — fixed height means control surface → `tight` (R5) |
 | `AppRadii.mdRadius` in tablet code | @Deprecated token — use `cardRadius`/`smRadius` (R4) |
+| `padding: MarketsSpacingTokens.…HeaderPadding` on a VitCard | Padding của header/hàng con, không phải card — dọc 0 làm chữ chạm viền (CB-R6) |
+| VitCard không truyền `padding:` lẫn `density:` | Mặc định thật là 0, không phải 8dp (CB-R7) |
 | Inner card radius == parent radius | Breaks concentric nesting (Rule 4) |
 | Shrinking card padding to fit a border in | Border never crowds content (Rule 4) |
 | Copying a pane's border recipe to a new pane | This standard is the recipe |

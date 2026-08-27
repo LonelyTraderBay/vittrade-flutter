@@ -150,6 +150,10 @@ class VitCard extends StatelessWidget {
         children: [content],
       );
     }
+    // ⚠ CẢ HAI NULL ⇒ KHÔNG bọc Padding nào (mặc định 0, KHÔNG phải 8dp) —
+    // card có viền LUÔN truyền `padding:` hoặc `density:` tường minh
+    // (khóa bởi test/quality/tablet_card_padding_guardrail_test.dart CB-R7;
+    // bẫy gây bug pulse card 2026-08-28).
     final resolvedPadding = padding ?? density?.cardPadding;
     if (resolvedPadding != null) {
       content = Padding(padding: resolvedPadding, child: content);
