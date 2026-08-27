@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/markets/domain/entities/market_entities.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -98,7 +97,9 @@ class MarketsPulseStrip extends StatelessWidget {
       return VitCard(
         radius: VitCardRadius.standard,
         clip: true,
-        padding: MarketsSpacingTokens.marketListPairCompactHeaderPadding,
+        // Padding mặc định VitCard (8dp đều) theo vai trò card KPI — token
+        // compact-header (12/0) là của sort header bảng pair, dọc 0 làm chữ
+        // chạm viền card (Card-Border Rule 4: không dưới mặc định).
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -134,7 +135,7 @@ class MarketsPulseStrip extends StatelessWidget {
     return VitCard(
       radius: VitCardRadius.standard,
       clip: true,
-      padding: MarketsSpacingTokens.marketListPairCompactHeaderPadding,
+      // Padding mặc định VitCard — xem nhánh compact ở trên.
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
