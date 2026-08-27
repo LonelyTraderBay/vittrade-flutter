@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -61,6 +61,43 @@ In tablet files, every dimension must be a token reference:
 
 The guardrail is **zero-tolerance with no baseline** — the surface is clean today and any new literal fails CI outright. (Token references like `AppSpacing.x5` never trip the scanner: the digit is glued to a word character.)
 
+## Rule 5 — Per-surface token overrides are exceptional (the 5 conditions)
+
+The token system is **one shared set per module, never two** — there is no
+`phone_tokens.dart` / `tablet_tokens.dart` fork. Per-surface differences ride
+on three sanctioned layers, tried in this order:
+
+1. **Context tiers** — `VitDensity` / `VitPageRhythm` picked per page
+   (compact / standard / form / relaxed / flush); the same enums serve both
+   surfaces, so density changes stay page-context decisions.
+2. **Frame tokens** — `TabletDashboardWidths` owns tablet-only geometry
+   (thresholds, master width, gutters). It is a tablet namespace, not a set
+   of overrides of phone values.
+3. **Local tablet-override token** — the exception. A module spacing token
+   whose name contains `Tablet` is legitimate only when ALL five conditions
+   hold:
+
+| # | Condition |
+| --- | --- |
+| 1 | Same role on both surfaces — it overrides an existing token's value; it never introduces a new role |
+| 2 | The difference is permanent and form-factor-intrinsic, not a tuning pass |
+| 3 | Not expressible via a tier or a frame token — those levers were tried first |
+| 4 | Co-located + co-named: declared in the same module token file right next to its phone counterpart, with `Tablet` inserted into the counterpart's name (`profileMenuIconBox` → `profileMenuTabletIconBox`) |
+| 5 | A dated doc comment states the rationale and both surface values, and the guardrail baseline is bumped in the same commit |
+
+Audit snapshot (2026-08-27): **2 override tokens out of 7,034 module spacing
+tokens (~0.03%)** — `profileMenuTabletIconBox=32` / `profileMenuTabletIcon=18`
+against phone `36/20` (menu rows read better slightly smaller beside the
+308dp master column). Both are referenced exclusively from tablet files and
+their phone counterparts stay live in the mirrored phone files. Enforced by
+`test/quality/tablet_token_override_guardrail_test.dart`: co-location (T1),
+no phone-side leakage (T2), exact-set ratchet on the baseline (T3).
+
+Page-local frame constants (Rule 2) are **not** overrides and stay sanctioned;
+promote a value into `TabletDashboardWidths` before a fourth module copies it
+(the `_compactBreakpoint = 760` trio in home/markets/profile sat at the limit
+as of 2026-08-27).
+
 ## Anti-patterns
 
 | Anti-pattern | Why |
@@ -71,6 +108,8 @@ The guardrail is **zero-tolerance with no baseline** — the surface is clean to
 | New gap = nearest scale step by eye | Role decides the token (Rule 1), not eyeballing |
 | `Divider(height: 1)` literal | Should be `AppSpacing.dividerHairline` |
 | Adding a one-caller spacing token | Tokens document a *role*; one-caller literals belong in review, not the scale |
+| Forking a whole per-surface token set | Two full sets guarantee drift; differences ride tiers → frame → Rule-5 override instead |
+| `…Tablet…` token referenced from a phone file | Breaks the override pairing contract (Rule 5 T2 — leakage-guarded) |
 
 ## Recipe for new tablet UI
 
@@ -87,6 +126,7 @@ cd flutter_app
 dart run tool/tablet_spacing_audit.dart            # regenerate audit CSV
 dart run tool/tablet_spacing_audit.dart --check    # CI: artifact current
 flutter test test/quality/tablet_spacing_guardrail_test.dart --reporter=compact
+flutter test test/quality/tablet_token_override_guardrail_test.dart --reporter=compact
 ```
 
 ## Migration pointers
