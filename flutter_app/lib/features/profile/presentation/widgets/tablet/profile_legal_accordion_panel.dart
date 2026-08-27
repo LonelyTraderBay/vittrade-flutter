@@ -17,6 +17,11 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 /// phone-only — not importable outside `profile_page.dart`'s `part`
 /// family). Same searchable accordion over the 39 GOM legal/compliance
 /// routes.
+///
+/// Collapsed by default (2026-08-27): the whole compliance library renders
+/// as ONE menu row until the user opens it — the master menu stays lean
+/// while every document stays one tap away. Inside, each group also starts
+/// collapsed; searching auto-expands matches as before.
 class ProfileLegalAccordionPanel extends StatefulWidget {
   const ProfileLegalAccordionPanel({super.key});
 
@@ -28,7 +33,8 @@ class ProfileLegalAccordionPanel extends StatefulWidget {
 class _ProfileLegalAccordionPanelState
     extends State<ProfileLegalAccordionPanel> {
   final _searchController = TextEditingController();
-  final Set<String> _expandedGroupIds = {'copy'};
+  bool _panelOpen = false;
+  final Set<String> _expandedGroupIds = {};
   String _query = '';
 
   @override
@@ -69,6 +75,65 @@ class _ProfileLegalAccordionPanelState
 
   @override
   Widget build(BuildContext context) {
+    if (!_panelOpen) return _buildCollapsedRow();
+    return _buildExpandedPanel(context);
+  }
+
+  /// The lean default: one framed menu row — same card idiom as the other
+  /// menu groups — that expands the whole library on tap.
+  Widget _buildCollapsedRow() {
+    return VitCard(
+      key: ProfileTabletKeys.legalScaffold,
+      borderColor: AppColors.cardBorder,
+      density: VitDensity.compact,
+      child: Material(
+        color: AppColors.transparent,
+        child: InkWell(
+          key: ProfileTabletKeys.legalToggle,
+          onTap: () => setState(() => _panelOpen = true),
+          child: VitIconListRow(
+            minHeight: VitDensity.standard.controlHeight,
+            padding: ProfileSpacingTokens.profileMenuRowPadding,
+            gap: ProfileSpacingTokens.profileMenuGap,
+            leading: SizedBox(
+              width: ProfileSpacingTokens.profileMenuTabletIconBox,
+              height: ProfileSpacingTokens.profileMenuTabletIconBox,
+              child: Material(
+                color: AppColors.text3.withValues(alpha: .12),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: AppRadii.cardRadius,
+                ),
+                child: const Icon(
+                  Icons.folder_outlined,
+                  color: AppColors.text3,
+                  size: ProfileSpacingTokens.profileMenuTabletIcon,
+                ),
+              ),
+            ),
+            title: Text(
+              'Tài liệu tuân thủ & báo cáo',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.caption.copyWith(
+                fontWeight: AppTextStyles.bold,
+              ),
+            ),
+            subtitle: Text(
+              '${ProfileLegalCatalog.itemCount} tài liệu — mở để xem',
+              style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+            ),
+            trailing: const Icon(
+              Icons.expand_more_rounded,
+              color: AppColors.text3,
+              size: ProfileSpacingTokens.profileMenuChevron,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExpandedPanel(BuildContext context) {
     final groups = _filteredGroups;
     final totalVisible = groups.fold<int>(
       0,
@@ -87,10 +152,27 @@ class _ProfileLegalAccordionPanelState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Tài liệu tuân thủ & báo cáo',
-                  style: AppTextStyles.caption.copyWith(
-                    fontWeight: AppTextStyles.bold,
+                // Tapping the heading collapses the library back to the
+                // single menu row (same toggle as the collapsed state).
+                InkWell(
+                  key: ProfileTabletKeys.legalToggle,
+                  onTap: () => setState(() => _panelOpen = false),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Tài liệu tuân thủ & báo cáo',
+                          style: AppTextStyles.caption.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                          ),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.expand_less_rounded,
+                        color: AppColors.text3,
+                        size: ProfileSpacingTokens.profileMenuChevron,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),

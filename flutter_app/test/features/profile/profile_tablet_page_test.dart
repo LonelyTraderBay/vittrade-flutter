@@ -508,6 +508,39 @@ void main() {
   );
 
   testWidgets(
+    'SC-156 legal library stays collapsed into one menu row until opened',
+    (tester) async {
+      await pumpTabletProfile(tester, size: const Size(1180, 820));
+
+      // Collapsed by default (2026-08-27): the whole compliance library is
+      // a single framed row — no search bar, no group tiles, no documents
+      // — so the master menu stays lean.
+      expect(find.byType(ProfileLegalAccordionPanel), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.legalScaffold), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.legalSearch), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.legalGroup('copy')), findsNothing);
+
+      // Opening expands the library; groups themselves stay collapsed
+      // until individually tapped.
+      await tester.ensureVisible(find.byKey(ProfileTabletKeys.legalToggle));
+      await tester.tap(find.byKey(ProfileTabletKeys.legalToggle));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+      expect(find.byKey(ProfileTabletKeys.legalSearch), findsOneWidget);
+      expect(find.byKey(ProfileTabletKeys.legalGroup('copy')), findsOneWidget);
+
+      // Tapping the heading collapses it back to the single row.
+      await tester.tap(find.byKey(ProfileTabletKeys.legalToggle));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(ProfileTabletKeys.legalSearch), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.legalGroup('copy')), findsNothing);
+      expect(find.byKey(ProfileTabletKeys.legalScaffold), findsOneWidget);
+    },
+  );
+
+  testWidgets(
     'SC-156 master-detail keeps the legal accordion in the framed master '
     'menu, not in the overview pane',
     (tester) async {

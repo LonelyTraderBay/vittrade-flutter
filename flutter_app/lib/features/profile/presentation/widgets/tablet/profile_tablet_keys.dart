@@ -24,6 +24,7 @@ final class ProfileTabletKeys {
   static const productHub = Key('sc156_profile_product_hub');
   static const kycBanner = Key('sc156_profile_kyc_banner');
   static const legalScaffold = Key('sc156_profile_legal_scaffold');
+  static const legalToggle = Key('sc156_profile_legal_toggle');
   static const legalSearch = Key('sc156_profile_legal_search');
 
   // KYC detail pane (SC-159 tablet port).

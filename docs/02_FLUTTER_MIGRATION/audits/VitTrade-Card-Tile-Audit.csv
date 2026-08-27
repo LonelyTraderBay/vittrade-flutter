@@ -754,7 +754,7 @@ profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_dev
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_edit_pane.dart,3,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart,5,0,0,C,0,0,0,pass,-
-profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,1,0,0,C,0,0,0,pass,-
+profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart,2,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_menu_panel.dart,1,0,0,E,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_product_hub_panel.dart,1,0,0,C,0,0,0,pass,-
 profile,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart,7,0,0,E,0,0,0,pass,-
