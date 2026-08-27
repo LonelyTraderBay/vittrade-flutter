@@ -97,9 +97,10 @@ class MarketsPulseStrip extends StatelessWidget {
       return VitCard(
         radius: VitCardRadius.standard,
         clip: true,
-        // Padding mặc định VitCard (8dp đều) theo vai trò card KPI — token
+        // Card KPI: 8dp đều (đồng bộ các card x3 cùng pane) — token
         // compact-header (12/0) là của sort header bảng pair, dọc 0 làm chữ
         // chạm viền card (Card-Border Rule 4: không dưới mặc định).
+        padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -135,7 +136,8 @@ class MarketsPulseStrip extends StatelessWidget {
     return VitCard(
       radius: VitCardRadius.standard,
       clip: true,
-      // Padding mặc định VitCard — xem nhánh compact ở trên.
+      // 8dp đều — xem nhánh compact ở trên.
+      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
