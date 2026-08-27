@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
@@ -476,6 +477,33 @@ void main() {
 
       expect(find.byKey(ProfileTabletKeys.accountHero), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SC-156 master menu keeps enough label zone at the 300dp master width',
+    (tester) async {
+      // masterDetailMasterWidth (308) must leave the menu rows a text zone
+      // wide enough for the longest Roboto label ("Xác minh danh tính
+      // (KYC)" ≈ 185dp at caption/bold). The widget-test font's intrinsic
+      // metrics are not Roboto's, so this asserts the REAL constrained
+      // width the paragraph renders into (master 300 − row/card paddings −
+      // icon box − gaps; the trailing chevron was dropped 2026-08-27 to
+      // hand its 34dp back to the labels — Adaptive standard rule 5).
+      for (final size in const [Size(820, 1180), Size(1180, 820)]) {
+        await pumpTabletProfile(tester, size: size);
+
+        final paragraph = tester.renderObject<RenderParagraph>(
+          find.text('Xác minh danh tính (KYC)').last,
+        );
+        expect(
+          paragraph.constraints.maxWidth,
+          greaterThanOrEqualTo(185),
+          reason:
+              'label zone too narrow at $size — widen '
+              'masterDetailMasterWidth or slim the row tokens',
+        );
+      }
     },
   );
 

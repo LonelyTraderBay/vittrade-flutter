@@ -22,8 +22,8 @@ final class TabletDashboardWidths {
   /// Minimum content width for a master-detail shell to keep its SPLIT
   /// (framed master menu beside the detail pane) below the two-column
   /// dashboard tier — the portrait tier. Between this width and
-  /// [twoColumnMinWidth] the shell splits with a narrower master column
-  /// ([masterDetailNarrowMasterWidth]) instead of stacking menu above pane:
+  /// [twoColumnMinWidth] the shell splits with the master column
+  /// ([masterDetailMasterWidth]) instead of stacking menu above pane:
   /// iPad-Settings portrait semantics, where rotation relayouts sizes but
   /// never changes the composition or swaps to full-page pushes. Below this
   /// width the shell falls back to the stacked single column down to
@@ -31,17 +31,24 @@ final class TabletDashboardWidths {
   /// in portrait still sit above it).
   ///
   /// Chosen so an 800dp-logical portrait tablet (shell = 800 − 96 rail =
-  /// 704dp) still splits: 320 master + 24 gutter + 360 detail ≈ phone-width
+  /// 704dp) still splits: 308 master + 24 gutter + 372 detail ≈ phone-width
   /// content, which every pane already renders by design (R3 threshold
   /// choice — verified per page, see the Adaptive standard).
   static const double masterDetailSplitMinWidth = 680;
 
-  /// Master (menu) column width for the portrait split tier (between
-  /// [masterDetailSplitMinWidth] and [twoColumnMinWidth]). The wide/centered
-  /// tier keeps [secondaryColumnMaxWidth] (400). Narrowed so the detail
-  /// pane keeps usable width beside it (shell − 320 − 24 gutter) while the
-  /// framed menu still fits its labels.
-  static const double masterDetailNarrowMasterWidth = 320;
+  /// The master (menu) column width for master-detail shells — ONE width
+  /// for both split tiers (wide/centered and portrait), like the iPad
+  /// Settings sidebar: the menu reads the same whichever way the tablet is
+  /// held, and every dp taken off it is handed straight to the detail pane
+  /// (the wide tier's pair cap stays 1224, so narrowing the master widens
+  /// the pane instead of adding dead margins). 300 fits the longest menu
+  /// label ("Xác minh danh tính (KYC)") un-ellipsized at the current row
+  /// tokens (verified by a TextPainter measurement test — don't lower
+  /// without re-running it); the wide tier previously borrowed
+  /// [secondaryColumnMaxWidth] (400) and portrait used 320 (2026-08-27
+  /// user request to slim the menu and maximize the pane on both
+  /// orientations).
+  static const double masterDetailMasterWidth = 308;
 
   /// Caps the primary (main-content) column's own width on wide
   /// tablets/landscape so rows and cards built for phone-width content

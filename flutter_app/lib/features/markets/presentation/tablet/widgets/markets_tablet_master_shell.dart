@@ -23,11 +23,12 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 ///
 /// Widths theo idiom đã kiểm chứng của tablet standard (R4–R8), chia 3
 /// tầng: tại/ngưỡng [TabletDashboardWidths.twoColumnMinWidth] thì cặp
-/// master/detail được cap và căn giữa thành một khối (master cố định 400 +
-/// detail Expanded); giữa [TabletDashboardWidths.masterDetailSplitMinWidth]
-/// và ngưỡng đó — tablet portrait thật — shell VẪN GIỮ split với master
-/// hẹp 320 (iPad-Settings portrait semantics: xoay chỉ relayout kích
-/// thước, không đổi composition, không đổi sang full-page push); dưới
+/// master/detail được cap và căn giữa thành một khối (master cố định 308 +
+/// detail Expanded — cap giữ 1224 nên menu gộm lại trao width cho pane);
+/// giữa [TabletDashboardWidths.masterDetailSplitMinWidth] và ngưỡng đó —
+/// tablet portrait thật — shell VẪN GIỮ split với cùng master 308
+/// (iPad-Settings portrait semantics: xoay chỉ relayout kích thước, không
+/// đổi composition, không đổi sang full-page push); dưới
 /// ngưỡng split (khi resize cửa sổ) shell rơi về một cột — hub xếp master
 /// trên overview pane, sub-route chiếm toàn chiều rộng (pane tự có back
 /// header). Shell sở hữu header cố định (R9); panes không tự render top
@@ -70,7 +71,7 @@ class MarketsTabletMasterShell extends ConsumerWidget {
                     context,
                     ref,
                     snapshotAsync,
-                    masterWidth: TabletDashboardWidths.secondaryColumnMaxWidth,
+                    masterWidth: TabletDashboardWidths.masterDetailMasterWidth,
                     maxBlockWidth:
                         TabletDashboardWidths.primaryColumnMaxWidth +
                         TabletDashboardWidths.secondaryColumnMaxWidth +
@@ -82,8 +83,7 @@ class MarketsTabletMasterShell extends ConsumerWidget {
                     context,
                     ref,
                     snapshotAsync,
-                    masterWidth:
-                        TabletDashboardWidths.masterDetailNarrowMasterWidth,
+                    masterWidth: TabletDashboardWidths.masterDetailMasterWidth,
                   );
                 }
                 return _buildNarrowShell(context, ref, snapshotAsync);

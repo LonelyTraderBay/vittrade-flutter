@@ -115,11 +115,10 @@ class _MenuRow extends StatelessWidget {
                         : Color(item.subtitleHex!),
                   ),
                 ),
-          trailing: const Icon(
-            Icons.chevron_right_rounded,
-            color: AppColors.text3,
-            size: ProfileSpacingTokens.profileMenuChevron,
-          ),
+          // No trailing chevron — iPad-Settings sidebar semantics: the
+          // menu list itself is the affordance, and dropping the chevron
+          // hands its 34dp (icon + gap) back to the labels so the slim
+          // 300dp master keeps every label un-ellipsized.
         ),
       ),
     );

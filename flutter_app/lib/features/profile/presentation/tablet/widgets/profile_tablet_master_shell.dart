@@ -26,11 +26,12 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 ///
 /// Widths follow the tablet standard's proven idioms (R4–R8), in three
 /// tiers: at/above [TabletDashboardWidths.twoColumnMinWidth] the
-/// menu/detail pair is capped and centered as one block (master fixed 400 +
-/// detail Expanded), mirroring `VitTwoColumnTabletDashboard`'s outer cap;
-/// between [TabletDashboardWidths.masterDetailSplitMinWidth] and that tier
-/// — real-tablet portrait — the shell KEEPS the split with a narrower
-/// master column (320), iPad-Settings portrait semantics, so rotation
+/// menu/detail pair is capped and centered as one block (master fixed 308 +
+/// detail Expanded — the cap stays 1224, so the slim menu hands its width
+/// straight to the pane), mirroring `VitTwoColumnTabletDashboard`'s outer
+/// cap; between [TabletDashboardWidths.masterDetailSplitMinWidth] and that
+/// tier — real-tablet portrait — the shell KEEPS the split with the same
+/// slim master column (308), iPad-Settings portrait semantics, so rotation
 /// relayouts sizes without ever changing the composition or swapping to
 /// full-page pushes; below the split threshold (window-resize territory)
 /// it falls back to a single column — menu stacked above the overview pane
@@ -68,7 +69,7 @@ class ProfileTabletMasterShell extends ConsumerWidget {
                 if (width >= TabletDashboardWidths.twoColumnMinWidth) {
                   return _buildSplitShell(
                     snapshotAsync,
-                    masterWidth: TabletDashboardWidths.secondaryColumnMaxWidth,
+                    masterWidth: TabletDashboardWidths.masterDetailMasterWidth,
                     maxBlockWidth:
                         TabletDashboardWidths.primaryColumnMaxWidth +
                         TabletDashboardWidths.secondaryColumnMaxWidth +
@@ -78,8 +79,7 @@ class ProfileTabletMasterShell extends ConsumerWidget {
                 if (width >= TabletDashboardWidths.masterDetailSplitMinWidth) {
                   return _buildSplitShell(
                     snapshotAsync,
-                    masterWidth:
-                        TabletDashboardWidths.masterDetailNarrowMasterWidth,
+                    masterWidth: TabletDashboardWidths.masterDetailMasterWidth,
                   );
                 }
                 return _buildNarrowShell(snapshotAsync);
