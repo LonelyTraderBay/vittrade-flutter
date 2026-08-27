@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_discover.dart';
@@ -72,6 +73,12 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
           child: VitPageContent(
             rhythm: VitPageRhythm.relaxed,
             padding: VitContentPadding.relaxed,
+            // Gutter-flush như mọi detail pane của shell (Rule 2): shell đã
+            // cấp outerHorizontalMargin + blockVerticalGap — thêm contentPad
+            // nữa là double gutter (bug 2026-08-28); density compact giữ
+            // 8dp đệm trên thay vì 16dp chồng lớp.
+            density: VitDensity.compact,
+            fullBleed: true,
             children: [
               MarketsPulseStrip(
                 key: MarketsTabletKeys.pulseStrip,

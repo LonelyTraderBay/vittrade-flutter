@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
@@ -40,6 +41,9 @@ class P2PTabletUtilitySurface extends StatelessWidget {
             subtitle: subtitle,
             showBack: true,
             onBack: onBack,
+            // Gutter-flush (S6): shell P2P đã cấp outer margin — header
+            // canh 0 thẳng hàng nội dung fullBleed bên dưới.
+            horizontalPadding: AppSpacing.zero,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -48,6 +52,7 @@ class P2PTabletUtilitySurface extends StatelessWidget {
                 rhythm: VitPageRhythm.form,
                 padding: VitContentPadding.compact,
                 density: VitDensity.compact,
+                fullBleed: true,
                 children: children,
               ),
             ),

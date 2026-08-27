@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -18,6 +19,9 @@ class MarketsLoadingContent extends StatelessWidget {
       child: VitPageContent(
         rhythm: VitPageRhythm.relaxed,
         padding: VitContentPadding.relaxed,
+        // Mirror đúng trang đã load: gutter-flush + density compact (S6).
+        density: VitDensity.compact,
+        fullBleed: true,
         children: [
           _PulseStripSkeleton(),
           _MoverStripSkeleton(),

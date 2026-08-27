@@ -60,6 +60,9 @@ class VitTabletUtilityPage extends StatelessWidget {
             subtitle: subtitle,
             showBack: true,
             onBack: onBack,
+            // Gutter-flush (S6): shell master-detail đã cấp outer margin —
+            // header canh 0 cho thẳng hàng nội dung fullBleed bên dưới.
+            horizontalPadding: AppSpacing.zero,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -68,6 +71,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                 rhythm: VitPageRhythm.form,
                 padding: VitContentPadding.compact,
                 density: VitDensity.compact,
+                fullBleed: true,
                 children: [
                   VitCard(
                     variant: VitCardVariant.hero,
