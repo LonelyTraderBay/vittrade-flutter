@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
@@ -37,6 +38,10 @@ const EdgeInsets _masterBodyPadding =
 /// route (`selectedPairId`), không giữ state cục bộ. Watchlist-mode là UI
 /// filter thuần (bộ lọc theo `favoriteIds` có sẵn của state controller) —
 /// không đụng tới `category`/`sort` của controller.
+///
+/// Khung master full-height là idiom cột cố định cuộn độc lập (R4) — khi
+/// watchlist chỉ có vài cặp, phần khung còn trống được lấp bằng hint dẫn về
+/// danh sách đầy đủ (cùng idiom empty-state 0-cặp) thay vì dead space.
 class MarketsMasterList extends ConsumerStatefulWidget {
   const MarketsMasterList({
     super.key,
@@ -57,6 +62,10 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
   /// Mặc định vào thẳng watchlist (Watchlist-first). Khi rỗng, empty state
   /// hướng dẫn bấm sao trong tab khác — không tự thần bí chuyển tab.
   bool _watchlistMode = true;
+
+  /// Ngưỡng "danh sách ngắn": không đủ cặp để lấp nổi khung master
+  /// (~5 hàng compact) thì hiện hint dẫn về danh sách đầy đủ.
+  static const int _shortListMaxPairs = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +96,13 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
     final shown = _watchlistMode
         ? pairs.where((pair) => favoriteIds.contains(pair.id)).toList()
         : pairs;
+
+    // Watchlist ngắn không lấp nổi khung full-height → mục cuối của danh
+    // sách là hint dẫn về danh sách đầy đủ (dead space thành hành động).
+    final showShortHint =
+        _watchlistMode &&
+        shown.isNotEmpty &&
+        shown.length <= _shortListMaxPairs;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -143,7 +159,7 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
                     // Hàng 0 là cụm sort header + divider — cuộn cùng danh
                     // sách để cột master không bao giờ tràn phần cố định ở
                     // khung tablet hẹp (narrow fallback flex share ~300px).
-                    itemCount: shown.length + 1,
+                    itemCount: shown.length + 1 + (showShortHint ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == 0) {
                         return Column(
@@ -161,7 +177,15 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
                           ],
                         );
                       }
-                      final pair = shown[index - 1];
+                      final itemIndex = index - 1;
+                      if (itemIndex == shown.length) {
+                        return _ShortWatchlistHint(
+                          count: shown.length,
+                          onShowAll: () =>
+                              setState(() => _watchlistMode = false),
+                        );
+                      }
+                      final pair = shown[itemIndex];
                       return _MasterPairRow(
                         key: MarketsTabletKeys.pair(pair.id),
                         pair: pair,
@@ -244,6 +268,34 @@ class _MasterSortHeader extends StatelessWidget {
 }
 
 final _masterHeaderStyle = AppTextStyles.micro.copyWith(color: AppColors.text3);
+
+/// Lấp phần khung master còn trống khi Yêu thích chỉ có vài cặp: cùng idiom
+/// empty-state (0 cặp) nhưng dành cho danh sách NGẮN — hint mờ + CTA về
+/// danh sách đầy đủ, biến dead space thành hướng dẫn hành động thay vì
+/// để khung viền full-height trống trơn.
+class _ShortWatchlistHint extends StatelessWidget {
+  const _ShortWatchlistHint({required this.count, required this.onShowAll});
+
+  final int count;
+  final VoidCallback onShowAll;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.x5),
+      child: VitEmptyState(
+        key: MarketsTabletKeys.watchlistShortHint,
+        icon: Icons.star_border_rounded,
+        title: 'Chỉ có $count cặp trong Yêu thích',
+        message:
+            'Bấm biểu tượng sao ở một cặp trong tab khác để lưu thêm vào đây.',
+        actionLabel: 'Xem tất cả cặp',
+        onAction: onShowAll,
+        density: VitDensity.compact,
+      ),
+    );
+  }
+}
 
 class _MasterPairRow extends ConsumerWidget {
   const _MasterPairRow({

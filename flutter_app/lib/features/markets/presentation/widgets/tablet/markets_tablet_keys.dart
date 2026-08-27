@@ -10,6 +10,7 @@ final class MarketsTabletKeys {
   static const pulseStrip = Key('sc008_markets_pulse_strip');
   static const masterList = Key('sc008_markets_master_list');
   static const watchlistEmpty = Key('sc008_markets_watchlist_empty');
+  static const watchlistShortHint = Key('sc008_markets_watchlist_short_hint');
   static const pairPaneContent = Key('sc044_pair_pane_content');
   static const pairPaneChart = Key('sc044_pair_pane_chart');
   static const pairPaneBuyCta = Key('sc044_pair_pane_buy_cta');

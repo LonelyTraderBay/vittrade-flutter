@@ -236,6 +236,24 @@ void main() {
     },
   );
 
+  testWidgets('SC-008 short watchlist shows a see-all hint below the rows', (
+    tester,
+  ) async {
+    await pumpTabletMarkets(tester, size: const Size(1180, 820));
+
+    // Watchlist-first mở với 3 cặp mock (≤ ngưỡng ngắn) → hint hiện ngay
+    // dưới hàng cuối, lấp dead space của khung master full-height.
+    expect(find.byKey(MarketsTabletKeys.watchlistShortHint), findsOneWidget);
+    expect(find.text('Chỉ có 3 cặp trong Yêu thích'), findsOneWidget);
+
+    await tester.tap(find.text('Xem tất cả cặp'));
+    await tester.pumpAndSettle();
+
+    // Về danh sách đầy đủ: hint biến mất, cặp không-favorite xuất hiện.
+    expect(find.byKey(MarketsTabletKeys.watchlistShortHint), findsNothing);
+    expect(find.byKey(MarketsTabletKeys.pair('solusdt')), findsOneWidget);
+  });
+
   testWidgets(
     'SC-008 tapping a master row opens the pair route inside the detail '
     'pane while the master column stays put',
