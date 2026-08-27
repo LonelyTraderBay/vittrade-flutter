@@ -59,6 +59,18 @@ final class ProfileSpacingTokens {
   static const double profileMenuGap = 14;
   static const double profileMenuSubtitleGap = AppSpacing.x3;
   static const double profileMenuChevron = 20;
+
+  /// Tablet master menu overrides (2026-08-27 spacing review) — the shared
+  /// phone tokens above stay untouched per R2. The tablet menu's icon box
+  /// slims 36 → 32 (glyph 20 → 18) so the 13px labels lead the row's visual
+  /// weight (financial info first, decoration second), and the group gap
+  /// between the master menu's business sections widens from the compact
+  /// rhythm's 8 to 16 — one deliberate rhythm break so the eye can
+  /// partition Tài khoản / Bảo mật / Portfolio at a glance while keeping
+  /// the financial-app density (reference platforms use 24-35).
+  static const double profileMenuTabletIconBox = 32;
+  static const double profileMenuTabletIcon = 18;
+  static const double profileMenuSectionGap = 16;
   static const double profileActivityButtonHeight = 44;
   static const double profileLogoutButtonHeight = 54;
   static const double profileLogoutIcon = AppSpacing.iconMd;

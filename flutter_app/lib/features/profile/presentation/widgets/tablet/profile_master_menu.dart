@@ -10,6 +10,7 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
@@ -44,7 +45,15 @@ class ProfileMasterMenu extends ConsumerWidget {
     final user = snapshot.user;
 
     return VitPageContent(
+      // The compact rhythm's own 8dp section gap reads as ONE continuous
+      // block across the three business groups (Tài khoản / Bảo mật /
+      // Portfolio) — the menu's group boundary needs a deliberate wider
+      // break (16) so the eye can partition the account domains at a
+      // glance, while staying denser than platform reference sidebars
+      // (24-35) to keep the financial-app density (2026-08-27 spacing
+      // review).
       rhythm: VitPageRhythm.compact,
+      customGap: ProfileSpacingTokens.profileMenuSectionGap,
       children: [
         Row(
           children: [

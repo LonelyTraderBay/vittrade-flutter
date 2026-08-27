@@ -81,8 +81,8 @@ class _MenuRow extends StatelessWidget {
           gap: ProfileSpacingTokens.profileMenuGap,
           subtitleGap: AppSpacing.pageRhythmCompactInnerGap,
           leading: SizedBox(
-            width: ProfileSpacingTokens.profileMenuIconBox,
-            height: ProfileSpacingTokens.profileMenuIconBox,
+            width: ProfileSpacingTokens.profileMenuTabletIconBox,
+            height: ProfileSpacingTokens.profileMenuTabletIconBox,
             child: Material(
               color: accent.withValues(alpha: .12),
               shape: const RoundedRectangleBorder(
@@ -91,7 +91,7 @@ class _MenuRow extends StatelessWidget {
               child: Icon(
                 profileIconFor(item.iconKey),
                 color: accent,
-                size: ProfileSpacingTokens.profileMenuIcon,
+                size: ProfileSpacingTokens.profileMenuTabletIcon,
               ),
             ),
           ),

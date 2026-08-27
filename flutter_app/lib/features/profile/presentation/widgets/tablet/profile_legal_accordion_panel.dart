@@ -165,8 +165,8 @@ class _LegalGroupTile extends StatelessWidget {
               padding: ProfileSpacingTokens.profileMenuRowPadding,
               gap: ProfileSpacingTokens.profileMenuGap,
               leading: SizedBox(
-                width: ProfileSpacingTokens.profileMenuIconBox,
-                height: ProfileSpacingTokens.profileMenuIconBox,
+                width: ProfileSpacingTokens.profileMenuTabletIconBox,
+                height: ProfileSpacingTokens.profileMenuTabletIconBox,
                 child: Material(
                   color: AppColors.text3.withValues(alpha: .12),
                   shape: const RoundedRectangleBorder(
@@ -175,7 +175,7 @@ class _LegalGroupTile extends StatelessWidget {
                   child: const Icon(
                     Icons.folder_outlined,
                     color: AppColors.text3,
-                    size: ProfileSpacingTokens.profileMenuIcon,
+                    size: ProfileSpacingTokens.profileMenuTabletIcon,
                   ),
                 ),
               ),
@@ -224,7 +224,7 @@ class _LegalItemRow extends StatelessWidget {
           minHeight: VitDensity.compact.controlHeight,
           padding: const EdgeInsetsDirectional.only(
             start:
-                ProfileSpacingTokens.profileMenuIconBox +
+                ProfileSpacingTokens.profileMenuTabletIconBox +
                 ProfileSpacingTokens.profileMenuGap +
                 AppSpacing.x4,
             end: AppSpacing.x4,
@@ -235,7 +235,7 @@ class _LegalItemRow extends StatelessWidget {
           leading: const Icon(
             Icons.description_outlined,
             color: AppColors.text3,
-            size: ProfileSpacingTokens.profileMenuIcon,
+            size: ProfileSpacingTokens.profileMenuTabletIcon,
           ),
           title: Text(
             item.label,
