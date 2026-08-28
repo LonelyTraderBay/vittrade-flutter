@@ -1,7 +1,7 @@
 # Page Rhythm Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules  
-**Enforcement:** `dart run tool/page_rhythm_audit.dart --check` · `test/quality/page_rhythm_guardrail_test.dart`  
+**Enforcement:** `dart run tool/page_rhythm_audit.dart --check` · `test/quality/page_rhythm_guardrail_test.dart` · `test/quality/tablet_rhythm_role_guardrail_test.dart` (PR-T1 relaxed-ban · PR-T2 tablet-hub-compact)  
 **Reference screen:** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart`
 
 Page rhythm makes spacing **consistent across navigation** — not just wired with a `rhythm:` token.
@@ -31,6 +31,20 @@ Parent owns section gaps. Children must **not** insert orphan `SizedBox` between
 | Chart / terminal | `flush` | 0 | Depth, full-bleed chart |
 
 Tab roots are listed in `flutter_app/tool/page_rhythm_audit.dart` (`_tabRootPages`).
+
+**Tablet surface (2026-08-28, machine-enforced):** the audit's tab-root list
+originally covered phone files only — the Markets terminal hub shipped with
+`relaxed` (24dp) and nobody flagged it (the "khoảng trống giữa tiêu đề vẫn
+rộng" bug). Two locks close that class:
+
+- **PR-T1 (absolute):** `VitPageRhythm.relaxed` is banned on the tablet
+  surface outside `VitTwoColumnTabletDashboard`'s secondary wrapper — relaxed
+  is the hero/onboarding tier; a terminal/detail page must never pick it.
+- **PR-T2 (ratchet):** every tablet hub of the five tabs
+  (`<module>_tablet_page.dart`) declares `compact` (or owns no rhythm because
+  its layout does). Profile hub is pinned as known debt (`standard`) —
+  migrate to `compact` when the module is touched, then update the map. A NEW
+  tablet hub declaring a non-compact tier fails CI outright.
 
 ## Six mandatory rules
 
