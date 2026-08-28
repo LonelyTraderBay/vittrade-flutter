@@ -71,12 +71,12 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
           key: MarketsTabletKeys.content,
           physics: const AlwaysScrollableScrollPhysics(),
           child: VitPageContent(
-            rhythm: VitPageRhythm.relaxed,
-            padding: VitContentPadding.relaxed,
-            // Gutter-flush như mọi detail pane của shell (Rule 2): shell đã
-            // cấp outerHorizontalMargin + blockVerticalGap — thêm contentPad
-            // nữa là double gutter (bug 2026-08-28); density compact giữ
-            // 8dp đệm trên thay vì 16dp chồng lớp.
+            // Tab root ⇒ tier compact theo bảng Page-Rhythm (section gap 8dp)
+            // — relaxed 24dp là của hero/onboarding, làm pane terminal thưa
+            // (user đánh dấu X 2026-08-28); wire pattern chuẩn tab root:
+            // rhythm + padding + density đều compact.
+            rhythm: VitPageRhythm.compact,
+            padding: VitContentPadding.compact,
             density: VitDensity.compact,
             fullBleed: true,
             children: [

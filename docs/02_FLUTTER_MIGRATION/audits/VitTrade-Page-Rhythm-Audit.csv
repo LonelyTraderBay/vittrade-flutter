@@ -664,7 +664,7 @@ markets,flutter_app/lib/features/markets/presentation/phone/pages/tools/market_c
 markets,flutter_app/lib/features/markets/presentation/phone/pages/tools/market_movers_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/phone/pages/tools/market_screener_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/phone/pages/tools/market_sectors_page.dart,compact,compact,0,,0,,0,0,pass
-markets,flutter_app/lib/features/markets/presentation/tablet/pages/markets_tablet_page.dart,compact,relaxed,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/tablet/pages/markets_tablet_page.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/market_formatters.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_chart.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/pair/market_depth_common.dart,standard,,0,,0,,1,0,pass
@@ -716,7 +716,7 @@ markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pai
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart,compact,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,standard,,0,,0,,0,0,pass
-markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,compact,relaxed,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,compact,compact,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,standard,,0,,0,,3,0,pass

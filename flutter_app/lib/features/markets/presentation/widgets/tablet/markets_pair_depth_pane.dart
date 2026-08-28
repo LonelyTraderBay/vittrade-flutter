@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_chart.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
@@ -60,6 +61,7 @@ class _MarketsPairDepthPaneState extends ConsumerState<MarketsPairDepthPane> {
         title: fallbackTitle,
         subtitle: 'Sổ lệnh · Markets',
         onBack: back,
+        rhythm: VitPageRhythm.flush,
         scrollKey: MarketsTabletKeys.depthPaneContent,
         children: const [VitSkeletonList()],
       ),
@@ -67,6 +69,7 @@ class _MarketsPairDepthPaneState extends ConsumerState<MarketsPairDepthPane> {
         title: fallbackTitle,
         subtitle: 'Sổ lệnh · Markets',
         onBack: back,
+        rhythm: VitPageRhythm.flush,
         scrollKey: MarketsTabletKeys.depthPaneContent,
         children: [
           VitErrorState(
@@ -91,6 +94,7 @@ class _MarketsPairDepthPaneState extends ConsumerState<MarketsPairDepthPane> {
           subtitle: 'Sổ lệnh · Markets',
           onBack: back,
           onRefresh: refresh,
+          rhythm: VitPageRhythm.flush,
           scrollKey: MarketsTabletKeys.depthPaneContent,
           children: [
             MarketDepthPairSummary(pair: effective.pair),

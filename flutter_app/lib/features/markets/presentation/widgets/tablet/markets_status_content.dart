@@ -17,8 +17,9 @@ class MarketsLoadingContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return const VitInsetScrollView(
       child: VitPageContent(
-        rhythm: VitPageRhythm.relaxed,
-        padding: VitContentPadding.relaxed,
+        // Mirror trang đã load: tab root ⇒ compact (Page-Rhythm).
+        rhythm: VitPageRhythm.compact,
+        padding: VitContentPadding.compact,
         // Mirror đúng trang đã load: gutter-flush + density compact (S6).
         density: VitDensity.compact,
         fullBleed: true,

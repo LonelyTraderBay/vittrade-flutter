@@ -28,7 +28,9 @@ class MarketsPaneScaffold extends StatelessWidget {
     this.onRefresh,
     this.headerActions,
     this.scrollKey,
-    this.rhythm = VitPageRhythm.relaxed,
+    // Detail scroll ⇒ tier standard (section gap 13dp) theo bảng
+    // Page-Rhythm; pane chart/terminal (depth) khai báo flush riêng.
+    this.rhythm = VitPageRhythm.standard,
   });
 
   final List<Widget> children;
