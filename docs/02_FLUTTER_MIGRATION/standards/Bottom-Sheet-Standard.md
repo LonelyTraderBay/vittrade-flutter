@@ -1,6 +1,7 @@
 # Bottom-Sheet Standard (Mandatory)
 
 **Authority:** Derived from the existing `showVitBottomSheet` wrapper (`flutter_app/lib/shared/widgets/vit_bottom_sheet.dart`) and its guardrail test — not new policy.  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `test/quality/bottom_sheet_guardrail_test.dart` (no audit tool exists for this domain)  
 **Reference screen:** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart` (`_showMoreProducts`)
 

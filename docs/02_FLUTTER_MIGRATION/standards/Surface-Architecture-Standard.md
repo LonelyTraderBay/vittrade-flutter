@@ -1,5 +1,6 @@
 # Surface Architecture Standard
 
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Phạm vi:** UI Phone, Tablet và Web của VitTrade Flutter.
 
 **Trạng thái:** Chuẩn đích trong migration ADR-013. Trong giai đoạn chuyển

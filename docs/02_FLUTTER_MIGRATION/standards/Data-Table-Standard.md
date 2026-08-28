@@ -2,7 +2,7 @@
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) · [Typography-Standard.md](./Typography-Standard.md) (Rule 2 — tabular figures) · [Card-Tile-Standard.md](./Card-Tile-Standard.md) / [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md) (framing) · [Segment-Pill-Standard.md](./Segment-Pill-Standard.md) (filter/sort tier)
 **Enforcement:** prose + review today, backed by the already-CI-locked rules it composes (typography guardrail, spacing locks, hairline tokens, input-state rules). No dedicated scanner while the repo has effectively one columnar table — see "Upgrade path" for the trigger to graduate.
-**Scope:** any screen whose primary job is comparing rows of financial/quantitative data — price pairs, positions, orders, ledger entries — on either surface (phone renders them as row lists, tablet as columnar tables).
+**Scope:** both surfaces — any screen whose primary job is comparing rows of financial/quantitative data (price pairs, positions, orders, ledger entries); phone renders them as row lists, tablet as columnar tables. See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).
 **Born:** 2026-08-24 — the Markets pair table established every one of these rules in practice; this doc writes them down so the *next* table (positions, orders ledger, …) doesn't re-derive them by eye.
 
 ## Why this standard exists

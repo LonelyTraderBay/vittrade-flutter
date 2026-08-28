@@ -1,6 +1,7 @@
 # Notice Acknowledgement Standard (Mandatory)
 
 **Authority:** Derived from the shipped `showVitNoticeSheet` API in
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 `flutter_app/lib/shared/widgets/vit_offline_banner.dart`, the Trade receipt /
 submit reference (`order_receipt_page.dart`, `trade_page_state.dart`), and
 rollout plan

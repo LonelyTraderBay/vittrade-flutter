@@ -1,6 +1,7 @@
 # Scroll Auto-Hide Standard (Mandatory)
 
 **Authority:** Derived from the shipped `VitAutoHideHeaderScaffold` contract in
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 `lib/shared/layout/vit_auto_hide_header_scaffold.dart`, the short-content
 regression in `test/shared/layout/vit_auto_hide_header_scaffold_test.dart`, and
 `test/quality/scroll_auto_hide_guardrail_test.dart`.

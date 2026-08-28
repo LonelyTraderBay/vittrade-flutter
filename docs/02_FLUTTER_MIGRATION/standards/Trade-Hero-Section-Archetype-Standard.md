@@ -1,5 +1,6 @@
 # Trade Hero Section Archetype Standard
 
+**Scope:** Trade-module screens on both surfaces — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Status:** Foundation batch landed (2026-07-13): four shared hero widgets
 now exist in `lib/features/trade_core/presentation/widgets/` — `trade_core`
 is the shared module the other 4 trade feature modules (`trade_terminal`,

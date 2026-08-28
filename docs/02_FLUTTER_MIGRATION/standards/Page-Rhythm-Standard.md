@@ -1,6 +1,7 @@
 # Page Rhythm Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `dart run tool/page_rhythm_audit.dart --check` · `test/quality/page_rhythm_guardrail_test.dart` · `test/quality/tablet_rhythm_role_guardrail_test.dart` (PR-T1 relaxed-ban · PR-T2 tablet-hub-compact)  
 **Reference screen:** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart`
 
@@ -27,7 +28,7 @@ Parent owns section gaps. Children must **not** insert orphan `SizedBox` between
 | Bottom-nav tab root | `compact` | 8px | Home, Markets, Trade hub, Wallet, Profile |
 | Standard scroll | `standard` | 13px | Settings, VIP, earn lists, detail scroll |
 | Wizard / KYC / auth forms / bottom sheets | `form` | 16px | OTP, onboarding steps, savings guide, staking sheets, P2P merchant apply |
-| Hero / onboarding hero (icon→title blocks) | `relaxed` | 24px | Welcome hero blocks, ladder/backtest hero, provider apply intro |
+| Hero / onboarding hero (icon→title blocks) — **phone-only: banned on tablet by PR-T1** | `relaxed` | 24px | Welcome hero blocks, ladder/backtest hero, provider apply intro |
 | Chart / terminal | `flush` | 0 | Depth, full-bleed chart |
 
 Tab roots are listed in `flutter_app/tool/page_rhythm_audit.dart` (`_tabRootPages`).

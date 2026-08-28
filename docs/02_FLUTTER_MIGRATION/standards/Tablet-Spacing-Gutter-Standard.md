@@ -21,7 +21,7 @@ Base scale (`AppSpacing`): `x1=3 · x2=5 · x3=8 · x4=13 · x5=21 · x6=34 · x
 | Section inner gap (standard tier) | `AppSpacing.pageRhythmStandardInnerGap` | 8 |
 | Section gap (between blocks in a scroll) | `pageRhythm*SectionGap` via `VitPageContent(rhythm:)` | 8–24 by tier |
 | Icon→text inside a tile/card row | `AppSpacing.x3` | 8 |
-| Between sibling cards in a column | `AppSpacing.cardGap` | 13 |
+| Between sibling cards in a column (token shared with phone) | `AppSpacing.cardGap` | 13 |
 | Inside-card padding | `VitCard` variant/density defaults (`density.cardPadding`) | — |
 | Tile strip padding (Tier A) | `AppSpacing.cardTilePadding` | 12×5 |
 

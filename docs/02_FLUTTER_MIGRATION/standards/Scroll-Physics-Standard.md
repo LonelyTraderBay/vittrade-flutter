@@ -1,6 +1,7 @@
 # Scroll Physics Standard (Mandatory)
 
 **Authority:** Derived from the existing app-wide `_VitTradeScrollBehavior` override in `lib/app/vit_trade_app.dart` and `test/quality/scroll_physics_guardrail_test.dart` — not a new policy.
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `flutter test test/quality/scroll_physics_guardrail_test.dart` (no `tool/*_audit.dart` exists for this domain — the guardrail test is the sole check; it is a plain `flutter_test`, not a CLI with a `--check` flag)
 
 VitTrade uses one scroll motion language app-wide: **`ClampingScrollPhysics` only.** There is no platform split — iOS does not get the native rubber-band/overscroll-glow bounce that `BouncingScrollPhysics` (or the Cupertino/Material default `ScrollBehavior`) would otherwise apply. This is already the shipped behavior, not an aspiration: `MaterialApp.router`'s `scrollBehavior` is set to a custom `_VitTradeScrollBehavior` that unconditionally returns `ClampingScrollPhysics`, and 250+ scrollables additionally set `physics: const ClampingScrollPhysics()` explicitly.

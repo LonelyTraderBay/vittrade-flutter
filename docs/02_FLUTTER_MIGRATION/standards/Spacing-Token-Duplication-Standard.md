@@ -1,6 +1,7 @@
 # Spacing Token Duplication Standard
 
 **Authority:** Derived from `flutter_app/tool/spacing_token_duplication_audit.dart` — no new policy invented, this doc documents what the tool checks.
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `dart run tool/spacing_token_duplication_audit.dart --check` · `test/quality/spacing_token_duplication_guardrail_test.dart`
 **Reference report:** [VitTrade-Spacing-Token-Duplication-Audit.md](../audits/VitTrade-Spacing-Token-Duplication-Audit.md) / [.csv](../audits/VitTrade-Spacing-Token-Duplication-Audit.csv) — generated 2026-07-09 baseline, `total_duplication_entries=295` across 12 of 21 modules.
 

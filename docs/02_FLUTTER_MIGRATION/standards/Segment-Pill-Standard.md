@@ -2,6 +2,7 @@
 
 **Status:** Mandatory — CI enforced  
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `flutter test test/quality/segment_pill_guardrail_test.dart`  
 **Audit:** `dart run tool/segment_pill_audit.dart --check --strict-full` → [VitTrade-Segment-Pill-Audit.csv](../audits/VitTrade-Segment-Pill-Audit.csv)  
 **Migration manifest:** `dart run tool/segment_pill_manifest.dart --check` → [VitTrade-Segment-Pill-Migration-Manifest.csv](../audits/VitTrade-Segment-Pill-Migration-Manifest.csv)  

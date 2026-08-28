@@ -1,6 +1,7 @@
 # UI Density Standard
 
 **Authority:** Derived from the `VitDensity` tier contract in
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 `lib/app/theme/app_density.dart` and the chained audit logic in
 `tool/ui_fullscreen_density_audit.dart` (fixed-size/local-literal debt per full
 screen) and `tool/visual_density_risk_audit.dart` (cross-route visual-density

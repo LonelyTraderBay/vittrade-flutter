@@ -2,7 +2,7 @@
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Typography · [AGENTS.md](../../../AGENTS.md) UI rules · [Flutter-Design-Tokens.md](../Flutter-Design-Tokens.md)
 **Enforcement:** `test/quality/typography_scale_guardrail_test.dart` (locks the scale's load-bearing invariants) · the `design_token_consistency_audit` already bans raw `fontSize` literals in presentation code (P0 hard-baselined, ratcheted repo-wide). Role choice itself stays review-enforced, like the tablet standard's R2/R3/R9.
-**Scope:** every presentation file on every surface — typography is surface-agnostic.
+**Scope:** both surfaces — every presentation file, typography is surface-agnostic. See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).
 **Born:** 2026-08-24 — the scale existed and was tokenized (`app_text_styles.dart`, ~42 roles) but was never written down as a *role map*: pages picked styles by eye, and nothing stated that financial tables must render through the tabular-figure numeric styles.
 
 ## Why this standard exists

@@ -1,6 +1,7 @@
 # Back Navigation Standard (Mandatory)
 
 **Authority:** Derived from the classification logic in `tool/back_navigation_behavior_audit.dart` and the required/forbidden snippet rules in `tool/home_entry_back_navigation_audit.dart` — this documents existing enforced behavior, it does not introduce new policy.
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement (header back-control audit):** `dart run tool/back_navigation_behavior_audit.dart --check --strict` · `test/quality/back_navigation_behavior_guardrail_test.dart` — Named CI step + artifact upload.
 **Enforcement (Home-entry contract audit):** `dart run tool/home_entry_back_navigation_audit.dart --check` (checks artifact freshness AND that every rule passes) · `test/quality/home_entry_back_navigation_guardrail_test.dart` — Named CI step + artifact upload.
 **Reference screen(s):** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart` / `home_page_part_02.dart` — every `HEB-C0*` rule in Domain 2 is anchored to a page Home can push a user into; see [HomePage-Flutter-Native-Standard.md](../../04_SCREEN_REFERENCES/home/HomePage-Flutter-Native-Standard.md), whose own Verification section runs the Domain 2 audit.

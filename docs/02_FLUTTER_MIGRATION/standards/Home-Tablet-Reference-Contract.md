@@ -3,6 +3,7 @@
 **Screen:** Home / SC-007  
 **Reference implementation:** `HomeTabletPage` + `VitTwoColumnTabletDashboard`  
 **Authority:** `AGENTS.md`, `DESIGN.md`, and `Tablet-Adaptive-Standard.md`
+**Scope:** every Dart file on the tablet surface — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 
 This contract extracts reusable tablet rules from Home. It does not make Home
 copy, product content, or business data a template for other screens.

@@ -1,6 +1,7 @@
 # Accent Icon Box Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Flutter-Module-Identity-Standard.md](./Flutter-Module-Identity-Standard.md)  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `flutter test test/quality/accent_icon_box_guardrail_test.dart`  
 **Canonical widget:** `flutter_app/lib/shared/widgets/vit_accent_icon_box.dart` → `VitAccentIconBox`
 

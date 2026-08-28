@@ -1,5 +1,6 @@
 # Flutter Page Archetype Standard
 
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 This document defines two secondary structural patterns beyond the Home-native
 foundation ([Flutter-Module-Identity-Standard.md](./Flutter-Module-Identity-Standard.md)):
 **tabbed detail pages** and **form/wizard pages**. Unlike Home — which is the

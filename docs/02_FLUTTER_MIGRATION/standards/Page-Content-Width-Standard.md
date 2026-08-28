@@ -1,6 +1,7 @@
 # Page Content Width Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · Home reference ([Flutter-Module-Identity-Standard.md](./Flutter-Module-Identity-Standard.md))  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `dart run tool/page_content_width_audit.dart --check` · `test/quality/page_content_width_guardrail_test.dart`  
 **Reference screens:** `home_scroll_shell.dart` (Recipe A) · `profile_page.dart` (Recipe B)
 

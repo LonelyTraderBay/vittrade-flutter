@@ -1,5 +1,6 @@
 # Flutter Module Identity Standard
 
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 This document defines how VitTrade Flutter screens can keep module-specific character without breaking the Home-native foundation.
 
 `SC-007 HomePage` remains the global source of truth for background, card treatment, spacing, typography, radii, bottom navigation, and primary brand behavior. Module identity is an accent layer only.

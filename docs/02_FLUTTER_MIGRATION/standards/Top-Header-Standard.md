@@ -1,6 +1,7 @@
 # Top Header Standard (Mandatory)
 
 **Authority:** Derived entirely from the four `tool/top_header_*_audit.dart` scripts and their `test/quality/top_header_*_guardrail_test.dart` counterparts — this doc introduces no new policy, it documents what those tools already classify and gate.
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement — behavior:** `dart run tool/top_header_behavior_audit.dart --check` · `test/quality/top_header_behavior_guardrail_test.dart`
 **Enforcement — actions:** `dart run tool/top_header_action_audit.dart --check --strict` · `test/quality/top_header_action_guardrail_test.dart`
 **Enforcement — global access:** `dart run tool/top_header_global_access_policy_audit.dart --check` · `test/quality/top_header_global_access_policy_guardrail_test.dart`

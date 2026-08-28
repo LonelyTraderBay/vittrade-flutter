@@ -1,5 +1,6 @@
 # Chuẩn tổ chức UI theo thiết bị
 
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 Phạm vi áp dụng: các feature đã có giao diện tablet riêng.
 
 ## Boundary chuẩn

@@ -1,10 +1,11 @@
 # Card Tile Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `dart run tool/card_tile_audit.dart --check` · `test/quality/card_tile_guardrail_test.dart`  
 **Reference screen:** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart`
 
-Card tiles define **when a `VitCard` gets a fixed height and vertical centering** — so horizontal strip tiles (Home “Gần đây”, market ticker) stay optically balanced without per-page `Column` hacks.
+Card tiles define **when a `VitCard` gets a fixed height and vertical centering** — so horizontal strip tiles (Home “Gần đây”, market ticker) stay optically balanced without per-page `Column` hacks. On the tablet surface a fixed-height card is a control surface and must also declare `radius: VitCardRadius.tight` (Tablet-Card-Border CB-R5 — 16 on a ~34dp tile reads as a pill).
 
 ## Five tiers
 

@@ -1,6 +1,7 @@
 # High-Risk State Standard (Mandatory)
 
 **Authority:** [AGENTS.md](../../../AGENTS.md) "Financial Safety" section (preview/confirm
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 withdrawals, escrow release, security changes, address additions, P2P
 payment-method changes) · derived from the existing
 `high_risk_state_primitives_guardrail_test.dart` check, not new policy.

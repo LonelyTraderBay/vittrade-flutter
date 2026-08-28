@@ -1,6 +1,7 @@
 # Body Component Standard
 
 **Authority:** Derived from existing tool logic in `flutter_app/tool/body_component_consistency_audit.dart` — no new policy invented; this doc writes down what the tool already grades.
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `dart run tool/body_component_consistency_audit.dart` (regenerate) · `dart run tool/body_component_consistency_audit.dart --check` (artifact-freshness check only) — **audit-only, not CI-enforced.** No `test/quality/body_component*` guardrail test exists today.
 **Reference report:** [VitTrade-Body-Component-Consistency-Audit.md](../audits/VitTrade-Body-Component-Consistency-Audit.md) / [.csv](../audits/VitTrade-Body-Component-Consistency-Audit.csv) — generated 2026-07-09 baseline, `total_routed_screens=414`.
 

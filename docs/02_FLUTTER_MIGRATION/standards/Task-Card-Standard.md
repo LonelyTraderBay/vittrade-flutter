@@ -1,6 +1,7 @@
 # Task Card Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Card-Tile-Standard.md](./Card-Tile-Standard.md) Tier E  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `flutter test test/quality/task_card_guardrail_test.dart`  
 **Canonical widget:** `flutter_app/lib/shared/widgets/vit_task_card.dart` → `VitTaskCard`
 

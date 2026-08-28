@@ -1,5 +1,6 @@
 # Flutter Native Design Standard
 
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 This file defines the active Flutter-native UI standard for VitTrade.
 
 ## Design Goals

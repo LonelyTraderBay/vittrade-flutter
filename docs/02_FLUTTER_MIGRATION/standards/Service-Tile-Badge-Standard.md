@@ -1,6 +1,7 @@
 # Service Tile Badge Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Card-Tile-Standard.md](./Card-Tile-Standard.md) Tier B  
+**Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 **Enforcement:** `flutter test test/quality/service_tile_badge_guardrail_test.dart`  
 **Canonical widget:** `flutter_app/lib/shared/widgets/vit_module_components.dart` → `VitServiceTile`
 
