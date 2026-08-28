@@ -61,10 +61,11 @@ class TradeTabletUtilityPage extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(
-                Icons.insights_outlined,
+              // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
+              // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
+              const VitAccentIconBox(
+                icon: Icons.insights_outlined,
                 color: AppColors.primary,
-                size: AppSpacing.iconLg,
               ),
               const SizedBox(width: AppSpacing.x3),
               Expanded(

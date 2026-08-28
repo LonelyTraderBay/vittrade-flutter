@@ -49,7 +49,9 @@ class ProfileTabletUtilityPage extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(icon, color: AppColors.primary, size: AppSpacing.iconLg),
+              // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
+              // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
+              VitAccentIconBox(icon: icon, color: AppColors.primary),
               const SizedBox(width: AppSpacing.x3),
               Expanded(
                 child: Column(

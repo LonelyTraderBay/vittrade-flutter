@@ -77,10 +77,11 @@ class VitWebUtilityPage extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              icon,
+                            // AIB-R6: icon leading cạnh mô tả nhiều dòng phải
+                            // nằm trong VitAccentIconBox (twin của tablet).
+                            VitAccentIconBox(
+                              icon: icon,
                               color: AppColors.primary,
-                              size: AppSpacing.iconLg,
                             ),
                             const SizedBox(width: AppSpacing.x4),
                             Expanded(
