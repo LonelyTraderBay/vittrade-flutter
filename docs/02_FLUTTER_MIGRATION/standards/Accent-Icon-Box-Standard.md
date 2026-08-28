@@ -36,10 +36,15 @@ toàn app. Lỗi gốc: hero banner của các trang placeholder dùng
 | --- | --- | --- |
 | AIB-R6a | `lib/shared/layout/**` (composition primitive dùng chung) | Cấm sạch — baseline rỗng |
 | AIB-R6b | mọi file `/tablet/` dưới `lib/features/**` | path\|count (46 match / 26 file tại 2026-08-28; chỉ được giảm) |
+| AIB-R6c | Row hero utility page chứa `VitAccentIconBox` | Bắt buộc `crossAxisAlignment: CrossAxisAlignment.center` |
 
 Icon nhỏ (iconSm) đầu hàng list-tile một dòng trong pane thật là nợ baseline
 của R6b — trả dần khi chạm file. Hàng mới trên tablet phải bọc
 `VitAccentIconBox` ngay từ đầu.
+
+**Căn dọc (R6c, 2026-08-29):** Row chứa `VitAccentIconBox` + khối text nhiều
+dòng phải `CrossAxisAlignment.center` — canh mép trên (`start`) khiến khối chữ
+cao hơn ô icon lệch hẳn xuống dưới, mất cân đối ("chữ không nằm giữa dòng").
 
 ## Wire pattern
 

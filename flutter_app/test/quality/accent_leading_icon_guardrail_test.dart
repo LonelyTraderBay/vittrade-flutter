@@ -77,6 +77,41 @@ Row(
     expect(_bareLeadingIconRows(_stripCommentLines(commented)), 0);
   });
 
+  test('AIB-R6c: hàng utility hero chứa VitAccentIconBox phải center-align', () {
+    // Lỗi gốc 2026-08-29 (user: "chữ nằm giữa dòng cho cân đối đẹp"): Row hero
+    // của utility page dùng crossAxisAlignment.start khiến khối mô tả 2 dòng
+    // (~43dp) canh mép trên ô icon 34dp, chữ lệch hẳn xuống dưới ô. Quy tắc:
+    // Row chứa VitAccentIconBox trong các utility page PHẢI center dọc.
+    const utilityPages = [
+      'lib/shared/layout/vit_tablet_utility_page.dart',
+      'lib/shared/layout/vit_web_utility_page.dart',
+      'lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart',
+      'lib/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart',
+      'lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+    ];
+    final offenders = <String>[];
+    for (final path in utilityPages) {
+      final clean = _stripCommentLines(File(path).readAsStringSync());
+      for (final start in _rowStartsContaining(clean, 'VitAccentIconBox')) {
+        final open = clean.indexOf('(', start);
+        final close = _matchingParen(clean, open);
+        final body = clean.substring(open + 1, close);
+        if (!body.contains('crossAxisAlignment: CrossAxisAlignment.center')) {
+          final line = clean.substring(0, start).split('\n').length;
+          offenders.add('$path:$line');
+        }
+      }
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason:
+          'Row hero utility page chứa VitAccentIconBox phải '
+          'crossAxisAlignment: CrossAxisAlignment.center (AIB-R6c).\n'
+          'Vi phạm: $offenders',
+    );
+  });
+
   test('AIB-R6a: lib/shared/layout cấm sạch icon trần đứng đầu Row', () {
     final hits = <String, int>{};
     _scanDirectory(Directory('lib/shared/layout'), hits);
@@ -191,6 +226,31 @@ int _bareLeadingIconRows(String src) {
     i = close;
   }
   return count;
+}
+
+/// Vị trí bắt đầu (`Row(`) của mọi Row whose phần thân chứa [needle]
+/// (không lồng nhau — Row ngoài thắng Row con).
+List<int> _rowStartsContaining(String src, String needle) {
+  final starts = <int>[];
+  for (var i = 0; i < src.length - _rowStart.length + 1; i++) {
+    if (!src.startsWith(_rowStart, i)) continue;
+    if (i > 0) {
+      final unit = src.codeUnitAt(i - 1);
+      final isIdent =
+          (unit >= 0x61 && unit <= 0x7A) ||
+          (unit >= 0x41 && unit <= 0x5A) ||
+          (unit >= 0x30 && unit <= 0x39) ||
+          unit == 0x5F ||
+          unit == 0x2E;
+      if (isIdent) continue;
+    }
+    final open = src.indexOf('(', i);
+    final close = _matchingParen(src, open);
+    if (close < 0) continue;
+    if (src.substring(open + 1, close).contains(needle)) starts.add(i);
+    i = close;
+  }
+  return starts;
 }
 
 void _scanDirectory(

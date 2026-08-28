@@ -47,7 +47,8 @@ class ProfileTabletUtilityPage extends StatelessWidget {
         VitCard(
           variant: VitCardVariant.hero,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // AIB-R6: khối mô tả căn giữa dọc theo ô icon.
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
               // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
