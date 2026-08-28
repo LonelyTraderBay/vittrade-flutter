@@ -223,7 +223,7 @@ class _MidPriceStrip extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: '   Spread: ${depth.spreadPct.toStringAsFixed(4)}%',
+                  text: '   Chênh lệch: ${depth.spreadPct.toStringAsFixed(4)}%',
                   style: AppTextStyles.micro.copyWith(
                     color: AppColors.text3,
                     fontFeatures: AppTextStyles.tabularFigures,

@@ -133,12 +133,12 @@ MarketDepthSnapshot _depthSnapshotAtTick(
       MarketAlertDraft(
         id: 'depth-btc-spread',
         pairId: 'btcusdt',
-        label: 'BTC depth spread baseline',
+        label: 'BTC đường nền chênh lệch giá sổ lệnh',
       ),
       MarketAlertDraft(
         id: 'depth-whale-wall',
         pairId: 'btcusdt',
-        label: 'Whale order wall watch',
+        label: 'Theo dõi tường lệnh cá voi',
       ),
     ],
     screenFilters: _marketDepthFilters,

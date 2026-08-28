@@ -151,12 +151,12 @@ mixin _MockMarketRepositoryCalendarDerivativesMethods
         MarketAlertDraft(
           id: 'depth-btc-spread',
           pairId: 'btcusdt',
-          label: 'BTC depth spread baseline',
+          label: 'BTC đường nền chênh lệch giá sổ lệnh',
         ),
         MarketAlertDraft(
           id: 'depth-whale-wall',
           pairId: 'btcusdt',
-          label: 'Whale order wall watch',
+          label: 'Theo dõi tường lệnh cá voi',
         ),
       ],
       screenFilters: _marketDepthFilters,
@@ -563,8 +563,8 @@ const List<DerivativePair> _derivativePairs = [
 ];
 
 const MarketScreenFilters _marketDepthFilters = MarketScreenFilters(
-  categories: ['Depth Chart', 'Order Book', 'Whale Alert'],
-  defaultCategory: 'Depth Chart',
+  categories: ['Biểu đồ độ sâu', 'Sổ lệnh', 'Lệnh cá voi'],
+  defaultCategory: 'Biểu đồ độ sâu',
   defaultSort: '25L',
   sortOptions: [
     MarketSortOption(id: '15', label: '15L'),

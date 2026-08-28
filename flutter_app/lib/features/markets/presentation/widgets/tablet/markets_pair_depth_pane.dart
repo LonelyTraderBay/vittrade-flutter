@@ -115,7 +115,7 @@ class _MarketsPairDepthPaneState extends ConsumerState<MarketsPairDepthPane> {
             const VitBanner(
               variant: VitBannerVariant.info,
               icon: Icons.info_outline_rounded,
-              message: 'Dữ liệu depth chỉ mang tính tham khảo',
+              message: 'Dữ liệu sổ lệnh chỉ mang tính tham khảo',
               detail:
                   'Không phải tín hiệu giao dịch. Giá và sổ lệnh có thể trễ so với thị trường thực.',
             ),

@@ -54,7 +54,7 @@ class _DepthMiniStats extends StatelessWidget {
       children: [
         Expanded(
           child: _MiniStat(
-            label: 'Spread',
+            label: 'Chênh lệch giá',
             value: '\$${depth.spread.toStringAsFixed(2)}',
             sub: '${depth.spreadPct.toStringAsFixed(4)}%',
           ),
@@ -62,7 +62,7 @@ class _DepthMiniStats extends StatelessWidget {
         const SizedBox(width: MarketsSpacingTokens.marketAnalyticsCompactGap),
         Expanded(
           child: _MiniStat(
-            label: 'Bid Wall',
+            label: 'Tường mua',
             value: formatMarketDepthQuantity(depth.totalBidQuantity),
             sub: snapshot.pair.baseAsset,
             color: AppColors.buy,
@@ -71,7 +71,7 @@ class _DepthMiniStats extends StatelessWidget {
         const SizedBox(width: MarketsSpacingTokens.marketAnalyticsCompactGap),
         Expanded(
           child: _MiniStat(
-            label: 'Ask Wall',
+            label: 'Tường bán',
             value: formatMarketDepthQuantity(depth.totalAskQuantity),
             sub: snapshot.pair.baseAsset,
             color: AppColors.sell,

@@ -32,17 +32,17 @@ class MarketDepthTabs extends StatelessWidget {
                 tabs: const [
                   VitTabItem(
                     key: 'depth',
-                    label: 'Depth Chart',
+                    label: 'Biểu đồ độ sâu',
                     widgetKey: marketDepthChartTabKey,
                   ),
                   VitTabItem(
                     key: 'orderBook',
-                    label: 'Order Book',
+                    label: 'Sổ lệnh',
                     widgetKey: marketDepthOrderBookTabKey,
                   ),
                   VitTabItem(
                     key: 'whale',
-                    label: 'Whale Alert',
+                    label: 'Lệnh cá voi',
                     widgetKey: marketDepthWhaleAlertTabKey,
                   ),
                 ],

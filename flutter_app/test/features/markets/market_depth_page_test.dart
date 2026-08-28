@@ -67,9 +67,9 @@ void main() {
     expect(snapshot.watchlist, containsAll(['btcusdt', 'ethusdt', 'solusdt']));
     expect(snapshot.alerts, hasLength(2));
     expect(snapshot.screenFilters.categories, [
-      'Depth Chart',
-      'Order Book',
-      'Whale Alert',
+      'Biểu đồ độ sâu',
+      'Sổ lệnh',
+      'Lệnh cá voi',
     ]);
     expect(snapshot.chartSeries['bidCumulative'], hasLength(25));
     expect(snapshot.chartSeries['askCumulative'], hasLength(25));
@@ -106,9 +106,10 @@ void main() {
     expect(find.text('Độ sâu BTC'), findsOneWidget);
     expect(find.text('BTC/USDT'), findsOneWidget);
     expect(find.text(r'$67,543.21'), findsOneWidget);
-    expect(find.text('Spread'), findsOneWidget);
+    expect(find.text('Chênh lệch giá'), findsOneWidget);
     expect(find.text(r'$40.53'), findsOneWidget);
-    expect(find.text('Biểu đồ độ sâu'), findsOneWidget);
+    // 'Biểu đồ độ sâu' xuất hiện 2 nơi: tab trái + tiêu đề card chart.
+    expect(find.text('Biểu đồ độ sâu'), findsNWidgets(2));
     expect(find.text('Mua 53.8%'), findsOneWidget);
     expect(find.text('Bán 46.2%'), findsOneWidget);
   });
@@ -150,7 +151,7 @@ void main() {
     expect(find.text('Lệnh bán (Ask)'), findsOneWidget);
     expect(find.text('Lệnh mua (Bid)'), findsOneWidget);
     expect(
-      find.textContaining('Spread: 0.0600%', findRichText: true),
+      find.textContaining('Chênh lệch: 0.0600%', findRichText: true),
       findsOneWidget,
     );
   });

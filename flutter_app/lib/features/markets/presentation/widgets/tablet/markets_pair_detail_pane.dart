@@ -196,7 +196,7 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                   icon: Icons.layers_rounded,
                   iconColor: AppColors.info,
                   title: 'Độ sâu thị trường',
-                  subtitle: 'Biểu đồ depth · Cảnh báo cá voi · Sổ lệnh',
+                  subtitle: 'Biểu đồ độ sâu · Cảnh báo cá voi · Sổ lệnh',
                   onTap: () => openMarketsDetailRoute(
                     context,
                     AppRoutePaths.pairDepth(pair.id),

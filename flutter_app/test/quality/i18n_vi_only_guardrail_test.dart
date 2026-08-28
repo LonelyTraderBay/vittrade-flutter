@@ -105,6 +105,18 @@ const _markerWords = {
   'connection',
   'retry',
   'refresh',
+  // Marker bổ sung 2026-08-29 (P1 depth-pane): các cụm thuật ngữ chart/lệnh
+  // từng trượt heuristic vì mỗi chuỗi chỉ đếm được 0-1 từ marker cũ
+  // ('Depth Chart', 'Order Book', 'Whale Alert', 'Bid Wall', 'Spread').
+  'depth',
+  'chart',
+  'book',
+  'whale',
+  'alert',
+  'spread',
+  'wall',
+  'bid',
+  'ask',
 };
 
 final _vietnameseDiacritics = RegExp(

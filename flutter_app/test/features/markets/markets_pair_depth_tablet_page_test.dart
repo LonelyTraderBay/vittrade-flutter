@@ -46,6 +46,9 @@ void main() {
     expect(find.text('Độ sâu BTC'), findsOneWidget);
     expect(find.byKey(MarketsTabletKeys.depthPaneContent), findsOneWidget);
     // Banner tham khảo của trang Phone được giữ nguyên (financial safety).
-    expect(find.text('Dữ liệu depth chỉ mang tính tham khảo'), findsOneWidget);
+    expect(
+      find.text('Dữ liệu sổ lệnh chỉ mang tính tham khảo'),
+      findsOneWidget,
+    );
   });
 }

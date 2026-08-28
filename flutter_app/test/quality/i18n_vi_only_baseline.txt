@@ -22,6 +22,8 @@ lib/features/cross_module/presentation/phone/pages/tax_report_center_settings_ta
 lib/features/cross_module/presentation/phone/pages/tax_report_center_settings_tab.dart|This platform does not provide tax advice. Tax reports are generated for your convenience only. Please consult a qualified tax professional or accountant for accurate tax filing guidance specific to your jurisdiction.
 lib/features/cross_module/presentation/phone/pages/tax_report_center_settings_tab.dart|We are not tax advisors or accountants
 lib/features/cross_module/presentation/widgets/cross_module_analytics_common.dart|Open Arena metrics are not included in financial analytics as Arena uses points-only system. See Arena leaderboard for trust and performance metrics.
+lib/features/cross_module/presentation/widgets/smart_alert_center_cards.dart|Create Alert
+lib/features/cross_module/presentation/widgets/smart_alert_center_history_settings.dart|Alert History
 lib/features/cross_module/presentation/widgets/smart_alert_center_history_settings.dart|SMS alerts may incur additional charges. Check with your mobile provider.
 lib/features/cross_module/presentation/widgets/smart_alert_center_tabs.dart|Smart alerts work across all modules. Set conditions and get notified via push, email, or SMS.
 lib/features/cross_module/presentation/widgets/unified_portfolio_overview.dart|Arena Points are not included in portfolio value as they are points-only and not financial assets. Each module maintains separate accounting.
@@ -29,6 +31,7 @@ lib/features/cross_module/presentation/widgets/unified_portfolio_overview.dart|R
 lib/features/dca/presentation/phone/pages/hub/dca_overview_demo.dart|Add overview card scenarios to preview profitable and loss states.
 lib/features/dca/presentation/phone/pages/hub/dca_overview_demo.dart|Could not load DCA card scenarios. Retry when back online.
 lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart|Budget, frequency, target allocations, asset removal notice, rebalance threshold, and disabled automation state remain visible before saving multi-asset DCA settings.
+lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart|Growth chart, ranked asset returns, diversification count, and performance context remain visible before adjusting DCA allocation strategy.
 lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart|Portfolio value, per-asset allocation, rebalance requirement, and automatic rebalance toggle remain visible before the next DCA execution.
 lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart|Some allocations deviate from target. Next purchase will rebalance automatically.
 lib/features/dca/presentation/phone/pages/portfolio/dca_performance_compare_page.dart|DCA is optimal for volatile markets and when you want to reduce timing risk. Lump sum can win in steady bull markets with low volatility.
@@ -52,15 +55,15 @@ lib/features/dev/presentation/phone/pages/route_checker_page.dart|Show all route
 lib/features/dev/presentation/phone/pages/route_checker_page.dart|Switch phase filter or return to live data.
 lib/features/dev/presentation/widgets/design_system_input_section.dart|InputWrapper with error
 lib/features/dev/presentation/widgets/design_system_playground.dart|Leave empty for no error
+lib/features/earn_savings/presentation/phone/pages/savings/auto_compound_settings_page.dart|Position toggles, compound frequency, threshold changes, yield impact, save confirmation, and success feedback are reviewed before automation is updated.
 lib/features/earn_savings/presentation/phone/pages/savings/savings_ladder_page.dart|Capital allocation, rung schedule, APY estimate, liquidity score, auto-renew flags, confirmation sheet, success state, and risk disclaimer are reviewed before a ladder is created.
 lib/features/earn_savings/presentation/phone/pages/savings/savings_risk_assessment_page.dart|Answers are used only to classify suitability, risk tolerance, lockup comfort and next-step product review.
-lib/features/earn_savings/presentation/phone/pages/savings/auto_compound_settings_page.dart|Position toggles, compound frequency, threshold changes, yield impact, save confirmation, and success feedback are reviewed before automation is updated.
+lib/features/earn_savings/presentation/widgets/savings/savings_risk_assessment_result.dart|Review product fit, lockup, APY variability, risk notes and next steps before subscribing.
 lib/features/earn_staking/presentation/phone/pages/staking/staking_advanced_orders_page.dart|Create Order
 lib/features/earn_staking/presentation/phone/pages/staking/staking_advanced_orders_page.dart|Order History
 lib/features/earn_staking/presentation/phone/pages/staking/staking_advanced_orders_page.dart|Order type, trigger condition, asset amount, risk disclosure, create-order preview, submitting state, and result handling are reviewed before an advanced staking order is placed.
 lib/features/earn_staking/presentation/phone/pages/staking/staking_developer_console_page.dart|API keys, production request volume, uptime, docs, audit logs, and create-key confirmation remain reviewed before Earn automation access changes.
 lib/features/earn_staking/presentation/phone/pages/staking/staking_withdrawal_policy_page.dart|Timeline, early fee, emergency limits, preview, confirm and support next steps are reviewed before withdrawal.
-lib/features/earn_savings/presentation/widgets/savings/savings_risk_assessment_result.dart|Review product fit, lockup, APY variability, risk notes and next steps before subscribing.
 lib/features/earn_staking/presentation/widgets/staking/staking_advanced_orders_overview_orders.dart|${_formatAmount(order.amount)} ${order.asset}
 lib/features/earn_staking/presentation/widgets/staking/staking_advanced_orders_sheet_fields.dart|Create Order
 lib/features/earn_staking/presentation/widgets/staking/staking_api_documentation_auth.dart|Include your API key in the X-API-Key header with every request.
@@ -114,17 +117,20 @@ lib/features/predictions/presentation/widgets/event/prediction_advanced_chart_in
 lib/features/predictions/presentation/widgets/event/prediction_event_detail_comments.dart|Beware of external links. Do not share personal or financial information.
 lib/features/predictions/presentation/widgets/event/prediction_event_detail_comments.dart|Strong ETF flow and liquidity backdrop support this market.
 lib/features/predictions/presentation/widgets/event/prediction_event_detail_detail_tabs.dart|This market will resolve to "Yes" if bitcoin reaches \$150K before July 2026 before the end date. Otherwise, it resolves to "No".
+lib/features/predictions/presentation/widgets/event/prediction_event_detail_order_book.dart|Order Book
 lib/features/predictions/presentation/widgets/event/prediction_event_detail_trade_panel.dart|Execute at current best available price
 lib/features/predictions/presentation/widgets/event/prediction_event_detail_trade_panel.dart|Set your desired entry price
 lib/features/predictions/presentation/widgets/event/prediction_order_preview_card.dart|Enter amount
 lib/features/predictions/presentation/widgets/event/prediction_order_preview_card.dart|Prediction positions, probability, receipt, rewards, and P/L stay separate from Arena Points.
 lib/features/predictions/presentation/widgets/phone/predictions_rewards_table.dart|Try adjusting your filters
+lib/features/predictions/presentation/widgets/portfolio/prediction_market_maker_provide.dart|Hieu gia bid/ask: ${(value / 100).toStringAsFixed(2)}%
 lib/features/predictions/presentation/widgets/portfolio/prediction_portfolio_positions.dart|Start trading to build your portfolio
 lib/features/predictions/presentation/widgets/portfolio/prediction_portfolio_summary.dart|Hide balance
 lib/features/predictions/presentation/widgets/portfolio/prediction_portfolio_summary.dart|Shares represent your stake in a market outcome. Each share pays \$1.00 
 lib/features/predictions/presentation/widgets/portfolio/prediction_portfolio_summary.dart|Show balance
 lib/features/predictions/presentation/widgets/portfolio/predictions_portfolio_bridge_card.dart|Prediction positions and P/L stay separate from Arena Points.
 lib/features/predictions/presentation/widgets/social/prediction_data_integration_sources.dart|External data feeds for event resolution
+lib/features/predictions/presentation/widgets/social/prediction_event_calendar_notifications.dart|Price Alert
 lib/features/predictions/presentation/widgets/social/prediction_social_analysis_share.dart|Join the prediction market and share your insights with the community.
 lib/features/predictions/presentation/widgets/social/prediction_tournaments_detail.dart|Return to the tournament list to continue.
 lib/features/predictions/presentation/widgets/social/prediction_tournaments_list.dart|View Details
@@ -244,6 +250,9 @@ lib/features/trade_terminal/presentation/widgets/tools/advanced_analytics_page_r
 lib/features/trade_terminal/presentation/widgets/tools/advanced_analytics_page_risk_journal.dart|VaR calculated using Monte Carlo simulation. Sharpe and Sortino ratios update daily with a 30-day rolling window.
 lib/features/trade_terminal/presentation/widgets/tools/advanced_analytics_page_sizing_footer.dart|Kelly percent is capped at half-Kelly for safety and adjusted by your actual win rate and R:R ratio.
 lib/features/trade_terminal/presentation/widgets/tools/advanced_analytics_page_sizing_footer.dart|Signals generated using technical indicators, on-chain data, sentiment analysis and volume profiling.
+lib/features/trade_terminal/presentation/widgets/tools/advanced_chart_header_toolbar.dart|Show area chart
+lib/features/trade_terminal/presentation/widgets/tools/advanced_chart_header_toolbar.dart|Show candle chart
+lib/features/trade_terminal/presentation/widgets/tools/advanced_chart_header_toolbar.dart|Show line chart
 lib/features/trade_terminal/presentation/widgets/tools/advanced_tools_tabs_sheets.dart|${order.amount.toStringAsFixed(1)} BTC @ \$${_formatMoney(order.price)}
 lib/features/trade_terminal/presentation/widgets/tools/advanced_tools_tabs_sheets.dart|${order.remaining.toStringAsFixed(1)} @ \$${_formatMoney(order.price)}
 lib/features/trade_terminal/presentation/widgets/tools/advanced_tools_tabs_sheets.dart|${orders.length} open orders selected for batch action.
@@ -256,7 +265,10 @@ lib/features/trade_terminal/presentation/widgets/tools/execution_quality_tabs.da
 lib/features/trade_terminal/presentation/widgets/tools/execution_quality_tabs.dart|Modify open order price or quantity
 lib/features/trade_terminal/presentation/widgets/tools/execution_quality_tabs.dart|View detailed execution breakdown after order fills
 lib/features/wallet/presentation/phone/pages/tools/wallet_gas_optimizer_page.dart|$label is not connected yet.
+lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart|Address book save
+lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart|Address book save
 lib/features/wallet/presentation/widgets/tools/network_status_summary.dart|Refresh network status
+lib/features/wallet/presentation/widgets/tools/wallet_gas_optimizer_tips.dart|Set Gas Price Alert
 lib/features/wallet/presentation/widgets/tools/wallet_gas_optimizer_trends.dart|Historically, fees have often been lower between 2 AM - 6 AM UTC. Confirm live fees before signing.
 lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|42% of your portfolio is in BTC. Consider rebalancing to reduce single-asset risk.
 lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|Advisory snapshot only. Your wallet is ${snapshot.overallMessage}

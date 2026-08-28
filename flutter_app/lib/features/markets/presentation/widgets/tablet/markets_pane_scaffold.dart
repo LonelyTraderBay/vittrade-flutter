@@ -49,7 +49,8 @@ class MarketsPaneScaffold extends StatelessWidget {
       physics: onRefresh == null ? null : const AlwaysScrollableScrollPhysics(),
       child: VitPageContent(
         rhythm: rhythm,
-        padding: VitContentPadding.relaxed,
+        // density: compact quyết top padding + section gap (padding: sẽ bị
+        // density override toàn bộ — không truyền để khỏi gây hiểu nhầm).
         density: VitDensity.compact,
         fullBleed: true,
         children: children,
