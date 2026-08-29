@@ -127,3 +127,71 @@ List<String> pairChartTimeLabels(String timeframe, int points, int count) {
 
 /// Định dạng giá trục — 2 số thập phân, tabular để canh cột.
 String pairChartAxisLabel(double value) => value.toStringAsFixed(2);
+
+/// Một nến OHLC của chart pane (SC-044, Hướng 1 "Trading Desk" 2026-08-29).
+/// Bull = close >= open (thân RỖNG khi vẽ), bear = close < open (thân đặc)
+/// — khác biệt hình dạng, không phụ thuộc màu (a11y theo khuyến nghị chart
+/// tài chính).
+class PairCandle {
+  const PairCandle({
+    required this.open,
+    required this.high,
+    required this.low,
+    required this.close,
+  });
+
+  final double open;
+  final double high;
+  final double low;
+  final double close;
+
+  bool get bullish => close >= open;
+}
+
+/// Sinh chuỗi nến OHLC từ chuỗi close của [pairChartSeriesForTimeframe]:
+/// open của nến i = close của nến i−1 (nến đầu mở quanh close đầu), rây
+/// cao/thấp neo biên độ theo dải của timeframe + hạt LCG — deterministic
+/// theo (timeframe, seed), nến cuối đóng đúng giá hiện tại.
+List<PairCandle> pairCandleSeriesForTimeframe(
+  List<double> baseSeries, {
+  required String timeframe,
+  required String seed,
+}) {
+  final closes = pairChartSeriesForTimeframe(
+    baseSeries,
+    timeframe: timeframe,
+    seed: seed,
+  );
+  if (closes.length < 2) return const [];
+  final minutes = pairTimeframeMinutes(timeframe);
+  final wickBand =
+      closes.last *
+      (minutes >= 43200
+          ? 0.012
+          : minutes >= 1440
+          ? 0.007
+          : minutes >= 240
+          ? 0.004
+          : 0.0018);
+  var state = _hashSeed('candle|$seed|$timeframe');
+  final candles = <PairCandle>[];
+  for (var index = 0; index < closes.length; index += 1) {
+    state = _nextRand(state);
+    final wickUp = ((state % 1000) / 1000) * wickBand;
+    state = _nextRand(state);
+    final wickDown = ((state % 1000) / 1000) * wickBand;
+    final close = closes[index];
+    final open = index == 0 ? closes.first : closes[index - 1];
+    final top = close > open ? close : open;
+    final bottom = close < open ? close : open;
+    candles.add(
+      PairCandle(
+        open: open,
+        high: top + wickUp + 1e-9,
+        low: bottom - wickDown - 1e-9,
+        close: close,
+      ),
+    );
+  }
+  return candles;
+}

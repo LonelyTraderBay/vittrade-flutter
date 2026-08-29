@@ -16,6 +16,8 @@ final class MarketsTabletKeys {
   static const pairPaneBuyCta = Key('sc044_pair_pane_buy_cta');
   static const pairPaneSellCta = Key('sc044_pair_pane_sell_cta');
   static const pairPaneFavorite = Key('sc044_pair_pane_favorite');
+  static const pairDeskRow = Key('sc044_pair_desk_row');
+  static const pairDeskFooter = Key('sc044_pair_desk_footer');
   static const tokenPaneContent = Key('sc045_token_pane_content');
   static const tokenStatsCard = Key('sc045_token_pane_stats_card');
   static const tokenChartLink = Key('sc045_token_pane_chart_link');

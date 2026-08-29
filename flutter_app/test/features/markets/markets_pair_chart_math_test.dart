@@ -94,4 +94,60 @@ void main() {
   test('nhãn trục giá 2 số thập phân', () {
     expect(pairChartAxisLabel(67543.219), '67543.22');
   });
+
+  // Hướng 1 'Trading Desk' (2026-08-29): chuỗi nến OHLC deterministic.
+  test('chuỗi nến: bất biến OHLC — high ≥ max(open,close), low ≤ min', () {
+    final candles = pairCandleSeriesForTimeframe(
+      [100, 102, 101, 103],
+      timeframe: '1H',
+      seed: 'btcusdt',
+    );
+    expect(candles.length, 72);
+    for (final candle in candles) {
+      expect(candle.high, greaterThanOrEqualTo(candle.open));
+      expect(candle.high, greaterThanOrEqualTo(candle.close));
+      expect(candle.low, lessThanOrEqualTo(candle.open));
+      expect(candle.low, lessThanOrEqualTo(candle.close));
+    }
+  });
+
+  test('chuỗi nến: open của nến i = close của nến i−1, nến cuối neo giá', () {
+    final base = <double>[100, 102, 101, 103.5];
+    final candles = pairCandleSeriesForTimeframe(
+      base,
+      timeframe: '4H',
+      seed: 'ethusdt',
+    );
+    for (var i = 1; i < candles.length; i++) {
+      expect(candles[i].open, closeTo(candles[i - 1].close, 1e-9));
+    }
+    expect(candles.last.close, base.last);
+  });
+
+  test('chuỗi nến deterministic theo (timeframe, seed)', () {
+    final a = pairCandleSeriesForTimeframe(
+      [100, 102],
+      timeframe: '1D',
+      seed: 'btcusdt',
+    );
+    final b = pairCandleSeriesForTimeframe(
+      [100, 102],
+      timeframe: '1D',
+      seed: 'btcusdt',
+    );
+    for (var i = 0; i < a.length; i++) {
+      expect(a[i].high, b[i].high);
+      expect(a[i].low, b[i].low);
+    }
+  });
+
+  test('chuỗi nến có nến bull (thân rỗng) và bear (thân đặc) hỗn hợp', () {
+    final candles = pairCandleSeriesForTimeframe(
+      [100, 102, 101, 103],
+      timeframe: '15m',
+      seed: 'bnbusdt',
+    );
+    expect(candles.any((candle) => candle.bullish), isTrue);
+    expect(candles.any((candle) => !candle.bullish), isTrue);
+  });
 }

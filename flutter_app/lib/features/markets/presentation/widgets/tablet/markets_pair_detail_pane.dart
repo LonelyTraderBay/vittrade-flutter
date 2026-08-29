@@ -123,101 +123,154 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
       ),
       data: (snapshot) {
         final pair = snapshot.pair;
-        return MarketsPaneScaffold(
-          title: pair.symbol,
-          subtitle: 'Phân tích cặp giao dịch',
-          onBack: () => goBackOrFallback(
-            context,
-            fallbackPath: AppRoutePaths.markets,
-            mode: BackNavigationMode.historyThenFallback,
-          ),
-          onRefresh: _refresh,
-          scrollKey: MarketsTabletKeys.pairPaneContent,
-          headerActions: [
-            VitHeaderActionItem(
-              key: MarketsTabletKeys.pairPaneFavorite,
-              type: favorite
-                  ? VitHeaderActionType.favoriteOn
-                  : VitHeaderActionType.favoriteOff,
-              tooltip: favorite
-                  ? 'Bỏ theo dõi ${pair.symbol}'
-                  : 'Theo dõi ${pair.symbol}',
-              onPressed: () => ref
-                  .read(marketListStateControllerProvider.notifier)
-                  .toggleFavorite(pair.id),
-            ),
-          ],
-          children: [
-            MarketsPairPriceOverviewPanel(pair: pair),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _PairViewTabs(
-                  activeView: _activeView,
-                  onChanged: (view) => setState(() => _activeView = view),
+        // Hướng 1 "Trading Desk": pane đủ rộng (≥ pairDeskSplitMinWidth)
+        // tách 2 cột + dải đáy ghim; hẹp hơn giữ khuôn 1 cột 4 tab. Phân
+        // nhánh theo CHIỀU RỘNG pane một lần ở đây — không đụng quy tắc
+        // zero-orientation-dispatch (thay đổi kích thước window relayout,
+        // không đổi composition theo hướng xoay).
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final desk =
+                constraints.maxWidth >=
+                MarketsSpacingTokens.pairDeskSplitMinWidth;
+            return MarketsPaneScaffold(
+              title: pair.symbol,
+              subtitle: 'Phân tích cặp giao dịch',
+              onBack: () => goBackOrFallback(
+                context,
+                fallbackPath: AppRoutePaths.markets,
+                mode: BackNavigationMode.historyThenFallback,
+              ),
+              onRefresh: _refresh,
+              scrollKey: MarketsTabletKeys.pairPaneContent,
+              headerActions: [
+                VitHeaderActionItem(
+                  key: MarketsTabletKeys.pairPaneFavorite,
+                  type: favorite
+                      ? VitHeaderActionType.favoriteOn
+                      : VitHeaderActionType.favoriteOff,
+                  tooltip: favorite
+                      ? 'Bỏ theo dõi ${pair.symbol}'
+                      : 'Theo dõi ${pair.symbol}',
+                  onPressed: () => ref
+                      .read(marketListStateControllerProvider.notifier)
+                      .toggleFavorite(pair.id),
                 ),
-                if (_activeView == MarketsPairView.chart)
-                  _PairChartWorkspace(
-                    series: snapshot.activeChartSeries,
-                    pairId: pair.id,
-                    positive: pair.change24h >= 0,
-                    timeframe: _timeframe,
-                    onTimeframeChanged: (value) =>
-                        setState(() => _timeframe = value),
-                    indicators: _indicators,
-                    onIndicatorToggle: (value) => setState(() {
-                      if (_indicators.contains(value)) {
-                        _indicators.remove(value);
-                      } else {
-                        _indicators.add(value);
-                      }
-                    }),
-                    onAdvanced: () => unawaited(
-                      context.push(AppRoutePaths.tradeAdvancedChart(pair.id)),
-                    ),
+              ],
+              footer: desk
+                  ? _PairDeskFooter(
+                      pair: pair,
+                      onBuy: () => _goTrade('buy'),
+                      onSell: () => _goTrade('sell'),
+                    )
+                  : null,
+              children: [
+                MarketsPairPriceOverviewPanel(pair: pair),
+                if (desk)
+                  _PairDeskRow(
+                    snapshot: snapshot,
+                    activeView: _activeView,
+                    onViewChanged: (view) => setState(() => _activeView = view),
+                    workspace: _activeView == MarketsPairView.depth
+                        ? _PairDepthWorkspace(pairId: widget.pairId)
+                        : _PairChartWorkspace(
+                            series: snapshot.activeChartSeries,
+                            pairId: pair.id,
+                            positive: pair.change24h >= 0,
+                            timeframe: _timeframe,
+                            onTimeframeChanged: (value) =>
+                                setState(() => _timeframe = value),
+                            indicators: _indicators,
+                            onIndicatorToggle: (value) => setState(() {
+                              if (_indicators.contains(value)) {
+                                _indicators.remove(value);
+                              } else {
+                                _indicators.add(value);
+                              }
+                            }),
+                            onAdvanced: () => unawaited(
+                              context.push(
+                                AppRoutePaths.tradeAdvancedChart(pair.id),
+                              ),
+                            ),
+                            desk: true,
+                          ),
                   )
-                else if (_activeView == MarketsPairView.orderBook)
-                  MarketsPairOrderBookPanel(snapshot: snapshot)
-                else if (_activeView == MarketsPairView.trades)
-                  MarketsPairTradesPanel(trades: snapshot.recentTrades)
                 else
-                  _PairDepthWorkspace(pairId: widget.pairId),
-              ],
-            ),
-            const _PairRiskWarning(),
-            VitPageSection(
-              // 2 VitCard cách nhau đúng cardGap (13) — gap mặc định tight
-              // (8) từng ép sát 2 link card giữa các section gap 13.
-              customGap: AppSpacing.cardGap,
-              children: [
-                // Thứ tự bậc thông tin 2026-08-29: phân tích (Thông tin coin)
-                // đứng trước khuyến nghị giao dịch (Mua định kỳ); phân tích
-                // độ sâu đã gom thành tab "Độ sâu" của pane này.
-                MarketsPairLinkCard(
-                  icon: Icons.info_outline_rounded,
-                  iconColor: marketListPrimary,
-                  title: 'Thông tin ${pair.baseAsset}',
-                  subtitle: 'Tokenomics · On-chain · Dự án',
-                  onTap: () => openMarketsDetailRoute(
-                    context,
-                    AppRoutePaths.pairInfo(pair.id),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _PairViewTabs(
+                        activeView: _activeView,
+                        onChanged: (view) => setState(() => _activeView = view),
+                      ),
+                      if (_activeView == MarketsPairView.chart)
+                        _PairChartWorkspace(
+                          series: snapshot.activeChartSeries,
+                          pairId: pair.id,
+                          positive: pair.change24h >= 0,
+                          timeframe: _timeframe,
+                          onTimeframeChanged: (value) =>
+                              setState(() => _timeframe = value),
+                          indicators: _indicators,
+                          onIndicatorToggle: (value) => setState(() {
+                            if (_indicators.contains(value)) {
+                              _indicators.remove(value);
+                            } else {
+                              _indicators.add(value);
+                            }
+                          }),
+                          onAdvanced: () => unawaited(
+                            context.push(
+                              AppRoutePaths.tradeAdvancedChart(pair.id),
+                            ),
+                          ),
+                        )
+                      else if (_activeView == MarketsPairView.orderBook)
+                        MarketsPairOrderBookPanel(snapshot: snapshot)
+                      else if (_activeView == MarketsPairView.trades)
+                        MarketsPairTradesPanel(trades: snapshot.recentTrades)
+                      else
+                        _PairDepthWorkspace(pairId: widget.pairId),
+                    ],
                   ),
+                const _PairRiskWarning(),
+                VitPageSection(
+                  // 2 VitCard cách nhau đúng cardGap (13) — gap mặc định tight
+                  // (8) từng ép sát 2 link card giữa các section gap 13.
+                  customGap: AppSpacing.cardGap,
+                  children: [
+                    // Thứ tự bậc thông tin 2026-08-29: phân tích (Thông tin coin)
+                    // đứng trước khuyến nghị giao dịch (Mua định kỳ); phân tích
+                    // độ sâu đã gom thành tab "Độ sâu" của pane này.
+                    MarketsPairLinkCard(
+                      icon: Icons.info_outline_rounded,
+                      iconColor: marketListPrimary,
+                      title: 'Thông tin ${pair.baseAsset}',
+                      subtitle: 'Tokenomics · On-chain · Dự án',
+                      onTap: () => openMarketsDetailRoute(
+                        context,
+                        AppRoutePaths.pairInfo(pair.id),
+                      ),
+                    ),
+                    MarketsPairLinkCard(
+                      icon: Icons.repeat_rounded,
+                      iconColor: AppColors.accent,
+                      title: 'Mua định kỳ ${pair.baseAsset}',
+                      subtitle: 'Tự động mua theo lịch · Giảm rủi ro biến động',
+                      onTap: () => unawaited(context.push(AppRoutePaths.dca)),
+                    ),
+                  ],
                 ),
-                MarketsPairLinkCard(
-                  icon: Icons.repeat_rounded,
-                  iconColor: AppColors.accent,
-                  title: 'Mua định kỳ ${pair.baseAsset}',
-                  subtitle: 'Tự động mua theo lịch · Giảm rủi ro biến động',
-                  onTap: () => unawaited(context.push(AppRoutePaths.dca)),
-                ),
+                if (!desk)
+                  _PairTradeCtas(
+                    pairId: pair.id,
+                    onBuy: () => _goTrade('buy'),
+                    onSell: () => _goTrade('sell'),
+                  ),
               ],
-            ),
-            _PairTradeCtas(
-              pairId: pair.id,
-              onBuy: () => _goTrade('buy'),
-              onSell: () => _goTrade('sell'),
-            ),
-          ],
+            );
+          },
         );
       },
     );

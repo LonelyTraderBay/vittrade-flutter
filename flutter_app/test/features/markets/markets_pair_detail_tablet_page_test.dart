@@ -68,7 +68,9 @@ void main() {
   testWidgets('SC-044 switching view tabs swaps chart / order book / trades', (
     tester,
   ) async {
-    await pumpPairPane(tester);
+    // Khuôn 1 cột 4 tab chỉ còn ở pane HẸP — desk rộng đã tách sổ lệnh +
+    // giao dịch thành cột phụ luôn hiện (test desk riêng bên dưới).
+    await pumpPairPane(tester, size: const Size(600, 820));
 
     await tester.tap(find.byKey(MarketsTabletKeys.pairViewTab('orderBook')));
     await tester.pumpAndSettle();
@@ -81,6 +83,31 @@ void main() {
 
     expect(find.text('Khối lượng'), findsOneWidget);
     expect(find.text('Thời gian'), findsOneWidget);
+  });
+
+  // Hướng 1 "Trading Desk" (2026-08-29): pane đủ rộng tách 2 cột — chart
+  // nến và SỔ LỆNH + GIAO DỊCH cùng nhìn thấy một lần, kèm dải đáy ghim
+  // giá + MUA/BÁN không cuộn.
+  testWidgets('SC-044 desk composition: chart beside order book + trades '
+      'with pinned trade footer', (tester) async {
+    await pumpPairPane(tester);
+
+    expect(find.byKey(MarketsTabletKeys.pairDeskRow), findsOneWidget);
+    expect(find.byKey(MarketsTabletKeys.pairPaneChart), findsOneWidget);
+    // Sổ lệnh + giao dịch LUÔN hiển thị cạnh chart — không cần đổi tab.
+    expect(find.text('Sổ lệnh BTC/USDT'), findsOneWidget);
+    expect(find.text('Khối lượng'), findsOneWidget);
+    expect(find.text('Thời gian'), findsOneWidget);
+    // Tab thu gọn còn Biểu đồ | Độ sâu — tab Sổ lệnh/Giao dịch không còn.
+    expect(find.byKey(MarketsTabletKeys.pairViewTab('depth')), findsOneWidget);
+    expect(
+      find.byKey(MarketsTabletKeys.pairViewTab('orderBook')),
+      findsNothing,
+    );
+    // Dải đáy ghim: giá + MUA/BÁN ngoài scroll.
+    expect(find.byKey(MarketsTabletKeys.pairDeskFooter), findsOneWidget);
+    expect(find.byKey(MarketsTabletKeys.pairPaneBuyCta), findsOneWidget);
+    expect(find.byKey(MarketsTabletKeys.pairPaneSellCta), findsOneWidget);
   });
 
   testWidgets('SC-044 depth tab embeds the depth analysis inside the pane', (
@@ -114,14 +141,21 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('MA (7)'), findsNothing);
 
-    // Bật Vol — legend khối lượng xuất hiện.
+    // Bật Vol — legend khối lượng xuất hiện (desk luôn hiện header bảng
+    // giao dịch cùng chữ — scope theo VitLegendItem của legend chart).
     await tester.tap(
       find.byWidgetPredicate(
         (widget) => widget is VitChoicePill && widget.label == 'Vol',
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Khối lượng'), findsOneWidget);
+    expect(
+      find.ancestor(
+        of: find.text('Khối lượng'),
+        matching: find.byType(VitLegendItem),
+      ),
+      findsOneWidget,
+    );
   });
 
   testWidgets('SC-044 buy CTA pushes the trade screen with side=buy', (
@@ -159,11 +193,14 @@ void main() {
   // S7 (2026-08-29): khóa layout thật của nhịp dọc pane — scaffold owns
   // section gap nên khoảng giữa các section phải ĐÚNG 13dp (tier
   // standard), không còn margin Phone chồng lên; lề trái các khối thẳng
-  // hàng ở contentPad.
+  // hàng ở contentPad. Desk (rộng): chart nằm trong desk row — gap đo từ
+  // đáy DESK ROW (cột phụ có thể cao hơn chart); khóa thêm cột phụ đứng
+  // CẠNH chart và footer ghim đáy.
   testWidgets('SC-044 pane section gaps follow the 13dp scaffold rhythm '
       '(S7 layout lock)', (tester) async {
     await pumpPairPane(tester);
 
+    final deskRow = tester.getRect(find.byKey(MarketsTabletKeys.pairDeskRow));
     final chart = tester.getRect(find.byKey(MarketsTabletKeys.pairPaneChart));
     final banner = tester.getRect(find.byType(VitBanner).first);
     final linkCards = find.ancestor(
@@ -174,18 +211,45 @@ void main() {
     final timeframe = tester.getRect(
       find.byType(VitPresetChipRow<String>).first,
     );
+    final footer = tester.getRect(find.byKey(MarketsTabletKeys.pairDeskFooter));
 
     expect(
-      banner.top - chart.bottom,
+      banner.top - deskRow.bottom,
       13,
       reason:
-          'Gap chart → banner cảnh báo phải đúng section gap 13dp '
+          'Gap desk row → banner cảnh báo phải đúng section gap 13dp '
           '(trước S7 từng stack thành 23dp).',
     );
     expect(
       link1.top - banner.bottom,
       13,
       reason: 'Gap banner → link card phải đúng 13dp (từng 26dp).',
+    );
+
+    // Desk: chart nằm gọn trong cột chính của desk row.
+    expect(chart.top, greaterThanOrEqualTo(deskRow.top));
+    expect(chart.bottom, lessThanOrEqualTo(deskRow.bottom));
+
+    // Cột phụ (sổ lệnh) đứng CẠNH chart — không chồng, không xuống dòng.
+    final orderBook = tester.getRect(
+      find
+          .ancestor(
+            of: find.text('Sổ lệnh BTC/USDT'),
+            matching: find.byType(VitCard),
+          )
+          .first,
+    );
+    expect(
+      orderBook.left,
+      greaterThan(chart.right),
+      reason: 'Sổ lệnh phải nằm bên phải chart (2 cột desk), không stacked.',
+    );
+
+    // Footer ghim đáy pane — không cuộn theo nội dung.
+    expect(
+      footer.bottom,
+      greaterThan(780),
+      reason: 'Dải giá + MUA/BÁN phải ghim sát đáy viewport (820dp).',
     );
 
     // Lề trái: hàng khung giờ, khung chart và khối giá thẳng hàng

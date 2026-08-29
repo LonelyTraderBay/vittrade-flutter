@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
@@ -28,6 +29,9 @@ class MarketsPaneScaffold extends StatelessWidget {
     this.onRefresh,
     this.headerActions,
     this.scrollKey,
+    // Dải ghim dưới scroll (không cuộn) — dùng cho desk footer của pane
+    // pair (giá + MUA/BÁN luôn nhìn thấy). Null = không có dải ghim.
+    this.footer,
     // Detail scroll ⇒ tier standard (section gap 13dp) theo bảng
     // Page-Rhythm; pane chart/terminal (depth) khai báo flush riêng.
     this.rhythm = VitPageRhythm.standard,
@@ -41,6 +45,7 @@ class MarketsPaneScaffold extends StatelessWidget {
   final List<VitHeaderActionItem>? headerActions;
   final VitPageRhythm rhythm;
   final Key? scrollKey;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,13 @@ class MarketsPaneScaffold extends StatelessWidget {
             },
           ),
         Expanded(child: body),
+        if (footer != null) ...[
+          const Divider(
+            height: AppSpacing.dividerHairline,
+            color: AppColors.divider,
+          ),
+          footer!,
+        ],
       ],
     );
   }

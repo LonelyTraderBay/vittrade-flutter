@@ -1340,6 +1340,23 @@ final class MarketsSpacingTokens {
     AppSpacing.contentPad,
     AppSpacing.x2,
   );
+  // Hướng 1 "Trading Desk" (2026-08-29): pane ≥ 700dp tách 2 cột — chart
+  // nến cao 400 + cột phụ 300 (sổ lệnh + giao dịch luôn hiện); dưới ngưỡng
+  // giữ khuôn 1 cột 4 tab như cũ. Ngưỡng ĐO THỰC (widget test, không ước
+  // lượng): mặt 600/768/1024 → pane 464/632/556 (hẹp); mặt 1180/1280 →
+  // pane 712/812 (desk) — tablet 1280dp thực luôn vào desk.
+  static const double pairDeskSplitMinWidth = 700;
+  static const double pairDeskChartHeight = 400;
+  static const double pairDeskSideWidth = 300;
+  static const double pairDeskGutter = AppSpacing.pageRhythmStandardSectionGap;
+  // Dải đáy ghim của desk: giá gọn + MUA/BÁN luôn nhìn thấy, không cuộn.
+  static const EdgeInsets pairDeskFooterPadding = EdgeInsets.fromLTRB(
+    AppSpacing.contentPad,
+    AppSpacing.x2,
+    AppSpacing.contentPad,
+    AppSpacing.x2,
+  );
+  static const double pairDeskFooterGap = AppSpacing.x3;
   static const double pairDetailNativeBottomExtra = AppSpacing.contentPad;
   static const double pairDetailVisualBottomExtra = 54;
   // A11Y-2: matches VitHeaderActionButton's 44dp minimum tap target so the

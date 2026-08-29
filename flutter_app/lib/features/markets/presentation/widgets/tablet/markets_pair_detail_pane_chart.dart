@@ -1,9 +1,12 @@
 part of 'markets_pair_detail_pane.dart';
 
-/// Khung nhìn biểu đồ: hàng timeframe + hàng chỉ báo + chart giá thật
-/// (painter riêng: grid + nhãn giá + volume + MA) — mọi nút hiển thị đều
-/// wired thật (P1 "một UI chi tiết coin hoàn chỉnh" 2026-08-29: timeframe
-/// đổi chuỗi dữ liệu, MA vẽ đường thật, chỉ indicator đã wired mới hiển).
+/// Khung nhìn biểu đồ giá (SC-044): toolbar khung giờ + hàng chỉ báo +
+/// chú giải + chart NẾN OHLC thật — mọi nút hiển thị đều wired (timeframe
+/// đổi chuỗi dữ liệu, MA vẽ SMA(7) thật, Vol vẽ dải khối lượng riêng).
+///
+/// [desk] bật chế độ "Trading Desk" (Hướng 1, 2026-08-29): chiều cao chart
+/// 400dp cho cột chính của bố cục 2 cột; tắt thì giữ 220dp của khuôn 1
+/// cột 4 tab (pane hẹp).
 class _PairChartWorkspace extends StatelessWidget {
   const _PairChartWorkspace({
     required this.series,
@@ -14,6 +17,7 @@ class _PairChartWorkspace extends StatelessWidget {
     required this.indicators,
     required this.onIndicatorToggle,
     required this.onAdvanced,
+    this.desk = false,
   });
 
   final List<double> series;
@@ -24,21 +28,21 @@ class _PairChartWorkspace extends StatelessWidget {
   final Set<String> indicators;
   final ValueChanged<String> onIndicatorToggle;
   final VoidCallback onAdvanced;
+  final bool desk;
 
   @override
   Widget build(BuildContext context) {
-    final chartSeries = pairChartSeriesForTimeframe(
+    final candles = pairCandleSeriesForTimeframe(
       series,
       timeframe: timeframe,
       seed: pairId,
     );
+    final closes = [for (final candle in candles) candle.close];
     final showMa = indicators.contains('MA');
-    final maSeries = showMa
-        ? computeMovingAverage(chartSeries)
-        : const <double>[];
+    final maSeries = showMa ? computeMovingAverage(closes) : const <double>[];
     final showVolume = indicators.contains('Vol');
     final volumes = showVolume
-        ? computeVolumeProfile(chartSeries, seed: '$pairId|$timeframe')
+        ? computeVolumeProfile(closes, seed: '$pairId|$timeframe')
         : const <double>[];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -134,14 +138,15 @@ class _PairChartWorkspace extends StatelessWidget {
           padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
           child: SizedBox(
             key: MarketsTabletKeys.pairPaneChart,
-            height: MarketsSpacingTokens.pairDetailChartHeight,
+            height: desk
+                ? MarketsSpacingTokens.pairDeskChartHeight
+                : MarketsSpacingTokens.pairDetailChartHeight,
             child: CustomPaint(
               size: Size.infinite,
               painter: _PairChartPainter(
-                series: chartSeries,
+                candles: candles,
                 maSeries: maSeries,
                 volumes: volumes,
-                positive: positive,
                 timeframe: timeframe,
               ),
             ),
@@ -152,58 +157,70 @@ class _PairChartWorkspace extends StatelessWidget {
   }
 }
 
-/// Painter chart giá của pane chi tiết cặp — grid ngang + nhãn giá hai bên +
-/// fill gradient theo hướng phiên + cột khối lượng + đường MA (tuỳ chọn) +
-/// nhãn thời gian tương đối đáy. Nhịp vẽ theo khuôn `_DepthChartPainter`.
+/// Painter chart NẾN của pane chi tiết cặp — khu vực giá (grid ngang +
+/// nhãn giá phải) tách rõ với dải KHỐI LƯỢNG riêng phía dưới (40% opacity
+/// theo khuyến nghị chart tài chính), nến bull thân RỖNG / bear thân ĐẶC
+/// (khác hình dạng, không phụ thuộc màu — a11y), đường MA tuỳ chọn, nhãn
+/// thời gian tương đối đáy.
 class _PairChartPainter extends CustomPainter {
   const _PairChartPainter({
-    required this.series,
+    required this.candles,
     required this.maSeries,
     required this.volumes,
-    required this.positive,
     required this.timeframe,
   });
 
-  final List<double> series;
+  final List<PairCandle> candles;
   final List<double> maSeries;
   final List<double> volumes;
-  final bool positive;
   final String timeframe;
 
   static const double _axisWidth = 56;
   static const double _labelHeight = 22;
+  static const double _volumeShare = 0.22;
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (series.length < 2) return;
+    if (candles.length < 2) return;
     // Chỉ reserve dải PHẢI cho nhãn giá — không reserve trái (từng để
     // 56dp trống hoàn toàn bên trái chart, lệch lẻ với các hàng trên).
+    final volumeHeight = size.height * _volumeShare;
     final plot = Rect.fromLTWH(
       0,
       0,
       size.width - _axisWidth,
-      size.height - _labelHeight,
+      size.height - _labelHeight - volumeHeight,
+    );
+    final volumeRect = Rect.fromLTWH(
+      plot.left,
+      plot.bottom,
+      plot.width,
+      volumeHeight,
     );
 
-    var minValue = series.reduce((a, b) => a < b ? a : b);
-    var maxValue = series.reduce((a, b) => a > b ? a : b);
+    var minValue = candles.first.low;
+    var maxValue = candles.first.high;
+    for (final candle in candles) {
+      if (candle.low < minValue) minValue = candle.low;
+      if (candle.high > maxValue) maxValue = candle.high;
+    }
     if (maSeries.isNotEmpty) {
       for (final value in maSeries) {
         if (value < minValue) minValue = value;
         if (value > maxValue) maxValue = value;
       }
     }
-    final range = (maxValue - minValue) * 1.08 + 1e-9;
+    final range = (maxValue - minValue) * 1.06 + 1e-9;
 
-    Offset pointFor(int index, double value, int count) => Offset(
-      plot.left + plot.width * index / (count - 1),
+    Offset pointFor(int index, double value) => Offset(
+      plot.left + plot.width * (index + 0.5) / candles.length,
       plot.bottom - ((value - minValue) / range) * plot.height,
     );
 
     _paintGridAndAxisLabels(canvas, plot, minValue, range);
-    _paintVolumeBars(canvas, plot);
-    _paintPriceLineAndFill(canvas, plot, pointFor);
-    _paintMaLine(canvas, plot, pointFor);
+    _paintVolumeBars(canvas, volumeRect);
+    _paintCandles(canvas, plot, pointFor);
+    _paintMaLine(canvas, pointFor);
     _paintTimeLabels(canvas, plot);
   }
 
@@ -227,79 +244,84 @@ class _PairChartPainter extends CustomPainter {
     }
   }
 
-  void _paintVolumeBars(Canvas canvas, Rect plot) {
+  void _paintVolumeBars(Canvas canvas, Rect rect) {
+    // Đường chân tách khu khối lượng với khu giá — cùng chất grid.
+    canvas.drawLine(
+      Offset(rect.left, rect.top),
+      Offset(rect.right, rect.top),
+      Paint()..color = AppColors.borderSolid.withValues(alpha: .5),
+    );
     if (volumes.isEmpty) return;
     final maxVolume = volumes.reduce((a, b) => a > b ? a : b) + 1e-9;
-    final barWidth = (plot.width / volumes.length * 0.6).clamp(1.0, 8.0);
-    final barPaint = Paint()
-      ..color = (positive ? AppColors.buy : AppColors.sell).withValues(
-        alpha: .35,
-      );
+    final barWidth = (rect.width / candles.length * 0.62).clamp(1.0, 10.0);
     for (var index = 0; index < volumes.length; index += 1) {
-      final height = (volumes[index] / maxVolume) * plot.height * 0.22;
-      final x = plot.left + plot.width * index / (volumes.length - 1);
+      // volumes[i] = biên độ chuyển giá nến i → i+1 ⇒ cột nằm giữa nến i+1.
+      final candle = candles[index + 1];
+      final x = rect.left + rect.width * (index + 1 + 0.5) / candles.length;
+      final height = (volumes[index] / maxVolume) * rect.height;
+      final barPaint = Paint()
+        ..color = (candle.bullish ? AppColors.buy : AppColors.sell).withValues(
+          alpha: .4,
+        );
       canvas.drawRect(
-        Rect.fromLTWH(x - barWidth / 2, plot.bottom - height, barWidth, height),
+        Rect.fromLTWH(x - barWidth / 2, rect.bottom - height, barWidth, height),
         barPaint,
       );
     }
   }
 
-  void _paintPriceLineAndFill(
+  void _paintCandles(
     Canvas canvas,
     Rect plot,
-    Offset Function(int, double, int) pointFor,
+    Offset Function(int, double) pointFor,
   ) {
-    final line = Path()
-      ..moveTo(pointFor(0, series[0], series.length).dx, plot.top);
-    for (var index = 0; index < series.length; index += 1) {
-      final point = pointFor(index, series[index], series.length);
-      line.lineTo(point.dx, point.dy);
+    final bodyWidth = (plot.width / candles.length * 0.62).clamp(1.0, 10.0);
+    for (var index = 0; index < candles.length; index += 1) {
+      final candle = candles[index];
+      final color = candle.bullish ? AppColors.buy : AppColors.sell;
+      final x = pointFor(index, candle.close).dx;
+      final wickPaint = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1
+        ..color = color;
+      canvas.drawLine(
+        Offset(x, pointFor(index, candle.high).dy),
+        Offset(x, pointFor(index, candle.low).dy),
+        wickPaint,
+      );
+      final bodyTop = pointFor(
+        index,
+        candle.open > candle.close ? candle.open : candle.close,
+      ).dy;
+      final bodyBottom = pointFor(
+        index,
+        candle.open > candle.close ? candle.close : candle.open,
+      ).dy;
+      final body = Rect.fromLTWH(
+        x - bodyWidth / 2,
+        bodyTop,
+        bodyWidth,
+        (bodyBottom - bodyTop).clamp(1.0, double.infinity),
+      );
+      if (candle.bullish) {
+        // Bull: thân RỖNG (viền) — khác hình dạng với bear (đặc).
+        canvas.drawRect(body, wickPaint);
+      } else {
+        canvas.drawRect(body, Paint()..color = color);
+      }
     }
-    final fill = Path.from(line)
-      ..lineTo(
-        pointFor(series.length - 1, series.last, series.length).dx,
-        plot.bottom,
-      )
-      ..lineTo(plot.left, plot.bottom)
-      ..close();
-    final fillPaint = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          (positive ? AppColors.buy : AppColors.sell).withValues(alpha: .22),
-          (positive ? AppColors.buy : AppColors.sell).withValues(alpha: .02),
-        ],
-      ).createShader(plot);
-    canvas.drawPath(fill, fillPaint);
-
-    final linePaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2
-      ..strokeCap = StrokeCap.round
-      ..color = positive ? AppColors.buy : AppColors.sell;
-    canvas.drawPath(line, linePaint);
   }
 
-  void _paintMaLine(
-    Canvas canvas,
-    Rect plot,
-    Offset Function(int, double, int) pointFor,
-  ) {
+  void _paintMaLine(Canvas canvas, Offset Function(int, double) pointFor) {
     if (maSeries.length < 2) return;
-    final period = series.length - maSeries.length + 1;
+    final period = candles.length - maSeries.length + 1;
     final path = Path()
       ..moveTo(
-        pointFor(period - 1, maSeries[0], series.length).dx,
-        pointFor(period - 1, maSeries[0], series.length).dy,
+        pointFor(period - 1, maSeries[0]).dx,
+        pointFor(period - 1, maSeries[0]).dy,
       );
     for (var index = 1; index < maSeries.length; index += 1) {
-      final point = pointFor(
-        period - 1 + index,
-        maSeries[index],
-        series.length,
-      );
+      final point = pointFor(period - 1 + index, maSeries[index]);
       path.lineTo(point.dx, point.dy);
     }
     final maPaint = Paint()
@@ -310,7 +332,7 @@ class _PairChartPainter extends CustomPainter {
   }
 
   void _paintTimeLabels(Canvas canvas, Rect plot) {
-    final labels = pairChartTimeLabels(timeframe, series.length, 4);
+    final labels = pairChartTimeLabels(timeframe, candles.length, 4);
     for (var index = 0; index < labels.length; index += 1) {
       final x = plot.left + plot.width * index / (labels.length - 1);
       _drawLabel(
@@ -348,9 +370,8 @@ class _PairChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _PairChartPainter oldDelegate) =>
-      oldDelegate.series != series ||
+      oldDelegate.candles != candles ||
       oldDelegate.maSeries != maSeries ||
       oldDelegate.volumes != volumes ||
-      oldDelegate.positive != positive ||
       oldDelegate.timeframe != timeframe;
 }

@@ -114,14 +114,25 @@ class _PriceStat extends StatelessWidget {
   }
 }
 
-/// Port tablet của `_ViewTabs` Phone — VitTabBar underline 4 khung nhìn
+/// Port tablet của `_ViewTabs` Phone — VitTabBar underline các khung nhìn
 /// (Biểu đồ / Sổ lệnh / Giao dịch / Độ sâu), key theo
-/// `MarketsTabletKeys.pairViewTab`.
+/// `MarketsTabletKeys.pairViewTab`. [views] thu gọn danh sách tab: desk
+/// 2 cột chỉ còn Biểu đồ | Độ sâu (Sổ lệnh + Giao dịch đã lên cột phụ).
 class _PairViewTabs extends StatelessWidget {
-  const _PairViewTabs({required this.activeView, required this.onChanged});
+  const _PairViewTabs({
+    required this.activeView,
+    required this.onChanged,
+    this.views = const [
+      MarketsPairView.chart,
+      MarketsPairView.orderBook,
+      MarketsPairView.trades,
+      MarketsPairView.depth,
+    ],
+  });
 
   final MarketsPairView activeView;
   final ValueChanged<MarketsPairView> onChanged;
+  final List<MarketsPairView> views;
 
   @override
   Widget build(BuildContext context) {
@@ -137,30 +148,26 @@ class _PairViewTabs extends StatelessWidget {
                 variant: VitTabBarVariant.underline,
                 onChanged: (key) => onChanged(marketsPairViewFromKey(key)),
                 tabs: [
-                  VitTabItem(
-                    key: 'chart',
-                    label: 'Biểu đồ',
-                    icon: Icons.show_chart_rounded,
-                    widgetKey: MarketsTabletKeys.pairViewTab('chart'),
-                  ),
-                  VitTabItem(
-                    key: 'orderBook',
-                    label: 'Sổ lệnh',
-                    icon: Icons.bar_chart_rounded,
-                    widgetKey: MarketsTabletKeys.pairViewTab('orderBook'),
-                  ),
-                  VitTabItem(
-                    key: 'trades',
-                    label: 'Giao dịch',
-                    icon: Icons.currency_exchange_rounded,
-                    widgetKey: MarketsTabletKeys.pairViewTab('trades'),
-                  ),
-                  VitTabItem(
-                    key: 'depth',
-                    label: 'Độ sâu',
-                    icon: Icons.layers_rounded,
-                    widgetKey: MarketsTabletKeys.pairViewTab('depth'),
-                  ),
+                  for (final view in views)
+                    VitTabItem(
+                      key: marketsPairViewKey(view),
+                      label: switch (view) {
+                        MarketsPairView.chart => 'Biểu đồ',
+                        MarketsPairView.orderBook => 'Sổ lệnh',
+                        MarketsPairView.trades => 'Giao dịch',
+                        MarketsPairView.depth => 'Độ sâu',
+                      },
+                      icon: switch (view) {
+                        MarketsPairView.chart => Icons.show_chart_rounded,
+                        MarketsPairView.orderBook => Icons.bar_chart_rounded,
+                        MarketsPairView.trades =>
+                          Icons.currency_exchange_rounded,
+                        MarketsPairView.depth => Icons.layers_rounded,
+                      },
+                      widgetKey: MarketsTabletKeys.pairViewTab(
+                        marketsPairViewKey(view),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -170,6 +177,131 @@ class _PairViewTabs extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Hàng desk 2 cột (Hướng 1 "Trading Desk", 2026-08-29): cột chính co giãn
+/// = mini-tab (Biểu đồ | Độ sâu) + workspace; cột phụ cố định 300dp =
+/// SỔ LỆNH + GIAO DỊCH luôn hiển thị cạnh chart — terminal thật, không
+/// phải đổi tab để xem. Chỉ render khi pane ≥
+/// [MarketsSpacingTokens.pairDeskSplitMinWidth].
+class _PairDeskRow extends StatelessWidget {
+  const _PairDeskRow({
+    required this.snapshot,
+    required this.activeView,
+    required this.onViewChanged,
+    required this.workspace,
+  });
+
+  final MarketPairDetailSnapshot snapshot;
+  final MarketsPairView activeView;
+  final ValueChanged<MarketsPairView> onViewChanged;
+  final Widget workspace;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      key: MarketsTabletKeys.pairDeskRow,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _PairViewTabs(
+                activeView: activeView,
+                onChanged: onViewChanged,
+                views: const [MarketsPairView.chart, MarketsPairView.depth],
+              ),
+              workspace,
+            ],
+          ),
+        ),
+        const SizedBox(width: MarketsSpacingTokens.pairDeskGutter),
+        SizedBox(
+          width: MarketsSpacingTokens.pairDeskSideWidth,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              MarketsPairOrderBookPanel(snapshot: snapshot),
+              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              MarketsPairTradesPanel(trades: snapshot.recentTrades),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Dải đáy GHIM của desk (không cuộn theo nội dung phân tích): giá hiện
+/// tại + pill biến động + MUA/BÁN luôn trong tầm mắt — đúng hành vi
+/// terminal; render qua `MarketsPaneScaffold.footer`.
+class _PairDeskFooter extends StatelessWidget {
+  const _PairDeskFooter({
+    required this.pair,
+    required this.onBuy,
+    required this.onSell,
+  });
+
+  final MarketPair pair;
+  final VoidCallback onBuy;
+  final VoidCallback onSell;
+
+  @override
+  Widget build(BuildContext context) {
+    final positive = pair.change24h >= 0;
+    return Padding(
+      key: MarketsTabletKeys.pairDeskFooter,
+      padding: MarketsSpacingTokens.pairDeskFooterPadding,
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    formatMarketPriceFixed2(pair.price),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.body.copyWith(
+                      fontWeight: AppTextStyles.bold,
+                      fontFeatures: AppTextStyles.tabularFigures,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.x2),
+                VitAccentPill(
+                  label:
+                      '${positive ? '▲' : '▼'} ${pair.change24h.abs().toStringAsFixed(2)}%',
+                  accentColor: positive ? AppColors.buy : AppColors.sell,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: MarketsSpacingTokens.pairDeskFooterGap),
+          Expanded(
+            child: VitCtaButton(
+              key: MarketsTabletKeys.pairPaneBuyCta,
+              variant: VitCtaButtonVariant.success,
+              density: VitDensity.compact,
+              onPressed: onBuy,
+              child: const Text('MUA'),
+            ),
+          ),
+          const SizedBox(width: MarketsSpacingTokens.pairDeskFooterGap),
+          Expanded(
+            child: VitCtaButton(
+              key: MarketsTabletKeys.pairPaneSellCta,
+              variant: VitCtaButtonVariant.danger,
+              density: VitDensity.compact,
+              onPressed: onSell,
+              child: const Text('BÁN'),
+            ),
+          ),
+        ],
       ),
     );
   }
