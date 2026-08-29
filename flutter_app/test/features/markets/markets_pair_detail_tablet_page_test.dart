@@ -154,4 +154,51 @@ void main() {
     expect(find.byType(MarketsPairDetailPane), findsNothing);
     expect(find.byType(MarketsTokenInfoPane), findsOneWidget);
   });
+
+  // S7 (2026-08-29): khóa layout thật của nhịp dọc pane — scaffold owns
+  // section gap nên khoảng giữa các section phải ĐÚNG 13dp (tier
+  // standard), không còn margin Phone chồng lên; lề trái các khối thẳng
+  // hàng ở contentPad.
+  testWidgets('SC-044 pane section gaps follow the 13dp scaffold rhythm '
+      '(S7 layout lock)', (tester) async {
+    await pumpPairPane(tester);
+
+    final chart = tester.getRect(find.byKey(MarketsTabletKeys.pairPaneChart));
+    final banner = tester.getRect(find.byType(VitBanner).first);
+    final linkCards = find.ancestor(
+      of: find.text('Thông tin BTC'),
+      matching: find.byType(VitCard),
+    );
+    final link1 = tester.getRect(linkCards.first);
+    final timeframe = tester.getRect(
+      find.byType(VitPresetChipRow<String>).first,
+    );
+
+    expect(
+      banner.top - chart.bottom,
+      13,
+      reason:
+          'Gap chart → banner cảnh báo phải đúng section gap 13dp '
+          '(trước S7 từng stack thành 23dp).',
+    );
+    expect(
+      link1.top - banner.bottom,
+      13,
+      reason: 'Gap banner → link card phải đúng 13dp (từng 26dp).',
+    );
+
+    // Lề trái: hàng khung giờ, khung chart và khối giá thẳng hàng
+    // contentPad (từng lệch 24 literal / dải trống 56dp của painter).
+    expect(
+      timeframe.left,
+      chart.left,
+      reason: 'Hàng khung giờ phải thẳng lề với khung chart.',
+    );
+    final priceStat = tester.getRect(find.text('24h Cao'));
+    expect(
+      (priceStat.left - chart.left).abs(),
+      lessThan(1),
+      reason: 'Khối giá phải thẳng lề với khung chart (contentPad).',
+    );
+  });
 }
