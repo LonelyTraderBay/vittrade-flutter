@@ -52,8 +52,14 @@ class _PairChartWorkspace extends StatelessWidget {
             onTap: onTimeframeChanged,
             accentColor: marketListPrimary,
             height: MarketsSpacingTokens.pairTimeframeHeight,
-            padding: EdgeInsets.zero,
-            gap: AppSpacing.x1,
+            // 2026-08-29 (user duyệt Phương án A): chip khung giờ ôm nội
+            // dung + gap x3 — Tier S3 fullWidth căng đều hợp trên Phone
+            // (chip ~55dp) nhưng trên pane tablet ~780dp chip phình 124dp
+            // và gap x1 (3dp) đọc là một thanh liền "dính nhau"; giờ cùng
+            // nhịp với hàng MA/Vol bên dưới (pill dùng padding compact x3
+            // mặc định — bỏ padding zero để chip không chạm viền).
+            fullWidth: false,
+            gap: AppSpacing.x3,
             items: const [
               VitPresetChipItem(value: '15m', label: '15m'),
               VitPresetChipItem(value: '1H', label: '1H'),

@@ -89,22 +89,12 @@ class VitPresetChipRow<T> extends StatelessWidget {
     final row = Row(
       children: [
         for (var index = 0; index < items.length; index++) ...[
-          Expanded(
-            child: VitChoicePill(
-              key: items[index].key,
-              label: items[index].label,
-              selected:
-                  selectedValue != null && selectedValue == items[index].value,
-              onTap: () => onTap(items[index].value),
-              accentColor: accentColor,
-              tone: tone,
-              fullWidth: fullWidth,
-              height: height,
-              padding: padding,
-              density: density,
-              semanticLabel: items[index].semanticLabel,
-            ),
-          ),
+          // `fullWidth: true` (mặc định, Tier S3): chip căng đều chiếm hết
+          // hàng qua Expanded. `fullWidth: false`: chip ôm nội dung — tham
+          // số này từng là ĐƯỜNG CHẾT vì Expanded bọc vô điều kiện
+          // (2026-08-29: pane timeframe tablet + P2P tax-year đều hỏi
+          // content-hug nhưng vẫn bị căng đều).
+          if (fullWidth) Expanded(child: _pillFor(index)) else _pillFor(index),
           if (index != items.length - 1) SizedBox(width: gap),
         ],
       ],
@@ -112,4 +102,18 @@ class VitPresetChipRow<T> extends StatelessWidget {
 
     return row;
   }
+
+  VitChoicePill _pillFor(int index) => VitChoicePill(
+    key: items[index].key,
+    label: items[index].label,
+    selected: selectedValue != null && selectedValue == items[index].value,
+    onTap: () => onTap(items[index].value),
+    accentColor: accentColor,
+    tone: tone,
+    fullWidth: fullWidth,
+    height: height,
+    padding: padding,
+    density: density,
+    semanticLabel: items[index].semanticLabel,
+  );
 }

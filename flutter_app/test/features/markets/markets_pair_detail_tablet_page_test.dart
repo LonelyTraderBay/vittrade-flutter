@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/markets/data/providers/market_repository_provider.dart';
 import 'package:vit_trade_flutter/features/markets/data/repositories/mock_market_repository.dart';
@@ -199,6 +200,62 @@ void main() {
       (priceStat.left - chart.left).abs(),
       lessThan(1),
       reason: 'Khối giá phải thẳng lề với khung chart (contentPad).',
+    );
+  });
+
+  // 2026-08-29 (Phương án A — user duyệt): chip khung giờ ôm nội dung với
+  // gap x3, cùng nhịp hàng MA/Vol — khóa chống quay lại Tier S3 fullWidth
+  // (chip căng đều 124dp + gap x1 3dp từng đọc là "một thanh dính nhau"
+  // trên pane tablet rộng).
+  testWidgets('SC-044 timeframe chips hug content with the x3 pill rhythm', (
+    tester,
+  ) async {
+    await pumpPairPane(tester);
+
+    Rect pillOf(String label) => tester.getRect(
+      find
+          .ancestor(of: find.text(label), matching: find.byType(VitChoicePill))
+          .first,
+    );
+
+    final labels = ['15m', '1H', '4H', '1D', '1W', '1M'];
+    final rects = [for (final label in labels) pillOf(label)];
+
+    // Gap giữa mọi cặp chip liên tiếp đúng x3 (8dp) — không còn 2-3dp.
+    for (var i = 1; i < rects.length; i++) {
+      expect(
+        rects[i].left - rects[i - 1].right,
+        closeTo(AppSpacing.x3, 0.01),
+        reason: 'Gap ${labels[i - 1]}→${labels[i]} phải đúng x3 (8dp).',
+      );
+    }
+
+    // Chip ôm nội dung: chip "15m" (3 ký tự) rộng hơn "1H" (2 ký tự) và
+    // không chip nào phình kiểu fullWidth (từng 124dp trên pane 780dp).
+    expect(
+      rects[0].width,
+      greaterThan(rects[1].width),
+      reason:
+          'Chip phải co theo nội dung — bằng nhau nghĩa là fullWidth '
+          'đã quay lại.',
+    );
+    for (final rect in rects) {
+      expect(
+        rect.width,
+        lessThan(100),
+        reason:
+            'Chip không được căng đều kiểu Tier S3 fullWidth trên pane '
+            'tablet.',
+      );
+    }
+
+    // Cùng nhịp với hàng indicator: gap MA→Vol cũng là x3.
+    final ma = pillOf('MA');
+    final vol = pillOf('Vol');
+    expect(
+      vol.left - ma.right,
+      closeTo(AppSpacing.x3, 0.01),
+      reason: 'Hàng khung giờ và hàng MA/Vol phải cùng một nhịp gap x3.',
     );
   });
 }
