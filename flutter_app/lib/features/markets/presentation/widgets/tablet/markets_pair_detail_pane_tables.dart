@@ -6,47 +6,61 @@ part of 'markets_pair_detail_pane.dart';
 
 /// Port tablet của `_OrderBookPanel` Phone — sổ lệnh 4 mức mỗi bên.
 class MarketsPairOrderBookPanel extends StatelessWidget {
-  const MarketsPairOrderBookPanel({super.key, required this.snapshot});
+  const MarketsPairOrderBookPanel({
+    super.key,
+    required this.snapshot,
+    this.framed = true,
+  });
 
   final MarketPairDetailSnapshot snapshot;
 
+  /// V2 (2026-08-30): desk nhúng bảng vào panel tabbed dùng chung — false
+  /// trả nội dung trần (không card riêng), khuôn tab hẹp giữ true như cũ.
+  final bool framed;
+
+  Widget _content({bool includeHeader = true}) => Column(
+    children: [
+      // Bare (desk panel tabbed): panel đã có tab + Mid — bỏ hàng tiêu đề.
+      if (includeHeader)
+        Row(
+          children: [
+            Text(
+              'Sổ lệnh ${snapshot.pair.symbol}',
+              style: AppTextStyles.body.copyWith(
+                fontWeight: AppTextStyles.bold,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.x2),
+            Expanded(
+              child: Text(
+                'Mid ${formatMarketPriceFixed2(snapshot.depth.midPrice)}',
+                textAlign: TextAlign.right,
+                style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+              ),
+            ),
+          ],
+        ),
+      if (includeHeader)
+        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+      for (final level in snapshot.depth.asks.take(4).toList().reversed)
+        _DepthRow(level: level, side: MarketOrderSide.sell),
+      const Divider(
+        color: AppColors.divider,
+        height: AppSpacing.dividerHairline,
+      ),
+      for (final level in snapshot.depth.bids.take(4))
+        _DepthRow(level: level, side: MarketOrderSide.buy),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
+    if (!framed) return _content(includeHeader: false);
     return Padding(
       padding: MarketsSpacingTokens.pairOrderPanelPadding,
       child: VitCard(
         padding: MarketsSpacingTokens.pairOrderCardPadding,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Sổ lệnh ${snapshot.pair.symbol}',
-                  style: AppTextStyles.body.copyWith(
-                    fontWeight: AppTextStyles.bold,
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.x2),
-                Expanded(
-                  child: Text(
-                    'Mid ${formatMarketPriceFixed2(snapshot.depth.midPrice)}',
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.micro.copyWith(color: AppColors.text3),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-            for (final level in snapshot.depth.asks.take(4).toList().reversed)
-              _DepthRow(level: level, side: MarketOrderSide.sell),
-            const Divider(
-              color: AppColors.divider,
-              height: AppSpacing.dividerHairline,
-            ),
-            for (final level in snapshot.depth.bids.take(4))
-              _DepthRow(level: level, side: MarketOrderSide.buy),
-          ],
-        ),
+        child: _content(),
       ),
     );
   }
@@ -103,22 +117,30 @@ class _DepthRow extends StatelessWidget {
 
 /// Port tablet của `_TradesPanel` Phone — bảng giao dịch gần đây.
 class MarketsPairTradesPanel extends StatelessWidget {
-  const MarketsPairTradesPanel({super.key, required this.trades});
+  const MarketsPairTradesPanel({
+    super.key,
+    required this.trades,
+    this.framed = true,
+  });
 
   final List<MarketRecentTrade> trades;
+  final bool framed;
+
+  Widget _content() => Column(
+    children: [
+      const _TradeHeader(),
+      for (final trade in trades) _TradeRow(trade: trade),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
+    if (!framed) return _content();
     return Padding(
       padding: MarketsSpacingTokens.pairOrderPanelPadding,
       child: VitCard(
         padding: MarketsSpacingTokens.pairOrderCardPadding,
-        child: Column(
-          children: [
-            const _TradeHeader(),
-            for (final trade in trades) _TradeRow(trade: trade),
-          ],
-        ),
+        child: _content(),
       ),
     );
   }

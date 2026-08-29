@@ -25,7 +25,7 @@ Global debt is report-only while the migration baseline is still being reduced. 
 
 | module | current debt | max baseline | status |
 | --- | ---: | ---: | --- |
-| markets | 1 | 2042 | pass |
+| markets | 2 | 2042 | pass |
 | p2p | 0 | 1911 | pass |
 | profile | 0 | 1037 | pass |
 | trade_bots | 0 | 0 | pass |
@@ -744,7 +744,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_depth.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart` | exception | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart` | exception | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

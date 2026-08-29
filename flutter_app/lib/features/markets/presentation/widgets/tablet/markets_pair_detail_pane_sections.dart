@@ -202,36 +202,156 @@ class _PairDeskRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      key: MarketsTabletKeys.pairDeskRow,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _PairViewTabs(
-                activeView: activeView,
-                onChanged: onViewChanged,
-                views: const [MarketsPairView.chart, MarketsPairView.depth],
+    return Padding(
+      // S7: children pane chỉ inset ngang — panel chart/book thụng lề
+      // contentPad thẳng hàng khối giá phía trên.
+      padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
+      child: Row(
+        key: MarketsTabletKeys.pairDeskRow,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _PairViewTabs(
+                  activeView: activeView,
+                  onChanged: onViewChanged,
+                  views: const [MarketsPairView.chart, MarketsPairView.depth],
+                ),
+                workspace,
+              ],
+            ),
+          ),
+          const SizedBox(width: MarketsSpacingTokens.pairDeskGutter),
+          SizedBox(
+            width: MarketsSpacingTokens.pairDeskSideWidth,
+            child: _PairBookPanel(snapshot: snapshot),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// V2-C (Bybit pattern, 2026-08-30): cột phụ là MỘT panel tabbed
+/// "Sổ lệnh | Giao dịch" — thay 2 card xếp chồng chật vốn bị gạch là
+/// "dính nhau"; nội dung tab nhúng dạng trần (framed: false).
+class _PairBookPanel extends StatefulWidget {
+  const _PairBookPanel({required this.snapshot});
+
+  final MarketPairDetailSnapshot snapshot;
+
+  @override
+  State<_PairBookPanel> createState() => _PairBookPanelState();
+}
+
+class _PairBookPanelState extends State<_PairBookPanel> {
+  bool _showBook = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return VitCard(
+      borderColor: AppColors.border,
+      padding: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: MarketsSpacingTokens.pairChartToolbarPadding,
+            child: Row(
+              children: [
+                _PairBookTabButton(
+                  label: 'Sổ lệnh',
+                  active: _showBook,
+                  widgetKey: MarketsTabletKeys.pairBookTab('book'),
+                  onTap: () => setState(() => _showBook = true),
+                ),
+                const SizedBox(width: MarketsSpacingTokens.pairIntervalGap),
+                _PairBookTabButton(
+                  label: 'Giao dịch',
+                  active: !_showBook,
+                  widgetKey: MarketsTabletKeys.pairBookTab('trades'),
+                  onTap: () => setState(() => _showBook = false),
+                ),
+                const Spacer(),
+                Expanded(
+                  child: Text(
+                    'Mid ${formatMarketPriceFixed2(widget.snapshot.depth.midPrice)}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right,
+                    style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            height: AppSpacing.dividerHairline,
+            color: AppColors.divider,
+          ),
+          Padding(
+            padding: MarketsSpacingTokens.pairBookContentPadding,
+            child: _showBook
+                ? MarketsPairOrderBookPanel(
+                    snapshot: widget.snapshot,
+                    framed: false,
+                  )
+                : MarketsPairTradesPanel(
+                    trades: widget.snapshot.recentTrades,
+                    framed: false,
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Nút tab của panel cột phụ — cùng ngôn ngữ text phẳng + gạch chân mảnh
+/// khi active (nhất quán toolbar chart).
+class _PairBookTabButton extends StatelessWidget {
+  const _PairBookTabButton({
+    required this.label,
+    required this.active,
+    required this.onTap,
+    this.widgetKey,
+  });
+
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+  final Key? widgetKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      key: widgetKey,
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.x1),
+            child: Text(
+              label,
+              style: AppTextStyles.caption.copyWith(
+                color: active ? AppColors.text1 : AppColors.text3,
+                fontWeight: active ? AppTextStyles.bold : null,
               ),
-              workspace,
-            ],
+            ),
           ),
-        ),
-        const SizedBox(width: MarketsSpacingTokens.pairDeskGutter),
-        SizedBox(
-          width: MarketsSpacingTokens.pairDeskSideWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              MarketsPairOrderBookPanel(snapshot: snapshot),
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
-              MarketsPairTradesPanel(trades: snapshot.recentTrades),
-            ],
+          SizedBox(
+            width: MarketsSpacingTokens.pairBookTabUnderline,
+            child: Divider(
+              height: AppSpacing.hairlineStroke * 2,
+              thickness: AppSpacing.hairlineStroke * 2,
+              color: active ? marketListPrimary : AppColors.transparent,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

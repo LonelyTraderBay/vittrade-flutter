@@ -1357,6 +1357,30 @@ final class MarketsSpacingTokens {
     AppSpacing.x2,
   );
   static const double pairDeskFooterGap = AppSpacing.x3;
+  // V2 Bybit (2026-08-30): thanh công cụ MỘT hàng trong panel chart — nút
+  // khung giờ text phẳng thay 3 hàng rời (chips + pills + legend) từng bị
+  // gạch là "dính nhau".
+  static const EdgeInsets pairChartToolbarPadding = EdgeInsets.fromLTRB(
+    AppSpacing.x3,
+    AppSpacing.x2,
+    AppSpacing.x3,
+    AppSpacing.x2,
+  );
+  static const double pairIntervalGap = AppSpacing.x2;
+  static const double pairIntervalDividerHeight = AppSpacing.x5;
+  static const EdgeInsets pairIntervalButtonPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x2,
+    vertical: AppSpacing.x1,
+  );
+  static const double pairIndicatorDot = AppSpacing.x1;
+  // Panel tabbed cột phụ (V2-C): nội dung thụng lề, gạch chân tab active.
+  static const EdgeInsets pairBookContentPadding = EdgeInsets.fromLTRB(
+    AppSpacing.x3,
+    AppSpacing.x2,
+    AppSpacing.x3,
+    AppSpacing.x3,
+  );
+  static const double pairBookTabUnderline = AppSpacing.x6;
   static const double pairDetailNativeBottomExtra = AppSpacing.contentPad;
   static const double pairDetailVisualBottomExtra = 54;
   // A11Y-2: matches VitHeaderActionButton's 44dp minimum tap target so the

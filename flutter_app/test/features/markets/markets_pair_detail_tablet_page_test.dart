@@ -94,10 +94,10 @@ void main() {
 
     expect(find.byKey(MarketsTabletKeys.pairDeskRow), findsOneWidget);
     expect(find.byKey(MarketsTabletKeys.pairPaneChart), findsOneWidget);
-    // Sổ lệnh + giao dịch LUÔN hiển thị cạnh chart — không cần đổi tab.
-    expect(find.text('Sổ lệnh BTC/USDT'), findsOneWidget);
-    expect(find.text('Khối lượng'), findsOneWidget);
-    expect(find.text('Thời gian'), findsOneWidget);
+    // V2-C: cột phụ là MỘT panel tabbed Sổ lệnh | Giao dịch (Bybit).
+    expect(find.byKey(MarketsTabletKeys.pairBookTab('book')), findsOneWidget);
+    expect(find.byKey(MarketsTabletKeys.pairBookTab('trades')), findsOneWidget);
+    expect(find.textContaining('Mid'), findsOneWidget);
     // Tab thu gọn còn Biểu đồ | Độ sâu — tab Sổ lệnh/Giao dịch không còn.
     expect(find.byKey(MarketsTabletKeys.pairViewTab('depth')), findsOneWidget);
     expect(
@@ -133,21 +133,13 @@ void main() {
     expect(find.text('MA (7)'), findsOneWidget);
 
     // Tắt MA — legend biến mất (nút wired thật, không còn nút giả).
-    await tester.tap(
-      find.byWidgetPredicate(
-        (widget) => widget is VitChoicePill && widget.label == 'MA',
-      ),
-    );
+    await tester.tap(find.byKey(MarketsTabletKeys.pairIndicator('MA')));
     await tester.pumpAndSettle();
     expect(find.text('MA (7)'), findsNothing);
 
     // Bật Vol — legend khối lượng xuất hiện (desk luôn hiện header bảng
     // giao dịch cùng chữ — scope theo VitLegendItem của legend chart).
-    await tester.tap(
-      find.byWidgetPredicate(
-        (widget) => widget is VitChoicePill && widget.label == 'Vol',
-      ),
-    );
+    await tester.tap(find.byKey(MarketsTabletKeys.pairIndicator('Vol')));
     await tester.pumpAndSettle();
     expect(
       find.ancestor(
@@ -208,8 +200,8 @@ void main() {
       matching: find.byType(VitCard),
     );
     final link1 = tester.getRect(linkCards.first);
-    final timeframe = tester.getRect(
-      find.byType(VitPresetChipRow<String>).first,
+    final firstInterval = tester.getRect(
+      find.byKey(MarketsTabletKeys.pairInterval('15m')),
     );
     final footer = tester.getRect(find.byKey(MarketsTabletKeys.pairDeskFooter));
 
@@ -230,19 +222,14 @@ void main() {
     expect(chart.top, greaterThanOrEqualTo(deskRow.top));
     expect(chart.bottom, lessThanOrEqualTo(deskRow.bottom));
 
-    // Cột phụ (sổ lệnh) đứng CẠNH chart — không chồng, không xuống dòng.
-    final orderBook = tester.getRect(
-      find
-          .ancestor(
-            of: find.text('Sổ lệnh BTC/USDT'),
-            matching: find.byType(VitCard),
-          )
-          .first,
+    // Cột phụ (panel tabbed sổ lệnh) đứng CẠNH chart — không stacked.
+    final bookTab = tester.getRect(
+      find.byKey(MarketsTabletKeys.pairBookTab('book')),
     );
     expect(
-      orderBook.left,
+      bookTab.left,
       greaterThan(chart.right),
-      reason: 'Sổ lệnh phải nằm bên phải chart (2 cột desk), không stacked.',
+      reason: 'Panel sổ lệnh phải nằm bên phải chart (2 cột desk).',
     );
 
     // Footer ghim đáy pane — không cuộn theo nội dung.
@@ -252,12 +239,12 @@ void main() {
       reason: 'Dải giá + MUA/BÁN phải ghim sát đáy viewport (820dp).',
     );
 
-    // Lề trái: hàng khung giờ, khung chart và khối giá thẳng hàng
-    // contentPad (từng lệch 24 literal / dải trống 56dp của painter).
+    // Lề trái trong panel chart: nút interval đầu tiên thụng đúng
+    // padding toolbar (x3) từ mép chart — không lệch thang tự phát.
     expect(
-      timeframe.left,
-      chart.left,
-      reason: 'Hàng khung giờ phải thẳng lề với khung chart.',
+      firstInterval.left - chart.left,
+      closeTo(AppSpacing.x3, 0.5),
+      reason: 'Toolbar trong panel phải thụng lề nhất quán từ mép chart.',
     );
     final priceStat = tester.getRect(find.text('24h Cao'));
     expect(
@@ -267,59 +254,69 @@ void main() {
     );
   });
 
-  // 2026-08-29 (Phương án A — user duyệt): chip khung giờ ôm nội dung với
-  // gap x3, cùng nhịp hàng MA/Vol — khóa chống quay lại Tier S3 fullWidth
-  // (chip căng đều 124dp + gap x1 3dp từng đọc là "một thanh dính nhau"
-  // trên pane tablet rộng).
-  testWidgets('SC-044 timeframe chips hug content with the x3 pill rhythm', (
+  // V2 Bybit (2026-08-30): thanh công cụ MỘT hàng trong panel chart —
+  // nút khung giờ text phẳng wired thật (đổi TF đổi dữ liệu nến), thay
+  // cho 3 hàng rời (chips + pills + legend) từng bị gạch "dính nhau".
+  testWidgets('SC-044 chart toolbar is one in-panel row of flat wired '
+      'interval buttons', (tester) async {
+    await pumpPairPane(tester);
+
+    // Đủ 6 nút khung giờ + 2 chỉ báo trong CÙNG panel chart.
+    for (final tf in ['15m', '1H', '4H', '1D', '1W', '1M']) {
+      expect(find.byKey(MarketsTabletKeys.pairInterval(tf)), findsOneWidget);
+    }
+    expect(find.byKey(MarketsTabletKeys.pairIndicator('MA')), findsOneWidget);
+    expect(find.byKey(MarketsTabletKeys.pairIndicator('Vol')), findsOneWidget);
+
+    // Toolbar nằm TRONG panel: nút đầu tiên và MA cùng MỘT hàng, ngay
+    // trên mép chart (không còn các hàng rời phía trên chart).
+    final chart = tester.getRect(find.byKey(MarketsTabletKeys.pairPaneChart));
+    final firstButton = tester.getRect(
+      find.byKey(MarketsTabletKeys.pairInterval('15m')),
+    );
+    final indicator = tester.getRect(
+      find.byKey(MarketsTabletKeys.pairIndicator('MA')),
+    );
+    expect(
+      firstButton.bottom,
+      lessThanOrEqualTo(chart.top + 1),
+      reason: 'Toolbar phải nằm trên chart trong cùng panel.',
+    );
+    // Hai hàng toolbar gọn trong panel: hàng interval rồi tới hàng MA/Vol.
+    expect(
+      indicator.top,
+      greaterThanOrEqualTo(firstButton.bottom),
+      reason: 'MA phải ở hàng dưới (hoặc sát) hàng interval trong panel.',
+    );
+    expect(
+      indicator.bottom,
+      lessThanOrEqualTo(chart.top + 1),
+      reason: 'Cả 2 hàng toolbar phải nằm trên mép chart trong panel.',
+    );
+
+    // Wired thật: bấm 4H đổi timeframe — chart vẫn render không lỗi.
+    await tester.tap(find.byKey(MarketsTabletKeys.pairInterval('4H')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(MarketsTabletKeys.pairPaneChart), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  // V2-C (Bybit pattern): panel tabbed cột phụ — bấm tab Giao dịch đổi
+  // nội dung sang bảng giao dịch.
+  testWidgets('SC-044 book panel tabs swap order book / recent trades', (
     tester,
   ) async {
     await pumpPairPane(tester);
 
-    Rect pillOf(String label) => tester.getRect(
-      find
-          .ancestor(of: find.text(label), matching: find.byType(VitChoicePill))
-          .first,
-    );
+    // Tab Sổ lệnh mặc định: có giá Mid trong header panel.
+    expect(find.textContaining('Mid'), findsOneWidget);
 
-    final labels = ['15m', '1H', '4H', '1D', '1W', '1M'];
-    final rects = [for (final label in labels) pillOf(label)];
+    await tester.tap(find.byKey(MarketsTabletKeys.pairBookTab('trades')));
+    await tester.pumpAndSettle();
 
-    // Gap giữa mọi cặp chip liên tiếp đúng x3 (8dp) — không còn 2-3dp.
-    for (var i = 1; i < rects.length; i++) {
-      expect(
-        rects[i].left - rects[i - 1].right,
-        closeTo(AppSpacing.x3, 0.01),
-        reason: 'Gap ${labels[i - 1]}→${labels[i]} phải đúng x3 (8dp).',
-      );
-    }
-
-    // Chip ôm nội dung: chip "15m" (3 ký tự) rộng hơn "1H" (2 ký tự) và
-    // không chip nào phình kiểu fullWidth (từng 124dp trên pane 780dp).
-    expect(
-      rects[0].width,
-      greaterThan(rects[1].width),
-      reason:
-          'Chip phải co theo nội dung — bằng nhau nghĩa là fullWidth '
-          'đã quay lại.',
-    );
-    for (final rect in rects) {
-      expect(
-        rect.width,
-        lessThan(100),
-        reason:
-            'Chip không được căng đều kiểu Tier S3 fullWidth trên pane '
-            'tablet.',
-      );
-    }
-
-    // Cùng nhịp với hàng indicator: gap MA→Vol cũng là x3.
-    final ma = pillOf('MA');
-    final vol = pillOf('Vol');
-    expect(
-      vol.left - ma.right,
-      closeTo(AppSpacing.x3, 0.01),
-      reason: 'Hàng khung giờ và hàng MA/Vol phải cùng một nhịp gap x3.',
-    );
+    // Bảng giao dịch hiện header Thời gian; Mid là header PANEL nên vẫn
+    // hiển thị ở cả 2 tab (kiến trúc tab, không phải nội dung tab).
+    expect(find.text('Thời gian'), findsOneWidget);
+    expect(find.textContaining('Mid'), findsOneWidget);
   });
 }

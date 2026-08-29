@@ -1,12 +1,12 @@
 part of 'markets_pair_detail_pane.dart';
 
-/// Khung nhìn biểu đồ giá (SC-044): toolbar khung giờ + hàng chỉ báo +
-/// chú giải + chart NẾN OHLC thật — mọi nút hiển thị đều wired (timeframe
-/// đổi chuỗi dữ liệu, MA vẽ SMA(7) thật, Vol vẽ dải khối lượng riêng).
+/// Khung nhìn biểu đồ giá (SC-044): PANEL chart kiểu Bybit (V2 2026-08-30)
+/// — thanh công cụ MỘT hàng nằm TRONG khung panel (nút khung giờ dạng text
+/// phẳng, chỉ báo MA/Vol/Nâng cao), chú giải vẽ overlay trong chart, nến
+/// OHLC + dải khối lượng riêng. Mọi nút hiển thị đều wired thật.
 ///
-/// [desk] bật chế độ "Trading Desk" (Hướng 1, 2026-08-29): chiều cao chart
-/// 400dp cho cột chính của bố cục 2 cột; tắt thì giữ 220dp của khuôn 1
-/// cột 4 tab (pane hẹp).
+/// [desk] bật chế độ "Trading Desk": chart cao 400dp cho cột chính của bố
+/// cục 2 cột; tắt thì 220dp của khuôn 1 cột 4 tab (pane hẹp).
 class _PairChartWorkspace extends StatelessWidget {
   const _PairChartWorkspace({
     required this.series,
@@ -44,135 +44,214 @@ class _PairChartWorkspace extends StatelessWidget {
     final volumes = showVolume
         ? computeVolumeProfile(closes, seed: '$pairId|$timeframe')
         : const <double>[];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          // S7/P2: lề trái contentPad thẳng hàng khối giá — token Phone từng
-          // lệch 24 literal và không đối xứng với phải (20).
-          padding: MarketsSpacingTokens.pairPaneChartRowPadding,
-          child: VitPresetChipRow<String>(
-            selectedValue: timeframe,
-            onTap: onTimeframeChanged,
-            accentColor: marketListPrimary,
-            height: MarketsSpacingTokens.pairTimeframeHeight,
-            // 2026-08-29 (user duyệt Phương án A): chip khung giờ ôm nội
-            // dung + gap x3 — Tier S3 fullWidth căng đều hợp trên Phone
-            // (chip ~55dp) nhưng trên pane tablet ~780dp chip phình 124dp
-            // và gap x1 (3dp) đọc là một thanh liền "dính nhau"; giờ cùng
-            // nhịp với hàng MA/Vol bên dưới (pill dùng padding compact x3
-            // mặc định — bỏ padding zero để chip không chạm viền).
-            fullWidth: false,
-            gap: AppSpacing.x3,
-            items: const [
-              VitPresetChipItem(value: '15m', label: '15m'),
-              VitPresetChipItem(value: '1H', label: '1H'),
-              VitPresetChipItem(value: '4H', label: '4H'),
-              VitPresetChipItem(value: '1D', label: '1D'),
-              VitPresetChipItem(value: '1W', label: '1W'),
-              VitPresetChipItem(value: '1M', label: '1M'),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: VitDensity.compact.controlHeight,
-          child: ListView(
-            padding: MarketsSpacingTokens.pairIndicatorListPadding,
-            scrollDirection: Axis.horizontal,
-            children: [
-              // Chỉ indicator ĐÃ WIRED được hiển thị: MA vẽ SMA(7) thật, Vol
-              // bật/tắt cột khối lượng. EMA/BOLL/MACD/RSI đã gỡ theo cùng
-              // quy tắc "nút hiển thị phải có hành vi thật".
-              for (final item in ['MA', 'Vol']) ...[
-                VitChoicePill(
-                  label: item,
-                  selected: indicators.contains(item),
-                  onTap: () => onIndicatorToggle(item),
-                  accentColor: marketListPrimary,
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.x3,
-                  ),
-                  semanticLabel: item,
+    final lastClose = closes.isEmpty ? 0.0 : closes.last;
+    return VitCard(
+      borderColor: AppColors.border,
+      padding: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // V2-A (Bybit pattern): MỘT hàng công cụ trong panel — nút khung
+          // giờ text phẳng (không pill) + vách mảnh + MA/Vol + Nâng cao.
+          // Ba hàng rời rời trước chart từng đọc là "dính nhau, không
+          // chuyên nghiệp" (user đánh dấu 2026-08-30).
+          Padding(
+            padding: MarketsSpacingTokens.pairChartToolbarPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Hàng 1: khung giờ — 6 nút text phẳng (không pill).
+                Row(
+                  children: [
+                    for (final tf in ['15m', '1H', '4H', '1D', '1W', '1M']) ...[
+                      _PairIntervalButton(
+                        label: tf,
+                        active: tf == timeframe,
+                        onTap: () => onTimeframeChanged(tf),
+                      ),
+                      const SizedBox(
+                        width: MarketsSpacingTokens.pairIntervalGap,
+                      ),
+                    ],
+                  ],
                 ),
-                const SizedBox(width: MarketsSpacingTokens.pairIndicatorGap),
+                // Hàng 2: chỉ báo MA/Vol + Nâng cao — cùng panel, gọn dưới
+                // hàng khung giờ (cột desk ~400dp không đủ 1 hàng cho tất
+                // cả; Binance-mobile cũng dùng 2 hàng trong header chart).
+                Row(
+                  children: [
+                    for (final item in ['MA', 'Vol']) ...[
+                      _PairIndicatorButton(
+                        label: item,
+                        active: indicators.contains(item),
+                        onTap: () => onIndicatorToggle(item),
+                      ),
+                      const SizedBox(
+                        width: MarketsSpacingTokens.pairIntervalGap,
+                      ),
+                    ],
+                    _PairIndicatorButton(
+                      label: 'Nâng cao',
+                      active: true,
+                      warning: true,
+                      onTap: onAdvanced,
+                    ),
+                  ],
+                ),
               ],
-              VitChoicePill(
-                label: 'Nâng cao',
-                selected: true,
-                onTap: onAdvanced,
-                tone: VitChoicePillTone.warning,
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.x3,
-                ),
-                semanticLabel: 'Nâng cao',
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: MarketsSpacingTokens.pairPaneChartRowPadding,
-          child: Row(
-            children: [
-              if (showMa) ...[
-                const VitLegendItem(
-                  label: 'MA (7)',
-                  color: marketListPrimary,
-                  dotSize: MarketsSpacingTokens.marketDepthLegendDot,
-                ),
-                const SizedBox(width: MarketsSpacingTokens.pairIndicatorGap),
-              ],
-              if (showVolume)
-                VitLegendItem(
-                  label: 'Khối lượng',
-                  color: (positive ? AppColors.buy : AppColors.sell).withValues(
-                    alpha: .35,
-                  ),
-                  dotSize: MarketsSpacingTokens.marketDepthLegendDot,
-                ),
-            ],
-          ),
-        ),
-        Padding(
-          // P2: thụng lề ngang contentPad để mép trái vùng vẽ thẳng hàng với
-          // hàng khung giờ/chú giải — painter không còn reserve dải trái.
-          padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
-          child: SizedBox(
-            key: MarketsTabletKeys.pairPaneChart,
-            height: desk
-                ? MarketsSpacingTokens.pairDeskChartHeight
-                : MarketsSpacingTokens.pairDetailChartHeight,
-            child: CustomPaint(
-              size: Size.infinite,
-              painter: _PairChartPainter(
-                candles: candles,
-                maSeries: maSeries,
-                volumes: volumes,
-                timeframe: timeframe,
-              ),
             ),
           ),
+          // V2-B: chart liền dưới toolbar trong CÙNG panel — chú giải là
+          // overlay TRÊN chart (Stack, góc trên-trái, kiểu Bybit) thay vì
+          // một hàng riêng bên ngoài; painter vẽ tag giá hiện tại trên
+          // rail phải.
+          Stack(
+            children: [
+              SizedBox(
+                key: MarketsTabletKeys.pairPaneChart,
+                height: desk
+                    ? MarketsSpacingTokens.pairDeskChartHeight
+                    : MarketsSpacingTokens.pairDetailChartHeight,
+                width: double.infinity,
+                child: CustomPaint(
+                  size: Size.infinite,
+                  painter: _PairChartPainter(
+                    candles: candles,
+                    maSeries: maSeries,
+                    volumes: volumes,
+                    positive: positive,
+                    lastClose: lastClose,
+                    timeframe: timeframe,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: AppSpacing.x2,
+                left: AppSpacing.x3,
+                child: Row(
+                  children: [
+                    if (showMa) ...[
+                      const VitLegendItem(
+                        label: 'MA (7)',
+                        color: marketListPrimary,
+                        dotSize: MarketsSpacingTokens.marketDepthLegendDot,
+                      ),
+                      const SizedBox(
+                        width: MarketsSpacingTokens.pairIndicatorGap,
+                      ),
+                    ],
+                    if (showVolume)
+                      VitLegendItem(
+                        label: 'Khối lượng',
+                        color: (positive ? AppColors.buy : AppColors.sell)
+                            .withValues(alpha: .55),
+                        dotSize: MarketsSpacingTokens.marketDepthLegendDot,
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Nút khung giờ text phẳng kiểu terminal (Bybit/TradingView): active =
+/// màu nhấn + đậm, không active = text phụ — không viền pill, không nền
+/// box, các nút tự nhiên tách rời nhau.
+class _PairIntervalButton extends StatelessWidget {
+  const _PairIntervalButton({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      key: MarketsTabletKeys.pairInterval(label),
+      onTap: onTap,
+      borderRadius: AppRadii.smRadius,
+      child: Padding(
+        padding: MarketsSpacingTokens.pairIntervalButtonPadding,
+        child: Text(
+          label,
+          style: AppTextStyles.caption.copyWith(
+            color: active ? marketListPrimary : AppColors.text3,
+            fontWeight: active ? AppTextStyles.bold : null,
+          ),
         ),
-      ],
+      ),
+    );
+  }
+}
+
+/// Nút chỉ báo (MA/Vol/Nâng cao) — cùng ngôn ngữ text phẳng; trạng thái
+/// bật/tắt thể hiện bằng chấm màu + chữ đậm (không chỉ dựa màu — a11y).
+class _PairIndicatorButton extends StatelessWidget {
+  const _PairIndicatorButton({
+    required this.label,
+    required this.active,
+    required this.onTap,
+    this.warning = false,
+  });
+
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+  final bool warning;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = warning
+        ? AppColors.warn
+        : active
+        ? marketListPrimary
+        : AppColors.text3;
+    return InkWell(
+      key: MarketsTabletKeys.pairIndicator(label),
+      onTap: onTap,
+      borderRadius: AppRadii.smRadius,
+      child: Padding(
+        padding: MarketsSpacingTokens.pairIntervalButtonPadding,
+        child: Text(
+          label,
+          style: AppTextStyles.caption.copyWith(
+            color: color,
+            fontWeight: active ? AppTextStyles.bold : null,
+          ),
+        ),
+      ),
     );
   }
 }
 
 /// Painter chart NẾN của pane chi tiết cặp — khu vực giá (grid ngang +
-/// nhãn giá phải) tách rõ với dải KHỐI LƯỢNG riêng phía dưới (40% opacity
-/// theo khuyến nghị chart tài chính), nến bull thân RỖNG / bear thân ĐẶC
-/// (khác hình dạng, không phụ thuộc màu — a11y), đường MA tuỳ chọn, nhãn
-/// thời gian tương đối đáy.
+/// nhãn giá phải căn giữa dọc + TAG giá hiện tại trên rail) tách rõ với
+/// dải KHỐI LƯỢNG riêng phía dưới (40% opacity), nến bull thân RỖNG /
+/// bear thân ĐẶC (khác hình dạng, không phụ thuộc màu — a11y), đường MA
+/// tuỳ chọn, chú giải overlay góc trên-trái, nhãn thời gian đáy.
 class _PairChartPainter extends CustomPainter {
   const _PairChartPainter({
     required this.candles,
     required this.maSeries,
     required this.volumes,
+    required this.positive,
+    required this.lastClose,
     required this.timeframe,
   });
 
   final List<PairCandle> candles;
   final List<double> maSeries;
   final List<double> volumes;
+  final bool positive;
+  final double lastClose;
   final String timeframe;
 
   static const double _axisWidth = 56;
@@ -182,8 +261,6 @@ class _PairChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (candles.length < 2) return;
-    // Chỉ reserve dải PHẢI cho nhãn giá — không reserve trái (từng để
-    // 56dp trống hoàn toàn bên trái chart, lệch lẻ với các hàng trên).
     final volumeHeight = size.height * _volumeShare;
     final plot = Rect.fromLTWH(
       0,
@@ -217,15 +294,17 @@ class _PairChartPainter extends CustomPainter {
       plot.bottom - ((value - minValue) / range) * plot.height,
     );
 
-    _paintGridAndAxisLabels(canvas, plot, minValue, range);
+    _paintGridAndAxisLabels(canvas, size, plot, minValue, range);
     _paintVolumeBars(canvas, volumeRect);
     _paintCandles(canvas, plot, pointFor);
     _paintMaLine(canvas, pointFor);
     _paintTimeLabels(canvas, plot);
+    _paintLastPriceTag(canvas, size, plot, minValue, range);
   }
 
   void _paintGridAndAxisLabels(
     Canvas canvas,
+    Size size,
     Rect plot,
     double min,
     double range,
@@ -239,13 +318,51 @@ class _PairChartPainter extends CustomPainter {
       _drawAxisLabel(
         canvas,
         pairChartAxisLabel(value),
-        Offset(plot.right + 6, y),
+        y,
+        size,
+        color: AppColors.text3,
       );
     }
   }
 
+  /// V2-B: nhãn giá căn giữa dọc theo vạch grid (trước đây vẽ từ điểm y
+  /// nguyên nên lệch xuống), nằm gọn trong rail phải bên trong panel.
+  void _drawAxisLabel(
+    Canvas canvas,
+    String text,
+    double y,
+    Size size, {
+    Color color = AppColors.text3,
+    Color? background,
+  }) {
+    final painter = TextPainter(
+      text: TextSpan(
+        text: text,
+        style: AppTextStyles.micro.copyWith(
+          color: color,
+          fontFeatures: AppTextStyles.tabularFigures,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout(maxWidth: _axisWidth - 8);
+    final dx = size.width - _axisWidth + 8;
+    final dy = (y - painter.height / 2).toDouble().clamp(0.0, double.infinity);
+    if (background != null) {
+      final tagRect = Rect.fromLTWH(
+        dx - 3,
+        dy - 1,
+        painter.width + 6,
+        painter.height + 2,
+      );
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(tagRect, AppRadii.smRadius.topLeft),
+        Paint()..color = background,
+      );
+    }
+    painter.paint(canvas, Offset(dx, dy));
+  }
+
   void _paintVolumeBars(Canvas canvas, Rect rect) {
-    // Đường chân tách khu khối lượng với khu giá — cùng chất grid.
     canvas.drawLine(
       Offset(rect.left, rect.top),
       Offset(rect.right, rect.top),
@@ -255,7 +372,6 @@ class _PairChartPainter extends CustomPainter {
     final maxVolume = volumes.reduce((a, b) => a > b ? a : b) + 1e-9;
     final barWidth = (rect.width / candles.length * 0.62).clamp(1.0, 10.0);
     for (var index = 0; index < volumes.length; index += 1) {
-      // volumes[i] = biên độ chuyển giá nến i → i+1 ⇒ cột nằm giữa nến i+1.
       final candle = candles[index + 1];
       final x = rect.left + rect.width * (index + 1 + 0.5) / candles.length;
       final height = (volumes[index] / maxVolume) * rect.height;
@@ -304,7 +420,6 @@ class _PairChartPainter extends CustomPainter {
         (bodyBottom - bodyTop).clamp(1.0, double.infinity),
       );
       if (candle.bullish) {
-        // Bull: thân RỖNG (viền) — khác hình dạng với bear (đặc).
         canvas.drawRect(body, wickPaint);
       } else {
         canvas.drawRect(body, Paint()..color = color);
@@ -331,6 +446,38 @@ class _PairChartPainter extends CustomPainter {
     canvas.drawPath(path, maPaint);
   }
 
+  /// V2-B (Bybit pattern): đường giá hiện tại nét đứt ngang chart + TAG
+  /// giá nền nhấn trên rail phải — mắt neo ngay mức đang giao dịch.
+  void _paintLastPriceTag(
+    Canvas canvas,
+    Size size,
+    Rect plot,
+    double min,
+    double range,
+  ) {
+    final y = plot.bottom - ((lastClose - min) / range) * plot.height;
+    if (y < plot.top || y > plot.bottom) return;
+    final dashPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1
+      ..color = (positive ? AppColors.buy : AppColors.sell).withValues(
+        alpha: .6,
+      );
+    var x = plot.left;
+    while (x < plot.right) {
+      canvas.drawLine(Offset(x, y), Offset(x + 4, y), dashPaint);
+      x += 8;
+    }
+    _drawAxisLabel(
+      canvas,
+      pairChartAxisLabel(lastClose),
+      y,
+      size,
+      color: AppColors.surface,
+      background: positive ? AppColors.buy : AppColors.sell,
+    );
+  }
+
   void _paintTimeLabels(Canvas canvas, Rect plot) {
     final labels = pairChartTimeLabels(timeframe, candles.length, 4);
     for (var index = 0; index < labels.length; index += 1) {
@@ -341,20 +488,6 @@ class _PairChartPainter extends CustomPainter {
         Offset(x.clamp(plot.left, plot.right - 40), plot.bottom + 4),
       );
     }
-  }
-
-  void _drawAxisLabel(Canvas canvas, String text, Offset at) {
-    final painter = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: AppTextStyles.micro.copyWith(
-          color: AppColors.text3,
-          fontFeatures: AppTextStyles.tabularFigures,
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-    )..layout(maxWidth: _axisWidth - 8);
-    painter.paint(canvas, at);
   }
 
   void _drawLabel(Canvas canvas, String text, Offset at) {
@@ -373,5 +506,6 @@ class _PairChartPainter extends CustomPainter {
       oldDelegate.candles != candles ||
       oldDelegate.maSeries != maSeries ||
       oldDelegate.volumes != volumes ||
+      oldDelegate.positive != positive ||
       oldDelegate.timeframe != timeframe;
 }

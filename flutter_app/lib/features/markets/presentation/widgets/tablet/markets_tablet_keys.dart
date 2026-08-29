@@ -27,5 +27,8 @@ final class MarketsTabletKeys {
   static Key pair(String id) => Key('sc008_pair_$id');
   static Key sortColumn(String columnId) => Key('sc008_sort_$columnId');
   static Key pairViewTab(String viewKey) => Key('sc044_pair_view_$viewKey');
+  static Key pairInterval(String tf) => Key('sc044_pair_interval_$tf');
+  static Key pairIndicator(String label) => Key('sc044_pair_indicator_$label');
+  static Key pairBookTab(String tabKey) => Key('sc044_pair_book_$tabKey');
   static Key tokenTab(String tabKey) => Key('sc045_token_tab_$tabKey');
 }
