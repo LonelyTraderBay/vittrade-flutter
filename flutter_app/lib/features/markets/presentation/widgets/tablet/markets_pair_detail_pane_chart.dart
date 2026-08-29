@@ -44,7 +44,9 @@ class _PairChartWorkspace extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: MarketsSpacingTokens.pairTimeframePadding,
+          // S7/P2: lề trái contentPad thẳng hàng khối giá — token Phone từng
+          // lệch 24 literal và không đối xứng với phải (20).
+          padding: MarketsSpacingTokens.pairPaneChartRowPadding,
           child: VitPresetChipRow<String>(
             selectedValue: timeframe,
             onTap: onTimeframeChanged,
@@ -98,7 +100,7 @@ class _PairChartWorkspace extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: MarketsSpacingTokens.pairTimeframePadding,
+          padding: MarketsSpacingTokens.pairPaneChartRowPadding,
           child: Row(
             children: [
               if (showMa) ...[
@@ -120,17 +122,22 @@ class _PairChartWorkspace extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          key: MarketsTabletKeys.pairPaneChart,
-          height: MarketsSpacingTokens.pairDetailChartHeight,
-          child: CustomPaint(
-            size: Size.infinite,
-            painter: _PairChartPainter(
-              series: chartSeries,
-              maSeries: maSeries,
-              volumes: volumes,
-              positive: positive,
-              timeframe: timeframe,
+        Padding(
+          // P2: thụng lề ngang contentPad để mép trái vùng vẽ thẳng hàng với
+          // hàng khung giờ/chú giải — painter không còn reserve dải trái.
+          padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
+          child: SizedBox(
+            key: MarketsTabletKeys.pairPaneChart,
+            height: MarketsSpacingTokens.pairDetailChartHeight,
+            child: CustomPaint(
+              size: Size.infinite,
+              painter: _PairChartPainter(
+                series: chartSeries,
+                maSeries: maSeries,
+                volumes: volumes,
+                positive: positive,
+                timeframe: timeframe,
+              ),
             ),
           ),
         ),
@@ -163,10 +170,12 @@ class _PairChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (series.length < 2) return;
+    // Chỉ reserve dải PHẢI cho nhãn giá — không reserve trái (từng để
+    // 56dp trống hoàn toàn bên trái chart, lệch lẻ với các hàng trên).
     final plot = Rect.fromLTWH(
-      _axisWidth,
       0,
-      size.width - _axisWidth * 2,
+      0,
+      size.width - _axisWidth,
       size.height - _labelHeight,
     );
 

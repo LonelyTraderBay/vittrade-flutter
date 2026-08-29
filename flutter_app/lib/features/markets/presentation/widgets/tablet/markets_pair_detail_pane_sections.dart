@@ -14,7 +14,9 @@ class MarketsPairPriceOverviewPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: MarketsSpacingTokens.pairPriceOverviewPadding,
+          // S7: scaffold pane đã chèn section gap — children chỉ inset ngang,
+          // không mang margin dọc của trang Phone (đã từng stack 13+14=27dp).
+          padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -179,7 +181,9 @@ class _PairRiskWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: MarketsSpacingTokens.pairRiskMargin,
+      // S7: chỉ inset ngang — margin dọc 10/13 của Phone từng stack thành
+      // 23–26dp trên section gap 13 của scaffold.
+      padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
       child: VitBanner(
         variant: VitBannerVariant.warning,
         icon: Icons.warning_amber_rounded,
@@ -210,7 +214,9 @@ class MarketsPairLinkCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: MarketsSpacingTokens.pairLinkMargin,
+      // S7: chỉ inset ngang contentPad — lề trái của link card phải thẳng
+      // hàng với khối giá và hàng khung giờ (đã từng lệch vì token Phone).
+      padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
       child: VitCard(
         borderColor: iconColor.withValues(alpha: .12),
         padding: EdgeInsets.zero,
@@ -283,30 +289,35 @@ class _PairTradeCtas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // S7: wrapper ngoài chỉ inset ngang; khoảng thở đáy cuộn là nội dung
+    // widget (pattern _Disclaimer), không phải margin trang Phone.
     return Padding(
-      padding: MarketsSpacingTokens.pairTradeCtaPadding,
-      child: Row(
-        children: [
-          Expanded(
-            child: VitCtaButton(
-              key: MarketsTabletKeys.pairPaneBuyCta,
-              variant: VitCtaButtonVariant.success,
-              density: VitDensity.compact,
-              onPressed: onBuy,
-              child: const Text('MUA'),
+      padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AppSpacing.x4),
+        child: Row(
+          children: [
+            Expanded(
+              child: VitCtaButton(
+                key: MarketsTabletKeys.pairPaneBuyCta,
+                variant: VitCtaButtonVariant.success,
+                density: VitDensity.compact,
+                onPressed: onBuy,
+                child: const Text('MUA'),
+              ),
             ),
-          ),
-          const SizedBox(width: MarketsSpacingTokens.pairTradeCtaGap),
-          Expanded(
-            child: VitCtaButton(
-              key: MarketsTabletKeys.pairPaneSellCta,
-              variant: VitCtaButtonVariant.danger,
-              density: VitDensity.compact,
-              onPressed: onSell,
-              child: const Text('BÁN'),
+            const SizedBox(width: MarketsSpacingTokens.pairTradeCtaGap),
+            Expanded(
+              child: VitCtaButton(
+                key: MarketsTabletKeys.pairPaneSellCta,
+                variant: VitCtaButtonVariant.danger,
+                density: VitDensity.compact,
+                onPressed: onSell,
+                child: const Text('BÁN'),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

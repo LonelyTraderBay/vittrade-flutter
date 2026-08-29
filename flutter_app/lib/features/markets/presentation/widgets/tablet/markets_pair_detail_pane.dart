@@ -186,6 +186,9 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
             ),
             const _PairRiskWarning(),
             VitPageSection(
+              // 2 VitCard cách nhau đúng cardGap (13) — gap mặc định tight
+              // (8) từng ép sát 2 link card giữa các section gap 13.
+              customGap: AppSpacing.cardGap,
               children: [
                 // Thứ tự bậc thông tin 2026-08-29: phân tích (Thông tin coin)
                 // đứng trước khuyến nghị giao dịch (Mua định kỳ); phân tích

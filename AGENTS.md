@@ -160,6 +160,17 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   cho P2P) — tablet surface **không** render lại phone page. Real web pages
   exist only for auth and home; mọi web route khác là placeholder
   `VitWebUtilityPage`.
+- Porting phone content into a tablet pane is a **re-compose, not a copy**:
+  the pane scaffold (`MarketsPaneScaffold` / `ProfilePaneScaffold` /
+  `VitTwoColumnTabletDashboard`) owns every vertical section gap, so pane
+  children must never carry the phone page's vertical margins — horizontal
+  insets use `contentPad`, end-of-scroll breathing lives inside the last
+  widget (rule S7, enforced by
+  `flutter_app/test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart`;
+  the 2026-08-29 pair-detail bug stacked phone margins onto the 13dp
+  section gap and rendered 23–29dp). When touching tablet UI, verify the
+  result is a tablet composition (scaffold-owned rhythm, tablet tokens),
+  never a phone frame reused.
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens, phone + tablet

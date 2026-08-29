@@ -29,7 +29,8 @@ class _PairDepthWorkspaceState extends ConsumerState<_PairDepthWorkspace> {
         child: VitSkeletonList(),
       ),
       error: (error, stackTrace) => Padding(
-        padding: MarketsSpacingTokens.pairTimeframePadding,
+        // S7/P2: chỉ inset ngang contentPad, bỏ token Phone lệch lề 24.
+        padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
         child: VitErrorState(
           title: 'Không tải được độ sâu thị trường',
           message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',

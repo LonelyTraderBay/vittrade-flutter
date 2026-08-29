@@ -1324,6 +1324,22 @@ final class MarketsSpacingTokens {
       TradeSpacingTokens.tradeBotLineHeightReadable;
   static EdgeInsets pairDetailScrollPadding(double bottomInset) =>
       EdgeInsets.only(bottom: bottomInset);
+  // S7 (2026-08-29): children trực tiếp của pane scaffold chỉ được inset
+  // NGANG — scaffold owns section gap dọc (13dp tier standard). Token này là
+  // vai trò flush ngang của pane tablet SC-044; margin dọc Phone
+  // (pairRiskMargin/pairLinkMargin/pairTradeCtaPadding) không được mang
+  // sang children list — từng stack thành gap 23–29dp.
+  static const EdgeInsets pairPaneChildFlushPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.contentPad,
+  );
+  // Hàng điều khiển (khung giờ/chú giải) trong khung chart của pane — lề
+  // trái contentPad thẳng hàng khối giá, đáy x2 (5) tạo nhịp giữa các hàng.
+  static const EdgeInsets pairPaneChartRowPadding = EdgeInsets.fromLTRB(
+    AppSpacing.contentPad,
+    0,
+    AppSpacing.contentPad,
+    AppSpacing.x2,
+  );
   static const double pairDetailNativeBottomExtra = AppSpacing.contentPad;
   static const double pairDetailVisualBottomExtra = 54;
   // A11Y-2: matches VitHeaderActionButton's 44dp minimum tap target so the
