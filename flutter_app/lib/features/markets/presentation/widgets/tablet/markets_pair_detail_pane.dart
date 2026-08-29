@@ -13,7 +13,10 @@ import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/market_formatters.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_chart.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_whale_alerts.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
@@ -24,20 +27,26 @@ import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart'
 
 part 'markets_pair_detail_pane_sections.dart';
 part 'markets_pair_detail_pane_tables.dart';
+part 'markets_pair_detail_pane_chart.dart';
+part 'markets_pair_detail_pane_depth.dart';
 
 /// Ba khung nhìn của pane phân tích cặp — mirror `_PairView` của trang
-/// Phone, đặt public để test tablet khóa theo key chuỗi.
-enum MarketsPairView { chart, orderBook, trades }
+/// Phone, đặt public để test tablet khóa theo key chuỗi. `depth` là khung
+/// thứ tư thêm 2026-08-29 (P1 "một UI chi tiết coin hoàn chỉnh"): gom phân
+/// tích độ sâu vào đúng pane của coin, thay link card điều hướng trang riêng.
+enum MarketsPairView { chart, orderBook, trades, depth }
 
 String marketsPairViewKey(MarketsPairView view) => switch (view) {
   MarketsPairView.chart => 'chart',
   MarketsPairView.orderBook => 'orderBook',
   MarketsPairView.trades => 'trades',
+  MarketsPairView.depth => 'depth',
 };
 
 MarketsPairView marketsPairViewFromKey(String key) => switch (key) {
   'orderBook' => MarketsPairView.orderBook,
   'trades' => MarketsPairView.trades,
+  'depth' => MarketsPairView.depth,
   _ => MarketsPairView.chart,
 };
 
@@ -150,6 +159,7 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                 if (_activeView == MarketsPairView.chart)
                   _PairChartWorkspace(
                     series: snapshot.activeChartSeries,
+                    pairId: pair.id,
                     positive: pair.change24h >= 0,
                     timeframe: _timeframe,
                     onTimeframeChanged: (value) =>
@@ -168,20 +178,18 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                   )
                 else if (_activeView == MarketsPairView.orderBook)
                   MarketsPairOrderBookPanel(snapshot: snapshot)
+                else if (_activeView == MarketsPairView.trades)
+                  MarketsPairTradesPanel(trades: snapshot.recentTrades)
                 else
-                  MarketsPairTradesPanel(trades: snapshot.recentTrades),
+                  _PairDepthWorkspace(pairId: widget.pairId),
               ],
             ),
             const _PairRiskWarning(),
             VitPageSection(
               children: [
-                MarketsPairLinkCard(
-                  icon: Icons.repeat_rounded,
-                  iconColor: AppColors.accent,
-                  title: 'Mua định kỳ ${pair.baseAsset}',
-                  subtitle: 'Tự động mua theo lịch · Giảm rủi ro biến động',
-                  onTap: () => unawaited(context.push(AppRoutePaths.dca)),
-                ),
+                // Thứ tự bậc thông tin 2026-08-29: phân tích (Thông tin coin)
+                // đứng trước khuyến nghị giao dịch (Mua định kỳ); phân tích
+                // độ sâu đã gom thành tab "Độ sâu" của pane này.
                 MarketsPairLinkCard(
                   icon: Icons.info_outline_rounded,
                   iconColor: marketListPrimary,
@@ -193,14 +201,11 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                   ),
                 ),
                 MarketsPairLinkCard(
-                  icon: Icons.layers_rounded,
-                  iconColor: AppColors.info,
-                  title: 'Độ sâu thị trường',
-                  subtitle: 'Biểu đồ độ sâu · Cảnh báo cá voi · Sổ lệnh',
-                  onTap: () => openMarketsDetailRoute(
-                    context,
-                    AppRoutePaths.pairDepth(pair.id),
-                  ),
+                  icon: Icons.repeat_rounded,
+                  iconColor: AppColors.accent,
+                  title: 'Mua định kỳ ${pair.baseAsset}',
+                  subtitle: 'Tự động mua theo lịch · Giảm rủi ro biến động',
+                  onTap: () => unawaited(context.push(AppRoutePaths.dca)),
                 ),
               ],
             ),

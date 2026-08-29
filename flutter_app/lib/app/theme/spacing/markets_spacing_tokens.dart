@@ -1377,6 +1377,9 @@ final class MarketsSpacingTokens {
     5,
   );
   static const double pairTimeframeHeight = 36;
+  // Chiều cao khung chart giá của pane chi tiết cặp — thay công thức magic
+  // `buttonStandard*3 + x7` (172) khi nâng cấp chart thật 2026-08-29.
+  static const double pairDetailChartHeight = 220;
   static const double pairIndicatorHeight = 42;
   static const EdgeInsets pairIndicatorListPadding = EdgeInsets.symmetric(
     horizontal: AppSpacing.contentPad,

@@ -533,8 +533,11 @@ markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tab
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_master_list.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_depth.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,0,0,0,0,0,0,0,0,no,-

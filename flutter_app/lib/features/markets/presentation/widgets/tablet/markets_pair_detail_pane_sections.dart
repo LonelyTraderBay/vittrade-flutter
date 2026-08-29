@@ -112,8 +112,9 @@ class _PriceStat extends StatelessWidget {
   }
 }
 
-/// Port tablet của `_ViewTabs` Phone — VitTabBar underline 3 khung nhìn,
-/// key theo `MarketsTabletKeys.pairViewTab`.
+/// Port tablet của `_ViewTabs` Phone — VitTabBar underline 4 khung nhìn
+/// (Biểu đồ / Sổ lệnh / Giao dịch / Độ sâu), key theo
+/// `MarketsTabletKeys.pairViewTab`.
 class _PairViewTabs extends StatelessWidget {
   const _PairViewTabs({required this.activeView, required this.onChanged});
 
@@ -152,6 +153,12 @@ class _PairViewTabs extends StatelessWidget {
                     icon: Icons.currency_exchange_rounded,
                     widgetKey: MarketsTabletKeys.pairViewTab('trades'),
                   ),
+                  VitTabItem(
+                    key: 'depth',
+                    label: 'Độ sâu',
+                    icon: Icons.layers_rounded,
+                    widgetKey: MarketsTabletKeys.pairViewTab('depth'),
+                  ),
                 ],
               ),
             ),
@@ -162,103 +169,6 @@ class _PairViewTabs extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-/// Khung nhìn biểu đồ: hàng timeframe + hàng chỉ báo + chart sparkline lớn
-/// (shared `VitSparkline` — tablet không tự vẽ painter riêng).
-class _PairChartWorkspace extends StatelessWidget {
-  const _PairChartWorkspace({
-    required this.series,
-    required this.positive,
-    required this.timeframe,
-    required this.onTimeframeChanged,
-    required this.indicators,
-    required this.onIndicatorToggle,
-    required this.onAdvanced,
-  });
-
-  final List<double> series;
-  final bool positive;
-  final String timeframe;
-  final ValueChanged<String> onTimeframeChanged;
-  final Set<String> indicators;
-  final ValueChanged<String> onIndicatorToggle;
-  final VoidCallback onAdvanced;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: MarketsSpacingTokens.pairTimeframePadding,
-          child: VitPresetChipRow<String>(
-            selectedValue: timeframe,
-            onTap: onTimeframeChanged,
-            accentColor: marketListPrimary,
-            height: MarketsSpacingTokens.pairTimeframeHeight,
-            padding: EdgeInsets.zero,
-            gap: AppSpacing.x1,
-            items: const [
-              VitPresetChipItem(value: '15m', label: '15m'),
-              VitPresetChipItem(value: '1H', label: '1H'),
-              VitPresetChipItem(value: '4H', label: '4H'),
-              VitPresetChipItem(value: '1D', label: '1D'),
-              VitPresetChipItem(value: '1W', label: '1W'),
-              VitPresetChipItem(value: '1M', label: '1M'),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: VitDensity.compact.controlHeight,
-          child: ListView(
-            padding: MarketsSpacingTokens.pairIndicatorListPadding,
-            scrollDirection: Axis.horizontal,
-            children: [
-              for (final item in [
-                'MA',
-                'EMA',
-                'BOLL',
-                'MACD',
-                'RSI',
-                'Vol',
-              ]) ...[
-                VitChoicePill(
-                  label: item,
-                  selected: indicators.contains(item),
-                  onTap: () => onIndicatorToggle(item),
-                  accentColor: marketListPrimary,
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.x3,
-                  ),
-                  semanticLabel: item,
-                ),
-                const SizedBox(width: MarketsSpacingTokens.pairIndicatorGap),
-              ],
-              VitChoicePill(
-                label: 'Nâng cao',
-                selected: true,
-                onTap: onAdvanced,
-                tone: VitChoicePillTone.warning,
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.x3,
-                ),
-                semanticLabel: 'Nâng cao',
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          key: MarketsTabletKeys.pairPaneChart,
-          height: AppSpacing.buttonStandard * 3 + AppSpacing.x7,
-          child: VitSparkline(
-            values: series,
-            color: positive ? AppColors.buy : AppColors.sell,
-          ),
-        ),
-      ],
     );
   }
 }

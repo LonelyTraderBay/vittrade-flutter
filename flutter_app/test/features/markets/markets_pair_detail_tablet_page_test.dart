@@ -11,6 +11,7 @@ import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/m
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_token_info_pane.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpPairPane(
@@ -57,7 +58,10 @@ void main() {
     expect(find.byKey(MarketsTabletKeys.pairPaneSellCta), findsOneWidget);
     expect(find.text('Giao dịch crypto có rủi ro cao.'), findsOneWidget);
     expect(find.text('Thông tin BTC'), findsOneWidget);
-    expect(find.text('Độ sâu thị trường'), findsOneWidget);
+    // Phân tích độ sâu gom thành tab thứ tư (P1 2026-08-29) — link card
+    // trang riêng đã bỏ.
+    expect(find.byKey(MarketsTabletKeys.pairViewTab('depth')), findsOneWidget);
+    expect(find.text('Mua định kỳ BTC'), findsOneWidget);
   });
 
   testWidgets('SC-044 switching view tabs swaps chart / order book / trades', (
@@ -76,6 +80,47 @@ void main() {
 
     expect(find.text('Khối lượng'), findsOneWidget);
     expect(find.text('Thời gian'), findsOneWidget);
+  });
+
+  testWidgets('SC-044 depth tab embeds the depth analysis inside the pane', (
+    tester,
+  ) async {
+    await pumpPairPane(tester);
+
+    await tester.tap(find.byKey(MarketsTabletKeys.pairViewTab('depth')));
+    await tester.pumpAndSettle();
+
+    // Reuse-public: các view công khai của pane độ sâu render tại chỗ.
+    expect(find.text('Biểu đồ độ sâu'), findsOneWidget);
+    expect(find.text('Tỷ lệ tường mua/bán'), findsOneWidget);
+    expect(find.text('Lệnh lớn gần đây'), findsOneWidget);
+  });
+
+  testWidgets('SC-044 indicator pills are wired: MA/Vol toggle legend + data', (
+    tester,
+  ) async {
+    await pumpPairPane(tester);
+
+    // MA mặc định bật (seed {'MA'}) — legend MA (7) hiển thị.
+    expect(find.text('MA (7)'), findsOneWidget);
+
+    // Tắt MA — legend biến mất (nút wired thật, không còn nút giả).
+    await tester.tap(
+      find.byWidgetPredicate(
+        (widget) => widget is VitChoicePill && widget.label == 'MA',
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('MA (7)'), findsNothing);
+
+    // Bật Vol — legend khối lượng xuất hiện.
+    await tester.tap(
+      find.byWidgetPredicate(
+        (widget) => widget is VitChoicePill && widget.label == 'Vol',
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Khối lượng'), findsOneWidget);
   });
 
   testWidgets('SC-044 buy CTA pushes the trade screen with side=buy', (

@@ -709,8 +709,11 @@ markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_master_list.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,standard,,0,,0,,0,0,pass
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_depth.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,standard,,0,,0,,0,0,pass
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,standard,,0,,0,,0,0,pass

@@ -7,7 +7,7 @@
 | Metric | Count |
 | --- | ---: |
 | Audit rows | 343 |
-| Files with shared widgets | 308 |
+| Files with shared widgets | 309 |
 | Compliance pass | 238 |
 | Compliance warn | 0 |
 | Compliance review | 105 |

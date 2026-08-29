@@ -232,6 +232,7 @@ pattern above) already answer every question orientation could.
 | A second global breakpoint constant for one screen's own fallback width | Should be a local, documented, page-scoped constant instead (R3) |
 | Skipping the ≥threshold widget test because the phone-width tests already pass | Leaves the actual two-column layout completely unverified |
 | Keeping the phone page's `VitAutoHidePageScaffold`/scroll-leading header as-is in the tablet page | Header has no single scroll offset to hide/show against once R4 splits the body — either breaks or silently no-ops |
+| Nút hiển thị mà không wired (đổi màu chip nhưng không đổi dữ liệu/vẽ gì) | "Nút giả" — người dùng bấm không thấy gì thay đổi. Nguồn gốc 2026-08-29 (P1 "một UI chi tiết coin hoàn chỉnh"): timeframe/indicator của chart giá từng là nút giả. Quy tắc: chỉ hiển thị control đã có hành vi thật; chưa wired thì ẨN, wired rồi mới hiện (khóa bằng test hành vi, vd `markets_pair_chart_math_test.dart` + widget test toggle legend) |
 
 ## Limitations
 
