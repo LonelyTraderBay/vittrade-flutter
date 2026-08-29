@@ -16,7 +16,7 @@ generated=2026-06-12
 status_fail=1
 status_warn=20
 status_exception=110
-rows=1273
+rows=1275
 ```
 
 ## CI Baseline Gates
@@ -742,10 +742,12 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
-| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_depth.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_painter.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart` | exception | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
+| feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_terminal.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |

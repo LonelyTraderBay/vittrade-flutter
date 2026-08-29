@@ -119,20 +119,17 @@ class _PriceStat extends StatelessWidget {
 /// `MarketsTabletKeys.pairViewTab`. [views] thu gọn danh sách tab: desk
 /// 2 cột chỉ còn Biểu đồ | Độ sâu (Sổ lệnh + Giao dịch đã lên cột phụ).
 class _PairViewTabs extends StatelessWidget {
-  const _PairViewTabs({
-    required this.activeView,
-    required this.onChanged,
-    this.views = const [
-      MarketsPairView.chart,
-      MarketsPairView.orderBook,
-      MarketsPairView.trades,
-      MarketsPairView.depth,
-    ],
-  });
+  const _PairViewTabs({required this.activeView, required this.onChanged});
 
   final MarketsPairView activeView;
   final ValueChanged<MarketsPairView> onChanged;
-  final List<MarketsPairView> views;
+
+  static const List<MarketsPairView> views = [
+    MarketsPairView.chart,
+    MarketsPairView.orderBook,
+    MarketsPairView.trades,
+    MarketsPairView.depth,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -177,58 +174,6 @@ class _PairViewTabs extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// Hàng desk 2 cột (Hướng 1 "Trading Desk", 2026-08-29): cột chính co giãn
-/// = mini-tab (Biểu đồ | Độ sâu) + workspace; cột phụ cố định 300dp =
-/// SỔ LỆNH + GIAO DỊCH luôn hiển thị cạnh chart — terminal thật, không
-/// phải đổi tab để xem. Chỉ render khi pane ≥
-/// [MarketsSpacingTokens.pairDeskSplitMinWidth].
-class _PairDeskRow extends StatelessWidget {
-  const _PairDeskRow({
-    required this.snapshot,
-    required this.activeView,
-    required this.onViewChanged,
-    required this.workspace,
-  });
-
-  final MarketPairDetailSnapshot snapshot;
-  final MarketsPairView activeView;
-  final ValueChanged<MarketsPairView> onViewChanged;
-  final Widget workspace;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      // S7: children pane chỉ inset ngang — panel chart/book thụng lề
-      // contentPad thẳng hàng khối giá phía trên.
-      padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
-      child: Row(
-        key: MarketsTabletKeys.pairDeskRow,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _PairViewTabs(
-                  activeView: activeView,
-                  onChanged: onViewChanged,
-                  views: const [MarketsPairView.chart, MarketsPairView.depth],
-                ),
-                workspace,
-              ],
-            ),
-          ),
-          const SizedBox(width: MarketsSpacingTokens.pairDeskGutter),
-          SizedBox(
-            width: MarketsSpacingTokens.pairDeskSideWidth,
-            child: _PairBookPanel(snapshot: snapshot),
-          ),
-        ],
       ),
     );
   }

@@ -144,6 +144,7 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,C,-,done,0,-
+03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_terminal.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,E,-,done,0,-
 03_tab_roots,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,C,-,done,0,-

@@ -41,7 +41,7 @@ mixin _MockMarketRepositoryTokenDetailMethods on _MockMarketRepositoryBase {
         for (final item in _marketPairs) item.id: item.sparklineData,
       },
       depth: _generateDepthData(pair.price, 25),
-      recentTrades: _marketRecentTrades,
+      recentTrades: _generateRecentTrades(pair.price, 24),
       lastUpdatedLabel: 'read-only',
       supportedStates: const {
         MarketScreenState.loading,
@@ -403,6 +403,25 @@ const List<MarketRecentTrade> _marketRecentTrades = [
     side: MarketOrderSide.buy,
   ),
 ];
+
+/// Terminal desk (2026-08-30): sinh [count] giao dịch deterministic quanh
+/// [basePrice] — lặp khuôn của 5 seed gốc với giá trượt dần theo index,
+/// đủ mật độ 24 dòng chuẩn sàn lớn; không đụng domain.
+List<MarketRecentTrade> _generateRecentTrades(double basePrice, int count) {
+  final seeds = _marketRecentTrades;
+  return List.generate(count, (index) {
+    final seed = seeds[index % seeds.length];
+    final drift = (index ~/ seeds.length) + 1;
+    return MarketRecentTrade(
+      id: '${seed.id}-$index',
+      price: basePrice * (1 - 0.0004 * index - 0.0002 * drift),
+      amount: seed.amount * (1 + 0.05 * drift),
+      side: index.isEven ? MarketOrderSide.buy : MarketOrderSide.sell,
+      time:
+          '12:0${(24 - index).clamp(0, 9)}:${(59 - index * 2).clamp(10, 59).toString().padLeft(2, '0')}',
+    );
+  });
+}
 
 const TokenFundamentalsDraft _btcFundamentals = TokenFundamentalsDraft(
   id: 'btcusdt',

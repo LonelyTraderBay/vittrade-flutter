@@ -29,6 +29,8 @@ part 'markets_pair_detail_pane_sections.dart';
 part 'markets_pair_detail_pane_tables.dart';
 part 'markets_pair_detail_pane_chart.dart';
 part 'markets_pair_detail_pane_depth.dart';
+part 'markets_pair_detail_pane_terminal.dart';
+part 'markets_pair_detail_pane_painter.dart';
 
 /// Ba khung nhìn của pane phân tích cặp — mirror `_PairView` của trang
 /// Phone, đặt public để test tablet khóa theo key chuỗi. `depth` là khung
@@ -164,39 +166,43 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                       onSell: () => _goTrade('sell'),
                     )
                   : null,
-              children: [
-                MarketsPairPriceOverviewPanel(pair: pair),
-                if (desk)
-                  _PairDeskRow(
-                    snapshot: snapshot,
-                    activeView: _activeView,
-                    onViewChanged: (view) => setState(() => _activeView = view),
-                    workspace: _activeView == MarketsPairView.depth
-                        ? _PairDepthWorkspace(pairId: widget.pairId)
-                        : _PairChartWorkspace(
-                            series: snapshot.activeChartSeries,
-                            pairId: pair.id,
-                            positive: pair.change24h >= 0,
-                            timeframe: _timeframe,
-                            onTimeframeChanged: (value) =>
-                                setState(() => _timeframe = value),
-                            indicators: _indicators,
-                            onIndicatorToggle: (value) => setState(() {
-                              if (_indicators.contains(value)) {
-                                _indicators.remove(value);
-                              } else {
-                                _indicators.add(value);
-                              }
-                            }),
-                            onAdvanced: () => unawaited(
-                              context.push(
-                                AppRoutePaths.tradeAdvancedChart(pair.id),
-                              ),
-                            ),
-                            desk: true,
+              // Terminal thuần: desk thay TOÀN BỘ vùng cuộn bằng grid cố
+              // định (meta | chart/độ sâu | sổ lệnh + giao dịch | mini-tab).
+              body: desk
+                  ? _PairTerminalShell(
+                      snapshot: snapshot,
+                      activeView: _activeView,
+                      onViewChanged: (view) =>
+                          setState(() => _activeView = view),
+                      timeframe: _timeframe,
+                      indicators: _indicators,
+                      workspace: _PairChartWorkspace(
+                        series: snapshot.activeChartSeries,
+                        pairId: pair.id,
+                        positive: pair.change24h >= 0,
+                        timeframe: _timeframe,
+                        onTimeframeChanged: (value) =>
+                            setState(() => _timeframe = value),
+                        indicators: _indicators,
+                        onIndicatorToggle: (value) => setState(() {
+                          if (_indicators.contains(value)) {
+                            _indicators.remove(value);
+                          } else {
+                            _indicators.add(value);
+                          }
+                        }),
+                        onAdvanced: () => unawaited(
+                          context.push(
+                            AppRoutePaths.tradeAdvancedChart(pair.id),
                           ),
-                  )
-                else
+                        ),
+                        desk: true,
+                      ),
+                    )
+                  : null,
+              children: [
+                if (!desk) MarketsPairPriceOverviewPanel(pair: pair),
+                if (!desk)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

@@ -1373,6 +1373,26 @@ final class MarketsSpacingTokens {
     vertical: AppSpacing.x1,
   );
   static const double pairIndicatorDot = AppSpacing.x1;
+  // Terminal thuần (hướng C 2026-08-30): gutter đều giữa các panel phẳng,
+  // hàng meta dày, mức sổ lệnh 26dp, dòng giao dịch 24dp.
+  static const double pairTerminalGutter = AppSpacing.cardGap;
+  static const EdgeInsets pairMetaStripPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x3,
+    vertical: AppSpacing.x2,
+  );
+  static const double pairMetaGap = AppSpacing.x3;
+  static const double pairMetaDividerHeight = AppSpacing.x5;
+  static const EdgeInsets pairPanelHeaderPadding = EdgeInsets.fromLTRB(
+    AppSpacing.x3,
+    AppSpacing.x2,
+    AppSpacing.x3,
+    AppSpacing.x1,
+  );
+  static const double pairBookRowExtent = 26;
+  static const EdgeInsets pairBookRowPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x1,
+  );
+  static const double pairTradeRowExtent = 24;
   // Panel tabbed cột phụ (V2-C): nội dung thụng lề, gạch chân tab active.
   static const EdgeInsets pairBookContentPadding = EdgeInsets.fromLTRB(
     AppSpacing.x3,

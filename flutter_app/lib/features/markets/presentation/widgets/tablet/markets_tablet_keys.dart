@@ -17,6 +17,15 @@ final class MarketsTabletKeys {
   static const pairPaneSellCta = Key('sc044_pair_pane_sell_cta');
   static const pairPaneFavorite = Key('sc044_pair_pane_favorite');
   static const pairDeskRow = Key('sc044_pair_desk_row');
+  static const pairTerminalGrid = Key('sc044_pair_terminal_grid');
+  static const pairMetaStrip = Key('sc044_pair_meta_strip');
+  static const pairBookPanel = Key('sc044_pair_book_panel');
+  static const pairTradesPanel = Key('sc044_pair_trades_panel');
+  static const pairOhlcReadout = Key('sc044_pair_ohlc_readout');
+  static Key pairMiniTab(String tab) => Key('sc044_pair_mini_$tab');
+  static Key pairBookRow(String side, int i) =>
+      Key('sc044_pair_book_${side}_$i');
+  static Key pairTradeRow(int i) => Key('sc044_pair_trade_$i');
   static const pairDeskFooter = Key('sc044_pair_desk_footer');
   static const tokenPaneContent = Key('sc045_token_pane_content');
   static const tokenStatsCard = Key('sc045_token_pane_stats_card');

@@ -32,6 +32,10 @@ class MarketsPaneScaffold extends StatelessWidget {
     // Dải ghim dưới scroll (không cuộn) — dùng cho desk footer của pane
     // pair (giá + MUA/BÁN luôn nhìn thấy). Null = không có dải ghim.
     this.footer,
+    // Terminal thuần (2026-08-30): khi != null, THAY TOÀN BỘ vùng cuộn —
+    // pane tự vẽ grid cố định chiếm hết chiều cao (children/scrollKey bị
+    // bỏ qua). Chỉ pane pair desk dùng; các pane khác giữ children.
+    this.body,
     // Detail scroll ⇒ tier standard (section gap 13dp) theo bảng
     // Page-Rhythm; pane chart/terminal (depth) khai báo flush riêng.
     this.rhythm = VitPageRhythm.standard,
@@ -46,10 +50,11 @@ class MarketsPaneScaffold extends StatelessWidget {
   final VitPageRhythm rhythm;
   final Key? scrollKey;
   final Widget? footer;
+  final Widget? body;
 
   @override
   Widget build(BuildContext context) {
-    Widget body = SingleChildScrollView(
+    Widget scrollArea = SingleChildScrollView(
       key: scrollKey,
       physics: onRefresh == null ? null : const AlwaysScrollableScrollPhysics(),
       child: VitPageContent(
@@ -62,7 +67,7 @@ class MarketsPaneScaffold extends StatelessWidget {
       ),
     );
     if (onRefresh != null) {
-      body = RefreshIndicator(onRefresh: onRefresh!, child: body);
+      scrollArea = RefreshIndicator(onRefresh: onRefresh!, child: scrollArea);
     }
 
     final headerTitle = title;
@@ -92,7 +97,7 @@ class MarketsPaneScaffold extends StatelessWidget {
               );
             },
           ),
-        Expanded(child: body),
+        Expanded(child: body ?? scrollArea),
         if (footer != null) ...[
           const Divider(
             height: AppSpacing.dividerHairline,

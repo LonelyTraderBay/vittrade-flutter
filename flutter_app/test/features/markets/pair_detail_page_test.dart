@@ -44,7 +44,8 @@ void main() {
     expect(snapshot.screenFilters.categories, isNotEmpty);
     expect(snapshot.chartSeries['btcusdt'], isNotEmpty);
     expect(snapshot.depth.bids, isNotEmpty);
-    expect(snapshot.recentTrades, hasLength(5));
+    // Terminal desk (2026-08-30): fixture sinh 24 giao dịch deterministic.
+    expect(snapshot.recentTrades, hasLength(24));
     expect(snapshot.lastUpdatedLabel, 'read-only');
     expect(
       snapshot.supportedStates,
@@ -108,7 +109,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Giá'), findsOneWidget);
     expect(find.text('Khối lượng'), findsOneWidget);
-    expect(find.text('23:29:14'), findsOneWidget);
+    expect(find.text('12:09:59'), findsOneWidget);
   });
 
   testWidgets('SC-044 detail cards navigate to token info and depth target', (

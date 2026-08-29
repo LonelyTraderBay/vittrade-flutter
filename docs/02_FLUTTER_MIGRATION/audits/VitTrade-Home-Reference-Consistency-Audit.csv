@@ -536,10 +536,12 @@ markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tab
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
-markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_depth.dart,0,0,0,0,0,0,0,0,no,-
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_painter.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,0,0,0,0,2,0,0,2,yes,allowed_source_keyword: orderbook
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_terminal.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart,0,0,0,0,0,0,0,0,no,-
 markets,feature_widget,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,0,0,0,0,0,0,0,0,no,-

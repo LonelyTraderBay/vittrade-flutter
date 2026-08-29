@@ -505,6 +505,7 @@ markets,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,1,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,2,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_tables.dart,2,0,0,C,0,0,0,pass,-
+markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_terminal.dart,1,0,0,C,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,2,0,0,E,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,4,0,0,E,0,0,0,pass,-
 markets,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,6,0,0,C,0,0,0,pass,-

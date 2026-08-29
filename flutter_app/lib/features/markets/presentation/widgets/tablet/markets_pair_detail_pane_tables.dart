@@ -177,7 +177,7 @@ class _TradeHeader extends StatelessWidget {
 }
 
 class _TradeRow extends StatelessWidget {
-  const _TradeRow({required this.trade});
+  const _TradeRow({super.key, required this.trade});
 
   final MarketRecentTrade trade;
 
