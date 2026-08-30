@@ -1,0 +1,14 @@
+{
+  "name": "vittrade-local",
+  "description": "VitTrade repo-local plugin marketplace: project subagents committed with the repository.",
+  "owner": {
+    "name": "LonelyTraderBay"
+  },
+  "plugins": [
+    {
+      "name": "vittrade-agents",
+      "source": "./plugins/vittrade-agents",
+      "description": "VitTrade project subagents: read-only compliance auditor and Android emulator UI acceptance verifier."
+    }
+  ]
+}

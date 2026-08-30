@@ -1,0 +1,6 @@
+{
+  "name": "vittrade-agents",
+  "version": "0.1.0",
+  "description": "VitTrade project subagents: read-only compliance auditor and Android emulator UI acceptance verifier.",
+  "agents": "agents"
+}

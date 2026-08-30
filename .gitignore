@@ -53,3 +53,6 @@ output/
 
 # ZCode session artifacts (plan-mode files, session scratch) — never commit
 .zcode/
+
+# ZCode video-agent-kit plugin runtime marker — never commit
+.video_agent/
