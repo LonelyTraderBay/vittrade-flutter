@@ -230,7 +230,6 @@ def render(changed: set[str], today: str, *, title: str, intro: str, doc_name: s
                 "",
                 *load_lines(batch_id, special, module_prompt),
                 "",
-                "GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).",
                 "STEP 0→5. Max 5-10 files code + tests this chat.",
                 "",
                 "BẮT BUỘC: redesign TOÀN BỘ TARGET PAGES bên dưới — Vit* · AppRadii · states.",

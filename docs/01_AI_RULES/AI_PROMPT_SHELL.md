@@ -40,18 +40,6 @@ Handoff line (when blocked): `RESUME FROM: <phase> - <batch/page>`
 
 Do not write anything after the handoff line.
 
-## GitNexus (MCP)
-
-Before editing any symbol: `impact({target, direction: "upstream"})`.
-
-Explore with `query()` / `context()` instead of repo-wide grep.
-
-Before commit: `detect_changes()`.
-
-Rename with GitNexus `rename`, not find-and-replace.
-
-If index stale: `.\scripts\gitnexus\Refresh-Index.ps1`
-
 ## Product boundaries
 
 - Open Arena: points-only (no wallet/payout/profit/stake-return language).
@@ -108,6 +96,5 @@ and checklists only unless a specific section is required.
 | --- | --- |
 | UI review/polish | `.codex/skills/vittrade-ui-checklists/SKILL.md` |
 | Pre-merge review | `.codex/skills/code-review-and-quality/SKILL.md` |
-| GitNexus workflows | `.codex/skills/gitnexus-impact-analysis/SKILL.md` |
 | Diff trim / batch self-check | `.codex/skills/vittrade-minimal-review/SKILL.md` |
 | Ponytail audit toàn module | `docs/02_FLUTTER_MIGRATION/checklists/ke-hoach-ponytail-audit-toan-module.md` v2.1 — **1 STEP/chat**; kết thúc **khối HANDOFF Section 1.2** (copy prompt STEP tiếp); MERGE dùng cùng khối, không chỉ `PONYTAIL AUDIT DONE` |

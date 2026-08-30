@@ -33,7 +33,6 @@
 ## Tier B discipline
 
 - Max **5–10 files** code + tests.
-- GitNexus `impact()` trước edit.
 - Mirror SC-007 Home (read-only).
 - States: loading · empty · error khi flow cần.
 - Không tạo local `Vit*` duplicate.

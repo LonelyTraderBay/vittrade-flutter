@@ -37,7 +37,6 @@
 
 ## Phase 1–5 — Migrate batches (≤5–10 files per chat)
 
-Each batch: GitNexus `impact` → replace overlay/SnackBar with `showVitNoticeSheet` → focused tests → analyze → shrink baseline once guardrail exists.
 
 ### Batch 1 — Trade / futures / bots overlays (P0)
 

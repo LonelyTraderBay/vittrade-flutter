@@ -257,8 +257,6 @@ and load only the relevant local skill from `.codex/skills/` for each task:
 
 - Multi-file or ambiguous work: use `planning-and-task-breakdown` first.
 - Implementation: use `incremental-implementation` and verify every slice.
-- Symbol changes: run GitNexus `impact` before editing and
-  `detect_changes` before committing.
 - UI work: use `vittrade-ui-checklists` plus the matching design-domain
   standard.
 - High-risk financial flows: use `vittrade-product-verify`.
@@ -287,8 +285,8 @@ and load only the relevant local skill from `.codex/skills/` for each task:
 
 Local agent workflow skills live in `.codex/skills/`. Use them selectively for
 spec, planning, implementation, testing, debugging, review, security, and UI
-work. This AGENTS.md remains the higher-priority project contract; GitNexus,
-Flutter commands, financial safety, and Prediction Markets/Open Arena
+work. This AGENTS.md remains the higher-priority project contract; Flutter
+commands, financial safety, and Prediction Markets/Open Arena
 boundaries always take precedence over generic skill guidance.
 
 | Task | Skill |
@@ -301,48 +299,8 @@ boundaries always take precedence over generic skill guidance.
 | Plan multi-file work | `.codex/skills/planning-and-task-breakdown/SKILL.md` |
 | Incremental implementation | `.codex/skills/incremental-implementation/SKILL.md` |
 | Pre-merge review | `.codex/skills/code-review-and-quality/SKILL.md` |
-| GitNexus impact / refactor | `.codex/skills/gitnexus-impact-analysis/SKILL.md` |
 | Over-engineering / diff trim | `.codex/skills/vittrade-minimal-review/SKILL.md` |
 | Debug / test failure / blocked batch | `.codex/skills/debugging-and-error-recovery/SKILL.md` |
 | Performance / jank / profiling | `.codex/skills/performance-optimization/SKILL.md` |
 | Trade module debt scan (sprint) | `.codex/skills/ponytail-audit/SKILL.md` |
 | UI/UX design intelligence (reference) | `.codex/skills/ui-ux-pro-max/SKILL.md` — tra cứu style/UX guidance; LUÔN thua DESIGN.md + tokens + Vit* ladder khi xung đột (xem install note trong SKILL.md) |
-
-<!-- gitnexus:start -->
-# GitNexus — Code Intelligence
-
-This project is indexed by GitNexus as **vittrade-flutter**. Counts and
-execution-flow totals are runtime data; verify freshness with
-`node .gitnexus/run.cjs status` instead of relying on hard-coded numbers. Use
-the GitNexus MCP tools to understand code, assess impact, and navigate safely.
-
-> Index stale? Run `.\scripts\gitnexus\Refresh-Index.ps1` or `node .gitnexus/run.cjs analyze --skip-agents-md --skip-skills`. Local index lives in `.gitnexus/` (gitignored, ~730MB — refresh after clone).
-
-## Always Do
-
-- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
-- **MUST run `detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows. For regression review, compare against the default branch: `detect_changes({scope: "compare", base_ref: "main"})`.
-- **MUST warn the user** if impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
-- When exploring unfamiliar code, use `query({query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
-- When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `context({name: "symbolName"})`.
-
-## Never Do
-
-- NEVER edit a function, class, or method without first running `impact` on it.
-- NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
-- NEVER rename symbols with find-and-replace — use `rename` which understands the call graph.
-- NEVER commit changes without running `detect_changes()` to check affected scope.
-
-## Resources
-
-| Resource | Use for |
-|----------|---------|
-| `gitnexus://repo/vittrade-flutter/context` | Codebase overview, check index freshness |
-| `gitnexus://repo/vittrade-flutter/clusters` | All functional areas |
-| `gitnexus://repo/vittrade-flutter/processes` | All execution flows |
-| `gitnexus://repo/vittrade-flutter/process/{name}` | Step-by-step execution trace |
-
-More GitNexus skills: `.codex/skills/gitnexus-exploring/`, `gitnexus-debugging/`,
-`gitnexus-refactoring/`, `gitnexus-guide/`, `gitnexus-cli/`.
-
-<!-- gitnexus:end -->

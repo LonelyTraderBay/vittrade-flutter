@@ -153,7 +153,6 @@ Headline lợi ích · security calm · mask neutral · label ≤3 từ · CTA v
 
 ### STEP 0 — Khám phá
 
-GitNexus `query`/`context` `WalletPage`. Đọc hub widgets + Home tương ứng. Baseline:
 
 ```bash
 cd flutter_app && flutter test test/features/wallet/wallet_page_test.dart --reporter=compact

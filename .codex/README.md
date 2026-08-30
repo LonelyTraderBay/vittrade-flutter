@@ -12,8 +12,7 @@ không phải nạp toàn bộ repo vào context.
    `.codex/skills/planning-and-task-breakdown/SKILL.md` trước khi sửa.
 4. Với thay đổi nhiều file, thực hiện từng batch nhỏ và verify sau mỗi batch;
    dùng `.codex/skills/incremental-implementation/SKILL.md`.
-5. Trước commit, đọc `.codex/skills/code-review-and-quality/SKILL.md` và chạy
-   `gitnexus detect_changes`.
+5. Trước commit, đọc `.codex/skills/code-review-and-quality/SKILL.md`.
 
 ## Skill router
 
@@ -24,9 +23,6 @@ không phải nạp toàn bộ repo vào context.
 | Financial/P2P/high-risk flow | `vittrade-product-verify`, `security-and-hardening` |
 | Bug, test fail, build fail | `debugging-and-error-recovery` |
 | Behavior/state/test mới | `test-driven-development` |
-| Refactor/ảnh hưởng symbol | `gitnexus-impact-analysis`, `gitnexus-refactoring` |
-| Khám phá execution flow | `gitnexus-exploring` |
-| Refresh/check graph | `gitnexus-cli` |
 | Trim diff trước khi hoàn tất batch | `vittrade-minimal-review`, `vittrade-batch-gate` |
 | Review trước merge | `code-review-and-quality` |
 
@@ -47,13 +43,6 @@ flutter test --reporter=compact
 Thêm audit/test theo module khi task chạm UI, router, financial flow hoặc
 shared component. Không commit `build/`, `.dart_tool/`, `run-artifacts/`, log,
 secret hoặc file cấu hình máy cá nhân.
-
-## GitNexus bắt buộc
-
-- Kiểm tra freshness bằng `node .gitnexus/run.cjs status`.
-- Trước khi sửa function/class/method: chạy `impact({target, direction: "upstream"})`.
-- Trước commit: chạy `detect_changes()` và kiểm tra scope/risk.
-- Nếu graph stale: chạy `node .gitnexus/run.cjs analyze --skip-agents-md --skip-skills`.
 
 ## Runtime boundary
 

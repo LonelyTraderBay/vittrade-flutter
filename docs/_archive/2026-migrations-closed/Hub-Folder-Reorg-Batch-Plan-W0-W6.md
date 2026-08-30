@@ -958,7 +958,6 @@ Update `wallet_routes.dart` after page moves.
    `flutter analyze`  
 3. Do **not** combine a fold batch with UI redesign / token cleanup.  
 4. For `part` files: prefer move-with-`part` first; convert to imported widgets in a later polish batch if risk is high.  
-5. Index refresh (optional after large waves): `.\scripts\gitnexus\Refresh-Index.ps1`
 
 ---
 

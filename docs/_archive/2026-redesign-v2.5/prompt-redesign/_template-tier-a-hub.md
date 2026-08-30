@@ -121,7 +121,6 @@ Batch con cùng module — liệt kê link từ hub; redesign batch riêng.
 
 ### STEP 0
 
-GitNexus `query` + `context` hub page. Baseline test `{HubTestPath}`.
 
 ### STEP 1–2
 

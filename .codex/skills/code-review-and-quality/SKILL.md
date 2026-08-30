@@ -326,7 +326,6 @@ When you are the author addressing PR or review comments:
 
 - Prefer existing `Vit*` shared widgets over new local duplicates.
 - Preserve Arena points-only and Prediction Markets financial boundaries (`AGENTS.md`).
-- Run GitNexus `context()` when a comment changes a shared symbol or route.
 - YAGNI: grep or `.codex/skills/vittrade-minimal-review/SKILL.md` before
   "implementing properly" for unused or speculative features.
 

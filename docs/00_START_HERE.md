@@ -80,7 +80,7 @@ behavior changes.
 | `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` | Map of every design-consistency audit domain — what enforces it, and the command to check it locally. |
 | `docs/02_FLUTTER_MIGRATION/checklists/Future-Feature-Onboarding-Checklist.md` | Required checklist before adding a feature, route, high-risk flow, or large test surface. |
 | `docs/02_FLUTTER_MIGRATION/checklists/Enterprise-PR-Review-Checklist.md` | Pull request review gates for architecture, router, product safety, and tests. |
-| `.codex/skills/` | Codex workflow skills for planning, implementation, UI, audits, testing, review, and GitNexus. |
+| `.codex/skills/` | Codex workflow skills for planning, implementation, UI, audits, testing, and review. |
 | `docs/03_DESIGN_SYSTEM/Guidelines.md` | Product and design rules. |
 | `docs/05_ARCHITECTURE/VitTrade-Enterprise-Architecture-Report.md` | Architecture reference; Flutter source wins on conflict. |
 

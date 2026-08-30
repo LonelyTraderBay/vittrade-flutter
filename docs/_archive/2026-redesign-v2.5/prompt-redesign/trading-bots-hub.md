@@ -180,7 +180,6 @@ Thứ tự scroll mục tiêu (phone 360px):
 
 ### STEP 0 — Khám phá (read-only)
 
-1. GitNexus: `query({query: "TradingBotsPage"})`, `context({name: "TradingBotsPage"})`.
 2. Đọc hub parts + Home sections tương ứng (không paste full file).
 3. Baseline test:
 

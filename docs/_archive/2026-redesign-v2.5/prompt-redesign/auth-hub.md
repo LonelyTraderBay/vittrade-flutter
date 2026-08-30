@@ -141,7 +141,6 @@ Màn Login phải cảm giác như **cổng bảo mật fintech tier-1** (Coinba
 
 ### STEP 0 — Khám phá
 
-GitNexus `query` + `context` `LoginPage`. Baseline:
 
 ```bash
 cd flutter_app

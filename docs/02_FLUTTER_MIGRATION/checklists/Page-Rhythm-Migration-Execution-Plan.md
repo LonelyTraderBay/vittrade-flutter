@@ -28,20 +28,19 @@
 ```
 WHILE manifest có status=pending:
   1. Đọc batch nhỏ nhất còn pending (mục Batch dưới đây)
-  2. GitNexus impact() trên VitPageContent / file đích trước khi sửa
-  3. Với TỪNG file trong batch (theo thứ tự):
+  2. Với TỪNG file trong batch (theo thứ tự):
      a. import app_page_rhythm.dart
      b. VitPageContent(rhythm: VitPageRhythm.<tier>, ...) — tier theo manifest
      c. Xóa SizedBox orphan giữa sibling top-level (parent owns gap)
      d. Inner gap: pageRhythm*InnerGap hoặc VitSectionHeader.bottomGap
-  4. Gate xác minh batch (bắt buộc trước khi sang batch kế):
+  3. Gate xác minh batch (bắt buộc trước khi sang batch kế):
      cd flutter_app
      flutter analyze lib/features/<cluster_của_batch>/
      flutter test test/features/<cluster>/ --reporter=compact  # nếu có
      dart run tool/page_rhythm_manifest.dart   # cập nhật done/pending
      dart run tool/page_rhythm_audit.dart
-  5. Đánh dấu batch DONE trong checkpoint (cuối file)
-  6. TIẾP TỤC batch kế — KHÔNG hỏi user, KHÔNG dừng giữa program
+  4. Đánh dấu batch DONE trong checkpoint (cuối file)
+  5. TIẾP TỤC batch kế — KHÔNG hỏi user, KHÔNG dừng giữa program
 UNTIL pending == 0
 ```
 

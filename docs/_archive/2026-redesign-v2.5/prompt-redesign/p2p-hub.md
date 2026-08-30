@@ -152,7 +152,6 @@ Headline lợi ích · escrow factual · KYC direct · label ≤3 từ · CTA ve
 
 ### STEP 0 — Khám phá
 
-GitNexus `query`/`context` `P2PHomePage`. Đọc hub parts + Home tương ứng. Baseline:
 
 ```bash
 cd flutter_app && flutter test test/features/p2p/p2p_home_page_test.dart --reporter=compact

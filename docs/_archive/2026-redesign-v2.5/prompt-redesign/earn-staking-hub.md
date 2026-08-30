@@ -142,7 +142,6 @@ Earn accent: module green — không dùng buy-green cho “guaranteed profit”
 
 ### STEP 0 — Khám phá
 
-GitNexus `query`/`context` `StakingEarnPage`. Baseline:
 
 ```bash
 cd flutter_app && flutter test test/features/earn/staking_earn_page_test.dart --reporter=compact

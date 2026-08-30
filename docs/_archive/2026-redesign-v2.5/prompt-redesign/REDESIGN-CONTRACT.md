@@ -40,7 +40,6 @@ Mọi hub prompt và batch Tier B **phải** tuân contract này. Chi tiết: [A
 
 | STEP | Việc |
 | --- | --- |
-| 0 | GitNexus `impact()` + `context()` trước edit |
 | 1 | Audit UI + clutter before |
 | 2 | Spec wireframe + before/after + persona check |
 | 3 | Code — max **5–10 files**/chat |

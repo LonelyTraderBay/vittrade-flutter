@@ -93,7 +93,6 @@ project contract and the skill files provide focused procedures.
 | `.codex/skills/code-review-and-quality/SKILL.md` | Pre-merge correctness, architecture, security, and performance review |
 | `.codex/skills/security-and-hardening/SKILL.md` | Security review and hardening |
 | `.codex/skills/test-driven-development/SKILL.md` | Test-first behavior changes |
-| `.codex/skills/gitnexus-cli/SKILL.md` | Index/status/maintenance commands |
 
 ## Checklists
 
@@ -148,10 +147,9 @@ the `02_FLUTTER_MIGRATION/` top level — verified against the tools' own
 | `.codex/skills/` | Repo-local Codex skills and VitTrade procedures |
 | `AGENTS.md` | Project contract and Codex workflow authority |
 | `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` | Plan → Execute batch discipline |
-| `.gitnexus/` | Local GitNexus graph cache (ignored) |
 
-Policy: use the smallest applicable Codex skill, GitNexus impact before symbol
-changes, and `detect_changes` before commits.
+Policy: use the smallest applicable Codex skill and keep the approved scope
+through verification.
 
 ## Removed / archived docs (2026-07-23)
 

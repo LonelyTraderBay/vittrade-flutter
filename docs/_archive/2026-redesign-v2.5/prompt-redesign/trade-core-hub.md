@@ -141,7 +141,6 @@ Pub mới · đổi route/repository/order logic · xóa `sc048_*` keys · redes
 
 ### STEP 0 — Khám phá
 
-GitNexus `query`/`context` `TradePage`. Baseline:
 
 ```bash
 cd flutter_app && flutter test test/features/trade/trade_page_test.dart --reporter=compact

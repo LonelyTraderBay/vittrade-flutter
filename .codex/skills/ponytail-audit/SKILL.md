@@ -68,8 +68,6 @@ Tags (same as [vittrade-minimal-review](../vittrade-minimal-review/SKILL.md)):
 5. **token drift** — `BorderRadius.circular(` outside `app_radii.dart`; raw hex
    colors outside `AppColors`.
 
-Use GitNexus `query()` for duplicate widget names before listing reuse-vit items.
-
 ## Do not flag
 
 - Financial preview/confirm, masked data, required flow states (AGENTS.md).

@@ -201,7 +201,6 @@ Không mở PR “dịch hết 280 dòng” trừ khi user yêu cầu riêng.
 
 1. Dùng phiên Codex hiện tại; không đổi model giữa batch.
 2. Không commit trừ user yêu cầu.  
-3. GitNexus `impact` trước khi sửa symbol (nếu index sẵn).  
 4. Batch gate: minimal-diff + `flutter analyze` + focused tests.  
 5. High-risk: luôn preview → confirm; mask PII.  
 6. Prediction Markets / Open Arena boundaries không đụng nhầm.

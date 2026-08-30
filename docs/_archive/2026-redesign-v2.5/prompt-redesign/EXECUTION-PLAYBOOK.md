@@ -137,7 +137,6 @@ EXECUTION 1/66 — batch RD-M02-B01 module RD-M02
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/auth-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M02 — RD-M02-B01
 ```
@@ -159,7 +158,6 @@ EXECUTION 2/66 — batch RD-M03-B01 module RD-M03
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M03 — RD-M03-B01
 ```
@@ -181,7 +179,6 @@ EXECUTION 3/66 — batch RD-K01 module RD-M04
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/markets-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M04 — RD-K01
 ```
@@ -202,7 +199,6 @@ EXECUTION 4/66 — batch RD-K02 module RD-M04
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M04 — RD-K02
 ```
@@ -223,7 +219,6 @@ EXECUTION 5/66 — batch RD-K03 module RD-M04
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M04 — RD-K03
 ```
@@ -244,7 +239,6 @@ EXECUTION 6/66 — batch RD-K04 module RD-M04
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M04 — RD-K04
 ```
@@ -266,7 +260,6 @@ EXECUTION 7/66 — batch RD-T01 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/trade-core-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T01
 ```
@@ -286,7 +279,6 @@ EXECUTION 8/66 — batch RD-T02 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/trading-bots-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: TRADING BOTS HUB UI REDESIGN DONE — SC-059 v2
 ```
@@ -307,7 +299,6 @@ EXECUTION 9/66 — batch RD-T03 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T03
 ```
@@ -328,7 +319,6 @@ EXECUTION 10/66 — batch RD-T04 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T04
 ```
@@ -348,7 +338,6 @@ EXECUTION 11/66 — batch RD-T05 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/copy-trading-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T05
 ```
@@ -369,7 +358,6 @@ EXECUTION 12/66 — batch RD-T06 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T06
 ```
@@ -390,7 +378,6 @@ EXECUTION 13/66 — batch RD-T07 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T07
 ```
@@ -411,7 +398,6 @@ EXECUTION 14/66 — batch RD-T08 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T08
 ```
@@ -432,7 +418,6 @@ EXECUTION 15/66 — batch RD-T09 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T09
 ```
@@ -453,7 +438,6 @@ EXECUTION 16/66 — batch RD-T10 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T10
 ```
@@ -474,7 +458,6 @@ EXECUTION 17/66 — batch RD-T11 module RD-M05
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M05 — RD-T11
 ```
@@ -496,7 +479,6 @@ EXECUTION 18/66 — batch RD-W01 module RD-M06
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/wallet-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M06 — RD-W01
 ```
@@ -517,7 +499,6 @@ EXECUTION 19/66 — batch RD-W02 module RD-M06
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M06 — RD-W02
 ```
@@ -538,7 +519,6 @@ EXECUTION 20/66 — batch RD-W03 module RD-M06
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M06 — RD-W03
 ```
@@ -559,7 +539,6 @@ EXECUTION 21/66 — batch RD-W04 module RD-M06
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M06 — RD-W04
 ```
@@ -581,7 +560,6 @@ EXECUTION 22/66 — batch RD-F01 module RD-M07
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M07 — RD-F01
 ```
@@ -601,7 +579,6 @@ EXECUTION 23/66 — batch RD-F02 module RD-M07
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M07 — RD-F02
 ```
@@ -621,7 +598,6 @@ EXECUTION 24/66 — batch RD-F03 module RD-M07
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M07 — RD-F03
 ```
@@ -643,7 +619,6 @@ EXECUTION 25/66 — batch RD-P01 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/p2p-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P01
 ```
@@ -664,7 +639,6 @@ EXECUTION 26/66 — batch RD-P02 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P02
 ```
@@ -685,7 +659,6 @@ EXECUTION 27/66 — batch RD-P03 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P03
 ```
@@ -706,7 +679,6 @@ EXECUTION 28/66 — batch RD-P04 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P04
 ```
@@ -727,7 +699,6 @@ EXECUTION 29/66 — batch RD-P05 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P05
 ```
@@ -748,7 +719,6 @@ EXECUTION 30/66 — batch RD-P06 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P06
 ```
@@ -769,7 +739,6 @@ EXECUTION 31/66 — batch RD-P07 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P07
 ```
@@ -790,7 +759,6 @@ EXECUTION 32/66 — batch RD-P08 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P08
 ```
@@ -811,7 +779,6 @@ EXECUTION 33/66 — batch RD-P09 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P09
 ```
@@ -832,7 +799,6 @@ EXECUTION 34/66 — batch RD-P10 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P10
 ```
@@ -853,7 +819,6 @@ EXECUTION 35/66 — batch RD-P11 module RD-M08
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M08 — RD-P11
 ```
@@ -875,7 +840,6 @@ EXECUTION 36/66 — batch RD-E01 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/earn-staking-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E01
 ```
@@ -896,7 +860,6 @@ EXECUTION 37/66 — batch RD-E02 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E02
 ```
@@ -917,7 +880,6 @@ EXECUTION 38/66 — batch RD-E03 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E03
 ```
@@ -938,7 +900,6 @@ EXECUTION 39/66 — batch RD-E04 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E04
 ```
@@ -959,7 +920,6 @@ EXECUTION 40/66 — batch RD-E05 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E05
 ```
@@ -980,7 +940,6 @@ EXECUTION 41/66 — batch RD-E06 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E06
 ```
@@ -1001,7 +960,6 @@ EXECUTION 42/66 — batch RD-E07 module RD-M09
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M09 — RD-E07
 ```
@@ -1023,7 +981,6 @@ EXECUTION 43/66 — batch RD-C01 module RD-M10
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M10 — RD-C01
 ```
@@ -1043,7 +1000,6 @@ EXECUTION 44/66 — batch RD-C02 module RD-M10
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M10 — RD-C02
 ```
@@ -1063,7 +1019,6 @@ EXECUTION 45/66 — batch RD-C03 module RD-M10
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M10 — RD-C03
 ```
@@ -1085,7 +1040,6 @@ EXECUTION 46/66 — batch RD-R01 module RD-M11
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/predictions-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M11 — RD-R01
 ```
@@ -1106,7 +1060,6 @@ EXECUTION 47/66 — batch RD-R02 module RD-M11
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M11 — RD-R02
 ```
@@ -1127,7 +1080,6 @@ EXECUTION 48/66 — batch RD-R03 module RD-M11
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M11 — RD-R03
 ```
@@ -1149,7 +1101,6 @@ EXECUTION 49/66 — batch RD-A01 module RD-M12
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/arena-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M12 — RD-A01
 ```
@@ -1170,7 +1121,6 @@ EXECUTION 50/66 — batch RD-A02 module RD-M12
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M12 — RD-A02
 ```
@@ -1191,7 +1141,6 @@ EXECUTION 51/66 — batch RD-A03 module RD-M12
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M12 — RD-A03
 ```
@@ -1212,7 +1161,6 @@ EXECUTION 52/66 — batch RD-A04 module RD-M12
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M12 — RD-A04
 ```
@@ -1233,7 +1181,6 @@ EXECUTION 53/66 — batch RD-A05 module RD-M12
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M12 — RD-A05
 ```
@@ -1255,7 +1202,6 @@ EXECUTION 54/66 — batch RD-L01 module RD-M13
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/launchpad-hub.md (FULL hub prompt)
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M13 — RD-L01
 ```
@@ -1276,7 +1222,6 @@ EXECUTION 55/66 — batch RD-L02 module RD-M13
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M13 — RD-L02
 ```
@@ -1297,7 +1242,6 @@ EXECUTION 56/66 — batch RD-L03 module RD-M13
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M13 — RD-L03
 ```
@@ -1319,7 +1263,6 @@ EXECUTION 57/66 — batch RD-M14-B01 module RD-M14
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M14 — RD-M14-B01
 ```
@@ -1341,7 +1284,6 @@ EXECUTION 58/66 — batch RD-M15-B01 module RD-M15
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M15 — RD-M15-B01
 ```
@@ -1363,7 +1305,6 @@ EXECUTION 59/66 — batch RD-M16-B01 module RD-M16
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M16 — RD-M16-B01
 ```
@@ -1385,7 +1326,6 @@ EXECUTION 60/66 — batch RD-M17-B01 module RD-M17
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M17 — RD-M17-B01
 ```
@@ -1407,7 +1347,6 @@ EXECUTION 61/66 — batch RD-M18-B01 module RD-M18
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M18 — RD-M18-B01
 ```
@@ -1429,7 +1368,6 @@ EXECUTION 62/66 — batch RD-M19-B01 module RD-M19
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M19 — RD-M19-B01
 ```
@@ -1451,7 +1389,6 @@ EXECUTION 63/66 — batch RD-M20-B01 module RD-M20
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M20 — RD-M20-B01
 ```
@@ -1473,7 +1410,6 @@ EXECUTION 64/66 — batch RD-M21-B01 module RD-M21
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M21 — RD-M21-B01
 ```
@@ -1495,7 +1431,6 @@ EXECUTION 65/66 — batch RD-M22-B01 module RD-M22
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M22 — RD-M22-B01
 ```
@@ -1517,7 +1452,6 @@ EXECUTION 66/66 — batch RD-M23-B01 module RD-M23
 - docs/02_FLUTTER_MIGRATION/prompt-redesign/_template-tier-b-batch.md
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (verify gate)
 
-GitNexus impact() trước mọi edit. Mirror SC-007 Home (read-only).
 STEP 0→5. Max 5-10 files. New chat next batch.
 Completion: MODULE UI REDESIGN DONE — RD-M23 — RD-M23-B01
 ```

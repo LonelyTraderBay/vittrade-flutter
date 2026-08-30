@@ -154,7 +154,6 @@ Mirror **cấu trúc** Home, **accent** probability (semantic buy/sell cho Yes/N
 
 ### STEP 0 — Khám phá (read-only)
 
-1. GitNexus: `query({query: "PredictionsHomePage"})`, `context({name: "PredictionsHomePage"})`.
 2. Đọc hub + Home sections tương ứng (không paste full file).
 3. Baseline: `flutter test test/features/predictions/predictions_home_page_test.dart --reporter=compact`
 

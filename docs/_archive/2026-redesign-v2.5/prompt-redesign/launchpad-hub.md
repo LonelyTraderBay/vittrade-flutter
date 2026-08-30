@@ -141,7 +141,6 @@ Performance, portfolio, staking, subscribe/claim flows — audit link từ hub; 
 
 ### STEP 0 — Khám phá
 
-GitNexus `query` + `context` `LaunchpadPage`. Baseline:
 
 ```bash
 cd flutter_app

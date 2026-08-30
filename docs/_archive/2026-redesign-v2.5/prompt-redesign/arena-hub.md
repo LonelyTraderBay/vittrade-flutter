@@ -155,7 +155,6 @@ Mirror **cấu trúc** Home, **accent** module Arena (points, completion — kh�
 
 ### STEP 0 — Khám phá (read-only)
 
-1. GitNexus: `query({query: "ArenaHomePage"})`, `context({name: "ArenaHomePage"})`.
 2. Đọc hub parts + Home sections tương ứng (không paste full file).
 3. Baseline: `flutter test test/features/arena/arena_home_page_test.dart --reporter=compact`
 

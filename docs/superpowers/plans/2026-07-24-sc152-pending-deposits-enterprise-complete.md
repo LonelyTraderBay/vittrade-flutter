@@ -16,7 +16,6 @@
 - Notice success/error/must-ack: **`showVitNoticeSheet`** — không SnackBar.
 - Filter: giữ **`VitFilterChip` S4**; icon: **`VitAccentIconBox`**; trust/footer: **`VitInfoCallout`**.
 - Sensitive: tiếp tục **`maskAddress`** cho `fromAddress` / `txHash`.
-- Trước edit symbol: GitNexus `impact` trên `PendingDepositsPage` / `_refreshDeposits` (repo `vittrade-flutter`).
 - Không commit trực tiếp `main`; branch feature → PR squash merge khi CI xanh.
 - Mỗi batch ≤ ~5–10 file; verify trước khi báo complete; minimal-diff self-check.
 - **Out of scope:** poll Timer 5s, thêm `ContextualSupportFlow.deposit`, đổi router path, redesign layout toàn wallet, BE thật.
@@ -70,7 +69,6 @@ Sau mỗi batch: `flutter analyze` (file đụng) + `flutter test test/features/
 - Consumes: `walletPendingDepositsProvider`, `showVitNoticeSheet`, `VitInsetScrollView`
 - Produces: `Future<void> _refreshDeposits()` awaitable; banner subtitle trung thực; pull-to-refresh cùng path
 
-- [ ] **Step 1: GitNexus impact**
 
 ```text
 impact({ target: "_refreshDeposits", direction: "upstream",
@@ -560,12 +558,6 @@ dart run tool/navigation_edge_audit.dart --check
 dart run tool/segment_pill_audit.dart --check --strict-full
 ```
 
-- [ ] **Step 5: GitNexus trước commit cuối**
-
-```text
-detect_changes({ scope: "all",
-  repo: "vittrade-flutter" })
-```
 
 Expected: risk low; chỉ wallet pending deposits + tokens/tests.
 

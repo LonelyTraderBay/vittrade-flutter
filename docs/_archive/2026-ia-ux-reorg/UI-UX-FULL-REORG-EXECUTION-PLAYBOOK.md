@@ -42,7 +42,6 @@ User muốn AI **làm theo thứ tự trong cùng một chat**, không bắt bu�
 
 1. Đọc đúng `STEP-x.y` đang `pending` / được chỉ định.  
 2. Đọc file nguồn STEP liệt kê.  
-3. Nếu sửa Dart: GitNexus `impact` trước khi sửa symbol.  
 4. Làm **hết** must-do của STEP; không kéo việc của STEP sau vào.  
 5. Chạy **verify của STEP**; ghi evidence ngắn.  
 6. Tick `[x]` ở checkbox STEP **và** cập nhật §1 Dashboard + §1.1 Log.  
@@ -92,7 +91,6 @@ Ràng buộc:
 - Mỗi STEP xong: verify → tick checkbox + §1 Dashboard + §1.1 Log → báo next STEP → tiếp tục
 - Hard stop §0.5: dừng và nói rõ lý do
 - Soft ceiling §0.4: cảnh báo nhưng tiếp tục nếu user đã chọn continuum
-- Dùng phiên Codex hiện tại; Dart: GitNexus impact trước khi sửa symbol
 - P0: không sửa flutter_app/lib (trừ khi STEP ghi rõ)
 ```
 

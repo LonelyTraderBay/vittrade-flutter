@@ -141,7 +141,6 @@ Pub mới · đổi route/repository/copy logic · xóa `sc063_*` keys · one-ch
 
 ### STEP 0 — Khám phá
 
-GitNexus `query`/`context` `CopyTradingPage`. Baseline:
 
 ```bash
 cd flutter_app && flutter test test/features/trade/copy_trading_page_test.dart --reporter=compact

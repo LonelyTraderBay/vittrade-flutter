@@ -138,7 +138,6 @@ Hub Markets phải cảm giác như **bảng giá fintech tier-1** (Binance Mark
 
 ### STEP 0 — Khám phá
 
-GitNexus `query` + `context` `MarketListPage`. Baseline:
 
 ```bash
 cd flutter_app

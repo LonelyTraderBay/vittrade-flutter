@@ -31,10 +31,9 @@ Skip Plan (single Agent chat) for small, obvious edits (1–3 files, clear fix).
 ## Phase 1 — Plan (Chat A)
 
 1. Start in read-only planning mode.
-2. Load the relevant Codex skills; GitNexus is available through the Codex
-   workspace tools.
+2. Load the relevant Codex skills.
 3. Paste the **Plan prompt** below (fill `<task>`).
-4. Agent explores only: GitNexus `impact` / `query`, targeted reads — no edits.
+4. Agent explores only targeted reads — no edits.
 5. **You approve** the batch plan before any Build / Execute chat.
 
 ### Plan prompt (copy)
@@ -72,7 +71,6 @@ Thực hiện đúng Batch <N> trong plan đã duyệt (dán / @ đoạn Batch N
 Ràng buộc:
 - Chỉ các file trong batch — không mở rộng scope
 - Giữ nguyên scope đã duyệt — không tự mở rộng yêu cầu
-- GitNexus impact trước khi sửa symbol
 - Xong: tự check minimal-diff (.codex/skills/vittrade-minimal-review/SKILL.md),
   rồi chạy verification gate (AI_PROMPT_SHELL § Verification) — analyze + focused tests
 - Báo evidence (lệnh + kết quả). Không hỏi “làm batch tiếp?” nếu plan đã định nghĩa batch kế
@@ -89,7 +87,7 @@ Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
 | 5–10 files / chat; new chat after batch | One giant migration chat |
 | Load one prompt + one plan slice (`docs/INDEX.md`) | Paste full audit CSV / backlog + plan |
 | QA in a **separate** chat | Mix visual QA into migration batch |
-| Hard task → smaller batch / Plan / GitNexus | Assume a higher model tier |
+| Hard task → smaller batch / Plan | Assume a higher model tier |
 
 ## Stuck recovery
 

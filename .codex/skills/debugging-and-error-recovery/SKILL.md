@@ -142,9 +142,8 @@ file, or symbol.
 
 **STOP** before fix #4. This pattern suggests architectural coupling, not a bad line.
 
-1. Run GitNexus `impact()` / `context()` on the shared symbol, provider, or route involved.
-2. Report to the user: symptom, fixes tried, architectural hypothesis.
-3. Choose one path — scoped refactor, revert the batch, or handoff
+1. Report to the user: symptom, fixes tried, architectural hypothesis.
+2. Choose one path — scoped refactor, revert the batch, or handoff
    (`RESUME FROM: <phase> - <batch>` per `docs/01_AI_RULES/AI_PROMPT_SHELL.md`) —
    **do not guess again.**
 

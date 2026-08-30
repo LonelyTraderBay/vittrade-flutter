@@ -381,7 +381,7 @@ AI thuc hien **dung thu tu** trong 1 chat (1 STEP):
 | ---: | --- | --- |
 | 1 | **PRE-FLIGHT** | Doc shell + skill + STEP nay. Xac nhan scope va file list. |
 | 2 | **INVENTORY** | Dem file `.dart` trong scope; ghi vao ledger header. Neu lech voi bang STEP → bao `BLOCKED`. |
-| 3 | **SCAN** | Quet tung file: reuse-vit, yagni, delete, shrink, token-drift. GitNexus `query()` truoc reuse-vit. |
+| 3 | **SCAN** | Quet tung file: reuse-vit, yagni, delete, shrink, token-drift. |
 | 4 | **WRITE** | Ghi artifact (partial hoac full). Toi thieu 5 findings co impact cao, hoac ghi "Lean slice". |
 | 5 | **PROGRESS** | Cap nhat `ponytail-audit-progress.md` (STEP = done). |
 | 6 | **STOP** | In **khối HANDOFF Section 1.2** (bắt buộc cuối message). **Không làm gì thêm.** |

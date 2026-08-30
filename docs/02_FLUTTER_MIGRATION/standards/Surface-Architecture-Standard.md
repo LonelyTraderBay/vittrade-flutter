@@ -94,7 +94,5 @@ features/markets/routes/web_markets_routes.dart
 ## Migration rule
 
 - Batch 5–10 file, một feature/bounded context.
-- Impact GitNexus trước khi sửa symbol hiện hữu.
-- `detect_changes` trước commit.
 - Analyze + focused test sau mỗi batch.
 - Không xóa legacy khi còn caller.

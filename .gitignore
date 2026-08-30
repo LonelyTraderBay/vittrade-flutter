@@ -27,7 +27,6 @@ Thumbs.db
 # Retired AI runtime — keep accidental legacy runtime output untracked
 .claude/
 CLAUDE.local.md
-.gitnexus/
 # Superpowers / SDD agent scratch (briefs, reports, review diffs) — never commit
 .superpowers/
 
