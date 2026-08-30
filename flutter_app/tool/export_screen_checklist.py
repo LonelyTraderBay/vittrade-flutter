@@ -222,8 +222,7 @@ def _route_path_sources(app_root: Path) -> str:
         key=lambda f: f.as_posix(),
     )
     parts.extend(f.read_text(encoding="utf-8") for f in id_files)
-    return "
-".join(parts)
+    return "\n".join(parts)
 
 
 def resolve_path(route_path: str, app_root: Path) -> str:
@@ -253,8 +252,7 @@ def load_all_sc_ids(app_root: Path) -> list[str]:
     text = (app_root / "lib/app/router/app_route_names.dart").read_text(encoding="utf-8")
     groups = app_root / "lib/app/router/route_groups"
     for f in sorted(groups.glob("*_route_ids.dart"), key=lambda f: f.as_posix()):
-        text += "
-" + f.read_text(encoding="utf-8")
+        text += "\n" + f.read_text(encoding="utf-8")
     seen: set[str] = set()
     out: list[str] = []
     for name in re.findall(r"static const String (sc\d+\w+)", text):
