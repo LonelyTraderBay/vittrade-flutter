@@ -114,7 +114,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           headerIconColor: AppModuleAccents.wallet,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppModuleAccents.wallet,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               key: DepositTabletPage.networkSelectorKey,
@@ -153,7 +153,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           headerIconColor: AppModuleAccents.wallet,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppModuleAccents.wallet,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               child: Column(

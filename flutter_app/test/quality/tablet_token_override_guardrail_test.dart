@@ -21,6 +21,9 @@ import 'package:flutter_test/flutter_test.dart';
 const List<String> kBaselineTabletOverrideTokens = [
   'profileMenuTabletIcon',
   'profileMenuTabletIconBox',
+  // Luật 13dp (2026-08-31): extent card expiry tablet 67 (gap mô tả 13) —
+  // phone giữ 62 (gap 5), cùng role khác surface (Rule 5 đủ 5 điều kiện).
+  'profileApiCreateTabletExpiryExtent',
 ];
 
 final _declarationRe = RegExp(r'static\s+const\s+\S+\s+(\w+)\s*=');

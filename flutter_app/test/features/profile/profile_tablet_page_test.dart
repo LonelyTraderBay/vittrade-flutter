@@ -583,10 +583,8 @@ void main() {
         prediction.top - predictionTitle.bottom,
         closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
       );
-      expect(
-        arena.top - prediction.bottom,
-        closeTo(AppSpacing.pageRhythmStandardInnerGap, 0.01),
-      );
+      // Luật 13dp (2026-08-31): section gap tablet = 13 (tier standard).
+      expect(arena.top - prediction.bottom, closeTo(AppSpacing.x4, 0.01));
       expect(
         productHub.top - productTitle.bottom,
         closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
@@ -684,12 +682,11 @@ void main() {
       await tester.tap(find.byKey(ProfileTabletKeys.menu('vip')));
       await tester.pumpAndSettle();
 
-      // ProfilePaneScaffold's VitPageContent(rhythm: form) owns the vertical
-      // rhythm between top-level blocks, so hero→tabs must measure exactly
-      // one pageRhythmFormSectionGap. A manual SizedBox separator between
-      // the pane's children stacks onto the rhythm gaps (16+8+16=40dp) and
-      // breaks the pane's rhythm — the bug caught by the 2026-08-23
-      // emulator acceptance screenshot.
+      // ProfilePaneScaffold's VitPageContent owns the vertical rhythm
+      // between top-level blocks, so hero→tabs must measure exactly one
+      // 13dp gap (luật 13dp tablet 2026-08-31 — tier standard). A manual
+      // SizedBox separator between the pane's children stacks onto the
+      // rhythm gaps and breaks the pane's rhythm (bug 2026-08-23).
       final pane = find.byKey(ProfileTabletKeys.vipPane);
       final hero = find.descendant(
         of: pane,
@@ -701,10 +698,7 @@ void main() {
 
       final heroBottom = tester.getBottomLeft(hero).dy;
       final tabsTop = tester.getTopLeft(tabs).dy;
-      expect(
-        tabsTop - heroBottom,
-        closeTo(AppSpacing.pageRhythmFormSectionGap, 0.1),
-      );
+      expect(tabsTop - heroBottom, closeTo(AppSpacing.x4, 0.1));
     },
   );
 

@@ -122,7 +122,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             _StatsRow(addresses: allAddresses),
             VitCard(
@@ -157,7 +157,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitSearchBar(
               fieldKey: AddressBookTabletPage.searchKey,
@@ -350,7 +350,7 @@ class _AddressSection extends ConsumerWidget {
       headerIconColor: color,
       accentColor: color,
       headerVariant: VitSectionHeaderVariant.plain,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         for (final address in addresses)
           _AddressTabletCard(address: address, ref: ref),

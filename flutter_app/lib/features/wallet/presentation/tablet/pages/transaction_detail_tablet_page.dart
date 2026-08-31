@@ -135,7 +135,7 @@ class _TransactionDetailTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [_ProgressTabletCard(transaction: transaction)],
         ),
       ],
@@ -169,7 +169,7 @@ class _TransactionDetailTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               density: VitDensity.compact,

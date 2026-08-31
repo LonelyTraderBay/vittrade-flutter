@@ -26,7 +26,7 @@ import 'package:flutter_test/flutter_test.dart';
 const List<String> kBaselineNonFullBleedPageContents = [
   'features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart|190',
   'features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart|205',
-  'features/profile/presentation/widgets/tablet/profile_master_menu.dart|47',
+  'features/profile/presentation/widgets/tablet/profile_master_menu.dart|46',
   'shared/layout/vit_two_column_tablet_dashboard.dart|202',
   'shared/layout/vit_two_column_tablet_dashboard.dart|296',
 ];

@@ -196,11 +196,9 @@ const _tabRootPages = {
   'features/wallet/presentation/phone/pages/wallet_page.dart',
   'features/trade/presentation/phone/pages/trade_page.dart',
   'features/predictions/presentation/phone/pages/predictions_home_page.dart',
-  // Tablet hubs join the same compact-tier contract as they migrate off
-  // legacy tiers (2026-08-28: Markets terminal hub). Add the remaining
-  // tablet hubs when their module is touched — never add one that still
-  // declares a non-compact rhythm (migrate the tier first).
-  'features/markets/presentation/tablet/pages/markets_tablet_page.dart',
+  // Tablet hubs KHÔNG còn trong compact-tier contract: luật 13dp
+  // (2026-08-31) đưa mọi section-gap tablet về standard(13) — Markets
+  // terminal hub đã chuyển standard cùng đợt sweep toàn dự án.
 };
 
 /// Tab rhythm lives in layout widgets when the page file has no [VitPageContent].
@@ -798,7 +796,14 @@ List<_VisualDebtRow> _visualDebtEntries({
       }
     }
     final customGapMatch = _legacyCustomGapRawScale.firstMatch(line);
-    if (customGapMatch != null) {
+    // Luật 13dp (2026-08-31): customGap: AppSpacing.x4 (13dp) trong file
+    // tablet presentation là PHÁP ĐỊNH — mọi khoảng trống tablet = 13.
+    final customGapTabletLawful =
+        customGapMatch != null &&
+        customGapMatch.group(1) == 'x4' &&
+        (file.contains('/presentation/tablet/') ||
+            file.contains('/presentation/widgets/tablet/'));
+    if (customGapMatch != null && !customGapTabletLawful) {
       entries.add(
         _VisualDebtRow(
           file: file,

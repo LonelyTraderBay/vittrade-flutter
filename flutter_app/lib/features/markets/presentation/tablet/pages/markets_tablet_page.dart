@@ -75,7 +75,7 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
             // — relaxed 24dp là của hero/onboarding, làm pane terminal thưa
             // (user đánh dấu X 2026-08-28); wire pattern chuẩn tab root:
             // rhythm + padding + density đều compact.
-            rhythm: VitPageRhythm.compact,
+            rhythm: VitPageRhythm.standard,
             padding: VitContentPadding.compact,
             density: VitDensity.compact,
             fullBleed: true,

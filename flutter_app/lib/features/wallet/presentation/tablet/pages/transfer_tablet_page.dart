@@ -127,7 +127,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             TransferDirectionCard(
               fromKey: TransferTabletPage.fromWalletKey,
@@ -158,7 +158,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             TransferAmountCard(
               controller: _amountController,
@@ -225,7 +225,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [RecentTransfersList(transfers: snapshot.recentTransfers)],
         ),
       ],

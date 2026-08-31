@@ -126,7 +126,7 @@ class _WalletMultiManagerTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: const [
@@ -156,7 +156,7 @@ class _WalletMultiManagerTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [for (final wallet in snapshot.wallets) _walletCard(wallet)],
     );
   }
@@ -251,7 +251,7 @@ class _WalletMultiManagerTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         for (final group in snapshot.groups)
           VitCard(
@@ -279,7 +279,7 @@ class _WalletMultiManagerTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
           variant: VitCardVariant.inner,
@@ -316,7 +316,7 @@ class _WalletMultiManagerTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

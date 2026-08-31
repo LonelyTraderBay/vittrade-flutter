@@ -40,7 +40,7 @@ class ProfileTabletUtilitySurface extends StatelessWidget {
         subtitle: subtitle,
         onBack: onBack,
         scrollKey: contentKey,
-        rhythm: VitPageRhythm.form,
+        rhythm: VitPageRhythm.standard,
         padding: VitContentPadding.compact,
         children: children,
       ),

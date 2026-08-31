@@ -142,7 +142,7 @@ class _DustConverterTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: [
@@ -168,7 +168,7 @@ class _DustConverterTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             Align(
               alignment: AlignmentDirectional.centerEnd,
@@ -276,7 +276,7 @@ class _DustConverterTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

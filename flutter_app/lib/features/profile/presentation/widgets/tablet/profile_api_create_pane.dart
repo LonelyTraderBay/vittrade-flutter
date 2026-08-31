@@ -222,7 +222,8 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
             mainAxisSpacing: ProfileSpacingTokens.profileApiCreateExpirySpacing,
             crossAxisSpacing:
                 ProfileSpacingTokens.profileApiCreateExpirySpacing,
-            mainAxisExtent: ProfileSpacingTokens.profileApiCreateExpiryExtent,
+            mainAxisExtent:
+                ProfileSpacingTokens.profileApiCreateTabletExpiryExtent,
           ),
           itemCount: snapshot.expiryOptions.length,
           itemBuilder: (context, index) {

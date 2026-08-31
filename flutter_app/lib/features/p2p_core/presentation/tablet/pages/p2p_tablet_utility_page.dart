@@ -93,7 +93,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

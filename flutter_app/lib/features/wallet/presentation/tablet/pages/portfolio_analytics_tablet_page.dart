@@ -111,7 +111,7 @@ class _PortfolioAnalyticsTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: [
@@ -139,7 +139,7 @@ class _PortfolioAnalyticsTabletPageState
             headerIconColor: AppColors.primary,
             headerVariant: VitSectionHeaderVariant.plain,
             accentColor: AppColors.primary,
-            rhythm: VitPageRhythm.form,
+            rhythm: VitPageRhythm.standard,
             children: [
               VitTabBar(
                 tabs: [
@@ -173,7 +173,7 @@ class _PortfolioAnalyticsTabletPageState
             headerIconColor: AppColors.primary,
             headerVariant: VitSectionHeaderVariant.plain,
             accentColor: AppColors.primary,
-            rhythm: VitPageRhythm.form,
+            rhythm: VitPageRhythm.standard,
             children: [
               Wrap(
                 spacing: AppSpacing.gridGap,
@@ -238,7 +238,7 @@ class _PortfolioAnalyticsTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

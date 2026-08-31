@@ -57,7 +57,7 @@ class AuthTabletSurface extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 1120),
                 child: VitPageContent(
-                  rhythm: VitPageRhythm.form,
+                  rhythm: VitPageRhythm.standard,
                   padding: VitContentPadding.none,
                   fullBleed: true,
                   children: [

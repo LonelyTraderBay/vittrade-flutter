@@ -150,7 +150,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           headerVariant: VitSectionHeaderVariant.accentBar,
           headerDensity: VitDensity.compact,
           innerGap: AppSpacing.pageRhythmCompactInnerGap,
-          customGap: AppSpacing.pageRhythmStandardInnerGap,
+          customGap: AppSpacing.x4,
           children: [
             ProfilePredictionCard(
               prediction: snapshot.prediction,

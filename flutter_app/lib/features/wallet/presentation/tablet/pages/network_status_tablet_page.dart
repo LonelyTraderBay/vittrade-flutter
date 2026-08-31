@@ -122,7 +122,7 @@ class _NetworkStatusTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               variant: VitTabBarVariant.segment,
@@ -150,7 +150,7 @@ class _NetworkStatusTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             if (networks.isEmpty)
               const VitEmptyState(
@@ -287,7 +287,7 @@ class _NetworkStatusTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

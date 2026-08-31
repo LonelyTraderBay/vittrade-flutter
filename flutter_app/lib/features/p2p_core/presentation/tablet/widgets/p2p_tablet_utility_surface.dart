@@ -49,7 +49,7 @@ class P2PTabletUtilitySurface extends StatelessWidget {
             child: SingleChildScrollView(
               key: contentKey,
               child: VitPageContent(
-                rhythm: VitPageRhythm.form,
+                rhythm: VitPageRhythm.standard,
                 padding: VitContentPadding.compact,
                 density: VitDensity.compact,
                 fullBleed: true,

@@ -112,7 +112,7 @@ class _TransactionHistoryTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: [
@@ -140,7 +140,7 @@ class _TransactionHistoryTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: transactions.isEmpty
               ? const [
                   VitEmptyState(

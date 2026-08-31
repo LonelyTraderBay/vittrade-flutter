@@ -123,7 +123,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             _usageCard(
               key: WithdrawLimitsTabletPage.dailyUsageKey,
@@ -168,7 +168,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             for (final item in snapshot.tiers)
               _tierCard(context, item, snapshot.currentLevel),
@@ -319,7 +319,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,
@@ -354,7 +354,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

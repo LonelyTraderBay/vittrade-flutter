@@ -31,7 +31,7 @@ class ProfilePaneScaffold extends StatelessWidget {
     this.onBack,
     this.onRefresh,
     this.headerActions,
-    this.rhythm = VitPageRhythm.form,
+    this.rhythm = VitPageRhythm.standard,
     this.padding = VitContentPadding.relaxed,
     this.scrollKey,
   });

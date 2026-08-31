@@ -30,10 +30,10 @@ const shellWidgetToVpcPath = <String, String>{
 
 /// Rhythm tier owned by each shell when a layout file declares multiple tiers.
 const shellWidgetRhythmTier = <String, String>{
-  'WalletTabletDetailSurface': 'form',
-  'TradeTabletDetailSurface': 'form',
-  'ProfileTabletUtilitySurface': 'form',
-  'P2PTabletUtilitySurface': 'form',
+  'WalletTabletDetailSurface': 'standard',
+  'TradeTabletDetailSurface': 'standard',
+  'ProfileTabletUtilitySurface': 'standard',
+  'P2PTabletUtilitySurface': 'standard',
   'VitTradeWorkspaceScaffold': 'compact',
   'VitTradeHubScaffold': 'compact',
   'VitTradeDetailScaffold': 'standard',

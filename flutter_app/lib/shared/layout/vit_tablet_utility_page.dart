@@ -68,7 +68,7 @@ class VitTabletUtilityPage extends StatelessWidget {
             child: SingleChildScrollView(
               key: contentKey,
               child: VitPageContent(
-                rhythm: VitPageRhythm.form,
+                rhythm: VitPageRhythm.standard,
                 padding: VitContentPadding.compact,
                 density: VitDensity.compact,
                 fullBleed: true,
@@ -112,7 +112,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                     headerIconColor: AppColors.primary,
                     headerVariant: VitSectionHeaderVariant.plain,
                     accentColor: AppColors.primary,
-                    rhythm: VitPageRhythm.form,
+                    rhythm: VitPageRhythm.standard,
                     children: [
                       VitCard(
                         variant: VitCardVariant.inner,

@@ -98,7 +98,7 @@ class _WalletTokenApprovalTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: const [
@@ -172,7 +172,7 @@ class _WalletTokenApprovalTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         const VitHighRiskStatePanel(
           state: VitHighRiskUiState.riskReview,
@@ -264,7 +264,7 @@ class _WalletTokenApprovalTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         for (final item in snapshot.revokedApprovals)
           VitCard(
@@ -288,7 +288,7 @@ class _WalletTokenApprovalTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
           variant: VitCardVariant.inner,

@@ -129,7 +129,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           headerIconColor: AppModuleAccents.wallet,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppModuleAccents.wallet,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             WithdrawNetworkSelector(
               asset: snapshot.asset,
@@ -144,7 +144,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           headerIconColor: AppModuleAccents.wallet,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppModuleAccents.wallet,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             WithdrawAddressInput(
               asset: snapshot.asset,
@@ -167,7 +167,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           headerIconColor: AppModuleAccents.wallet,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppModuleAccents.wallet,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           headerTrailing: VitCtaButton(
             onPressed: () {
               _amountController.text = formatWithdrawBalance(

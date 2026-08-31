@@ -147,7 +147,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           headerIconColor: accent,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: accent,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             Wrap(
               spacing: AppSpacing.gridGap,
@@ -175,7 +175,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           headerIconColor: accent,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: accent,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: [
@@ -218,7 +218,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,
@@ -262,7 +262,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: snapshot.transactions.isEmpty
               ? const [
                   VitEmptyState(

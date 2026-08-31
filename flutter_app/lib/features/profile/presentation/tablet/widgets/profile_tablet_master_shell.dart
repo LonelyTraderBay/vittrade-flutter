@@ -188,7 +188,7 @@ class _MasterMenuSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitPageContent(
-      rhythm: VitPageRhythm.compact,
+      rhythm: VitPageRhythm.standard,
       padding: VitContentPadding.compact,
       children: [VitSectionSkeleton(), VitSectionSkeleton()],
     );
@@ -203,7 +203,7 @@ class _MasterMenuError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitPageContent(
-      rhythm: VitPageRhythm.compact,
+      rhythm: VitPageRhythm.standard,
       padding: VitContentPadding.compact,
       children: [
         VitEmptyState(

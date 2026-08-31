@@ -126,7 +126,7 @@ class _WalletHealthScoreTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitTabBar(
               tabs: [
@@ -170,7 +170,7 @@ class _WalletHealthScoreTabletPageState
       headerIconColor: AppColors.caution,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         for (final recommendation in snapshot.priorityRecommendations)
           VitCard(
@@ -213,7 +213,7 @@ class _WalletHealthScoreTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
           variant: VitCardVariant.inner,
@@ -253,7 +253,7 @@ class _WalletHealthScoreTabletPageState
       headerIconColor: AppColors.primary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: AppColors.primary,
-      rhythm: VitPageRhythm.form,
+      rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
           variant: VitCardVariant.inner,
@@ -302,7 +302,7 @@ class _WalletHealthScoreTabletPageState
           headerIconColor: AppColors.primary,
           headerVariant: VitSectionHeaderVariant.plain,
           accentColor: AppColors.primary,
-          rhythm: VitPageRhythm.form,
+          rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
               variant: VitCardVariant.inner,

@@ -63,7 +63,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 ///   wrapped around the `Row` or an `Expanded` child directly.
 ///
 /// R6: the two-column path uses `VitContentPadding.relaxed` +
-/// `VitPageRhythm.relaxed`; the single-column fallback keeps `.compact`.
+/// `VitPageRhythm.standard`; the single-column fallback keeps `.standard`.
 /// Screen-specific [primaryContentGap] and [secondaryContentGap] overrides may
 /// tighten the major-section rhythm when the dashboard has a denser scan path;
 /// they only affect the two-column path and keep the fallback contract intact.
@@ -201,7 +201,7 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: bottomContentInset),
                       child: VitPageContent(
                         padding: VitContentPadding.compact,
-                        rhythm: VitPageRhythm.compact,
+                        rhythm: VitPageRhythm.standard,
                         children: [...primaryChildren, ...secondaryChildren],
                       ),
                     ),
@@ -254,8 +254,8 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                                 child: VitPageContent(
                                   padding: VitContentPadding.none,
                                   fullBleed: true,
-                                  rhythm: VitPageRhythm.relaxed,
-                                  customGap: primaryContentGap,
+                                  rhythm: VitPageRhythm.standard,
+                                  customGap: primaryContentGap ?? AppSpacing.x4,
                                   children: primaryChildren,
                                 ),
                               ),
@@ -295,8 +295,9 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                                     ),
                                     child: VitPageContent(
                                       padding: VitContentPadding.relaxed,
-                                      rhythm: VitPageRhythm.relaxed,
-                                      customGap: secondaryContentGap,
+                                      rhythm: VitPageRhythm.standard,
+                                      customGap:
+                                          secondaryContentGap ?? AppSpacing.x4,
                                       children: secondaryChildren,
                                     ),
                                   ),

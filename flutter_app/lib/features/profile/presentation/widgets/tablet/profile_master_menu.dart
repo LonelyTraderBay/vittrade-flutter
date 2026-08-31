@@ -10,7 +10,6 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_legal_accordion_panel.dart';
@@ -52,8 +51,8 @@ class ProfileMasterMenu extends ConsumerWidget {
       // glance, while staying denser than platform reference sidebars
       // (24-35) to keep the financial-app density (2026-08-27 spacing
       // review).
-      rhythm: VitPageRhythm.compact,
-      customGap: ProfileSpacingTokens.profileMenuSectionGap,
+      rhythm: VitPageRhythm.standard,
+      customGap: AppSpacing.x4,
       children: [
         Row(
           children: [

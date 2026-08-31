@@ -93,7 +93,15 @@ void main() {
       if (normalized.contains('/dev/')) continue;
 
       final lines = entity.readAsStringSync().split('\n');
+      // Luật 13dp (2026-08-31): customGap: AppSpacing.x4 trong tablet
+      // presentation là pháp định (mọi khoảng trắng tablet = 13).
+      final law13Tablet =
+          normalized.contains('/presentation/tablet/') ||
+          normalized.contains('/presentation/widgets/tablet/');
       for (var i = 0; i < lines.length; i++) {
+        if (law13Tablet && lines[i].contains('customGap: AppSpacing.x4')) {
+          continue;
+        }
         if (_legacyCustomGapRawScale.hasMatch(lines[i])) {
           violations.add('${entity.path}:${i + 1}: ${lines[i].trim()}');
         }

@@ -34,8 +34,10 @@ const Set<String> kRelaxedWhitelist = {
 /// map — chỉ được tiến về 'compact'/'none', không lùi.
 const Map<String, Set<String>> kTabletHubTiers = {
   'features/home/presentation/tablet/pages/home_tablet_page.dart': {'none'},
+  // Luật 13dp (2026-08-31): hub tablet chuẩn standard(13) — compact(8)
+  // không còn là tier hợp lệ cho hub tablet.
   'features/markets/presentation/tablet/pages/markets_tablet_page.dart': {
-    'compact',
+    'standard',
   },
   'features/trade/presentation/tablet/pages/trade_tablet_page.dart': {'none'},
   'features/wallet/presentation/tablet/pages/wallet_tablet_page.dart': {'none'},

@@ -406,9 +406,12 @@ final class ProfileSpacingTokens {
   static const int profileApiCreateExpiryCrossAxisCount = 2;
   static const double profileApiCreateExpirySpacing = AppSpacing.x2;
 
-  /// Luật 13dp: extent chứa label + gap 13 + description sau khi gap
-  /// mô tả đổi 5 → 13 (62 → 67, khóa test SC-163 không tràn).
-  static const double profileApiCreateExpiryExtent = 67;
+  static const double profileApiCreateExpiryExtent = 62;
+
+  /// Luật 13dp tablet (2026-08-31): extent chứa label + gap 13 +
+  /// description sau khi gap mô tả trên tablet đổi 5 → 13 — phone giữ
+  /// 62 vì gap phone vẫn 5 (Rule 5: cùng role, khác surface).
+  static const double profileApiCreateTabletExpiryExtent = 67;
   static const EdgeInsets profileApiCreateExpiryPadding = EdgeInsets.fromLTRB(
     13,
     10,
