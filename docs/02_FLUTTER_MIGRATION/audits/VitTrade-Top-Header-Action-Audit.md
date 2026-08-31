@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=403
+vit_header_total=406
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -17,7 +17,7 @@ action_groups_over_limit=0
 
 | Classification | Count |
 | --- | ---: |
-| canonical | 384 |
+| canonical | 385 |
 
 ## Action Inventory
 
@@ -395,6 +395,7 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/announcements_page.dart` | 74 | `_AnnouncementsPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/help_center_page.dart` | 91 | `_HelpCenterPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/support_page.dart` | 83 | `_SupportPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart` | 55 | `TradeTabletDetailSurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/address_add_page.dart` | 101 | `_AddressAddPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/address_book_page.dart` | 80 | `_AddressBookPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/pending_deposits_page.dart` | 87 | `_PendingDepositsPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |

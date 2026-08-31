@@ -44,7 +44,6 @@ const Map<String, int> kBaselineImplicitPaddingCards = {
   'features/profile/presentation/widgets/tablet/profile_status_content.dart': 2,
   'features/profile/presentation/widgets/tablet/profile_vip_pane.dart': 1,
   'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart': 3,
-  'features/trade/presentation/widgets/tablet/trade_status_content.dart': 4,
   'features/trade/presentation/widgets/tablet/trade_ticker_strip.dart': 1,
   'features/wallet/presentation/tablet/pages/address_book_tablet_page.dart': 1,
   'features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart': 3,

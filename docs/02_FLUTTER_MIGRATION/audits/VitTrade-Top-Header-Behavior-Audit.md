@@ -4,8 +4,8 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=409
-fixed_vit_header_remaining=169
-auto_hide_header=93
+fixed_vit_header_remaining=171
+auto_hide_header=91
 custom_scroll_header=1
 no_top_header=32
 unresolved=114
@@ -21,8 +21,8 @@ unresolved=114
 | trade_copy | 22 |
 | markets | 21 |
 | trade_bots | 19 |
+| trade | 5 |
 | auth | 3 |
-| trade | 3 |
 | home | 1 |
 
 ## Route Header Inventory
@@ -317,8 +317,8 @@ unresolved=114
 | trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
 | trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart` |
 | trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
-| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/orders_history_page.dart` |
-| trade | `AppRoutePaths.tradePositions` | `PositionDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/position_dashboard_page.dart` |
+| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` |
+| trade | `AppRoutePaths.tradePositions` | `PositionDashboardTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` |
 | trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotApiDocumentation` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotBacktesting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |

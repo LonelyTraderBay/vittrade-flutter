@@ -792,6 +792,8 @@ trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/position_dashb
 trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart,1,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart,2,0,0,E,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,2,1,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,1,0,0,E,0,0,0,pass,-
@@ -817,7 +819,8 @@ trade,flutter_app/lib/features/trade/presentation/widgets/phone/trade_settings_p
 trade,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,1,0,0,E,0,0,0,pass,-
-trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,4,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,2,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_panel.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,1,0,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,1,0,0,C,0,0,0,pass,-
 trade_bots,flutter_app/lib/features/trade_bots/presentation/widgets/backtest/bot_backtesting_widgets.dart,3,1,0,C,0,0,0,pass,-

@@ -33,6 +33,86 @@ final class TradeSpacingTokens {
   );
   static const EdgeInsets tradeRiskPanelPadding = tradeMarketPanelPadding;
 
+  // Terminal 3 vùng (SC-048 tablet, hướng Bybit 2026-08-31): grid cố định
+  // không cuộn trang, panel phẳng viền hairline — mật độ trùng chuẩn
+  // terminal Markets (SC-044 hướng C) để hai terminal của app đọc cùng một
+  // nhịp; giữ token riêng vì guardrail cross-feature cấm dùng token
+  // Markets từ trade.
+  /// Gutter đều giữa các panel phẳng của terminal.
+  static const double tradeTerminalGutter = AppSpacing.cardGap;
+  static const EdgeInsets tradeTerminalMetaStripPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x3,
+    vertical: AppSpacing.x2,
+  );
+  static const double tradeTerminalMetaGap = AppSpacing.x3;
+  static const double tradeTerminalMetaDividerHeight = AppSpacing.x5;
+  static const EdgeInsets tradeTerminalPanelHeaderPadding = EdgeInsets.fromLTRB(
+    AppSpacing.x3,
+    AppSpacing.x2,
+    AppSpacing.x3,
+    AppSpacing.x1,
+  );
+
+  /// Mức sổ lệnh của terminal (12 mức/bên).
+  static const double tradeTerminalBookRowExtent = 26;
+  static const EdgeInsets tradeTerminalBookRowPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x1,
+  );
+
+  /// Dòng giao dịch gần đây của terminal (24 dòng).
+  static const double tradeTerminalTradeRowExtent = 24;
+
+  /// Cột sổ lệnh + tape của terminal ở tầng đầy đủ.
+  static const double tradeTerminalBookColumnWidth = 300;
+
+  /// Cột đặt lệnh luôn hiện của terminal.
+  static const double tradeTerminalEntryColumnWidth = 320;
+
+  /// Thanh công cụ khung giờ + chỉ báo trong panel chart.
+  static const EdgeInsets tradeTerminalChartToolbarPadding =
+      EdgeInsets.fromLTRB(
+        AppSpacing.x3,
+        AppSpacing.x2,
+        AppSpacing.x3,
+        AppSpacing.x2,
+      );
+  static const double tradeTerminalIntervalGap = AppSpacing.x2;
+  static const EdgeInsets tradeTerminalIntervalButtonPadding =
+      EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
+
+  /// Vùng tab dưới chart (Lệnh mở | Vị thế | Sổ lệnh tùy tầng).
+  static const double tradeTerminalBottomPanelHeight = 230;
+  static const double tradeTerminalBottomTabGap = AppSpacing.x2;
+  static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x2,
+    vertical: AppSpacing.x1,
+  );
+
+  /// Cột "MUA/BÁN + symbol" của các bảng dưới chart — đủ chỗ cho nhãn dài
+  /// nhất ("MUA BTC/USDT") không ellipsis sớm.
+  static const double tradeTerminalSymbolColumnWidth =
+      AppSpacing.x7 + AppSpacing.x5 + AppSpacing.x3;
+
+  /// Nút đổi cặp + hàng cặp trong sheet chọn (padding dùng token, không
+  /// EdgeInsets thô — home-reference consistency).
+  static const EdgeInsets tradeTerminalPickerButtonPadding =
+      EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
+  static const EdgeInsets tradeTerminalPickerRowPadding = EdgeInsets.symmetric(
+    vertical: AppSpacing.x2,
+  );
+
+  /// Tầng đầy đủ (chart | sổ lệnh | đặt lệnh) — điểm chạm ĐO THỰC bằng
+  /// widget test ở mặt QA (xem trade_tablet_page_test), không ước lượng.
+  static const double tradeTerminalFullSplitMinWidth = 1000;
+
+  /// Tầng gọn (chart | đặt lệnh+tape) cho tablet portrait thật; dưới mốc
+  /// này là vùng resize cửa sổ → stack cuộn.
+  static const double tradeTerminalSplitMinWidth = 620;
+
+  /// Chiều cao chart ở tầng stack (resize cửa sổ) — panel fill cần cao độ
+  /// giới hạn trong cuộn dọc.
+  static const double tradeTerminalStackedChartHeight = 300;
+
   /// Home-aligned section rhythm for L2 trade pages (8px).
   static const double tradePageContentGap = AppSpacing.x3;
 

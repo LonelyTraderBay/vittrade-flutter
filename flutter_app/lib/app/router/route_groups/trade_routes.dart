@@ -6,6 +6,8 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade_core/domain/entities/trade_core_entities.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
@@ -188,27 +190,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeOrdersHistory,
       name: AppRouteNames.sc050OrdersHistory,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-050',
-          title: 'Lịch sử lệnh',
-          subtitle: 'Theo dõi trạng thái và kết quả lệnh',
-          description:
-              'Bố cục hai cột giúp đối chiếu trạng thái lệnh và thông tin chi tiết nhanh hơn.',
-          facts: const [
-            TradeTabletFact(label: 'Lệnh gần đây', value: '8'),
-            TradeTabletFact(
-              label: 'Đang xử lý',
-              value: '2',
-              valueColor: AppColors.caution,
-            ),
-            TradeTabletFact(
-              label: 'Đã hoàn tất',
-              value: '6',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Lọc lịch sử lệnh',
-        ),
+        AppSurface.tablet => const OrdersHistoryTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => OrdersHistoryPage(shellRenderMode: shellRenderMode),
@@ -218,23 +200,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradePositions,
       name: AppRouteNames.sc053PositionDashboard,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-053',
-          title: 'Bảng vị thế',
-          subtitle: 'Vị thế mở · giá trị · P/L',
-          description:
-              'Theo dõi vị thế, giá vào và P/L trong vùng nội dung rộng dành cho Tablet.',
-          facts: const [
-            TradeTabletFact(label: 'Vị thế mở', value: '2'),
-            TradeTabletFact(label: 'Giá trị danh nghĩa', value: '\$12,480'),
-            TradeTabletFact(
-              label: 'P/L hôm nay',
-              value: '+\$184.20',
-              valueColor: AppColors.buy,
-            ),
-          ],
-          actionLabel: 'Xem chi tiết vị thế',
-        ),
+        AppSurface.tablet => const PositionDashboardTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => PositionDashboardPage(shellRenderMode: shellRenderMode),

@@ -877,7 +877,15 @@ trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_book_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_bottom_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_chart_math.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_chart_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_meta_strip.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_panel.dart,0,0,0,0,0,0,0,0,no,-
+trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_tape_panel.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart,0,0,0,0,0,0,0,0,no,-

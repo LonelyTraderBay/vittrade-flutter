@@ -175,7 +175,9 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
         const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
         VitKeyValueRow(
           label: 'Trượt giá',
-          value: 'Lệnh thị trường · có thể lệch khi khớp',
+          // Cột terminal 320dp: bản rút gọn của dòng confirm sheet đầy đủ
+          // ('Lệnh thị trường · có thể lệch khi khớp') để không tràn cột.
+          value: 'Có thể lệch khi khớp',
           labelStyle: AppTextStyles.caption.copyWith(color: AppColors.text2),
           valueStyle: AppTextStyles.caption.copyWith(color: AppColors.text1),
         ),

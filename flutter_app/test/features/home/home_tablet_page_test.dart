@@ -18,6 +18,7 @@ import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
@@ -441,7 +442,9 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeTabletPage), findsNothing);
-      expect(find.byType(VitTwoColumnTabletDashboard), findsOneWidget);
+      // Trade tablet giờ là terminal 3 vùng (2026-08-31), không còn
+      // VitTwoColumnTabletDashboard.
+      expect(find.byType(TradeTabletPage), findsOneWidget);
     },
   );
 

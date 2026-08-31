@@ -12,8 +12,8 @@ mixin _MockTradeTerminalRepositoryCoreSpotMethods
     return TradeScreenSnapshot(
       pair: pair,
       pairs: _pairs,
-      orderBook: _orderBook,
-      trades: _trades,
+      orderBook: _buildOrderBook(pair),
+      trades: _buildTape(pair),
       orders: _orders,
       positions: _positions,
       copyProviders: const ['AlphaQuant', 'Delta Scalper'],

@@ -240,6 +240,10 @@ referral,referral/presentation/widgets/referral_history_page_sections.dart,VitCh
 rewards,rewards/presentation/widgets/rewards_hub_task_section.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 support,support/presentation/widgets/announcements_filters_widgets.dart,VitChoicePill,chip,1,44,hug,-,pass,
 support,support/presentation/widgets/support_quick_contacts_tabs.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+trade,trade/presentation/tablet/pages/orders_history_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade,trade/presentation/tablet/pages/orders_history_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+trade,trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade,trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/widgets/convert/convert_page_amount_widgets.dart,VitChoicePill,chip,1,44,hug,-,pass,
 trade,trade/presentation/widgets/convert/convert_page_amount_widgets.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade,trade/presentation/widgets/futures/futures_page_form_controls.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
@@ -254,6 +258,7 @@ trade,trade/presentation/widgets/phone/trade_history_export_selectors_includes.d
 trade,trade/presentation/widgets/phone/trade_settings_page_sections.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
 trade,trade/presentation/widgets/phone/vit_trade_side_switch.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
 trade,trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
+trade,trade/presentation/widgets/tablet/trade_terminal_bottom_panel.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/widgets/tablet/vit_trade_side_switch.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
 trade,trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade_bots,trade_bots/presentation/phone/pages/dashboard/bot_equity_curve_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,

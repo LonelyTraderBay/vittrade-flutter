@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,16 +6,19 @@ import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart'
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_positions_panel.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_status_content.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_bottom_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_book_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_chart_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_meta_strip.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_panel.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_terminal_tape_panel.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit_trade_simple_order_form.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_formatters.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_high_risk_status_ui.dart';
@@ -26,29 +26,28 @@ import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_product_navigation.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-/// Tablet composition of Trade (SC-048) — same route, same
-/// [tradeScreenProvider] data and the same public Trade widgets as
-/// [TradePage], but laid out as a persistent two-column dashboard instead
-/// of one scrolling phone column. Does not touch `trade_page.dart`/
-/// `trade_page_state.dart` — reached via `createTabletAppRouter`/surface
-/// bootstrap. Fourth reference implementation for
-/// `docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md`.
+/// Terminal giao dịch 3 vùng của Trade tablet (SC-048/SC-049, hướng Bybit
+/// duyệt 2026-08-31) — cùng route, cùng [tradeScreenProvider] và cùng
+/// widget công khai với [TradePage], nhưng là GRID CỐ ĐỊNH chiếm toàn bộ
+/// chiều cao, KHÔNG cuộn trang: hàng meta dày đặc 1 dòng (đổi cặp + giá +
+/// Cao/Thấp/KL + làm mới), cột chart nến OHLC (toolbar khung giờ + MA/KL
+/// wired thật, crosshair) với tab Lệnh mở | Vị thế dưới chart, cột sổ lệnh
+/// 12 mức/bên + tape giao dịch, và cột ĐẶT LỆNH luôn hiện. Tách vùng bằng
+/// panel phẳng viền hairline (ngôn ngữ terminal Markets SC-044 hướng C).
 ///
-/// Deliberate financial-safety column grouping (not just a generic content
-/// split): the order-entry backbone — product-switch tabs, price hero,
-/// order form, and the persistent "Đánh giá rủi ro" risk panel — all stay
-/// together in the PRIMARY column. That risk panel restates the same fee/
-/// slippage/balance facts as the confirm-sheet CTA a moment later; keeping
-/// it beside the form means anyone acting entirely within that column
-/// always sees live risk status next to what they're about to submit,
-/// without depending on also having scrolled the independently-scrolling
-/// secondary column into view. Only content genuinely independent of the
-/// in-progress order draft — the "Tiếp theo" nudge and existing positions —
-/// goes in the secondary column. See
-/// docs/02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md.
+/// Nhóm cột an toàn tài chính (bất biến giữ từ dashboard cũ, khóa bằng
+/// test): xương sống đặt lệnh — product tabs, form, panel "Đánh giá rủi
+/// ro" và disclaimer — ở cùng cột ĐẶT LỆNH luôn hiện không cuộn, nên fee/
+/// trượt giá/số dư luôn kề cạnh nút gửi. Sổ lệnh/tape/chart là dữ liệu độc
+/// lập với lệnh nháp, tách cột riêng.
+///
+/// Tầng chiều rộng (đọc width MỘT lần qua LayoutBuilder — R1c, không bao
+/// giờ hỏi orientation): ≥ [TradeSpacingTokens.tradeTerminalFullSplitMinWidth]
+/// = 3 vùng đầy; ≥ [TradeSpacingTokens.tradeTerminalSplitMinWidth] = chart
+/// | đặt lệnh+tape (sổ lệnh thành tab thứ 3 dưới chart); dưới nữa là vùng
+/// resize cửa sổ → stack cuộn.
 class TradeTabletPage extends ConsumerStatefulWidget {
   const TradeTabletPage({
     super.key,
@@ -119,55 +118,12 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     );
   }
 
-  _TradeTabletNextAction _resolveNextAction(TradeScreenSnapshot snapshot) {
-    if (snapshot.orders.isNotEmpty) {
-      return _TradeTabletNextAction(
-        icon: Icons.pending_actions_outlined,
-        title: 'Hoàn tất lệnh đang chờ',
-        subtitle: 'Bạn có ${snapshot.orders.length} lệnh mở cần theo dõi',
-        statusLabel: 'Lệnh mở',
-        ctaLabel: 'Xem lệnh',
-        onTap: () => context.push(AppRoutePaths.tradeOrdersHistory),
-      );
-    }
-    if (snapshot.positions.isEmpty) {
-      return _TradeTabletNextAction(
-        icon: Icons.play_circle_outline_rounded,
-        title: 'Bắt đầu giao dịch đầu tiên',
-        subtitle: 'Chọn MUA hoặc BÁN, nhập số lượng và xác nhận',
-        statusLabel: 'Mới',
-        ctaLabel: 'Bắt đầu',
-        onTap: () {
-          unawaited(HapticFeedback.selectionClick());
-          unawaited(
-            showVitNoticeSheet(
-              context: context,
-              title: 'Bắt đầu giao dịch',
-              message: 'Tính năng bắt đầu giao dịch sẽ sớm ra mắt',
-            ),
-          );
-        },
-      );
-    }
-    return _TradeTabletNextAction(
-      icon: Icons.account_balance_wallet_outlined,
-      title: 'Theo dõi tài sản Spot',
-      subtitle: 'Bạn đang giữ ${snapshot.positions.length} vị thế',
-      statusLabel: 'Vị thế',
-      ctaLabel: 'Xem',
-      onTap: () => context.push(AppRoutePaths.tradePositions),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenAsync = ref.watch(tradeScreenProvider(widget.pairId));
     final showBack = context.canPop();
-    // Unlike the phone page (whose header lives entirely inside its data
-    // branch, so loading/error show no chrome at all), the tablet header is
-    // a fixed sibling present in every async state (R9) — falls back to a
-    // generic title before the pair has loaded once, via AsyncValue's own
-    // last-known-value accessor, then shows the real symbol once available.
+    // Header cố định xuất hiện trong mọi nhánh async (R9) — fallback tên
+    // chung trước khi cặp tải xong, hiện symbol thật khi có dữ liệu.
     final pair = screenAsync.asData?.value.pair;
 
     return VitPageLayout(
@@ -188,8 +144,8 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
                   )
                 : null,
             backKey: TradeTabletKeys.back,
-            // STEP-P2.4 / D5: persistent Lệnh + Vị thế (EP-26 / EP-27) — same
-            // as phone, doesn't depend on pair data so it's safe pre-load.
+            // STEP-P2.4 / D5: Lệnh + Vị thế (EP-26 / EP-27) — không phụ
+            // thuộc dữ liệu cặp, an toàn trước khi tải xong.
             actions: [
               VitHeaderActionItem(
                 type: VitHeaderActionType.history,
@@ -207,7 +163,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           ),
           Expanded(
             child: screenAsync.when(
-              loading: () => TradeLoadingContent(onRefresh: _refreshScreen),
+              loading: () => const TradeLoadingContent(),
               error: (error, stackTrace) => SingleChildScrollView(
                 child: VitErrorState(
                   title: 'Không tải được màn hình giao dịch',
@@ -216,7 +172,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
                   onAction: _refreshScreen,
                 ),
               ),
-              data: _buildDashboard,
+              data: _buildTerminal,
             ),
           ),
         ],
@@ -224,15 +180,188 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     );
   }
 
-  // Two-column threshold and per-column width caps are owned by
-  // [VitTwoColumnTabletDashboard] (`TabletDashboardWidths` defaults) —
-  // Trade's own content confirmed the same values as `HomeTabletPage` hold,
-  // including the primary/secondary VitCard-ancestry split the risk panel
-  // depends on (see the wide-tablet cases in `trade_tablet_page_test.dart`).
-  // Pass constructor overrides on the call below instead of editing the
-  // shared widths if Trade's content ever needs a different number.
+  Widget _buildTerminal(TradeScreenSnapshot snapshot) {
+    final pair = snapshot.pair;
+    final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
 
-  Widget _buildDashboard(TradeScreenSnapshot snapshot) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TradeTerminalMetaStrip(
+          pair: pair,
+          pairs: snapshot.pairs,
+          highLabel: daySnapshot.highLabel,
+          lowLabel: daySnapshot.lowLabel,
+          volumeLabel: daySnapshot.volumeLabel,
+          // Đổi cặp = thay root của luồng giao dịch (khuôn Bybit), không
+          // xếp chồng cặp cũ lên stack back.
+          onPairSelected: (candidate) =>
+              context.go(AppRoutePaths.tradePair(candidate.id)),
+          onRefresh: () => _refreshScreen(),
+        ),
+        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              if (width >= TradeSpacingTokens.tradeTerminalFullSplitMinWidth) {
+                return _buildFullTier(snapshot);
+              }
+              if (width >= TradeSpacingTokens.tradeTerminalSplitMinWidth) {
+                return _buildCompactTier(snapshot);
+              }
+              return _buildStackedTier(snapshot);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Tầng đầy đủ: [chart + tab dưới chart | sổ lệnh + tape | đặt lệnh].
+  Widget _buildFullTier(TradeScreenSnapshot snapshot) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(child: _buildChartColumn(snapshot)),
+        const SizedBox(width: TradeSpacingTokens.tradeTerminalGutter),
+        SizedBox(
+          width: TradeSpacingTokens.tradeTerminalBookColumnWidth,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: TradeTerminalBookPanel(orderBook: snapshot.orderBook),
+              ),
+              const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+              Expanded(child: TradeTerminalTapePanel(trades: snapshot.trades)),
+            ],
+          ),
+        ),
+        const SizedBox(width: TradeSpacingTokens.tradeTerminalGutter),
+        SizedBox(
+          width: TradeSpacingTokens.tradeTerminalEntryColumnWidth,
+          child: _buildEntryPanel(snapshot, scrollable: true),
+        ),
+      ],
+    );
+  }
+
+  /// Tầng gọn (tablet portrait): [chart + tab dưới chart (kèm tab Sổ lệnh)
+  /// | đặt lệnh (cuộn nội bộ khi cần) + tape].
+  Widget _buildCompactTier(TradeScreenSnapshot snapshot) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(child: _buildChartColumn(snapshot, showBookTab: true)),
+        const SizedBox(width: TradeSpacingTokens.tradeTerminalGutter),
+        SizedBox(
+          width: TradeSpacingTokens.tradeTerminalEntryColumnWidth,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: _buildEntryPanel(snapshot, scrollable: true)),
+              const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+              SizedBox(
+                height: TradeSpacingTokens.tradeTerminalBottomPanelHeight,
+                child: TradeTerminalTapePanel(trades: snapshot.trades),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Vùng resize cửa sổ (nhỏ hơn tablet thật): stack cuộn dọc, panel giữ
+  /// nguyên nhưng cao độ giới hạn bằng SizedBox.
+  Widget _buildStackedTier(TradeScreenSnapshot snapshot) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ..._buildProductTabs(snapshot),
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+          SizedBox(
+            height: TradeSpacingTokens.tradeTerminalStackedChartHeight,
+            child: _buildChartPanel(snapshot),
+          ),
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+          _buildBottomPanel(snapshot, showBookTab: true),
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+          SizedBox(
+            height: TradeSpacingTokens.tradeTerminalBottomPanelHeight * 2,
+            child: TradeTerminalBookPanel(orderBook: snapshot.orderBook),
+          ),
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+          _buildEntryPanel(snapshot, scrollable: false),
+        ],
+      ),
+    );
+  }
+
+  /// Hàng product tabs (L1 — Spot/Futures/Margin/Convert/Bot).
+  List<Widget> _buildProductTabs(TradeScreenSnapshot snapshot) {
+    return tradeShellWithProductTabs(
+      context: context,
+      showProductTabs: true,
+      activeProductId: 'spot',
+      productPair: snapshot.pair,
+      quickNavKey: TradeTabletKeys.quickNav,
+      navigationBuilder: buildTradeProductNavigation,
+      children: const [SizedBox.shrink()],
+    );
+  }
+
+  /// Panel chart nến OHLC của cặp hiện tại.
+  Widget _buildChartPanel(TradeScreenSnapshot snapshot) {
+    final pair = snapshot.pair;
+    return TradeTerminalChartPanel(
+      pairId: pair.id,
+      anchorPrice: pair.price,
+      positive: pair.changePct >= 0,
+    );
+  }
+
+  /// Tab Lệnh mở | Vị thế (| Sổ lệnh ở tầng không có cột sổ lệnh riêng).
+  Widget _buildBottomPanel(
+    TradeScreenSnapshot snapshot, {
+    bool showBookTab = false,
+  }) {
+    return TradeTerminalBottomPanel(
+      orders: snapshot.orders,
+      positions: snapshot.positions,
+      orderBook: snapshot.orderBook,
+      showBookTab: showBookTab,
+      onViewAll: () => context.push(AppRoutePaths.tradeOrdersHistory),
+    );
+  }
+
+  /// Cột chart: product tabs (L1 — điều hướng sản phẩm) + panel chart nến
+  /// (Expanded) + tab Lệnh mở | Vị thế dưới chart.
+  Widget _buildChartColumn(
+    TradeScreenSnapshot snapshot, {
+    bool showBookTab = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ..._buildProductTabs(snapshot),
+        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+        Expanded(child: _buildChartPanel(snapshot)),
+        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+        _buildBottomPanel(snapshot, showBookTab: showBookTab),
+      ],
+    );
+  }
+
+  /// Cột ĐẶT LỆNH — xương sống an toàn tài chính: form + panel rủi ro +
+  /// disclaimer cùng cột, LUÔN HIỆN (terminal không cuộn trang; cột tự
+  /// cuộn nội bộ khi viewport lùn).
+  Widget _buildEntryPanel(
+    TradeScreenSnapshot snapshot, {
+    required bool scrollable,
+  }) {
     final pair = snapshot.pair;
     final amount = double.tryParse(_amountController.text) ?? 0;
     final draft = TradeOrderDraft(
@@ -251,57 +380,48 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     final canSubmit = orderNotifier.canSubmit;
     final submitting = orderState.status.isBusy;
     final marketPrice = formatTradePrice(pair.price);
-    final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
-    final nextAction = _resolveNextAction(snapshot);
     final availableBalanceLabel = _side == TradeOrderSide.buy
         ? '${formatTradeMoney(snapshot.balances.usdtAvailable)} USDT'
         : '${formatTradeMoney(snapshot.balances.baseAvailable)} ${pair.baseAsset}';
 
-    // Product-switch quick-nav stays scoped to the primary (order-entry)
-    // column rather than promoted to a second fixed bar above both columns
-    // — it's page-primary navigation for the order flow happening in that
-    // column, not shared context for the secondary column's nudge/positions
-    // content, and R9 doesn't establish a pattern for a second chrome tier.
-    // The instrument hero moved the other way: its price facts became the
-    // fixed full-width ticker banner so they stay visible regardless of
-    // either column's scroll offset.
-    final primaryChildren = tradeShellWithProductTabs(
-      context: context,
-      showProductTabs: true,
-      activeProductId: 'spot',
-      productPair: pair,
-      quickNavKey: TradeTabletKeys.quickNav,
-      navigationBuilder: buildTradeProductNavigation,
+    final form = VitTradeSimpleOrderForm(
+      side: _side,
+      pair: pair,
+      balances: snapshot.balances,
+      amountController: _amountController,
+      preview: preview,
+      canSubmit: canSubmit,
+      marketPriceLabel: marketPrice,
+      buyKey: TradeTabletKeys.buySide,
+      sellKey: TradeTabletKeys.sellSide,
+      amountFieldKey: TradeTabletKeys.amountField,
+      submitKey: TradeTabletKeys.submit,
+      pctKeyBuilder: TradeTabletKeys.pct,
+      onSideChanged: (side) => setState(() => _side = side),
+      onPct: (pct) => setState(() {
+        final available = _side == TradeOrderSide.buy
+            ? snapshot.balances.usdtAvailable / pair.price
+            : snapshot.balances.baseAvailable;
+        _amountController.text = (available * pct / 100).toStringAsFixed(6);
+      }),
+      onChanged: () => setState(() {}),
+      submitting: submitting,
+      onPreviewOpened: orderNotifier.enterPreview,
+      onPreviewDismissed: orderNotifier.cancelPreview,
+      onConfirmedSubmit: () => _submitOrder(orderRequest),
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        VitTradeSimpleOrderForm(
-          side: _side,
-          pair: pair,
-          balances: snapshot.balances,
-          amountController: _amountController,
-          preview: preview,
-          canSubmit: canSubmit,
-          marketPriceLabel: marketPrice,
-          buyKey: TradeTabletKeys.buySide,
-          sellKey: TradeTabletKeys.sellSide,
-          amountFieldKey: TradeTabletKeys.amountField,
-          submitKey: TradeTabletKeys.submit,
-          pctKeyBuilder: TradeTabletKeys.pct,
-          onSideChanged: (side) => setState(() => _side = side),
-          onPct: (pct) => setState(() {
-            final available = _side == TradeOrderSide.buy
-                ? snapshot.balances.usdtAvailable / pair.price
-                : snapshot.balances.baseAvailable;
-            _amountController.text = (available * pct / 100).toStringAsFixed(6);
-          }),
-          onChanged: () => setState(() {}),
-          submitting: submitting,
-          onPreviewOpened: orderNotifier.enterPreview,
-          onPreviewDismissed: orderNotifier.cancelPreview,
-          onConfirmedSubmit: () => _submitOrder(orderRequest),
+        Padding(
+          padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+          child: form,
         ),
         if (snapshot.highRiskContractId != null)
-          VitTradeSection(
-            title: 'Đánh giá rủi ro',
+          Padding(
+            padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
             child: VitHighRiskStatePanel(
               state: orderState.status.uiState,
               title: switch (orderState.status.uiState) {
@@ -328,75 +448,24 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
               density: VitDensity.tool,
             ),
           ),
-        // Same disclaimer VitTradeSimpleShell appends unconditionally on
-        // phone (see vit_trade_simple_shell.dart) — kept beside the order
-        // form/risk panel it caveats rather than the secondary column.
-        Text(
-          'Giao dịch tiền mã hoá có rủi ro. Chỉ dùng số tiền bạn chấp nhận mất.',
-          textAlign: TextAlign.center,
-          style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+        // Disclaimer y hệt shell phone (vit_trade_simple_shell) — giữ kề
+        // form/panel rủi ro mà nó cảnh báo.
+        Padding(
+          padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+          child: Text(
+            'Giao dịch tiền mã hoá có rủi ro. Chỉ dùng số tiền bạn chấp nhận mất.',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+          ),
         ),
       ],
     );
 
-    final secondaryChildren = [
-      VitTradeSection(
-        title: 'Tiếp theo',
-        child: VitNextActionCard(
-          key: TradeTabletKeys.nextAction,
-          icon: nextAction.icon,
-          title: nextAction.title,
-          subtitle: nextAction.subtitle,
-          statusLabel: nextAction.statusLabel,
-          ctaLabel: nextAction.ctaLabel,
-          accentColor: AppModuleAccents.trade,
-          onTap: nextAction.onTap,
-        ),
-      ),
-      VitTradeSection(
-        title: 'Tài sản của bạn',
-        actionLabel: snapshot.positions.isNotEmpty ? 'Xem tất cả' : null,
-        onAction: snapshot.positions.isNotEmpty
-            ? () => context.push(AppRoutePaths.tradePositions)
-            : null,
-        child: TradePositionsPanel(positions: snapshot.positions),
-      ),
-    ];
-
-    return VitTwoColumnTabletDashboard(
-      banner: TradeTickerStrip(
-        symbol: pair.symbol,
-        priceLabel: marketPrice,
-        changePct: pair.changePct,
-        highLabel: daySnapshot.highLabel,
-        lowLabel: daySnapshot.lowLabel,
-        volumeLabel: daySnapshot.volumeLabel,
-        sparklineValues: daySnapshot.sparkline,
-        availableBalanceLabel: availableBalanceLabel,
-      ),
-      onRefresh: _refreshScreen,
-      primaryChildren: primaryChildren,
-      secondaryChildren: secondaryChildren,
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
+    return TradeTerminalPanel(
+      panelKey: TradeTabletKeys.entryPanel,
+      label: 'ĐẶT LỆNH',
+      fill: scrollable,
+      child: scrollable ? SingleChildScrollView(child: content) : content,
     );
   }
-}
-
-class _TradeTabletNextAction {
-  const _TradeTabletNextAction({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.statusLabel,
-    required this.ctaLabel,
-    required this.onTap,
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String statusLabel;
-  final String ctaLabel;
-  final VoidCallback onTap;
 }

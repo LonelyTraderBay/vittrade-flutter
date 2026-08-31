@@ -377,30 +377,6 @@ const List<String> _advancedAnalyticsFeatures = [
   'Beta Calculation',
 ];
 
-const TradeOrderBook _orderBook = TradeOrderBook(
-  bids: [
-    TradeBookLevel(price: 67524.13, amount: 0.812, total: 54829),
-    TradeBookLevel(price: 67518.80, amount: 1.204, total: 81308),
-    TradeBookLevel(price: 67510.42, amount: 0.533, total: 35982),
-  ],
-  asks: [
-    TradeBookLevel(price: 67545.13, amount: 0.628, total: 42416),
-    TradeBookLevel(price: 67551.90, amount: 0.904, total: 61067),
-    TradeBookLevel(price: 67563.44, amount: 1.118, total: 75540),
-  ],
-);
-
-const List<TradeTapePrint> _trades = [
-  TradeTapePrint(price: 67543.21, amount: 0.036, time: '23:29:14', isBuy: true),
-  TradeTapePrint(
-    price: 67541.88,
-    amount: 0.082,
-    time: '23:29:12',
-    isBuy: false,
-  ),
-  TradeTapePrint(price: 67544.09, amount: 0.024, time: '23:29:09', isBuy: true),
-];
-
 const List<TradeOpenOrder> _orders = [
   TradeOpenOrder(
     id: 'ord001',
@@ -421,6 +397,46 @@ const List<TradeOpenOrder> _orders = [
     amount: 1.4,
     filled: 0,
     createdAt: '23/02 08:11',
+  ),
+  TradeOpenOrder(
+    id: 'ord003',
+    symbol: 'SOL/USDT',
+    side: TradeOrderSide.buy,
+    type: TradeOrderType.stop,
+    price: 138.4,
+    amount: 40,
+    filled: 0,
+    createdAt: '23/02 07:58',
+  ),
+  TradeOpenOrder(
+    id: 'ord004',
+    symbol: 'BTC/USDT',
+    side: TradeOrderSide.sell,
+    type: TradeOrderType.limit,
+    price: 68900,
+    amount: .06,
+    filled: 0,
+    createdAt: '23/02 07:41',
+  ),
+  TradeOpenOrder(
+    id: 'ord005',
+    symbol: 'ETH/USDT',
+    side: TradeOrderSide.buy,
+    type: TradeOrderType.limit,
+    price: 3410,
+    amount: 2.5,
+    filled: 1.1,
+    createdAt: '23/02 06:17',
+  ),
+  TradeOpenOrder(
+    id: 'ord006',
+    symbol: 'SOL/USDT',
+    side: TradeOrderSide.sell,
+    type: TradeOrderType.limit,
+    price: 152.8,
+    amount: 65,
+    filled: 0,
+    createdAt: '23/02 05:36',
   ),
 ];
 
@@ -544,5 +560,29 @@ const List<TradePosition> _positions = [
     side: TradeOrderSide.buy,
     notional: 8105.19,
     pnl: 142.44,
+  ),
+  TradePosition(
+    symbol: 'ETH/USDT',
+    side: TradeOrderSide.buy,
+    notional: 4225.73,
+    pnl: 169.74,
+  ),
+  TradePosition(
+    symbol: 'SOL/USDT',
+    side: TradeOrderSide.buy,
+    notional: 4633.0,
+    pnl: -167.0,
+  ),
+  TradePosition(
+    symbol: 'SOL/USDT',
+    side: TradeOrderSide.sell,
+    notional: 1783.2,
+    pnl: 66.8,
+  ),
+  TradePosition(
+    symbol: 'BTC/USDT',
+    side: TradeOrderSide.sell,
+    notional: 1350.86,
+    pnl: 14.86,
   ),
 ];

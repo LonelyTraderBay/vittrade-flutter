@@ -6,6 +6,8 @@ import 'dart:io';
 const shellWidgetToVpcPath = <String, String>{
   'WalletTabletDetailSurface':
       'features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart',
+  'TradeTabletDetailSurface':
+      'features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart',
   'ProfileTabletUtilitySurface':
       'features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart',
   'P2PTabletUtilitySurface':
@@ -29,6 +31,7 @@ const shellWidgetToVpcPath = <String, String>{
 /// Rhythm tier owned by each shell when a layout file declares multiple tiers.
 const shellWidgetRhythmTier = <String, String>{
   'WalletTabletDetailSurface': 'form',
+  'TradeTabletDetailSurface': 'form',
   'ProfileTabletUtilitySurface': 'form',
   'P2PTabletUtilitySurface': 'form',
   'VitTradeWorkspaceScaffold': 'compact',
@@ -100,11 +103,11 @@ const routeNameToPageOverrides = <String, String>{
   'AppRouteNames.sc049TradePair':
       'features/trade/presentation/tablet/pages/trade_tablet_page.dart',
   'AppRouteNames.sc050OrdersHistory':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/orders_history_tablet_page.dart',
   'AppRouteNames.sc052TradeSettings':
       'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
   'AppRouteNames.sc053PositionDashboard':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart',
   'AppRouteNames.sc054TradeHistoryExport':
       'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
   'AppRouteNames.sc056Convert':

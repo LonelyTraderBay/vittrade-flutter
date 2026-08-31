@@ -11,6 +11,7 @@ part '../fixtures/trade_conversions_utilities_repository_methods.dart';
 part '../fixtures/trade_conversions_utilities_repository_fixtures.dart';
 part '../fixtures/trade_core_spot_repository_methods.dart';
 part '../fixtures/trade_core_spot_repository_fixtures.dart';
+part '../fixtures/trade_core_spot_book_tape_fixtures.dart';
 part '../fixtures/trade_futures_leverage_repository_methods.dart';
 part '../fixtures/trade_futures_leverage_repository_fixtures.dart';
 part '../fixtures/trade_realtime_repository_methods.dart';

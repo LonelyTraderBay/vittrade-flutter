@@ -15,8 +15,8 @@ Generated from `flutter_app/tool/design_token_consistency_audit.dart`.
 generated=2026-06-12
 status_fail=1
 status_warn=20
-status_exception=110
-rows=1275
+status_exception=113
+rows=1283
 ```
 
 ## CI Baseline Gates
@@ -102,7 +102,7 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/wallet/presentation/widgets/tablet/wallet_page_balance_sections.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_layout | `` | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | shared_widget | `` | `flutter_app/lib/shared/widgets/vit_segmented_choice.dart` | warn | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | - |
-| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/tools/launchpad_dca_builder_history.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/launchpad/presentation/widgets/tools/launchpad_dca_builder_strategies.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_field_controls.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_helpers.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/arena/presentation/widgets/governance/arena_governance_gate_models.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
@@ -1083,7 +1083,15 @@ This section counts only local typography drift: `fontSize`, `fontFamily`, and `
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_book_panel.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_bottom_panel.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: orderbook |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_chart_math.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_chart_panel.dart` | exception | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | allowed_source_keyword: custompainter |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_meta_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
+| feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_tape_panel.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_confirm_sheet.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
 | feature_widget | `` | `flutter_app/lib/features/trade/presentation/widgets/tablet/vit_trade_side_switch.dart` | pass | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - |
