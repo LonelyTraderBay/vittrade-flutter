@@ -130,6 +130,7 @@ class _TransactionDetailTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tiến trình',
           headerIcon: Icons.timeline_rounded,
           headerIconColor: AppColors.primary,
@@ -164,6 +165,7 @@ class _TransactionDetailTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Thông tin chi tiết',
           headerIcon: Icons.article_outlined,
           headerIconColor: AppColors.primary,

@@ -94,6 +94,7 @@ class _PendingDepositsTabletPageState
           onRefresh: _refreshDeposits,
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bộ lọc nạp tiền',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -112,6 +113,7 @@ class _PendingDepositsTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Danh sách nạp',
           headerIcon: Icons.pending_actions_outlined,
           headerIconColor: AppColors.primary,
@@ -168,6 +170,7 @@ class _PendingDepositsTabletPageState
           contractId: 'Wallet pending deposits',
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tóm tắt trạng thái',
           headerIcon: Icons.analytics_outlined,
           headerIconColor: AppColors.primary,

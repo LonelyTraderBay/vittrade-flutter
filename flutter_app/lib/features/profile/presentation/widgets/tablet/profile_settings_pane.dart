@@ -73,7 +73,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.pageRhythmCompactInnerGap,
+              innerGap: AppSpacing.x4,
               children: [
                 _CurrencyCard(
                   currencies: snapshot.currencyOptions,
@@ -87,7 +87,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.pageRhythmCompactInnerGap,
+              innerGap: AppSpacing.x4,
               children: [
                 _LanguageCard(
                   languages: snapshot.languages,
@@ -101,7 +101,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.pageRhythmCompactInnerGap,
+              innerGap: AppSpacing.x4,
               children: [
                 if (snapshot.tradeSecurity.isEmpty)
                   const VitEmptyState(
@@ -122,7 +122,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.pageRhythmCompactInnerGap,
+              innerGap: AppSpacing.x4,
               children: [
                 if (snapshot.notifications.isEmpty)
                   const VitEmptyState(

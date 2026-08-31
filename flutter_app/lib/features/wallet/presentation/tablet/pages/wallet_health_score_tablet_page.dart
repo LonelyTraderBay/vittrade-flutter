@@ -121,6 +121,7 @@ class _WalletHealthScoreTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Khu vực đánh giá',
           headerIcon: Icons.fact_check_outlined,
           headerIconColor: AppColors.primary,
@@ -165,6 +166,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildOverview(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Ưu tiên cải thiện',
       headerIcon: Icons.priority_high_rounded,
       headerIconColor: AppColors.caution,
@@ -208,6 +210,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildSecurity(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Bảo mật ví',
       headerIcon: Icons.security_outlined,
       headerIconColor: AppColors.primary,
@@ -248,6 +251,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildDiversification(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Phân bổ tài sản',
       headerIcon: Icons.pie_chart_outline_rounded,
       headerIconColor: AppColors.primary,
@@ -297,6 +301,7 @@ class _WalletHealthScoreTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Chi tiết điểm',
           headerIcon: Icons.insights_outlined,
           headerIconColor: AppColors.primary,

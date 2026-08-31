@@ -92,7 +92,7 @@ class ProfileMasterMenu extends ConsumerWidget {
             accentColor: Color(section.accentHex),
             headerVariant: VitSectionHeaderVariant.accentBar,
             headerDensity: VitDensity.compact,
-            innerGap: AppSpacing.pageRhythmCompactInnerGap,
+            innerGap: AppSpacing.x4,
             children: [
               if (section.id == 'legal')
                 const ProfileLegalAccordionPanel()

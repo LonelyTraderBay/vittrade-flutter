@@ -117,6 +117,7 @@ class _OrdersHistoryTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Thống kê',
                       child: _OrderStatsCard(snapshot: snapshot),
                     ),

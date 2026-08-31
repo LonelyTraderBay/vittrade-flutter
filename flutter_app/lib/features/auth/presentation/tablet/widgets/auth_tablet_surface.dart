@@ -93,7 +93,7 @@ class AuthTabletSurface extends StatelessWidget {
                               title: title,
                               subtitle: subtitle,
                               variant: VitSectionHeaderVariant.accentBar,
-                              bottomGap: AppSpacing.pageRhythmFormInnerGap,
+                              bottomGap: AppSpacing.x4,
                             ),
                             child,
                           ],

@@ -77,11 +77,13 @@ class MarginHubTabletPage extends ConsumerWidget {
                       children: const [SizedBox.shrink()],
                     ),
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Chỉ số tổng quan',
                       child: _HubStatsCard(stats: snapshot.stats),
                     ),
                     for (final feature in snapshot.features)
                       VitTradeSection(
+                        innerGap: AppSpacing.x4,
                         title: feature.title,
                         child: VitCard(
                           radius: VitCardRadius.tight,
@@ -114,6 +116,7 @@ class MarginHubTabletPage extends ConsumerWidget {
                   ],
                   secondaryChildren: [
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Điều hướng nhanh',
                       child: VitCard(
                         radius: VitCardRadius.tight,
@@ -149,6 +152,7 @@ class MarginHubTabletPage extends ConsumerWidget {
                       ),
                     ),
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Tuân thủ',
                       child: VitCard(
                         radius: VitCardRadius.tight,

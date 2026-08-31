@@ -284,6 +284,14 @@ bool _headerHasInnerGap(String callBody, String source, int callStart) {
     return true;
   }
 
+  // Luật 13dp (2026-08-31): bottomGap: AppSpacing.x4 (13dp) là khai báo
+  // inner-gap hợp lệ của tablet — tách giá trị khỏi tier phone.
+  if (RegExp(
+    r'bottomGap:\s*(?:AppSpacing\.x4|AppSpacing\.cardGap)',
+  ).hasMatch(callBody)) {
+    return true;
+  }
+
   if (callBody.startsWith('VitModuleSectionHeader(') &&
       !RegExp(r'bottomGap:\s*0(?:\.0)?').hasMatch(callBody)) {
     return true;

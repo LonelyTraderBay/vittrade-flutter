@@ -31,7 +31,7 @@ class HomeMarketWatchlistPanel extends StatelessWidget {
       children: [
         VitSectionHeader(
           title: 'Thị trường',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
+          bottomGap: AppSpacing.x4,
           actionLabel: 'Xem tất cả',
           actionSemanticLabel: 'Xem tất cả thị trường',
           onAction: () => onNavigate('/markets'),

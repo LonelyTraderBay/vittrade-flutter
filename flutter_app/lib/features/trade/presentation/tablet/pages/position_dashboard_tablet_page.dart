@@ -102,12 +102,14 @@ class _PositionDashboardTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Tổng quan',
                       child: _PositionSummaryCard(
                         positions: snapshot.positions,
                       ),
                     ),
                     const VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Đánh giá rủi ro',
                       child: VitCard(
                         variant: VitCardVariant.inner,

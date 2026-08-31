@@ -579,15 +579,17 @@ void main() {
       final productTitle = tester.getRect(find.text('LỐI TẮT SẢN PHẨM'));
       final productHub = tester.getRect(find.byType(ProfileProductHubPanel));
 
+      // Luật 13dp (2026-08-31): label → nội dung trên tablet = 13
+      // (innerGap khai riêng tại call-site tablet, tách khỏi tier phone).
       expect(
         prediction.top - predictionTitle.bottom,
-        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
+        closeTo(AppSpacing.x4, 0.01),
       );
       // Luật 13dp (2026-08-31): section gap tablet = 13 (tier standard).
       expect(arena.top - prediction.bottom, closeTo(AppSpacing.x4, 0.01));
       expect(
         productHub.top - productTitle.bottom,
-        closeTo(AppSpacing.pageRhythmCompactInnerGap, 0.01),
+        closeTo(AppSpacing.x4, 0.01),
       );
     },
   );

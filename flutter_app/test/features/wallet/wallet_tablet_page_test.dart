@@ -152,25 +152,21 @@ void main() {
       matching: find.byType(VitPageSection),
     );
     final dcaSection = tester.getRect(dcaSectionFinder);
-    final compactHeaderPadding = find.byWidgetPredicate(
+    // Luật 13dp (2026-08-31): section gap + label→nội dung tablet = 13.
+    final law13HeaderPadding = find.byWidgetPredicate(
       (widget) =>
           widget is Padding &&
           widget.padding ==
-              const EdgeInsetsDirectional.only(
-                bottom: AppSpacing.pageRhythmCompactInnerGap,
-              ),
+              const EdgeInsetsDirectional.only(bottom: AppSpacing.x4),
     );
 
+    expect(dcaSection.top - toolsSection.bottom, closeTo(AppSpacing.x4, 0.01));
     expect(
-      dcaSection.top - toolsSection.bottom,
-      closeTo(AppSpacing.pageRhythmCompactSectionGap, 0.01),
-    );
-    expect(
-      find.descendant(of: dcaSectionFinder, matching: compactHeaderPadding),
+      find.descendant(of: dcaSectionFinder, matching: law13HeaderPadding),
       findsOneWidget,
     );
     expect(
-      find.descendant(of: toolsSectionFinder, matching: compactHeaderPadding),
+      find.descendant(of: toolsSectionFinder, matching: law13HeaderPadding),
       findsOneWidget,
     );
   });

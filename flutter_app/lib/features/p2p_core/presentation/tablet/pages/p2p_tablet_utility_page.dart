@@ -88,6 +88,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
             density: VitDensity.compact,
           ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Thông tin chính',
           headerIcon: Icons.fact_check_outlined,
           headerIconColor: AppColors.primary,

@@ -103,8 +103,13 @@ class _TradeTabletOrderReceiptPageState
               accentColor: AppColors.buy,
             ),
             _ReceiptCard(receipt: receipt),
-            VitTradeSection(title: 'Lưu ý', child: _TradeTabletWarningNotice()),
             VitTradeSection(
+              innerGap: AppSpacing.x4,
+              title: 'Lưu ý',
+              child: _TradeTabletWarningNotice(),
+            ),
+            VitTradeSection(
+              innerGap: AppSpacing.x4,
               title: 'Hỗ trợ',
               child: _OrderSupportLink(supportRoute: snapshot.supportRoute),
             ),

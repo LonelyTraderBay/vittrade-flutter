@@ -149,7 +149,7 @@ class _DevicesSectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitSectionHeader(
       title: label,
-      bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+      bottomGap: AppSpacing.x4,
       variant: VitSectionHeaderVariant.accentBar,
       accentColor: AppColors.primary,
       density: VitDensity.compact,

@@ -28,7 +28,7 @@ List<Widget> _subsPaneChildren({
     if (showCreate) const _SubsCreateForm(),
     VitSectionHeader(
       title: 'TÀI KHOẢN (${snapshot.accounts.length})',
-      bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+      bottomGap: AppSpacing.x4,
       density: VitDensity.compact,
     ),
     if (snapshot.accounts.isEmpty)

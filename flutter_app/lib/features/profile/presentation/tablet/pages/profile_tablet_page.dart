@@ -149,7 +149,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           accentColor: AppColors.accent,
           headerVariant: VitSectionHeaderVariant.accentBar,
           headerDensity: VitDensity.compact,
-          innerGap: AppSpacing.pageRhythmCompactInnerGap,
+          innerGap: AppSpacing.x4,
           customGap: AppSpacing.x4,
           children: [
             ProfilePredictionCard(
@@ -168,7 +168,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           accentColor: AppColors.warn,
           headerVariant: VitSectionHeaderVariant.accentBar,
           headerDensity: VitDensity.compact,
-          innerGap: AppSpacing.pageRhythmCompactInnerGap,
+          innerGap: AppSpacing.x4,
           children: [
             if (snapshot.productShortcuts.isEmpty)
               const VitEmptyState(

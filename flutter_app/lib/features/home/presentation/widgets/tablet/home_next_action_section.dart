@@ -23,10 +23,7 @@ class HomeNextActionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const VitSectionHeader(
-          title: 'Tiếp theo',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
-        ),
+        const VitSectionHeader(title: 'Tiếp theo', bottomGap: AppSpacing.x4),
         VitNextActionCard(
           key: HomeTabletKeys.nextAction,
           icon: HomeActionTokens.icon(nextAction.icon),

@@ -35,7 +35,7 @@ class HomeRecentProductsSection extends StatelessWidget {
       children: [
         VitSectionHeader(
           title: 'Gần đây',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
+          bottomGap: AppSpacing.x4,
           density: density,
         ),
         if (recentProducts.isEmpty)

@@ -106,6 +106,7 @@ class _PortfolioAnalyticsTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Góc nhìn',
           headerIcon: Icons.dashboard_outlined,
           headerIconColor: AppColors.primary,
@@ -134,6 +135,7 @@ class _PortfolioAnalyticsTabletPageState
         ),
         if (_view == 'overview') ...[
           VitPageSection(
+            innerGap: AppSpacing.x4,
             label: 'Lịch sử giá trị',
             headerIcon: Icons.show_chart_rounded,
             headerIconColor: AppColors.primary,
@@ -168,6 +170,7 @@ class _PortfolioAnalyticsTabletPageState
             ],
           ),
           VitPageSection(
+            innerGap: AppSpacing.x4,
             label: 'Chỉ số chính',
             headerIcon: Icons.insights_outlined,
             headerIconColor: AppColors.primary,
@@ -233,6 +236,7 @@ class _PortfolioAnalyticsTabletPageState
           contractId: 'Phân tích danh mục',
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tài sản nổi bật',
           headerIcon: Icons.pie_chart_outline_rounded,
           headerIconColor: AppColors.primary,

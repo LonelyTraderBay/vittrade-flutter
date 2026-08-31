@@ -44,7 +44,7 @@ class HomeProductsSection extends StatelessWidget {
       children: [
         VitSectionHeader(
           title: 'Hành động nhanh',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
+          bottomGap: AppSpacing.x4,
           actionLabel: moreActionCount <= 0
               ? null
               : 'Xem thêm (+$moreActionCount)',

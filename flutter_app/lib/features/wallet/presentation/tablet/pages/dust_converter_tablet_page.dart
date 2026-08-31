@@ -137,6 +137,7 @@ class _DustConverterTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Chuyển đổi sang',
           headerIcon: Icons.currency_exchange_rounded,
           headerIconColor: AppColors.primary,
@@ -163,6 +164,7 @@ class _DustConverterTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Số dư nhỏ (${assets.length})',
           headerIcon: Icons.inventory_2_outlined,
           headerIconColor: AppColors.primary,
@@ -271,6 +273,7 @@ class _DustConverterTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tóm tắt xem trước',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

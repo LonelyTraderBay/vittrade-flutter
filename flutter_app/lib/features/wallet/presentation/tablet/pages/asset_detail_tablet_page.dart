@@ -142,6 +142,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Thao tác nhanh',
           headerIcon: Icons.bolt_outlined,
           headerIconColor: accent,
@@ -170,6 +171,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Biểu đồ giá',
           headerIcon: Icons.show_chart_rounded,
           headerIconColor: accent,
@@ -213,6 +215,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Phân bổ số dư',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -257,6 +260,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Giao dịch gần đây',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

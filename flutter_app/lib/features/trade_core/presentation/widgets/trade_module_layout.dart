@@ -115,6 +115,7 @@ class VitTradeSection extends StatelessWidget {
     this.actionLabel,
     this.onAction,
     this.headerTrailing,
+    this.innerGap,
   });
 
   final String title;
@@ -122,6 +123,10 @@ class VitTradeSection extends StatelessWidget {
   final String? actionLabel;
   final VoidCallback? onAction;
   final Widget? headerTrailing;
+
+  /// Luật 13dp (2026-08-31): caller TABLET truyền 13 để tách nhịp khỏi
+  /// tier mặc định dùng chung với phone (8) — null giữ nguyên cho phone.
+  final double? innerGap;
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +138,7 @@ class VitTradeSection extends StatelessWidget {
       onAction: onAction,
       headerTrailing: headerTrailing,
       gap: VitContentGap.tight,
+      innerGap: innerGap,
       children: [child],
     );
   }

@@ -197,7 +197,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerVariant: VitSectionHeaderVariant.plain,
         actionLabel: 'Phân tích',
         onAction: () => _navigate('/wallet/portfolio-analytics'),
-        innerGap: AppSpacing.pageRhythmCompactInnerGap,
+        innerGap: AppSpacing.x4,
         children: [
           if (_tab == 'assets')
             WalletSearchAndFilter(
@@ -229,7 +229,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerIconColor: AppModuleAccents.wallet,
         accentColor: AppModuleAccents.wallet,
         headerVariant: VitSectionHeaderVariant.plain,
-        innerGap: AppSpacing.pageRhythmCompactInnerGap,
+        innerGap: AppSpacing.x4,
         children: [
           WalletToolGrid(
             tools: snapshot.tools,
@@ -244,7 +244,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerIconColor: AppColors.accent,
         accentColor: AppColors.accent,
         headerVariant: VitSectionHeaderVariant.plain,
-        innerGap: AppSpacing.pageRhythmCompactInnerGap,
+        innerGap: AppSpacing.x4,
         children: [WalletDcaCard(dca: snapshot.dca)],
       ),
     ];
@@ -252,8 +252,9 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
     return VitTwoColumnTabletDashboard(
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
+      // Luật 13dp (2026-08-31): section gap dashboard = 13.
+      primaryContentGap: AppSpacing.x4,
+      secondaryContentGap: AppSpacing.x4,
     );
   }
 }

@@ -121,6 +121,7 @@ class _WalletMultiManagerTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Danh sách quản lý',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -151,6 +152,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildWallets(WalletMultiManagerSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Tất cả ví',
       headerIcon: Icons.wallet_outlined,
       headerIconColor: AppColors.primary,
@@ -246,6 +248,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildGroups(WalletMultiManagerSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Nhóm ví',
       headerIcon: Icons.folder_copy_outlined,
       headerIconColor: AppColors.primary,
@@ -274,6 +277,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildActivity(WalletMultiManagerSnapshot snapshot) {
     return const VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Hoạt động gần đây',
       headerIcon: Icons.history_rounded,
       headerIconColor: AppColors.primary,
@@ -311,6 +315,7 @@ class _WalletMultiManagerTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Ví đang chọn',
           headerIcon: Icons.account_balance_outlined,
           headerIconColor: AppColors.primary,

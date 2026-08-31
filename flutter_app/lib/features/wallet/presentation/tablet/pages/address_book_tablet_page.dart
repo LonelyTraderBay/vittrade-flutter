@@ -117,6 +117,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tổng quan',
           headerIcon: Icons.analytics_outlined,
           headerIconColor: AppColors.primary,
@@ -152,6 +153,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bộ lọc',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -204,6 +206,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
             onAction: () => context.go(AppRoutePaths.walletAddressBookAdd),
           ),
         const VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bảo mật địa chỉ',
           headerIcon: Icons.shield_outlined,
           headerIconColor: AppColors.primary,
@@ -345,6 +348,7 @@ class _AddressSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: title,
       headerIcon: icon,
       headerIconColor: color,

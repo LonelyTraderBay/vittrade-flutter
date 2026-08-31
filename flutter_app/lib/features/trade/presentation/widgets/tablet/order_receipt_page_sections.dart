@@ -11,6 +11,7 @@ class _ReceiptCard extends StatelessWidget {
     final sideColor = isBuy ? AppColors.buy : AppColors.sell;
 
     return VitTradeSection(
+      innerGap: AppSpacing.x4,
       title: 'Tóm tắt khớp lệnh',
       headerTrailing: _StatusBadge(
         key: TradeTabletOrderReceiptPage.openOrdersKey,

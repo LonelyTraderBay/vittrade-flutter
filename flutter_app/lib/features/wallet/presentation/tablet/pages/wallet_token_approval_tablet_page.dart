@@ -93,6 +93,7 @@ class _WalletTokenApprovalTabletPageState
       children: [
         _securityOverview(snapshot),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Danh mục quyền truy cập',
           headerIcon: Icons.shield_outlined,
           headerIconColor: AppColors.primary,
@@ -167,6 +168,7 @@ class _WalletTokenApprovalTabletPageState
     final snapshot = controller.state.snapshot;
     final approvals = snapshot.riskSortedApprovals;
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Quyền đang hoạt động',
       headerIcon: Icons.lock_open_outlined,
       headerIconColor: AppColors.primary,
@@ -259,6 +261,7 @@ class _WalletTokenApprovalTabletPageState
 
   Widget _historyContent(WalletTokenApprovalSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Lịch sử thu hồi',
       headerIcon: Icons.history_rounded,
       headerIconColor: AppColors.primary,
@@ -283,6 +286,7 @@ class _WalletTokenApprovalTabletPageState
 
   Widget _settingsContent() {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Cài đặt bảo mật',
       headerIcon: Icons.settings_outlined,
       headerIconColor: AppColors.primary,

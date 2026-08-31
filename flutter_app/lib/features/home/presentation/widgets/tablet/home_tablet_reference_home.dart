@@ -117,8 +117,8 @@ class HomeTabletReferenceHome extends StatelessWidget {
       ],
       secondaryChildren: secondaryChildren,
       onRefresh: onRefresh,
-      primaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
-      secondaryContentGap: AppSpacing.pageRhythmCompactSectionGap,
+      primaryContentGap: AppSpacing.x4,
+      secondaryContentGap: AppSpacing.x4,
     );
   }
 }

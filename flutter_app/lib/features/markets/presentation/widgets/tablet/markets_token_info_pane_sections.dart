@@ -81,7 +81,7 @@ class _OverviewTab extends StatelessWidget {
         const SizedBox(height: AppSpacing.x4),
         VitSectionHeader(
           title: 'Thống kê thị trường',
-          bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+          bottomGap: AppSpacing.x4,
           accentColor: AppAssetColors.forSymbol(pair.baseAsset),
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -128,7 +128,7 @@ class _OverviewTab extends StatelessWidget {
         const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Cung token',
-          bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+          bottomGap: AppSpacing.x4,
           accentColor: AppColors.primary,
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -136,7 +136,7 @@ class _OverviewTab extends StatelessWidget {
         const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Phân bổ cung',
-          bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+          bottomGap: AppSpacing.x4,
           accentColor: AppColors.accent,
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -144,7 +144,7 @@ class _OverviewTab extends StatelessWidget {
         const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Kỷ lục giá',
-          bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+          bottomGap: AppSpacing.x4,
           accentColor: AppColors.warn,
           variant: VitSectionHeaderVariant.accentBar,
         ),

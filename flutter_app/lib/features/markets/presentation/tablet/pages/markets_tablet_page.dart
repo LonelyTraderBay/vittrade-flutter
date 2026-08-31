@@ -88,19 +88,19 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
               VitPageSection(
                 label: 'Biến động nổi bật',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.pageRhythmCompactInnerGap,
+                innerGap: AppSpacing.x4,
                 children: [MarketListTopMovers(pairs: snapshot.marketPairs)],
               ),
               VitPageSection(
                 label: 'Công cụ thị trường',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.pageRhythmCompactInnerGap,
+                innerGap: AppSpacing.x4,
                 children: [MarketListTools(onNavigate: _go, tablet: true)],
               ),
               const VitPageSection(
                 label: 'Lối tắt từ Markets',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.pageRhythmCompactInnerGap,
+                innerGap: AppSpacing.x4,
                 children: [MarketListDiscoverMoreSection()],
               ),
             ],

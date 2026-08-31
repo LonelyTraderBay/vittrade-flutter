@@ -91,6 +91,7 @@ class TradeTabletUtilityPage extends StatelessWidget {
             density: VitDensity.compact,
           ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Thông tin chính',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

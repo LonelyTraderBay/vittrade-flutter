@@ -137,7 +137,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           activeBuyKey: const Key('sc048_trade_active_buy_side'),
           activeSellKey: const Key('sc048_trade_active_sell_side'),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitInput(
           key: amountFieldKey,
           label: 'Số lượng $actionVerb ($baseAsset)',

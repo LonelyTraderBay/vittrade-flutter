@@ -137,4 +137,77 @@ void main() {
       isFalse,
     );
   });
+
+  test('Luật 13dp: section tablet (label/title) tự khai innerGap = 13', () {
+    final violations = <String>[];
+    for (final root in _scannedDirs) {
+      final dir = Directory(root);
+      if (!dir.existsSync()) continue;
+      for (final entity in dir.listSync(recursive: true)) {
+        if (entity is! File || !entity.path.endsWith('.dart')) continue;
+        final path = entity.path.replaceAll('\\', '/');
+        if (!_isTabletPresentationPath(path)) continue;
+        final src = File(entity.path).readAsStringSync();
+        for (final m in RegExp(
+          r'\b(?:VitPageSection|VitTradeSection)\s*\(',
+        ).allMatches(src)) {
+          var depth = 0;
+          var end = -1;
+          for (var i = m.end - 1; i < src.length; i++) {
+            if (src[i] == '(') depth++;
+            if (src[i] == ')') {
+              depth--;
+              if (depth == 0) {
+                end = i + 1;
+                break;
+              }
+            }
+          }
+          if (end < 0) continue;
+          final span = src.substring(m.start, end);
+          // label:/title: phải là tham số TRỰC TIẾP của section (depth 1)
+          // — title: của card con không tính.
+          final openParen = span.indexOf('(');
+          var argDepth = 0;
+          final argChars = StringBuffer();
+          for (var i = openParen; i < span.length; i++) {
+            final c = span[i];
+            if (c == '(') {
+              argDepth++;
+              if (argDepth == 1) continue;
+            } else if (c == ')') {
+              argDepth--;
+              if (argDepth == 0) break;
+            }
+            if (argDepth == 1) argChars.write(c == '\n' ? ' ' : c);
+          }
+          final topLevelArgs = argChars.toString();
+          final ownsLabel = RegExp(
+            r'(?:^|,)\s*(?:label|title):\s*',
+          ).hasMatch(topLevelArgs);
+          if (!ownsLabel) continue;
+          if (!span.contains('innerGap: AppSpacing.x4')) {
+            violations.add(
+              '$path — ${src.substring(m.start, m.start + 40)}… thiếu '
+              'innerGap: AppSpacing.x4 (khoảng nhãn → nội dung tablet = 13)',
+            );
+          }
+        }
+        // bottomGap trực tiếp (label → nội dung) cũng phải 13.
+        for (final m in RegExp(r'bottomGap:\s*([^,)]+)').allMatches(src)) {
+          final expr = m.group(1)!.trim();
+          final literal = double.tryParse(expr);
+          final ok = literal != null
+              ? literal == 13
+              : (expr == 'AppSpacing.x4' ||
+                    expr == 'AppSpacing.cardGap' ||
+                    expr == 'AppSpacing.sectionGapCompact');
+          if (!ok) {
+            violations.add('$path — bottomGap: $expr phải là 13');
+          }
+        }
+      }
+    }
+    expect(violations, isEmpty, reason: violations.take(8).join('\n'));
+  });
 }

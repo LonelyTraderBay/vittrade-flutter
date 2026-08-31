@@ -24,7 +24,7 @@ class HomeDiscoveryPanel extends StatelessWidget {
       children: [
         const VitSectionHeader(
           title: 'Dự đoán & Thách đấu',
-          bottomGap: AppSpacing.pageRhythmCompactInnerGap,
+          bottomGap: AppSpacing.x4,
         ),
         VitCard(
           clip: true,

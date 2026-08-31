@@ -118,6 +118,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Mức sử dụng hiện tại',
           headerIcon: Icons.speed_rounded,
           headerIconColor: AppColors.primary,
@@ -163,6 +164,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'So sánh hạn mức theo cấp KYC',
           headerIcon: Icons.layers_outlined,
           headerIconColor: AppColors.primary,
@@ -314,6 +316,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           density: VitDensity.compact,
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tóm tắt hạn mức',
           headerIcon: Icons.account_balance_outlined,
           headerIconColor: AppColors.primary,
@@ -349,6 +352,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Câu hỏi thường gặp',
           headerIcon: Icons.help_outline_rounded,
           headerIconColor: AppColors.primary,

@@ -85,6 +85,7 @@ class _WalletGasOptimizerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bảng điều khiển phí',
           headerIcon: Icons.speed_rounded,
           headerIconColor: AppColors.primary,
@@ -153,6 +154,7 @@ class _WalletGasOptimizerTabletPageState
           ),
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Chọn tốc độ giao dịch',
           headerIcon: Icons.tune_rounded,
           headerIconColor: AppColors.primary,
@@ -189,6 +191,7 @@ class _WalletGasOptimizerTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'So sánh loại giao dịch',
           headerIcon: Icons.compare_arrows_rounded,
           headerIconColor: AppColors.primary,
@@ -225,6 +228,7 @@ class _WalletGasOptimizerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Xu hướng phí 24 giờ',
           headerIcon: Icons.show_chart_rounded,
           headerIconColor: AppColors.primary,
@@ -248,6 +252,7 @@ class _WalletGasOptimizerTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Hoạt động mạng',
           headerIcon: Icons.bar_chart_rounded,
           headerIconColor: AppColors.primary,
@@ -280,6 +285,7 @@ class _WalletGasOptimizerTabletPageState
 
   Widget _buildTips(WalletGasOptimizerSnapshot snapshot) {
     return VitPageSection(
+      innerGap: AppSpacing.x4,
       label: 'Mẹo tiết kiệm phí',
       headerIcon: Icons.lightbulb_outline_rounded,
       headerIconColor: AppColors.primary,
@@ -324,6 +330,7 @@ class _WalletGasOptimizerTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tóm tắt vận hành',
           headerIcon: Icons.monitor_heart_outlined,
           headerIconColor: AppColors.primary,

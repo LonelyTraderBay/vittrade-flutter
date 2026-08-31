@@ -117,6 +117,7 @@ class _NetworkStatusTabletPageState
         ),
         _buildSummary(snapshot),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bộ lọc mạng',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -143,6 +144,7 @@ class _NetworkStatusTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: _filter == _NetworkStatusFilter.all
               ? 'Mạng theo mức ưu tiên'
               : '${_filter.label} (${networks.length})',
@@ -282,6 +284,7 @@ class _NetworkStatusTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tổng quan hệ thống',
           headerIcon: Icons.monitor_heart_outlined,
           headerIconColor: AppColors.primary,

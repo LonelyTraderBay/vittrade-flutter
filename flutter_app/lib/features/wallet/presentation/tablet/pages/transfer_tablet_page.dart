@@ -122,6 +122,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Ví nguồn và ví nhận',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -153,6 +154,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tài sản và số lượng',
           headerIcon: Icons.payments_outlined,
           headerIconColor: AppColors.primary,
@@ -206,7 +208,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           icon: Icons.shield_outlined,
           iconColor: AppColors.primary,
           variant: VitSectionHeaderVariant.plain,
-          bottomGap: AppSpacing.pageRhythmFormInnerGap,
+          bottomGap: AppSpacing.x4,
         ),
         if (_amount > 0)
           const VitHighRiskStatePanel(
@@ -220,6 +222,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           const TransferInfoNotice(),
         const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Lịch sử gần đây',
           headerIcon: Icons.history_rounded,
           headerIconColor: AppColors.primary,

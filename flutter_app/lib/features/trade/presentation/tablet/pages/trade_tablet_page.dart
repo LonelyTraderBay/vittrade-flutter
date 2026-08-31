@@ -136,6 +136,10 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           VitHeader(
             title: pair?.symbol ?? 'Giao dịch',
             subtitle: 'Giao dịch Spot',
+            // Luật 13dp: inset header terminal = 13, cùng mặt phẳng với
+            // lề ngang 13 của grid bên dưới (default token header dùng
+            // chung contentPad 20 của phone).
+            horizontalPadding: AppSpacing.x4,
             showBack: showBack,
             onBack: showBack
                 ? () => goBackOrFallback(
@@ -185,37 +189,44 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     final pair = snapshot.pair;
     final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TradeTerminalMetaStrip(
-          pair: pair,
-          pairs: snapshot.pairs,
-          highLabel: daySnapshot.highLabel,
-          lowLabel: daySnapshot.lowLabel,
-          volumeLabel: daySnapshot.volumeLabel,
-          // Đổi cặp = thay root của luồng giao dịch (khuôn Bybit), không
-          // xếp chồng cặp cũ lên stack back.
-          onPairSelected: (candidate) =>
-              context.go(AppRoutePaths.tradePair(candidate.id)),
-          onRefresh: () => _refreshScreen(),
-        ),
-        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
-        Expanded(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth;
-              if (width >= TradeSpacingTokens.tradeTerminalFullSplitMinWidth) {
-                return _buildFullTier(snapshot);
-              }
-              if (width >= TradeSpacingTokens.tradeTerminalSplitMinWidth) {
-                return _buildCompactTier(snapshot);
-              }
-              return _buildStackedTier(snapshot);
-            },
+    // Luật 13dp: khoảng trống hai bên trái/phải của terminal = 13 —
+    // grid không còn chạm mép màn hình (flush variant chỉ bỏ bottom pad,
+    // không có ai cấp inset ngang cho trang đứng riêng như terminal).
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TradeTerminalMetaStrip(
+            pair: pair,
+            pairs: snapshot.pairs,
+            highLabel: daySnapshot.highLabel,
+            lowLabel: daySnapshot.lowLabel,
+            volumeLabel: daySnapshot.volumeLabel,
+            // Đổi cặp = thay root của luồng giao dịch (khuôn Bybit), không
+            // xếp chồng cặp cũ lên stack back.
+            onPairSelected: (candidate) =>
+                context.go(AppRoutePaths.tradePair(candidate.id)),
+            onRefresh: () => _refreshScreen(),
           ),
-        ),
-      ],
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final width = constraints.maxWidth;
+                if (width >=
+                    TradeSpacingTokens.tradeTerminalFullSplitMinWidth) {
+                  return _buildFullTier(snapshot);
+                }
+                if (width >= TradeSpacingTokens.tradeTerminalSplitMinWidth) {
+                  return _buildCompactTier(snapshot);
+                }
+                return _buildStackedTier(snapshot);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 

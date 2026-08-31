@@ -109,6 +109,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Mạng nạp',
           headerIcon: Icons.hub_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -148,6 +149,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Địa chỉ nạp',
           headerIcon: Icons.qr_code_2_rounded,
           headerIconColor: AppModuleAccents.wallet,
@@ -211,7 +213,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           icon: Icons.shield_outlined,
           iconColor: AppColors.sell,
           variant: VitSectionHeaderVariant.plain,
-          bottomGap: AppSpacing.pageRhythmFormInnerGap,
+          bottomGap: AppSpacing.x4,
         ),
         VitBanner(
           variant: VitBannerVariant.warning,

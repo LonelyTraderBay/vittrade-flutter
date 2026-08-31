@@ -107,6 +107,7 @@ class _TransactionHistoryTabletPageState
             icon: Icons.info_outline_rounded,
           ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Bộ lọc giao dịch',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -135,6 +136,7 @@ class _TransactionHistoryTabletPageState
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Giao dịch gần đây',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

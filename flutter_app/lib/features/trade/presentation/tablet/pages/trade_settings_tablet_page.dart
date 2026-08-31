@@ -89,6 +89,7 @@ class _TradeSettingsTabletPageState
                       children: const [SizedBox.shrink()],
                     ),
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Xác nhận lệnh',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -111,6 +112,7 @@ class _TradeSettingsTabletPageState
                       ),
                     ),
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Phản hồi khi khớp lệnh',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -133,6 +135,7 @@ class _TradeSettingsTabletPageState
                       ),
                     ),
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Hiển thị terminal',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -168,6 +171,7 @@ class _TradeSettingsTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
+                      innerGap: AppSpacing.x4,
                       title: 'Cấu hình hiện tại',
                       // Nút Lưu nằm trong CÙNG section child với card cấu
                       // hình — khoảng thở là inner gap (S7: children của

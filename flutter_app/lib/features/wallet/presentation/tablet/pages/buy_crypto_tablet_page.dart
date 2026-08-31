@@ -168,6 +168,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
           contractId: 'Mua tiền mã hóa',
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Tóm tắt giao dịch',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

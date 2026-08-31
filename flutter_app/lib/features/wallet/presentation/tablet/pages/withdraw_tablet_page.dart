@@ -124,6 +124,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
       children: [
         WithdrawBalanceCard(asset: snapshot.asset, value: snapshot.available),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Mạng rút',
           headerIcon: Icons.hub_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -139,6 +140,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Địa chỉ nhận',
           headerIcon: Icons.wallet_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -162,6 +164,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           ],
         ),
         VitPageSection(
+          innerGap: AppSpacing.x4,
           label: 'Số lượng',
           headerIcon: Icons.payments_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -220,7 +223,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           icon: Icons.shield_outlined,
           iconColor: AppModuleAccents.wallet,
           variant: VitSectionHeaderVariant.plain,
-          bottomGap: AppSpacing.pageRhythmFormInnerGap,
+          bottomGap: AppSpacing.x4,
         ),
         WithdrawWarning(asset: snapshot.asset, network: network),
         const SizedBox(height: AppSpacing.x4),
