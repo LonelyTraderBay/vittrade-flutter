@@ -82,7 +82,7 @@ class VitTradeConfirmSheet extends StatelessWidget {
               density: VitDensity.tool,
               showDivider: i < lines.length - 1,
             ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCard(
             variant: VitCardVariant.inner,
             radius: VitCardRadius.tight,
@@ -110,7 +110,7 @@ class VitTradeConfirmSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Semantics(
                   button: true,

@@ -102,7 +102,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+                const SizedBox(height: AppSpacing.x4),
                 const _ExportGroupLabel('Trường kèm theo'),
                 for (final include in state.includes)
                   Padding(
@@ -144,9 +144,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(
-                          height: AppSpacing.pageRhythmCompactInnerGap,
-                        ),
+                        const SizedBox(height: AppSpacing.x4),
                         Text(
                           'Tải xuống: ${state.result!.downloadUrl}',
                           style: AppTextStyles.caption.copyWith(
@@ -200,7 +198,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 for (final (label, value) in [
                   ('Tổng số lệnh', '${snapshot.stats.totalTrades}'),
                   (

@@ -227,12 +227,12 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
                 color: AppColors.buy,
                 size: AppSpacing.iconLg,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               const Text(
                 'Đặt lệnh thành công!',
                 style: AppTextStyles.sectionTitle,
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 'Lệnh mua ${receiveAmount.toStringAsFixed(6)} ${crypto.symbol} từ ${VitFormat.count(amountVnd)} VND đã được ghi nhận.',
                 textAlign: TextAlign.center,
@@ -241,7 +241,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitCtaButton(
           variant: VitCtaButtonVariant.success,
           onPressed: () => context.go(AppRoutePaths.wallet),
@@ -305,7 +305,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: snapshot.cryptoOptions.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x1),
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
             itemBuilder: (context, index) {
               final option = snapshot.cryptoOptions[index];
               return VitCard(
@@ -322,7 +322,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
                       accentColor: Color(option.colorHex),
                       size: AppSpacing.iconLg,
                     ),
-                    const SizedBox(width: AppSpacing.x2),
+                    const SizedBox(width: AppSpacing.x4),
                     Expanded(child: Text(option.name)),
                     Text(option.symbol),
                   ],

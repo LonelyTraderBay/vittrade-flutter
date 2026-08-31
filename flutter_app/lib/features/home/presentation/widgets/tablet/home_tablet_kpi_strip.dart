@@ -6,7 +6,6 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
@@ -156,9 +155,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
                   pnlBlock,
                   const _KpiDivider(),
                   trendBlock,
-                  const SizedBox(
-                    width: HomeSpacingTokens.homePortfolioActionSpacing,
-                  ),
+                  const SizedBox(width: AppSpacing.x4),
                   toggle,
                 ],
               ),
@@ -167,9 +164,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
             Row(
               children: [
                 breakdownBlock,
-                const SizedBox(
-                  width: HomeSpacingTokens.homePortfolioActionSpacing,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 actions,
               ],
             ),
@@ -194,9 +189,9 @@ class HomeTabletKpiStrip extends StatelessWidget {
             trendBlock,
             const _KpiDivider(),
             breakdownBlock,
-            const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+            const SizedBox(width: AppSpacing.x4),
             toggle,
-            const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+            const SizedBox(width: AppSpacing.x4),
             actions,
           ],
         ),
@@ -217,7 +212,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
             color: AppColors.portfolioTextDim,
             size: AppSpacing.iconMd,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,9 +243,9 @@ class HomeTabletKpiStrip extends StatelessWidget {
             leading: const Icon(Icons.file_download_outlined),
             child: const Text('Nạp ngay'),
           ),
-          const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+          const SizedBox(width: AppSpacing.x4),
           VitCtaButton(
-            height: _kpiActionExtent,
+            height: AppSpacing.x4,
             density: VitDensity.compact,
             fullWidth: false,
             variant: VitCtaButtonVariant.secondary,
@@ -297,7 +292,7 @@ class _KpiBlock extends StatelessWidget {
           ),
         ),
         if (value != null) ...[
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value!,
             maxLines: 1,
@@ -306,7 +301,7 @@ class _KpiBlock extends StatelessWidget {
           ),
         ],
         if (subline != null) ...[
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             subline!,
             maxLines: 1,
@@ -317,7 +312,7 @@ class _KpiBlock extends StatelessWidget {
           ),
         ],
         if (trailingBelow != null) ...[
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           trailingBelow!,
         ],
       ],
@@ -378,7 +373,7 @@ class _KpiBreakdown extends StatelessWidget {
               fontWeight: AppTextStyles.medium,
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           row('Spot', spot),
           row('Earn', earn),
           row('Funding', funding),
@@ -424,9 +419,9 @@ class _KpiActionRow extends StatelessWidget {
           variant: VitCtaButtonVariant.primary,
           key: HomeTabletKeys.portfolioDeposit,
         ),
-        const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        const SizedBox(width: AppSpacing.x4),
         action('Rút', Icons.file_upload_outlined, '/wallet/withdraw/USDT'),
-        const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        const SizedBox(width: AppSpacing.x4),
         action(
           'Ví',
           Icons.account_balance_wallet_outlined,

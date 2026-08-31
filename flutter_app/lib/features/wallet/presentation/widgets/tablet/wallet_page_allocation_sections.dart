@@ -28,7 +28,7 @@ class WalletAllocationCard extends StatelessWidget {
             ),
             painter: _AllocationPainter(assets: assets, total: total),
           ),
-          const SizedBox(width: AppSpacing.contentPad),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               children: [
@@ -43,9 +43,7 @@ class WalletAllocationCard extends StatelessWidget {
                           child: ColoredBox(color: Color(asset.colorHex)),
                         ),
                       ),
-                      const SizedBox(
-                        width: WalletSpacingTokens.walletAllocationLegendGap,
-                      ),
+                      const SizedBox(width: AppSpacing.x4),
                       Expanded(
                         child: Text(
                           asset.symbol,
@@ -66,9 +64,7 @@ class WalletAllocationCard extends StatelessWidget {
                     ],
                   ),
                   if (asset != assets.take(6).last)
-                    const SizedBox(
-                      height: WalletSpacingTokens.walletAllocationLegendItemGap,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                 ],
               ],
             ),

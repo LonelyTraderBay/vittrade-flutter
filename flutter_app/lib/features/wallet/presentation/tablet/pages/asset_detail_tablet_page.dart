@@ -97,7 +97,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                     size: AppSpacing.buttonCompact,
                     border: true,
                   ),
-                  const SizedBox(width: AppSpacing.x2),
+                  const SizedBox(width: AppSpacing.x4),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +108,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x1),
+                        const SizedBox(height: AppSpacing.x4),
                         Text(
                           snapshot.symbol,
                           style: AppTextStyles.caption.copyWith(
@@ -126,14 +126,14 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 VitFormat.usd(snapshot.usdValue),
                 style: AppTextStyles.heroNumber.copyWith(
                   fontFeatures: AppTextStyles.tabularFigures,
                 ),
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '${_assetAmount(snapshot.balance)} ${snapshot.symbol}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -190,7 +190,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
               onChanged: (period) => setState(() => _period = period),
               variant: VitTabBarVariant.segment,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCard(
               variant: VitCardVariant.inner,
               child: SizedBox(
@@ -288,13 +288,13 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                                 ? AppColors.buy
                                 : AppColors.sell,
                           ),
-                          const SizedBox(width: AppSpacing.x2),
+                          const SizedBox(width: AppSpacing.x4),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(tx.label),
-                                const SizedBox(height: AppSpacing.x1),
+                                const SizedBox(height: AppSpacing.x4),
                                 Text(
                                   tx.createdAt,
                                   style: AppTextStyles.micro.copyWith(

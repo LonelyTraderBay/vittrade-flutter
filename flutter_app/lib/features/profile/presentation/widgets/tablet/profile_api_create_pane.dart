@@ -117,14 +117,14 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
               inputFormatters: [LengthLimitingTextInputFormatter(30)],
               onChanged: (_) => setState(() {}),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Text(
                   'Tối thiểu 3 ký tự',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(width: AppSpacing.x3),
+                const SizedBox(width: AppSpacing.x4),
                 const Expanded(child: SizedBox.shrink()),
                 Text(
                   '${_nameController.text.length}/30',
@@ -147,7 +147,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                 onTap: () => _togglePermission(permission.id),
               ),
               if (permission != snapshot.permissions.last)
-                SizedBox(height: VitDensity.compact.verticalSpace),
+                const SizedBox(height: AppSpacing.x4),
             ],
           ],
         ),
@@ -169,9 +169,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                     onSubmitted: (_) => _addIp(),
                   ),
                 ),
-                const SizedBox(
-                  width: ProfileSpacingTokens.profileApiCreateIpInputGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 SizedBox(
                   width: ProfileSpacingTokens.profileApiCreateIpAddWidth,
                   child: VitIconButton(
@@ -184,7 +182,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                 ),
               ],
             ),
-            SizedBox(height: VitDensity.compact.verticalSpace),
+            const SizedBox(height: AppSpacing.x4),
             if (_ips.isEmpty)
               Text(
                 'Không có IP whitelist — key có thể được dùng từ bất kỳ đâu',
@@ -257,7 +255,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     option.description,
                     maxLines: 1,

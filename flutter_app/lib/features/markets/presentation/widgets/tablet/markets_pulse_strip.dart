@@ -237,7 +237,7 @@ class _PulseBlock extends StatelessWidget {
             fontWeight: AppTextStyles.medium,
           ),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           value,
           maxLines: 1,
@@ -248,7 +248,7 @@ class _PulseBlock extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           subline,
           maxLines: 1,

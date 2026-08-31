@@ -89,7 +89,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           child: Row(
             children: [
               Icon(Icons.verified_user_outlined, color: Color(tier.colorHex)),
-              const SizedBox(width: AppSpacing.x2),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +98,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                       'Cấp KYC ${tier.level}',
                       style: AppTextStyles.sectionTitle,
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       tier.name,
                       style: AppTextStyles.caption.copyWith(
@@ -150,7 +150,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(Icons.warning_amber_rounded, color: AppColors.caution),
-              const SizedBox(width: AppSpacing.x2),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   'Rút số tiền lớn có thể cần xem xét thủ công hoặc xác minh bổ sung. Kiểm tra bước tiếp theo trước khi tạo lệnh.',
@@ -203,7 +203,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           ClipRRect(
             borderRadius: AppRadii.pillRadius,
             child: LinearProgressIndicator(
@@ -213,7 +213,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
               backgroundColor: AppColors.surface3,
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -260,13 +260,13 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                   : Icons.check_circle_outline_rounded,
               color: Color(tier.colorHex),
             ),
-            const SizedBox(width: AppSpacing.x2),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Cấp ${tier.level} · ${tier.name}'),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     tier.dailyLimit > 0
                         ? '${VitFormat.usd(tier.dailyLimit)}/ngày'
@@ -368,7 +368,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       snapshot.faqs[i].answer,
                       style: AppTextStyles.micro.copyWith(
@@ -376,13 +376,9 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
                       ),
                     ),
                     if (i != snapshot.faqs.length - 1) ...[
-                      const SizedBox(
-                        height: AppSpacing.pageRhythmFormSectionGap,
-                      ),
+                      const SizedBox(height: AppSpacing.x4),
                       const Divider(color: AppColors.divider),
-                      const SizedBox(
-                        height: AppSpacing.pageRhythmFormSectionGap,
-                      ),
+                      const SizedBox(height: AppSpacing.x4),
                     ],
                   ],
                 ],

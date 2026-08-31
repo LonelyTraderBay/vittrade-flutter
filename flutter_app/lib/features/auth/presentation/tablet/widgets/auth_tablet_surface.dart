@@ -141,7 +141,7 @@ class _AuthTabletColumns extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           brand,
-          const SizedBox(height: AppSpacing.pageRhythmRelaxedSectionGap),
+          const SizedBox(height: AppSpacing.x4),
           form,
         ],
       );
@@ -151,7 +151,7 @@ class _AuthTabletColumns extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(flex: 5, child: brand),
-        const SizedBox(width: AppSpacing.x6),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(flex: 7, child: form),
       ],
     );
@@ -174,26 +174,26 @@ class _AuthTabletBrandPanel extends StatelessWidget {
           color: AppColors.onAccent,
           size: AppSpacing.iconLg,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmRelaxedSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const Text('VitTrade', style: AppTextStyles.pageTitle),
-        const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Text(title, style: AppTextStyles.sectionTitle),
-        const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           description,
           style: AppTextStyles.body.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmRelaxedSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const _AuthTabletTrustLine(
           icon: Icons.verified_user_outlined,
           text: 'Xác minh rõ ràng trước khi tiếp tục',
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         const _AuthTabletTrustLine(
           icon: Icons.visibility_off_outlined,
           text: 'Thông tin nhạy cảm luôn được bảo vệ',
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         const _AuthTabletTrustLine(
           icon: Icons.devices_outlined,
           text: 'Tối ưu cho màn hình tablet và bàn phím',
@@ -215,7 +215,7 @@ class _AuthTabletTrustLine extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, color: AppColors.onAccent, size: AppSpacing.iconSm),
-        const SizedBox(width: AppSpacing.x3),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: Text(
             text,

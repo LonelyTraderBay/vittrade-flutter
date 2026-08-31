@@ -45,7 +45,7 @@ class VitTradeSimpleHero extends StatelessWidget {
           density: VitTradeInstrumentHeroDensity.standard,
         ),
         if (availableBalanceLabel != null) ...[
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             'Số dư khả dụng: $availableBalanceLabel',
             style: AppTextStyles.caption.copyWith(

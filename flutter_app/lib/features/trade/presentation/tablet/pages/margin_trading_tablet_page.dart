@@ -143,7 +143,7 @@ class _MarginTradingTabletPageState
                   ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitSegmentedChoice<String>(
               selected: _side,
               onChanged: (side) => setState(() => _side = side),
@@ -164,7 +164,7 @@ class _MarginTradingTabletPageState
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               key: MarginTradingTabletPage.amountFieldKey,
               label: 'Số lượng (${snapshot.pair.baseAsset})',
@@ -175,7 +175,7 @@ class _MarginTradingTabletPageState
                 decimal: true,
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitPresetChipRow.percentBalance(
               onTap: (pct) => setState(() {
                 // maxAmountFor trả chuỗi định dạng sẵn — parse về số trước
@@ -189,7 +189,7 @@ class _MarginTradingTabletPageState
               keyFor: (pct) => Key('sc085_tablet_pct_$pct'),
               accentColor: AppColors.primary,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             for (final (label, value) in [
               ('Đòn bẩy', '${snapshot.defaultLeverage}x'),
               (
@@ -219,7 +219,7 @@ class _MarginTradingTabletPageState
                   ),
                 ),
               ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCtaButton(
               key: MarginTradingTabletPage.submitKey,
               onPressed: canSubmit ? () => _openConfirm(snapshot) : null,
@@ -249,7 +249,7 @@ class _MarginTradingTabletPageState
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 for (final (label, value) in [
                   (
                     'Tổng vốn',
@@ -312,7 +312,7 @@ class _MarginTradingTabletPageState
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   for (final position in modePositions)
                     Padding(
                       padding: const EdgeInsets.symmetric(

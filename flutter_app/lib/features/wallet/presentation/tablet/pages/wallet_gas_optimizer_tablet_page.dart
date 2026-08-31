@@ -130,7 +130,7 @@ class _WalletGasOptimizerTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Mức phí được đề xuất'),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '${snapshot.recommendedLevel.gwei} Gwei',
                       style: AppTextStyles.heroNumber.copyWith(
@@ -138,7 +138,7 @@ class _WalletGasOptimizerTabletPageState
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '${snapshot.recommendedLevel.timeEstimate} · ${VitFormat.signedPercent(snapshot.vsAveragePct, fractionDigits: 2)} so với trung bình',
                       style: AppTextStyles.caption.copyWith(
@@ -175,7 +175,7 @@ class _WalletGasOptimizerTabletPageState
               onChanged: (speed) => setState(() => _selectedSpeed = speed),
               variant: VitTabBarVariant.segment,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCard(
               variant: VitCardVariant.inner,
               child: VitInfoRow(
@@ -294,12 +294,12 @@ class _WalletGasOptimizerTabletPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(tip.title, style: AppTextStyles.sectionTitle),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   tip.description,
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '${tip.potentialSaving} · ${tip.difficulty}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.buy),

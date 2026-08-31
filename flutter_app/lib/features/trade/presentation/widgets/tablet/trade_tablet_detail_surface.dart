@@ -90,17 +90,13 @@ class TradeTabletDetailSurface extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(flex: 7, child: primary),
-                                const SizedBox(
-                                  width: AppSpacing.pageRhythmRelaxedSectionGap,
-                                ),
+                                const SizedBox(width: AppSpacing.x4),
                                 Expanded(flex: 5, child: secondary),
                               ],
                             )
                           else ...[
                             primary,
-                            const SizedBox(
-                              height: AppSpacing.pageRhythmRelaxedSectionGap,
-                            ),
+                            const SizedBox(height: AppSpacing.x4),
                             secondary,
                           ],
                         ],

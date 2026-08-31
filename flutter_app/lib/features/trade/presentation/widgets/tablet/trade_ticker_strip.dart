@@ -68,7 +68,7 @@ class TradeTickerStrip extends StatelessWidget {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x1),
+                        const SizedBox(height: AppSpacing.x4),
                         Text(
                           'Thị trường Spot',
                           maxLines: 1,
@@ -80,7 +80,7 @@ class TradeTickerStrip extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x2),
+                  const SizedBox(width: AppSpacing.x4),
                   SizedBox(
                     width: AppSpacing.x7,
                     height: SharedSpacingTokens.homeSparklineHeight,
@@ -121,7 +121,7 @@ class TradeTickerStrip extends StatelessWidget {
                       fontWeight: AppTextStyles.medium,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     availableBalanceLabel,
                     maxLines: 1,

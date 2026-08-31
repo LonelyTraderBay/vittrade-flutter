@@ -405,7 +405,10 @@ final class ProfileSpacingTokens {
   );
   static const int profileApiCreateExpiryCrossAxisCount = 2;
   static const double profileApiCreateExpirySpacing = AppSpacing.x2;
-  static const double profileApiCreateExpiryExtent = 62;
+
+  /// Luật 13dp: extent chứa label + gap 13 + description sau khi gap
+  /// mô tả đổi 5 → 13 (62 → 67, khóa test SC-163 không tràn).
+  static const double profileApiCreateExpiryExtent = 67;
   static const EdgeInsets profileApiCreateExpiryPadding = EdgeInsets.fromLTRB(
     13,
     10,

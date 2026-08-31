@@ -772,17 +772,29 @@ List<_VisualDebtRow> _visualDebtEntries({
       final inColumn = _lineInColumnChildrenContext(lines, i);
       if (inColumn || _lineInsideVitCard(source, i)) {
         final tokenMatch = RegExp(r'AppSpacing\.(x[34])').firstMatch(line);
-        entries.add(
-          _VisualDebtRow(
-            file: file,
-            line: i + 1,
-            token: tokenMatch?.group(1) ?? 'x3',
-            px: tokenMatch?.group(1) == 'x4' ? 13 : 8,
-            category: 'legacy_scale_sizedbox_x3_x4',
-            batch: '32',
-            status: 'open',
-          ),
-        );
+        // Luật 13dp (2026-08-31): SizedBox khe x4 (13dp) trong file tablet
+        // presentation là PHÁP ĐỊNH — mọi khoảng trống dọc+ngang trên
+        // tablet đều 13, guardrail tablet_gap_13_guardrail_test khóa
+        // zero-tolerance. Chỉ còn debt khi x4 nằm ngoài tablet (phone/web
+        // chưa áp luật) hoặc khi giá trị là x3 (8 ≠ 13).
+        final isTabletPresentation =
+            file.contains('/presentation/tablet/') ||
+            file.contains('/presentation/widgets/tablet/') ||
+            file.contains('/app/shell/tablet/');
+        final tokenIsLawful13 = tokenMatch?.group(1) == 'x4';
+        if (!(isTabletPresentation && tokenIsLawful13)) {
+          entries.add(
+            _VisualDebtRow(
+              file: file,
+              line: i + 1,
+              token: tokenMatch?.group(1) ?? 'x3',
+              px: tokenMatch?.group(1) == 'x4' ? 13 : 8,
+              category: 'legacy_scale_sizedbox_x3_x4',
+              batch: '32',
+              status: 'open',
+            ),
+          );
+        }
       }
     }
     final customGapMatch = _legacyCustomGapRawScale.firstMatch(line);

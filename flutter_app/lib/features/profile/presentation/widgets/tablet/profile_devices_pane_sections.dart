@@ -39,9 +39,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileDevicesSummaryGapInline,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +52,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                         fontWeight: AppTextStyles.heavy,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '$totalDevices thiết bị đã đăng nhập',
                       style: AppTextStyles.micro.copyWith(
@@ -66,7 +64,7 @@ class _DevicesSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -76,9 +74,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   color: AppColors.buy,
                 ),
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileDevicesSummaryStatGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _DevicesSummaryStat(
                   label: 'Không tin cậy',
@@ -86,9 +82,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   color: AppColors.warn,
                 ),
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileDevicesSummaryStatGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _DevicesSummaryStat(
                   label: 'Đang hoạt động',
@@ -131,7 +125,7 @@ class _DevicesSummaryStat extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.micro.copyWith(color: AppColors.text3),
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             Text(
               value,
               style: AppTextStyles.caption.copyWith(
@@ -234,27 +228,25 @@ class _DevicesDeviceCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileDevicesIconGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _DeviceDetails(device: device, suspicious: suspicious),
               ),
             ],
           ),
           if (showActions) ...[
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             const Divider(
               height: AppSpacing.dividerHairline,
               color: AppColors.divider,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
                   child: _TrustButton(device: device, onTap: onToggleTrust),
                 ),
-                const SizedBox(
-                  width: ProfileSpacingTokens.profileDevicesActionGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 _DeviceLogoutButton(deviceId: device.id, onTap: onLogout),
               ],
             ),
@@ -292,7 +284,7 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
               density: VitDensity.compact,
               showDivider: i != devices.length - 1,
             ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCard(
             variant: VitCardVariant.inner,
             density: VitDensity.compact,
@@ -302,7 +294,7 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
               style: AppTextStyles.caption.copyWith(color: AppColors.warn),
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -314,7 +306,7 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
                   child: const Text('Hủy'),
                 ),
               ),
-              const SizedBox(width: AppSpacing.pageRhythmStandardInnerGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: VitCtaButton(
                   key: confirmKey,
@@ -357,18 +349,14 @@ class _DeviceDetails extends StatelessWidget {
               ),
             ),
             if (device.isCurrent) ...[
-              const SizedBox(
-                width: ProfileSpacingTokens.profileDevicesNamePillGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               const VitAccentPill(
                 label: 'Hiện tại',
                 accentColor: AppColors.buy,
               ),
             ],
             if (suspicious) ...[
-              const SizedBox(
-                width: ProfileSpacingTokens.profileDevicesNamePillGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               const Icon(
                 Icons.warning_amber_rounded,
                 color: AppColors.warn,
@@ -377,7 +365,7 @@ class _DeviceDetails extends StatelessWidget {
             ],
           ],
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           '${device.browser} • ${device.os}',
           maxLines: 1,
@@ -387,7 +375,7 @@ class _DeviceDetails extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Wrap(
           spacing: ProfileSpacingTokens.profileDevicesMetaSpacing,
           runSpacing: ProfileSpacingTokens.profileDevicesMetaRunSpacing,
@@ -402,7 +390,7 @@ class _DeviceDetails extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           'IP: ${device.ip}',
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -428,7 +416,7 @@ class _DevicesMetaItem extends StatelessWidget {
           color: AppColors.text3,
           size: ProfileSpacingTokens.profileDevicesMetaIcon,
         ),
-        const SizedBox(width: ProfileSpacingTokens.profileDevicesMetaIconGap),
+        const SizedBox(width: AppSpacing.x4),
         Text(
           value,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),

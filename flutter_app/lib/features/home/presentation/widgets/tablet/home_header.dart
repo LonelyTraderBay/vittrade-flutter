@@ -32,7 +32,7 @@ class HomeHeader extends StatelessWidget {
             'VitTrade',
             style: AppTextStyles.pageTitle.copyWith(color: AppColors.text1),
           ),
-          const SizedBox(width: AppSpacing.x6),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 420),

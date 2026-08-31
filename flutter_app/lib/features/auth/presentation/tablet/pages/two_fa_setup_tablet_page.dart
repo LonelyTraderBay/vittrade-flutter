@@ -141,7 +141,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
                 size: 72,
                 color: AppColors.primary,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               const Text(
                 'Quét mã QR bằng ứng dụng xác thực của bạn.',
                 textAlign: TextAlign.center,
@@ -152,7 +152,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
                 textAlign: TextAlign.center,
                 style: AppTextStyles.monoCode,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitCtaButton(
                 key: TwoFaSetupTabletPage.copyKey,
                 onPressed: () async {
@@ -169,7 +169,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitInput(
           controller: _codeController,
           fieldKey: TwoFaSetupTabletPage.codeFieldKey,
@@ -183,7 +183,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
           ],
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitCtaButton(
           key: TwoFaSetupTabletPage.submitKey,
           onPressed: _submitting ? null : _verifyCode,
@@ -203,7 +203,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
           message:
               'Lưu các mã này ở nơi an toàn. Mỗi mã chỉ dùng được một lần.',
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitCard(
           variant: VitCardVariant.inner,
           padding: const EdgeInsets.all(AppSpacing.x4),
@@ -217,7 +217,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         CheckboxListTile(
           key: TwoFaSetupTabletPage.backupSavedKey,
           value: _backupCodesSaved,

@@ -71,22 +71,21 @@ final class TabletDashboardWidths {
   static const double secondaryColumnMaxWidth = 400;
 
   /// Outer breathing room reserved on each side of the dashboard block.
-  /// Matches `AppSpacing.contentPad` (20) so the dashboard's content plane
-  /// aligns exactly with the header's content inset — one shared edge line
-  /// — while still keeping content off the screen bezel. Reserved inside
-  /// the pair cap in [VitTwoColumnTabletDashboard], so the column caps
-  /// themselves stay at their proven values (R8).
-  static const double outerHorizontalMargin = 20;
+  /// LUẬT 13dp (user chốt 2026-08-31): mọi khoảng trống dọc + ngang trên
+  /// tablet = 13 — lề ngang khung đổi 20 → 13, tách khỏi `contentPad` của
+  /// phone (một quyết định khung tablet, không phải fork token module).
+  /// Reserved inside the pair cap in [VitTwoColumnTabletDashboard], so the
+  /// column caps themselves stay at their proven values (R8).
+  static const double outerHorizontalMargin = 13;
 
-  /// Explicit gutter between the two dashboard columns — both columns sit
-  /// on the same content plane (cards and the sidebar frame inset by
-  /// [outerHorizontalMargin]), so the block needs a deliberate separator
-  /// wider than the outer margin to read as two panels, not one slab.
-  static const double columnGutter = 24;
+  /// Explicit gutter between the two dashboard columns — LUẬT 13dp
+  /// (2026-08-31): 24 → 13, cùng một khoảng trắng với mọi khe khác trên
+  /// tablet để khung và nội dung đọc cùng một nhịp.
+  static const double columnGutter = 13;
 
   /// Vertical breathing room above and below the two-column block: the top
   /// gap drops both columns below the fixed header on one shared line, and
   /// the bottom gap keeps scrolled content from pressing against the
-  /// viewport's bottom edge.
-  static const double blockVerticalGap = 16;
+  /// viewport's bottom edge. LUẬT 13dp (2026-08-31): 16 → 13.
+  static const double blockVerticalGap = 13;
 }

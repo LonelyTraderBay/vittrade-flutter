@@ -83,7 +83,7 @@ class _PortfolioAnalyticsTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Tổng giá trị danh mục'),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       VitFormat.usd(snapshot.totalUsd),
                       style: AppTextStyles.heroNumber.copyWith(
@@ -154,7 +154,7 @@ class _PortfolioAnalyticsTabletPageState
                 onChanged: (period) => setState(() => _period = period),
                 variant: VitTabBarVariant.segment,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitCard(
                 variant: VitCardVariant.inner,
                 child: SizedBox(
@@ -194,7 +194,7 @@ class _PortfolioAnalyticsTabletPageState
                                 color: AppColors.text3,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.x1),
+                            const SizedBox(height: AppSpacing.x4),
                             Text(
                               metric.value,
                               style: AppTextStyles.sectionTitle.copyWith(
@@ -267,14 +267,14 @@ class _PortfolioAnalyticsTabletPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Tốt nhất'),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '${snapshot.bestProfitAsset} · ${VitFormat.usdSigned(snapshot.bestProfitUsd)}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.buy),
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               const Text('Cần theo dõi'),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '${snapshot.worstLossAsset} · ${VitFormat.usdSigned(-snapshot.worstLossUsd)}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.sell),

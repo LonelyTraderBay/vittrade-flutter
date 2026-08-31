@@ -176,9 +176,7 @@ class _TradeSettingsTabletPageState
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           _CurrentConfigCard(settings: snapshot.settings),
-                          const SizedBox(
-                            height: AppSpacing.pageRhythmStandardSectionGap,
-                          ),
+                          const SizedBox(height: AppSpacing.x4),
                           VitCtaButton(
                             key: TradeSettingsTabletPage.saveKey,
                             onPressed: () async {

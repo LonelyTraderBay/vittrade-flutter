@@ -127,7 +127,7 @@ class _DiscoveryRow extends StatelessWidget {
             status: badgeStatus,
             size: VitStatusPillSize.sm,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Text(
             actionLabel,
             style: AppTextStyles.micro.copyWith(
@@ -135,7 +135,7 @@ class _DiscoveryRow extends StatelessWidget {
               fontWeight: AppTextStyles.medium,
             ),
           ),
-          const SizedBox(width: AppSpacing.x1),
+          const SizedBox(width: AppSpacing.x4),
           Icon(
             Icons.chevron_right_rounded,
             size: SharedSpacingTokens.homeSectionActionChevronSize,

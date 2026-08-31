@@ -223,7 +223,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           bottomGap: AppSpacing.pageRhythmFormInnerGap,
         ),
         WithdrawWarning(asset: snapshot.asset, network: network),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitBanner(
           variant: validation == null
               ? VitBannerVariant.info
@@ -235,7 +235,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
               ? Icons.fact_check_outlined
               : Icons.info_outline_rounded,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         WithdrawSupportLink(
           onTap: () => context.go(
             ContextualSupportContracts.supportRouteFor(

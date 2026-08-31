@@ -4,4 +4,4 @@ features/wallet/presentation/tablet/pages/network_status_tablet_page.dart,191,R5
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart,391,R5-fixed-height-card,"child: VitCard("
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart,441,R5-fixed-height-card,"VitCard("
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart,600,R5-fixed-height-card,"return VitCard("
-features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart,245,R5-fixed-height-card,"VitCard("
+features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart,244,R5-fixed-height-card,"VitCard("

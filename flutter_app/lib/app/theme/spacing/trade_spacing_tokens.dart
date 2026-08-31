@@ -50,7 +50,9 @@ final class TradeSpacingTokens {
     horizontal: AppSpacing.x3,
     vertical: AppSpacing.x4,
   );
-  static const double tradeTerminalMetaGap = AppSpacing.x3;
+
+  /// LUẬT 13dp: khoảng ngang giữa các cụm số liệu meta = 13.
+  static const double tradeTerminalMetaGap = AppSpacing.x4;
   static const double tradeTerminalMetaDividerHeight = AppSpacing.x5;
   static const EdgeInsets tradeTerminalPanelHeaderPadding = EdgeInsets.fromLTRB(
     AppSpacing.x3,
@@ -99,7 +101,9 @@ final class TradeSpacingTokens {
         AppSpacing.x3,
         AppSpacing.x4,
       );
-  static const double tradeTerminalIntervalGap = AppSpacing.x2;
+
+  /// LUẬT 13dp: khoảng ngang giữa các nút khung giờ/chỉ báo = 13.
+  static const double tradeTerminalIntervalGap = AppSpacing.x4;
   static const EdgeInsets tradeTerminalIntervalButtonPadding =
       EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
 
@@ -113,7 +117,9 @@ final class TradeSpacingTokens {
       tradeTerminalBottomPanelHeight -
       AppSpacing.x4 * 3 -
       (AppSpacing.x5 + AppSpacing.x2 + AppSpacing.x1);
-  static const double tradeTerminalBottomTabGap = AppSpacing.x2;
+
+  /// LUẬT 13dp: khoảng ngang tab ↔ nút xem tất cả = 13.
+  static const double tradeTerminalBottomTabGap = AppSpacing.x4;
   static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
     horizontal: AppSpacing.x2,
     vertical: AppSpacing.x1,

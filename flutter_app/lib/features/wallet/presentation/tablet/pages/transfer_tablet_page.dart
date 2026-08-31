@@ -292,7 +292,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: eligibleWallets.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x1),
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
             itemBuilder: (context, index) {
               final wallet = eligibleWallets[index];
               return TransferWalletPickerRow(
@@ -321,7 +321,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: snapshot.assets.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x1),
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
             itemBuilder: (context, index) {
               final asset = snapshot.assets[index];
               return TransferAssetPickerRow(

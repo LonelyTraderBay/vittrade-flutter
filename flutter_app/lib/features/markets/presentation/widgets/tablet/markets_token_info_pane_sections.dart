@@ -78,7 +78,7 @@ class _OverviewTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _HeroCard(snapshot: snapshot),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitSectionHeader(
           title: 'Thống kê thị trường',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -125,7 +125,7 @@ class _OverviewTab extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Cung token',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -133,7 +133,7 @@ class _OverviewTab extends StatelessWidget {
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _SupplyCard(fundamentals: fundamentals, supplyPct: supplyPct),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Phân bổ cung',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -141,7 +141,7 @@ class _OverviewTab extends StatelessWidget {
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _DistributionCard(distribution: fundamentals.supplyDistribution),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Kỷ lục giá',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -153,7 +153,7 @@ class _OverviewTab extends StatelessWidget {
           athDropPct: athDropPct,
           atlGainPct: atlGainPct,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         _ChartLink(pairId: pair.id),
       ],
     );
@@ -183,13 +183,13 @@ class _HeroCard extends StatelessWidget {
                 size: AppSpacing.buttonCompact,
                 radius: AppRadii.cardRadius,
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(fundamentals.name, style: AppTextStyles.sectionTitle),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       fundamentals.consensus,
                       maxLines: 1,
@@ -203,7 +203,7 @@ class _HeroCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -287,7 +287,7 @@ class _InfoRow extends StatelessWidget {
           child: Row(
             children: [
               Icon(row.icon, size: AppSpacing.iconSm, color: row.iconColor),
-              const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   row.label,
@@ -335,7 +335,7 @@ class _SupplyCard extends StatelessWidget {
                 '${formatMarketCompact(fundamentals.circulatingSupply)} ${fundamentals.symbol}',
           ),
           if (supplyPct != null) ...[
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -351,7 +351,7 @@ class _SupplyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(width: AppSpacing.x4),
                 Text(
                   '${supplyPct!.toStringAsFixed(1)}%',
                   style: AppTextStyles.micro.copyWith(
@@ -362,7 +362,7 @@ class _SupplyCard extends StatelessWidget {
               ],
             ),
           ],
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           _MetricLine(
             label: 'Tổng cung',
             value:
@@ -440,7 +440,7 @@ class _DistributionCard extends StatelessWidget {
             size: const Size.square(70),
             painter: _DonutPainter(distribution),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               children: [
@@ -456,9 +456,7 @@ class _DistributionCard extends StatelessWidget {
                           size: AppSpacing.pageRhythmCompactInnerGap,
                           color: item.color.resolve(),
                         ),
-                        const SizedBox(
-                          width: AppSpacing.pageRhythmCompactInnerGap,
-                        ),
+                        const SizedBox(width: AppSpacing.x4),
                         Expanded(
                           child: Text(
                             item.label,

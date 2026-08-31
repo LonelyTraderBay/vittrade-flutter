@@ -313,7 +313,7 @@ class _SummaryCard extends StatelessWidget {
                 : Icons.check_circle_outline_rounded,
             color: color,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,7 +326,7 @@ class _SummaryCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   hasPending
                       ? 'Làm mới để cập nhật trạng thái xác nhận.'
@@ -431,7 +431,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
                 icon: Icons.south_west_rounded,
                 color: config.color,
               ),
-              const SizedBox(width: AppSpacing.x2),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -442,7 +442,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '${deposit.network} · ${deposit.createdAt}',
                       style: AppTextStyles.micro.copyWith(
@@ -463,7 +463,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
                       fontFeatures: AppTextStyles.tabularFigures,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   VitStatusPill(
                     label: config.label,
                     icon: config.icon,
@@ -475,7 +475,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
             ],
           ),
           if (isPending) ...[
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -493,7 +493,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             ClipRRect(
               borderRadius: AppRadii.pillRadius,
               child: LinearProgressIndicator(
@@ -504,7 +504,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitInfoRow(
             label: 'Dự kiến nhận',
             value: deposit.estimatedArrival,
@@ -531,7 +531,7 @@ class _PendingDepositTabletCard extends StatelessWidget {
             ),
           ),
           if (deposit.status == 'failed') ...[
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCtaButton(
               variant: VitCtaButtonVariant.secondary,
               density: VitDensity.compact,

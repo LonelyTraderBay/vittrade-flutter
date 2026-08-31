@@ -133,9 +133,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(
-                          height: AppSpacing.pageRhythmFormInnerGap,
-                        ),
+                        const SizedBox(height: AppSpacing.x4),
                         Text(
                           'Phí ${network.fee} · Tối thiểu ${network.minDeposit} ${snapshot.asset}',
                           style: AppTextStyles.caption,
@@ -165,23 +163,19 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
                     size: 144,
                     color: AppColors.text1,
                   ),
-                  const SizedBox(
-                    height: AppSpacing.pageRhythmStandardSectionGap,
-                  ),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     'Địa chỉ ${snapshot.asset} · ${network.name}',
                     style: AppTextStyles.caption,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   SelectableText(
                     network.address,
                     textAlign: TextAlign.center,
                     style: AppTextStyles.monoCode,
                   ),
-                  const SizedBox(
-                    height: AppSpacing.pageRhythmStandardSectionGap,
-                  ),
+                  const SizedBox(height: AppSpacing.x4),
                   VitCtaButton(
                     key: DepositTabletPage.copyAddressKey,
                     onPressed: () => _copyAddress(network.address),
@@ -237,7 +231,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
                   fontWeight: AppTextStyles.bold,
                 ),
               ),
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               const _DetailRow(label: 'Trạng thái', value: 'Đang hoạt động'),
               _DetailRow(label: 'Thời gian nhận', value: network.arrivalTime),
               _DetailRow(
@@ -253,7 +247,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         VitCtaButton(
           onPressed: () {
             setState(() => _copied = false);
@@ -290,8 +284,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: networks.length,
-            separatorBuilder: (_, _) =>
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
             itemBuilder: (context, index) {
               final network = networks[index];
               return VitCard(

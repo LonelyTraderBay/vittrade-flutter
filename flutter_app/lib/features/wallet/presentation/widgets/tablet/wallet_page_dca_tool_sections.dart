@@ -5,7 +5,6 @@ const double _walletToolGridAspectRatio = 2.25;
 const double _walletToolGridGap = AppSpacing.x2;
 const double _walletDcaIcon = AppSpacing.iconLg;
 const double _walletDcaStatIcon = AppSpacing.iconMd;
-const double _walletDcaGap = AppSpacing.x2;
 
 class WalletDcaCard extends StatelessWidget {
   const WalletDcaCard({super.key, required this.dca});
@@ -28,7 +27,7 @@ class WalletDcaCard extends StatelessWidget {
                 color: _walletPurple,
                 size: _walletDcaIcon,
               ),
-              const SizedBox(width: _walletDcaGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +45,7 @@ class WalletDcaCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.x1),
+                        const SizedBox(width: AppSpacing.x4),
                         VitMetricDeltaPill(
                           label: dca.returnLabel,
                           tone: VitMetricDeltaTone.positive,
@@ -54,9 +53,7 @@ class WalletDcaCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: AppSpacing.pageRhythmCompactInnerGap,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       dca.subtitle,
                       style: AppTextStyles.micro.copyWith(
@@ -75,7 +72,7 @@ class WalletDcaCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: _walletDcaGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -86,7 +83,7 @@ class WalletDcaCard extends StatelessWidget {
                   value: dca.activePlans.toString(),
                 ),
               ),
-              const SizedBox(width: _walletDcaGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _DcaStatCard(
                   icon: Icons.trending_up_rounded,
@@ -97,7 +94,7 @@ class WalletDcaCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: _walletDcaGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               const _IconCircle(
@@ -105,7 +102,7 @@ class WalletDcaCard extends StatelessWidget {
                 color: _walletAmber,
                 size: _walletDcaStatIcon,
               ),
-              const SizedBox(width: _walletDcaGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +114,7 @@ class WalletDcaCard extends StatelessWidget {
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       dca.nextTrade,
                       style: AppTextStyles.caption.copyWith(
@@ -159,7 +156,7 @@ class _DcaStatCard extends StatelessWidget {
       child: Row(
         children: [
           _IconCircle(icon: icon, color: iconColor, size: _walletDcaStatIcon),
-          const SizedBox(width: _walletDcaGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +169,7 @@ class _DcaStatCard extends StatelessWidget {
                     color: AppColors.text3,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   value,
                   maxLines: 1,

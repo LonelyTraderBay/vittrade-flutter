@@ -98,7 +98,7 @@ class _WalletMultiManagerTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Tổng giá trị danh mục'),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       VitFormat.usd(snapshot.totalBalance),
                       style: AppTextStyles.heroNumber.copyWith(
@@ -175,7 +175,7 @@ class _WalletMultiManagerTabletPageState
             accentColor: Color(wallet.accentColorHex),
             size: AppSpacing.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,12 +191,12 @@ class _WalletMultiManagerTabletPageState
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '${wallet.type} · ${VitFormat.signedPercent(wallet.change24hPct, fractionDigits: 2)}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   revealed ? wallet.address : wallet.maskedAddress,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -204,7 +204,7 @@ class _WalletMultiManagerTabletPageState
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x1),
+          const SizedBox(width: AppSpacing.x4),
           Column(
             children: [
               IconButton(
@@ -324,14 +324,14 @@ class _WalletMultiManagerTabletPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(selected.name, style: AppTextStyles.sectionTitle),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     '${selected.lastActiveLabel} · ${selected.assets.length} tài sản',
                     style: AppTextStyles.caption.copyWith(
                       color: AppColors.text2,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   for (var i = 0; i < selected.assets.length; i++)
                     VitInfoRow(
                       label: selected.assets[i].symbol,

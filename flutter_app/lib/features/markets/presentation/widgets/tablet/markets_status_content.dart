@@ -55,10 +55,13 @@ class MarketsMasterSkeleton extends StatelessWidget {
               width: double.infinity,
               height: AppSpacing.buttonCompact,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
-            const VitSkeleton(width: 220, height: AppSpacing.buttonCompact),
-            const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
-            const VitSkeleton(width: 180, height: AppSpacing.x4),
+            const SizedBox(height: AppSpacing.x4),
+            const VitSkeleton(
+              width: AppSpacing.x4,
+              height: AppSpacing.buttonCompact,
+            ),
+            const SizedBox(height: AppSpacing.x4),
+            const VitSkeleton(width: AppSpacing.x4, height: AppSpacing.x4),
             ...List<Widget>.generate(6, (_) => const _MasterRowSkeleton()),
           ],
         ),
@@ -75,13 +78,13 @@ class _MasterRowSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        SizedBox(height: AppSpacing.x4),
         Row(
           children: [
             VitSkeleton(width: 16, height: 16),
-            SizedBox(width: AppSpacing.x2),
+            SizedBox(width: AppSpacing.x4),
             VitSkeleton(width: 28, height: 28),
-            SizedBox(width: AppSpacing.x2),
+            SizedBox(width: AppSpacing.x4),
             Expanded(flex: 5, child: VitSkeleton(width: 90, height: 24)),
             Expanded(flex: 4, child: VitSkeleton(width: 72, height: 14)),
             Expanded(flex: 3, child: VitSkeleton(width: 44, height: 18)),
@@ -120,9 +123,9 @@ class _PulseStripSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VitSkeleton(width: double.infinity, height: 14),
-        SizedBox(height: AppSpacing.x1),
+        SizedBox(height: AppSpacing.x4),
         VitSkeleton(width: double.infinity, height: 16),
-        SizedBox(height: AppSpacing.x1),
+        SizedBox(height: AppSpacing.x4),
         VitSkeleton(width: double.infinity, height: 10),
       ],
     );
@@ -135,13 +138,13 @@ class _PulseStripSkeleton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(flex: 3, child: block),
-          SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSpacing.x4),
           Expanded(flex: 3, child: block),
-          SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSpacing.x4),
           Expanded(flex: 2, child: block),
-          SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSpacing.x4),
           Expanded(flex: 2, child: block),
-          SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSpacing.x4),
           Expanded(flex: 2, child: block),
         ],
       ),
@@ -159,7 +162,7 @@ class _MoverStripSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        SizedBox(height: AppSpacing.x4),
         // Mirror movers strip đã load: card tight + 8dp đều.
         VitCard(
           radius: VitCardRadius.tight,
@@ -181,7 +184,7 @@ class _ToolsSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitSkeleton(width: 120, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        SizedBox(height: AppSpacing.x4),
         VitCard(child: VitSkeletonList(rows: 2)),
       ],
     );
@@ -198,7 +201,7 @@ class _DiscoverSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        SizedBox(height: AppSpacing.x4),
         // Mirror discover card đã load: khung clip zero-inset tường minh.
         VitCard(
           clip: true,

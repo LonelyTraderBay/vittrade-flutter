@@ -52,8 +52,16 @@ void main() {
       if (normalized.contains('/dev/')) continue;
 
       final lines = entity.readAsStringSync().split('\n');
+      // Luật 13dp (user chốt 2026-08-31): AppSpacing.x4 (13dp) raw là GIÁ
+      // TRỊ PHÁP ĐỊNH cho mọi khe dọc trên tablet presentation — được
+      // phép ở đó (khóa bởi tablet_gap_13_guardrail_test); phone/web vẫn
+      // phải dùng token pageRhythm*.
+      final law13Tablet =
+          normalized.contains('/presentation/tablet/') ||
+          normalized.contains('/presentation/widgets/tablet/');
       for (var i = 0; i < lines.length; i++) {
         final line = lines[i];
+        if (law13Tablet && line.contains('AppSpacing.x4')) continue;
         if (_legacyX34PlainHeight.hasMatch(line) &&
             !line.contains('+') &&
             !line.contains('-')) {

@@ -93,7 +93,7 @@ class _DiscoverRow extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: MarketsSpacingTokens.marketDiscoverRowGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,16 +110,11 @@ class _DiscoverRow extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width:
-                              MarketsSpacingTokens.marketDiscoverTitleBadgeGap,
-                        ),
+                        const SizedBox(width: AppSpacing.x4),
                         VitAccentPill(label: badge, accentColor: color),
                       ],
                     ),
-                    const SizedBox(
-                      height: MarketsSpacingTokens.marketDiscoverSubtitleGap,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       subtitle,
                       maxLines: 1,

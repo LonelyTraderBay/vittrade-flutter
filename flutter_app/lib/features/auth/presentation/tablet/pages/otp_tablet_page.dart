@@ -107,7 +107,7 @@ class _OtpTabletPageState extends ConsumerState<OtpTabletPage> {
           AuthTabletInfoBanner(
             message: 'Mã đang được gửi đến ${widget.contact}.',
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          const SizedBox(height: AppSpacing.x4),
           VitInput(
             controller: _codeController,
             fieldKey: OtpTabletPage.codeFieldKey,
@@ -129,7 +129,7 @@ class _OtpTabletPageState extends ConsumerState<OtpTabletPage> {
             const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
             AuthTabletErrorBanner(message: _error),
           ],
-          const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCtaButton(
             key: OtpTabletPage.submitKey,
             onPressed: _submitting ? null : _submit,

@@ -229,12 +229,12 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               },
               contractId: snapshot.highRiskContractId,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             Text(
               'Chọn hướng',
               style: AppTextStyles.control.copyWith(color: AppColors.text1),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitSegmentedChoice<TradeFuturesSide>(
               selected: _side,
               onChanged: (side) => setState(() => _side = side),
@@ -255,7 +255,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               key: FuturesTabletPage.marginFieldKey,
               label: 'Số tiền ký quỹ (USDT)',
@@ -266,7 +266,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                 decimal: true,
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitPresetChipRow.percentBalance(
               onTap: (pct) => setState(() {
                 _marginController.text = (available * pct / 100)
@@ -276,10 +276,10 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               accentColor: AppColors.primary,
             ),
             if (margin > 0) ...[
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              const SizedBox(height: AppSpacing.x4),
               _FuturesPreviewRows(preview: preview),
             ],
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCtaButton(
               key: FuturesTabletPage.submitKey,
               onPressed: preview.canOpen && !submitting
@@ -301,7 +301,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
             // Bậc thang canSubmit của máy ADR-001 — hiển thị lỗi validate
             // gần nút bấm (form feedback chuẩn).
             if (!orderNotifier.canSubmit && margin > 0) ...[
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 orderNotifier.validationMessage() ?? '',
                 style: AppTextStyles.caption.copyWith(color: AppColors.caution),
@@ -378,7 +378,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   for (final position in snapshot.positions)
                     Padding(
                       padding: const EdgeInsets.symmetric(

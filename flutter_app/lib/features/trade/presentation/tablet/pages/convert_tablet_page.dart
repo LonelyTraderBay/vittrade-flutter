@@ -139,7 +139,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+                const SizedBox(height: AppSpacing.x4),
                 VitInput(
                   key: ConvertTabletPage.amountFieldKey,
                   label: 'Số lượng (${snapshot.fromAsset.symbol})',
@@ -150,7 +150,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                     decimal: true,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 Wrap(
                   spacing: AppSpacing.rowGap,
                   runSpacing: AppSpacing.rowGap,
@@ -166,9 +166,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                   ],
                 ),
                 if (quote != null) ...[
-                  const SizedBox(
-                    height: AppSpacing.pageRhythmStandardSectionGap,
-                  ),
+                  const SizedBox(height: AppSpacing.x4),
                   for (final (label, value) in [
                     (
                       'Nhận ước tính',
@@ -193,7 +191,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                       ),
                     ),
                 ],
-                const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 VitCtaButton(
                   key: ConvertTabletPage.submitKey,
                   onPressed: amount <= 0
@@ -260,9 +258,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: AppSpacing.pageRhythmCompactInnerGap,
-                      ),
+                      const SizedBox(height: AppSpacing.x4),
                       for (final record in snapshot.history.take(5))
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -347,7 +343,7 @@ class _AssetBlock extends StatelessWidget {
           label,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           symbol,
           style: AppTextStyles.sectionTitle.copyWith(color: AppColors.text1),
@@ -356,7 +352,7 @@ class _AssetBlock extends StatelessWidget {
           name,
           style: AppTextStyles.caption.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           balanceLabel,
           style: AppTextStyles.caption.copyWith(

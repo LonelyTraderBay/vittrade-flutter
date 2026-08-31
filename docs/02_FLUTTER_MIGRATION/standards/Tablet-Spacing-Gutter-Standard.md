@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_vertical_gap_13_ratchet_guardrail_test.dart` (**Rule 6 — 13dp vertical whitespace ratchet**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_gap_13_guardrail_test.dart` (**Rule 6 — 13dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -102,7 +102,7 @@ promote a value into `TabletDashboardWidths` before a fourth module copies it
 as of 2026-08-27).
 
 
-## Rule 6 — Luật 13dp: mọi khoảng trắng dọc giữa các khối = 13 (không ngoại lệ)
+## Rule 6 — Luật 13dp: mọi khoảng trắng DỌC VÀ NGANG = 13 (không ngoại lệ, khóa tuyệt đối)
 
 **Born:** 2026-08-31 — product-owner decision sau lỗi nhịp lệch của Trade
 terminal SC-048 (label→nội dung chạy từ 8 → 44dp giữa các panel do padding
@@ -113,31 +113,32 @@ phạm vi vì đó không phải khoảng trắng giữa các khối.
 
 | Phát biểu | Chi tiết |
 | --- | --- |
-| **Áp cho** | Mọi khoảng trắng DỌC giữa các khối trong file tablet: panel↔panel, section↔section, mép panel→nội dung đầu tiên, nhãn→nội dung, khối↔khối trong một cột, nội dung cuối→viền dưới |
+| **Áp cho** | Mọi khoảng trắng DỌC VÀ NGANG (mở rộng chiều 2026-08-31 cùng ngày theo quyết định product owner) giữa các phần tử trong file tablet: panel↔panel, section↔section, mép panel→nội dung đầu tiên, nhãn→nội dung, khối↔khối, phần tử↔phần tử trong hàng (icon↔chữ, chip↔chip, nút↔nút) |
 | **Giá trị duy nhất** | `13` — qua `AppSpacing.x4` / `AppSpacing.cardGap` / `AppSpacing.sectionGapCompact` hoặc token module giá trị 13 (vd `TradeSpacingTokens.tradeTerminalGutter`) |
-| **Ngoài phạm vi** | Inset ngang; extent/leading của HÀNG DỮ LIỆU (24–26dp row, padding 3dp quanh chữ trong hàng); kích thước control (inputHeight, buttonHeight, icon); border/hairline; chiều cao canvas biểu đồ; touch-target của nút |
+| **Ngoài phạm vi** | Extent/leading của HÀNG DỮ LIỆU (24–26dp row, padding quanh chữ trong hàng); kích thước control (inputHeight, buttonHeight, icon); border/hairline; chiều cao canvas biểu đồ; touch-target của nút; inset padding của panel (một khoảng = một lớp, xem dưới) |
 | **Một khoảng = một lớp** | Cấm chồng: label padding bottom 13 **HOẶC** child padding top 13 — không bao giờ cả hai. Body của panel phẳng chỉ inset ngang (pattern `tradeTerminalPanelBodyPadding`); khoảng dọc do đúng một lớp đảm nhiệm |
 | **Đo theo flow** | Khoảng đo từ mép khối đến mép khối kế theo trục flow (RenderBox). Phần tử thấp hơn bị `crossAxisAlignment.center` làm lệch tâm trong một hàng không tính là gap |
 
 Enforcement hai lớp:
 
-1. **Nguồn (ratchet):** `test/quality/tablet_vertical_gap_13_ratchet_guardrail_test.dart`
-   — mọi `SizedBox(height: …)` mới trong thư mục tablet phải là 13/token
-   hợp lệ; nợ của module port TRƯỚC khi luật sinh ra nằm trong
-   `test/quality/baselines/tablet_vertical_gap_13_baseline.txt`
-   (55 file · 154 chỗ, chốt 2026-08-31) — cấm tăng ở mọi file, cấm file
-   mới mang nợ; trả nợ khi chạm file thì giảm baseline cùng commit
-   (workflow giống i18n vi-only).
+1. **Nguồn (zero-tolerance, KHÔNG baseline):**
+   `test/quality/tablet_gap_13_guardrail_test.dart` — mọi SizedBox
+   KHÔNG child (khe) với `height:`/`width:` trong thư mục tablet phải là
+   13 (AppSpacing.x4 / cardGap / token 13 được liệt kê). Đợt mở rộng
+   chiều 2026-08-31 đã sweep 636+ khe về 13 và XÓA baseline ratchet —
+   bất kỳ khe mới ≠ 13 fail CI ngay lập tức.
 2. **Đo thật (layout-lock):** mỗi module đã chuyển sang luật 13 phải có
    test RenderBox đo mọi cặp kề == 13.0 — bản mẫu:
    `test/features/trade/trade_terminal_gap_13_lock_test.dart`
    (gutter + mép→nội dung + nhãn→nội dung + khối↔khối, ±0.1dp).
 
-Trạng thái chuyển đổi: **Trade terminal SC-048/049 đã chuyển xong
-(2026-08-31)**. Module khác chuyển dần theo đợt port/sweep — mỗi đợt kèm
-lock test + cập nhật baseline. Widget dùng CHUNG phone+tablet
-(vd `VitTradeSimpleOrderForm`) nằm ngoài phạm vi cho tới khi có quyết định
-riêng cho phone surface.
+Trạng thái: **TOÀN BỘ surface tablet đã sweep xong (2026-08-31)** —
+79+ file, mọi khe SizedBox dọc+ngang = 13, khung dashboard
+(columnGutter 24→13, blockVerticalGap 16→13, outerHorizontalMargin
+20→13). Widget dùng CHUNG phone+tablet (vd `VitTradeSimpleOrderForm`,
+tier `VitPageContent(rhythm:)` compact 8dp) nằm ngoài phạm vi cho tới khi
+có quyết định riêng cho phone surface — đây là RANH GIỚI đã biết duy
+nhất của luật.
 
 ## Anti-patterns
 

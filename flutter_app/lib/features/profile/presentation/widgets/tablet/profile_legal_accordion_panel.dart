@@ -175,12 +175,12 @@ class _ProfileLegalAccordionPanelState
                     ],
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '$totalVisible / ${ProfileLegalCatalog.itemCount} mục',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 VitSearchBar(
                   key: ProfileTabletKeys.legalSearch,
                   controller: _searchController,

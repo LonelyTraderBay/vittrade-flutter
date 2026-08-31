@@ -82,7 +82,7 @@ class _MoverStripSection extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: color, size: MarketsSpacingTokens.marketMoverIcon),
-        const SizedBox(width: AppSpacing.x1),
+        const SizedBox(width: AppSpacing.x4),
         Flexible(
           flex: 0,
           child: Text(
@@ -95,9 +95,9 @@ class _MoverStripSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x2),
+        const SizedBox(width: AppSpacing.x4),
         for (var i = 0; i < pairs.length; i++) ...[
-          if (i > 0) const SizedBox(width: AppSpacing.x2),
+          if (i > 0) const SizedBox(width: AppSpacing.x4),
           Flexible(
             child: Text(
               '${pairs[i].baseAsset} ${marketListFormatPct(pairs[i].change24h)}',

@@ -221,7 +221,7 @@ class _CurrencyCard extends StatelessWidget {
             color: AppColors.primary,
             size: ProfileSpacingTokens.settingsCurrencyIcon,
           ),
-          const SizedBox(width: ProfileSpacingTokens.settingsCurrencyIconGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +233,7 @@ class _CurrencyCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 VitPresetChipRow<String>(
                   gap: ProfileSpacingTokens.settingsCurrencyChipGap,
                   selectedValue: selectedCurrency,
@@ -415,7 +415,7 @@ class _SettingsToggleRow extends StatelessWidget {
                 color: AppColors.primary,
                 size: ProfileSpacingTokens.settingsRowIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.settingsRowIconGap),
+              const SizedBox(width: AppSpacing.x4),
             ],
             Expanded(
               child: Column(
@@ -431,7 +431,7 @@ class _SettingsToggleRow extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     row.subtitle,
                     maxLines: 1,
@@ -445,7 +445,7 @@ class _SettingsToggleRow extends StatelessWidget {
               ),
             ),
             if (row.canToggle && row.enabled != null) ...[
-              const SizedBox(width: ProfileSpacingTokens.settingsRowSwitchGap),
+              const SizedBox(width: AppSpacing.x4),
               VitTogglePill(
                 key: ProfileTabletKeys.settingsToggle(row.id),
                 enabled: enabled,
@@ -487,7 +487,7 @@ class _AppInfoCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           for (final row in rows) ...[
             Row(
               children: [
@@ -501,9 +501,7 @@ class _AppInfoCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: ProfileSpacingTokens.settingsAppInfoValueGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 Text(
                   row.value,
                   style: AppTextStyles.caption.copyWith(
@@ -513,8 +511,7 @@ class _AppInfoCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (row != rows.last)
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            if (row != rows.last) const SizedBox(height: AppSpacing.x4),
           ],
         ],
       ),

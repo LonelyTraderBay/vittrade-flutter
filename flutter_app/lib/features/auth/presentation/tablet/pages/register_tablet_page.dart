@@ -137,7 +137,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _nameController,
               fieldKey: RegisterTabletPage.nameFieldKey,
@@ -146,7 +146,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               prefix: const Icon(Icons.person_outline_rounded),
               textInputAction: TextInputAction.next,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _contactController,
               fieldKey: RegisterTabletPage.contactFieldKey,
@@ -166,7 +166,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
                   : TextInputType.phone,
               textInputAction: TextInputAction.next,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _passwordController,
               fieldKey: RegisterTabletPage.passwordFieldKey,
@@ -176,7 +176,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               obscureText: true,
               textInputAction: TextInputAction.next,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _confirmController,
               fieldKey: RegisterTabletPage.confirmFieldKey,
@@ -186,7 +186,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               obscureText: true,
               textInputAction: TextInputAction.next,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _referralController,
               fieldKey: RegisterTabletPage.referralFieldKey,
@@ -195,7 +195,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               prefix: const Icon(Icons.card_giftcard_outlined),
               textInputAction: TextInputAction.done,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             CheckboxListTile(
               key: RegisterTabletPage.agreementKey,
               value: _agreed,
@@ -208,7 +208,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               ),
             ),
             if (_error.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               AuthTabletErrorBanner(message: _error),
             ],
             const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
@@ -219,7 +219,7 @@ class _RegisterTabletPageState extends ConsumerState<RegisterTabletPage> {
               variant: VitCtaButtonVariant.auth,
               child: const Text('Tạo tài khoản'),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             TextButton(
               onPressed: _submitting
                   ? null

@@ -30,7 +30,7 @@ class MarketsPairOrderBookPanel extends StatelessWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(width: AppSpacing.x2),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               child: Text(
                 'Mid ${formatMarketPriceFixed2(snapshot.depth.midPrice)}',
@@ -40,8 +40,7 @@ class MarketsPairOrderBookPanel extends StatelessWidget {
             ),
           ],
         ),
-      if (includeHeader)
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+      if (includeHeader) const SizedBox(height: AppSpacing.x4),
       for (final level in snapshot.depth.asks.take(4).toList().reversed)
         _DepthRow(level: level, side: MarketOrderSide.sell),
       const Divider(

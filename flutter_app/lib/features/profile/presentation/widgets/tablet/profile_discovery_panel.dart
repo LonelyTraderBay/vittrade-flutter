@@ -46,7 +46,7 @@ class ProfilePredictionCard extends StatelessWidget {
                 color: AppColors.accent,
                 size: ProfileSpacingTokens.profileModuleIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   'Prediction Portfolio',
@@ -57,14 +57,14 @@ class ProfilePredictionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleGap),
+              const SizedBox(width: AppSpacing.x4),
               const VitAccentPill(
                 label: 'Prediction Market',
                 accentColor: AppColors.accent,
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -73,14 +73,14 @@ class ProfilePredictionCard extends StatelessWidget {
                   value: '${prediction.positions}',
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleStatGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'Lệnh mở',
                   value: '${prediction.openOrders}',
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleStatGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'P/L',
@@ -90,7 +90,7 @@ class ProfilePredictionCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -101,23 +101,19 @@ class ProfilePredictionCard extends StatelessWidget {
                   style: AppTextStyles.badge.copyWith(color: AppColors.accent),
                 ),
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               const Icon(
                 Icons.chevron_right_rounded,
                 color: AppColors.accent,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleEndGap),
+              const SizedBox(width: AppSpacing.x4),
               const Icon(
                 Icons.emoji_events_outlined,
                 color: AppColors.text3,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Flexible(
                 child: Text(
                   'Leaderboard',
@@ -160,7 +156,7 @@ class ProfileArenaCard extends StatelessWidget {
                 color: AppColors.warn,
                 size: ProfileSpacingTokens.profileModuleIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   'Open Arena',
@@ -171,14 +167,14 @@ class ProfileArenaCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleGap),
+              const SizedBox(width: AppSpacing.x4),
               const VitAccentPill(
                 label: 'Points only',
                 accentColor: AppColors.warn,
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -188,11 +184,11 @@ class ProfileArenaCard extends StatelessWidget {
                   valueColor: AppColors.warn,
                 ),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleStatGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _ModuleStat(label: 'Phòng', value: '${arena.rooms}'),
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleStatGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'Creator',
@@ -202,7 +198,7 @@ class ProfileArenaCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Expanded(
@@ -213,23 +209,19 @@ class ProfileArenaCard extends StatelessWidget {
                   style: AppTextStyles.badge.copyWith(color: AppColors.warn),
                 ),
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               const Icon(
                 Icons.chevron_right_rounded,
                 color: AppColors.warn,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.profileModuleEndGap),
+              const SizedBox(width: AppSpacing.x4),
               const Icon(
                 Icons.shield_outlined,
                 color: AppColors.text3,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Flexible(
                 child: Text(
                   'An toàn & Báo cáo',
@@ -270,7 +262,7 @@ class _ModuleStat extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: AppTextStyles.numericMicro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           value,
           maxLines: 1,

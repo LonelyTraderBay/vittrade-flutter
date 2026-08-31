@@ -1,12 +1,8 @@
 part of 'wallet_page_sections.dart';
 
-const double _walletAssetSectionGap = AppSpacing.x2;
 const double _walletAssetHeaderButtonHeight =
     AppSpacing.searchBarCompactHeight - AppSpacing.x2;
 const double _walletAssetAvatarCompactSize = AppSpacing.x6 - AppSpacing.x1;
-const double _walletAssetRowGap = AppSpacing.x3;
-const double _walletAssetTextGap = AppSpacing.x1;
-const double _walletAssetChevronGap = AppSpacing.x2;
 const double _walletAssetChevronSize = AppSpacing.iconMd - AppSpacing.x1;
 
 class WalletSegmentedTabs extends StatelessWidget {
@@ -88,9 +84,9 @@ class WalletAssetSection extends StatelessWidget {
           onChanged: onChanged,
           onFilter: onFilter,
         ),
-        const SizedBox(height: _walletAssetSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         WalletAssetHeader(count: count, onNavigate: onNavigate),
-        const SizedBox(height: _walletAssetSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         WalletAssetList(assets: assets, hidden: hidden, onNavigate: onNavigate),
       ],
     );
@@ -188,7 +184,7 @@ class WalletAssetList extends StatelessWidget {
                   'N\u1EA1p ho\u1EB7c mua crypto \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u qu\u1EA3n l\u00FD danh m\u1EE5c.',
               icon: Icons.account_balance_wallet_outlined,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -199,7 +195,7 @@ class WalletAssetList extends StatelessWidget {
                     child: const Text('N\u1EA1p ti\u1EC1n'),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: VitCtaButton(
                     density: VitDensity.compact,
@@ -270,7 +266,7 @@ class _WalletTabletAssetRow extends StatelessWidget {
                   radius: AppRadii.pillRadius,
                   border: true,
                 ),
-                const SizedBox(width: _walletAssetRowGap),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -283,7 +279,7 @@ class _WalletTabletAssetRow extends StatelessWidget {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(height: _walletAssetTextGap),
+                      const SizedBox(height: AppSpacing.x4),
                       Text(
                         asset.name,
                         maxLines: 1,
@@ -309,7 +305,7 @@ class _WalletTabletAssetRow extends StatelessWidget {
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: _walletAssetTextGap),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       hidden
                           ? '\u2022\u2022\u2022\u2022'
@@ -320,7 +316,7 @@ class _WalletTabletAssetRow extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(width: _walletAssetChevronGap),
+                const SizedBox(width: AppSpacing.x4),
                 const Icon(
                   Icons.chevron_right_rounded,
                   color: AppColors.text3,

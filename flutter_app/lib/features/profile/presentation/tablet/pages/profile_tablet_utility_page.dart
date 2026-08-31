@@ -53,7 +53,7 @@ class ProfileTabletUtilityPage extends StatelessWidget {
               // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
               // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
               VitAccentIconBox(icon: icon, color: AppColors.primary),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,9 +65,7 @@ class ProfileTabletUtilityPage extends StatelessWidget {
                         height: 1.35,
                       ),
                     ),
-                    const SizedBox(
-                      height: AppSpacing.pageRhythmCompactInnerGap,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       'Trình quản lý đầy đủ cho mục này đang được hoàn thiện.',
                       style: AppTextStyles.caption.copyWith(

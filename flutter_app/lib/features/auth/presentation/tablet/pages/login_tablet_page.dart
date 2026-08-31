@@ -102,7 +102,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                 if (_error.isNotEmpty) setState(() => _error = '');
               },
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             VitInput(
               controller: _passwordController,
               fieldKey: LoginTabletPage.passwordFieldKey,
@@ -131,7 +131,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
               const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
               AuthTabletErrorBanner(message: _error),
             ],
-            const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCtaButton(
               key: LoginTabletPage.submitKey,
               onPressed: _submitting ? null : _submit,
@@ -140,7 +140,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
               child: const Text('Đăng nhập'),
             ),
             if (showDemoLogin) ...[
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitCtaButton(
                 key: LoginTabletPage.demoSubmitKey,
                 onPressed: _submitting ? null : () => _submit(demo: true),
@@ -186,7 +186,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             Text(
               'Bằng cách đăng nhập, bạn đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của VitTrade.',
               textAlign: TextAlign.center,

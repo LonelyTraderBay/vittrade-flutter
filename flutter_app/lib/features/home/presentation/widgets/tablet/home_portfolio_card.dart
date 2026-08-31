@@ -10,7 +10,6 @@ import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.da
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 
 const double _heroActionExtent = AppSpacing.buttonCompact + AppSpacing.x2;
@@ -83,10 +82,10 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildHeader(),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           _buildBalanceSection(),
           if (showDelta) ...[
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -108,7 +107,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
               ],
             ),
             if (trend.length >= 2) ...[
-              const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Row(
                 children: [
                   Expanded(
@@ -122,7 +121,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                             fontWeight: AppTextStyles.medium,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x1),
+                        const SizedBox(height: AppSpacing.x4),
                         Text(
                           'Theo giá trị tài sản',
                           style: AppTextStyles.micro.copyWith(
@@ -132,7 +131,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x3),
+                  const SizedBox(width: AppSpacing.x4),
                   Expanded(
                     flex: 2,
                     child: SizedBox(
@@ -147,7 +146,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
               ),
             ],
           ],
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           HomePortfolioBreakdown(
             snapshot: snapshot,
             balanceHidden: balanceHidden,
@@ -174,7 +173,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                   fontWeight: AppTextStyles.medium,
                 ),
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 'Quy USD · theo giá thị trường',
                 style: AppTextStyles.micro.copyWith(
@@ -216,7 +215,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Tooltip(
             message: balanceHidden
                 ? 'Số dư đang ẩn'
@@ -235,7 +234,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                       size: SharedSpacingTokens.homePortfolioBadgeIcon,
                       color: AppColors.portfolioTextMuted,
                     ),
-                    const SizedBox(width: AppSpacing.x1),
+                    const SizedBox(width: AppSpacing.x4),
                   ],
                   Text(
                     _secondaryBalanceLabel,
@@ -265,7 +264,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
             child: const Text('Nạp'),
           ),
         ),
-        const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: VitCtaButton(
             height: _heroActionExtent,
@@ -277,7 +276,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
             child: const Text('Rút'),
           ),
         ),
-        const SizedBox(width: HomeSpacingTokens.homePortfolioActionSpacing),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: VitCtaButton(
             height: _heroActionExtent,
@@ -311,7 +310,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                 color: AppColors.portfolioTextDim,
                 size: AppSpacing.iconMd,
               ),
-              const SizedBox(width: AppSpacing.x2),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,7 +322,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       'Nạp USDT để bắt đầu giao dịch, earn và khám phá sản phẩm trên VitTrade.',
                       style: AppTextStyles.caption.copyWith(
@@ -335,7 +334,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCtaButton(
             key: HomeTabletKeys.portfolioDeposit,
             height: _heroActionExtent,
@@ -345,7 +344,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
             leading: const Icon(Icons.file_download_outlined),
             child: const Text('Nạp ngay'),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCtaButton(
             height: _heroActionExtent,
             density: VitDensity.compact,

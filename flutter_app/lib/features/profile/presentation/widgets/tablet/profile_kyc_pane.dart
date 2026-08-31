@@ -166,7 +166,7 @@ class _KycStatusCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: ProfileSpacingTokens.kycStatusCheckGap),
+            const SizedBox(width: AppSpacing.x4),
             const Icon(
               Icons.check_rounded,
               color: _ProfileKycPaneState._kycGreen,
@@ -239,11 +239,7 @@ class _KycLevelCard extends StatelessWidget {
                           color: _ProfileKycPaneState._kycMuted,
                           size: ProfileSpacingTokens.kycDetailIcon,
                         ),
-                        const SizedBox(
-                          width:
-                              AppSpacing.dividerHairline +
-                              AppSpacing.hairlineStroke,
-                        ),
+                        const SizedBox(width: AppSpacing.x4),
                         Text(
                           'Đã hoàn thành',
                           style: AppTextStyles.badge.copyWith(
@@ -361,7 +357,7 @@ class _ExpandedLevelDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _DetailsBlock(title: 'Giới hạn giao dịch:', lines: level.limits),
-        const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         _DetailsBlock(
           title: 'Tính năng mở khóa:',
           lines: level.features,
@@ -369,7 +365,7 @@ class _ExpandedLevelDetails extends StatelessWidget {
           checkmarks: true,
         ),
         if (canStart) ...[
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCtaButton(
             key: ProfileTabletKeys.kycStart(level.level),
             onPressed: submitting ? null : onStart,
@@ -410,7 +406,7 @@ class _DetailsBlock extends StatelessWidget {
           title,
           style: AppTextStyles.badge.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         for (final line in lines) ...[
           Row(
             children: [
@@ -427,7 +423,7 @@ class _DetailsBlock extends StatelessWidget {
                   '• ',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text1),
                 ),
-              const SizedBox(width: ProfileSpacingTokens.kycDetailIconGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   line,
@@ -438,7 +434,7 @@ class _DetailsBlock extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
         ],
       ],
     );
@@ -462,7 +458,7 @@ class _KycPrivacyCard extends StatelessWidget {
             color: _ProfileKycPaneState._kycPrimary,
             size: ProfileSpacingTokens.kycPrivacyIcon,
           ),
-          const SizedBox(width: ProfileSpacingTokens.kycPrivacyGapHorizontal),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +470,7 @@ class _KycPrivacyCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   'Thông tin KYC được mã hóa AES-256. Chúng tôi không chia sẻ với bên thứ ba.',
                   maxLines: 2,

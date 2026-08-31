@@ -33,9 +33,7 @@ class MarketsPairPriceOverviewPanel extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: MarketsSpacingTokens.pairPriceChangeGap,
-                  ),
+                  const SizedBox(width: AppSpacing.x4),
                   VitAccentPill(
                     label:
                         '${positive ? '▲' : '▼'} ${pair.change24h.abs().toStringAsFixed(2)}%',
@@ -43,7 +41,7 @@ class MarketsPairPriceOverviewPanel extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Row(
                 children: [
                   Expanded(
@@ -101,7 +99,7 @@ class _PriceStat extends StatelessWidget {
           label,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           value,
           style: AppTextStyles.numericMicro.copyWith(
@@ -212,7 +210,7 @@ class _PairBookPanelState extends State<_PairBookPanel> {
                   widgetKey: MarketsTabletKeys.pairBookTab('book'),
                   onTap: () => setState(() => _showBook = true),
                 ),
-                const SizedBox(width: MarketsSpacingTokens.pairIntervalGap),
+                const SizedBox(width: AppSpacing.x4),
                 _PairBookTabButton(
                   label: 'Giao dịch',
                   active: !_showBook,
@@ -337,7 +335,7 @@ class _PairDeskFooter extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 VitAccentPill(
                   label:
                       '${positive ? '▲' : '▼'} ${pair.change24h.abs().toStringAsFixed(2)}%',
@@ -346,7 +344,7 @@ class _PairDeskFooter extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: MarketsSpacingTokens.pairDeskFooterGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: VitCtaButton(
               key: MarketsTabletKeys.pairPaneBuyCta,
@@ -356,7 +354,7 @@ class _PairDeskFooter extends StatelessWidget {
               child: const Text('MUA'),
             ),
           ),
-          const SizedBox(width: MarketsSpacingTokens.pairDeskFooterGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: VitCtaButton(
               key: MarketsTabletKeys.pairPaneSellCta,
@@ -437,7 +435,7 @@ class MarketsPairLinkCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: MarketsSpacingTokens.pairLinkGap),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -448,7 +446,7 @@ class MarketsPairLinkCard extends StatelessWidget {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       subtitle,
                       maxLines: 1,
@@ -503,7 +501,7 @@ class _PairTradeCtas extends StatelessWidget {
                 child: const Text('MUA'),
               ),
             ),
-            const SizedBox(width: MarketsSpacingTokens.pairTradeCtaGap),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               child: VitCtaButton(
                 key: MarketsTabletKeys.pairPaneSellCta,

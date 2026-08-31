@@ -174,7 +174,7 @@ class _SecurityScoreCard extends StatelessWidget {
                   style: AppTextStyles.control.copyWith(color: AppColors.text2),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 '${snapshot.scoreLabel} (${snapshot.score}/4)',
                 style: AppTextStyles.control.copyWith(
@@ -184,7 +184,7 @@ class _SecurityScoreCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitSegmentedProgressBar(
             segmentCount: 4,
             filledCount: snapshot.score,
@@ -194,7 +194,7 @@ class _SecurityScoreCard extends StatelessWidget {
             gap: ProfileSpacingTokens.securityScoreBarGap,
             borderRadius: AppRadii.pillRadius,
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           // Nested inside the standard-tier score card — tight radius keeps
           // the concentric −8 rule (Tablet-Card-Border-Standard R4).
           VitCard(
@@ -218,7 +218,7 @@ class _SecurityScoreCard extends StatelessWidget {
                   color: _ProfileSecurityPaneState._securityAmber,
                   size: ProfileSpacingTokens.securitySmallIcon,
                 ),
-                const SizedBox(width: ProfileSpacingTokens.securityIconGap),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: Text(
                     'Bật tất cả tính năng bảo mật để bảo vệ tài sản của bạn tốt nhất.',
@@ -318,13 +318,13 @@ class _SecurityRow extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (item.status != null) ...[
-              const SizedBox(width: ProfileSpacingTokens.securityStatusGap),
+              const SizedBox(width: AppSpacing.x4),
               VitAccentPill(
                 label: item.status!,
                 accentColor: Color(item.statusHex!),
               ),
             ],
-            const SizedBox(width: ProfileSpacingTokens.securityChevronGap),
+            const SizedBox(width: AppSpacing.x4),
             const Icon(
               Icons.chevron_right_rounded,
               color: AppColors.text3,
@@ -351,7 +351,7 @@ class _DeviceList extends StatelessWidget {
           'THIẾT BỊ ĐĂNG NHẬP',
           style: AppTextStyles.badge.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitCard(
           borderColor: _ProfileSecurityPaneState._securityBorder,
           clip: true,
@@ -397,7 +397,7 @@ class _DeviceRow extends StatelessWidget {
               color: AppColors.text3,
               size: ProfileSpacingTokens.securityDeviceIcon,
             ),
-            const SizedBox(width: ProfileSpacingTokens.securityDeviceGap),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,9 +416,7 @@ class _DeviceRow extends StatelessWidget {
                         ),
                       ),
                       if (device.isCurrent) ...[
-                        const SizedBox(
-                          width: ProfileSpacingTokens.securityStatusGap,
-                        ),
+                        const SizedBox(width: AppSpacing.x4),
                         const VitAccentPill(
                           label: 'Hiện tại',
                           accentColor: _ProfileSecurityPaneState._securityGreen,
@@ -426,7 +424,7 @@ class _DeviceRow extends StatelessWidget {
                       ],
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     '${device.os} • ${device.location}',
                     maxLines: 1,
@@ -435,7 +433,7 @@ class _DeviceRow extends StatelessWidget {
                       color: _ProfileSecurityPaneState._securityMuted,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     device.lastSeen,
                     style: AppTextStyles.numericMicro.copyWith(
@@ -446,7 +444,7 @@ class _DeviceRow extends StatelessWidget {
               ),
             ),
             if (!device.isCurrent) ...[
-              const SizedBox(width: ProfileSpacingTokens.securityStatusGap),
+              const SizedBox(width: AppSpacing.x4),
               const VitAccentPill(
                 label: 'Đăng xuất',
                 accentColor: _ProfileSecurityPaneState._securityRed,
@@ -485,7 +483,7 @@ class _AntiPhishingCard extends StatelessWidget {
                 color: _ProfileSecurityPaneState._securityPrimary,
                 size: ProfileSpacingTokens.securityAntiPhishingIcon,
               ),
-              const SizedBox(width: ProfileSpacingTokens.securityIconGap),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 'Mã chống lừa đảo',
                 style: AppTextStyles.control.copyWith(
@@ -495,17 +493,17 @@ class _AntiPhishingCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             'Đặt mã cá nhân. Email từ VitTrade sẽ luôn hiển thị mã này.',
             style: AppTextStyles.numericMicro.copyWith(color: AppColors.text2),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             'Trước khi Lưu: xem trước mã · chỉ dùng email VitTrade thật · không hoàn tác ngay sau xác nhận.',
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitInput(
             fieldKey: ProfileTabletKeys.securityAntiPhishingField,
             controller: controller,

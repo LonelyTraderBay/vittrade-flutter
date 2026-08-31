@@ -146,13 +146,13 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           onChanged: (_) => onChanged(),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitPresetChipRow.percentBalance(
           onTap: onPct,
           keyFor: pctKeyBuilder ?? (pct) => Key('sc048_pct_$pct'),
           accentColor: _tradePrimary,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitKeyValueRow(
           label: 'Giá thị trường',
           value: marketPriceLabel,
@@ -162,7 +162,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitKeyValueRow(
           label: 'Phí ước tính',
           value: formatTradeMoney(preview.fee),
@@ -172,7 +172,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitKeyValueRow(
           label: 'Trượt giá',
           // Cột terminal 320dp: bản rút gọn của dòng confirm sheet đầy đủ
@@ -181,7 +181,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           labelStyle: AppTextStyles.caption.copyWith(color: AppColors.text2),
           valueStyle: AppTextStyles.caption.copyWith(color: AppColors.text1),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitKeyValueRow(
           label: 'Số dư khả dụng',
           value: side == TradeOrderSide.buy
@@ -193,7 +193,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         VitKeyValueRow(
           label: 'Tổng thanh toán',
           value: '${formatTradeMoney(preview.total)} USDT',
@@ -204,12 +204,12 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           'Giá thị trường có thể thay đổi. Không hoàn tác sau khi xác nhận gửi.',
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Semantics(
           button: true,
           enabled: canSubmit && !submitting,

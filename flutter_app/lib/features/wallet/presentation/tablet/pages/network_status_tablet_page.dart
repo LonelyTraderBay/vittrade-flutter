@@ -207,7 +207,7 @@ class _NetworkStatusTabletPageState
                   size: AppSpacing.iconMd,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +218,7 @@ class _NetworkStatusTabletPageState
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       'Tự động cập nhật mỗi ${snapshot.refreshIntervalSeconds} giây',
                       style: AppTextStyles.caption.copyWith(
@@ -238,7 +238,7 @@ class _NetworkStatusTabletPageState
             ],
           ),
           if (_refreshFeedback != null) ...[
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: VitStatusPill(
@@ -250,7 +250,7 @@ class _NetworkStatusTabletPageState
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               _SummaryStat(
@@ -258,13 +258,13 @@ class _NetworkStatusTabletPageState
                 label: 'Hoạt động',
                 color: AppColors.buy,
               ),
-              const SizedBox(width: AppSpacing.x1),
+              const SizedBox(width: AppSpacing.x4),
               _SummaryStat(
                 value: '${snapshot.issueCount}',
                 label: 'Chậm / tắc',
                 color: AppColors.caution,
               ),
-              const SizedBox(width: AppSpacing.x1),
+              const SizedBox(width: AppSpacing.x4),
               _SummaryStat(
                 value: '${snapshot.downCount}',
                 label: 'Bảo trì',
@@ -404,7 +404,7 @@ class _SummaryStat extends StatelessWidget {
                 fontFeatures: AppTextStyles.tabularFigures,
               ),
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             Text(
               label,
               style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -458,7 +458,7 @@ class _NetworkStatusCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x3),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -471,7 +471,7 @@ class _NetworkStatusCard extends StatelessWidget {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.x1),
+                      const SizedBox(height: AppSpacing.x4),
                       Text(
                         'Block #${network.blockHeight}',
                         style: AppTextStyles.micro.copyWith(
@@ -484,7 +484,7 @@ class _NetworkStatusCard extends StatelessWidget {
                 _HealthStatusIndicator(health: network.health),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -502,7 +502,7 @@ class _NetworkStatusCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             Semantics(
               label:
                   'Tắc nghẽn mạng ${network.congestionPct}%, ${_congestionLabel(network.congestionPct)}',
@@ -516,9 +516,9 @@ class _NetworkStatusCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             _NetworkStatsGrid(network: network),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -527,7 +527,7 @@ class _NetworkStatusCard extends StatelessWidget {
                     enabled: network.depositEnabled,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x1),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: _AvailabilityChip(
                     label: 'Rút',
@@ -537,7 +537,7 @@ class _NetworkStatusCard extends StatelessWidget {
               ],
             ),
             if (network.notes case final note?) ...[
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               _NetworkNote(note: note),
             ],
           ],
@@ -579,11 +579,11 @@ class _NetworkStatsGrid extends StatelessWidget {
             children: [
               for (var col = 0; col < 2; col++) ...[
                 Expanded(child: _NetworkStatTile(stat: stats[row * 2 + col])),
-                if (col == 0) const SizedBox(width: AppSpacing.x1),
+                if (col == 0) const SizedBox(width: AppSpacing.x4),
               ],
             ],
           ),
-          if (row == 0) const SizedBox(height: AppSpacing.x1),
+          if (row == 0) const SizedBox(height: AppSpacing.x4),
         ],
       ],
     );
@@ -603,7 +603,7 @@ class _NetworkStatTile extends StatelessWidget {
       child: Row(
         children: [
           Icon(stat.icon, color: AppColors.text3, size: AppSpacing.iconSm),
-          const SizedBox(width: AppSpacing.x1),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -615,7 +615,7 @@ class _NetworkStatTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   stat.value,
                   maxLines: 1,
@@ -692,7 +692,7 @@ class _NetworkNote extends StatelessWidget {
             color: AppColors.caution,
             size: AppSpacing.iconSm,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Text(
               note,
@@ -731,7 +731,7 @@ class _NetworkLegendCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Wrap(
             spacing: AppSpacing.x1,
             runSpacing: AppSpacing.x1,

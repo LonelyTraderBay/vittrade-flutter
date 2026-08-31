@@ -6,6 +6,7 @@ import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart'
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
@@ -349,7 +350,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
         ..._buildProductTabs(snapshot),
         const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
         Expanded(child: _buildChartPanel(snapshot)),
-        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
+        const SizedBox(height: AppSpacing.x4),
         _buildBottomPanel(snapshot, showBookTab: showBookTab),
       ],
     );

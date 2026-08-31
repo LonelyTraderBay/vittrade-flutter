@@ -94,9 +94,7 @@ class _TradeTerminalBottomPanelState extends State<TradeTerminalBottomPanel> {
                     onChanged: (key) => setState(() => _activeTab = key),
                   ),
                 ),
-                const SizedBox(
-                  width: TradeSpacingTokens.tradeTerminalBottomTabGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 IconButton(
                   key: TradeTabletKeys.bottomTab('view_all'),
                   tooltip: 'Xem tất cả',

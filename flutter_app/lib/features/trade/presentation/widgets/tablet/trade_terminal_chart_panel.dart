@@ -96,13 +96,9 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                         _probeIndex = null;
                       }),
                     ),
-                    const SizedBox(
-                      width: TradeSpacingTokens.tradeTerminalIntervalGap,
-                    ),
+                    const SizedBox(width: AppSpacing.x4),
                   ],
-                  const SizedBox(
-                    width: TradeSpacingTokens.tradeTerminalIntervalGap,
-                  ),
+                  const SizedBox(width: AppSpacing.x4),
                   for (final item in ['MA', 'Vol']) ...[
                     _TradeTerminalTextButton(
                       key: TradeTabletKeys.indicator(item),
@@ -114,9 +110,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                             : _indicators.add(item);
                       }),
                     ),
-                    const SizedBox(
-                      width: TradeSpacingTokens.tradeTerminalIntervalGap,
-                    ),
+                    const SizedBox(width: AppSpacing.x4),
                   ],
                 ],
               ),
@@ -195,9 +189,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                               label: 'MA (7)',
                               color: AppColors.primary,
                             ),
-                            const SizedBox(
-                              width: TradeSpacingTokens.tradeTerminalMetaGap,
-                            ),
+                            const SizedBox(width: AppSpacing.x4),
                           ],
                           if (showVolume)
                             VitLegendItem(

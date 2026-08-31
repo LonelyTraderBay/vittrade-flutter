@@ -50,13 +50,13 @@ class ProfileSecuritySummarySkeleton extends StatelessWidget {
           Row(
             children: [
               Expanded(child: VitSkeleton(width: double.infinity, height: 14)),
-              SizedBox(width: AppSpacing.x3),
+              SizedBox(width: AppSpacing.x4),
               VitSkeleton(width: 72, height: 14),
             ],
           ),
-          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          SizedBox(height: AppSpacing.x4),
           VitSkeleton(width: double.infinity, height: 7),
-          SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          SizedBox(height: AppSpacing.x4),
           VitSkeleton(width: double.infinity, height: AppSpacing.buttonCompact),
         ],
       ),
@@ -97,20 +97,20 @@ class _AccountHeroSkeleton extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               VitSkeleton(width: double.infinity, height: 20),
-                              SizedBox(height: AppSpacing.x1),
+                              SizedBox(height: AppSpacing.x4),
                               VitSkeleton(width: 180, height: 10),
-                              SizedBox(height: AppSpacing.x1),
+                              SizedBox(height: AppSpacing.x4),
                               VitSkeleton(width: 140, height: 10),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                    SizedBox(height: AppSpacing.x4),
                     Row(
                       children: [
                         VitSkeleton(width: 64, height: 22),
-                        SizedBox(width: AppSpacing.pageRhythmStandardInnerGap),
+                        SizedBox(width: AppSpacing.x4),
                         VitSkeleton(width: 88, height: 22),
                       ],
                     ),
@@ -124,7 +124,7 @@ class _AccountHeroSkeleton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _FactBoxSkeleton(),
-                    SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                    SizedBox(height: AppSpacing.x4),
                     _FactBoxSkeleton(),
                   ],
                 ),
@@ -148,7 +148,7 @@ class _FactBoxSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VitSkeleton(width: 80, height: 10),
-        SizedBox(height: AppSpacing.x1),
+        SizedBox(height: AppSpacing.x4),
         VitSkeleton(width: double.infinity, height: 14),
       ],
     );
@@ -167,7 +167,7 @@ class VitSectionSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        SizedBox(height: AppSpacing.x4),
         VitCard(child: VitSkeletonList(rows: 4)),
       ],
     );

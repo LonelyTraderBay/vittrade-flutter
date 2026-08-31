@@ -111,13 +111,13 @@ class _DustConverterTabletPageState
                 color: AppColors.caution,
                 size: AppSpacing.iconLg,
               ),
-              const SizedBox(width: AppSpacing.x2),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Số dư nhỏ có thể chuyển đổi'),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '${assets.length} tài sản · ${VitFormat.usd(selectedTotal)} đang chọn',
                       style: AppTextStyles.caption.copyWith(
@@ -235,13 +235,13 @@ class _DustConverterTabletPageState
             accentColor: Color(asset.colorHex),
             size: AppSpacing.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(asset.name),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '${asset.availableLabel} · ${VitFormat.usd(asset.usdValue)}',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),

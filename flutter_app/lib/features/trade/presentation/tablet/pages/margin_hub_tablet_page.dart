@@ -163,9 +163,7 @@ class MarginHubTabletPage extends ConsumerWidget {
                                 fontWeight: AppTextStyles.bold,
                               ),
                             ),
-                            const SizedBox(
-                              height: AppSpacing.pageRhythmCompactInnerGap,
-                            ),
+                            const SizedBox(height: AppSpacing.x4),
                             Text(
                               snapshot.compliance.description,
                               style: AppTextStyles.caption.copyWith(

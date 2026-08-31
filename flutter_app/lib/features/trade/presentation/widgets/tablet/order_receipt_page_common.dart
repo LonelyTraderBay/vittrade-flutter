@@ -30,7 +30,7 @@ class _RiskBox extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             maxLines: 1,
@@ -65,7 +65,7 @@ class _TradeTabletWarningNotice extends StatelessWidget {
             color: AppColors.warn,
             size: AppSpacing.iconSm,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Text(
               'Lệnh có thể bị khớp 1 phần hoặc hủy nếu giá thay đổi nhanh. '
@@ -105,7 +105,7 @@ class _OrderSupportLink extends StatelessWidget {
             color: AppColors.primary,
             size: AppSpacing.iconMd,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Text(
               'Cần hỗ trợ lệnh này?',
@@ -124,7 +124,7 @@ class _OrderSupportLink extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(width: AppSpacing.x1),
+          const SizedBox(width: AppSpacing.x4),
           const Icon(
             Icons.chevron_right_rounded,
             color: AppColors.primary,

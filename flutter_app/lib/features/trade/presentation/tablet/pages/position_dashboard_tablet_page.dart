@@ -198,7 +198,7 @@ class _PositionControlsRow extends StatelessWidget {
             onChanged: onTabChanged,
           ),
         ),
-        const SizedBox(width: AppSpacing.rowGap),
+        const SizedBox(width: AppSpacing.x4),
         for (final (id, label) in [
           ('pnl', 'P/L'),
           ('pnlPct', '% P/L'),
@@ -211,7 +211,7 @@ class _PositionControlsRow extends StatelessWidget {
             onTap: () => onSortChanged(id),
             color: AppColors.primary,
           ),
-          const SizedBox(width: AppSpacing.rowGap),
+          const SizedBox(width: AppSpacing.x4),
         ],
       ],
     );
@@ -437,7 +437,7 @@ class _PositionSummaryCard extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          const SizedBox(height: AppSpacing.rowGap),
+          const SizedBox(height: AppSpacing.x4),
           VitKeyValueRow(
             label: 'Tổng giá trị danh nghĩa',
             value: formatTradeMoney(totalNotional),
@@ -447,7 +447,7 @@ class _PositionSummaryCard extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          const SizedBox(height: AppSpacing.rowGap),
+          const SizedBox(height: AppSpacing.x4),
           VitKeyValueRow(
             label: 'Tổng P/L chưa realise',
             value:

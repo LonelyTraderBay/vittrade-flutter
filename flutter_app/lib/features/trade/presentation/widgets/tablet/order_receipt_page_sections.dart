@@ -32,7 +32,7 @@ class _ReceiptCard extends StatelessWidget {
                     label: isBuy ? 'MUA' : 'BÁN',
                     color: sideColor,
                   ),
-                  const SizedBox(width: AppSpacing.x2),
+                  const SizedBox(width: AppSpacing.x4),
                   Expanded(
                     child: Text(
                       receipt.symbol,
@@ -120,9 +120,7 @@ class _ReceiptCard extends StatelessWidget {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: AppSpacing.pageRhythmCompactInnerGap,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     Row(
                       children: [
                         if (receipt.tpPrice != null)
@@ -134,7 +132,7 @@ class _ReceiptCard extends StatelessWidget {
                             ),
                           ),
                         if (receipt.tpPrice != null && receipt.slPrice != null)
-                          const SizedBox(width: AppSpacing.x2),
+                          const SizedBox(width: AppSpacing.x4),
                         if (receipt.slPrice != null)
                           Expanded(
                             child: _RiskBox(

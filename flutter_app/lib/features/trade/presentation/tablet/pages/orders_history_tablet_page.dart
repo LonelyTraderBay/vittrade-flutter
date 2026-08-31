@@ -203,7 +203,7 @@ class _TradeTabletTabRow extends StatelessWidget {
             onChanged: onTabChanged,
           ),
         ),
-        const SizedBox(width: AppSpacing.rowGap),
+        const SizedBox(width: AppSpacing.x4),
         for (final (id, label) in [
           ('all', 'Tất cả'),
           ('buy', 'Mua'),
@@ -216,7 +216,7 @@ class _TradeTabletTabRow extends StatelessWidget {
             onTap: () => onFilterChanged(id),
             color: AppColors.primary,
           ),
-          const SizedBox(width: AppSpacing.rowGap),
+          const SizedBox(width: AppSpacing.x4),
         ],
       ],
     );

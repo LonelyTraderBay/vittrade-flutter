@@ -47,13 +47,13 @@ class _CreateFieldSection extends StatelessWidget {
                 ),
               ),
               if (required) ...[
-                const SizedBox(width: AppSpacing.x1),
+                const SizedBox(width: AppSpacing.x4),
                 Text(
                   '*',
                   style: AppTextStyles.caption.copyWith(color: AppColors.sell),
                 ),
               ] else if (optional != null) ...[
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 Text(
                   optional!,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -61,7 +61,7 @@ class _CreateFieldSection extends StatelessWidget {
               ],
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           child,
         ],
       ),
@@ -122,9 +122,7 @@ class _PermissionCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: ProfileSpacingTokens.profileApiCreatePermissionIconGap,
-          ),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +151,7 @@ class _PermissionCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                SizedBox(height: VitDensity.compact.verticalSpace),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   permission.description,
                   maxLines: 1,
@@ -163,9 +161,7 @@ class _PermissionCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            width: ProfileSpacingTokens.profileApiCreatePermissionTrailingGap,
-          ),
+          const SizedBox(width: AppSpacing.x4),
           SizedBox(
             width: ProfileSpacingTokens.profileApiCreatePermissionCheck,
             height: ProfileSpacingTokens.profileApiCreatePermissionCheck,
@@ -208,9 +204,7 @@ class _SecurityTipsCard extends StatelessWidget {
                 color: AppColors.primary,
                 size: ProfileSpacingTokens.profileApiCreateTipsIcon,
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileApiCreateTipsTitleGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 'Mẹo bảo mật',
                 style: AppTextStyles.caption.copyWith(
@@ -220,7 +214,7 @@ class _SecurityTipsCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           for (var i = 0; i < tips.length; i++) ...[
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,9 +236,7 @@ class _SecurityTipsCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: ProfileSpacingTokens.profileApiCreateTipsBulletGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: Text(
                     tips[i],
@@ -258,8 +250,7 @@ class _SecurityTipsCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (i != tips.length - 1)
-              SizedBox(height: VitDensity.compact.verticalSpace),
+            if (i != tips.length - 1) const SizedBox(height: AppSpacing.x4),
           ],
         ],
       ),
@@ -322,7 +313,7 @@ class _CreateWarningCard extends StatelessWidget {
             color: color,
             size: ProfileSpacingTokens.profileApiCreateTipsIcon,
           ),
-          const SizedBox(width: AppSpacing.x3),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Text(
               text,
@@ -353,7 +344,7 @@ class _KeyResultCard extends StatelessWidget {
             label,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             maxLines: 1,

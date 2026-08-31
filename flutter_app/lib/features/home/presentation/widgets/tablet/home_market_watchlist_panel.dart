@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -59,7 +58,7 @@ class HomeMarketWatchlistPanel extends StatelessWidget {
             VitTabItem(key: 'new', label: 'Mới', icon: Icons.fiber_new_rounded),
           ],
         ),
-        const SizedBox(height: SharedSpacingTokens.homeSectionInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         if (pairs.isEmpty)
           const VitEmptyState(
             title: 'Chưa có cặp nào trong mục này',

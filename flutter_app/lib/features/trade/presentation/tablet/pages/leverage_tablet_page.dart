@@ -97,7 +97,7 @@ class LeverageTabletPage extends ConsumerWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Wrap(
               spacing: AppSpacing.rowGap,
               runSpacing: AppSpacing.rowGap,
@@ -112,9 +112,9 @@ class LeverageTabletPage extends ConsumerWidget {
                   ),
               ],
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(height: AppSpacing.x4),
             _LeverageImpactRows(preview: preview),
-            const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             VitCtaButton(
               key: LeverageTabletPage.submitKey,
               onPressed:
@@ -144,7 +144,7 @@ class LeverageTabletPage extends ConsumerWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             for (final (label, value) in [
               (
                 'Ký quỹ ví dụ',
@@ -167,7 +167,7 @@ class LeverageTabletPage extends ConsumerWidget {
                   ),
                 ),
               ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             if (preview.warningText.isNotEmpty)
               Text(
                 preview.warningText,

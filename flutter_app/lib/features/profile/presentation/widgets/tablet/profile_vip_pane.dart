@@ -156,10 +156,7 @@ class _VipHero extends StatelessWidget {
                                 size: ProfileSpacingTokens
                                     .profileVipHeroBadgeIcon,
                               ),
-                              const SizedBox(
-                                width:
-                                    ProfileSpacingTokens.profileVipHeroTitleGap,
-                              ),
+                              const SizedBox(width: AppSpacing.x4),
                               Flexible(
                                 child: Text(
                                   currentTier.name,
@@ -173,7 +170,7 @@ class _VipHero extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: VitDensity.compact.verticalSpace),
+                          const SizedBox(height: AppSpacing.x4),
                           Text(
                             'Thành viên từ ${snapshot.memberSince}',
                             maxLines: 1,
@@ -186,9 +183,7 @@ class _VipHero extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: ProfileSpacingTokens.profileVipHeroStatusGap,
-                    ),
+                    const SizedBox(width: AppSpacing.x4),
                     VitStatusPill(
                       label: currentTier.badge,
                       status: VitStatusPillStatus.orange,
@@ -196,7 +191,7 @@ class _VipHero extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: VitDensity.compact.verticalSpace),
+                const SizedBox(height: AppSpacing.x4),
                 Row(
                   children: [
                     Expanded(
@@ -250,7 +245,7 @@ class _HeroFeeBox extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             style: AppTextStyles.sectionTitle.copyWith(
@@ -348,11 +343,11 @@ class _VipProgressCard extends StatelessWidget {
                 'Tiến độ lên hạng',
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               _TierIcon(tier: nextTier),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -376,7 +371,7 @@ class _VipProgressCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: VitDensity.compact.verticalSpace),
+              const SizedBox(height: AppSpacing.x4),
               VitProgressBar(
                 progress: volumeProgress,
                 color: _ProfileVipPaneState._vipAccent,
@@ -384,7 +379,7 @@ class _VipProgressCard extends StatelessWidget {
                 trackColor: AppColors.surface3,
                 borderRadius: AppRadii.pillRadius,
               ),
-              SizedBox(height: VitDensity.compact.verticalSpace),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 'Cần thêm ${_formatUsd(nextTier.monthlyVolume - snapshot.monthlyVolume)} để đạt mục tiêu',
                 style: AppTextStyles.micro.copyWith(
@@ -393,7 +388,7 @@ class _VipProgressCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -417,7 +412,7 @@ class _VipProgressCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: VitDensity.compact.verticalSpace),
+              const SizedBox(height: AppSpacing.x4),
               VitProgressBar(
                 progress: assetProgress,
                 color: _ProfileVipPaneState._vipSuccess,
@@ -425,7 +420,7 @@ class _VipProgressCard extends StatelessWidget {
                 trackColor: AppColors.surface3,
                 borderRadius: AppRadii.pillRadius,
               ),
-              SizedBox(height: VitDensity.compact.verticalSpace),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '✓ Điều kiện tài sản đạt ✓',
                 style: AppTextStyles.micro.copyWith(
@@ -535,9 +530,7 @@ class _VipTierRow extends StatelessWidget {
               child: Row(
                 children: [
                   _TierIcon(tier: tier),
-                  const SizedBox(
-                    width: ProfileSpacingTokens.profileVipTierNameGap,
-                  ),
+                  const SizedBox(width: AppSpacing.x4),
                   Flexible(
                     child: Text(
                       tier.name,
@@ -552,9 +545,7 @@ class _VipTierRow extends StatelessWidget {
                     ),
                   ),
                   if (active) ...[
-                    const SizedBox(
-                      width: ProfileSpacingTokens.profileVipActiveDotGap,
-                    ),
+                    const SizedBox(width: AppSpacing.x4),
                     const SizedBox(
                       width: ProfileSpacingTokens.profileVipActiveDot,
                       height: ProfileSpacingTokens.profileVipActiveDot,
@@ -629,9 +620,7 @@ class _FeeSavingsCard extends StatelessWidget {
                 color: _ProfileVipPaneState._vipSuccess,
                 size: ProfileSpacingTokens.profileVipSavingsIcon,
               ),
-              const SizedBox(
-                width: ProfileSpacingTokens.profileVipSavingsIconGap,
-              ),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 'Tiết kiệm phí của bạn',
                 style: AppTextStyles.body.copyWith(
@@ -641,7 +630,7 @@ class _FeeSavingsCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           const Row(
             children: [
               Expanded(
@@ -651,7 +640,7 @@ class _FeeSavingsCard extends StatelessWidget {
                   sub: 'vs. Standard rate',
                 ),
               ),
-              SizedBox(width: ProfileSpacingTokens.profileVipSavingsBoxGap),
+              SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: _SavingBox(
                   label: 'Tổng tích lũy',
@@ -693,7 +682,7 @@ class _SavingBox extends StatelessWidget {
               color: _ProfileVipPaneState._vipMuted,
             ),
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             style: AppTextStyles.base.copyWith(
@@ -702,7 +691,7 @@ class _SavingBox extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          SizedBox(height: VitDensity.compact.verticalSpace),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             sub,
             style: AppTextStyles.micro.copyWith(
@@ -769,9 +758,7 @@ class _BenefitTierCard extends StatelessWidget {
                 child: Row(
                   children: [
                     _TierIcon(tier: tier),
-                    const SizedBox(
-                      width: ProfileSpacingTokens.profileVipBenefitIconGap,
-                    ),
+                    const SizedBox(width: AppSpacing.x4),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -783,9 +770,7 @@ class _BenefitTierCard extends StatelessWidget {
                               fontWeight: AppTextStyles.heavy,
                             ),
                           ),
-                          const SizedBox(
-                            height: AppSpacing.pageRhythmCompactInnerGap,
-                          ),
+                          const SizedBox(height: AppSpacing.x4),
                           Text(
                             'Volume >= ${_formatUsd(tier.monthlyVolume)}/tháng hoặc Tài sản >= ${_formatUsd(tier.assetHold)}',
                             maxLines: 2,
@@ -824,16 +809,14 @@ class _BenefitTierCard extends StatelessWidget {
                       unlocked: unlocked,
                     ),
                     if (feature != tier.features.last)
-                      const SizedBox(
-                        height: AppSpacing.pageRhythmCompactInnerGap,
-                      ),
+                      const SizedBox(height: AppSpacing.x4),
                   ],
-                  const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   const Divider(
                     height: AppSpacing.dividerHairline,
                     color: AppColors.divider,
                   ),
-                  const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+                  const SizedBox(height: AppSpacing.x4),
                   Row(
                     children: [
                       _BenefitMetric(
@@ -841,19 +824,13 @@ class _BenefitTierCard extends StatelessWidget {
                         value: _formatFee(tier.makerFee),
                         active: unlocked,
                       ),
-                      const SizedBox(
-                        width: ProfileSpacingTokens
-                            .profileVipBenefitMetricColumnGap,
-                      ),
+                      const SizedBox(width: AppSpacing.x4),
                       _BenefitMetric(
                         label: 'Taker',
                         value: _formatFee(tier.takerFee),
                         active: unlocked,
                       ),
-                      const SizedBox(
-                        width: ProfileSpacingTokens
-                            .profileVipBenefitMetricColumnGap,
-                      ),
+                      const SizedBox(width: AppSpacing.x4),
                       Expanded(
                         child: _BenefitMetric(
                           label: 'Hạn mức rút',
@@ -902,9 +879,7 @@ class _FeatureLine extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          width: ProfileSpacingTokens.profileVipBenefitFeatureIconGap,
-        ),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: Text(
             text,
@@ -943,7 +918,7 @@ class _BenefitMetric extends StatelessWidget {
             color: _ProfileVipPaneState._vipMuted,
           ),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           value,
           maxLines: 1,
@@ -985,7 +960,7 @@ class _UpgradeCta extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: ProfileSpacingTokens.profileVipUpgradeIconGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -999,7 +974,7 @@ class _UpgradeCta extends StatelessWidget {
                     fontWeight: AppTextStyles.heavy,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   'Tăng khối lượng giao dịch để tiết kiệm thêm',
                   maxLines: 2,
@@ -1009,7 +984,7 @@ class _UpgradeCta extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: ProfileSpacingTokens.profileVipUpgradeCtaGap),
+          const SizedBox(width: AppSpacing.x4),
           VitCtaButton(
             key: ProfileTabletKeys.vipTradeCta,
             onPressed: onTrade,

@@ -121,7 +121,7 @@ class _MetaStripSkeleton extends StatelessWidget {
         child: Row(
           children: [
             VitSkeleton(width: 96, height: AppSpacing.x4),
-            SizedBox(width: TradeSpacingTokens.tradeTerminalMetaGap),
+            SizedBox(width: AppSpacing.x4),
             VitSkeleton(width: 88, height: AppSpacing.x4),
             Spacer(),
             VitSkeleton(width: 150, height: AppSpacing.x4),
@@ -143,9 +143,9 @@ class _ProductTabsSkeleton extends StatelessWidget {
       child: Row(
         children: [
           VitSkeleton(width: 96, height: AppSpacing.buttonCompact),
-          SizedBox(width: AppSpacing.x1),
+          SizedBox(width: AppSpacing.x4),
           VitSkeleton(width: 72, height: AppSpacing.buttonCompact),
-          SizedBox(width: AppSpacing.x1),
+          SizedBox(width: AppSpacing.x4),
           VitSkeleton(width: 72, height: AppSpacing.buttonCompact),
         ],
       ),
@@ -188,11 +188,11 @@ class _PanelSkeleton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             VitSkeleton(width: labelWidth, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             const VitSkeleton(width: double.infinity, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             const VitSkeleton(width: double.infinity, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             const VitSkeleton(width: 120, height: AppSpacing.x3),
           ],
         ),

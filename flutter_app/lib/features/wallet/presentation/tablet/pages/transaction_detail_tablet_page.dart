@@ -106,18 +106,18 @@ class _TransactionDetailTabletPageState
           child: Column(
             children: [
               Icon(meta.icon, color: meta.color, size: AppSpacing.iconLg),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitStatusPill(
                 label: _statusLabel(transaction.status),
                 status: _statusPill(transaction.status),
                 size: VitStatusPillSize.md,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 meta.label,
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '${meta.isDebit ? '-' : '+'}${_formatAmount(transaction)} ${transaction.asset}',
                 style: AppTextStyles.heroNumber.copyWith(
@@ -209,7 +209,7 @@ class _TransactionDetailTabletPageState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.open_in_new_rounded, color: AppColors.primary),
-                SizedBox(width: AppSpacing.x2),
+                SizedBox(width: AppSpacing.x4),
                 Text('Xem trên Explorer'),
               ],
             ),

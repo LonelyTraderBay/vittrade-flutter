@@ -12,7 +12,6 @@ import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
 
 /// Independent Tablet composition for wallet transaction history SC-136.
 class TransactionHistoryTabletPage extends ConsumerStatefulWidget {
@@ -183,12 +182,12 @@ class _TransactionHistoryTabletPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Phạm vi hiện tại'),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 '$count giao dịch đang hiển thị theo bộ lọc.',
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               const Text(
                 'Dữ liệu giao dịch được giữ theo trạng thái từ ví và không tự động xác nhận hoàn tất.',
                 style: AppTextStyles.micro,
@@ -250,7 +249,7 @@ class _TransactionTabletCard extends StatelessWidget {
             borderColor: meta.color.withValues(alpha: .22),
             child: Icon(meta.icon, color: meta.color, size: AppSpacing.iconSm),
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,9 +260,7 @@ class _TransactionTabletCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(
-                  height: WalletSpacingTokens.walletHistoryLineSpacing,
-                ),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   transaction.createdAt,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -271,7 +268,7 @@ class _TransactionTabletCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -283,9 +280,7 @@ class _TransactionTabletCard extends StatelessWidget {
                   fontFeatures: AppTextStyles.tabularFigures,
                 ),
               ),
-              const SizedBox(
-                height: WalletSpacingTokens.walletHistoryLineSpacing,
-              ),
+              const SizedBox(height: AppSpacing.x4),
               VitStatusPill(
                 label: status,
                 status: _statusPill(transaction.status),
@@ -293,7 +288,7 @@ class _TransactionTabletCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           const Icon(Icons.chevron_right_rounded, color: AppColors.text3),
         ],
       ),

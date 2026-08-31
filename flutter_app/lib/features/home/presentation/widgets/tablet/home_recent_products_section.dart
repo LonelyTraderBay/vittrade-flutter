@@ -103,7 +103,7 @@ class _HomeRecentProductRow extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           VitStatusPill(label: product.stateLabel, size: VitStatusPillSize.sm),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           const Icon(
             Icons.chevron_right_rounded,
             size: SharedSpacingTokens.homeSectionActionChevronSize,

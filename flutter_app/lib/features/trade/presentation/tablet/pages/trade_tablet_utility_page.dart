@@ -68,7 +68,7 @@ class TradeTabletUtilityPage extends StatelessWidget {
                 icon: Icons.insights_outlined,
                 color: AppColors.primary,
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Expanded(
                 child: Text(
                   description,

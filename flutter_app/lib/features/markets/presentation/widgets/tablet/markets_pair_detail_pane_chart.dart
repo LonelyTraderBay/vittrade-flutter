@@ -91,9 +91,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                         active: tf == widget.timeframe,
                         onTap: () => widget.onTimeframeChanged(tf),
                       ),
-                      const SizedBox(
-                        width: MarketsSpacingTokens.pairIntervalGap,
-                      ),
+                      const SizedBox(width: AppSpacing.x4),
                     ],
                   ],
                 ),
@@ -105,9 +103,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                         active: widget.indicators.contains(item),
                         onTap: () => widget.onIndicatorToggle(item),
                       ),
-                      const SizedBox(
-                        width: MarketsSpacingTokens.pairIntervalGap,
-                      ),
+                      const SizedBox(width: AppSpacing.x4),
                     ],
                     _PairIndicatorButton(
                       label: 'Nâng cao',
@@ -236,7 +232,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                   color: marketListPrimary,
                   dotSize: MarketsSpacingTokens.marketDepthLegendDot,
                 ),
-                const SizedBox(width: MarketsSpacingTokens.pairIndicatorGap),
+                const SizedBox(width: AppSpacing.x4),
               ],
               if (showVolume)
                 VitLegendItem(

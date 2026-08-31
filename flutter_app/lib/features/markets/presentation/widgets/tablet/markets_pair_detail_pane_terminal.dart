@@ -31,7 +31,7 @@ class _PairTerminalShell extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _PairMetaStrip(pair: pair),
-        const SizedBox(height: MarketsSpacingTokens.pairTerminalGutter),
+        const SizedBox(height: AppSpacing.x4),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -48,9 +48,7 @@ class _PairTerminalShell extends StatelessWidget {
                             )
                           : workspace,
                     ),
-                    const SizedBox(
-                      height: MarketsSpacingTokens.pairTerminalGutter,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     _PairMiniTabs(
                       pair: pair,
                       activeView: activeView,
@@ -59,16 +57,14 @@ class _PairTerminalShell extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: MarketsSpacingTokens.pairTerminalGutter),
+              const SizedBox(width: AppSpacing.x4),
               SizedBox(
                 width: MarketsSpacingTokens.pairDeskSideWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(child: _PairTerminalBookPanel(snapshot: snapshot)),
-                    const SizedBox(
-                      height: MarketsSpacingTokens.pairTerminalGutter,
-                    ),
+                    const SizedBox(height: AppSpacing.x4),
                     Expanded(
                       child: _PairTerminalTradesPanel(
                         trades: snapshot.recentTrades,
@@ -115,7 +111,7 @@ class _PairMetaStrip extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppSpacing.x2),
+            const SizedBox(width: AppSpacing.x4),
             Text(
               '${positive ? '▲' : '▼'}${pair.change24h.abs().toStringAsFixed(2)}%',
               style: AppTextStyles.caption.copyWith(
@@ -128,7 +124,7 @@ class _PairMetaStrip extends StatelessWidget {
               ('Thấp', formatMarketPriceFixed2(pair.low24h)),
               ('KL', formatMarketCompact(pair.volume24h, prefix: '\$')),
             ]) ...[
-              const SizedBox(width: MarketsSpacingTokens.pairMetaGap),
+              const SizedBox(width: AppSpacing.x4),
               const SizedBox(
                 height: MarketsSpacingTokens.pairMetaDividerHeight,
                 child: VerticalDivider(
@@ -137,7 +133,7 @@ class _PairMetaStrip extends StatelessWidget {
                   color: AppColors.divider,
                 ),
               ),
-              const SizedBox(width: MarketsSpacingTokens.pairMetaGap),
+              const SizedBox(width: AppSpacing.x4),
               Text.rich(
                 TextSpan(
                   text: '$label ',
@@ -415,7 +411,7 @@ class _PairMiniTabs extends StatelessWidget {
                     : MarketsPairView.depth,
               ),
             ),
-            const SizedBox(width: MarketsSpacingTokens.pairIntervalGap),
+            const SizedBox(width: AppSpacing.x4),
             _PairIntervalButton(
               key: MarketsTabletKeys.pairMiniTab('info'),
               label: 'Thông tin',
@@ -425,7 +421,7 @@ class _PairMiniTabs extends StatelessWidget {
                 AppRoutePaths.pairInfo(pair.id),
               ),
             ),
-            const SizedBox(width: MarketsSpacingTokens.pairIntervalGap),
+            const SizedBox(width: AppSpacing.x4),
             _PairIntervalButton(
               key: MarketsTabletKeys.pairMiniTab('dca'),
               label: 'Mua định kỳ',

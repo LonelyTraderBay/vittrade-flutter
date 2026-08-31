@@ -121,7 +121,7 @@ class _AddressAddTabletPageState extends ConsumerState<AddressAddTabletPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               sections[2],
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              const SizedBox(height: AppSpacing.x4),
               AddressPrimaryActionButton(
                 key: AddressAddTabletPage.saveKey,
                 enabled: _canSave(controller),

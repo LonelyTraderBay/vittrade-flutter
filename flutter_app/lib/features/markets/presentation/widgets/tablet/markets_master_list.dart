@@ -20,9 +20,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart'
 const _watchlistCategoryLabel = 'Yêu thích';
 
 const double _masterFavoriteIcon = AppSpacing.iconMd - AppSpacing.x1;
-const double _masterFavoriteGap = AppSpacing.x2;
 const double _masterAvatar = AppSpacing.x6 - AppSpacing.x1;
-const double _masterColumnGap = AppSpacing.x2;
 const double _masterHeaderHeight = AppSpacing.buttonCompact;
 const EdgeInsets _masterHeaderPadding =
     MarketsSpacingTokens.marketListPairCompactHeaderPadding;
@@ -227,8 +225,8 @@ class _MasterSortHeader extends StatelessWidget {
         padding: _masterHeaderPadding,
         child: Row(
           children: [
-            const SizedBox(width: _masterFavoriteIcon),
-            const SizedBox(width: _masterFavoriteGap),
+            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               flex: 5,
               child: Text('Cặp giao dịch', style: _masterHeaderStyle),
@@ -346,7 +344,7 @@ class _MasterPairRow extends ConsumerWidget {
                   size: _masterFavoriteIcon,
                   padding: AppSpacing.zero,
                 ),
-                const SizedBox(width: _masterFavoriteGap),
+                const SizedBox(width: AppSpacing.x4),
                 VitAssetAvatar(
                   label: pair.baseAsset,
                   accentColor: AppAssetColors.forSymbol(pair.baseAsset),
@@ -354,7 +352,7 @@ class _MasterPairRow extends ConsumerWidget {
                   radius: AppRadii.pillRadius,
                   border: true,
                 ),
-                const SizedBox(width: _masterColumnGap),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   flex: 5,
                   child: Column(
@@ -392,7 +390,7 @@ class _MasterPairRow extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: _masterColumnGap),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   flex: 3,
                   child: Text(
@@ -408,7 +406,7 @@ class _MasterPairRow extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: _masterColumnGap),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   flex: 4,
                   child: Text(

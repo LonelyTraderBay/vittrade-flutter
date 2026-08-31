@@ -34,7 +34,7 @@ class _ApiPaneKeyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _ApiPaneKeyHeader(apiKey: apiKey, onToggle: onToggle),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             _ApiPaneSecretRow(
               label: 'API KEY',
               value: _maskedKey(apiKey.key),
@@ -46,7 +46,7 @@ class _ApiPaneKeyCard extends StatelessWidget {
                 onTap: () => onCopy('${apiKey.id}_key', apiKey.key),
               ),
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             _ApiPaneSecretRow(
               label: 'SECRET',
               value: showSecret ? apiKey.secret : '••••••••••••••••••••••',
@@ -64,7 +64,7 @@ class _ApiPaneKeyCard extends StatelessWidget {
                     onTap: onReveal,
                   ),
                   if (showSecret) ...[
-                    const SizedBox(width: AppSpacing.x1),
+                    const SizedBox(width: AppSpacing.x4),
                     _ApiPaneIconTap(
                       icon: copiedId == '${apiKey.id}_secret'
                           ? Icons.check_circle_outline_rounded
@@ -75,11 +75,11 @@ class _ApiPaneKeyCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             _ApiPanePermissionBadges(apiKey: apiKey),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             _ApiPaneUsageRow(apiKey: apiKey),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -100,7 +100,7 @@ class _ApiPaneKeyCard extends StatelessWidget {
                     child: const Text('Tạo lại Secret'),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 VitIconButton(
                   key: ProfileTabletKeys.apiKeyDelete(apiKey.id),
                   icon: Icons.delete_outline_rounded,
@@ -153,7 +153,7 @@ class _ApiPaneKeyHeader extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x3),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,14 +170,14 @@ class _ApiPaneKeyHeader extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x1),
+                  const SizedBox(width: AppSpacing.x4),
                   VitAccentPill(
                     label: active ? '• Active' : '• Disabled',
                     accentColor: active ? AppColors.buy : AppColors.sell,
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const SizedBox(height: AppSpacing.x4),
               Text(
                 'Tạo: ${apiKey.createdAt} • ${apiKey.expiresAt == null ? 'Không hết hạn' : 'Hết hạn: ${apiKey.expiresAt}'}',
                 maxLines: 1,
@@ -187,7 +187,7 @@ class _ApiPaneKeyHeader extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: AppSpacing.x2),
+        const SizedBox(width: AppSpacing.x4),
         VitTogglePill(
           key: ProfileTabletKeys.apiKeyToggle(apiKey.id),
           enabled: active,
@@ -256,7 +256,7 @@ class _ApiPaneSecretRow extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           trailing,
         ],
       ),
@@ -335,7 +335,7 @@ class _ApiPaneUsageRow extends StatelessWidget {
           color: AppColors.text3,
           size: ProfileSpacingTokens.profileApiUsageIcon,
         ),
-        const SizedBox(width: ProfileSpacingTokens.profileApiUsageGapInline),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: Text(
             'Dùng lần cuối: ${apiKey.lastUsed ?? 'Chưa dùng'}',

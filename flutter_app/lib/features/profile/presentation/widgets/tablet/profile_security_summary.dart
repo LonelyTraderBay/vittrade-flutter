@@ -45,7 +45,7 @@ class ProfileSecuritySummary extends StatelessWidget {
                   style: AppTextStyles.control.copyWith(color: AppColors.text2),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 '${snapshot.scoreLabel} (${snapshot.score}/4)',
                 style: AppTextStyles.control.copyWith(
@@ -55,7 +55,7 @@ class ProfileSecuritySummary extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitSegmentedProgressBar(
             segmentCount: 4,
             filledCount: snapshot.score,
@@ -65,7 +65,7 @@ class ProfileSecuritySummary extends StatelessWidget {
             gap: ProfileSpacingTokens.securityScoreBarGap,
             borderRadius: AppRadii.pillRadius,
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           VitCtaButton(
             onPressed: onUpgrade,
             variant: VitCtaButtonVariant.secondary,

@@ -97,7 +97,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               symbol: pair.symbol,
               onTap: () => _openPairPicker(context),
             ),
-            const SizedBox(width: TradeSpacingTokens.tradeTerminalMetaGap),
+            const SizedBox(width: AppSpacing.x4),
             Flexible(
               child: Text(
                 formatTradePrice(pair.price),
@@ -110,7 +110,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppSpacing.x2),
+            const SizedBox(width: AppSpacing.x4),
             Text(
               '${positive ? '▲' : '▼'}${pair.changePct.abs().toStringAsFixed(2)}%',
               style: AppTextStyles.caption.copyWith(
@@ -123,7 +123,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               ('Thấp', lowLabel),
               ('KL', volumeLabel),
             ]) ...[
-              const SizedBox(width: TradeSpacingTokens.tradeTerminalMetaGap),
+              const SizedBox(width: AppSpacing.x4),
               const SizedBox(
                 height: TradeSpacingTokens.tradeTerminalMetaDividerHeight,
                 child: VerticalDivider(
@@ -132,7 +132,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
                   color: AppColors.divider,
                 ),
               ),
-              const SizedBox(width: TradeSpacingTokens.tradeTerminalMetaGap),
+              const SizedBox(width: AppSpacing.x4),
               // Flexible + ellipsis: tablet portrait (~655dp nội dung) vẫn
               // đủ chỗ — cụm số liệu co lại thay vì tràn panel.
               Flexible(
@@ -195,7 +195,7 @@ class _PairPickerButton extends StatelessWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(width: AppSpacing.x1),
+            const SizedBox(width: AppSpacing.x4),
             const Icon(
               Icons.keyboard_arrow_down_rounded,
               color: AppColors.text2,

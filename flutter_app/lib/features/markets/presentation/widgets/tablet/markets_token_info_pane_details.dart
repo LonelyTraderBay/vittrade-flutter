@@ -62,7 +62,7 @@ class _AthAtlCards extends StatelessWidget {
             deltaColor: AppColors.sell,
           ),
         ),
-        const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(width: AppSpacing.x4),
         Expanded(
           child: _PriceRecordCard(
             label: 'ATL',
@@ -109,7 +109,7 @@ class _PriceRecordCard extends StatelessWidget {
           Row(
             children: [
               Icon(icon, size: AppSpacing.iconSm, color: color),
-              const SizedBox(width: AppSpacing.x1),
+              const SizedBox(width: AppSpacing.x4),
               Text(
                 label,
                 style: AppTextStyles.micro.copyWith(
@@ -119,7 +119,7 @@ class _PriceRecordCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             style: AppTextStyles.caption.copyWith(
@@ -132,7 +132,7 @@ class _PriceRecordCard extends StatelessWidget {
             date,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             delta,
             maxLines: 1,
@@ -175,7 +175,7 @@ class _ChartLink extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,7 +186,7 @@ class _ChartLink extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   'Chart, sổ lệnh, giao dịch gần đây',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -224,7 +224,7 @@ class _OnchainTab extends StatelessWidget {
                     color: AppColors.buy,
                     size: AppSpacing.iconSm,
                   ),
-                  const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(width: AppSpacing.x4),
                   Text(
                     'Hoạt động mạng lưới (24h)',
                     style: AppTextStyles.caption.copyWith(
@@ -234,7 +234,7 @@ class _OnchainTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Row(
                 children: [
                   Expanded(
@@ -245,7 +245,7 @@ class _OnchainTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(width: AppSpacing.x4),
                   Expanded(
                     child: _MiniStat(
                       label: 'Giao dịch',
@@ -254,7 +254,7 @@ class _OnchainTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Row(
                 children: [
                   Expanded(
@@ -263,7 +263,7 @@ class _OnchainTab extends StatelessWidget {
                       value: formatMarketCompact(f.holders.toDouble()),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(width: AppSpacing.x4),
                   Expanded(
                     child: _MiniStat(
                       label: 'TVL',
@@ -277,7 +277,7 @@ class _OnchainTab extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Thông tin mạng lưới',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -329,7 +329,7 @@ class _MiniStat extends StatelessWidget {
             label,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             value,
             style: AppTextStyles.amountSm.copyWith(
@@ -365,7 +365,7 @@ class _ProjectTab extends StatelessWidget {
                     color: AppColors.primary,
                     size: AppSpacing.iconSm,
                   ),
-                  const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+                  const SizedBox(width: AppSpacing.x4),
                   Text(
                     'Giới thiệu',
                     style: AppTextStyles.caption.copyWith(
@@ -375,12 +375,12 @@ class _ProjectTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(f.description, style: AppTextStyles.body),
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Liên kết',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -388,7 +388,7 @@ class _ProjectTab extends StatelessWidget {
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _ProjectLinks(fundamentals: f),
-        const SizedBox(height: AppSpacing.pageRhythmCompactSectionGap),
+        const SizedBox(height: AppSpacing.x4),
         const VitSectionHeader(
           title: 'Chỉ số quan trọng',
           bottomGap: AppSpacing.pageRhythmStandardInnerGap,
@@ -436,19 +436,19 @@ class _ProjectLinks extends StatelessWidget {
           label: 'Website',
           value: fundamentals.website,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         _LinkRow(
           icon: Icons.description_outlined,
           label: 'Whitepaper',
           value: fundamentals.whitepaper,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         _LinkRow(
           icon: Icons.code_rounded,
           label: 'GitHub',
           value: fundamentals.github,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         _LinkRow(
           icon: Icons.alternate_email_rounded,
           label: 'Twitter',
@@ -481,7 +481,7 @@ class _LinkRow extends StatelessWidget {
             color: AppColors.primary,
             size: AppSpacing.iconSm + AppSpacing.x1,
           ),
-          const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

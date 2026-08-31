@@ -7,7 +7,6 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 
 const double _marketCategoryCompactHeight = AppSpacing.buttonCompact;
-const double _marketCategoryCompactGap = AppSpacing.x2;
 const EdgeInsets _marketFilterCompactPadding =
     MarketsSpacingTokens.marketListFilterCompactPadding;
 
@@ -35,8 +34,7 @@ class MarketListCategoryTabs extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         clipBehavior: Clip.none,
         itemCount: categories.length,
-        separatorBuilder: (_, _) =>
-            const SizedBox(width: _marketCategoryCompactGap),
+        separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.x4),
         itemBuilder: (context, index) {
           final category = categories[index];
           return VitFilterChip(

@@ -191,13 +191,13 @@ class MarketListTools extends StatelessWidget {
         child: Row(
           children: [
             for (var i = 0; i < hubTools.length; i++) ...[
-              if (i > 0) const SizedBox(width: _marketToolCompactGap),
+              if (i > 0) const SizedBox(width: AppSpacing.x4),
               _ToolChip(
                 tool: hubTools[i],
                 onTap: () => onNavigate('/markets/${hubTools[i].route}'),
               ),
             ],
-            const SizedBox(width: _marketToolCompactGap),
+            const SizedBox(width: AppSpacing.x4),
             VitChoicePill(
               label: 'Thêm',
               selected: false,

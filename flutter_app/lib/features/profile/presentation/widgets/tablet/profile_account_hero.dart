@@ -64,7 +64,7 @@ class ProfileAccountHero extends StatelessWidget {
               radius: AppRadii.cardRadius,
               border: true,
             ),
-            const SizedBox(width: ProfileSpacingTokens.profileMenuGap),
+            const SizedBox(width: AppSpacing.x4),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,7 @@ class ProfileAccountHero extends StatelessWidget {
                       color: AppColors.onAccent,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     VitFormat.email(user.email),
                     maxLines: 1,
@@ -87,7 +87,7 @@ class ProfileAccountHero extends StatelessWidget {
                       color: AppColors.portfolioTextMuted,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  const SizedBox(height: AppSpacing.x4),
                   Text(
                     'Tham gia từ ${user.joinDate}',
                     maxLines: 1,
@@ -99,7 +99,7 @@ class ProfileAccountHero extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(width: AppSpacing.x4),
             VitIconButton(
               key: ProfileTabletKeys.editProfile,
               icon: Icons.person_outline_rounded,
@@ -109,7 +109,7 @@ class ProfileAccountHero extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: VitDensity.compact.verticalSpace),
+        const SizedBox(height: AppSpacing.x4),
         Wrap(
           key: ProfileTabletKeys.heroPills,
           spacing: ProfileSpacingTokens.profileHeroPillGap,
@@ -144,7 +144,7 @@ class ProfileAccountHero extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _HeroFactBox(label: 'UID', value: user.id),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Material(
           color: AppColors.transparent,
           child: InkWell(
@@ -188,7 +188,7 @@ class ProfileAccountHero extends StatelessWidget {
               height: ProfileSpacingTokens.profileVipProgressHeight,
               borderRadius: AppRadii.pillRadius,
             ),
-            const SizedBox(height: AppSpacing.x1),
+            const SizedBox(height: AppSpacing.x4),
             Text(
               vip.volumeLabel,
               maxLines: 1,
@@ -291,7 +291,7 @@ class _HeroFactBox extends StatelessWidget {
               color: AppColors.portfolioTextMuted,
             ),
           ),
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Row(
             children: [
               Flexible(
@@ -307,9 +307,7 @@ class _HeroFactBox extends StatelessWidget {
                 ),
               ),
               if (trailing != null) ...[
-                const SizedBox(
-                  width: ProfileSpacingTokens.profileHeroInfoTrailingGap,
-                ),
+                const SizedBox(width: AppSpacing.x4),
                 trailing!,
               ],
             ],

@@ -195,7 +195,7 @@ class _PaneAvatarEditor extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+        const SizedBox(height: AppSpacing.x4),
         Text(
           'Nhấn vào biểu tượng camera để thay đổi',
           textAlign: TextAlign.center,
@@ -237,7 +237,7 @@ class _PaneEditField extends StatelessWidget {
             fontWeight: AppTextStyles.heavy,
           ),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        const SizedBox(height: AppSpacing.x4),
         VitInput(
           fieldKey: keyValue,
           controller: controller,
@@ -247,7 +247,7 @@ class _PaneEditField extends StatelessWidget {
           onChanged: onChanged,
         ),
         if (note != null) ...[
-          const SizedBox(height: AppSpacing.x1),
+          const SizedBox(height: AppSpacing.x4),
           Text(
             note!,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),

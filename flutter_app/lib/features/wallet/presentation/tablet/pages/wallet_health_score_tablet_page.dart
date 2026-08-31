@@ -89,7 +89,7 @@ class _WalletHealthScoreTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Điểm sức khỏe tổng thể'),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       '${snapshot.overallScore}',
                       style: AppTextStyles.heroNumber.copyWith(
@@ -97,7 +97,7 @@ class _WalletHealthScoreTabletPageState
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x1),
+                    const SizedBox(height: AppSpacing.x4),
                     Text(
                       _statusLabel(snapshot.overallScore),
                       style: AppTextStyles.caption.copyWith(
@@ -182,13 +182,13 @@ class _WalletHealthScoreTabletPageState
             child: Row(
               children: [
                 const Icon(Icons.shield_outlined, color: AppColors.caution),
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(recommendation.title),
-                      const SizedBox(height: AppSpacing.x1),
+                      const SizedBox(height: AppSpacing.x4),
                       Text(
                         recommendation.description,
                         style: AppTextStyles.caption.copyWith(
@@ -333,7 +333,7 @@ class _WalletHealthScoreTabletPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Xu hướng điểm số'),
-                const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+                const SizedBox(height: AppSpacing.x4),
                 SizedBox(
                   height: AppSpacing.x7 * 3,
                   child: VitSparkline(
@@ -362,16 +362,16 @@ class _WalletHealthScoreTabletPageState
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(recommendation.title, style: AppTextStyles.sectionTitle),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               Text(recommendation.description),
-              const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitStatusPill(
                 label: 'Khuyến nghị ưu tiên · ${recommendation.category}',
                 status: VitStatusPillStatus.warning,
                 icon: Icons.info_outline_rounded,
                 size: VitStatusPillSize.sm,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+              const SizedBox(height: AppSpacing.x4),
               VitCtaButton(
                 key: WalletHealthScoreTabletPage.sheetCloseKey,
                 onPressed: () => Navigator.of(context).pop(),

@@ -131,13 +131,13 @@ class _WalletTokenApprovalTabletPageState
             color: AppColors.accent,
             size: AppSpacing.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Tổng quan phê duyệt token'),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '${snapshot.approvals.length} quyền đang hoạt động',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -217,7 +217,7 @@ class _WalletTokenApprovalTabletPageState
             _riskIcon(approval.riskLevel),
             color: _riskColor(approval.riskLevel),
           ),
-          const SizedBox(width: AppSpacing.x2),
+          const SizedBox(width: AppSpacing.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,12 +233,12 @@ class _WalletTokenApprovalTabletPageState
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   '${approval.spenderName} · ${approval.maskedSpender}',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                const SizedBox(height: AppSpacing.x4),
                 Text(
                   'Hạn mức: ${approval.amountLabel} · Dùng lần cuối: ${approval.lastUsedLabel}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -385,9 +385,9 @@ class _WalletTokenApprovalTabletPageState
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(preview.title, style: AppTextStyles.sectionTitle),
-            const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Text(preview.body),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             const VitHighRiskStatePanel(
               state: VitHighRiskUiState.riskReview,
               title: 'Bước xem trước bắt buộc',
@@ -396,7 +396,7 @@ class _WalletTokenApprovalTabletPageState
               contractId: 'Thu hồi quyền token',
               density: VitDensity.compact,
             ),
-            const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+            const SizedBox(height: AppSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -407,7 +407,7 @@ class _WalletTokenApprovalTabletPageState
                     child: const Text('Xem lại sau'),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x2),
+                const SizedBox(width: AppSpacing.x4),
                 Expanded(
                   child: VitCtaButton(
                     key: WalletTokenApprovalTabletPage.revokeSheetConfirmKey,
