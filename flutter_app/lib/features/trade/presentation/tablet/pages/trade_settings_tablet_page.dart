@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -89,7 +89,7 @@ class _TradeSettingsTabletPageState
                       children: const [SizedBox.shrink()],
                     ),
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Xác nhận lệnh',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -112,7 +112,7 @@ class _TradeSettingsTabletPageState
                       ),
                     ),
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Phản hồi khi khớp lệnh',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -135,7 +135,7 @@ class _TradeSettingsTabletPageState
                       ),
                     ),
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Hiển thị terminal',
                       child: _SettingsSwitchCard(
                         rows: [
@@ -171,7 +171,7 @@ class _TradeSettingsTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Cấu hình hiện tại',
                       // Nút Lưu nằm trong CÙNG section child với card cấu
                       // hình — khoảng thở là inner gap (S7: children của
@@ -180,7 +180,7 @@ class _TradeSettingsTabletPageState
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           _CurrentConfigCard(settings: snapshot.settings),
-                          const SizedBox(height: AppSpacing.x4),
+                          const SizedBox(height: TabletSpacingTokens.x4),
                           VitCtaButton(
                             key: TradeSettingsTabletPage.saveKey,
                             onPressed: () async {
@@ -236,13 +236,15 @@ class _SettingsSwitchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       radius: VitCardRadius.tight,
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           for (final row in rows)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x2),
+              padding: const EdgeInsets.symmetric(
+                vertical: TabletSpacingTokens.x2,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -277,7 +279,7 @@ class _CurrentConfigCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       radius: VitCardRadius.tight,
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -289,7 +291,9 @@ class _CurrentConfigCard extends StatelessWidget {
             ('Khung giờ chart', settings.chartTimeframe),
           ])
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x2),
+              padding: const EdgeInsets.symmetric(
+                vertical: TabletSpacingTokens.x2,
+              ),
               child: Row(
                 children: [
                   Expanded(

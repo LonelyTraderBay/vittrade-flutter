@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_filters.dart';
@@ -19,9 +19,10 @@ import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart'
 /// Watchlist-first: người dùng quay lại terminal để xem lại cặp đã lưu.
 const _watchlistCategoryLabel = 'Yêu thích';
 
-const double _masterFavoriteIcon = AppSpacing.iconMd - AppSpacing.x1;
-const double _masterAvatar = AppSpacing.x6 - AppSpacing.x1;
-const double _masterHeaderHeight = AppSpacing.buttonCompact;
+const double _masterFavoriteIcon =
+    TabletSpacingTokens.iconMd - TabletSpacingTokens.x1;
+const double _masterAvatar = TabletSpacingTokens.x6 - TabletSpacingTokens.x1;
+const double _masterHeaderHeight = TabletSpacingTokens.buttonCompact;
 const EdgeInsets _masterHeaderPadding =
     MarketsSpacingTokens.marketListPairCompactHeaderPadding;
 const EdgeInsets _masterRowPadding =
@@ -119,7 +120,7 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
           ),
         ),
         Padding(
-          padding: _masterBodyPadding.copyWith(top: AppSpacing.zero),
+          padding: _masterBodyPadding.copyWith(top: TabletSpacingTokens.zero),
           child: MarketListCategoryTabs(
             categories: [_watchlistCategoryLabel, ...categories],
             activeCategory: _watchlistMode ? _watchlistCategoryLabel : category,
@@ -169,8 +170,8 @@ class _MarketsMasterListState extends ConsumerState<MarketsMasterList> {
                             ),
                             const Divider(
                               color: AppColors.divider,
-                              height: AppSpacing.dividerHairline,
-                              thickness: AppSpacing.dividerHairline,
+                              height: TabletSpacingTokens.dividerHairline,
+                              thickness: TabletSpacingTokens.dividerHairline,
                             ),
                           ],
                         );
@@ -225,8 +226,8 @@ class _MasterSortHeader extends StatelessWidget {
         padding: _masterHeaderPadding,
         child: Row(
           children: [
-            const SizedBox(width: AppSpacing.x4),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Expanded(
               flex: 5,
               child: Text('Cặp giao dịch', style: _masterHeaderStyle),
@@ -280,7 +281,9 @@ class _ShortWatchlistHint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.x5),
+      padding: const EdgeInsetsDirectional.symmetric(
+        vertical: TabletSpacingTokens.x5,
+      ),
       child: VitEmptyState(
         key: MarketsTabletKeys.watchlistShortHint,
         icon: Icons.star_border_rounded,
@@ -342,9 +345,9 @@ class _MasterPairRow extends ConsumerWidget {
                   onPressed: onFavoriteToggle,
                   color: favorite ? marketListArenaAccent : AppColors.text3,
                   size: _masterFavoriteIcon,
-                  padding: AppSpacing.zero,
+                  padding: TabletSpacingTokens.zero,
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 VitAssetAvatar(
                   label: pair.baseAsset,
                   accentColor: AppAssetColors.forSymbol(pair.baseAsset),
@@ -352,7 +355,7 @@ class _MasterPairRow extends ConsumerWidget {
                   radius: AppRadii.pillRadius,
                   border: true,
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   flex: 5,
                   child: Column(
@@ -390,7 +393,7 @@ class _MasterPairRow extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   flex: 3,
                   child: Text(
@@ -406,7 +409,7 @@ class _MasterPairRow extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   flex: 4,
                   child: Text(

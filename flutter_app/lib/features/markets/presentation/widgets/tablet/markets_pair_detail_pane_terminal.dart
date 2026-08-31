@@ -31,7 +31,7 @@ class _PairTerminalShell extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _PairMetaStrip(pair: pair),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -48,7 +48,7 @@ class _PairTerminalShell extends StatelessWidget {
                             )
                           : workspace,
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     _PairMiniTabs(
                       pair: pair,
                       activeView: activeView,
@@ -57,14 +57,14 @@ class _PairTerminalShell extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               SizedBox(
                 width: MarketsSpacingTokens.pairDeskSideWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(child: _PairTerminalBookPanel(snapshot: snapshot)),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Expanded(
                       child: _PairTerminalTradesPanel(
                         trades: snapshot.recentTrades,
@@ -111,7 +111,7 @@ class _PairMetaStrip extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Text(
               '${positive ? '▲' : '▼'}${pair.change24h.abs().toStringAsFixed(2)}%',
               style: AppTextStyles.caption.copyWith(
@@ -124,16 +124,16 @@ class _PairMetaStrip extends StatelessWidget {
               ('Thấp', formatMarketPriceFixed2(pair.low24h)),
               ('KL', formatMarketCompact(pair.volume24h, prefix: '\$')),
             ]) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const SizedBox(
                 height: MarketsSpacingTokens.pairMetaDividerHeight,
                 child: VerticalDivider(
-                  width: AppSpacing.hairlineStroke,
-                  thickness: AppSpacing.hairlineStroke,
+                  width: TabletSpacingTokens.hairlineStroke,
+                  thickness: TabletSpacingTokens.hairlineStroke,
                   color: AppColors.divider,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Text.rich(
                 TextSpan(
                   text: '$label ',
@@ -254,7 +254,7 @@ class _PairTerminalBookPanel extends StatelessWidget {
                   maxCumulative: maxCumulative,
                 ),
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               for (var i = 0; i < bids.length; i++)
@@ -411,7 +411,7 @@ class _PairMiniTabs extends StatelessWidget {
                     : MarketsPairView.depth,
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             _PairIntervalButton(
               key: MarketsTabletKeys.pairMiniTab('info'),
               label: 'Thông tin',
@@ -421,7 +421,7 @@ class _PairMiniTabs extends StatelessWidget {
                 AppRoutePaths.pairInfo(pair.id),
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             _PairIntervalButton(
               key: MarketsTabletKeys.pairMiniTab('dca'),
               label: 'Mua định kỳ',

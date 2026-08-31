@@ -16,8 +16,8 @@ class _RiskBox extends StatelessWidget {
     return VitCard(
       radius: VitCardRadius.tight,
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       borderColor: color.withValues(alpha: .22),
       child: Column(
@@ -30,7 +30,7 @@ class _RiskBox extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             value,
             maxLines: 1,
@@ -53,8 +53,8 @@ class _TradeTabletWarningNotice extends StatelessWidget {
     return VitCard(
       radius: VitCardRadius.tight,
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       borderColor: AppColors.warn.withValues(alpha: .22),
       child: Row(
@@ -63,9 +63,9 @@ class _TradeTabletWarningNotice extends StatelessWidget {
           const Icon(
             Icons.warning_amber_rounded,
             color: AppColors.warn,
-            size: AppSpacing.iconSm,
+            size: TabletSpacingTokens.iconSm,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Text(
               'Lệnh có thể bị khớp 1 phần hoặc hủy nếu giá thay đổi nhanh. '
@@ -94,8 +94,8 @@ class _OrderSupportLink extends StatelessWidget {
       onTap: () => context.go(supportRoute),
       radius: VitCardRadius.tight,
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       borderColor: AppColors.primary.withValues(alpha: .12),
       child: Row(
@@ -103,9 +103,9 @@ class _OrderSupportLink extends StatelessWidget {
           const Icon(
             Icons.support_agent_rounded,
             color: AppColors.primary,
-            size: AppSpacing.iconMd,
+            size: TabletSpacingTokens.iconMd,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Text(
               'Cần hỗ trợ lệnh này?',
@@ -124,11 +124,11 @@ class _OrderSupportLink extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           const Icon(
             Icons.chevron_right_rounded,
             color: AppColors.primary,
-            size: AppSpacing.iconMd,
+            size: TabletSpacingTokens.iconMd,
           ),
         ],
       ),

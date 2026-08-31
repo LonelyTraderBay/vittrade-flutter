@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/common/profile_icon_registry.dart';
@@ -174,7 +174,7 @@ class _SecurityScoreCard extends StatelessWidget {
                   style: AppTextStyles.control.copyWith(color: AppColors.text2),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Text(
                 '${snapshot.scoreLabel} (${snapshot.score}/4)',
                 style: AppTextStyles.control.copyWith(
@@ -184,7 +184,7 @@ class _SecurityScoreCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitSegmentedProgressBar(
             segmentCount: 4,
             filledCount: snapshot.score,
@@ -194,7 +194,7 @@ class _SecurityScoreCard extends StatelessWidget {
             gap: ProfileSpacingTokens.securityScoreBarGap,
             borderRadius: AppRadii.pillRadius,
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           // Nested inside the standard-tier score card — tight radius keeps
           // the concentric −8 rule (Tablet-Card-Border-Standard R4).
           VitCard(
@@ -218,7 +218,7 @@ class _SecurityScoreCard extends StatelessWidget {
                   color: _ProfileSecurityPaneState._securityAmber,
                   size: ProfileSpacingTokens.securitySmallIcon,
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: Text(
                     'Bật tất cả tính năng bảo mật để bảo vệ tài sản của bạn tốt nhất.',
@@ -256,7 +256,7 @@ class _SecurityList extends StatelessWidget {
               _SecurityRow(item: item, onTap: () => onItemTap(item)),
               if (item != items.last)
                 const Divider(
-                  height: AppSpacing.dividerHairline,
+                  height: TabletSpacingTokens.dividerHairline,
                   color: _ProfileSecurityPaneState._securityDivider,
                 ),
             ],
@@ -286,7 +286,7 @@ class _SecurityRow extends StatelessWidget {
       borderColor: AppColors.transparent,
       padding: EdgeInsets.zero,
       child: VitIconListRow(
-        minHeight: VitDensity.compact.controlHeight + AppSpacing.x5,
+        minHeight: VitDensity.compact.controlHeight + TabletSpacingTokens.x5,
         padding: ProfileSpacingTokens.securityRowPadding,
         gap: ProfileSpacingTokens.securityRowGap,
         leading: VitAccentIconBox(
@@ -318,13 +318,13 @@ class _SecurityRow extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (item.status != null) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               VitAccentPill(
                 label: item.status!,
                 accentColor: Color(item.statusHex!),
               ),
             ],
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             const Icon(
               Icons.chevron_right_rounded,
               color: AppColors.text3,
@@ -351,7 +351,7 @@ class _DeviceList extends StatelessWidget {
           'THIẾT BỊ ĐĂNG NHẬP',
           style: AppTextStyles.badge.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           borderColor: _ProfileSecurityPaneState._securityBorder,
           clip: true,
@@ -363,7 +363,7 @@ class _DeviceList extends StatelessWidget {
                   _DeviceRow(device: device),
                   if (device != devices.last)
                     const Divider(
-                      height: AppSpacing.dividerHairline,
+                      height: TabletSpacingTokens.dividerHairline,
                       color: _ProfileSecurityPaneState._securityDivider,
                     ),
                 ],
@@ -397,7 +397,7 @@ class _DeviceRow extends StatelessWidget {
               color: AppColors.text3,
               size: ProfileSpacingTokens.securityDeviceIcon,
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,7 +416,7 @@ class _DeviceRow extends StatelessWidget {
                         ),
                       ),
                       if (device.isCurrent) ...[
-                        const SizedBox(width: AppSpacing.x4),
+                        const SizedBox(width: TabletSpacingTokens.x4),
                         const VitAccentPill(
                           label: 'Hiện tại',
                           accentColor: _ProfileSecurityPaneState._securityGreen,
@@ -424,7 +424,7 @@ class _DeviceRow extends StatelessWidget {
                       ],
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     '${device.os} • ${device.location}',
                     maxLines: 1,
@@ -433,7 +433,7 @@ class _DeviceRow extends StatelessWidget {
                       color: _ProfileSecurityPaneState._securityMuted,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     device.lastSeen,
                     style: AppTextStyles.numericMicro.copyWith(
@@ -444,7 +444,7 @@ class _DeviceRow extends StatelessWidget {
               ),
             ),
             if (!device.isCurrent) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const VitAccentPill(
                 label: 'Đăng xuất',
                 accentColor: _ProfileSecurityPaneState._securityRed,
@@ -483,7 +483,7 @@ class _AntiPhishingCard extends StatelessWidget {
                 color: _ProfileSecurityPaneState._securityPrimary,
                 size: ProfileSpacingTokens.securityAntiPhishingIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Text(
                 'Mã chống lừa đảo',
                 style: AppTextStyles.control.copyWith(
@@ -493,17 +493,17 @@ class _AntiPhishingCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             'Đặt mã cá nhân. Email từ VitTrade sẽ luôn hiển thị mã này.',
             style: AppTextStyles.numericMicro.copyWith(color: AppColors.text2),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             'Trước khi Lưu: xem trước mã · chỉ dùng email VitTrade thật · không hoàn tác ngay sau xác nhận.',
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitInput(
             fieldKey: ProfileTabletKeys.securityAntiPhishingField,
             controller: controller,

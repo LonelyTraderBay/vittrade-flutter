@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -98,7 +98,7 @@ class _WalletMultiManagerTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Tổng giá trị danh mục'),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       VitFormat.usd(snapshot.totalBalance),
                       style: AppTextStyles.heroNumber.copyWith(
@@ -121,7 +121,7 @@ class _WalletMultiManagerTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Danh sách quản lý',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -152,7 +152,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildWallets(WalletMultiManagerSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Tất cả ví',
       headerIcon: Icons.wallet_outlined,
       headerIconColor: AppColors.primary,
@@ -175,9 +175,9 @@ class _WalletMultiManagerTabletPageState
           VitAssetAvatar(
             label: wallet.name,
             accentColor: Color(wallet.accentColorHex),
-            size: AppSpacing.iconLg,
+            size: TabletSpacingTokens.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,12 +193,12 @@ class _WalletMultiManagerTabletPageState
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '${wallet.type} · ${VitFormat.signedPercent(wallet.change24hPct, fractionDigits: 2)}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   revealed ? wallet.address : wallet.maskedAddress,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -206,7 +206,7 @@ class _WalletMultiManagerTabletPageState
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Column(
             children: [
               IconButton(
@@ -248,7 +248,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildGroups(WalletMultiManagerSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Nhóm ví',
       headerIcon: Icons.folder_copy_outlined,
       headerIconColor: AppColors.primary,
@@ -265,7 +265,7 @@ class _WalletMultiManagerTabletPageState
               leading: VitAssetAvatar(
                 label: group.name,
                 accentColor: Color(group.colorHex),
-                size: AppSpacing.iconLg,
+                size: TabletSpacingTokens.iconLg,
               ),
               density: VitDensity.compact,
               showDivider: false,
@@ -277,7 +277,7 @@ class _WalletMultiManagerTabletPageState
 
   Widget _buildActivity(WalletMultiManagerSnapshot snapshot) {
     return const VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Hoạt động gần đây',
       headerIcon: Icons.history_rounded,
       headerIconColor: AppColors.primary,
@@ -315,7 +315,7 @@ class _WalletMultiManagerTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Ví đang chọn',
           headerIcon: Icons.account_balance_outlined,
           headerIconColor: AppColors.primary,
@@ -329,14 +329,14 @@ class _WalletMultiManagerTabletPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(selected.name, style: AppTextStyles.sectionTitle),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     '${selected.lastActiveLabel} · ${selected.assets.length} tài sản',
                     style: AppTextStyles.caption.copyWith(
                       color: AppColors.text2,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   for (var i = 0; i < selected.assets.length; i++)
                     VitInfoRow(
                       label: selected.assets[i].symbol,

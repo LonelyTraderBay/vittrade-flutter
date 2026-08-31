@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
@@ -47,11 +47,11 @@ class TradeTerminalMetaStrip extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Padding(
-              padding: AppSpacing.contentInsets,
+              padding: TabletSpacingTokens.contentInsets,
               child: VitSheetHandle(),
             ),
             Padding(
-              padding: AppSpacing.contentInsets,
+              padding: TabletSpacingTokens.contentInsets,
               child: Text(
                 'Chọn cặp giao dịch',
                 style: AppTextStyles.sectionTitle.copyWith(
@@ -63,7 +63,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                padding: AppSpacing.contentInsets,
+                padding: TabletSpacingTokens.contentInsets,
                 children: [
                   for (final candidate in pairs)
                     _TradePairPickerRow(
@@ -97,7 +97,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               symbol: pair.symbol,
               onTap: () => _openPairPicker(context),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Flexible(
               child: Text(
                 formatTradePrice(pair.price),
@@ -110,7 +110,7 @@ class TradeTerminalMetaStrip extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Text(
               '${positive ? '▲' : '▼'}${pair.changePct.abs().toStringAsFixed(2)}%',
               style: AppTextStyles.caption.copyWith(
@@ -123,16 +123,16 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               ('Thấp', lowLabel),
               ('KL', volumeLabel),
             ]) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const SizedBox(
                 height: TradeSpacingTokens.tradeTerminalMetaDividerHeight,
                 child: VerticalDivider(
-                  width: AppSpacing.hairlineStroke,
-                  thickness: AppSpacing.hairlineStroke,
+                  width: TabletSpacingTokens.hairlineStroke,
+                  thickness: TabletSpacingTokens.hairlineStroke,
                   color: AppColors.divider,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               // Flexible + ellipsis: tablet portrait (~655dp nội dung) vẫn
               // đủ chỗ — cụm số liệu co lại thay vì tràn panel.
               Flexible(
@@ -160,7 +160,10 @@ class TradeTerminalMetaStrip extends StatelessWidget {
               key: TradeTabletKeys.refresh,
               tooltip: 'Làm mới dữ liệu',
               onPressed: onRefresh,
-              icon: const Icon(Icons.refresh_rounded, size: AppSpacing.iconMd),
+              icon: const Icon(
+                Icons.refresh_rounded,
+                size: TabletSpacingTokens.iconMd,
+              ),
               color: AppColors.text2,
               visualDensity: VisualDensity.compact,
             ),
@@ -195,7 +198,7 @@ class _PairPickerButton extends StatelessWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             const Icon(
               Icons.keyboard_arrow_down_rounded,
               color: AppColors.text2,
@@ -248,9 +251,9 @@ class _TradePairPickerRow extends StatelessWidget {
                 fontFeatures: AppTextStyles.tabularFigures,
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             SizedBox(
-              width: AppSpacing.x7 + AppSpacing.x6,
+              width: TabletSpacingTokens.x7 + TabletSpacingTokens.x6,
               child: Text(
                 '${positive ? '▲' : '▼'}${pair.changePct.abs().toStringAsFixed(2)}%',
                 textAlign: TextAlign.right,

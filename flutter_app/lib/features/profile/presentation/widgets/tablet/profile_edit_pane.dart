@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
@@ -173,7 +173,7 @@ class _PaneAvatarEditor extends StatelessWidget {
             VitAssetAvatar(
               label: initial,
               accentColor: AppColors.primary,
-              size: AppSpacing.x7 + AppSpacing.x5,
+              size: TabletSpacingTokens.x7 + TabletSpacingTokens.x5,
               radius: AppRadii.cardLargeRadius,
               border: true,
             ),
@@ -195,7 +195,7 @@ class _PaneAvatarEditor extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           'Nhấn vào biểu tượng camera để thay đổi',
           textAlign: TextAlign.center,
@@ -237,7 +237,7 @@ class _PaneEditField extends StatelessWidget {
             fontWeight: AppTextStyles.heavy,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           fieldKey: keyValue,
           controller: controller,
@@ -247,7 +247,7 @@ class _PaneEditField extends StatelessWidget {
           onChanged: onChanged,
         ),
         if (note != null) ...[
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             note!,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),

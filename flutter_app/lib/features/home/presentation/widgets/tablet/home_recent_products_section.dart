@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
@@ -35,7 +35,7 @@ class HomeRecentProductsSection extends StatelessWidget {
       children: [
         VitSectionHeader(
           title: 'Gần đây',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           density: density,
         ),
         if (recentProducts.isEmpty)
@@ -59,8 +59,8 @@ class HomeRecentProductsSection extends StatelessWidget {
                   ),
                   if (i < recentProducts.length - 1)
                     const Divider(
-                      height: AppSpacing.dividerHairline,
-                      thickness: AppSpacing.dividerHairline,
+                      height: TabletSpacingTokens.dividerHairline,
+                      thickness: TabletSpacingTokens.dividerHairline,
                       color: AppColors.divider,
                     ),
                 ],
@@ -85,7 +85,7 @@ class _HomeRecentProductRow extends StatelessWidget {
       onTap: onTap,
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: HomeSpacingTokens.homeListRowPadding,
-        vertical: AppSpacing.x3,
+        vertical: TabletSpacingTokens.x3,
       ),
       leading: VitAccentIconBox(
         icon: HomeActionTokens.icon(product.icon),
@@ -103,7 +103,7 @@ class _HomeRecentProductRow extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           VitStatusPill(label: product.stateLabel, size: VitStatusPillSize.sm),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           const Icon(
             Icons.chevron_right_rounded,
             size: SharedSpacingTokens.homeSectionActionChevronSize,

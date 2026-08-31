@@ -18,7 +18,7 @@ class WalletAllocationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final total = assets.fold<double>(0, (sum, asset) => sum + asset.usdValue);
     return VitCard(
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       variant: VitCardVariant.standard,
       child: Row(
         children: [
@@ -28,7 +28,7 @@ class WalletAllocationCard extends StatelessWidget {
             ),
             painter: _AllocationPainter(assets: assets, total: total),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               children: [
@@ -43,7 +43,7 @@ class WalletAllocationCard extends StatelessWidget {
                           child: ColoredBox(color: Color(asset.colorHex)),
                         ),
                       ),
-                      const SizedBox(width: AppSpacing.x4),
+                      const SizedBox(width: TabletSpacingTokens.x4),
                       Expanded(
                         child: Text(
                           asset.symbol,
@@ -64,7 +64,7 @@ class WalletAllocationCard extends StatelessWidget {
                     ],
                   ),
                   if (asset != assets.take(6).last)
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                 ],
               ],
             ),

@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -85,7 +85,7 @@ class _WalletGasOptimizerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Bảng điều khiển phí',
           headerIcon: Icons.speed_rounded,
           headerIconColor: AppColors.primary,
@@ -131,7 +131,7 @@ class _WalletGasOptimizerTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Mức phí được đề xuất'),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '${snapshot.recommendedLevel.gwei} Gwei',
                       style: AppTextStyles.heroNumber.copyWith(
@@ -139,7 +139,7 @@ class _WalletGasOptimizerTabletPageState
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '${snapshot.recommendedLevel.timeEstimate} · ${VitFormat.signedPercent(snapshot.vsAveragePct, fractionDigits: 2)} so với trung bình',
                       style: AppTextStyles.caption.copyWith(
@@ -154,7 +154,7 @@ class _WalletGasOptimizerTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Chọn tốc độ giao dịch',
           headerIcon: Icons.tune_rounded,
           headerIconColor: AppColors.primary,
@@ -177,7 +177,7 @@ class _WalletGasOptimizerTabletPageState
               onChanged: (speed) => setState(() => _selectedSpeed = speed),
               variant: VitTabBarVariant.segment,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCard(
               variant: VitCardVariant.inner,
               child: VitInfoRow(
@@ -191,7 +191,7 @@ class _WalletGasOptimizerTabletPageState
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'So sánh loại giao dịch',
           headerIcon: Icons.compare_arrows_rounded,
           headerIconColor: AppColors.primary,
@@ -228,7 +228,7 @@ class _WalletGasOptimizerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Xu hướng phí 24 giờ',
           headerIcon: Icons.show_chart_rounded,
           headerIconColor: AppColors.primary,
@@ -239,7 +239,7 @@ class _WalletGasOptimizerTabletPageState
             VitCard(
               variant: VitCardVariant.inner,
               child: SizedBox(
-                height: AppSpacing.x7 * 3,
+                height: TabletSpacingTokens.x7 * 3,
                 child: VitSparkline(
                   values: [
                     for (final point in snapshot.history)
@@ -252,7 +252,7 @@ class _WalletGasOptimizerTabletPageState
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Hoạt động mạng',
           headerIcon: Icons.bar_chart_rounded,
           headerIconColor: AppColors.primary,
@@ -285,7 +285,7 @@ class _WalletGasOptimizerTabletPageState
 
   Widget _buildTips(WalletGasOptimizerSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Mẹo tiết kiệm phí',
       headerIcon: Icons.lightbulb_outline_rounded,
       headerIconColor: AppColors.primary,
@@ -300,12 +300,12 @@ class _WalletGasOptimizerTabletPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(tip.title, style: AppTextStyles.sectionTitle),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   tip.description,
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '${tip.potentialSaving} · ${tip.difficulty}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.buy),
@@ -330,7 +330,7 @@ class _WalletGasOptimizerTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tóm tắt vận hành',
           headerIcon: Icons.monitor_heart_outlined,
           headerIconColor: AppColors.primary,

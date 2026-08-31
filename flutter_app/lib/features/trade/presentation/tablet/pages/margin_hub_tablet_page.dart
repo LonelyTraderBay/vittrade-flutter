@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -77,24 +77,24 @@ class MarginHubTabletPage extends ConsumerWidget {
                       children: const [SizedBox.shrink()],
                     ),
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Chỉ số tổng quan',
                       child: _HubStatsCard(stats: snapshot.stats),
                     ),
                     for (final feature in snapshot.features)
                       VitTradeSection(
-                        innerGap: AppSpacing.x4,
+                        innerGap: TabletSpacingTokens.x4,
                         title: feature.title,
                         child: VitCard(
                           radius: VitCardRadius.tight,
-                          padding: AppSpacing.cardPaddingCompact,
+                          padding: TabletSpacingTokens.cardPaddingCompact,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               for (final item in feature.items)
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                    vertical: AppSpacing.x1,
+                                    vertical: TabletSpacingTokens.x1,
                                   ),
                                   child: Row(
                                     children: [
@@ -116,11 +116,11 @@ class MarginHubTabletPage extends ConsumerWidget {
                   ],
                   secondaryChildren: [
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Điều hướng nhanh',
                       child: VitCard(
                         radius: VitCardRadius.tight,
-                        padding: AppSpacing.cardPaddingCompact,
+                        padding: TabletSpacingTokens.cardPaddingCompact,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -152,11 +152,11 @@ class MarginHubTabletPage extends ConsumerWidget {
                       ),
                     ),
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Tuân thủ',
                       child: VitCard(
                         radius: VitCardRadius.tight,
-                        padding: AppSpacing.cardPaddingCompact,
+                        padding: TabletSpacingTokens.cardPaddingCompact,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -167,7 +167,7 @@ class MarginHubTabletPage extends ConsumerWidget {
                                 fontWeight: AppTextStyles.bold,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.x4),
+                            const SizedBox(height: TabletSpacingTokens.x4),
                             Text(
                               snapshot.compliance.description,
                               style: AppTextStyles.caption.copyWith(
@@ -199,13 +199,15 @@ class _HubStatsCard extends StatelessWidget {
     return VitCard(
       key: MarginHubTabletPage.statsKey,
       radius: VitCardRadius.tight,
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           for (final stat in stats)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+              padding: const EdgeInsets.symmetric(
+                vertical: TabletSpacingTokens.x1,
+              ),
               child: Row(
                 children: [
                   Expanded(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_trade_instrument_hero.dart';
 
@@ -45,7 +45,7 @@ class VitTradeSimpleHero extends StatelessWidget {
           density: VitTradeInstrumentHeroDensity.standard,
         ),
         if (availableBalanceLabel != null) ...[
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             'Số dư khả dụng: $availableBalanceLabel',
             style: AppTextStyles.caption.copyWith(

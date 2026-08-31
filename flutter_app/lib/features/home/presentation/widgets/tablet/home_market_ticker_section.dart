@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
-const double _assetAvatarExtent = AppSpacing.iconMd + AppSpacing.x1;
+const double _assetAvatarExtent =
+    TabletSpacingTokens.iconMd + TabletSpacingTokens.x1;
 
 class HomeMarketTickerSection extends StatelessWidget {
   const HomeMarketTickerSection({

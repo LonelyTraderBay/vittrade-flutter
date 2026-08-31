@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -86,7 +86,7 @@ class LeverageTabletPage extends ConsumerWidget {
       ),
       primary: VitCard(
         radius: VitCardRadius.tight,
-        padding: AppSpacing.cardPaddingCompact,
+        padding: TabletSpacingTokens.cardPaddingCompact,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -97,10 +97,10 @@ class LeverageTabletPage extends ConsumerWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Wrap(
-              spacing: AppSpacing.rowGap,
-              runSpacing: AppSpacing.rowGap,
+              spacing: TabletSpacingTokens.rowGap,
+              runSpacing: TabletSpacingTokens.rowGap,
               children: [
                 for (final preset in snapshot.presets)
                   VitFilterChip(
@@ -112,9 +112,9 @@ class LeverageTabletPage extends ConsumerWidget {
                   ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             _LeverageImpactRows(preview: preview),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCtaButton(
               key: LeverageTabletPage.submitKey,
               onPressed:
@@ -133,7 +133,7 @@ class LeverageTabletPage extends ConsumerWidget {
       ),
       secondary: VitCard(
         radius: VitCardRadius.tight,
-        padding: AppSpacing.cardPaddingCompact,
+        padding: TabletSpacingTokens.cardPaddingCompact,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -144,7 +144,7 @@ class LeverageTabletPage extends ConsumerWidget {
                 fontWeight: AppTextStyles.bold,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             for (final (label, value) in [
               (
                 'Ký quỹ ví dụ',
@@ -154,7 +154,9 @@ class LeverageTabletPage extends ConsumerWidget {
               ('Mức đang chọn', '${state.request.leverage} x'),
             ])
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+                padding: const EdgeInsets.symmetric(
+                  vertical: TabletSpacingTokens.x1,
+                ),
                 child: VitKeyValueRow(
                   label: label,
                   value: value,
@@ -167,7 +169,7 @@ class LeverageTabletPage extends ConsumerWidget {
                   ),
                 ),
               ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             if (preview.warningText.isNotEmpty)
               Text(
                 preview.warningText,
@@ -192,7 +194,7 @@ class _LeverageImpactRows extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+          padding: const EdgeInsets.symmetric(vertical: TabletSpacingTokens.x1),
           child: VitKeyValueRow(
             label: 'Mức rủi ro',
             value: preview.riskLabel,
@@ -217,7 +219,9 @@ class _LeverageImpactRows extends StatelessWidget {
           ('Lỗ nếu giá −1%', formatTradeSignedMoney(preview.lossAtOnePct)),
         ])
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+            padding: const EdgeInsets.symmetric(
+              vertical: TabletSpacingTokens.x1,
+            ),
             child: VitKeyValueRow(
               label: label,
               value: value,

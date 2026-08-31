@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -65,7 +65,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
               // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
               // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
               VitAccentIconBox(icon: icon, color: AppColors.primary),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   description,
@@ -88,7 +88,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
             density: VitDensity.compact,
           ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Thông tin chính',
           headerIcon: Icons.fact_check_outlined,
           headerIconColor: AppColors.primary,

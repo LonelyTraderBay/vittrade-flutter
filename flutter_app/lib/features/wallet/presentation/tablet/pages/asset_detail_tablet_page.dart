@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -94,10 +94,10 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                   VitAssetAvatar(
                     label: snapshot.symbol,
                     accentColor: accent,
-                    size: AppSpacing.buttonCompact,
+                    size: TabletSpacingTokens.buttonCompact,
                     border: true,
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +108,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x4),
+                        const SizedBox(height: TabletSpacingTokens.x4),
                         Text(
                           snapshot.symbol,
                           style: AppTextStyles.caption.copyWith(
@@ -126,14 +126,14 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 VitFormat.usd(snapshot.usdValue),
                 style: AppTextStyles.heroNumber.copyWith(
                   fontFeatures: AppTextStyles.tabularFigures,
                 ),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 '${_assetAmount(snapshot.balance)} ${snapshot.symbol}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -142,7 +142,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Thao tác nhanh',
           headerIcon: Icons.bolt_outlined,
           headerIconColor: accent,
@@ -151,12 +151,12 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           rhythm: VitPageRhythm.standard,
           children: [
             Wrap(
-              spacing: AppSpacing.gridGap,
-              runSpacing: AppSpacing.gridGap,
+              spacing: TabletSpacingTokens.gridGap,
+              runSpacing: TabletSpacingTokens.gridGap,
               children: [
                 for (final action in snapshot.actions)
                   SizedBox(
-                    width: AppSpacing.serviceTileMinHeight * 2,
+                    width: TabletSpacingTokens.serviceTileMinHeight * 2,
                     child: VitServiceTile(
                       key: AssetDetailTabletPage.actionKey(action.id),
                       density: VitServiceTileDensity.compact,
@@ -171,7 +171,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Biểu đồ giá',
           headerIcon: Icons.show_chart_rounded,
           headerIconColor: accent,
@@ -192,15 +192,15 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
               onChanged: (period) => setState(() => _period = period),
               variant: VitTabBarVariant.segment,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCard(
               variant: VitCardVariant.inner,
               child: SizedBox(
-                height: AppSpacing.x7 * 3,
+                height: TabletSpacingTokens.x7 * 3,
                 child: VitSparkline(
                   values: [for (final point in snapshot.chart) point.price],
                   color: accent,
-                  strokeWidth: AppSpacing.borderWidth,
+                  strokeWidth: TabletSpacingTokens.borderWidth,
                 ),
               ),
             ),
@@ -215,7 +215,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Phân bổ số dư',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -260,7 +260,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Giao dịch gần đây',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,
@@ -292,13 +292,13 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                                 ? AppColors.buy
                                 : AppColors.sell,
                           ),
-                          const SizedBox(width: AppSpacing.x4),
+                          const SizedBox(width: TabletSpacingTokens.x4),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(tx.label),
-                                const SizedBox(height: AppSpacing.x4),
+                                const SizedBox(height: TabletSpacingTokens.x4),
                                 Text(
                                   tx.createdAt,
                                   style: AppTextStyles.micro.copyWith(

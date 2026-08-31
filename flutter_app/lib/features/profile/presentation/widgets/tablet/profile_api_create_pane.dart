@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dar
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart';
@@ -117,14 +117,14 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
               inputFormatters: [LengthLimitingTextInputFormatter(30)],
               onChanged: (_) => setState(() {}),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Text(
                   'Tối thiểu 3 ký tự',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 const Expanded(child: SizedBox.shrink()),
                 Text(
                   '${_nameController.text.length}/30',
@@ -147,7 +147,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                 onTap: () => _togglePermission(permission.id),
               ),
               if (permission != snapshot.permissions.last)
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
             ],
           ],
         ),
@@ -169,7 +169,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                     onSubmitted: (_) => _addIp(),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 SizedBox(
                   width: ProfileSpacingTokens.profileApiCreateIpAddWidth,
                   child: VitIconButton(
@@ -182,7 +182,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             if (_ips.isEmpty)
               Text(
                 'Không có IP whitelist — key có thể được dùng từ bất kỳ đâu',
@@ -202,7 +202,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                       selected: true,
                       onTap: () => setState(() => _ips.remove(ip)),
                       tone: VitChoicePillTone.success,
-                      height: AppSpacing.buttonCompact,
+                      height: TabletSpacingTokens.buttonCompact,
                       padding:
                           ProfileSpacingTokens.profileApiCreateIpChipPadding,
                     ),
@@ -256,7 +256,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     option.description,
                     maxLines: 1,

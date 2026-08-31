@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
@@ -23,7 +23,10 @@ class HomeNextActionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const VitSectionHeader(title: 'Tiếp theo', bottomGap: AppSpacing.x4),
+        const VitSectionHeader(
+          title: 'Tiếp theo',
+          bottomGap: TabletSpacingTokens.x4,
+        ),
         VitNextActionCard(
           key: HomeTabletKeys.nextAction,
           icon: HomeActionTokens.icon(nextAction.icon),

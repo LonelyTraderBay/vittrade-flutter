@@ -28,7 +28,7 @@ List<Widget> _subsPaneChildren({
     if (showCreate) const _SubsCreateForm(),
     VitSectionHeader(
       title: 'TÀI KHOẢN (${snapshot.accounts.length})',
-      bottomGap: AppSpacing.x4,
+      bottomGap: TabletSpacingTokens.x4,
       density: VitDensity.compact,
     ),
     if (snapshot.accounts.isEmpty)
@@ -79,7 +79,7 @@ class _SubsSummaryCard extends StatelessWidget {
                 color: AppColors.primary,
                 size: ProfileSpacingTokens.profileSubAccountSummaryIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   'Tổng tài sản tất cả tài khoản',
@@ -99,14 +99,14 @@ class _SubsSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             isBalanceHidden ? '••••••' : VitFormat.usd(snapshot.totalBalance),
             style: AppTextStyles.heroNumber.copyWith(
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             isBalanceHidden
                 ? 'PnL 30d: ••••'
@@ -116,7 +116,7 @@ class _SubsSummaryCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -126,7 +126,7 @@ class _SubsSummaryCard extends StatelessWidget {
                   valueColor: AppColors.text1,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _SubsMetric(
                   label: 'Hoạt động',
@@ -134,7 +134,7 @@ class _SubsSummaryCard extends StatelessWidget {
                   valueColor: AppColors.buy,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _SubsMetric(
                   label: 'API Keys',
@@ -165,8 +165,8 @@ class _SubsMetric extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCardStat(
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +180,7 @@ class _SubsMetric extends StatelessWidget {
               color: AppColors.portfolioTextMuted,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             value,
             style: AppTextStyles.baseMedium.copyWith(color: valueColor),
@@ -237,12 +237,12 @@ class _SubsCreateFormState extends State<_SubsCreateForm> {
               fontWeight: AppTextStyles.extraBold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           const _SubsFieldPreview(
             label: 'Tên tài khoản',
             value: 'VD: Grid Bot #2',
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -250,7 +250,7 @@ class _SubsCreateFormState extends State<_SubsCreateForm> {
                 'Loại tài khoản',
                 style: AppTextStyles.micro.copyWith(color: AppColors.text3),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitPresetChipRow<String>(
                 gap: ProfileSpacingTokens.profileSubAccountFormPillGap,
                 selectedValue: _accountType,
@@ -262,9 +262,9 @@ class _SubsCreateFormState extends State<_SubsCreateForm> {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           const _SubsPermissionPreview(),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitCtaButton(
             onPressed: _submitCreate,
             density: VitDensity.compact,
@@ -308,7 +308,7 @@ class _SubsPermissionPreview extends StatelessWidget {
           'Quyền hạn',
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Wrap(
           spacing: ProfileSpacingTokens.profileSubAccountFormPillGap,
           runSpacing: ProfileSpacingTokens.profileSubAccountFormPillGap,
@@ -337,7 +337,7 @@ class _SubsFieldPreview extends StatelessWidget {
           label,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         // Field-preview placeholder (mock-UI stage) — disabled bare input
         // keeps the same input chrome as the phone's preview box.
         VitInput(
@@ -371,7 +371,7 @@ class _SubsAccountCard extends StatelessWidget {
 
     return VitCard(
       key: ProfileTabletKeys.subAccountsCard(account.id),
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: AppColors.cardBorder,
       clip: true,
       child: Column(
@@ -393,7 +393,7 @@ class _SubsAccountCard extends StatelessWidget {
                       size: ProfileSpacingTokens.profileSubAccountAvatarSize,
                       radius: AppRadii.cardRadius,
                     ),
-                    const SizedBox(width: AppSpacing.x4),
+                    const SizedBox(width: TabletSpacingTokens.x4),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -410,14 +410,14 @@ class _SubsAccountCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: AppSpacing.x4),
+                              const SizedBox(width: TabletSpacingTokens.x4),
                               VitAccentPill(
                                 label: _typeLabel(account.type),
                                 accentColor: typeColor,
                               ),
                             ],
                           ),
-                          const SizedBox(height: AppSpacing.x4),
+                          const SizedBox(height: TabletSpacingTokens.x4),
                           Row(
                             children: [
                               Icon(
@@ -426,7 +426,7 @@ class _SubsAccountCard extends StatelessWidget {
                                 size: ProfileSpacingTokens
                                     .profileSubAccountStatusIcon,
                               ),
-                              const SizedBox(width: AppSpacing.x4),
+                              const SizedBox(width: TabletSpacingTokens.x4),
                               Text(
                                 _statusLabel(account.status),
                                 style: AppTextStyles.micro.copyWith(
@@ -434,7 +434,7 @@ class _SubsAccountCard extends StatelessWidget {
                                   fontWeight: AppTextStyles.bold,
                                 ),
                               ),
-                              const SizedBox(width: AppSpacing.x4),
+                              const SizedBox(width: TabletSpacingTokens.x4),
                               Flexible(
                                 child: Text(
                                   '· ${account.lastActive}',
@@ -450,7 +450,7 @@ class _SubsAccountCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.x4),
+                    const SizedBox(width: TabletSpacingTokens.x4),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -463,7 +463,7 @@ class _SubsAccountCard extends StatelessWidget {
                             fontFeatures: AppTextStyles.tabularFigures,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x4),
+                        const SizedBox(height: TabletSpacingTokens.x4),
                         Text(
                           isBalanceHidden
                               ? '••'
@@ -504,7 +504,7 @@ class _SubsDetails extends StatelessWidget {
             height: ProfileSpacingTokens.profileSubAccountDetailsDividerHeight,
             color: AppColors.divider,
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -533,12 +533,12 @@ class _SubsDetails extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             'Quyền hạn:',
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Wrap(
             spacing: ProfileSpacingTokens.profileSubAccountPermissionGap,
             runSpacing: ProfileSpacingTokens.profileSubAccountPermissionGap,
@@ -550,7 +550,7 @@ class _SubsDetails extends StatelessWidget {
                 ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text.rich(
             TextSpan(
               text: 'Email: ',
@@ -563,7 +563,7 @@ class _SubsDetails extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           const Row(
             children: [
               Expanded(
@@ -574,7 +574,7 @@ class _SubsDetails extends StatelessWidget {
                   background: AppColors.primary08,
                 ),
               ),
-              SizedBox(width: AppSpacing.x4),
+              SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _SubsActionChip(
                   icon: Icons.key_rounded,
@@ -583,7 +583,7 @@ class _SubsDetails extends StatelessWidget {
                   background: AppColors.warn08,
                 ),
               ),
-              SizedBox(width: AppSpacing.x4),
+              SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _SubsActionChip(
                   icon: Icons.settings_outlined,
@@ -628,7 +628,7 @@ class _SubsActionChip extends StatelessWidget {
               color: color,
               size: ProfileSpacingTokens.profileSubAccountActionIcon,
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Flexible(
               child: Text(
                 label,
@@ -663,7 +663,7 @@ class _SubsInfoNote extends StatelessWidget {
             color: AppColors.primary,
             size: ProfileSpacingTokens.profileSubAccountInfoNoteIcon,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Text(
               'Mỗi tài khoản phụ có ví và API riêng biệt. Bạn có thể tạo tối đa '

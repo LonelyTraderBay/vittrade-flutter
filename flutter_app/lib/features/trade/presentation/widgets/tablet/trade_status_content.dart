@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_skeleton.dart';
@@ -115,16 +115,16 @@ class _MetaStripSkeleton extends StatelessWidget {
     return const VitCard(
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       child: Padding(
         padding: TradeSpacingTokens.tradeTerminalMetaStripPadding,
         child: Row(
           children: [
-            VitSkeleton(width: 96, height: AppSpacing.x4),
-            SizedBox(width: AppSpacing.x4),
-            VitSkeleton(width: 88, height: AppSpacing.x4),
+            VitSkeleton(width: 96, height: TabletSpacingTokens.x4),
+            SizedBox(width: TabletSpacingTokens.x4),
+            VitSkeleton(width: 88, height: TabletSpacingTokens.x4),
             Spacer(),
-            VitSkeleton(width: 150, height: AppSpacing.x4),
+            VitSkeleton(width: 150, height: TabletSpacingTokens.x4),
           ],
         ),
       ),
@@ -142,11 +142,11 @@ class _ProductTabsSkeleton extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          VitSkeleton(width: 96, height: AppSpacing.buttonCompact),
-          SizedBox(width: AppSpacing.x4),
-          VitSkeleton(width: 72, height: AppSpacing.buttonCompact),
-          SizedBox(width: AppSpacing.x4),
-          VitSkeleton(width: 72, height: AppSpacing.buttonCompact),
+          VitSkeleton(width: 96, height: TabletSpacingTokens.buttonCompact),
+          SizedBox(width: TabletSpacingTokens.x4),
+          VitSkeleton(width: 72, height: TabletSpacingTokens.buttonCompact),
+          SizedBox(width: TabletSpacingTokens.x4),
+          VitSkeleton(width: 72, height: TabletSpacingTokens.buttonCompact),
         ],
       ),
     );
@@ -180,20 +180,26 @@ class _PanelSkeleton extends StatelessWidget {
     return VitCard(
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       child: Padding(
         padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            VitSkeleton(width: labelWidth, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x4),
-            const VitSkeleton(width: double.infinity, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x4),
-            const VitSkeleton(width: double.infinity, height: AppSpacing.x3),
-            const SizedBox(height: AppSpacing.x4),
-            const VitSkeleton(width: 120, height: AppSpacing.x3),
+            VitSkeleton(width: labelWidth, height: TabletSpacingTokens.x3),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            const VitSkeleton(
+              width: double.infinity,
+              height: TabletSpacingTokens.x3,
+            ),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            const VitSkeleton(
+              width: double.infinity,
+              height: TabletSpacingTokens.x3,
+            ),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            const VitSkeleton(width: 120, height: TabletSpacingTokens.x3),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
@@ -40,7 +40,7 @@ class TradeTerminalPanel extends StatelessWidget {
       key: panelKey,
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,

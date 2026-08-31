@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/address/wallet_address_add_common.dart';
@@ -121,7 +121,7 @@ class _AddressAddTabletPageState extends ConsumerState<AddressAddTabletPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               sections[2],
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               AddressPrimaryActionButton(
                 key: AddressAddTabletPage.saveKey,
                 enabled: _canSave(controller),

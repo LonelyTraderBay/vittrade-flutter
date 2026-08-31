@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/core/product_flow/contextual_support_contract.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
@@ -124,7 +124,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
       children: [
         WithdrawBalanceCard(asset: snapshot.asset, value: snapshot.available),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Mạng rút',
           headerIcon: Icons.hub_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -140,7 +140,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Địa chỉ nhận',
           headerIcon: Icons.wallet_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -164,7 +164,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Số lượng',
           headerIcon: Icons.payments_outlined,
           headerIconColor: AppModuleAccents.wallet,
@@ -179,7 +179,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
               setState(() {});
             },
             fullWidth: false,
-            height: AppSpacing.buttonCompact,
+            height: TabletSpacingTokens.buttonCompact,
             variant: VitCtaButtonVariant.ghost,
             child: const Text('Tất cả'),
           ),
@@ -223,10 +223,10 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           icon: Icons.shield_outlined,
           iconColor: AppModuleAccents.wallet,
           variant: VitSectionHeaderVariant.plain,
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
         ),
         WithdrawWarning(asset: snapshot.asset, network: network),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitBanner(
           variant: validation == null
               ? VitBannerVariant.info
@@ -238,7 +238,7 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
               ? Icons.fact_check_outlined
               : Icons.info_outline_rounded,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         WithdrawSupportLink(
           onTap: () => context.go(
             ContextualSupportContracts.supportRouteFor(

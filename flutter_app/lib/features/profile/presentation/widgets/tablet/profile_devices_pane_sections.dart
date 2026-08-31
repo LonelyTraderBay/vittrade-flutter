@@ -39,7 +39,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                         fontWeight: AppTextStyles.heavy,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '$totalDevices thiết bị đã đăng nhập',
                       style: AppTextStyles.micro.copyWith(
@@ -64,7 +64,7 @@ class _DevicesSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -74,7 +74,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   color: AppColors.buy,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _DevicesSummaryStat(
                   label: 'Không tin cậy',
@@ -82,7 +82,7 @@ class _DevicesSummaryCard extends StatelessWidget {
                   color: AppColors.warn,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _DevicesSummaryStat(
                   label: 'Đang hoạt động',
@@ -115,7 +115,7 @@ class _DevicesSummaryStat extends StatelessWidget {
       color: AppColors.surface3.withValues(alpha: .82),
       shape: const RoundedRectangleBorder(borderRadius: AppRadii.cardRadius),
       child: Padding(
-        padding: const EdgeInsetsDirectional.all(AppSpacing.x2),
+        padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -125,7 +125,7 @@ class _DevicesSummaryStat extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.micro.copyWith(color: AppColors.text3),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(
               value,
               style: AppTextStyles.caption.copyWith(
@@ -149,7 +149,7 @@ class _DevicesSectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitSectionHeader(
       title: label,
-      bottomGap: AppSpacing.x4,
+      bottomGap: TabletSpacingTokens.x4,
       variant: VitSectionHeaderVariant.accentBar,
       accentColor: AppColors.primary,
       density: VitDensity.compact,
@@ -175,7 +175,7 @@ class _OtherDevicesHeader extends StatelessWidget {
           onPressed: onLogoutAll,
           variant: VitCtaButtonVariant.destructive,
           fullWidth: false,
-          height: AppSpacing.buttonCompact,
+          height: TabletSpacingTokens.buttonCompact,
           child: const Text('Đăng xuất tất cả'),
         ),
       ],
@@ -228,25 +228,25 @@ class _DevicesDeviceCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _DeviceDetails(device: device, suspicious: suspicious),
               ),
             ],
           ),
           if (showActions) ...[
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             const Divider(
-              height: AppSpacing.dividerHairline,
+              height: TabletSpacingTokens.dividerHairline,
               color: AppColors.divider,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
                   child: _TrustButton(device: device, onTap: onToggleTrust),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 _DeviceLogoutButton(deviceId: device.id, onTap: onLogout),
               ],
             ),
@@ -284,7 +284,7 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
               density: VitDensity.compact,
               showDivider: i != devices.length - 1,
             ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitCard(
             variant: VitCardVariant.inner,
             density: VitDensity.compact,
@@ -294,7 +294,7 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
               style: AppTextStyles.caption.copyWith(color: AppColors.warn),
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -302,17 +302,17 @@ class _LogoutAllDevicesPreviewSheet extends StatelessWidget {
                   key: cancelKey,
                   onPressed: () => Navigator.of(context).pop(false),
                   variant: VitCtaButtonVariant.secondary,
-                  height: AppSpacing.ctaHeight,
+                  height: TabletSpacingTokens.ctaHeight,
                   child: const Text('Hủy'),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: VitCtaButton(
                   key: confirmKey,
                   onPressed: () => Navigator.of(context).pop(true),
                   variant: VitCtaButtonVariant.destructive,
-                  height: AppSpacing.ctaHeight,
+                  height: TabletSpacingTokens.ctaHeight,
                   child: const Text('Đăng xuất tất cả'),
                 ),
               ),
@@ -349,14 +349,14 @@ class _DeviceDetails extends StatelessWidget {
               ),
             ),
             if (device.isCurrent) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const VitAccentPill(
                 label: 'Hiện tại',
                 accentColor: AppColors.buy,
               ),
             ],
             if (suspicious) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const Icon(
                 Icons.warning_amber_rounded,
                 color: AppColors.warn,
@@ -365,7 +365,7 @@ class _DeviceDetails extends StatelessWidget {
             ],
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           '${device.browser} • ${device.os}',
           maxLines: 1,
@@ -375,7 +375,7 @@ class _DeviceDetails extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Wrap(
           spacing: ProfileSpacingTokens.profileDevicesMetaSpacing,
           runSpacing: ProfileSpacingTokens.profileDevicesMetaRunSpacing,
@@ -390,7 +390,7 @@ class _DeviceDetails extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           'IP: ${device.ip}',
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -416,7 +416,7 @@ class _DevicesMetaItem extends StatelessWidget {
           color: AppColors.text3,
           size: ProfileSpacingTokens.profileDevicesMetaIcon,
         ),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         Text(
           value,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),

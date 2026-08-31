@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
@@ -68,7 +68,7 @@ class TradeTickerStrip extends StatelessWidget {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x4),
+                        const SizedBox(height: TabletSpacingTokens.x4),
                         Text(
                           'Thị trường Spot',
                           maxLines: 1,
@@ -80,9 +80,9 @@ class TradeTickerStrip extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   SizedBox(
-                    width: AppSpacing.x7,
+                    width: TabletSpacingTokens.x7,
                     height: SharedSpacingTokens.homeSparklineHeight,
                     child: VitSparkline(
                       values: sparklineValues,
@@ -121,7 +121,7 @@ class TradeTickerStrip extends StatelessWidget {
                       fontWeight: AppTextStyles.medium,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     availableBalanceLabel,
                     maxLines: 1,
@@ -148,8 +148,8 @@ class _TickerDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VerticalDivider(
-      thickness: AppSpacing.dividerHairline,
-      width: AppSpacing.x3 * 2 + AppSpacing.dividerHairline,
+      thickness: TabletSpacingTokens.dividerHairline,
+      width: TabletSpacingTokens.x3 * 2 + TabletSpacingTokens.dividerHairline,
       color: AppColors.divider,
     );
   }

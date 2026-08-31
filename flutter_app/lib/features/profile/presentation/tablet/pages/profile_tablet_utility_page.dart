@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_utility_surface.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -53,7 +53,7 @@ class ProfileTabletUtilityPage extends StatelessWidget {
               // AIB-R6: icon leading cạnh mô tả nhiều dòng phải nằm trong
               // VitAccentIconBox — icon trần trông nhỏ so với khối chữ.
               VitAccentIconBox(icon: icon, color: AppColors.primary),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class ProfileTabletUtilityPage extends StatelessWidget {
                         height: 1.35,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       'Trình quản lý đầy đủ cho mục này đang được hoàn thiện.',
                       style: AppTextStyles.caption.copyWith(

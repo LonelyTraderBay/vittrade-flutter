@@ -6,4 +6,4 @@ features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|193|R5
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|394|R5-fixed-height-card
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|444|R5-fixed-height-card
 features/wallet/presentation/tablet/pages/network_status_tablet_page.dart|603|R5-fixed-height-card
-features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart|246|R5-fixed-height-card
+features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart|248|R5-fixed-height-card

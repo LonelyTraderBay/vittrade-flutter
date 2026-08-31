@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -24,7 +24,7 @@ class HomeDiscoveryPanel extends StatelessWidget {
       children: [
         const VitSectionHeader(
           title: 'Dự đoán & Thách đấu',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
         ),
         VitCard(
           clip: true,
@@ -40,8 +40,8 @@ class HomeDiscoveryPanel extends StatelessWidget {
                 onTap: () => onNavigate('/markets/predictions'),
               ),
               const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
+                thickness: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               _DiscoveryRow(
@@ -55,8 +55,8 @@ class HomeDiscoveryPanel extends StatelessWidget {
                 onTap: () => onNavigate('/arena'),
               ),
               const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
+                thickness: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               const Padding(
@@ -106,7 +106,7 @@ class _DiscoveryRow extends StatelessWidget {
       onTap: onTap,
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: HomeSpacingTokens.homeListRowPadding,
-        vertical: AppSpacing.x4,
+        vertical: TabletSpacingTokens.x4,
       ),
       leading: VitAccentIconBox(icon: icon, color: accentColor),
       title: Text(
@@ -127,7 +127,7 @@ class _DiscoveryRow extends StatelessWidget {
             status: badgeStatus,
             size: VitStatusPillSize.sm,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Text(
             actionLabel,
             style: AppTextStyles.micro.copyWith(
@@ -135,7 +135,7 @@ class _DiscoveryRow extends StatelessWidget {
               fontWeight: AppTextStyles.medium,
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Icon(
             Icons.chevron_right_rounded,
             size: SharedSpacingTokens.homeSectionActionChevronSize,

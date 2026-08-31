@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 
 typedef SurfaceRouterFactory = GoRouter Function();
 
@@ -21,6 +22,9 @@ final class SurfaceRouterHost {
   final SurfaceRouterFactory webRouter;
 
   GoRouter createRouter(AppSurface surface) {
+    // 2026-09-01 tách token phone/tablet: chốt cờ surface cho spacing
+    // token (VitDensity card padding) đúng lúc bootstrap chọn router.
+    TabletSpacingTokens.tabletSurfaceActive = surface == AppSurface.tablet;
     return switch (surface) {
       AppSurface.phone => phoneRouter(),
       AppSurface.tablet => tabletRouter(),

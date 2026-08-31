@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart';
@@ -67,14 +67,14 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
           ),
           primary: VitCard(
             radius: VitCardRadius.tight,
-            padding: AppSpacing.cardPaddingCompact,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const _ExportGroupLabel('Định dạng'),
                 Wrap(
-                  spacing: AppSpacing.rowGap,
-                  runSpacing: AppSpacing.rowGap,
+                  spacing: TabletSpacingTokens.rowGap,
+                  runSpacing: TabletSpacingTokens.rowGap,
                   children: [
                     for (final format in snapshot.formats)
                       VitFilterChip(
@@ -86,11 +86,13 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+                const SizedBox(
+                  height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+                ),
                 const _ExportGroupLabel('Khoảng thời gian'),
                 Wrap(
-                  spacing: AppSpacing.rowGap,
-                  runSpacing: AppSpacing.rowGap,
+                  spacing: TabletSpacingTokens.rowGap,
+                  runSpacing: TabletSpacingTokens.rowGap,
                   children: [
                     for (final period in snapshot.periods)
                       VitFilterChip(
@@ -102,12 +104,12 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 const _ExportGroupLabel('Trường kèm theo'),
                 for (final include in state.includes)
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.x2,
+                      vertical: TabletSpacingTokens.x2,
                     ),
                     child: Row(
                       children: [
@@ -128,12 +130,14 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                       ],
                     ),
                   ),
-                const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+                const SizedBox(
+                  height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+                ),
                 if (state.result != null) ...[
                   VitCard(
                     variant: VitCardVariant.inner,
                     radius: VitCardRadius.tight,
-                    padding: AppSpacing.cardPaddingCompact,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -144,7 +148,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x4),
+                        const SizedBox(height: TabletSpacingTokens.x4),
                         Text(
                           'Tải xuống: ${state.result!.downloadUrl}',
                           style: AppTextStyles.caption.copyWith(
@@ -155,7 +159,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: AppSpacing.pageRhythmStandardSectionGap,
+                    height: TabletSpacingTokens.pageRhythmStandardSectionGap,
                   ),
                   VitCtaButton(
                     onPressed: notifier.resetResult,
@@ -187,7 +191,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
           ),
           secondary: VitCard(
             radius: VitCardRadius.tight,
-            padding: AppSpacing.cardPaddingCompact,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -198,7 +202,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 for (final (label, value) in [
                   ('Tổng số lệnh', '${snapshot.stats.totalTrades}'),
                   (
@@ -210,7 +214,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                 ])
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.x1,
+                      vertical: TabletSpacingTokens.x1,
                     ),
                     child: VitKeyValueRow(
                       label: label,
@@ -242,7 +246,7 @@ class _ExportGroupLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: AppSpacing.pageRhythmCompactInnerGap,
+        bottom: TabletSpacingTokens.pageRhythmCompactInnerGap,
       ),
       child: Text(
         label,

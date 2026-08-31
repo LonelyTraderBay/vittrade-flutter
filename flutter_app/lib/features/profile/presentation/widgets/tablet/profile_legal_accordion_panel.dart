@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -175,12 +175,12 @@ class _ProfileLegalAccordionPanelState
                     ],
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '$totalVisible / ${ProfileLegalCatalog.itemCount} mục',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 VitSearchBar(
                   key: ProfileTabletKeys.legalSearch,
                   controller: _searchController,
@@ -206,7 +206,7 @@ class _ProfileLegalAccordionPanelState
           else
             for (final group in groups) ...[
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               _LegalGroupTile(
@@ -308,10 +308,10 @@ class _LegalItemRow extends StatelessWidget {
             start:
                 ProfileSpacingTokens.profileMenuTabletIconBox +
                 ProfileSpacingTokens.profileMenuGap +
-                AppSpacing.x4,
-            end: AppSpacing.x4,
-            top: AppSpacing.x2,
-            bottom: AppSpacing.x2,
+                TabletSpacingTokens.x4,
+            end: TabletSpacingTokens.x4,
+            top: TabletSpacingTokens.x2,
+            bottom: TabletSpacingTokens.x2,
           ),
           gap: ProfileSpacingTokens.profileMenuGap,
           leading: const Icon(

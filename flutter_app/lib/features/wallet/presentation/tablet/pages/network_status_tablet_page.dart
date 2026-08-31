@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -117,7 +117,7 @@ class _NetworkStatusTabletPageState
         ),
         _buildSummary(snapshot),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Bộ lọc mạng',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -144,7 +144,7 @@ class _NetworkStatusTabletPageState
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: _filter == _NetworkStatusFilter.all
               ? 'Mạng theo mức ưu tiên'
               : '${_filter.label} (${networks.length})',
@@ -191,8 +191,8 @@ class _NetworkStatusTabletPageState
           Row(
             children: [
               VitCard(
-                width: AppSpacing.iconLg,
-                height: AppSpacing.iconLg,
+                width: TabletSpacingTokens.iconLg,
+                height: TabletSpacingTokens.iconLg,
                 variant: VitCardVariant.ghost,
                 radius: VitCardRadius.standard,
                 borderColor: summaryColor.withValues(alpha: .34),
@@ -206,10 +206,10 @@ class _NetworkStatusTabletPageState
                       ? Icons.wifi_off_rounded
                       : Icons.wifi_rounded,
                   color: summaryColor,
-                  size: AppSpacing.iconMd,
+                  size: TabletSpacingTokens.iconMd,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,7 +220,7 @@ class _NetworkStatusTabletPageState
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       'Tự động cập nhật mỗi ${snapshot.refreshIntervalSeconds} giây',
                       style: AppTextStyles.caption.copyWith(
@@ -240,7 +240,7 @@ class _NetworkStatusTabletPageState
             ],
           ),
           if (_refreshFeedback != null) ...[
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: VitStatusPill(
@@ -252,7 +252,7 @@ class _NetworkStatusTabletPageState
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               _SummaryStat(
@@ -260,13 +260,13 @@ class _NetworkStatusTabletPageState
                 label: 'Hoạt động',
                 color: AppColors.buy,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               _SummaryStat(
                 value: '${snapshot.issueCount}',
                 label: 'Chậm / tắc',
                 color: AppColors.caution,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               _SummaryStat(
                 value: '${snapshot.downCount}',
                 label: 'Bảo trì',
@@ -284,7 +284,7 @@ class _NetworkStatusTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tổng quan hệ thống',
           headerIcon: Icons.monitor_heart_outlined,
           headerIconColor: AppColors.primary,
@@ -393,7 +393,7 @@ class _SummaryStat extends StatelessWidget {
     return Expanded(
       child: VitCard(
         variant: VitCardVariant.inner,
-        height: AppSpacing.buttonStandard,
+        height: TabletSpacingTokens.buttonStandard,
         alignment: Alignment.center,
         borderColor: color.withValues(alpha: .34),
         child: Column(
@@ -407,7 +407,7 @@ class _SummaryStat extends StatelessWidget {
                 fontFeatures: AppTextStyles.tabularFigures,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(
               label,
               style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -442,8 +442,8 @@ class _NetworkStatusCard extends StatelessWidget {
             Row(
               children: [
                 VitCard(
-                  width: AppSpacing.buttonCompact,
-                  height: AppSpacing.buttonCompact,
+                  width: TabletSpacingTokens.buttonCompact,
+                  height: TabletSpacingTokens.buttonCompact,
                   variant: VitCardVariant.ghost,
                   radius: VitCardRadius.standard,
                   background: ColoredBox(
@@ -461,7 +461,7 @@ class _NetworkStatusCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +474,7 @@ class _NetworkStatusCard extends StatelessWidget {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.x4),
+                      const SizedBox(height: TabletSpacingTokens.x4),
                       Text(
                         'Block #${network.blockHeight}',
                         style: AppTextStyles.micro.copyWith(
@@ -487,7 +487,7 @@ class _NetworkStatusCard extends StatelessWidget {
                 _HealthStatusIndicator(health: network.health),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
@@ -505,23 +505,23 @@ class _NetworkStatusCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Semantics(
               label:
                   'Tắc nghẽn mạng ${network.congestionPct}%, ${_congestionLabel(network.congestionPct)}',
               child: ClipRRect(
                 borderRadius: AppRadii.pillRadius,
                 child: LinearProgressIndicator(
-                  minHeight: AppSpacing.x1,
+                  minHeight: TabletSpacingTokens.x1,
                   value: (network.congestionPct / 100).clamp(0, 1).toDouble(),
                   color: congestionColor.withValues(alpha: .55),
                   backgroundColor: congestionColor.withValues(alpha: .08),
                 ),
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             _NetworkStatsGrid(network: network),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
@@ -530,7 +530,7 @@ class _NetworkStatusCard extends StatelessWidget {
                     enabled: network.depositEnabled,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: _AvailabilityChip(
                     label: 'Rút',
@@ -540,7 +540,7 @@ class _NetworkStatusCard extends StatelessWidget {
               ],
             ),
             if (network.notes case final note?) ...[
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               _NetworkNote(note: note),
             ],
           ],
@@ -582,11 +582,11 @@ class _NetworkStatsGrid extends StatelessWidget {
             children: [
               for (var col = 0; col < 2; col++) ...[
                 Expanded(child: _NetworkStatTile(stat: stats[row * 2 + col])),
-                if (col == 0) const SizedBox(width: AppSpacing.x4),
+                if (col == 0) const SizedBox(width: TabletSpacingTokens.x4),
               ],
             ],
           ),
-          if (row == 0) const SizedBox(height: AppSpacing.x4),
+          if (row == 0) const SizedBox(height: TabletSpacingTokens.x4),
         ],
       ],
     );
@@ -602,11 +602,15 @@ class _NetworkStatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       variant: VitCardVariant.ghost,
-      height: AppSpacing.buttonStandard,
+      height: TabletSpacingTokens.buttonStandard,
       child: Row(
         children: [
-          Icon(stat.icon, color: AppColors.text3, size: AppSpacing.iconSm),
-          const SizedBox(width: AppSpacing.x4),
+          Icon(
+            stat.icon,
+            color: AppColors.text3,
+            size: TabletSpacingTokens.iconSm,
+          ),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -618,7 +622,7 @@ class _NetworkStatTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   stat.value,
                   maxLines: 1,
@@ -693,9 +697,9 @@ class _NetworkNote extends StatelessWidget {
           const Icon(
             Icons.warning_amber_rounded,
             color: AppColors.caution,
-            size: AppSpacing.iconSm,
+            size: TabletSpacingTokens.iconSm,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Text(
               note,
@@ -734,10 +738,10 @@ class _NetworkLegendCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Wrap(
-            spacing: AppSpacing.x1,
-            runSpacing: AppSpacing.x1,
+            spacing: TabletSpacingTokens.x1,
+            runSpacing: TabletSpacingTokens.x1,
             children: [
               for (final state in states)
                 VitStatusPill(

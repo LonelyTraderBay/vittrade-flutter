@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
@@ -59,7 +59,7 @@ class HomeMoreProductsDialog extends StatelessWidget {
               for (final action in actions)
                 Padding(
                   padding: const EdgeInsetsDirectional.symmetric(
-                    vertical: AppSpacing.x1,
+                    vertical: TabletSpacingTokens.x1,
                   ),
                   child: buildHomeQuickActionTile(
                     action,
@@ -75,7 +75,7 @@ class HomeMoreProductsDialog extends StatelessWidget {
         VitCtaButton(
           onPressed: () => Navigator.of(context).pop(),
           variant: VitCtaButtonVariant.secondary,
-          height: AppSpacing.buttonCompact,
+          height: TabletSpacingTokens.buttonCompact,
           fullWidth: false,
           child: const Text('Đóng'),
         ),

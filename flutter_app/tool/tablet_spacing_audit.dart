@@ -79,6 +79,13 @@ void main(List<String> args) {
     final isTabletSurface =
         normalized.contains('/tablet/') || fileName.contains('tablet');
     if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
+    // Token files là nơi số liệu ĐƯỢC PHÉP sống (app_spacing,
+    // *_spacing_tokens — kể cả tablet_spacing_tokens tách 2026-09-01):
+    // scanner chỉ khóa literal tại call-site, không khóa định nghĩa token.
+    if (normalized.contains('/app/theme/spacing/') ||
+        normalized.endsWith('/app_spacing.dart')) {
+      continue;
+    }
 
     final lines = entity.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {

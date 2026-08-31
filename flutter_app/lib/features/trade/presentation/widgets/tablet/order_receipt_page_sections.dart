@@ -11,7 +11,7 @@ class _ReceiptCard extends StatelessWidget {
     final sideColor = isBuy ? AppColors.buy : AppColors.sell;
 
     return VitTradeSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       title: 'Tóm tắt khớp lệnh',
       headerTrailing: _StatusBadge(
         key: TradeTabletOrderReceiptPage.openOrdersKey,
@@ -33,7 +33,7 @@ class _ReceiptCard extends StatelessWidget {
                     label: isBuy ? 'MUA' : 'BÁN',
                     color: sideColor,
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Expanded(
                     child: Text(
                       receipt.symbol,
@@ -46,7 +46,7 @@ class _ReceiptCard extends StatelessWidget {
               ),
             ),
             const Divider(
-              height: AppSpacing.dividerHairline,
+              height: TabletSpacingTokens.dividerHairline,
               color: AppColors.divider,
             ),
             VitInfoRow(
@@ -76,7 +76,7 @@ class _ReceiptCard extends StatelessWidget {
               valueColor: AppColors.receiptTextMuted,
             ),
             const Divider(
-              height: AppSpacing.dividerHairline,
+              height: TabletSpacingTokens.dividerHairline,
               color: AppColors.divider,
             ),
             VitInfoRow(
@@ -106,7 +106,7 @@ class _ReceiptCard extends StatelessWidget {
             ),
             if (receipt.tpPrice != null || receipt.slPrice != null) ...[
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               Padding(
@@ -121,7 +121,7 @@ class _ReceiptCard extends StatelessWidget {
                         fontWeight: AppTextStyles.bold,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Row(
                       children: [
                         if (receipt.tpPrice != null)
@@ -133,7 +133,7 @@ class _ReceiptCard extends StatelessWidget {
                             ),
                           ),
                         if (receipt.tpPrice != null && receipt.slPrice != null)
-                          const SizedBox(width: AppSpacing.x4),
+                          const SizedBox(width: TabletSpacingTokens.x4),
                         if (receipt.slPrice != null)
                           Expanded(
                             child: _RiskBox(
@@ -205,7 +205,7 @@ class _CopyOrderIdButton extends StatelessWidget {
         icon: Icons.copy_rounded,
         tooltip: 'Sao chép mã lệnh',
         color: AppColors.text3,
-        size: AppSpacing.iconSm,
+        size: TabletSpacingTokens.iconSm,
         padding: 0,
         onPressed: () => Clipboard.setData(ClipboardData(text: orderId)),
       ),

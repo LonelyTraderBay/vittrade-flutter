@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart';
@@ -50,14 +50,17 @@ class ProfileSecuritySummarySkeleton extends StatelessWidget {
           Row(
             children: [
               Expanded(child: VitSkeleton(width: double.infinity, height: 14)),
-              SizedBox(width: AppSpacing.x4),
+              SizedBox(width: TabletSpacingTokens.x4),
               VitSkeleton(width: 72, height: 14),
             ],
           ),
-          SizedBox(height: AppSpacing.x4),
+          SizedBox(height: TabletSpacingTokens.x4),
           VitSkeleton(width: double.infinity, height: 7),
-          SizedBox(height: AppSpacing.x4),
-          VitSkeleton(width: double.infinity, height: AppSpacing.buttonCompact),
+          SizedBox(height: TabletSpacingTokens.x4),
+          VitSkeleton(
+            width: double.infinity,
+            height: TabletSpacingTokens.buttonCompact,
+          ),
         ],
       ),
     );
@@ -91,48 +94,48 @@ class _AccountHeroSkeleton extends StatelessWidget {
                           width: ProfileSpacingTokens.profileHeroAvatar,
                           height: ProfileSpacingTokens.profileHeroAvatar,
                         ),
-                        SizedBox(width: AppSpacing.x4),
+                        SizedBox(width: TabletSpacingTokens.x4),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               VitSkeleton(width: double.infinity, height: 20),
-                              SizedBox(height: AppSpacing.x4),
+                              SizedBox(height: TabletSpacingTokens.x4),
                               VitSkeleton(width: 180, height: 10),
-                              SizedBox(height: AppSpacing.x4),
+                              SizedBox(height: TabletSpacingTokens.x4),
                               VitSkeleton(width: 140, height: 10),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSpacing.x4),
+                    SizedBox(height: TabletSpacingTokens.x4),
                     Row(
                       children: [
                         VitSkeleton(width: 64, height: 22),
-                        SizedBox(width: AppSpacing.x4),
+                        SizedBox(width: TabletSpacingTokens.x4),
                         VitSkeleton(width: 88, height: 22),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: AppSpacing.x4),
+              SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _FactBoxSkeleton(),
-                    SizedBox(height: AppSpacing.x4),
+                    SizedBox(height: TabletSpacingTokens.x4),
                     _FactBoxSkeleton(),
                   ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
-          VitSkeleton(width: double.infinity, height: AppSpacing.x3),
+          SizedBox(height: TabletSpacingTokens.pageRhythmStandardSectionGap),
+          VitSkeleton(width: double.infinity, height: TabletSpacingTokens.x3),
         ],
       ),
     );
@@ -148,7 +151,7 @@ class _FactBoxSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VitSkeleton(width: 80, height: 10),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitSkeleton(width: double.infinity, height: 14),
       ],
     );
@@ -166,8 +169,8 @@ class VitSectionSkeleton extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.x4),
+        VitSkeleton(width: 140, height: TabletSpacingTokens.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitCard(child: VitSkeletonList(rows: 4)),
       ],
     );

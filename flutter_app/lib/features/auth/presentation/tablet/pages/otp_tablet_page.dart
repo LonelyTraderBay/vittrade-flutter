@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/controllers/password_reset_flow_controller.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -107,7 +107,7 @@ class _OtpTabletPageState extends ConsumerState<OtpTabletPage> {
           AuthTabletInfoBanner(
             message: 'Mã đang được gửi đến ${widget.contact}.',
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitInput(
             controller: _codeController,
             fieldKey: OtpTabletPage.codeFieldKey,
@@ -126,10 +126,12 @@ class _OtpTabletPageState extends ConsumerState<OtpTabletPage> {
             onSubmitted: (_) => _submit(),
           ),
           if (_error.isNotEmpty) ...[
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(
+              height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+            ),
             AuthTabletErrorBanner(message: _error),
           ],
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitCtaButton(
             key: OtpTabletPage.submitKey,
             onPressed: _submitting ? null : _submit,

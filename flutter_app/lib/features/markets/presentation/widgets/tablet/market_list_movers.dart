@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/domain/entities/market_entities.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 
-const double _marketMoverStripHeight = AppSpacing.buttonCompact;
+const double _marketMoverStripHeight = TabletSpacingTokens.buttonCompact;
 const EdgeInsets _marketMoverStripPadding =
     MarketsSpacingTokens.marketListMoverCompactPadding;
 
@@ -43,11 +43,11 @@ class MarketListTopMovers extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: AppSpacing.dividerHairline,
-            height: AppSpacing.x5,
+            width: TabletSpacingTokens.dividerHairline,
+            height: TabletSpacingTokens.x5,
             child: VerticalDivider(
               color: AppColors.divider,
-              width: AppSpacing.dividerHairline,
+              width: TabletSpacingTokens.dividerHairline,
             ),
           ),
           Expanded(
@@ -82,7 +82,7 @@ class _MoverStripSection extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: color, size: MarketsSpacingTokens.marketMoverIcon),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         Flexible(
           flex: 0,
           child: Text(
@@ -95,9 +95,9 @@ class _MoverStripSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         for (var i = 0; i < pairs.length; i++) ...[
-          if (i > 0) const SizedBox(width: AppSpacing.x4),
+          if (i > 0) const SizedBox(width: TabletSpacingTokens.x4),
           Flexible(
             child: Text(
               '${pairs[i].baseAsset} ${marketListFormatPct(pairs[i].change24h)}',

@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -107,7 +107,7 @@ class _TransactionHistoryTabletPageState
             icon: Icons.info_outline_rounded,
           ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Bộ lọc giao dịch',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -136,7 +136,7 @@ class _TransactionHistoryTabletPageState
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Giao dịch gần đây',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,
@@ -177,19 +177,21 @@ class _TransactionHistoryTabletPageState
               'Kiểm tra trạng thái, mạng lưới, phí và mã giao dịch trước khi xử lý khiếu nại.',
           contractId: 'Lịch sử giao dịch ví',
         ),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(
+          height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+        ),
         VitCard(
           variant: VitCardVariant.inner,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Phạm vi hiện tại'),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 '$count giao dịch đang hiển thị theo bộ lọc.',
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               const Text(
                 'Dữ liệu giao dịch được giữ theo trạng thái từ ví và không tự động xác nhận hoàn tất.',
                 style: AppTextStyles.micro,
@@ -244,14 +246,18 @@ class _TransactionTabletCard extends StatelessWidget {
       child: Row(
         children: [
           VitCard(
-            width: AppSpacing.buttonCompact,
-            height: AppSpacing.buttonCompact,
+            width: TabletSpacingTokens.buttonCompact,
+            height: TabletSpacingTokens.buttonCompact,
             variant: VitCardVariant.inner,
             alignment: Alignment.center,
             borderColor: meta.color.withValues(alpha: .22),
-            child: Icon(meta.icon, color: meta.color, size: AppSpacing.iconSm),
+            child: Icon(
+              meta.icon,
+              color: meta.color,
+              size: TabletSpacingTokens.iconSm,
+            ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -262,7 +268,7 @@ class _TransactionTabletCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   transaction.createdAt,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -270,7 +276,7 @@ class _TransactionTabletCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -282,7 +288,7 @@ class _TransactionTabletCard extends StatelessWidget {
                   fontFeatures: AppTextStyles.tabularFigures,
                 ),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitStatusPill(
                 label: status,
                 status: _statusPill(transaction.status),
@@ -290,7 +296,7 @@ class _TransactionTabletCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           const Icon(Icons.chevron_right_rounded, color: AppColors.text3),
         ],
       ),

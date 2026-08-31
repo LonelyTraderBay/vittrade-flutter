@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/wallet_transfer_sections.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -122,7 +122,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Ví nguồn và ví nhận',
           headerIcon: Icons.account_balance_wallet_outlined,
           headerIconColor: AppColors.primary,
@@ -154,7 +154,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tài sản và số lượng',
           headerIcon: Icons.payments_outlined,
           headerIconColor: AppColors.primary,
@@ -208,7 +208,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           icon: Icons.shield_outlined,
           iconColor: AppColors.primary,
           variant: VitSectionHeaderVariant.plain,
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
         ),
         if (_amount > 0)
           const VitHighRiskStatePanel(
@@ -220,9 +220,11 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
           )
         else
           const TransferInfoNotice(),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(
+          height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+        ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Lịch sử gần đây',
           headerIcon: Icons.history_rounded,
           headerIconColor: AppColors.primary,
@@ -295,7 +297,8 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: eligibleWallets.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
+            separatorBuilder: (_, _) =>
+                const SizedBox(height: TabletSpacingTokens.x4),
             itemBuilder: (context, index) {
               final wallet = eligibleWallets[index];
               return TransferWalletPickerRow(
@@ -324,7 +327,8 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: snapshot.assets.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
+            separatorBuilder: (_, _) =>
+                const SizedBox(height: TabletSpacingTokens.x4),
             itemBuilder: (context, index) {
               final asset = snapshot.assets[index];
               return TransferAssetPickerRow(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -46,7 +46,7 @@ class ProfilePredictionCard extends StatelessWidget {
                 color: AppColors.accent,
                 size: ProfileSpacingTokens.profileModuleIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   'Prediction Portfolio',
@@ -57,14 +57,14 @@ class ProfilePredictionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const VitAccentPill(
                 label: 'Prediction Market',
                 accentColor: AppColors.accent,
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -73,14 +73,14 @@ class ProfilePredictionCard extends StatelessWidget {
                   value: '${prediction.positions}',
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'Lệnh mở',
                   value: '${prediction.openOrders}',
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'P/L',
@@ -90,7 +90,7 @@ class ProfilePredictionCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -101,19 +101,19 @@ class ProfilePredictionCard extends StatelessWidget {
                   style: AppTextStyles.badge.copyWith(color: AppColors.accent),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const Icon(
                 Icons.chevron_right_rounded,
                 color: AppColors.accent,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const Icon(
                 Icons.emoji_events_outlined,
                 color: AppColors.text3,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Flexible(
                 child: Text(
                   'Leaderboard',
@@ -156,7 +156,7 @@ class ProfileArenaCard extends StatelessWidget {
                 color: AppColors.warn,
                 size: ProfileSpacingTokens.profileModuleIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   'Open Arena',
@@ -167,14 +167,14 @@ class ProfileArenaCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const VitAccentPill(
                 label: 'Points only',
                 accentColor: AppColors.warn,
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -184,11 +184,11 @@ class ProfileArenaCard extends StatelessWidget {
                   valueColor: AppColors.warn,
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _ModuleStat(label: 'Phòng', value: '${arena.rooms}'),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: _ModuleStat(
                   label: 'Creator',
@@ -198,7 +198,7 @@ class ProfileArenaCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Expanded(
@@ -209,19 +209,19 @@ class ProfileArenaCard extends StatelessWidget {
                   style: AppTextStyles.badge.copyWith(color: AppColors.warn),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const Icon(
                 Icons.chevron_right_rounded,
                 color: AppColors.warn,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               const Icon(
                 Icons.shield_outlined,
                 color: AppColors.text3,
                 size: ProfileSpacingTokens.profileModuleLinkIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Flexible(
                 child: Text(
                   'An toàn & Báo cáo',
@@ -262,7 +262,7 @@ class _ModuleStat extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: AppTextStyles.numericMicro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           value,
           maxLines: 1,

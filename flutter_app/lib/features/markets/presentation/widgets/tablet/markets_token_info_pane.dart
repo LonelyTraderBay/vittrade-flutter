@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/theme/accent_tone_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/market_formatters.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';

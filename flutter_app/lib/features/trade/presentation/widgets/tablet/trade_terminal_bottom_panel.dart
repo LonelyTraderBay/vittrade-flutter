@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
@@ -94,14 +94,14 @@ class _TradeTerminalBottomPanelState extends State<TradeTerminalBottomPanel> {
                     onChanged: (key) => setState(() => _activeTab = key),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 IconButton(
                   key: TradeTabletKeys.bottomTab('view_all'),
                   tooltip: 'Xem tất cả',
                   onPressed: widget.onViewAll,
                   icon: const Icon(
                     Icons.open_in_full_rounded,
-                    size: AppSpacing.iconSm + AppSpacing.x2,
+                    size: TabletSpacingTokens.iconSm + TabletSpacingTokens.x2,
                   ),
                   color: AppColors.primary,
                   visualDensity: VisualDensity.compact,

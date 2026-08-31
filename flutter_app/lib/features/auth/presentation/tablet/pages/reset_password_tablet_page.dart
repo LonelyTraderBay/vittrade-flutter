@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/domain/validators/password_policy.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/controllers/password_reset_flow_controller.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart';
@@ -126,7 +126,7 @@ class _ResetPasswordTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AuthTabletInfoBanner(message: 'Đang cập nhật cho ${challenge.email}.'),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _newPasswordController,
           fieldKey: ResetPasswordTabletPage.newPasswordFieldKey,
@@ -135,7 +135,7 @@ class _ResetPasswordTabletPageState
           prefix: const Icon(Icons.lock_outline_rounded),
           obscureText: true,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _confirmPasswordController,
           fieldKey: ResetPasswordTabletPage.confirmPasswordFieldKey,
@@ -145,10 +145,10 @@ class _ResetPasswordTabletPageState
           obscureText: true,
         ),
         if (_error.isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           AuthTabletErrorBanner(message: _error),
         ],
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ResetPasswordTabletPage.submitKey,
           onPressed: _submitting ? null : () => _submit(challenge),
@@ -170,11 +170,11 @@ class _ResetPasswordTabletPageState
           color: AppColors.riskWarning,
           size: 56,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const AuthTabletInfoBanner(
           message: 'Mã xác minh không còn hiệu lực hoặc chưa được xác nhận.',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ResetPasswordTabletPage.retryKey,
           onPressed: () => context.go(AppRoutePaths.authForgotPassword),
@@ -194,12 +194,12 @@ class _ResetPasswordTabletPageState
           color: AppColors.buy,
           size: 56,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const Text(
           'Mật khẩu mới đã được lưu an toàn. Bạn có thể đăng nhập lại.',
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ResetPasswordTabletPage.loginKey,
           onPressed: () => context.go(AppRoutePaths.authLogin),

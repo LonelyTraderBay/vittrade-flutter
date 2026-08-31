@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -45,7 +45,7 @@ class ProfileSecuritySummary extends StatelessWidget {
                   style: AppTextStyles.control.copyWith(color: AppColors.text2),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Text(
                 '${snapshot.scoreLabel} (${snapshot.score}/4)',
                 style: AppTextStyles.control.copyWith(
@@ -55,7 +55,7 @@ class ProfileSecuritySummary extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitSegmentedProgressBar(
             segmentCount: 4,
             filledCount: snapshot.score,
@@ -65,12 +65,12 @@ class ProfileSecuritySummary extends StatelessWidget {
             gap: ProfileSpacingTokens.securityScoreBarGap,
             borderRadius: AppRadii.pillRadius,
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitCtaButton(
             onPressed: onUpgrade,
             variant: VitCtaButtonVariant.secondary,
             density: VitDensity.compact,
-            height: AppSpacing.buttonCompact,
+            height: TabletSpacingTokens.buttonCompact,
             child: const Text('Nâng cấp bảo mật'),
           ),
         ],

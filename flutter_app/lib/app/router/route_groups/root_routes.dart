@@ -7,6 +7,9 @@ GoRouter createAppRouter({
   AppSurface? surface,
 }) {
   final config = appConfig ?? AppConfig.current;
+  // 2026-09-01 tách token phone/tablet: compat router cũng chốt cờ surface
+  // cho spacing token (surface: null = phone compat — cờ về false).
+  TabletSpacingTokens.tabletSurfaceActive = surface == AppSurface.tablet;
   return GoRouter(
     initialLocation: initialLocation ?? _defaultInitialLocation,
     // SEC-S45: route không khớp -> trang lỗi tiếng Việt thay ErrorScreen

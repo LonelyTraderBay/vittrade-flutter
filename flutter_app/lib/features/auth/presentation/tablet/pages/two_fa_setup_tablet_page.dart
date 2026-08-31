@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -133,7 +133,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
       children: [
         VitCard(
           variant: VitCardVariant.inner,
-          padding: const EdgeInsets.all(AppSpacing.x5),
+          padding: const EdgeInsets.all(TabletSpacingTokens.x5),
           child: Column(
             children: [
               const Icon(
@@ -141,18 +141,20 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
                 size: 72,
                 color: AppColors.primary,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               const Text(
                 'Quét mã QR bằng ứng dụng xác thực của bạn.',
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              const SizedBox(
+                height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+              ),
               const SelectableText(
                 _tabletTwoFaSecret,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.monoCode,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitCtaButton(
                 key: TwoFaSetupTabletPage.copyKey,
                 onPressed: () async {
@@ -169,7 +171,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _codeController,
           fieldKey: TwoFaSetupTabletPage.codeFieldKey,
@@ -183,7 +185,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
           ],
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: TwoFaSetupTabletPage.submitKey,
           onPressed: _submitting ? null : _verifyCode,
@@ -203,13 +205,13 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
           message:
               'Lưu các mã này ở nơi an toàn. Mỗi mã chỉ dùng được một lần.',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           variant: VitCardVariant.inner,
-          padding: const EdgeInsets.all(AppSpacing.x4),
+          padding: const EdgeInsets.all(TabletSpacingTokens.x4),
           child: Wrap(
-            spacing: AppSpacing.x4,
-            runSpacing: AppSpacing.x3,
+            spacing: TabletSpacingTokens.x4,
+            runSpacing: TabletSpacingTokens.x3,
             alignment: WrapAlignment.center,
             children: [
               for (final code in _tabletBackupCodes)
@@ -217,7 +219,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         CheckboxListTile(
           key: TwoFaSetupTabletPage.backupSavedKey,
           value: _backupCodesSaved,
@@ -228,7 +230,9 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
           title: const Text('Tôi đã lưu các mã khôi phục ở nơi an toàn.'),
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+        const SizedBox(
+          height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+        ),
         VitCtaButton(
           key: TwoFaSetupTabletPage.submitKey,
           onPressed: _submitting ? null : _completeSetup,
@@ -243,7 +247,7 @@ class _TwoFaSetupTabletPageState extends ConsumerState<TwoFaSetupTabletPage> {
   Widget _errorWidget() {
     if (_error.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(top: AppSpacing.x4),
+      padding: const EdgeInsets.only(top: TabletSpacingTokens.x4),
       child: AuthTabletErrorBanner(message: _error),
     );
   }

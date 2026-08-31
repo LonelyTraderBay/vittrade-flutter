@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/product_flow/contextual_support_contract.dart';
 import 'package:vit_trade_flutter/core/utils/data_masking.dart';
@@ -105,19 +105,23 @@ class _TransactionDetailTabletPageState
           borderColor: meta.color.withValues(alpha: .22),
           child: Column(
             children: [
-              Icon(meta.icon, color: meta.color, size: AppSpacing.iconLg),
-              const SizedBox(height: AppSpacing.x4),
+              Icon(
+                meta.icon,
+                color: meta.color,
+                size: TabletSpacingTokens.iconLg,
+              ),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitStatusPill(
                 label: _statusLabel(transaction.status),
                 status: _statusPill(transaction.status),
                 size: VitStatusPillSize.md,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 meta.label,
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 '${meta.isDebit ? '-' : '+'}${_formatAmount(transaction)} ${transaction.asset}',
                 style: AppTextStyles.heroNumber.copyWith(
@@ -130,7 +134,7 @@ class _TransactionDetailTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tiến trình',
           headerIcon: Icons.timeline_rounded,
           headerIconColor: AppColors.primary,
@@ -165,7 +169,7 @@ class _TransactionDetailTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Thông tin chi tiết',
           headerIcon: Icons.article_outlined,
           headerIconColor: AppColors.primary,
@@ -211,7 +215,7 @@ class _TransactionDetailTabletPageState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.open_in_new_rounded, color: AppColors.primary),
-                SizedBox(width: AppSpacing.x4),
+                SizedBox(width: TabletSpacingTokens.x4),
                 Text('Xem trên Explorer'),
               ],
             ),

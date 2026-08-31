@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -19,7 +19,7 @@ class MarketListDiscoverMoreSection extends StatelessWidget {
     // — mọi section của pane tổng quan dùng một idiom header duy nhất.
     return VitCard(
       clip: true,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       child: Column(
         children: [
           _DiscoverRow(
@@ -31,8 +31,8 @@ class MarketListDiscoverMoreSection extends StatelessWidget {
             onTap: () => context.go(AppRoutePaths.marketsPredictions),
           ),
           const Divider(
-            height: AppSpacing.dividerHairline,
-            thickness: AppSpacing.dividerHairline,
+            height: TabletSpacingTokens.dividerHairline,
+            thickness: TabletSpacingTokens.dividerHairline,
             color: AppColors.divider,
           ),
           _DiscoverRow(
@@ -93,7 +93,7 @@ class _DiscoverRow extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,11 +110,11 @@ class _DiscoverRow extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.x4),
+                        const SizedBox(width: TabletSpacingTokens.x4),
                         VitAccentPill(label: badge, accentColor: color),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       subtitle,
                       maxLines: 1,

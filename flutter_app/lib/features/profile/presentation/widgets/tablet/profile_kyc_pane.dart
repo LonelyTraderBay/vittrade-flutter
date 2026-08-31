@@ -11,7 +11,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
@@ -166,7 +166,7 @@ class _KycStatusCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             const Icon(
               Icons.check_rounded,
               color: _ProfileKycPaneState._kycGreen,
@@ -214,7 +214,8 @@ class _KycLevelCard extends StatelessWidget {
             variant: VitCardVariant.ghost,
             borderColor: AppColors.transparent,
             child: VitIconListRow(
-              minHeight: VitDensity.compact.controlHeight + AppSpacing.x5,
+              minHeight:
+                  VitDensity.compact.controlHeight + TabletSpacingTokens.x5,
               padding: ProfileSpacingTokens.kycLevelRowPadding,
               gap: ProfileSpacingTokens.kycLevelRowGap,
               leading: _LevelIcon(
@@ -239,7 +240,7 @@ class _KycLevelCard extends StatelessWidget {
                           color: _ProfileKycPaneState._kycMuted,
                           size: ProfileSpacingTokens.kycDetailIcon,
                         ),
-                        const SizedBox(width: AppSpacing.x4),
+                        const SizedBox(width: TabletSpacingTokens.x4),
                         Text(
                           'Đã hoàn thành',
                           style: AppTextStyles.badge.copyWith(
@@ -267,7 +268,7 @@ class _KycLevelCard extends StatelessWidget {
           ),
           if (expanded) ...[
             const Divider(
-              height: AppSpacing.dividerHairline,
+              height: TabletSpacingTokens.dividerHairline,
               color: AppColors.divider,
             ),
             Padding(
@@ -357,7 +358,7 @@ class _ExpandedLevelDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _DetailsBlock(title: 'Giới hạn giao dịch:', lines: level.limits),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _DetailsBlock(
           title: 'Tính năng mở khóa:',
           lines: level.features,
@@ -365,7 +366,7 @@ class _ExpandedLevelDetails extends StatelessWidget {
           checkmarks: true,
         ),
         if (canStart) ...[
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitCtaButton(
             key: ProfileTabletKeys.kycStart(level.level),
             onPressed: submitting ? null : onStart,
@@ -406,7 +407,7 @@ class _DetailsBlock extends StatelessWidget {
           title,
           style: AppTextStyles.badge.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         for (final line in lines) ...[
           Row(
             children: [
@@ -423,7 +424,7 @@ class _DetailsBlock extends StatelessWidget {
                   '• ',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text1),
                 ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   line,
@@ -434,7 +435,7 @@ class _DetailsBlock extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
         ],
       ],
     );
@@ -458,7 +459,7 @@ class _KycPrivacyCard extends StatelessWidget {
             color: _ProfileKycPaneState._kycPrimary,
             size: ProfileSpacingTokens.kycPrivacyIcon,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -470,7 +471,7 @@ class _KycPrivacyCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   'Thông tin KYC được mã hóa AES-256. Chúng tôi không chia sẻ với bên thứ ba.',
                   maxLines: 2,

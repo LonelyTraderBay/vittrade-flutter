@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart'
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -102,19 +102,19 @@ class _PositionDashboardTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Tổng quan',
                       child: _PositionSummaryCard(
                         positions: snapshot.positions,
                       ),
                     ),
                     const VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Đánh giá rủi ro',
                       child: VitCard(
                         variant: VitCardVariant.inner,
                         radius: VitCardRadius.tight,
-                        padding: AppSpacing.cardPaddingCompact,
+                        padding: TabletSpacingTokens.cardPaddingCompact,
                         child: VitHighRiskStatePanel(
                           state: VitHighRiskUiState.riskReview,
                           density: VitDensity.tool,
@@ -200,7 +200,7 @@ class _PositionControlsRow extends StatelessWidget {
             onChanged: onTabChanged,
           ),
         ),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         for (final (id, label) in [
           ('pnl', 'P/L'),
           ('pnlPct', '% P/L'),
@@ -213,7 +213,7 @@ class _PositionControlsRow extends StatelessWidget {
             onTap: () => onSortChanged(id),
             color: AppColors.primary,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
         ],
       ],
     );
@@ -239,7 +239,7 @@ class _PositionTable extends StatelessWidget {
       key: PositionDashboardTabletPage.tableKey,
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       clip: true,
       child: Column(
         children: [
@@ -251,8 +251,8 @@ class _PositionTable extends StatelessWidget {
             ),
             if (i < positions.length - 1)
               const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
+                thickness: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
           ],
@@ -279,8 +279,8 @@ class _PositionTableHeader extends StatelessWidget {
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       child: Row(
         children: [
@@ -313,8 +313,8 @@ class _PositionTableRow extends StatelessWidget {
     final pnlColor = positive ? AppColors.buy : AppColors.sell;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       child: Row(
         children: [
@@ -425,7 +425,7 @@ class _PositionSummaryCard extends StatelessWidget {
       key: PositionDashboardTabletPage.summaryKey,
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -439,7 +439,7 @@ class _PositionSummaryCard extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitKeyValueRow(
             label: 'Tổng giá trị danh nghĩa',
             value: formatTradeMoney(totalNotional),
@@ -449,7 +449,7 @@ class _PositionSummaryCard extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           VitKeyValueRow(
             label: 'Tổng P/L chưa realise',
             value:

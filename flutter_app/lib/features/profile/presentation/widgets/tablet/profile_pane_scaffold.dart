@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_navigation_rail.dart';
@@ -99,7 +99,7 @@ class ProfilePaneScaffold extends StatelessWidget {
                 showBack: narrow && onBack != null,
                 onBack: onBack,
                 actions: headerActions ?? const [],
-                horizontalPadding: AppSpacing.zero,
+                horizontalPadding: TabletSpacingTokens.zero,
               );
             },
           ),

@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart';
@@ -158,7 +158,7 @@ class _SuspiciousBanner extends StatelessWidget {
             color: AppColors.warn,
             size: ProfileSpacingTokens.profileActivityBannerIcon,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +173,7 @@ class _SuspiciousBanner extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   'Vui lòng kiểm tra và đổi mật khẩu nếu không phải bạn',
                   maxLines: 1,
@@ -213,7 +213,7 @@ class _ActivityEntryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _ActivityIcon(config: type),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,14 +231,14 @@ class _ActivityEntryCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.x4),
+                        const SizedBox(width: TabletSpacingTokens.x4),
                         VitAccentPill(
                           label: status.label,
                           accentColor: status.color,
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       log.description,
                       maxLines: 1,
@@ -251,7 +251,7 @@ class _ActivityEntryCard extends StatelessWidget {
                 ),
               ),
               if (suspicious) ...[
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 const Icon(
                   Icons.warning_amber_rounded,
                   color: AppColors.warn,
@@ -260,14 +260,14 @@ class _ActivityEntryCard extends StatelessWidget {
               ],
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           _ActivityDetails(log: log),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           const Divider(
-            height: AppSpacing.dividerHairline,
+            height: TabletSpacingTokens.dividerHairline,
             color: AppColors.divider,
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             log.timestamp,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -325,7 +325,7 @@ class _ActivityDetails extends StatelessWidget {
                     value: log.location,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: _ActivityDetailBlock(
                     icon: Icons.desktop_windows_outlined,
@@ -335,7 +335,7 @@ class _ActivityDetails extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             _ActivityDetailBlock(label: 'IP ADDRESS', value: log.ipAddress),
           ],
         ),
@@ -368,7 +368,7 @@ class _ActivityDetailBlock extends StatelessWidget {
                 color: AppColors.text3,
                 size: ProfileSpacingTokens.profileActivityDetailIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
             ],
             Flexible(
               child: Text(
@@ -380,7 +380,7 @@ class _ActivityDetailBlock extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           value,
           maxLines: 1,
@@ -411,7 +411,7 @@ class _ActivityFooter extends StatelessWidget {
             color: AppColors.primary,
             size: ProfileSpacingTokens.profileActivityFooterIcon,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Text(
               'Nhật ký hoạt động giúp bạn theo dõi tất cả thao tác trên tài khoản. Nếu '

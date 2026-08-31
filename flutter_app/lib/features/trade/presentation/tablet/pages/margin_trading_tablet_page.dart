@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -125,13 +125,13 @@ class _MarginTradingTabletPageState
       ),
       primary: VitCard(
         radius: VitCardRadius.tight,
-        padding: AppSpacing.cardPaddingCompact,
+        padding: TabletSpacingTokens.cardPaddingCompact,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Wrap(
-              spacing: AppSpacing.rowGap,
-              runSpacing: AppSpacing.rowGap,
+              spacing: TabletSpacingTokens.rowGap,
+              runSpacing: TabletSpacingTokens.rowGap,
               children: [
                 for (final tab in snapshot.modeTabs)
                   VitFilterChip(
@@ -143,7 +143,7 @@ class _MarginTradingTabletPageState
                   ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitSegmentedChoice<String>(
               selected: _side,
               onChanged: (side) => setState(() => _side = side),
@@ -164,7 +164,7 @@ class _MarginTradingTabletPageState
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitInput(
               key: MarginTradingTabletPage.amountFieldKey,
               label: 'Số lượng (${snapshot.pair.baseAsset})',
@@ -175,7 +175,7 @@ class _MarginTradingTabletPageState
                 decimal: true,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitPresetChipRow.percentBalance(
               onTap: (pct) => setState(() {
                 // maxAmountFor trả chuỗi định dạng sẵn — parse về số trước
@@ -189,7 +189,7 @@ class _MarginTradingTabletPageState
               keyFor: (pct) => Key('sc085_tablet_pct_$pct'),
               accentColor: AppColors.primary,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             for (final (label, value) in [
               ('Đòn bẩy', '${snapshot.defaultLeverage}x'),
               (
@@ -206,7 +206,9 @@ class _MarginTradingTabletPageState
               ),
             ])
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+                padding: const EdgeInsets.symmetric(
+                  vertical: TabletSpacingTokens.x1,
+                ),
                 child: VitKeyValueRow(
                   label: label,
                   value: value,
@@ -219,7 +221,7 @@ class _MarginTradingTabletPageState
                   ),
                 ),
               ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCtaButton(
               key: MarginTradingTabletPage.submitKey,
               onPressed: canSubmit ? () => _openConfirm(snapshot) : null,
@@ -238,7 +240,7 @@ class _MarginTradingTabletPageState
         children: [
           VitCard(
             radius: VitCardRadius.tight,
-            padding: AppSpacing.cardPaddingCompact,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -249,7 +251,7 @@ class _MarginTradingTabletPageState
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 for (final (label, value) in [
                   (
                     'Tổng vốn',
@@ -274,7 +276,7 @@ class _MarginTradingTabletPageState
                 ])
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.x1,
+                      vertical: TabletSpacingTokens.x1,
                     ),
                     child: VitKeyValueRow(
                       label: label,
@@ -291,7 +293,9 @@ class _MarginTradingTabletPageState
               ],
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          const SizedBox(
+            height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+          ),
           if (modePositions.isEmpty)
             const VitEmptyState(
               icon: Icons.account_balance_outlined,
@@ -301,7 +305,7 @@ class _MarginTradingTabletPageState
           else
             VitCard(
               radius: VitCardRadius.tight,
-              padding: AppSpacing.cardPaddingCompact,
+              padding: TabletSpacingTokens.cardPaddingCompact,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -312,11 +316,11 @@ class _MarginTradingTabletPageState
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   for (final position in modePositions)
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.x1,
+                        vertical: TabletSpacingTokens.x1,
                       ),
                       child: Row(
                         children: [

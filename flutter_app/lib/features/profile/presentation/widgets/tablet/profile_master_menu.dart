@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_footer_actions.dart';
@@ -52,7 +52,7 @@ class ProfileMasterMenu extends ConsumerWidget {
       // (24-35) to keep the financial-app density (2026-08-27 spacing
       // review).
       rhythm: VitPageRhythm.standard,
-      customGap: AppSpacing.x4,
+      customGap: TabletSpacingTokens.x4,
       children: [
         Row(
           children: [
@@ -71,8 +71,8 @@ class ProfileMasterMenu extends ConsumerWidget {
         ),
         Wrap(
           key: const Key('sc156_profile_master_pills'),
-          spacing: AppSpacing.x2,
-          runSpacing: AppSpacing.x1,
+          spacing: TabletSpacingTokens.x2,
+          runSpacing: TabletSpacingTokens.x1,
           children: [
             VitAccentPill(
               label: user.vipLevel,
@@ -92,7 +92,7 @@ class ProfileMasterMenu extends ConsumerWidget {
             accentColor: Color(section.accentHex),
             headerVariant: VitSectionHeaderVariant.accentBar,
             headerDensity: VitDensity.compact,
-            innerGap: AppSpacing.x4,
+            innerGap: TabletSpacingTokens.x4,
             children: [
               if (section.id == 'legal')
                 const ProfileLegalAccordionPanel()

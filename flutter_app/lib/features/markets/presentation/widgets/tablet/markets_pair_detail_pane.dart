@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/market_formatters.dart';
@@ -244,7 +244,7 @@ class _MarketsPairDetailPaneState extends ConsumerState<MarketsPairDetailPane> {
                 VitPageSection(
                   // 2 VitCard cách nhau đúng cardGap (13) — gap mặc định tight
                   // (8) từng ép sát 2 link card giữa các section gap 13.
-                  customGap: AppSpacing.cardGap,
+                  customGap: TabletSpacingTokens.cardGap,
                   children: [
                     // Thứ tự bậc thông tin 2026-08-29: phân tích (Thông tin coin)
                     // đứng trước khuyến nghị giao dịch (Mua định kỳ); phân tích

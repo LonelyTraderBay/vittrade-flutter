@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -83,7 +83,7 @@ class _PortfolioAnalyticsTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Tổng giá trị danh mục'),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       VitFormat.usd(snapshot.totalUsd),
                       style: AppTextStyles.heroNumber.copyWith(
@@ -106,7 +106,7 @@ class _PortfolioAnalyticsTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Góc nhìn',
           headerIcon: Icons.dashboard_outlined,
           headerIconColor: AppColors.primary,
@@ -135,7 +135,7 @@ class _PortfolioAnalyticsTabletPageState
         ),
         if (_view == 'overview') ...[
           VitPageSection(
-            innerGap: AppSpacing.x4,
+            innerGap: TabletSpacingTokens.x4,
             label: 'Lịch sử giá trị',
             headerIcon: Icons.show_chart_rounded,
             headerIconColor: AppColors.primary,
@@ -156,11 +156,11 @@ class _PortfolioAnalyticsTabletPageState
                 onChanged: (period) => setState(() => _period = period),
                 variant: VitTabBarVariant.segment,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitCard(
                 variant: VitCardVariant.inner,
                 child: SizedBox(
-                  height: AppSpacing.x7 * 3,
+                  height: TabletSpacingTokens.x7 * 3,
                   child: VitSparkline(
                     values: [for (final point in snapshot.history) point.value],
                     color: AppColors.primary,
@@ -170,7 +170,7 @@ class _PortfolioAnalyticsTabletPageState
             ],
           ),
           VitPageSection(
-            innerGap: AppSpacing.x4,
+            innerGap: TabletSpacingTokens.x4,
             label: 'Chỉ số chính',
             headerIcon: Icons.insights_outlined,
             headerIconColor: AppColors.primary,
@@ -179,12 +179,12 @@ class _PortfolioAnalyticsTabletPageState
             rhythm: VitPageRhythm.standard,
             children: [
               Wrap(
-                spacing: AppSpacing.gridGap,
-                runSpacing: AppSpacing.gridGap,
+                spacing: TabletSpacingTokens.gridGap,
+                runSpacing: TabletSpacingTokens.gridGap,
                 children: [
                   for (final metric in snapshot.metrics)
                     SizedBox(
-                      width: AppSpacing.serviceTileMinHeight * 2,
+                      width: TabletSpacingTokens.serviceTileMinHeight * 2,
                       child: VitCard(
                         variant: VitCardVariant.inner,
                         density: VitDensity.compact,
@@ -197,7 +197,7 @@ class _PortfolioAnalyticsTabletPageState
                                 color: AppColors.text3,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.x4),
+                            const SizedBox(height: TabletSpacingTokens.x4),
                             Text(
                               metric.value,
                               style: AppTextStyles.sectionTitle.copyWith(
@@ -236,7 +236,7 @@ class _PortfolioAnalyticsTabletPageState
           contractId: 'Phân tích danh mục',
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tài sản nổi bật',
           headerIcon: Icons.pie_chart_outline_rounded,
           headerIconColor: AppColors.primary,
@@ -255,7 +255,7 @@ class _PortfolioAnalyticsTabletPageState
                       leading: VitAssetAvatar(
                         label: snapshot.assets[i].symbol,
                         accentColor: Color(snapshot.assets[i].colorHex),
-                        size: AppSpacing.iconLg,
+                        size: TabletSpacingTokens.iconLg,
                       ),
                       density: VitDensity.compact,
                       showDivider: i != snapshot.assets.length - 1,
@@ -271,14 +271,14 @@ class _PortfolioAnalyticsTabletPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Tốt nhất'),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 '${snapshot.bestProfitAsset} · ${VitFormat.usdSigned(snapshot.bestProfitUsd)}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.buy),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               const Text('Cần theo dõi'),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 '${snapshot.worstLossAsset} · ${VitFormat.usdSigned(-snapshot.worstLossUsd)}',
                 style: AppTextStyles.caption.copyWith(color: AppColors.sell),

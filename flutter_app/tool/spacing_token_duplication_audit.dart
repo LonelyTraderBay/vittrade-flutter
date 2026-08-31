@@ -65,6 +65,10 @@ const _moduleBaselines = <String, int>{
   'predictions': 0,
   'profile': 0,
   'referral': 0,
+  // 'tablet' (2026-09-01): namespace tablet_spacing_tokens cố ý mirror
+  // snapshot AppSpacing để tách surface (user duyệt) — 19 literal là
+  // chủ đích thiết kế, không phải nợ cần trả; ratchet giữ không-tăng.
+  'tablet': 19,
   'shared': 0,
   'support': 0,
   'trade': 0,

@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -93,7 +93,7 @@ class _WalletTokenApprovalTabletPageState
       children: [
         _securityOverview(snapshot),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Danh mục quyền truy cập',
           headerIcon: Icons.shield_outlined,
           headerIconColor: AppColors.primary,
@@ -130,15 +130,15 @@ class _WalletTokenApprovalTabletPageState
           const Icon(
             Icons.security_outlined,
             color: AppColors.accent,
-            size: AppSpacing.iconLg,
+            size: TabletSpacingTokens.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Tổng quan phê duyệt token'),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '${snapshot.approvals.length} quyền đang hoạt động',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -168,7 +168,7 @@ class _WalletTokenApprovalTabletPageState
     final snapshot = controller.state.snapshot;
     final approvals = snapshot.riskSortedApprovals;
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Quyền đang hoạt động',
       headerIcon: Icons.lock_open_outlined,
       headerIconColor: AppColors.primary,
@@ -219,7 +219,7 @@ class _WalletTokenApprovalTabletPageState
             _riskIcon(approval.riskLevel),
             color: _riskColor(approval.riskLevel),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,12 +235,12 @@ class _WalletTokenApprovalTabletPageState
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '${approval.spenderName} · ${approval.maskedSpender}',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   'Hạn mức: ${approval.amountLabel} · Dùng lần cuối: ${approval.lastUsedLabel}',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -261,7 +261,7 @@ class _WalletTokenApprovalTabletPageState
 
   Widget _historyContent(WalletTokenApprovalSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Lịch sử thu hồi',
       headerIcon: Icons.history_rounded,
       headerIconColor: AppColors.primary,
@@ -286,7 +286,7 @@ class _WalletTokenApprovalTabletPageState
 
   Widget _settingsContent() {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Cài đặt bảo mật',
       headerIcon: Icons.settings_outlined,
       headerIconColor: AppColors.primary,
@@ -383,15 +383,15 @@ class _WalletTokenApprovalTabletPageState
   Widget _revokeSheet(BuildContext sheetContext, TokenRevokePreview preview) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x5),
+        padding: const EdgeInsets.all(TabletSpacingTokens.x5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(preview.title, style: AppTextStyles.sectionTitle),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(preview.body),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             const VitHighRiskStatePanel(
               state: VitHighRiskUiState.riskReview,
               title: 'Bước xem trước bắt buộc',
@@ -400,7 +400,7 @@ class _WalletTokenApprovalTabletPageState
               contractId: 'Thu hồi quyền token',
               density: VitDensity.compact,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
@@ -411,7 +411,7 @@ class _WalletTokenApprovalTabletPageState
                     child: const Text('Xem lại sau'),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: VitCtaButton(
                     key: WalletTokenApprovalTabletPage.revokeSheetConfirmKey,

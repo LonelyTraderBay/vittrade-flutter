@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_discover.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_movers.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_tools.dart';
@@ -88,19 +88,19 @@ class _MarketsTabletPageState extends ConsumerState<MarketsTabletPage> {
               VitPageSection(
                 label: 'Biến động nổi bật',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.x4,
+                innerGap: TabletSpacingTokens.x4,
                 children: [MarketListTopMovers(pairs: snapshot.marketPairs)],
               ),
               VitPageSection(
                 label: 'Công cụ thị trường',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.x4,
+                innerGap: TabletSpacingTokens.x4,
                 children: [MarketListTools(onNavigate: _go, tablet: true)],
               ),
               const VitPageSection(
                 label: 'Lối tắt từ Markets',
                 headerVariant: VitSectionHeaderVariant.plain,
-                innerGap: AppSpacing.x4,
+                innerGap: TabletSpacingTokens.x4,
                 children: [MarketListDiscoverMoreSection()],
               ),
             ],

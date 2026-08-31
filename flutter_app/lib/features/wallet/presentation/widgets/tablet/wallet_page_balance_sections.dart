@@ -1,8 +1,8 @@
 part of 'wallet_page_sections.dart';
 
 const double _walletHeroPrimaryActionHeight =
-    AppSpacing.searchBarCompactHeight - AppSpacing.x1;
-const double _walletBreakdownDividerHeight = AppSpacing.x6;
+    TabletSpacingTokens.searchBarCompactHeight - TabletSpacingTokens.x1;
+const double _walletBreakdownDividerHeight = TabletSpacingTokens.x6;
 
 class WalletBalanceHero extends StatelessWidget {
   const WalletBalanceHero({
@@ -54,7 +54,7 @@ class WalletBalanceHero extends StatelessWidget {
                         fontWeight: AppTextStyles.medium,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       'Quy USD · theo giá thị trường',
                       style: AppTextStyles.micro.copyWith(
@@ -75,7 +75,7 @@ class WalletBalanceHero extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             hidden ? '••••••' : _formatUsd(snapshot.totalUsd),
             style: AppTextStyles.heroNumber.copyWith(
@@ -83,7 +83,7 @@ class WalletBalanceHero extends StatelessWidget {
               letterSpacing: 0,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             hidden
                 ? '••••• BTC'
@@ -93,7 +93,7 @@ class WalletBalanceHero extends StatelessWidget {
             ),
           ),
           if (!hidden) ...[
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
@@ -114,10 +114,10 @@ class WalletBalanceHero extends StatelessWidget {
               ],
             ),
           ],
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           _BreakdownRow(snapshot: snapshot, hidden: hidden),
           if (deposit != null || withdraw != null || hasOverflow) ...[
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 if (deposit != null)
@@ -129,7 +129,7 @@ class WalletBalanceHero extends StatelessWidget {
                     ),
                   ),
                 if (deposit != null && withdraw != null)
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                 if (withdraw != null)
                   Expanded(
                     child: _WalletTabletHeroActionButton(
@@ -139,7 +139,7 @@ class WalletBalanceHero extends StatelessWidget {
                     ),
                   ),
                 if (hasOverflow) ...[
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   VitInlineIconAction(
                     key: const Key('sc135_wallet_more_actions'),
                     tooltip: 'Thêm thao tác',
@@ -264,7 +264,7 @@ class _BreakdownRow extends StatelessWidget {
                     size: VitStatusPillSize.sm,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   hidden ? '••••' : _formatUsd(items[i].$2),
                   style: AppTextStyles.caption.copyWith(

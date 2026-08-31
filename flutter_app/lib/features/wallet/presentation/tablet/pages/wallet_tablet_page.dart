@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/tablet/wallet_page_sections.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/tablet/wallet_tablet_keys.dart';
@@ -88,8 +88,8 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
             title: 'Thêm thao tác',
             child: VitActionTileGrid(
               density: VitDensity.compact,
-              crossAxisSpacing: AppSpacing.x3,
-              mainAxisSpacing: AppSpacing.x3,
+              crossAxisSpacing: TabletSpacingTokens.x3,
+              mainAxisSpacing: TabletSpacingTokens.x3,
               physics: const ClampingScrollPhysics(),
               itemCount: overflowActions.length,
               itemBuilder: (context, index, density) {
@@ -197,7 +197,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerVariant: VitSectionHeaderVariant.plain,
         actionLabel: 'Phân tích',
         onAction: () => _navigate('/wallet/portfolio-analytics'),
-        innerGap: AppSpacing.x4,
+        innerGap: TabletSpacingTokens.x4,
         children: [
           if (_tab == 'assets')
             WalletSearchAndFilter(
@@ -229,7 +229,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerIconColor: AppModuleAccents.wallet,
         accentColor: AppModuleAccents.wallet,
         headerVariant: VitSectionHeaderVariant.plain,
-        innerGap: AppSpacing.x4,
+        innerGap: TabletSpacingTokens.x4,
         children: [
           WalletToolGrid(
             tools: snapshot.tools,
@@ -244,7 +244,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
         headerIconColor: AppColors.accent,
         accentColor: AppColors.accent,
         headerVariant: VitSectionHeaderVariant.plain,
-        innerGap: AppSpacing.x4,
+        innerGap: TabletSpacingTokens.x4,
         children: [WalletDcaCard(dca: snapshot.dca)],
       ),
     ];
@@ -253,8 +253,8 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
       // Luật 13dp (2026-08-31): section gap dashboard = 13.
-      primaryContentGap: AppSpacing.x4,
-      secondaryContentGap: AppSpacing.x4,
+      primaryContentGap: TabletSpacingTokens.x4,
+      secondaryContentGap: TabletSpacingTokens.x4,
     );
   }
 }

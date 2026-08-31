@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/utils/data_masking.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
@@ -117,7 +117,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tổng quan',
           headerIcon: Icons.analytics_outlined,
           headerIconColor: AppColors.primary,
@@ -136,7 +136,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
                     Icons.verified_user_outlined,
                     color: _whitelistOnly ? AppColors.buy : AppColors.text2,
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   const Expanded(
                     child: Text('Chỉ hiển thị địa chỉ trong danh sách trắng'),
                   ),
@@ -153,7 +153,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Bộ lọc',
           headerIcon: Icons.filter_alt_outlined,
           headerIconColor: AppColors.primary,
@@ -206,7 +206,7 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
             onAction: () => context.go(AppRoutePaths.walletAddressBookAdd),
           ),
         const VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Bảo mật địa chỉ',
           headerIcon: Icons.shield_outlined,
           headerIconColor: AppColors.primary,
@@ -279,7 +279,7 @@ class _StatsRow extends StatelessWidget {
                       fontFeatures: AppTextStyles.tabularFigures,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     stats[i].$2,
                     maxLines: 1,
@@ -290,7 +290,8 @@ class _StatsRow extends StatelessWidget {
               ),
             ),
           ),
-          if (i != stats.length - 1) const SizedBox(width: AppSpacing.x4),
+          if (i != stats.length - 1)
+            const SizedBox(width: TabletSpacingTokens.x4),
         ],
       ],
     );
@@ -315,7 +316,8 @@ class _NetworkFilters extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: filters.length,
-        separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.x4),
+        separatorBuilder: (_, _) =>
+            const SizedBox(width: TabletSpacingTokens.x4),
         itemBuilder: (context, index) {
           final filter = filters[index];
           return VitChoicePill(
@@ -348,7 +350,7 @@ class _AddressSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: title,
       headerIcon: icon,
       headerIconColor: color,
@@ -391,7 +393,7 @@ class _AddressTabletCard extends StatelessWidget {
                 Icons.shield_outlined,
                 color: address.isWhitelisted ? AppColors.buy : AppColors.text3,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,7 +411,7 @@ class _AddressTabletCard extends StatelessWidget {
                           ),
                         ),
                         if (address.isWhitelisted) ...[
-                          const SizedBox(width: AppSpacing.x4),
+                          const SizedBox(width: TabletSpacingTokens.x4),
                           const VitStatusPill(
                             label: 'Danh sách trắng',
                             icon: Icons.check_rounded,
@@ -419,14 +421,14 @@ class _AddressTabletCard extends StatelessWidget {
                         ],
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '${address.network} · ${address.asset}',
                       style: AppTextStyles.micro.copyWith(
                         color: AppColors.text3,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       maskAddress(address.address),
                       style: AppTextStyles.numericMicro.copyWith(
@@ -438,7 +440,7 @@ class _AddressTabletCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               VitChoicePill(
@@ -475,7 +477,7 @@ class _AddressTabletCard extends StatelessWidget {
                     ? VitIconButtonVariant.primary
                     : VitIconButtonVariant.ghost,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               VitIconButton(
                 key: AddressBookTabletPage.editKey(address.id),
                 icon: Icons.edit_rounded,
@@ -488,7 +490,7 @@ class _AddressTabletCard extends StatelessWidget {
                 size: VitIconButtonSize.md,
                 variant: VitIconButtonVariant.ghost,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               VitIconButton(
                 key: AddressBookTabletPage.deleteKey(address.id),
                 icon: Icons.delete_outline_rounded,

@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/assets/wallet_buy_crypto_sections.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
@@ -168,7 +168,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
           contractId: 'Mua tiền mã hóa',
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tóm tắt giao dịch',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,
@@ -226,14 +226,14 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
               const Icon(
                 Icons.check_circle_outline_rounded,
                 color: AppColors.buy,
-                size: AppSpacing.iconLg,
+                size: TabletSpacingTokens.iconLg,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               const Text(
                 'Đặt lệnh thành công!',
                 style: AppTextStyles.sectionTitle,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 'Lệnh mua ${receiveAmount.toStringAsFixed(6)} ${crypto.symbol} từ ${VitFormat.count(amountVnd)} VND đã được ghi nhận.',
                 textAlign: TextAlign.center,
@@ -242,7 +242,7 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           variant: VitCtaButtonVariant.success,
           onPressed: () => context.go(AppRoutePaths.wallet),
@@ -306,7 +306,8 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: snapshot.cryptoOptions.length,
-            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x4),
+            separatorBuilder: (_, _) =>
+                const SizedBox(height: TabletSpacingTokens.x4),
             itemBuilder: (context, index) {
               final option = snapshot.cryptoOptions[index];
               return VitCard(
@@ -321,9 +322,9 @@ class _BuyCryptoTabletPageState extends ConsumerState<BuyCryptoTabletPage> {
                     VitAssetAvatar(
                       label: option.symbol,
                       accentColor: Color(option.colorHex),
-                      size: AppSpacing.iconLg,
+                      size: TabletSpacingTokens.iconLg,
                     ),
-                    const SizedBox(width: AppSpacing.x4),
+                    const SizedBox(width: TabletSpacingTokens.x4),
                     Expanded(child: Text(option.name)),
                     Text(option.symbol),
                   ],

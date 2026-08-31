@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -47,21 +47,24 @@ class MarketsMasterSkeleton extends StatelessWidget {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+        padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const VitSkeleton(
               width: double.infinity,
-              height: AppSpacing.buttonCompact,
+              height: TabletSpacingTokens.buttonCompact,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             const VitSkeleton(
-              width: AppSpacing.x4,
-              height: AppSpacing.buttonCompact,
+              width: TabletSpacingTokens.x4,
+              height: TabletSpacingTokens.buttonCompact,
             ),
-            const SizedBox(height: AppSpacing.x4),
-            const VitSkeleton(width: AppSpacing.x4, height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            const VitSkeleton(
+              width: TabletSpacingTokens.x4,
+              height: TabletSpacingTokens.x4,
+            ),
             ...List<Widget>.generate(6, (_) => const _MasterRowSkeleton()),
           ],
         ),
@@ -78,13 +81,13 @@ class _MasterRowSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         Row(
           children: [
             VitSkeleton(width: 16, height: 16),
-            SizedBox(width: AppSpacing.x4),
+            SizedBox(width: TabletSpacingTokens.x4),
             VitSkeleton(width: 28, height: 28),
-            SizedBox(width: AppSpacing.x4),
+            SizedBox(width: TabletSpacingTokens.x4),
             Expanded(flex: 5, child: VitSkeleton(width: 90, height: 24)),
             Expanded(flex: 4, child: VitSkeleton(width: 72, height: 14)),
             Expanded(flex: 3, child: VitSkeleton(width: 44, height: 18)),
@@ -123,9 +126,9 @@ class _PulseStripSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VitSkeleton(width: double.infinity, height: 14),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitSkeleton(width: double.infinity, height: 16),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitSkeleton(width: double.infinity, height: 10),
       ],
     );
@@ -133,18 +136,18 @@ class _PulseStripSkeleton extends StatelessWidget {
       radius: VitCardRadius.standard,
       clip: true,
       // Mirror card pulse đã load: cùng 8dp đều (CB-R7 — tường minh padding).
-      padding: EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(flex: 3, child: block),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(flex: 3, child: block),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(flex: 2, child: block),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(flex: 2, child: block),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(flex: 2, child: block),
         ],
       ),
@@ -161,12 +164,12 @@ class _MoverStripSkeleton extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.x4),
+        VitSkeleton(width: 140, height: TabletSpacingTokens.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         // Mirror movers strip đã load: card tight + 8dp đều.
         VitCard(
           radius: VitCardRadius.tight,
-          padding: EdgeInsetsDirectional.all(AppSpacing.x3),
+          padding: EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
           child: VitSkeletonList(rows: 4),
         ),
       ],
@@ -183,8 +186,8 @@ class _ToolsSkeleton extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        VitSkeleton(width: 120, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.x4),
+        VitSkeleton(width: 120, height: TabletSpacingTokens.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitCard(child: VitSkeletonList(rows: 2)),
       ],
     );
@@ -200,12 +203,12 @@ class _DiscoverSkeleton extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        VitSkeleton(width: 140, height: AppSpacing.x4),
-        SizedBox(height: AppSpacing.x4),
+        VitSkeleton(width: 140, height: TabletSpacingTokens.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         // Mirror discover card đã load: khung clip zero-inset tường minh.
         VitCard(
           clip: true,
-          padding: AppSpacing.zeroInsets,
+          padding: TabletSpacingTokens.zeroInsets,
           child: VitSkeletonList(rows: 2),
         ),
       ],

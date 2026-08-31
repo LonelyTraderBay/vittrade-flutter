@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/auth/domain/validators/password_policy.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -172,7 +172,7 @@ class _ForgotPasswordTabletPageState
         const AuthTabletInfoBanner(
           message: 'Chỉ tiếp tục nếu bạn đang sở hữu email của tài khoản.',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _emailController,
           fieldKey: ForgotPasswordTabletPage.emailFieldKey,
@@ -182,7 +182,7 @@ class _ForgotPasswordTabletPageState
           keyboardType: TextInputType.emailAddress,
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ForgotPasswordTabletPage.submitKey,
           onPressed: _submitting ? null : _sendOtp,
@@ -201,7 +201,7 @@ class _ForgotPasswordTabletPageState
         AuthTabletInfoBanner(
           message: 'Mã đã gửi đến ${_emailController.text}.',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _otpController,
           fieldKey: ForgotPasswordTabletPage.otpFieldKey,
@@ -215,7 +215,7 @@ class _ForgotPasswordTabletPageState
           ],
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ForgotPasswordTabletPage.submitKey,
           onPressed: _submitting ? null : _verifyOtp,
@@ -239,7 +239,7 @@ class _ForgotPasswordTabletPageState
           prefix: const Icon(Icons.lock_outline_rounded),
           obscureText: true,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           controller: _confirmPasswordController,
           fieldKey: ForgotPasswordTabletPage.confirmPasswordFieldKey,
@@ -249,7 +249,7 @@ class _ForgotPasswordTabletPageState
           obscureText: true,
         ),
         _errorWidget(),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           key: ForgotPasswordTabletPage.submitKey,
           onPressed: _submitting ? null : _resetPassword,
@@ -270,12 +270,12 @@ class _ForgotPasswordTabletPageState
           size: 56,
           color: AppColors.buy,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const Text(
           'Mật khẩu đã được cập nhật. Hãy đăng nhập lại để tiếp tục giao dịch.',
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCtaButton(
           onPressed: () => context.go(AppRoutePaths.authLogin),
           variant: VitCtaButtonVariant.auth,
@@ -288,7 +288,7 @@ class _ForgotPasswordTabletPageState
   Widget _errorWidget() {
     if (_error.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(top: AppSpacing.x4),
+      padding: const EdgeInsets.only(top: TabletSpacingTokens.x4),
       child: AuthTabletErrorBanner(message: _error),
     );
   }

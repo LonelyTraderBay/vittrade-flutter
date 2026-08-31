@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -89,7 +89,7 @@ class _WalletHealthScoreTabletPageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Điểm sức khỏe tổng thể'),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '${snapshot.overallScore}',
                       style: AppTextStyles.heroNumber.copyWith(
@@ -97,7 +97,7 @@ class _WalletHealthScoreTabletPageState
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       _statusLabel(snapshot.overallScore),
                       style: AppTextStyles.caption.copyWith(
@@ -108,11 +108,11 @@ class _WalletHealthScoreTabletPageState
                 ),
               ),
               SizedBox(
-                width: AppSpacing.x7 * 2,
-                height: AppSpacing.x7 * 2,
+                width: TabletSpacingTokens.x7 * 2,
+                height: TabletSpacingTokens.x7 * 2,
                 child: CircularProgressIndicator(
                   value: snapshot.overallScore / 100,
-                  strokeWidth: AppSpacing.x1,
+                  strokeWidth: TabletSpacingTokens.x1,
                   color: AppColors.primary,
                   backgroundColor: AppColors.surface3,
                 ),
@@ -121,7 +121,7 @@ class _WalletHealthScoreTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Khu vực đánh giá',
           headerIcon: Icons.fact_check_outlined,
           headerIconColor: AppColors.primary,
@@ -166,7 +166,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildOverview(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Ưu tiên cải thiện',
       headerIcon: Icons.priority_high_rounded,
       headerIconColor: AppColors.caution,
@@ -184,13 +184,13 @@ class _WalletHealthScoreTabletPageState
             child: Row(
               children: [
                 const Icon(Icons.shield_outlined, color: AppColors.caution),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(recommendation.title),
-                      const SizedBox(height: AppSpacing.x4),
+                      const SizedBox(height: TabletSpacingTokens.x4),
                       Text(
                         recommendation.description,
                         style: AppTextStyles.caption.copyWith(
@@ -210,7 +210,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildSecurity(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Bảo mật ví',
       headerIcon: Icons.security_outlined,
       headerIconColor: AppColors.primary,
@@ -251,7 +251,7 @@ class _WalletHealthScoreTabletPageState
 
   Widget _buildDiversification(WalletHealthScoreSnapshot snapshot) {
     return VitPageSection(
-      innerGap: AppSpacing.x4,
+      innerGap: TabletSpacingTokens.x4,
       label: 'Phân bổ tài sản',
       headerIcon: Icons.pie_chart_outline_rounded,
       headerIconColor: AppColors.primary,
@@ -270,7 +270,7 @@ class _WalletHealthScoreTabletPageState
                   leading: VitAssetAvatar(
                     label: snapshot.diversification[i].name,
                     accentColor: Color(snapshot.diversification[i].colorHex),
-                    size: AppSpacing.iconLg,
+                    size: TabletSpacingTokens.iconLg,
                   ),
                   density: VitDensity.compact,
                   showDivider: i != snapshot.diversification.length - 1,
@@ -301,7 +301,7 @@ class _WalletHealthScoreTabletPageState
           density: VitDensity.compact,
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Chi tiết điểm',
           headerIcon: Icons.insights_outlined,
           headerIconColor: AppColors.primary,
@@ -338,9 +338,9 @@ class _WalletHealthScoreTabletPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Xu hướng điểm số'),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 SizedBox(
-                  height: AppSpacing.x7 * 3,
+                  height: TabletSpacingTokens.x7 * 3,
                   child: VitSparkline(
                     values: [
                       for (final point in snapshot.history)
@@ -361,22 +361,22 @@ class _WalletHealthScoreTabletPageState
       context: context,
       builder: (context) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.x5),
+          padding: const EdgeInsets.all(TabletSpacingTokens.x5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(recommendation.title, style: AppTextStyles.sectionTitle),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(recommendation.description),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitStatusPill(
                 label: 'Khuyến nghị ưu tiên · ${recommendation.category}',
                 status: VitStatusPillStatus.warning,
                 icon: Icons.info_outline_rounded,
                 size: VitStatusPillSize.sm,
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitCtaButton(
                 key: WalletHealthScoreTabletPage.sheetCloseKey,
                 onPressed: () => Navigator.of(context).pop(),

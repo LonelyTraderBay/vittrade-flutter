@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/notifications_controller_providers.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
 import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
 import 'package:vit_trade_flutter/app/shell/web/web_app_shell.dart';

@@ -8,7 +8,7 @@ import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart'
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -202,7 +202,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
       primary: VitCard(
         radius: VitCardRadius.tight,
         density: VitDensity.tool,
-        padding: AppSpacing.cardPaddingCompact,
+        padding: TabletSpacingTokens.cardPaddingCompact,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -229,12 +229,12 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               },
               contractId: snapshot.highRiskContractId,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(
               'Chọn hướng',
               style: AppTextStyles.control.copyWith(color: AppColors.text1),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitSegmentedChoice<TradeFuturesSide>(
               selected: _side,
               onChanged: (side) => setState(() => _side = side),
@@ -255,7 +255,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitInput(
               key: FuturesTabletPage.marginFieldKey,
               label: 'Số tiền ký quỹ (USDT)',
@@ -266,7 +266,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                 decimal: true,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitPresetChipRow.percentBalance(
               onTap: (pct) => setState(() {
                 _marginController.text = (available * pct / 100)
@@ -276,10 +276,10 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               accentColor: AppColors.primary,
             ),
             if (margin > 0) ...[
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               _FuturesPreviewRows(preview: preview),
             ],
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCtaButton(
               key: FuturesTabletPage.submitKey,
               onPressed: preview.canOpen && !submitting
@@ -301,7 +301,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
             // Bậc thang canSubmit của máy ADR-001 — hiển thị lỗi validate
             // gần nút bấm (form feedback chuẩn).
             if (!orderNotifier.canSubmit && margin > 0) ...[
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(
                 orderNotifier.validationMessage() ?? '',
                 style: AppTextStyles.caption.copyWith(color: AppColors.caution),
@@ -316,7 +316,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
           VitCard(
             radius: VitCardRadius.tight,
             density: VitDensity.tool,
-            padding: AppSpacing.cardPaddingCompact,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -339,7 +339,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                 ])
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.x1,
+                      vertical: TabletSpacingTokens.x1,
                     ),
                     child: VitKeyValueRow(
                       label: label,
@@ -356,7 +356,9 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               ],
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          const SizedBox(
+            height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+          ),
           if (snapshot.positions.isEmpty)
             const VitEmptyState(
               icon: Icons.insights_outlined,
@@ -367,7 +369,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
             VitCard(
               radius: VitCardRadius.tight,
               density: VitDensity.tool,
-              padding: AppSpacing.cardPaddingCompact,
+              padding: TabletSpacingTokens.cardPaddingCompact,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -378,11 +380,11 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   for (final position in snapshot.positions)
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.x1,
+                        vertical: TabletSpacingTokens.x1,
                       ),
                       child: _FuturesPositionRow(position: position),
                     ),
@@ -424,7 +426,9 @@ class _FuturesPreviewRows extends StatelessWidget {
           ('Phí mở lệnh', formatTradeMoney(preview.openFee), AppColors.text2),
         ])
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+            padding: const EdgeInsets.symmetric(
+              vertical: TabletSpacingTokens.x1,
+            ),
             child: VitKeyValueRow(
               label: label,
               value: value,

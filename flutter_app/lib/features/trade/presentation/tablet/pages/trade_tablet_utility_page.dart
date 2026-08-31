@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_module_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -68,7 +68,7 @@ class TradeTabletUtilityPage extends StatelessWidget {
                 icon: Icons.insights_outlined,
                 color: AppColors.primary,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   description,
@@ -91,7 +91,7 @@ class TradeTabletUtilityPage extends StatelessWidget {
             density: VitDensity.compact,
           ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Thông tin chính',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

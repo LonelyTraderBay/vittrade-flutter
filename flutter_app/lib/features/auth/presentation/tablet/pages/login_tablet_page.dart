@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/network/api_client.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/widgets/auth_tablet_surface.dart';
@@ -102,7 +102,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                 if (_error.isNotEmpty) setState(() => _error = '');
               },
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitInput(
               controller: _passwordController,
               fieldKey: LoginTabletPage.passwordFieldKey,
@@ -128,10 +128,12 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
               onSubmitted: (_) => _submit(),
             ),
             if (_error.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              const SizedBox(
+                height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+              ),
               AuthTabletErrorBanner(message: _error),
             ],
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             VitCtaButton(
               key: LoginTabletPage.submitKey,
               onPressed: _submitting ? null : _submit,
@@ -140,7 +142,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
               child: const Text('Đăng nhập'),
             ),
             if (showDemoLogin) ...[
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               VitCtaButton(
                 key: LoginTabletPage.demoSubmitKey,
                 onPressed: _submitting ? null : () => _submit(demo: true),
@@ -149,7 +151,9 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                 child: const Text('Dùng tài khoản demo'),
               ),
             ],
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(
+              height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -159,7 +163,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                       ? null
                       : () => context.go(AppRoutePaths.authForgotPassword),
                   fullWidth: false,
-                  height: AppSpacing.buttonCompact,
+                  height: TabletSpacingTokens.buttonCompact,
                   variant: VitCtaButtonVariant.ghost,
                   child: Text(
                     'Quên mật khẩu?',
@@ -175,7 +179,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                       ? null
                       : () => context.go(AppRoutePaths.authRegister),
                   fullWidth: false,
-                  height: AppSpacing.buttonCompact,
+                  height: TabletSpacingTokens.buttonCompact,
                   variant: VitCtaButtonVariant.ghost,
                   child: Text(
                     'Đăng ký',
@@ -186,7 +190,7 @@ class _LoginTabletPageState extends ConsumerState<LoginTabletPage> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(
               'Bằng cách đăng nhập, bạn đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của VitTrade.',
               textAlign: TextAlign.center,

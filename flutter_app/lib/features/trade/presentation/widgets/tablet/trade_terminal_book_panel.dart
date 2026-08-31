@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
@@ -27,7 +27,7 @@ class TradeTerminalBookPanel extends StatelessWidget {
         fill: true,
         child: Center(
           child: Padding(
-            padding: AppSpacing.contentInsets,
+            padding: TabletSpacingTokens.contentInsets,
             child: Text(
               'Chưa có dữ liệu sổ lệnh',
               style: AppTextStyles.micro,
@@ -83,7 +83,7 @@ class TradeTerminalBookPanel extends StatelessWidget {
                   side: TradeOrderSide.sell,
                 ),
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
               for (var i = 0; i < bids.length; i++)

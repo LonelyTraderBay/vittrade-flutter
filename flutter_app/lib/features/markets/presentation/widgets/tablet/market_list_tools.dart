@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 
-const double _marketToolsCompactHeight = AppSpacing.buttonCompact;
-const double _marketToolCompactGap = AppSpacing.x2;
+const double _marketToolsCompactHeight = TabletSpacingTokens.buttonCompact;
+const double _marketToolCompactGap = TabletSpacingTokens.x2;
 const EdgeInsets _marketToolCompactPadding =
     MarketsSpacingTokens.marketListToolCompactPadding;
-const double _marketToolCompactIcon = AppSpacing.iconSm;
+const double _marketToolCompactIcon = TabletSpacingTokens.iconSm;
 
 class MarketListTools extends StatelessWidget {
   const MarketListTools({
@@ -125,15 +125,15 @@ class MarketListTools extends StatelessWidget {
           return VitSheetPanel(
             title: 'Thêm công cụ',
             child: Wrap(
-              spacing: AppSpacing.x3,
-              runSpacing: AppSpacing.x3,
+              spacing: TabletSpacingTokens.x3,
+              runSpacing: TabletSpacingTokens.x3,
               children: [
                 for (final tool in overflowTools)
                   SizedBox(
                     width:
                         (MediaQuery.sizeOf(sheetContext).width -
-                            AppSpacing.contentPad * 2 -
-                            AppSpacing.x3) /
+                            TabletSpacingTokens.contentPad * 2 -
+                            TabletSpacingTokens.x3) /
                         2,
                     child: VitServiceTile(
                       density: VitServiceTileDensity.compact,
@@ -191,13 +191,13 @@ class MarketListTools extends StatelessWidget {
         child: Row(
           children: [
             for (var i = 0; i < hubTools.length; i++) ...[
-              if (i > 0) const SizedBox(width: AppSpacing.x4),
+              if (i > 0) const SizedBox(width: TabletSpacingTokens.x4),
               _ToolChip(
                 tool: hubTools[i],
                 onTap: () => onNavigate('/markets/${hubTools[i].route}'),
               ),
             ],
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             VitChoicePill(
               label: 'Thêm',
               selected: false,

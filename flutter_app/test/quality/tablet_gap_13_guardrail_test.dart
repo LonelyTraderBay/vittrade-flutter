@@ -19,13 +19,19 @@ import 'package:flutter_test/flutter_test.dart';
 const _scannedDirs = ['lib/app/shell/tablet', 'lib/features'];
 
 /// Biểu thức `height:`/`width:` hợp lệ của một SizedBox-khe.
+/// Từ 2026-09-01 file tablet đọc `TabletSpacingTokens` (namespace tách
+/// riêng) — whitelist nhận cả hai namespace với cùng bộ tên.
 final _allowedGapExpr = RegExp(
-  r'^(AppSpacing\.x4|AppSpacing\.cardGap|AppSpacing\.sectionGapCompact'
-  r'|AppSpacing\.zero|double\.infinity|AppSpacing\.dividerHairline'
-  r'|AppSpacing\.hairlineStroke|AppSpacing\.borderWidth'
+  r'^((?:AppSpacing|TabletSpacingTokens)\.x4'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.cardGap'
+  r'|AppSpacing\.sectionGapCompact'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.zero|double\.infinity'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.dividerHairline'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.hairlineStroke'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.borderWidth'
   r'|TradeSpacingTokens\.tradeTerminalGutter'
   // Token role giá trị đúng 13 (không phải khe mới, chỉ cách gọi tên).
-  r'|AppSpacing\.pageRhythmStandardSectionGap'
+  r'|(?:AppSpacing|TabletSpacingTokens)\.pageRhythmStandardSectionGap'
   r'|AppSpacing\.pageRhythmRelaxedInnerGap'
   r'|TabletDashboardWidths\.columnGutter'
   r'|TabletDashboardWidths\.blockVerticalGap)$',
@@ -80,7 +86,9 @@ List<String> _scanCurrent() {
         for (final axis in ['height', 'width']) {
           final am = RegExp(axis + r':\s*([^,)]+)').firstMatch(span);
           if (am == null) continue;
-          final expr = am.group(1)!.trim();
+          // dart format có co dấu dòng giữa tên namespace và member —
+          // chuẩn hoá bỏ mọi khoảng trắng trước khi so khớp whitelist.
+          final expr = am.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
               ? (literal == 0 || literal == 13)
@@ -186,21 +194,24 @@ void main() {
             r'(?:^|,)\s*(?:label|title):\s*',
           ).hasMatch(topLevelArgs);
           if (!ownsLabel) continue;
-          if (!span.contains('innerGap: AppSpacing.x4')) {
+          if (!span.contains('innerGap: AppSpacing.x4') &&
+              !span.contains('innerGap: TabletSpacingTokens.x4')) {
             violations.add(
               '$path — ${src.substring(m.start, m.start + 40)}… thiếu '
-              'innerGap: AppSpacing.x4 (khoảng nhãn → nội dung tablet = 13)',
+              'innerGap 13 (khoảng nhãn → nội dung tablet = 13)',
             );
           }
         }
         // bottomGap trực tiếp (label → nội dung) cũng phải 13.
         for (final m in RegExp(r'bottomGap:\s*([^,)]+)').allMatches(src)) {
-          final expr = m.group(1)!.trim();
+          final expr = m.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
               ? literal == 13
               : (expr == 'AppSpacing.x4' ||
+                    expr == 'TabletSpacingTokens.x4' ||
                     expr == 'AppSpacing.cardGap' ||
+                    expr == 'TabletSpacingTokens.cardGap' ||
                     expr == 'AppSpacing.sectionGapCompact');
           if (!ok) {
             violations.add('$path — bottomGap: $expr phải là 13');

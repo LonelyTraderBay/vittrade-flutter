@@ -9,7 +9,7 @@ import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dar
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/storage/key_value_store.dart';
@@ -73,7 +73,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               children: [
                 _CurrencyCard(
                   currencies: snapshot.currencyOptions,
@@ -87,7 +87,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               children: [
                 _LanguageCard(
                   languages: snapshot.languages,
@@ -101,7 +101,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               children: [
                 if (snapshot.tradeSecurity.isEmpty)
                   const VitEmptyState(
@@ -122,7 +122,7 @@ class _ProfileSettingsPaneState extends ConsumerState<ProfileSettingsPane> {
               accentColor: AppColors.primary,
               headerVariant: VitSectionHeaderVariant.accentBar,
               headerDensity: VitDensity.compact,
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               children: [
                 if (snapshot.notifications.isEmpty)
                   const VitEmptyState(
@@ -221,7 +221,7 @@ class _CurrencyCard extends StatelessWidget {
             color: AppColors.primary,
             size: ProfileSpacingTokens.settingsCurrencyIcon,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +233,7 @@ class _CurrencyCard extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 VitPresetChipRow<String>(
                   gap: ProfileSpacingTokens.settingsCurrencyChipGap,
                   selectedValue: selectedCurrency,
@@ -282,7 +282,7 @@ class _LanguageCard extends StatelessWidget {
             ),
             if (language != languages.last)
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
           ],
@@ -315,7 +315,8 @@ class _LanguageRow extends StatelessWidget {
         color: selected ? AppColors.surface2 : AppColors.transparent,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minHeight: VitDensity.compact.controlHeight + AppSpacing.x2,
+            minHeight:
+                VitDensity.compact.controlHeight + TabletSpacingTokens.x2,
           ),
           child: Padding(
             padding: ProfileSpacingTokens.settingsLanguageRowPadding,
@@ -374,7 +375,7 @@ class _SettingsListCard extends StatelessWidget {
             ),
             if (row != rows.last)
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
           ],
@@ -401,7 +402,7 @@ class _SettingsToggleRow extends StatelessWidget {
 
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: VitDensity.compact.controlHeight + AppSpacing.x5,
+        minHeight: VitDensity.compact.controlHeight + TabletSpacingTokens.x5,
       ),
       child: Padding(
         padding: hasIcon
@@ -415,7 +416,7 @@ class _SettingsToggleRow extends StatelessWidget {
                 color: AppColors.primary,
                 size: ProfileSpacingTokens.settingsRowIcon,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
             ],
             Expanded(
               child: Column(
@@ -431,7 +432,7 @@ class _SettingsToggleRow extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     row.subtitle,
                     maxLines: 1,
@@ -445,7 +446,7 @@ class _SettingsToggleRow extends StatelessWidget {
               ),
             ),
             if (row.canToggle && row.enabled != null) ...[
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               VitTogglePill(
                 key: ProfileTabletKeys.settingsToggle(row.id),
                 enabled: enabled,
@@ -487,7 +488,7 @@ class _AppInfoCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           for (final row in rows) ...[
             Row(
               children: [
@@ -501,7 +502,7 @@ class _AppInfoCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Text(
                   row.value,
                   style: AppTextStyles.caption.copyWith(
@@ -511,7 +512,8 @@ class _AppInfoCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (row != rows.last) const SizedBox(height: AppSpacing.x4),
+            if (row != rows.last)
+              const SizedBox(height: TabletSpacingTokens.x4),
           ],
         ],
       ),

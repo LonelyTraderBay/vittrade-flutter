@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -112,7 +112,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
           ),
           primary: VitCard(
             radius: VitCardRadius.tight,
-            padding: AppSpacing.cardPaddingCompact,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -139,7 +139,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 VitInput(
                   key: ConvertTabletPage.amountFieldKey,
                   label: 'Số lượng (${snapshot.fromAsset.symbol})',
@@ -150,10 +150,10 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                     decimal: true,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Wrap(
-                  spacing: AppSpacing.rowGap,
-                  runSpacing: AppSpacing.rowGap,
+                  spacing: TabletSpacingTokens.rowGap,
+                  runSpacing: TabletSpacingTokens.rowGap,
                   children: [
                     for (final option in snapshot.slippageOptions)
                       VitFilterChip(
@@ -166,7 +166,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                   ],
                 ),
                 if (quote != null) ...[
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   for (final (label, value) in [
                     (
                       'Nhận ước tính',
@@ -176,7 +176,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                   ])
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.x1,
+                        vertical: TabletSpacingTokens.x1,
                       ),
                       child: VitKeyValueRow(
                         label: label,
@@ -191,7 +191,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                       ),
                     ),
                 ],
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 VitCtaButton(
                   key: ConvertTabletPage.submitKey,
                   onPressed: amount <= 0
@@ -213,7 +213,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
             children: [
               VitCard(
                 radius: VitCardRadius.tight,
-                padding: AppSpacing.cardPaddingCompact,
+                padding: TabletSpacingTokens.cardPaddingCompact,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -227,7 +227,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                     ])
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.x1,
+                          vertical: TabletSpacingTokens.x1,
                         ),
                         child: VitKeyValueRow(
                           label: label,
@@ -243,11 +243,13 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+              const SizedBox(
+                height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+              ),
               if (snapshot.history.isNotEmpty)
                 VitCard(
                   radius: VitCardRadius.tight,
-                  padding: AppSpacing.cardPaddingCompact,
+                  padding: TabletSpacingTokens.cardPaddingCompact,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -258,11 +260,11 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.x4),
+                      const SizedBox(height: TabletSpacingTokens.x4),
                       for (final record in snapshot.history.take(5))
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.x1,
+                            vertical: TabletSpacingTokens.x1,
                           ),
                           child: Text(
                             '${formatTradeMoney(record.fromAmount)} ${record.fromSymbol} → '
@@ -343,7 +345,7 @@ class _AssetBlock extends StatelessWidget {
           label,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           symbol,
           style: AppTextStyles.sectionTitle.copyWith(color: AppColors.text1),
@@ -352,7 +354,7 @@ class _AssetBlock extends StatelessWidget {
           name,
           style: AppTextStyles.caption.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           balanceLabel,
           style: AppTextStyles.caption.copyWith(

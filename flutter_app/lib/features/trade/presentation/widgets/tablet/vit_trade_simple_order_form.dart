@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_formatters.dart';
@@ -137,7 +137,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           activeBuyKey: const Key('sc048_trade_active_buy_side'),
           activeSellKey: const Key('sc048_trade_active_sell_side'),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitInput(
           key: amountFieldKey,
           label: 'Số lượng $actionVerb ($baseAsset)',
@@ -146,13 +146,13 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           onChanged: (_) => onChanged(),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitPresetChipRow.percentBalance(
           onTap: onPct,
           keyFor: pctKeyBuilder ?? (pct) => Key('sc048_pct_$pct'),
           accentColor: _tradePrimary,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitKeyValueRow(
           label: 'Giá thị trường',
           value: marketPriceLabel,
@@ -162,7 +162,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitKeyValueRow(
           label: 'Phí ước tính',
           value: formatTradeMoney(preview.fee),
@@ -172,7 +172,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitKeyValueRow(
           label: 'Trượt giá',
           // Cột terminal 320dp: bản rút gọn của dòng confirm sheet đầy đủ
@@ -181,7 +181,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
           labelStyle: AppTextStyles.caption.copyWith(color: AppColors.text2),
           valueStyle: AppTextStyles.caption.copyWith(color: AppColors.text1),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitKeyValueRow(
           label: 'Số dư khả dụng',
           value: side == TradeOrderSide.buy
@@ -193,7 +193,7 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitKeyValueRow(
           label: 'Tổng thanh toán',
           value: '${formatTradeMoney(preview.total)} USDT',
@@ -204,12 +204,12 @@ class VitTradeSimpleOrderForm extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           'Giá thị trường có thể thay đổi. Không hoàn tác sau khi xác nhận gửi.',
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Semantics(
           button: true,
           enabled: canSubmit && !submitting,

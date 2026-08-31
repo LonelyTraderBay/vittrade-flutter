@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
@@ -50,10 +50,10 @@ class WalletTabletDetailSurface extends StatelessWidget {
                 final wide = constraints.maxWidth >= 900;
                 return SingleChildScrollView(
                   padding: const EdgeInsetsDirectional.fromSTEB(
-                    AppSpacing.x6,
-                    AppSpacing.pageRhythmStandardSectionGap,
-                    AppSpacing.x6,
-                    AppSpacing.x7,
+                    TabletSpacingTokens.x6,
+                    TabletSpacingTokens.pageRhythmStandardSectionGap,
+                    TabletSpacingTokens.x6,
+                    TabletSpacingTokens.x7,
                   ),
                   child: Center(
                     child: ConstrainedBox(
@@ -68,13 +68,13 @@ class WalletTabletDetailSurface extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(flex: 7, child: primary),
-                                const SizedBox(width: AppSpacing.x4),
+                                const SizedBox(width: TabletSpacingTokens.x4),
                                 Expanded(flex: 5, child: secondary),
                               ],
                             )
                           else ...[
                             primary,
-                            const SizedBox(height: AppSpacing.x4),
+                            const SizedBox(height: TabletSpacingTokens.x4),
                             secondary,
                           ],
                         ],

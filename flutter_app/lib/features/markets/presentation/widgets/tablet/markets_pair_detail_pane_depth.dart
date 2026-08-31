@@ -25,7 +25,7 @@ class _PairDepthWorkspaceState extends ConsumerState<_PairDepthWorkspace> {
     final depthAsync = ref.watch(marketDepthSnapshotProvider(query));
     return depthAsync.when(
       loading: () => const Padding(
-        padding: EdgeInsetsDirectional.all(AppSpacing.x4),
+        padding: EdgeInsetsDirectional.all(TabletSpacingTokens.x4),
         child: VitSkeletonList(),
       ),
       error: (error, stackTrace) => Padding(
@@ -46,7 +46,9 @@ class _PairDepthWorkspaceState extends ConsumerState<_PairDepthWorkspace> {
             levels: _levels,
             onLevelSelected: (level) => setState(() => _levels = level),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          const SizedBox(
+            height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+          ),
           MarketDepthWhaleAlertsView(snapshot: snapshot),
         ],
       ),

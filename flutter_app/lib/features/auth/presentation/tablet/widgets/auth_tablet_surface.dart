@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
@@ -48,10 +48,10 @@ class AuthTabletSurface extends StatelessWidget {
         builder: (context, constraints) {
           return SingleChildScrollView(
             padding: const EdgeInsetsDirectional.fromSTEB(
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x7,
+              TabletSpacingTokens.x6,
+              TabletSpacingTokens.x6,
+              TabletSpacingTokens.x6,
+              TabletSpacingTokens.x7,
             ),
             child: Center(
               child: ConstrainedBox(
@@ -66,7 +66,7 @@ class AuthTabletSurface extends StatelessWidget {
                       brandTitle: brandTitle,
                       brandDescription: brandDescription,
                       form: VitCard(
-                        padding: const EdgeInsets.all(AppSpacing.x6),
+                        padding: const EdgeInsets.all(TabletSpacingTokens.x6),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -76,9 +76,9 @@ class AuthTabletSurface extends StatelessWidget {
                                 child: VitCtaButton(
                                   onPressed: onBack,
                                   fullWidth: false,
-                                  height: AppSpacing.buttonCompact,
+                                  height: TabletSpacingTokens.buttonCompact,
                                   padding: const EdgeInsetsDirectional.only(
-                                    end: AppSpacing.x3,
+                                    end: TabletSpacingTokens.x3,
                                   ),
                                   variant: VitCtaButtonVariant.ghost,
                                   leading: const Icon(Icons.arrow_back_rounded),
@@ -86,14 +86,15 @@ class AuthTabletSurface extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: AppSpacing.pageRhythmStandardSectionGap,
+                                height: TabletSpacingTokens
+                                    .pageRhythmStandardSectionGap,
                               ),
                             ],
                             VitSectionHeader(
                               title: title,
                               subtitle: subtitle,
                               variant: VitSectionHeaderVariant.accentBar,
-                              bottomGap: AppSpacing.x4,
+                              bottomGap: TabletSpacingTokens.x4,
                             ),
                             child,
                           ],
@@ -129,7 +130,7 @@ class _AuthTabletColumns extends StatelessWidget {
     final brand = VitCard(
       variant: VitCardVariant.hero,
       radius: VitCardRadius.large,
-      padding: const EdgeInsets.all(AppSpacing.x6),
+      padding: const EdgeInsets.all(TabletSpacingTokens.x6),
       child: _AuthTabletBrandPanel(
         title: brandTitle,
         description: brandDescription,
@@ -141,7 +142,7 @@ class _AuthTabletColumns extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           brand,
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           form,
         ],
       );
@@ -151,7 +152,7 @@ class _AuthTabletColumns extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(flex: 5, child: brand),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         Expanded(flex: 7, child: form),
       ],
     );
@@ -172,28 +173,28 @@ class _AuthTabletBrandPanel extends StatelessWidget {
         const Icon(
           Icons.shield_outlined,
           color: AppColors.onAccent,
-          size: AppSpacing.iconLg,
+          size: TabletSpacingTokens.iconLg,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const Text('VitTrade', style: AppTextStyles.pageTitle),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(title, style: AppTextStyles.sectionTitle),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           description,
           style: AppTextStyles.body.copyWith(color: AppColors.text2),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const _AuthTabletTrustLine(
           icon: Icons.verified_user_outlined,
           text: 'Xác minh rõ ràng trước khi tiếp tục',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const _AuthTabletTrustLine(
           icon: Icons.visibility_off_outlined,
           text: 'Thông tin nhạy cảm luôn được bảo vệ',
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const _AuthTabletTrustLine(
           icon: Icons.devices_outlined,
           text: 'Tối ưu cho màn hình tablet và bàn phím',
@@ -214,8 +215,8 @@ class _AuthTabletTrustLine extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: AppColors.onAccent, size: AppSpacing.iconSm),
-        const SizedBox(width: AppSpacing.x4),
+        Icon(icon, color: AppColors.onAccent, size: TabletSpacingTokens.iconSm),
+        const SizedBox(width: TabletSpacingTokens.x4),
         Expanded(
           child: Text(
             text,

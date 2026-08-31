@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -64,7 +64,7 @@ class ProfileAccountHero extends StatelessWidget {
               radius: AppRadii.cardRadius,
               border: true,
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,7 @@ class ProfileAccountHero extends StatelessWidget {
                       color: AppColors.onAccent,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     VitFormat.email(user.email),
                     maxLines: 1,
@@ -87,7 +87,7 @@ class ProfileAccountHero extends StatelessWidget {
                       color: AppColors.portfolioTextMuted,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x4),
+                  const SizedBox(height: TabletSpacingTokens.x4),
                   Text(
                     'Tham gia từ ${user.joinDate}',
                     maxLines: 1,
@@ -99,7 +99,7 @@ class ProfileAccountHero extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: AppSpacing.x4),
+            const SizedBox(width: TabletSpacingTokens.x4),
             VitIconButton(
               key: ProfileTabletKeys.editProfile,
               icon: Icons.person_outline_rounded,
@@ -109,7 +109,7 @@ class ProfileAccountHero extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Wrap(
           key: ProfileTabletKeys.heroPills,
           spacing: ProfileSpacingTokens.profileHeroPillGap,
@@ -130,7 +130,7 @@ class ProfileAccountHero extends StatelessWidget {
                 onPressed: onVerifyKyc,
                 variant: VitCtaButtonVariant.primary,
                 density: VitDensity.compact,
-                height: AppSpacing.buttonCompact,
+                height: TabletSpacingTokens.buttonCompact,
                 fullWidth: false,
                 child: const Text('Xác minh'),
               ),
@@ -144,7 +144,7 @@ class ProfileAccountHero extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _HeroFactBox(label: 'UID', value: user.id),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Material(
           color: AppColors.transparent,
           child: InkWell(
@@ -188,7 +188,7 @@ class ProfileAccountHero extends StatelessWidget {
               height: ProfileSpacingTokens.profileVipProgressHeight,
               borderRadius: AppRadii.pillRadius,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Text(
               vip.volumeLabel,
               maxLines: 1,
@@ -219,11 +219,11 @@ class ProfileAccountHero extends StatelessWidget {
                   children: [
                     identityBlock,
                     const SizedBox(
-                      height: AppSpacing.pageRhythmStandardSectionGap,
+                      height: TabletSpacingTokens.pageRhythmStandardSectionGap,
                     ),
                     factBoxes,
                     const SizedBox(
-                      height: AppSpacing.pageRhythmStandardSectionGap,
+                      height: TabletSpacingTokens.pageRhythmStandardSectionGap,
                     ),
                     runway,
                   ],
@@ -237,13 +237,13 @@ class ProfileAccountHero extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Expanded(flex: 5, child: identityBlock),
-                          const SizedBox(width: AppSpacing.x4),
+                          const SizedBox(width: TabletSpacingTokens.x4),
                           Expanded(flex: 3, child: factBoxes),
                         ],
                       ),
                     ),
                     const SizedBox(
-                      height: AppSpacing.pageRhythmStandardSectionGap,
+                      height: TabletSpacingTokens.pageRhythmStandardSectionGap,
                     ),
                     runway,
                   ],
@@ -291,7 +291,7 @@ class _HeroFactBox extends StatelessWidget {
               color: AppColors.portfolioTextMuted,
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             children: [
               Flexible(
@@ -307,7 +307,7 @@ class _HeroFactBox extends StatelessWidget {
                 ),
               ),
               if (trailing != null) ...[
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 trailing!,
               ],
             ],

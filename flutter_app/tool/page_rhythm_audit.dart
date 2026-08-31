@@ -279,7 +279,7 @@ _InnerGapScan _scanInnerGapCompliance(String source) {
 
 bool _headerHasInnerGap(String callBody, String source, int callStart) {
   if (RegExp(
-    r'bottomGap:\s*(?:AppSpacing\.pageRhythm\w+InnerGap|VitDensity\.|VitContentGap\.)',
+    r'bottomGap:\s*(?:(?:AppSpacing|TabletSpacingTokens)\.pageRhythm\w+InnerGap|VitDensity\.|VitContentGap\.)',
   ).hasMatch(callBody)) {
     return true;
   }
@@ -287,7 +287,7 @@ bool _headerHasInnerGap(String callBody, String source, int callStart) {
   // Luật 13dp (2026-08-31): bottomGap: AppSpacing.x4 (13dp) là khai báo
   // inner-gap hợp lệ của tablet — tách giá trị khỏi tier phone.
   if (RegExp(
-    r'bottomGap:\s*(?:AppSpacing\.x4|AppSpacing\.cardGap)',
+    r'bottomGap:\s*(?:(?:AppSpacing|TabletSpacingTokens)\.(?:x4|cardGap))',
   ).hasMatch(callBody)) {
     return true;
   }

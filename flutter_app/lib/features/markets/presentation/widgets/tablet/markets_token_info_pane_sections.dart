@@ -45,7 +45,7 @@ class _TokenTabs extends StatelessWidget {
               ),
             ),
             const Divider(
-              height: AppSpacing.dividerHairline,
+              height: TabletSpacingTokens.dividerHairline,
               color: AppColors.divider,
             ),
           ],
@@ -78,10 +78,10 @@ class _OverviewTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _HeroCard(snapshot: snapshot),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitSectionHeader(
           title: 'Thống kê thị trường',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppAssetColors.forSymbol(pair.baseAsset),
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -125,26 +125,26 @@ class _OverviewTab extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Cung token',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.primary,
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _SupplyCard(fundamentals: fundamentals, supplyPct: supplyPct),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Phân bổ cung',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.accent,
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _DistributionCard(distribution: fundamentals.supplyDistribution),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Kỷ lục giá',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.warn,
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -153,7 +153,7 @@ class _OverviewTab extends StatelessWidget {
           athDropPct: athDropPct,
           atlGainPct: atlGainPct,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _ChartLink(pairId: pair.id),
       ],
     );
@@ -170,7 +170,7 @@ class _HeroCard extends StatelessWidget {
     final pair = snapshot.pair;
     final fundamentals = snapshot.fundamentals;
     return VitCard(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       borderColor: AppColors.primary.withValues(alpha: 0.22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,16 +180,16 @@ class _HeroCard extends StatelessWidget {
               VitAssetAvatar(
                 label: pair.baseAsset,
                 accentColor: AppAssetColors.forSymbol(pair.baseAsset),
-                size: AppSpacing.buttonCompact,
+                size: TabletSpacingTokens.buttonCompact,
                 radius: AppRadii.cardRadius,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(fundamentals.name, style: AppTextStyles.sectionTitle),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       fundamentals.consensus,
                       maxLines: 1,
@@ -203,7 +203,7 @@ class _HeroCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -259,7 +259,9 @@ class _InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: TabletSpacingTokens.x3,
+      ),
       child: Column(
         children: [
           for (var i = 0; i < rows.length; i += 1)
@@ -282,12 +284,16 @@ class _InfoRow extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsetsDirectional.symmetric(
-            vertical: AppSpacing.x2,
+            vertical: TabletSpacingTokens.x2,
           ),
           child: Row(
             children: [
-              Icon(row.icon, size: AppSpacing.iconSm, color: row.iconColor),
-              const SizedBox(width: AppSpacing.x4),
+              Icon(
+                row.icon,
+                size: TabletSpacingTokens.iconSm,
+                color: row.iconColor,
+              ),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Text(
                   row.label,
@@ -308,8 +314,8 @@ class _InfoRow extends StatelessWidget {
         ),
         if (showDivider)
           const Divider(
-            height: AppSpacing.dividerHairline,
-            thickness: AppSpacing.dividerHairline,
+            height: TabletSpacingTokens.dividerHairline,
+            thickness: TabletSpacingTokens.dividerHairline,
             color: AppColors.divider,
           ),
       ],
@@ -326,7 +332,7 @@ class _SupplyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Column(
         children: [
           _MetricLine(
@@ -335,14 +341,14 @@ class _SupplyCard extends StatelessWidget {
                 '${formatMarketCompact(fundamentals.circulatingSupply)} ${fundamentals.symbol}',
           ),
           if (supplyPct != null) ...[
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: TabletSpacingTokens.x4),
             Row(
               children: [
                 Expanded(
                   child: ClipRRect(
                     borderRadius: AppRadii.swatchRadius,
                     child: LinearProgressIndicator(
-                      minHeight: AppSpacing.x1,
+                      minHeight: TabletSpacingTokens.x1,
                       value: (supplyPct! / 100).clamp(0, 1).toDouble(),
                       backgroundColor: AppColors.surface3,
                       valueColor: const AlwaysStoppedAnimation(
@@ -351,7 +357,7 @@ class _SupplyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
                 Text(
                   '${supplyPct!.toStringAsFixed(1)}%',
                   style: AppTextStyles.micro.copyWith(
@@ -362,7 +368,7 @@ class _SupplyCard extends StatelessWidget {
               ],
             ),
           ],
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           _MetricLine(
             label: 'Tổng cung',
             value:
@@ -402,7 +408,9 @@ class _MetricLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.x1),
+      padding: const EdgeInsetsDirectional.symmetric(
+        vertical: TabletSpacingTokens.x1,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -433,30 +441,30 @@ class _DistributionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Row(
         children: [
           CustomPaint(
             size: const Size.square(70),
             painter: _DonutPainter(distribution),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               children: [
                 for (final item in distribution)
                   Padding(
                     padding: const EdgeInsetsDirectional.symmetric(
-                      vertical: AppSpacing.x1,
+                      vertical: TabletSpacingTokens.x1,
                     ),
                     child: Row(
                       children: [
                         Icon(
                           Icons.circle,
-                          size: AppSpacing.pageRhythmCompactInnerGap,
+                          size: TabletSpacingTokens.pageRhythmCompactInnerGap,
                           color: item.color.resolve(),
                         ),
-                        const SizedBox(width: AppSpacing.x4),
+                        const SizedBox(width: TabletSpacingTokens.x4),
                         Expanded(
                           child: Text(
                             item.label,

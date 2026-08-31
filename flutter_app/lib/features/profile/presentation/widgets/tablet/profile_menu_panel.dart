@@ -4,7 +4,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -45,7 +45,7 @@ class ProfileMenuPanel extends StatelessWidget {
             ),
             if (item != section.items.last)
               const Divider(
-                height: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
           ],
@@ -79,7 +79,7 @@ class _MenuRow extends StatelessWidget {
           minHeight: VitDensity.standard.controlHeight,
           padding: ProfileSpacingTokens.profileMenuRowPadding,
           gap: ProfileSpacingTokens.profileMenuGap,
-          subtitleGap: AppSpacing.pageRhythmCompactInnerGap,
+          subtitleGap: TabletSpacingTokens.pageRhythmCompactInnerGap,
           leading: SizedBox(
             width: ProfileSpacingTokens.profileMenuTabletIconBox,
             height: ProfileSpacingTokens.profileMenuTabletIconBox,

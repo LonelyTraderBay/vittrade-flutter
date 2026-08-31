@@ -91,7 +91,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                         active: tf == widget.timeframe,
                         onTap: () => widget.onTimeframeChanged(tf),
                       ),
-                      const SizedBox(width: AppSpacing.x4),
+                      const SizedBox(width: TabletSpacingTokens.x4),
                     ],
                   ],
                 ),
@@ -103,7 +103,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                         active: widget.indicators.contains(item),
                         onTap: () => widget.onIndicatorToggle(item),
                       ),
-                      const SizedBox(width: AppSpacing.x4),
+                      const SizedBox(width: TabletSpacingTokens.x4),
                     ],
                     _PairIndicatorButton(
                       label: 'Nâng cao',
@@ -123,7 +123,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
             padding: MarketsSpacingTokens.pairBookRowPadding,
             child: Wrap(
               spacing: MarketsSpacingTokens.pairMetaGap,
-              runSpacing: AppSpacing.x1,
+              runSpacing: TabletSpacingTokens.x1,
               children: [
                 for (final (label, value) in [
                   ('O', probe?.open),
@@ -222,8 +222,8 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
       children: [
         chart,
         Positioned(
-          top: AppSpacing.x2,
-          left: AppSpacing.x3,
+          top: TabletSpacingTokens.x2,
+          left: TabletSpacingTokens.x3,
           child: Row(
             children: [
               if (showMa) ...[
@@ -232,7 +232,7 @@ class _PairChartWorkspaceState extends State<_PairChartWorkspace> {
                   color: marketListPrimary,
                   dotSize: MarketsSpacingTokens.marketDepthLegendDot,
                 ),
-                const SizedBox(width: AppSpacing.x4),
+                const SizedBox(width: TabletSpacingTokens.x4),
               ],
               if (showVolume)
                 VitLegendItem(

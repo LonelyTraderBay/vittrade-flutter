@@ -7,7 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -109,15 +109,15 @@ class _DustConverterTabletPageState
               const Icon(
                 Icons.auto_awesome_outlined,
                 color: AppColors.caution,
-                size: AppSpacing.iconLg,
+                size: TabletSpacingTokens.iconLg,
               ),
-              const SizedBox(width: AppSpacing.x4),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Số dư nhỏ có thể chuyển đổi'),
-                    const SizedBox(height: AppSpacing.x4),
+                    const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
                       '${assets.length} tài sản · ${VitFormat.usd(selectedTotal)} đang chọn',
                       style: AppTextStyles.caption.copyWith(
@@ -137,7 +137,7 @@ class _DustConverterTabletPageState
           ),
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Chuyển đổi sang',
           headerIcon: Icons.currency_exchange_rounded,
           headerIconColor: AppColors.primary,
@@ -164,7 +164,7 @@ class _DustConverterTabletPageState
           ],
         ),
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Số dư nhỏ (${assets.length})',
           headerIcon: Icons.inventory_2_outlined,
           headerIconColor: AppColors.primary,
@@ -235,15 +235,15 @@ class _DustConverterTabletPageState
           VitAssetAvatar(
             label: asset.symbol,
             accentColor: Color(asset.colorHex),
-            size: AppSpacing.iconLg,
+            size: TabletSpacingTokens.iconLg,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(asset.name),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   '${asset.availableLabel} · ${VitFormat.usd(asset.usdValue)}',
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -273,7 +273,7 @@ class _DustConverterTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitPageSection(
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           label: 'Tóm tắt xem trước',
           headerIcon: Icons.receipt_long_outlined,
           headerIconColor: AppColors.primary,

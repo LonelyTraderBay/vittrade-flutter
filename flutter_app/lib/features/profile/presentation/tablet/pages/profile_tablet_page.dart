@@ -10,7 +10,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_account_hero.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_discovery_panel.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_pane_navigation.dart';
@@ -149,8 +149,8 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           accentColor: AppColors.accent,
           headerVariant: VitSectionHeaderVariant.accentBar,
           headerDensity: VitDensity.compact,
-          innerGap: AppSpacing.x4,
-          customGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
+          customGap: TabletSpacingTokens.x4,
           children: [
             ProfilePredictionCard(
               prediction: snapshot.prediction,
@@ -168,7 +168,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
           accentColor: AppColors.warn,
           headerVariant: VitSectionHeaderVariant.accentBar,
           headerDensity: VitDensity.compact,
-          innerGap: AppSpacing.x4,
+          innerGap: TabletSpacingTokens.x4,
           children: [
             if (snapshot.productShortcuts.isEmpty)
               const VitEmptyState(

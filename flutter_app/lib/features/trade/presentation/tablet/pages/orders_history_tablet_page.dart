@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/controllers/trade_controller.dart';
@@ -117,7 +117,7 @@ class _OrdersHistoryTabletPageState
                   ],
                   secondaryChildren: [
                     VitTradeSection(
-                      innerGap: AppSpacing.x4,
+                      innerGap: TabletSpacingTokens.x4,
                       title: 'Thống kê',
                       child: _OrderStatsCard(snapshot: snapshot),
                     ),
@@ -204,7 +204,7 @@ class _TradeTabletTabRow extends StatelessWidget {
             onChanged: onTabChanged,
           ),
         ),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         for (final (id, label) in [
           ('all', 'Tất cả'),
           ('buy', 'Mua'),
@@ -217,7 +217,7 @@ class _TradeTabletTabRow extends StatelessWidget {
             onTap: () => onFilterChanged(id),
             color: AppColors.primary,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
         ],
       ],
     );
@@ -250,7 +250,7 @@ class _OrdersTable extends StatelessWidget {
       key: OrdersHistoryTabletPage.tableKey,
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.zeroInsets,
+      padding: TabletSpacingTokens.zeroInsets,
       clip: true,
       child: Column(
         children: [
@@ -264,8 +264,8 @@ class _OrdersTable extends StatelessWidget {
             ),
             if (i < orders.length - 1)
               const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+                height: TabletSpacingTokens.dividerHairline,
+                thickness: TabletSpacingTokens.dividerHairline,
                 color: AppColors.divider,
               ),
           ],
@@ -294,8 +294,8 @@ class _OrdersTableHeader extends StatelessWidget {
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       child: Row(
         children: [
@@ -355,8 +355,8 @@ class _OrderTableRow extends StatelessWidget {
         order.status == TradeOrderStatus.partial;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x2,
+        horizontal: TabletSpacingTokens.x3,
+        vertical: TabletSpacingTokens.x2,
       ),
       child: Row(
         children: [
@@ -465,7 +465,7 @@ class _OrderStatsCard extends StatelessWidget {
       key: OrdersHistoryTabletPage.statsKey,
       radius: VitCardRadius.tight,
       borderColor: AppColors.border,
-      padding: AppSpacing.cardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -475,7 +475,9 @@ class _OrderStatsCard extends StatelessWidget {
             ('Đã hủy', '$cancelled', AppColors.text3),
           ])
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x2),
+              padding: const EdgeInsets.symmetric(
+                vertical: TabletSpacingTokens.x2,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -498,12 +500,14 @@ class _OrderStatsCard extends StatelessWidget {
               ),
             ),
           const Divider(
-            height: AppSpacing.dividerHairline,
-            thickness: AppSpacing.dividerHairline,
+            height: TabletSpacingTokens.dividerHairline,
+            thickness: TabletSpacingTokens.dividerHairline,
             color: AppColors.divider,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.x2),
+            padding: const EdgeInsets.symmetric(
+              vertical: TabletSpacingTokens.x2,
+            ),
             child: Row(
               children: [
                 Expanded(

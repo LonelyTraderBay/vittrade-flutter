@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/domain/entities/market_entities.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/market_list_common.dart';
@@ -100,7 +100,7 @@ class MarketsPulseStrip extends StatelessWidget {
         // Card KPI: 8dp đều (đồng bộ các card x3 cùng pane) — token
         // compact-header (12/0) là của sort header bảng pair, dọc 0 làm chữ
         // chạm viền card (Card-Border Rule 4: không dưới mặc định).
-        padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+        padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -117,7 +117,9 @@ class MarketsPulseStrip extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+            const SizedBox(
+              height: TabletSpacingTokens.pageRhythmStandardSectionGap,
+            ),
             IntrinsicHeight(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -137,7 +139,7 @@ class MarketsPulseStrip extends StatelessWidget {
       radius: VitCardRadius.standard,
       clip: true,
       // 8dp đều — xem nhánh compact ở trên.
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -237,7 +239,7 @@ class _PulseBlock extends StatelessWidget {
             fontWeight: AppTextStyles.medium,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           value,
           maxLines: 1,
@@ -248,7 +250,7 @@ class _PulseBlock extends StatelessWidget {
             fontFeatures: AppTextStyles.tabularFigures,
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         Text(
           subline,
           maxLines: 1,
@@ -291,8 +293,8 @@ class _PulseDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VerticalDivider(
-      thickness: AppSpacing.dividerHairline,
-      width: AppSpacing.x3 * 2 + AppSpacing.dividerHairline,
+      thickness: TabletSpacingTokens.dividerHairline,
+      width: TabletSpacingTokens.x3 * 2 + TabletSpacingTokens.dividerHairline,
       color: AppColors.divider,
     );
   }

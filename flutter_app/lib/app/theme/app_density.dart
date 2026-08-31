@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 
 enum VitDensity { compact, standard, relaxed, hero, tool }
 
@@ -66,6 +67,18 @@ extension VitDensityMetrics on VitDensity {
   }
 
   EdgeInsetsGeometry get cardPadding {
+    // 2026-09-01 tách token phone/tablet: trên tablet, padding card đọc
+    // từ TabletSpacingTokens (giá trị snapshot y hệt — đổi ở đó không
+    // ảnh hưởng phone).
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return switch (this) {
+        VitDensity.compact => TabletSpacingTokens.cardPaddingCompactDensity,
+        VitDensity.standard => TabletSpacingTokens.cardPaddingStandardDensity,
+        VitDensity.relaxed => TabletSpacingTokens.cardPaddingRelaxedDensity,
+        VitDensity.hero => TabletSpacingTokens.cardPaddingHeroDensity,
+        VitDensity.tool => TabletSpacingTokens.cardPaddingToolDensity,
+      };
+    }
     return EdgeInsetsDirectional.symmetric(
       horizontal: cardHorizontalPadding,
       vertical: cardVerticalPadding,

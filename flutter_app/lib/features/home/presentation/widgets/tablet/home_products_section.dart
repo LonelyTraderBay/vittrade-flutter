@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/home_formatters.dart';
@@ -44,7 +44,7 @@ class HomeProductsSection extends StatelessWidget {
       children: [
         VitSectionHeader(
           title: 'Hành động nhanh',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           actionLabel: moreActionCount <= 0
               ? null
               : 'Xem thêm (+$moreActionCount)',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart';
 
@@ -81,7 +81,7 @@ class MarketListSortHeaderCell extends StatelessWidget {
                           ? Icons.keyboard_arrow_up_rounded
                           : Icons.keyboard_arrow_down_rounded)
                     : Icons.unfold_more_rounded,
-                size: AppSpacing.iconSm,
+                size: TabletSpacingTokens.iconSm,
                 color: active ? AppColors.text1 : AppColors.text3,
               ),
             ],

@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart'
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
@@ -139,7 +139,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
             // Luật 13dp: inset header terminal = 13, cùng mặt phẳng với
             // lề ngang 13 của grid bên dưới (default token header dùng
             // chung contentPad 20 của phone).
-            horizontalPadding: AppSpacing.x4,
+            horizontalPadding: TabletSpacingTokens.x4,
             showBack: showBack,
             onBack: showBack
                 ? () => goBackOrFallback(
@@ -193,7 +193,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     // grid không còn chạm mép màn hình (flush variant chỉ bỏ bottom pad,
     // không có ai cấp inset ngang cho trang đứng riêng như terminal).
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+      padding: const EdgeInsets.symmetric(horizontal: TabletSpacingTokens.x4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -361,7 +361,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
         ..._buildProductTabs(snapshot),
         const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
         Expanded(child: _buildChartPanel(snapshot)),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _buildBottomPanel(snapshot, showBookTab: showBookTab),
       ],
     );

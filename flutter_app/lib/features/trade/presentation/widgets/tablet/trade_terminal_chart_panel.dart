@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart';
@@ -96,9 +96,9 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                         _probeIndex = null;
                       }),
                     ),
-                    const SizedBox(width: AppSpacing.x4),
+                    const SizedBox(width: TabletSpacingTokens.x4),
                   ],
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   for (final item in ['MA', 'Vol']) ...[
                     _TradeTerminalTextButton(
                       key: TradeTabletKeys.indicator(item),
@@ -110,7 +110,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                             : _indicators.add(item);
                       }),
                     ),
-                    const SizedBox(width: AppSpacing.x4),
+                    const SizedBox(width: TabletSpacingTokens.x4),
                   ],
                 ],
               ),
@@ -121,7 +121,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
             padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
             child: Wrap(
               spacing: TradeSpacingTokens.tradeTerminalMetaGap,
-              runSpacing: AppSpacing.x1,
+              runSpacing: TabletSpacingTokens.x1,
               children: [
                 for (final (label, value) in [
                   ('O', probe?.open),
@@ -180,8 +180,8 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                       ),
                     ),
                     Positioned(
-                      top: AppSpacing.x2,
-                      left: AppSpacing.x3,
+                      top: TabletSpacingTokens.x2,
+                      left: TabletSpacingTokens.x3,
                       child: Row(
                         children: [
                           if (showMa) ...[
@@ -189,7 +189,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
                               label: 'MA (7)',
                               color: AppColors.primary,
                             ),
-                            const SizedBox(width: AppSpacing.x4),
+                            const SizedBox(width: TabletSpacingTokens.x4),
                           ],
                           if (showVolume)
                             VitLegendItem(

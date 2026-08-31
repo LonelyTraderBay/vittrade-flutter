@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -33,8 +33,8 @@ class HomeLoadingContent extends StatelessWidget {
         HomeRecentProductsSkeleton(),
         HomeDiscoverySkeleton(),
       ],
-      primaryContentGap: AppSpacing.x4,
-      secondaryContentGap: AppSpacing.x4,
+      primaryContentGap: TabletSpacingTokens.x4,
+      secondaryContentGap: TabletSpacingTokens.x4,
     );
   }
 }
@@ -75,10 +75,16 @@ class HomeKpiStripSkeleton extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 3, child: _labelValuePair(valueHeight: AppSpacing.x6)),
-          const SizedBox(width: AppSpacing.x4),
-          Expanded(flex: 3, child: _labelValuePair(valueHeight: AppSpacing.x5)),
-          const SizedBox(width: AppSpacing.x4),
+          Expanded(
+            flex: 3,
+            child: _labelValuePair(valueHeight: TabletSpacingTokens.x6),
+          ),
+          const SizedBox(width: TabletSpacingTokens.x4),
+          Expanded(
+            flex: 3,
+            child: _labelValuePair(valueHeight: TabletSpacingTokens.x5),
+          ),
+          const SizedBox(width: TabletSpacingTokens.x4),
           const Expanded(
             flex: 2,
             child: Column(
@@ -88,7 +94,7 @@ class HomeKpiStripSkeleton extends StatelessWidget {
                   width: double.infinity,
                   height: HomeSpacingTokens.skeletonLineHeightLg,
                 ),
-                SizedBox(height: AppSpacing.x4),
+                SizedBox(height: TabletSpacingTokens.x4),
                 VitSkeleton(
                   width: double.infinity,
                   height: SharedSpacingTokens.homeSparklineHeight,
@@ -96,7 +102,7 @@ class HomeKpiStripSkeleton extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             flex: 2,
             child: Column(
@@ -106,18 +112,18 @@ class HomeKpiStripSkeleton extends StatelessWidget {
                   width: double.infinity,
                   height: HomeSpacingTokens.skeletonLineHeightLg,
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 for (var i = 0; i < 3; i++) ...[
                   const VitSkeleton(
                     width: double.infinity,
                     height: HomeSpacingTokens.skeletonLineHeightSm,
                   ),
-                  if (i < 2) const SizedBox(height: AppSpacing.x4),
+                  if (i < 2) const SizedBox(height: TabletSpacingTokens.x4),
                 ],
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           const _KpiActionsSkeleton(),
         ],
       ),
@@ -132,7 +138,7 @@ class HomeKpiStripSkeleton extends StatelessWidget {
           width: double.infinity,
           height: HomeSpacingTokens.skeletonLineHeightLg,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitSkeleton(width: double.infinity, height: valueHeight),
       ],
     );
@@ -148,16 +154,16 @@ class _KpiActionsSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     const buttonGhost = VitSkeleton(
       width: 64,
-      height: AppSpacing.buttonCompact + AppSpacing.x3,
+      height: TabletSpacingTokens.buttonCompact + TabletSpacingTokens.x3,
       borderRadius: AppRadii.cardRadius,
     );
     return const Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         buttonGhost,
-        SizedBox(width: AppSpacing.x4),
+        SizedBox(width: TabletSpacingTokens.x4),
         buttonGhost,
-        SizedBox(width: AppSpacing.x4),
+        SizedBox(width: TabletSpacingTokens.x4),
         buttonGhost,
       ],
     );
@@ -174,9 +180,9 @@ class HomeNextActionSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(
           width: HomeSpacingTokens.skeletonSubtitleWidth,
-          height: AppSpacing.x4,
+          height: TabletSpacingTokens.x4,
         ),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           padding: EdgeInsetsDirectional.all(
             SharedSpacingTokens.homeNextActionCardPadding,
@@ -188,7 +194,7 @@ class HomeNextActionSkeleton extends StatelessWidget {
                 height: SharedSpacingTokens.homeNextActionIconContainer,
                 borderRadius: AppRadii.smRadius,
               ),
-              SizedBox(width: AppSpacing.x4),
+              SizedBox(width: TabletSpacingTokens.x4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,7 +203,7 @@ class HomeNextActionSkeleton extends StatelessWidget {
                       width: HomeSpacingTokens.skeletonTitleWidth,
                       height: HomeSpacingTokens.skeletonLineHeightLg,
                     ),
-                    SizedBox(height: AppSpacing.x4),
+                    SizedBox(height: TabletSpacingTokens.x4),
                     VitSkeleton(
                       width: HomeSpacingTokens.skeletonLineWidthLg,
                       height: HomeSpacingTokens.skeletonLineHeightSm,
@@ -224,9 +230,9 @@ class HomeProductsSkeleton extends StatelessWidget {
       children: [
         const VitSkeleton(
           width: HomeSpacingTokens.skeletonSubtitleWidth,
-          height: AppSpacing.x4,
+          height: TabletSpacingTokens.x4,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitActionTileGrid(
           density: VitDensity.standard,
           itemCount: HomeProductsSection.gridCapacity,
@@ -254,9 +260,9 @@ class HomeRecentProductsSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(
           width: HomeSpacingTokens.skeletonSubtitleWidth,
-          height: AppSpacing.x4,
+          height: TabletSpacingTokens.x4,
         ),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           child: Column(
             children: [
@@ -279,16 +285,16 @@ class _HomeRecentProductRowSkeleton extends StatelessWidget {
     return const Padding(
       padding: EdgeInsetsDirectional.symmetric(
         horizontal: HomeSpacingTokens.homeListRowPadding,
-        vertical: AppSpacing.x3,
+        vertical: TabletSpacingTokens.x3,
       ),
       child: Row(
         children: [
           VitSkeleton(
-            width: AppSpacing.accentIconBoxSize,
-            height: AppSpacing.accentIconBoxSize,
+            width: TabletSpacingTokens.accentIconBoxSize,
+            height: TabletSpacingTokens.accentIconBoxSize,
             borderRadius: AppRadii.smRadius,
           ),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -297,7 +303,7 @@ class _HomeRecentProductRowSkeleton extends StatelessWidget {
                   width: HomeSpacingTokens.skeletonTitleWidth,
                   height: HomeSpacingTokens.skeletonLineHeightLg,
                 ),
-                SizedBox(height: AppSpacing.x4),
+                SizedBox(height: TabletSpacingTokens.x4),
                 VitSkeleton(
                   width: HomeSpacingTokens.skeletonSubtitleWidth,
                   height: HomeSpacingTokens.skeletonLineHeightSm,
@@ -330,14 +336,14 @@ class HomeAnnouncementSkeleton extends StatelessWidget {
             height: SharedSpacingTokens.homeAnnouncementIcon,
             borderRadius: AppRadii.smRadius,
           ),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: VitSkeleton(
               width: double.infinity,
               height: HomeSpacingTokens.skeletonLineHeightLg,
             ),
           ),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           VitSkeleton(
             width: SharedSpacingTokens.homeAnnouncementChevron,
             height: SharedSpacingTokens.homeAnnouncementChevron,
@@ -361,9 +367,9 @@ class HomeDiscoverySkeleton extends StatelessWidget {
       children: [
         VitSkeleton(
           width: HomeSpacingTokens.skeletonSubtitleWidth,
-          height: AppSpacing.x4,
+          height: TabletSpacingTokens.x4,
         ),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           child: Column(
             children: [
@@ -385,16 +391,16 @@ class _HomeDiscoveryRowSkeleton extends StatelessWidget {
     return const Padding(
       padding: EdgeInsetsDirectional.symmetric(
         horizontal: HomeSpacingTokens.homeListRowPadding,
-        vertical: AppSpacing.x4,
+        vertical: TabletSpacingTokens.x4,
       ),
       child: Row(
         children: [
           VitSkeleton(
-            width: AppSpacing.accentIconBoxSize,
-            height: AppSpacing.accentIconBoxSize,
+            width: TabletSpacingTokens.accentIconBoxSize,
+            height: TabletSpacingTokens.accentIconBoxSize,
             borderRadius: AppRadii.smRadius,
           ),
-          SizedBox(width: AppSpacing.x4),
+          SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -403,7 +409,7 @@ class _HomeDiscoveryRowSkeleton extends StatelessWidget {
                   width: HomeSpacingTokens.skeletonSubtitleWidth,
                   height: HomeSpacingTokens.skeletonLineHeightLg,
                 ),
-                SizedBox(height: AppSpacing.x4),
+                SizedBox(height: TabletSpacingTokens.x4),
                 VitSkeleton(
                   width: HomeSpacingTokens.skeletonLineWidthLg,
                   height: HomeSpacingTokens.skeletonLineHeightSm,
@@ -427,9 +433,9 @@ class HomeMarketSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(
           width: HomeSpacingTokens.skeletonSubtitleWidth,
-          height: AppSpacing.x4,
+          height: TabletSpacingTokens.x4,
         ),
-        SizedBox(height: AppSpacing.x4),
+        SizedBox(height: TabletSpacingTokens.x4),
         VitSkeletonList(rows: 3),
       ],
     );

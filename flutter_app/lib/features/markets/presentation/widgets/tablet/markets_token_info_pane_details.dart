@@ -62,7 +62,7 @@ class _AthAtlCards extends StatelessWidget {
             deltaColor: AppColors.sell,
           ),
         ),
-        const SizedBox(width: AppSpacing.x4),
+        const SizedBox(width: TabletSpacingTokens.x4),
         Expanded(
           child: _PriceRecordCard(
             label: 'ATL',
@@ -101,15 +101,15 @@ class _PriceRecordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       borderColor: color.withValues(alpha: 0.12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(icon, size: AppSpacing.iconSm, color: color),
-              const SizedBox(width: AppSpacing.x4),
+              Icon(icon, size: TabletSpacingTokens.iconSm, color: color),
+              const SizedBox(width: TabletSpacingTokens.x4),
               Text(
                 label,
                 style: AppTextStyles.micro.copyWith(
@@ -119,7 +119,7 @@ class _PriceRecordCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             value,
             style: AppTextStyles.caption.copyWith(
@@ -132,7 +132,7 @@ class _PriceRecordCard extends StatelessWidget {
             date,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             delta,
             maxLines: 1,
@@ -159,12 +159,12 @@ class _ChartLink extends StatelessWidget {
       key: MarketsTabletKeys.tokenChartLink,
       onTap: () =>
           openMarketsDetailRoute(context, AppRoutePaths.pairDetail(pairId)),
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Row(
         children: [
           SizedBox(
-            width: AppSpacing.buttonCompact,
-            height: AppSpacing.buttonCompact,
+            width: TabletSpacingTokens.buttonCompact,
+            height: TabletSpacingTokens.buttonCompact,
             child: Material(
               // Surface lồng trong card 16 — quy tắc khung lồng −8 ⇒ 8.
               color: AppColors.primary.withValues(alpha: 0.12),
@@ -175,7 +175,7 @@ class _ChartLink extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,7 +186,7 @@ class _ChartLink extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: TabletSpacingTokens.x4),
                 Text(
                   'Chart, sổ lệnh, giao dịch gần đây',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -213,7 +213,7 @@ class _OnchainTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
-          padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+          padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -222,9 +222,9 @@ class _OnchainTab extends StatelessWidget {
                   const Icon(
                     Icons.bolt_rounded,
                     color: AppColors.buy,
-                    size: AppSpacing.iconSm,
+                    size: TabletSpacingTokens.iconSm,
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Text(
                     'Hoạt động mạng lưới (24h)',
                     style: AppTextStyles.caption.copyWith(
@@ -234,7 +234,7 @@ class _OnchainTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Row(
                 children: [
                   Expanded(
@@ -245,7 +245,7 @@ class _OnchainTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Expanded(
                     child: _MiniStat(
                       label: 'Giao dịch',
@@ -254,7 +254,7 @@ class _OnchainTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Row(
                 children: [
                   Expanded(
@@ -263,7 +263,7 @@ class _OnchainTab extends StatelessWidget {
                       value: formatMarketCompact(f.holders.toDouble()),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Expanded(
                     child: _MiniStat(
                       label: 'TVL',
@@ -277,10 +277,10 @@ class _OnchainTab extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Thông tin mạng lưới',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.primary,
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -321,7 +321,7 @@ class _MiniStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       variant: VitCardVariant.inner,
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -329,7 +329,7 @@ class _MiniStat extends StatelessWidget {
             label,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: TabletSpacingTokens.x4),
           Text(
             value,
             style: AppTextStyles.amountSm.copyWith(
@@ -354,7 +354,7 @@ class _ProjectTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
-          padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+          padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -363,9 +363,9 @@ class _ProjectTab extends StatelessWidget {
                   const Icon(
                     Icons.article_outlined,
                     color: AppColors.primary,
-                    size: AppSpacing.iconSm,
+                    size: TabletSpacingTokens.iconSm,
                   ),
-                  const SizedBox(width: AppSpacing.x4),
+                  const SizedBox(width: TabletSpacingTokens.x4),
                   Text(
                     'Giới thiệu',
                     style: AppTextStyles.caption.copyWith(
@@ -375,23 +375,23 @@ class _ProjectTab extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x4),
+              const SizedBox(height: TabletSpacingTokens.x4),
               Text(f.description, style: AppTextStyles.body),
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Liên kết',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.primary,
           variant: VitSectionHeaderVariant.accentBar,
         ),
         _ProjectLinks(fundamentals: f),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         const VitSectionHeader(
           title: 'Chỉ số quan trọng',
-          bottomGap: AppSpacing.x4,
+          bottomGap: TabletSpacingTokens.x4,
           accentColor: AppColors.buy,
           variant: VitSectionHeaderVariant.accentBar,
         ),
@@ -436,19 +436,19 @@ class _ProjectLinks extends StatelessWidget {
           label: 'Website',
           value: fundamentals.website,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _LinkRow(
           icon: Icons.description_outlined,
           label: 'Whitepaper',
           value: fundamentals.whitepaper,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _LinkRow(
           icon: Icons.code_rounded,
           label: 'GitHub',
           value: fundamentals.github,
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: TabletSpacingTokens.x4),
         _LinkRow(
           icon: Icons.alternate_email_rounded,
           label: 'Twitter',
@@ -473,15 +473,15 @@ class _LinkRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x3),
+      padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x3),
       child: Row(
         children: [
           Icon(
             icon,
             color: AppColors.primary,
-            size: AppSpacing.iconSm + AppSpacing.x1,
+            size: TabletSpacingTokens.iconSm + TabletSpacingTokens.x1,
           ),
-          const SizedBox(width: AppSpacing.x4),
+          const SizedBox(width: TabletSpacingTokens.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -505,7 +505,7 @@ class _LinkRow extends StatelessWidget {
           const Icon(
             Icons.open_in_new_rounded,
             color: AppColors.text3,
-            size: AppSpacing.iconSm,
+            size: TabletSpacingTokens.iconSm,
           ),
         ],
       ),

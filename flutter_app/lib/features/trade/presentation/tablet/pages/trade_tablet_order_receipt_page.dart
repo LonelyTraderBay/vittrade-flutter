@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
@@ -20,7 +20,7 @@ import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/vit_t
 part '../../widgets/tablet/order_receipt_page_sections.dart';
 part '../../widgets/tablet/order_receipt_page_common.dart';
 
-const double _receiptCopyActionExtent = AppSpacing.buttonCompact;
+const double _receiptCopyActionExtent = TabletSpacingTokens.buttonCompact;
 
 class TradeTabletOrderReceiptPage extends ConsumerStatefulWidget {
   const TradeTabletOrderReceiptPage({super.key, this.shellRenderMode});
@@ -104,12 +104,12 @@ class _TradeTabletOrderReceiptPageState
             ),
             _ReceiptCard(receipt: receipt),
             VitTradeSection(
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               title: 'Lưu ý',
               child: _TradeTabletWarningNotice(),
             ),
             VitTradeSection(
-              innerGap: AppSpacing.x4,
+              innerGap: TabletSpacingTokens.x4,
               title: 'Hỗ trợ',
               child: _OrderSupportLink(supportRoute: snapshot.supportRoute),
             ),
