@@ -1037,6 +1037,13 @@ List<String> _extraSourceForPageGroup(
         className: null,
       ),
     ],
+    'TradeTabletDetailSurface(': [
+      (
+        path:
+            'lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart',
+        className: null,
+      ),
+    ],
     'ProfileTabletUtilitySurface(': [
       (
         path:

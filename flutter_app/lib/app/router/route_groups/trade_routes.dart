@@ -2,15 +2,20 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_breakpoints.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/trade_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/convert_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/futures_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/leverage_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade_core/domain/entities/trade_core_entities.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/orders_history_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/order_receipt_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/phone/pages/hub/trade_settings_page.dart';
@@ -53,24 +58,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeConvert,
       name: AppRouteNames.sc056Convert,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-056',
-          title: 'Chuyển đổi tài sản',
-          subtitle: 'Đổi tài sản · xem trước tỷ giá và phí',
-          description:
-              'Xem lại tỷ giá quy đổi, phí áp dụng và tài sản nhận trước khi tiếp tục.',
-          facts: const [
-            TradeTabletFact(label: 'Tài sản gửi', value: 'USDT'),
-            TradeTabletFact(label: 'Tài sản nhận', value: 'BTC'),
-            TradeTabletFact(
-              label: 'Phí chuyển đổi',
-              value: 'Theo báo giá hiện tại',
-            ),
-          ],
-          actionLabel: 'Xem trước chuyển đổi',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận chuyển đổi tài sản',
-        ),
+        AppSurface.tablet => const ConvertTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => ConvertPage(shellRenderMode: shellRenderMode),
@@ -85,28 +73,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeMargin,
       name: AppRouteNames.sc085MarginTrading,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-085',
-          title: 'Giao dịch Margin',
-          subtitle: 'Vay tài sản · quản lý tỷ lệ ký quỹ',
-          description:
-              'Theo dõi giá trị vị thế, tài sản vay và ngưỡng thanh lý trong cùng một màn hình Tablet.',
-          facts: const [
-            TradeTabletFact(label: 'Cặp giao dịch', value: 'BTC/USDT'),
-            TradeTabletFact(
-              label: 'Tỷ lệ ký quỹ',
-              value: 'Theo thời gian thực',
-            ),
-            TradeTabletFact(
-              label: 'Cảnh báo',
-              value: 'Cần xem trước trước khi gửi',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Xem trước lệnh Margin',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận lệnh Margin',
-        ),
+        AppSurface.tablet => const MarginTradingTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => MarginTradingPage(shellRenderMode: shellRenderMode),
@@ -116,24 +83,9 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeMarginBtcusdt,
       name: AppRouteNames.sc086MarginTradingPair,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-086',
-          title: 'Margin BTC/USDT',
-          subtitle: 'Vị thế BTC/USDT · kiểm soát rủi ro',
-          description:
-              'Kiểm tra giá tham chiếu, tỷ lệ ký quỹ và ngưỡng thanh lý trước khi thực hiện lệnh.',
-          facts: const [
-            TradeTabletFact(label: 'Cặp giao dịch', value: 'BTC/USDT'),
-            TradeTabletFact(label: 'Chế độ', value: 'Margin cô lập'),
-            TradeTabletFact(
-              label: 'Trạng thái',
-              value: 'Cần xem trước',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Xem trước lệnh Margin',
-          requiresConfirmation: true,
-          confirmationTitle: 'Xác nhận lệnh Margin BTC/USDT',
+        AppSurface.tablet => const MarginTradingTabletPage(
+          pairId: 'btcusdt',
+          pairRouteVariant: true,
         ),
         AppSurface.phone || AppSurface.web || null => MarginTradingPage(
           pairId: 'btcusdt',
@@ -146,23 +98,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeMarginHub,
       name: AppRouteNames.sc090MarginTradingHub,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-090',
-          title: 'Trung tâm Margin',
-          subtitle: 'Tổng quan vị thế · vay · rủi ro',
-          description:
-              'Tổng hợp các vị thế Margin và hành động cần ưu tiên trên một bố cục Tablet rộng.',
-          facts: const [
-            TradeTabletFact(label: 'Vị thế đang mở', value: '2'),
-            TradeTabletFact(label: 'Tài sản vay', value: 'USDT'),
-            TradeTabletFact(
-              label: 'Mức cảnh báo',
-              value: 'Theo tỷ lệ ký quỹ',
-              valueColor: AppColors.caution,
-            ),
-          ],
-          actionLabel: 'Mở bảng điều khiển Margin',
-        ),
+        AppSurface.tablet => const MarginHubTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => MarginTradingHubPage(shellRenderMode: shellRenderMode),
@@ -210,27 +146,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeSettings,
       name: AppRouteNames.sc052TradeSettings,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-052',
-          title: 'Cài đặt giao dịch',
-          subtitle: 'Xác nhận · thông báo · hiển thị',
-          description:
-              'Quản lý các tùy chọn giao dịch và yêu cầu xác nhận trong một bảng điều khiển rõ ràng.',
-          facts: const [
-            TradeTabletFact(
-              label: 'Xác nhận lệnh',
-              value: 'Đang bật',
-              valueColor: AppColors.buy,
-            ),
-            TradeTabletFact(
-              label: 'Thông báo giá',
-              value: 'Đang bật',
-              valueColor: AppColors.buy,
-            ),
-            TradeTabletFact(label: 'Chế độ hiển thị', value: 'Tablet rộng'),
-          ],
-          actionLabel: 'Lưu cài đặt',
-        ),
+        AppSurface.tablet => const TradeSettingsTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => TradeSettingsPage(shellRenderMode: shellRenderMode),
@@ -240,22 +156,7 @@ List<RouteBase> tradeRoutes(
       path: AppRoutePaths.tradeExport,
       name: AppRouteNames.sc054TradeHistoryExport,
       builder: (_, _) => switch (surface) {
-        AppSurface.tablet => _tradeTabletUtility(
-          semanticIdentifier: 'SC-054',
-          title: 'Xuất lịch sử giao dịch',
-          subtitle: 'Chọn phạm vi · định dạng · kênh nhận',
-          description:
-              'Chuẩn bị báo cáo giao dịch với phạm vi và định dạng được kiểm tra trước khi tạo.',
-          facts: const [
-            TradeTabletFact(
-              label: 'Phạm vi mặc định',
-              value: '30 ngày gần nhất',
-            ),
-            TradeTabletFact(label: 'Định dạng', value: 'CSV'),
-            TradeTabletFact(label: 'Kênh nhận', value: 'Tải xuống an toàn'),
-          ],
-          actionLabel: 'Tạo báo cáo',
-        ),
+        AppSurface.tablet => const TradeHistoryExportTabletPage(),
         AppSurface.phone ||
         AppSurface.web ||
         null => TradeHistoryExportPage(shellRenderMode: shellRenderMode),
@@ -267,28 +168,7 @@ List<RouteBase> tradeRoutes(
       builder: (_, state) {
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
         return switch (surface) {
-          AppSurface.tablet => _tradeTabletUtility(
-            semanticIdentifier: 'SC-058',
-            title: 'Đòn bẩy Futures',
-            subtitle: 'Thiết lập đòn bẩy · xem trước tác động',
-            description:
-                'Kiểm tra đòn bẩy, ký quỹ ban đầu và rủi ro thanh lý trước khi áp dụng cho $pairId.',
-            facts: [
-              TradeTabletFact(
-                label: 'Cặp giao dịch',
-                value: pairId.toUpperCase(),
-              ),
-              const TradeTabletFact(label: 'Đòn bẩy hiện tại', value: '5x'),
-              const TradeTabletFact(
-                label: 'Yêu cầu',
-                value: 'Xác nhận rủi ro',
-                valueColor: AppColors.caution,
-              ),
-            ],
-            actionLabel: 'Xem trước đòn bẩy',
-            requiresConfirmation: true,
-            confirmationTitle: 'Xác nhận thay đổi đòn bẩy',
-          ),
+          AppSurface.tablet => LeverageTabletPage(pairId: pairId),
           AppSurface.phone || AppSurface.web || null => LeveragePage(
             pairId: pairId,
             shellRenderMode: shellRenderMode,
@@ -302,31 +182,7 @@ List<RouteBase> tradeRoutes(
       builder: (_, state) {
         final pairId = state.pathParameters['pairId'] ?? 'btcusdt';
         return switch (surface) {
-          AppSurface.tablet => _tradeTabletUtility(
-            semanticIdentifier: 'SC-057',
-            title: 'Giao dịch Futures',
-            subtitle: 'Vị thế Long/Short · ký quỹ · thanh lý',
-            description:
-                'Tổng hợp thông tin Futures và đặt lệnh với vùng đánh giá rủi ro luôn hiển thị trên Tablet.',
-            facts: [
-              TradeTabletFact(
-                label: 'Cặp giao dịch',
-                value: pairId.toUpperCase(),
-              ),
-              const TradeTabletFact(
-                label: 'Chế độ',
-                value: 'Hợp đồng vĩnh cửu',
-              ),
-              const TradeTabletFact(
-                label: 'Rủi ro',
-                value: 'Cần xem trước trước khi gửi',
-                valueColor: AppColors.caution,
-              ),
-            ],
-            actionLabel: 'Xem trước lệnh Futures',
-            requiresConfirmation: true,
-            confirmationTitle: 'Xác nhận lệnh Futures',
-          ),
+          AppSurface.tablet => FuturesTabletPage(pairId: pairId),
           AppSurface.phone ||
           AppSurface.web ||
           null => FuturesPage(pairId: pairId, shellRenderMode: shellRenderMode),
@@ -371,26 +227,4 @@ List<RouteBase> tradeRoutes(
 
 TradeOrderSide _tradeSideFromQuery(String? value) {
   return value == 'sell' ? TradeOrderSide.sell : TradeOrderSide.buy;
-}
-
-TradeTabletUtilityPage _tradeTabletUtility({
-  required String semanticIdentifier,
-  required String title,
-  required String subtitle,
-  required String description,
-  required List<TradeTabletFact> facts,
-  String? actionLabel,
-  bool requiresConfirmation = false,
-  String? confirmationTitle,
-}) {
-  return TradeTabletUtilityPage(
-    semanticIdentifier: semanticIdentifier,
-    title: title,
-    subtitle: subtitle,
-    description: description,
-    facts: facts,
-    actionLabel: actionLabel,
-    requiresConfirmation: requiresConfirmation,
-    confirmationTitle: confirmationTitle,
-  );
 }

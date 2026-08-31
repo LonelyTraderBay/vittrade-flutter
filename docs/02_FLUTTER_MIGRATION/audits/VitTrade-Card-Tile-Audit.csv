@@ -792,8 +792,15 @@ trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/position_dashb
 trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart,1,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/convert_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/futures_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/leverage_tablet_page.dart,2,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart,4,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart,2,0,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart,2,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,2,1,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,1,0,0,E,0,0,0,pass,-

@@ -105,23 +105,23 @@ const routeNameToPageOverrides = <String, String>{
   'AppRouteNames.sc050OrdersHistory':
       'features/trade/presentation/tablet/pages/orders_history_tablet_page.dart',
   'AppRouteNames.sc052TradeSettings':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart',
   'AppRouteNames.sc053PositionDashboard':
       'features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart',
   'AppRouteNames.sc054TradeHistoryExport':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart',
   'AppRouteNames.sc056Convert':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/convert_tablet_page.dart',
   'AppRouteNames.sc057Futures':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/futures_tablet_page.dart',
   'AppRouteNames.sc058Leverage':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/leverage_tablet_page.dart',
   'AppRouteNames.sc085MarginTrading':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart',
   'AppRouteNames.sc086MarginTradingPair':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart',
   'AppRouteNames.sc090MarginTradingHub':
-      'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart',
+      'features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart',
   'AppRouteNames.sc135Wallet':
       'features/wallet/presentation/tablet/pages/wallet_tablet_page.dart',
   'AppRouteNames.sc136TxHistory':

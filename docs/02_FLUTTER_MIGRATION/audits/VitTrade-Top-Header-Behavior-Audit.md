@@ -4,10 +4,10 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=409
-fixed_vit_header_remaining=171
-auto_hide_header=91
+fixed_vit_header_remaining=172
+auto_hide_header=84
 custom_scroll_header=1
-no_top_header=32
+no_top_header=38
 unresolved=114
 ```
 
@@ -21,7 +21,7 @@ unresolved=114
 | trade_copy | 22 |
 | markets | 21 |
 | trade_bots | 19 |
-| trade | 5 |
+| trade | 6 |
 | auth | 3 |
 | home | 1 |
 
@@ -308,18 +308,18 @@ unresolved=114
 | support | `AppRoutePaths.supportAnnouncements` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportHelp` | `unresolved` | unresolved | unresolved | `unresolved` |
 | trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
-| trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/futures/futures_page.dart` |
-| trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/futures/leverage_page.dart` |
+| trade | `'/trade/:pairId/futures'` | `FuturesTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/futures_tablet_page.dart` |
+| trade | `'/trade/:pairId/futures/leverage'` | `LeverageTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/leverage_tablet_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
-| trade | `AppRoutePaths.tradeConvert` | `ConvertPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/convert/convert_page.dart` |
-| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart` |
-| trade | `AppRoutePaths.tradeMargin` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
-| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
-| trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart` |
+| trade | `AppRoutePaths.tradeConvert` | `ConvertTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/convert_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMargin` | `MarginTradingTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginHub` | `MarginHubTabletPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` |
 | trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
 | trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` |
 | trade | `AppRoutePaths.tradePositions` | `PositionDashboardTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart` |
+| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotApiDocumentation` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotBacktesting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotDrawdownAnalyzer` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |

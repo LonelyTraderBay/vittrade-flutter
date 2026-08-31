@@ -37,29 +37,29 @@ hard_coded_offline_banner=0
 
 | Screen level | Routes |
 | --- | ---: |
-| L2_detail | 187 |
+| L2_detail | 189 |
 | L2_utilityDetail | 66 |
 | L3_transactionFlow | 55 |
-| L2_entityDetail | 40 |
+| L2_entityDetail | 41 |
 | L1_utilityHub | 23 |
 | L2_sectionHub | 13 |
 | L1_authFlow | 8 |
 | L1_productModuleHub | 7 |
-| L1_instrumentWorkspace | 4 |
 | L1_primaryTabRoot | 3 |
 | L0_authEntry | 1 |
 | L0_homeRoot | 1 |
+| L1_instrumentWorkspace | 1 |
 | L3_fullscreenTool | 1 |
 
 ## Archetype Counts
 
 | Archetype | Routes |
 | --- | ---: |
-| detail | 392 |
+| detail | 395 |
 | rootModule | 10 |
-| instrument | 4 |
 | authOnboarding | 1 |
 | fullscreenTool | 1 |
+| instrument | 1 |
 | rootBrand | 1 |
 
 ## Strict Issue Counts
@@ -357,18 +357,18 @@ hard_coded_offline_banner=0
 | support | `AppRoutePaths.supportAnnouncements` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L1_utilityHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 2 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
-| trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/futures/futures_page.dart` |
-| trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/futures/leverage_page.dart` |
+| trade | `'/trade/:pairId/futures'` | `FuturesTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/futures_tablet_page.dart` |
+| trade | `'/trade/:pairId/futures/leverage'` | `LeverageTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_entityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/leverage_tablet_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 2 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
-| trade | `AppRoutePaths.tradeConvert` | `ConvertPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_detail | detail | no | yes | no | `-` | - | content | state_driven | offlineNoCache | 1 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/convert/convert_page.dart` |
-| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart` |
-| trade | `AppRoutePaths.tradeMargin` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
-| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | instrument | L1_instrumentWorkspace | instrument | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
-| trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_sectionHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart` |
+| trade | `AppRoutePaths.tradeConvert` | `ConvertTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/convert_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMargin` | `MarginTradingTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginHub` | `MarginHubTabletPage` | fixed_vit_header | vit_header_default_with_actions | detail | L2_sectionHub | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` |
 | trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | fixed_vit_header | vit_header_default_with_actions | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
 | trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` |
 | trade | `AppRoutePaths.tradePositions` | `PositionDashboardTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L3_transactionFlow | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart` |
+| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_utilityDetail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotApiDocumentation` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotBacktesting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotDrawdownAnalyzer` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | detail | L2_detail | detail | no | yes | no | `-` | - | none | none | none | 0 | - | - | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |

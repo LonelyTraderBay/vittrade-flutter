@@ -1118,8 +1118,10 @@ trade,flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trad
 trade,flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/phone/pages/trade_page_state.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,standard,,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,standard,,0,,0,,0,0,pass

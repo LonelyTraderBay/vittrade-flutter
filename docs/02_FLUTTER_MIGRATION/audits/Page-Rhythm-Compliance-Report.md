@@ -6,7 +6,7 @@ Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
 ## Summary
 
-Screen rollup: 409 real_page routes, L1 pass 399, L2 pass 399 warn 0, unknown 10, documented exceptions 8.
+Screen rollup: 409 real_page routes, L1 pass 399, L2 pass 399 warn 0, unknown 10, documented exceptions 10.
 | Level | Meaning |
 | --- | --- |
 | L1 | Wiring: rhythm, orphan gaps, nested VPC |
