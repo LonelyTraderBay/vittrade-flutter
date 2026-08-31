@@ -76,7 +76,8 @@ class _TradeTerminalBottomPanelState extends State<TradeTerminalBottomPanel> {
     return TradeTerminalPanel(
       panelKey: TradeTabletKeys.bottomPanel,
       child: Padding(
-        padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+        // Luật 13dp: mép panel → tab; body chỉ inset ngang.
+        padding: TradeSpacingTokens.tradeTerminalPanelBodyTopPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -109,16 +110,16 @@ class _TradeTerminalBottomPanelState extends State<TradeTerminalBottomPanel> {
                 ),
               ],
             ),
+            const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
             SizedBox(
-              height:
-                  TradeSpacingTokens.tradeTerminalBottomPanelHeight -
-                  AppSpacing.x6,
+              height: TradeSpacingTokens.tradeTerminalBottomTableHeight,
               child: switch (_activeTab) {
                 'positions' => _PositionTable(positions: widget.positions),
                 'book' => _BookTable(orderBook: widget.orderBook),
                 _ => _OrderTable(orders: widget.orders),
               },
             ),
+            const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
           ],
         ),
       ),

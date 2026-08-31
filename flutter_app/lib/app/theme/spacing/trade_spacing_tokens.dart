@@ -38,20 +38,37 @@ final class TradeSpacingTokens {
   // terminal Markets (SC-044 hướng C) để hai terminal của app đọc cùng một
   // nhịp; giữ token riêng vì guardrail cross-feature cấm dùng token
   // Markets từ trade.
+  //
+  // LUẬT 13dp (user chốt 2026-08-31): mọi khoảng trắng DỌC của terminal
+  // đều là 13dp — gutter panel↔panel, mép panel→nội dung đầu, nhãn→nội
+  // dung, giữa hai khối trong panel, nội dung cuối→viền dưới. Một giá
+  // trị, không ngoại lệ; inset NGANG và extent hàng dữ liệu không thuộc
+  // phạm vi luật (không phải khoảng trắng dọc).
   /// Gutter đều giữa các panel phẳng của terminal.
   static const double tradeTerminalGutter = AppSpacing.cardGap;
   static const EdgeInsets tradeTerminalMetaStripPadding = EdgeInsets.symmetric(
     horizontal: AppSpacing.x3,
-    vertical: AppSpacing.x2,
+    vertical: AppSpacing.x4,
   );
   static const double tradeTerminalMetaGap = AppSpacing.x3;
   static const double tradeTerminalMetaDividerHeight = AppSpacing.x5;
   static const EdgeInsets tradeTerminalPanelHeaderPadding = EdgeInsets.fromLTRB(
     AppSpacing.x3,
-    AppSpacing.x2,
+    AppSpacing.x4,
     AppSpacing.x3,
-    AppSpacing.x1,
+    AppSpacing.x4,
   );
+
+  /// Body panel: CHỈ inset ngang — mọi khoảng dọc do luật 13dp đảm nhiệm
+  /// (header padding bottom 13 với panel có nhãn; body top/bottom padding
+  /// với panel không nhãn). Cấm bọc thêm padding dọc ở child.
+  static const EdgeInsets tradeTerminalPanelBodyPadding = EdgeInsets.symmetric(
+    horizontal: AppSpacing.x3,
+  );
+  static const EdgeInsets tradeTerminalPanelBodyTopPadding =
+      EdgeInsets.fromLTRB(AppSpacing.x3, AppSpacing.x4, AppSpacing.x3, 0);
+  static const EdgeInsets tradeTerminalPanelBodyBottomPadding =
+      EdgeInsets.fromLTRB(AppSpacing.x3, 0, AppSpacing.x3, AppSpacing.x4);
 
   /// Mức sổ lệnh của terminal (12 mức/bên).
   static const double tradeTerminalBookRowExtent = 26;
@@ -61,6 +78,12 @@ final class TradeSpacingTokens {
 
   /// Dòng giao dịch gần đây của terminal (24 dòng).
   static const double tradeTerminalTradeRowExtent = 24;
+
+  /// Inset ngang của hàng header cột (Khối lượng/Thời gian) trong tape —
+  /// chỉ ngang, không dọc (luật 13dp: khoảng nhãn → header do label
+  /// padding bottom đảm nhiệm).
+  static const EdgeInsets tradeTerminalColumnHeaderPadding =
+      EdgeInsets.symmetric(horizontal: AppSpacing.x2);
 
   /// Cột sổ lệnh + tape của terminal ở tầng đầy đủ.
   static const double tradeTerminalBookColumnWidth = 300;
@@ -72,16 +95,24 @@ final class TradeSpacingTokens {
   static const EdgeInsets tradeTerminalChartToolbarPadding =
       EdgeInsets.fromLTRB(
         AppSpacing.x3,
-        AppSpacing.x2,
+        AppSpacing.x4,
         AppSpacing.x3,
-        AppSpacing.x2,
+        AppSpacing.x4,
       );
   static const double tradeTerminalIntervalGap = AppSpacing.x2;
   static const EdgeInsets tradeTerminalIntervalButtonPadding =
       EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
 
   /// Vùng tab dưới chart (Lệnh mở | Vị thế | Sổ lệnh tùy tầng).
-  static const double tradeTerminalBottomPanelHeight = 230;
+  /// Chiều cao vùng dưới chart sau luật 13dp: 13 (mép→tab) + tab (~29) +
+  /// 13 (tab→bảng) + 8 hàng × 24 + 13 (hàng cuối→viền).
+  static const double tradeTerminalBottomPanelHeight = 260;
+
+  /// Chiều cao phần bảng trong panel dưới chart = 8 hàng × extent 24.
+  static const double tradeTerminalBottomTableHeight =
+      tradeTerminalBottomPanelHeight -
+      AppSpacing.x4 * 3 -
+      (AppSpacing.x5 + AppSpacing.x2 + AppSpacing.x1);
   static const double tradeTerminalBottomTabGap = AppSpacing.x2;
   static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
     horizontal: AppSpacing.x2,

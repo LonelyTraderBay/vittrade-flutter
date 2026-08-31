@@ -124,7 +124,7 @@ class _TradeTerminalChartPanelState extends State<TradeTerminalChartPanel> {
           ),
           Padding(
             key: TradeTabletKeys.ohlcReadout,
-            padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+            padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
             child: Wrap(
               spacing: TradeSpacingTokens.tradeTerminalMetaGap,
               runSpacing: AppSpacing.x1,

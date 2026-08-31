@@ -411,17 +411,21 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
       onConfirmedSubmit: () => _submitOrder(orderRequest),
     );
 
+    // Luật 13dp: mỗi khối chỉ inset ngang — khoảng dọc giữa các khối và
+    // tới viền panel đều là gutter 13 (label padding bottom đã cho form
+    // khoảng 13 đầu tiên).
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+          padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
           child: form,
         ),
+        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
         if (snapshot.highRiskContractId != null)
           Padding(
-            padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+            padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
             child: VitHighRiskStatePanel(
               state: orderState.status.uiState,
               title: switch (orderState.status.uiState) {
@@ -450,14 +454,17 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           ),
         // Disclaimer y hệt shell phone (vit_trade_simple_shell) — giữ kề
         // form/panel rủi ro mà nó cảnh báo.
+        if (snapshot.highRiskContractId != null)
+          const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
         Padding(
-          padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+          padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
           child: Text(
             'Giao dịch tiền mã hoá có rủi ro. Chỉ dùng số tiền bạn chấp nhận mất.',
             textAlign: TextAlign.center,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
         ),
+        const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),
       ],
     );
 

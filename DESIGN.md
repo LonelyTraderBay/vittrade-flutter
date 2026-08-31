@@ -81,6 +81,14 @@ spacing:
   rowPy: 14px
   inputHeight: 52px
   ctaHeight: 52px
+
+# Tablet vertical whitespace law (2026-08-31): every VERTICAL gap between
+# blocks on the tablet surface is 13px (x4) — panel-to-panel, panel-edge to
+# first content, label to content, block to block. One gap = one layer (no
+# stacked paddings). Horizontal insets, data-row extents, control sizes are
+# out of scope. Enforced by tablet_vertical_gap_13_ratchet_guardrail_test +
+# per-module RenderBox layout locks. See Tablet-Spacing-Gutter-Standard
+# Rule 6.
 components:
   button-primary:
     backgroundColor: "{colors.primary}"

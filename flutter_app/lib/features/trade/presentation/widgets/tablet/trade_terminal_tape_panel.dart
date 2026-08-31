@@ -23,7 +23,7 @@ class TradeTerminalTapePanel extends StatelessWidget {
       label: 'GIAO DỊCH',
       fill: true,
       child: Padding(
-        padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+        padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -44,6 +44,9 @@ class TradeTerminalTapePanel extends StatelessWidget {
                       ),
                     )
                   : ListView.builder(
+                      // Luật 13dp: hàng cuối → viền dưới khi cuộn tới đáy.
+                      padding: TradeSpacingTokens
+                          .tradeTerminalPanelBodyBottomPadding,
                       itemCount: trades.length,
                       itemExtent:
                           TradeSpacingTokens.tradeTerminalTradeRowExtent,
@@ -65,8 +68,10 @@ class _TradeTapeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Luật 13dp: không padding dọc — khoảng nhãn → header cột đã do label
+    // padding bottom 13 đảm nhiệm; chỉ inset ngang như hàng dữ liệu.
     return Padding(
-      padding: TradeSpacingTokens.tradeTerminalBottomRowPadding,
+      padding: TradeSpacingTokens.tradeTerminalColumnHeaderPadding,
       child: Row(
         children: [
           const Expanded(child: SizedBox()),

@@ -68,8 +68,10 @@ class TradeTerminalBookPanel extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
+        padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
         child: SingleChildScrollView(
+          // Luật 13dp: hàng cuối → viền dưới.
+          padding: TradeSpacingTokens.tradeTerminalPanelBodyBottomPadding,
           child: Column(
             children: [
               for (var i = asks.length - 1; i >= 0; i--)
