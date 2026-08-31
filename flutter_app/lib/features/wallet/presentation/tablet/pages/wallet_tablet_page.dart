@@ -252,7 +252,7 @@ class _WalletTabletPageState extends ConsumerState<WalletTabletPage> {
     return VitTwoColumnTabletDashboard(
       primaryChildren: primaryChildren,
       secondaryChildren: secondaryChildren,
-      // Luật 13dp (2026-08-31): section gap dashboard = 13.
+      // Luật 8pt 12dp (2026-08-31): section gap dashboard = 13.
       primaryContentGap: TabletSpacingTokens.x4,
       secondaryContentGap: TabletSpacingTokens.x4,
     );

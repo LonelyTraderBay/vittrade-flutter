@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/markets/data/providers/market_repository_provider.dart';
@@ -336,7 +336,7 @@ void main() {
   });
 
   // S7 narrow: khuôn cuộn hẹp vẫn giữ section gap 13dp quanh banner.
-  testWidgets('SC-044 narrow pane keeps the 13dp section rhythm (S7)', (
+  testWidgets('SC-044 narrow pane keeps the 12dp section rhythm (S7)', (
     tester,
   ) async {
     await pumpPairPane(tester, size: const Size(600, 820));
@@ -352,8 +352,8 @@ void main() {
     );
     expect(
       link1.top - banner.bottom,
-      AppSpacing.x4,
-      reason: 'Gap banner → link card phải đúng 13dp (tier standard).',
+      TabletSpacingTokens.x4,
+      reason: 'Gap banner → link card phải đúng 12dp (luật 8pt tablet).',
     );
   });
 }

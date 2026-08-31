@@ -68,7 +68,8 @@ const _moduleBaselines = <String, int>{
   // 'tablet' (2026-09-01): namespace tablet_spacing_tokens cố ý mirror
   // snapshot AppSpacing để tách surface (user duyệt) — 19 literal là
   // chủ đích thiết kế, không phải nợ cần trả; ratchet giữ không-tăng.
-  'tablet': 19,
+  'tablet': 10, // 8pt grid (01-09): giá trị lưới 4/8/12/16/24/32/56
+  // chủ đích trùng bội số — ratchet không tăng.
   'shared': 0,
   'support': 0,
   'trade': 0,

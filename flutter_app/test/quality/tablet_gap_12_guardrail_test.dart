@@ -1,4 +1,4 @@
-// LUẬT 13dp (user chốt 2026-08-31, mở rộng chiều cùng ngày): mọi khoảng
+// LUẬT 8PT/12DP TABLET (user chốt 2026-08-31, mở rộng chiều cùng ngày): mọi khoảng
 // trống DỌC VÀ NGANG trên toàn bộ surface tablet đều là 13dp — KHÔNG
 // NGOẠI LỆ, KHÔNG baseline. "Khoảng trống" = mọi SizedBox KHÔNG có child
 // (đứng giữa các phần tử làm khe). SizedBox CÓ child là kích thước của
@@ -91,11 +91,11 @@ List<String> _scanCurrent() {
           final expr = am.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
-              ? (literal == 0 || literal == 13)
+              ? (literal == 0 || literal == 12)
               : _allowedGapExpr.hasMatch(expr);
           if (!ok) {
             violations.add(
-              '$path — SizedBox khe $axis: $expr (phải là 13: '
+              '$path — SizedBox khe $axis: $expr (phải là 12: '
               'AppSpacing.x4 / cardGap)',
             );
           }
@@ -207,14 +207,14 @@ void main() {
           final expr = m.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
-              ? literal == 13
+              ? literal == 12
               : (expr == 'AppSpacing.x4' ||
                     expr == 'TabletSpacingTokens.x4' ||
                     expr == 'AppSpacing.cardGap' ||
                     expr == 'TabletSpacingTokens.cardGap' ||
                     expr == 'AppSpacing.sectionGapCompact');
           if (!ok) {
-            violations.add('$path — bottomGap: $expr phải là 13');
+            violations.add('$path — bottomGap: $expr phải là 12');
           }
         }
       }

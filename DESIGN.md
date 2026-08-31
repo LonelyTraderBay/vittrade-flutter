@@ -82,12 +82,13 @@ spacing:
   inputHeight: 52px
   ctaHeight: 52px
 
-# Tablet whitespace law (2026-08-31): every VERTICAL AND HORIZONTAL gap
-# between elements on the tablet surface is 13px (x4) — no exceptions,
-# locked with zero tolerance. One gap = one layer (no stacked paddings).
-# Data-row extents, control sizes, borders are out of scope (metrics, not
-# whitespace). Enforced by tablet_gap_13_guardrail_test + per-module
-# RenderBox layout locks. See Tablet-Spacing-Gutter-Standard Rule 6.
+# Tablet whitespace law — 8pt grid (2026-09-01, hướng A): tablet surface
+# runs a Base-8 scale (4·8·12·16·24·32·56) in TabletSpacingTokens; every
+# VERTICAL AND HORIZONTAL gap = 12px — no exceptions, zero tolerance.
+# One gap = one layer. Data-row extents, control sizes, borders are out
+# of scope (metrics). Phone keeps the Fibonacci AppSpacing scale.
+# Enforced by tablet_gap_12_guardrail_test + RenderBox layout locks.
+# See Tablet-Spacing-Gutter-Standard Rule 6.
 components:
   button-primary:
     backgroundColor: "{colors.primary}"

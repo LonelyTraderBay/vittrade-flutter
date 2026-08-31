@@ -136,7 +136,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           VitHeader(
             title: pair?.symbol ?? 'Giao dịch',
             subtitle: 'Giao dịch Spot',
-            // Luật 13dp: inset header terminal = 13, cùng mặt phẳng với
+            // Luật 8pt 12dp: inset header terminal = 13, cùng mặt phẳng với
             // lề ngang 13 của grid bên dưới (default token header dùng
             // chung contentPad 20 của phone).
             horizontalPadding: TabletSpacingTokens.x4,
@@ -189,7 +189,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     final pair = snapshot.pair;
     final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
 
-    // Luật 13dp: khoảng trống hai bên trái/phải của terminal = 13 —
+    // Luật 8pt 12dp: khoảng trống hai bên trái/phải của terminal = 13 —
     // grid không còn chạm mép màn hình (flush variant chỉ bỏ bottom pad,
     // không có ai cấp inset ngang cho trang đứng riêng như terminal).
     return Padding(
@@ -423,7 +423,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
       onConfirmedSubmit: () => _submitOrder(orderRequest),
     );
 
-    // Luật 13dp: mỗi khối chỉ inset ngang — khoảng dọc giữa các khối và
+    // Luật 8pt 12dp: mỗi khối chỉ inset ngang — khoảng dọc giữa các khối và
     // tới viền panel đều là gutter 13 (label padding bottom đã cho form
     // khoảng 13 đầu tiên).
     final content = Column(

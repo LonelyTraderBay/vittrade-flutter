@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 
 final class MarketsSpacingTokens {
@@ -1361,46 +1362,46 @@ final class MarketsSpacingTokens {
   // khung giờ text phẳng thay 3 hàng rời (chips + pills + legend) từng bị
   // gạch là "dính nhau".
   static const EdgeInsets pairChartToolbarPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3,
-    AppSpacing.x2,
-    AppSpacing.x3,
-    AppSpacing.x2,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x2,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x2,
   );
-  static const double pairIntervalGap = AppSpacing.x2;
-  static const double pairIntervalDividerHeight = AppSpacing.x5;
+  static const double pairIntervalGap = TabletSpacingTokens.x2;
+  static const double pairIntervalDividerHeight = TabletSpacingTokens.x5;
   static const EdgeInsets pairIntervalButtonPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x2,
-    vertical: AppSpacing.x1,
+    horizontal: TabletSpacingTokens.x2,
+    vertical: TabletSpacingTokens.x1,
   );
   static const double pairIndicatorDot = AppSpacing.x1;
   // Terminal thuần (hướng C 2026-08-30): gutter đều giữa các panel phẳng,
   // hàng meta dày, mức sổ lệnh 26dp, dòng giao dịch 24dp.
-  static const double pairTerminalGutter = AppSpacing.cardGap;
+  static const double pairTerminalGutter = TabletSpacingTokens.cardGap;
   static const EdgeInsets pairMetaStripPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x3,
-    vertical: AppSpacing.x2,
+    horizontal: TabletSpacingTokens.x3,
+    vertical: TabletSpacingTokens.x2,
   );
-  static const double pairMetaGap = AppSpacing.x3;
-  static const double pairMetaDividerHeight = AppSpacing.x5;
+  static const double pairMetaGap = TabletSpacingTokens.x3;
+  static const double pairMetaDividerHeight = TabletSpacingTokens.x5;
   static const EdgeInsets pairPanelHeaderPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3,
-    AppSpacing.x2,
-    AppSpacing.x3,
-    AppSpacing.x1,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x2,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x1,
   );
   static const double pairBookRowExtent = 26;
   static const EdgeInsets pairBookRowPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x1,
+    horizontal: TabletSpacingTokens.x1,
   );
   static const double pairTradeRowExtent = 24;
   // Panel tabbed cột phụ (V2-C): nội dung thụng lề, gạch chân tab active.
   static const EdgeInsets pairBookContentPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3,
-    AppSpacing.x2,
-    AppSpacing.x3,
-    AppSpacing.x3,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x2,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x3,
   );
-  static const double pairBookTabUnderline = AppSpacing.x6;
+  static const double pairBookTabUnderline = TabletSpacingTokens.x6;
   static const double pairDetailNativeBottomExtra = AppSpacing.contentPad;
   static const double pairDetailVisualBottomExtra = 54;
   // A11Y-2: matches VitHeaderActionButton's 44dp minimum tap target so the

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
 /// BỘ TOKEN KHOẢNG CÁCH RIÊNG CỦA SURFACE TABLET (user chốt tách hoàn toàn
-/// 2026-09-01): mọi file tablet đọc số liệu khoảng cách/kích thước từ đây,
-/// KHÔNG còn đọc `AppSpacing` của phone. Giá trị khởi đầu sao chép nguyên
-/// vẹn từ `AppSpacing` (snapshot 2026-09-01) nên đợt tách này KHÔNG đổi
-/// một pixel nào — mục đích là quyền tự chủ: đổi giá trị nào ở đây chỉ
-/// ảnh hưởng tablet, phone bất động.
+/// 2026-09-01; chuyển LƯỚI 8PT cùng ngày theo hướng A user duyệt): mọi file
+/// tablet đọc số liệu khoảng cách/kích thước từ đây, KHÔNG còn đọc
+/// `AppSpacing` của phone. Thang bước là bội 4/8 (4·8·12·16·24·32·56) —
+/// LUẬT TABLET: mọi khoảng trắng = 12. Đổi giá trị nào ở đây chỉ ảnh
+/// hưởng tablet, phone bất động.
 ///
 /// Quy ước:
 /// - Mọi giá trị inline kèm `// nguồn: AppSpacing.<tên>` để truy vết
 ///   snapshot; sau này chỉnh giá trị thì cập nhật comment nguồn thành
 ///   lý do mới (đừng xoá — lịch sử giúp audit).
-/// - Luật 13dp (2026-08-31) vẫn thắng: các token khoảng-trắng giữ 13.
+/// - Luật 8pt 12dp (2026-08-31) vẫn thắng: các token khoảng-trắng giữ 13.
 /// - Guardrail `tablet_gap_13_guardrail_test.dart` whitelist cả namespace
 ///   này với cùng bộ tên như AppSpacing cũ.
 final class TabletSpacingTokens {
   const TabletSpacingTokens._();
 
   // ---- Thang bước (mirror AppSpacing, 2026-09-01) ----
-  static const double x1 = 3; // nguồn: AppSpacing.x1
-  static const double x2 = 5; // nguồn: AppSpacing.x2
-  static const double x3 = 8; // nguồn: AppSpacing.x3
-  static const double x4 = 13; // nguồn: AppSpacing.x4 — LUẬT 13dp
-  static const double x5 = 21; // nguồn: AppSpacing.x5
-  static const double x6 = 34; // nguồn: AppSpacing.x6
-  static const double x7 = 55; // nguồn: AppSpacing.x7
+  static const double x1 = 4; // 8pt grid (nguồn cũ AppSpacing.x1 = 3)
+  static const double x2 = 4; // 8pt grid (nguồn cũ AppSpacing.x2 = 5)
+  static const double x3 = 8; // 8pt grid — đã đúng lưới
+  static const double x4 = 12; // 8pt grid — LUẬT TABLET 12dp (nguồn cũ 13)
+  static const double x5 = 24; // 8pt grid (nguồn cũ AppSpacing.x5 = 21)
+  static const double x6 = 32; // 8pt grid (nguồn cũ AppSpacing.x6 = 34)
+  static const double x7 = 56; // 8pt grid (nguồn cũ AppSpacing.x7 = 55)
 
   // ---- Zero / hairline ----
   static const double zero = 0; // nguồn: AppSpacing.zero
@@ -49,15 +49,15 @@ final class TabletSpacingTokens {
       34; // nguồn: AppSpacing.accentIconBoxSize (= buttonCompact)
 
   // ---- Khoảng trắng có vai trò ----
-  /// LUẬT 13dp: gap giữa các card/section — 13 (nguồn: AppSpacing.cardGap).
-  static const double cardGap = 13;
+  /// LUẬT TABLET 12dp (8pt grid): gap giữa các card/section.
+  static const double cardGap = 12;
 
-  /// LUẬT 13dp: section gap tier standard — 13 (nguồn: pageRhythmStandardSectionGap).
-  static const double pageRhythmStandardSectionGap = 13;
+  /// LUẬT TABLET 12dp (8pt grid): section gap tier standard.
+  static const double pageRhythmStandardSectionGap = 12;
 
   /// Inner gap compact của phone — tablet dùng khi cần khớp nhịp cũ
-  /// (nguồn: AppSpacing.pageRhythmCompactInnerGap = 5).
-  static const double pageRhythmCompactInnerGap = 5;
+  /// (nguồn cũ 5 — 8pt grid: 4).
+  static const double pageRhythmCompactInnerGap = 4;
 
   /// Inner gap form của phone (nguồn: AppSpacing.pageRhythmFormInnerGap = 8).
   static const double pageRhythmFormInnerGap = 8;
@@ -89,8 +89,8 @@ final class TabletSpacingTokens {
   /// standard 16/16 (nguồn: VitDensity.standard = pageContentGapDefault).
   static const EdgeInsets cardPaddingStandardDensity = EdgeInsets.all(16);
 
-  /// relaxed 21/21 (nguồn: VitDensity.relaxed = x5).
-  static const EdgeInsets cardPaddingRelaxedDensity = EdgeInsets.all(21);
+  /// relaxed 24/24 (8pt grid; nguồn cũ 21).
+  static const EdgeInsets cardPaddingRelaxedDensity = EdgeInsets.all(24);
 
   /// hero 20/24/20/20 (nguồn: VitDensity.hero).
   static const EdgeInsets cardPaddingHeroDensity = EdgeInsets.fromLTRB(
@@ -100,10 +100,10 @@ final class TabletSpacingTokens {
     20,
   );
 
-  /// tool 12 ngang / 5 dọc (nguồn: VitDensity.tool).
+  /// tool 12 ngang / 4 dọc (8pt grid; nguồn cũ 5).
   static const EdgeInsets cardPaddingToolDensity = EdgeInsets.symmetric(
     horizontal: 12,
-    vertical: 5,
+    vertical: 4,
   );
 
   /// Cờ surface: composition root đặt true khi bootstrap chọn tablet —

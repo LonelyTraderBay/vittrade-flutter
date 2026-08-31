@@ -1,5 +1,5 @@
-// LUẬT 13dp (user chốt 2026-08-31): mọi khoảng trắng DỌC của terminal
-// Trade tablet đều bằng 13dp — không ngoại lệ. Test này đo RenderBox thật
+// LUẬT 8PT/12DP (user chốt 2026-08-31): mọi khoảng trắng DỌC của terminal
+// Trade tablet đều bằng 12dp — không ngoại lệ. Test này đo RenderBox thật
 // của mọi cặp kề nhau (panel↔panel, mép panel→nội dung, nhãn→nội dung,
 // giữa các khối trong cột đặt lệnh) ở tầng đầy đủ 1280×800. Chạm vào
 // terminal mà quên khoảng 13 đâu đó thì test này đỏ đúng chỗ.
@@ -15,7 +15,7 @@ import 'package:vit_trade_flutter/features/trade/presentation/widgets/tablet/vit
 import 'package:vit_trade_flutter/shared/widgets/vit_high_risk_state_panel.dart';
 
 void main() {
-  testWidgets('Luật 13dp: mọi khoảng dọc kề nhau của terminal == 13.0', (
+  testWidgets('Luật 12dp: mọi khoảng dọc kề nhau của terminal == 12.0', (
     tester,
   ) async {
     tester.view.devicePixelRatio = 1;
@@ -53,9 +53,9 @@ void main() {
     void expectGap13(String label, Rect upper, Rect lower) {
       expect(
         lower.top - upper.bottom,
-        moreOrLessEquals(13.0, epsilon: 0.1),
+        moreOrLessEquals(12.0, epsilon: 0.1),
         reason:
-            '$label phải cách nhau đúng 13dp theo luật 13dp của terminal '
+            '$label phải cách nhau đúng 12dp theo luật 8pt của tablet '
             '(thực tế ${lower.top - upper.bottom})',
       );
     }
@@ -84,9 +84,9 @@ void main() {
     void expectTop13(String label, Rect panel, Rect content) {
       expect(
         content.top - panel.top,
-        moreOrLessEquals(13.0, epsilon: 0.1),
+        moreOrLessEquals(12.0, epsilon: 0.1),
         reason:
-            '$label phải cách nhau đúng 13dp (thực tế '
+            '$label phải cách nhau đúng 12dp (thực tế '
             '${content.top - panel.top})',
       );
     }

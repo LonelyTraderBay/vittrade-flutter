@@ -102,7 +102,13 @@ promote a value into `TabletDashboardWidths` before a fourth module copies it
 as of 2026-08-27).
 
 
-## Rule 6 — Luật 13dp: mọi khoảng trắng DỌC VÀ NGANG = 13 (không ngoại lệ, khóa tuyệt đối)
+## Rule 6 — Luật 8pt/12dp: mọi khoảng trắng DỌC VÀ NGANG = 12 (không ngoại lệ, khóa tuyệt đối)
+
+> **Migration 2026-09-01 (hướng A user duyệt):** tablet chuyển sang lưới
+> 8pt (Base-8) — thang 4·8·12·16·24·32·56 sống trong
+> `TabletSpacingTokens`; con số luật đổi 13 → 12 (không thể nhận ra bằng
+> mắt), mọi nhịp giờ khớp widget Material (4/8/16/24). Phone giữ thang
+> Fibonacci cũ qua `AppSpacing` — hai surface hai namespace, độc lập.
 
 **Born:** 2026-08-31 — product-owner decision sau lỗi nhịp lệch của Trade
 terminal SC-048 (label→nội dung chạy từ 8 → 44dp giữa các panel do padding
@@ -114,7 +120,7 @@ phạm vi vì đó không phải khoảng trắng giữa các khối.
 | Phát biểu | Chi tiết |
 | --- | --- |
 | **Áp cho** | Mọi khoảng trắng DỌC VÀ NGANG (mở rộng chiều 2026-08-31 cùng ngày theo quyết định product owner) giữa các phần tử trong file tablet: panel↔panel, section↔section, mép panel→nội dung đầu tiên, nhãn→nội dung, khối↔khối, phần tử↔phần tử trong hàng (icon↔chữ, chip↔chip, nút↔nút) |
-| **Giá trị duy nhất** | `13` — qua `AppSpacing.x4` / `AppSpacing.cardGap` / `AppSpacing.sectionGapCompact` hoặc token module giá trị 13 (vd `TradeSpacingTokens.tradeTerminalGutter`) |
+| **Giá trị duy nhất** | `12` — qua `TabletSpacingTokens.x4` / `.cardGap` / `.pageRhythmStandardSectionGap` (namespace tablet) hoặc token module terminal cùng nguồn |
 | **Ngoài phạm vi** | Extent/leading của HÀNG DỮ LIỆU (24–26dp row, padding quanh chữ trong hàng); kích thước control (inputHeight, buttonHeight, icon); border/hairline; chiều cao canvas biểu đồ; touch-target của nút; inset padding của panel (một khoảng = một lớp, xem dưới) |
 | **Một khoảng = một lớp** | Cấm chồng: label padding bottom 13 **HOẶC** child padding top 13 — không bao giờ cả hai. Body của panel phẳng chỉ inset ngang (pattern `tradeTerminalPanelBodyPadding`); khoảng dọc do đúng một lớp đảm nhiệm |
 | **Đo theo flow** | Khoảng đo từ mép khối đến mép khối kế theo trục flow (RenderBox). Phần tử thấp hơn bị `crossAxisAlignment.center` làm lệch tâm trong một hàng không tính là gap |

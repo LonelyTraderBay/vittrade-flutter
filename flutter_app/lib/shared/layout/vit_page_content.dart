@@ -4,6 +4,7 @@ import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_section_header.dart';
 
 /// Top padding preset for [VitPageContent].
@@ -81,9 +82,7 @@ class VitPageContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: _withGaps(
           children,
-          customGap ??
-              rhythm?.sectionGap ??
-              _resolveContentGap(gap: gap, density: density, customGap: null),
+          _sectionGap(customGap, rhythm, gap, density),
         ),
       ),
     );
@@ -177,15 +176,38 @@ class VitPageSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (label != null) _buildHeader(),
-        ..._withGaps(
-          children,
-          customGap ??
-              rhythm?.sectionGap ??
-              _resolveContentGap(gap: gap, density: density, customGap: null),
-        ),
+        ..._withGaps(children, _sectionGap(customGap, rhythm, gap, density)),
       ],
     );
   }
+}
+
+/// Luật 8pt 12dp tablet (2026-09-01): khi surface tablet active, section
+/// gap của tier enum đọc TabletSpacingTokens (12) thay vì AppSpacing của
+/// phone (13) — phone đường cũ nguyên vẹn.
+double _sectionGap(
+  double? customGap,
+  VitPageRhythm? rhythm,
+  VitContentGap gap,
+  VitDensity? density,
+) {
+  if (customGap != null) return customGap;
+  if (rhythm != null) {
+    return TabletSpacingTokens.tabletSurfaceActive
+        ? switch (rhythm) {
+            // Luật 8pt 12dp: section gap tablet = 12 cho mọi tier dọc
+            // (compact giữ 8 khi scaffold chủ đích compact — map đủ 5
+            // tier, phone đọc enum như cũ).
+            VitPageRhythm.compact => TabletSpacingTokens.x3,
+            VitPageRhythm.standard ||
+            VitPageRhythm.form ||
+            VitPageRhythm.relaxed =>
+              TabletSpacingTokens.pageRhythmStandardSectionGap,
+            VitPageRhythm.flush => TabletSpacingTokens.zero,
+          }
+        : rhythm.sectionGap;
+  }
+  return _resolveContentGap(gap: gap, density: density, customGap: null);
 }
 
 List<Widget> _withGaps(List<Widget> children, double gap) {

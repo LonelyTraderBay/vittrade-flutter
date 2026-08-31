@@ -5,6 +5,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/trade_compliance_spacing_tok
 import 'package:vit_trade_flutter/app/theme/spacing/trade_copy_spacing_tokens.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/launchpad_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
 
@@ -45,47 +46,57 @@ final class TradeSpacingTokens {
   // trị, không ngoại lệ; inset NGANG và extent hàng dữ liệu không thuộc
   // phạm vi luật (không phải khoảng trắng dọc).
   /// Gutter đều giữa các panel phẳng của terminal.
-  static const double tradeTerminalGutter = AppSpacing.cardGap;
+  static const double tradeTerminalGutter = TabletSpacingTokens.cardGap;
   static const EdgeInsets tradeTerminalMetaStripPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x3,
-    vertical: AppSpacing.x4,
+    horizontal: TabletSpacingTokens.x3,
+    vertical: TabletSpacingTokens.x4,
   );
 
   /// LUẬT 13dp: khoảng ngang giữa các cụm số liệu meta = 13.
-  static const double tradeTerminalMetaGap = AppSpacing.x4;
-  static const double tradeTerminalMetaDividerHeight = AppSpacing.x5;
+  static const double tradeTerminalMetaGap = TabletSpacingTokens.x4;
+  static const double tradeTerminalMetaDividerHeight = TabletSpacingTokens.x5;
   static const EdgeInsets tradeTerminalPanelHeaderPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3,
-    AppSpacing.x4,
-    AppSpacing.x3,
-    AppSpacing.x4,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x4,
+    TabletSpacingTokens.x3,
+    TabletSpacingTokens.x4,
   );
 
-  /// Body panel: CHỈ inset ngang — mọi khoảng dọc do luật 13dp đảm nhiệm
+  /// Body panel: CHỈ inset ngang — mọi khoảng dọc do luật 8pt 12dp đảm nhiệm
   /// (header padding bottom 13 với panel có nhãn; body top/bottom padding
   /// với panel không nhãn). Cấm bọc thêm padding dọc ở child.
   static const EdgeInsets tradeTerminalPanelBodyPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x3,
+    horizontal: TabletSpacingTokens.x3,
   );
   static const EdgeInsets tradeTerminalPanelBodyTopPadding =
-      EdgeInsets.fromLTRB(AppSpacing.x3, AppSpacing.x4, AppSpacing.x3, 0);
+      EdgeInsets.fromLTRB(
+        TabletSpacingTokens.x3,
+        TabletSpacingTokens.x4,
+        TabletSpacingTokens.x3,
+        0,
+      );
   static const EdgeInsets tradeTerminalPanelBodyBottomPadding =
-      EdgeInsets.fromLTRB(AppSpacing.x3, 0, AppSpacing.x3, AppSpacing.x4);
+      EdgeInsets.fromLTRB(
+        TabletSpacingTokens.x3,
+        0,
+        TabletSpacingTokens.x3,
+        TabletSpacingTokens.x4,
+      );
 
   /// Mức sổ lệnh của terminal (12 mức/bên).
   static const double tradeTerminalBookRowExtent = 26;
   static const EdgeInsets tradeTerminalBookRowPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x1,
+    horizontal: TabletSpacingTokens.x1,
   );
 
   /// Dòng giao dịch gần đây của terminal (24 dòng).
   static const double tradeTerminalTradeRowExtent = 24;
 
   /// Inset ngang của hàng header cột (Khối lượng/Thời gian) trong tape —
-  /// chỉ ngang, không dọc (luật 13dp: khoảng nhãn → header do label
+  /// chỉ ngang, không dọc (luật 8pt 12dp: khoảng nhãn → header do label
   /// padding bottom đảm nhiệm).
   static const EdgeInsets tradeTerminalColumnHeaderPadding =
-      EdgeInsets.symmetric(horizontal: AppSpacing.x2);
+      EdgeInsets.symmetric(horizontal: TabletSpacingTokens.x2);
 
   /// Cột sổ lệnh + tape của terminal ở tầng đầy đủ.
   static const double tradeTerminalBookColumnWidth = 300;
@@ -96,46 +107,54 @@ final class TradeSpacingTokens {
   /// Thanh công cụ khung giờ + chỉ báo trong panel chart.
   static const EdgeInsets tradeTerminalChartToolbarPadding =
       EdgeInsets.fromLTRB(
-        AppSpacing.x3,
-        AppSpacing.x4,
-        AppSpacing.x3,
-        AppSpacing.x4,
+        TabletSpacingTokens.x3,
+        TabletSpacingTokens.x4,
+        TabletSpacingTokens.x3,
+        TabletSpacingTokens.x4,
       );
 
   /// LUẬT 13dp: khoảng ngang giữa các nút khung giờ/chỉ báo = 13.
-  static const double tradeTerminalIntervalGap = AppSpacing.x4;
+  static const double tradeTerminalIntervalGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalIntervalButtonPadding =
-      EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
+      EdgeInsets.symmetric(
+        horizontal: TabletSpacingTokens.x2,
+        vertical: TabletSpacingTokens.x1,
+      );
 
   /// Vùng tab dưới chart (Lệnh mở | Vị thế | Sổ lệnh tùy tầng).
-  /// Chiều cao vùng dưới chart sau luật 13dp: 13 (mép→tab) + tab (~29) +
+  /// Chiều cao vùng dưới chart sau luật 8pt 12dp: 13 (mép→tab) + tab (~29) +
   /// 13 (tab→bảng) + 8 hàng × 24 + 13 (hàng cuối→viền).
   static const double tradeTerminalBottomPanelHeight = 260;
 
   /// Chiều cao phần bảng trong panel dưới chart = 8 hàng × extent 24.
   static const double tradeTerminalBottomTableHeight =
       tradeTerminalBottomPanelHeight -
-      AppSpacing.x4 * 3 -
-      (AppSpacing.x5 + AppSpacing.x2 + AppSpacing.x1);
+      TabletSpacingTokens.x4 * 3 -
+      (TabletSpacingTokens.x5 +
+          TabletSpacingTokens.x2 +
+          TabletSpacingTokens.x1);
 
   /// LUẬT 13dp: khoảng ngang tab ↔ nút xem tất cả = 13.
-  static const double tradeTerminalBottomTabGap = AppSpacing.x4;
+  static const double tradeTerminalBottomTabGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x2,
-    vertical: AppSpacing.x1,
+    horizontal: TabletSpacingTokens.x2,
+    vertical: TabletSpacingTokens.x1,
   );
 
   /// Cột "MUA/BÁN + symbol" của các bảng dưới chart — đủ chỗ cho nhãn dài
   /// nhất ("MUA BTC/USDT") không ellipsis sớm.
   static const double tradeTerminalSymbolColumnWidth =
-      AppSpacing.x7 + AppSpacing.x5 + AppSpacing.x3;
+      TabletSpacingTokens.x7 + TabletSpacingTokens.x5 + TabletSpacingTokens.x3;
 
   /// Nút đổi cặp + hàng cặp trong sheet chọn (padding dùng token, không
   /// EdgeInsets thô — home-reference consistency).
   static const EdgeInsets tradeTerminalPickerButtonPadding =
-      EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: AppSpacing.x1);
+      EdgeInsets.symmetric(
+        horizontal: TabletSpacingTokens.x2,
+        vertical: TabletSpacingTokens.x1,
+      );
   static const EdgeInsets tradeTerminalPickerRowPadding = EdgeInsets.symmetric(
-    vertical: AppSpacing.x2,
+    vertical: TabletSpacingTokens.x2,
   );
 
   /// Tầng đầy đủ (chart | sổ lệnh | đặt lệnh) — điểm chạm ĐO THỰC bằng

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/wallet_page.dart';
@@ -152,21 +152,24 @@ void main() {
       matching: find.byType(VitPageSection),
     );
     final dcaSection = tester.getRect(dcaSectionFinder);
-    // Luật 13dp (2026-08-31): section gap + label→nội dung tablet = 13.
-    final law13HeaderPadding = find.byWidgetPredicate(
+    // Luật 8pt 12dp tablet: section gap + label→nội dung = 12.
+    final law12HeaderPadding = find.byWidgetPredicate(
       (widget) =>
           widget is Padding &&
           widget.padding ==
-              const EdgeInsetsDirectional.only(bottom: AppSpacing.x4),
+              const EdgeInsetsDirectional.only(bottom: TabletSpacingTokens.x4),
     );
 
-    expect(dcaSection.top - toolsSection.bottom, closeTo(AppSpacing.x4, 0.01));
     expect(
-      find.descendant(of: dcaSectionFinder, matching: law13HeaderPadding),
+      dcaSection.top - toolsSection.bottom,
+      closeTo(TabletSpacingTokens.x4, 0.01),
+    );
+    expect(
+      find.descendant(of: dcaSectionFinder, matching: law12HeaderPadding),
       findsOneWidget,
     );
     expect(
-      find.descendant(of: toolsSectionFinder, matching: law13HeaderPadding),
+      find.descendant(of: toolsSectionFinder, matching: law12HeaderPadding),
       findsOneWidget,
     );
   });

@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/core/storage/key_value_store.dart';
 import 'package:vit_trade_flutter/features/profile/data/providers/profile_repository_provider.dart';
@@ -583,13 +583,16 @@ void main() {
       // (innerGap khai riêng tại call-site tablet, tách khỏi tier phone).
       expect(
         prediction.top - predictionTitle.bottom,
-        closeTo(AppSpacing.x4, 0.01),
+        closeTo(TabletSpacingTokens.x4, 0.01),
       );
       // Luật 13dp (2026-08-31): section gap tablet = 13 (tier standard).
-      expect(arena.top - prediction.bottom, closeTo(AppSpacing.x4, 0.01));
+      expect(
+        arena.top - prediction.bottom,
+        closeTo(TabletSpacingTokens.x4, 0.01),
+      );
       expect(
         productHub.top - productTitle.bottom,
-        closeTo(AppSpacing.x4, 0.01),
+        closeTo(TabletSpacingTokens.x4, 0.01),
       );
     },
   );
@@ -700,7 +703,7 @@ void main() {
 
       final heroBottom = tester.getBottomLeft(hero).dy;
       final tabsTop = tester.getTopLeft(tabs).dy;
-      expect(tabsTop - heroBottom, closeTo(AppSpacing.x4, 0.1));
+      expect(tabsTop - heroBottom, closeTo(TabletSpacingTokens.x4, 0.1));
     },
   );
 

@@ -408,7 +408,7 @@ final class ProfileSpacingTokens {
 
   static const double profileApiCreateExpiryExtent = 62;
 
-  /// Luật 13dp tablet (2026-08-31): extent chứa label + gap 13 +
+  /// Luật 8pt 12dp tablet (2026-08-31): extent chứa label + gap 13 +
   /// description sau khi gap mô tả trên tablet đổi 5 → 13 — phone giữ
   /// 62 vì gap phone vẫn 5 (Rule 5: cùng role, khác surface).
   static const double profileApiCreateTabletExpiryExtent = 67;

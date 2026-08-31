@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/home/data/home_mock_data.dart';
@@ -139,10 +139,13 @@ void main() {
     );
 
     // Luật 13dp (2026-08-31): mọi section gap tablet = 13.
-    expect(quickActions.top - nextAction.bottom, closeTo(AppSpacing.x4, 0.01));
+    expect(
+      quickActions.top - nextAction.bottom,
+      closeTo(TabletSpacingTokens.x4, 0.01),
+    );
     expect(
       recentProducts.top - quickActions.bottom,
-      closeTo(AppSpacing.x4, 0.01),
+      closeTo(TabletSpacingTokens.x4, 0.01),
     );
   });
 
