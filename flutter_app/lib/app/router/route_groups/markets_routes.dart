@@ -10,7 +10,6 @@ import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tool
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/market_depth_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/market_heatmap_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/tablet/pages/markets_tablet_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_movers_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/market_news_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/hub/market_overview_page.dart';
@@ -25,9 +24,6 @@ import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/rese
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/token_unlocks_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/hub/watchlist_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_token_info_pane.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
@@ -41,13 +37,8 @@ List<RouteBase> marketsRoutes(
     GoRoute(
       path: AppRoutePaths.markets,
       name: AppRouteNames.sc008MarketList,
-      builder: (_, _) => switch (surface) {
-        // Web surface composition is migrated in P7.
-        AppSurface.phone ||
-        AppSurface.web ||
-        null => MarketListPage(shellRenderMode: shellRenderMode),
-        AppSurface.tablet => const MarketsTabletPage(),
-      },
+      // Web surface composition is migrated in P7.
+      builder: (_, _) => MarketListPage(shellRenderMode: shellRenderMode),
     ),
     GoRoute(
       path: AppRoutePaths.marketsOverview,
@@ -206,8 +197,10 @@ List<RouteBase> marketPairRoutes(
         return switch (surface) {
           // Terminal master-detail: pane phân tích thật trong detail column
           // bên cạnh master list.
-          AppSurface.tablet => MarketsPairDetailPane(pairId: pairId),
-          AppSurface.phone || AppSurface.web || null => PairDetailPage(
+          AppSurface.phone ||
+          AppSurface.tablet ||
+          AppSurface.web ||
+          null => PairDetailPage(
             // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
             pairId: pairId,
             shellRenderMode: shellRenderMode,
@@ -223,8 +216,10 @@ List<RouteBase> marketPairRoutes(
         return switch (surface) {
           // Terminal master-detail: pane thông tin token thật trong detail
           // column.
-          AppSurface.tablet => MarketsTokenInfoPane(pairId: pairId),
-          AppSurface.phone || AppSurface.web || null => TokenInfoPage(
+          AppSurface.phone ||
+          AppSurface.tablet ||
+          AppSurface.web ||
+          null => TokenInfoPage(
             // SEC-S45: default hợp lý UX (chợ/tài sản mặc định, không phải thực thể riêng tư) — giữ.
             pairId: pairId,
             shellRenderMode: shellRenderMode,
@@ -242,8 +237,10 @@ List<RouteBase> marketPairRoutes(
         return switch (surface) {
           // Terminal master-detail: pane độ sâu thị trường thật trong
           // detail column (back luôn về pair detail pane).
-          AppSurface.tablet => MarketsPairDepthPane(pairId: pairId),
-          AppSurface.phone || AppSurface.web || null => MarketDepthPage(
+          AppSurface.phone ||
+          AppSurface.tablet ||
+          AppSurface.web ||
+          null => MarketDepthPage(
             pairId: pairId,
             backPath: returnTo ?? AppRoutePaths.pairDetail(pairId),
             shellRenderMode: shellRenderMode,

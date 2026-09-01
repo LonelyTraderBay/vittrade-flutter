@@ -75,6 +75,9 @@ jobs:
       - name: Route coverage artifact is current
         run: dart run tool/route_coverage_audit.dart --check
 
+      - name: Tablet route manifest is current
+        run: dart run tool/generate_tablet_route_manifest.dart --check
+
       - name: Navigation edge artifact is current
         run: dart run tool/navigation_edge_audit.dart --check
 

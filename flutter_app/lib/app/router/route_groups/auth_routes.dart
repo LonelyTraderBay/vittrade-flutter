@@ -3,18 +3,11 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/contracts/auth_route_args.dart';
-import 'package:vit_trade_flutter/features/auth/domain/entities/auth_entities.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/forgot_password_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/login_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/register_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/reset_password_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/two_fa_setup_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/forgot_password_tablet_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/login_tablet_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/otp_tablet_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/register_tablet_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/reset_password_tablet_page.dart';
-import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/web/pages/auth_web_page.dart';
 import 'package:vit_trade_flutter/features/enterprise_states/presentation/phone/pages/force_update_gate_page.dart';
 import 'package:vit_trade_flutter/features/enterprise_states/presentation/phone/pages/maintenance_gate_page.dart';
@@ -28,15 +21,10 @@ List<RouteBase> topLevelRoutes(
   ShellRenderMode shellRenderMode, {
   AppSurface? surface,
 }) {
-  Widget surfacePage({
-    required Widget phone,
-    required Widget tablet,
-    required Widget web,
-  }) {
+  Widget surfacePage({required Widget phone, required Widget web}) {
     return switch (surface) {
-      AppSurface.tablet => tablet,
       AppSurface.web => web,
-      AppSurface.phone || null => phone,
+      AppSurface.phone || AppSurface.tablet || null => phone,
     };
   }
 
@@ -49,7 +37,6 @@ List<RouteBase> topLevelRoutes(
         renderMode: shellRenderMode,
         child: surfacePage(
           phone: const LoginPage(),
-          tablet: const LoginTabletPage(),
           web: const AuthWebPage(
             semanticIdentifier: 'SC-001',
             title: 'Đăng nhập',
@@ -72,7 +59,6 @@ List<RouteBase> topLevelRoutes(
         renderMode: shellRenderMode,
         child: surfacePage(
           phone: const RegisterPage(),
-          tablet: const RegisterTabletPage(),
           web: const AuthWebPage(
             semanticIdentifier: 'SC-002',
             title: 'Tạo tài khoản',
@@ -94,16 +80,8 @@ List<RouteBase> topLevelRoutes(
       builder: (_, state) => AuthRouteShell(
         renderMode: shellRenderMode,
         child: switch (surface) {
-          AppSurface.tablet => OtpTabletPage(
-            contact:
-                _otpArgs(state).contact ??
-                state.uri.queryParameters['contact'] ??
-                'your@email.com',
-            contactType: _otpArgs(state).contactType ?? _otpContactType(state),
-            purpose: _otpArgs(state).purpose ?? _otpPurpose(state),
-          ),
           AppSurface.web => _webOtpPage(state),
-          AppSurface.phone || null => buildOtpPage(state),
+          AppSurface.phone || AppSurface.tablet || null => buildOtpPage(state),
         },
       ),
     ),
@@ -114,7 +92,6 @@ List<RouteBase> topLevelRoutes(
         renderMode: shellRenderMode,
         child: surfacePage(
           phone: const TwoFASetupPage(),
-          tablet: const TwoFaSetupTabletPage(),
           web: const AuthWebPage(
             semanticIdentifier: 'SC-004',
             title: 'Thiết lập 2FA',
@@ -134,7 +111,6 @@ List<RouteBase> topLevelRoutes(
         renderMode: shellRenderMode,
         child: surfacePage(
           phone: const ForgotPasswordPage(),
-          tablet: const ForgotPasswordTabletPage(),
           web: const AuthWebPage(
             semanticIdentifier: 'SC-005',
             title: 'Quên mật khẩu',
@@ -154,7 +130,6 @@ List<RouteBase> topLevelRoutes(
         renderMode: shellRenderMode,
         child: surfacePage(
           phone: const ResetPasswordPage(),
-          tablet: const ResetPasswordTabletPage(),
           web: const AuthWebPage(
             semanticIdentifier: 'SC-006',
             title: 'Đặt lại mật khẩu',
@@ -252,21 +227,6 @@ OtpPageRouteArgs _otpArgs(GoRouterState state) {
   return state.extra is OtpPageRouteArgs
       ? state.extra! as OtpPageRouteArgs
       : const OtpPageRouteArgs();
-}
-
-AuthOtpPurpose _otpPurpose(GoRouterState state) {
-  return switch (state.uri.queryParameters['purpose']) {
-    'register' => AuthOtpPurpose.register,
-    'twoFactor' || '2fa' => AuthOtpPurpose.twoFactor,
-    'passwordReset' || 'reset' => AuthOtpPurpose.passwordReset,
-    _ => AuthOtpPurpose.verify,
-  };
-}
-
-AuthContactType _otpContactType(GoRouterState state) {
-  return state.uri.queryParameters['type'] == 'phone'
-      ? AuthContactType.phone
-      : AuthContactType.email;
 }
 
 Widget _webOtpPage(GoRouterState state) {

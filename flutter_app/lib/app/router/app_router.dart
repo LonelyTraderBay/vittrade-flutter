@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,23 +10,15 @@ import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
 import 'package:vit_trade_flutter/app/router/visual_qa_route_metadata.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
-import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
 import 'package:vit_trade_flutter/app/shell/web/web_app_shell.dart';
 import 'package:vit_trade_flutter/core/config/app_environment.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/auth/data/auth_repository.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/phone/pages/otp_page.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
-import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
 import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:vit_trade_flutter/app/router/contracts/auth_route_args.dart';
@@ -58,7 +49,6 @@ import 'package:vit_trade_flutter/app/router/route_groups/wallet_routes.dart';
 
 export 'app_route_contracts.dart';
 part 'route_groups/root_routes.dart';
-part 'internal_surface_gate.dart';
 part 'router_helpers.dart';
 
 /// Public compatibility facade.

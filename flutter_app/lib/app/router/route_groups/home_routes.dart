@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/features/home/presentation/phone/pages/home_page.dart';
-import 'package:vit_trade_flutter/features/home/presentation/tablet/pages/home_tablet_page.dart';
 import 'package:vit_trade_flutter/features/home/presentation/web/pages/home_web_page.dart';
 import 'package:vit_trade_flutter/features/news/presentation/phone/pages/news_page.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
@@ -19,8 +18,9 @@ List<RouteBase> homeRoutes(
       path: AppRoutePaths.home,
       name: AppRouteNames.sc007Home,
       builder: (_, _) => switch (surface) {
-        AppSurface.phone || null => HomePage(shellRenderMode: shellRenderMode),
-        AppSurface.tablet => const HomeTabletPage(),
+        AppSurface.phone ||
+        AppSurface.tablet ||
+        null => HomePage(shellRenderMode: shellRenderMode),
         AppSurface.web => const HomeWebPage(),
       },
     ),

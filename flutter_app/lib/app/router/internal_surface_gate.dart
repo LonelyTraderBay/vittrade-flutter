@@ -1,4 +1,17 @@
-part of 'app_router.dart';
+// Gate dùng chung cho cây phone, tablet và legacy (web).
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
+import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
+import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
 enum InternalSurfaceKind { admin, developer, qaDemo }
 
@@ -16,14 +29,12 @@ final class InternalSurfaceAccessPolicy {
   static bool allows({
     required bool releaseMode,
     required bool explicitEnable,
-  }) {
-    return !releaseMode || explicitEnable;
-  }
+  }) => !releaseMode || explicitEnable;
 
   static bool isInternalPath(String path) => kindForPath(path) != null;
 
   static InternalSurfaceKind? kindForPath(String path) {
-    final normalized = _normalizePath(path);
+    final normalized = Uri.tryParse(path)?.path ?? path;
     if (normalized == AppRoutePaths.admin ||
         normalized.startsWith('${AppRoutePaths.admin}/')) {
       return InternalSurfaceKind.admin;
@@ -31,17 +42,8 @@ final class InternalSurfaceAccessPolicy {
     if (_developerPaths.contains(normalized)) {
       return InternalSurfaceKind.developer;
     }
-    if (_qaDemoPaths.contains(normalized)) {
-      return InternalSurfaceKind.qaDemo;
-    }
+    if (_qaDemoPaths.contains(normalized)) return InternalSurfaceKind.qaDemo;
     return null;
-  }
-
-  static String _normalizePath(String path) {
-    final uri = Uri.tryParse(path);
-    final parsedPath = uri?.path;
-    if (parsedPath == null || parsedPath.isEmpty) return path;
-    return parsedPath;
   }
 
   static const Set<String> _developerPaths = {
@@ -142,14 +144,9 @@ class _InternalSurfaceRestrictedPage extends StatelessWidget {
 }
 
 extension InternalSurfaceKindCopy on InternalSurfaceKind {
-  String get label {
-    switch (this) {
-      case InternalSurfaceKind.admin:
-        return 'Admin operations';
-      case InternalSurfaceKind.developer:
-        return 'Developer diagnostics';
-      case InternalSurfaceKind.qaDemo:
-        return 'QA demo surface';
-    }
-  }
+  String get label => switch (this) {
+    InternalSurfaceKind.admin => 'Admin operations',
+    InternalSurfaceKind.developer => 'Developer diagnostics',
+    InternalSurfaceKind.qaDemo => 'QA demo surface',
+  };
 }

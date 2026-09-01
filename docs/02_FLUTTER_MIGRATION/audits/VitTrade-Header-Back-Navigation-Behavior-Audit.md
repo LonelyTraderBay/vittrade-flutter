@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=542
+visible_header_back_entries=541
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 473 |
+| parent_route_only | 472 |
 | history_then_fallback | 69 |
 
 ## Strict Issue Counts
@@ -35,8 +35,7 @@ sheet_result_baseline=9
 
 | File | Line | Owner | Widget | Classification | Mode | Fallback | High risk | Issue | Notes |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
-| `flutter_app/lib/app/router/internal_surface_gate.dart` | 92 | `_InternalSurfaceRestrictedPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
-| `flutter_app/lib/app/router/phone/phone_internal_surface_gate.dart` | 93 | `_InternalSurfaceRestrictedPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
+| `flutter_app/lib/app/router/internal_surface_gate.dart` | 94 | `_InternalSurfaceRestrictedPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/ab_test_dashboard_page.dart` | 58 | `_ABTestDashboardPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/admin_settings_page.dart` | 44 | `AdminSettingsPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/analytics_dashboard_page.dart` | 66 | `_AnalyticsDashboardPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |

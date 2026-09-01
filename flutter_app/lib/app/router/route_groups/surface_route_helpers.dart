@@ -24,31 +24,6 @@ Widget buildSurfaceAwareTabletRoute({
   String? confirmationMessage,
   IconData icon = Icons.dashboard_customize_outlined,
 }) {
-  final tablet = VitTabletUtilityPage(
-    semanticIdentifier: semanticIdentifier,
-    title: title,
-    subtitle: subtitle,
-    description: description,
-    facts:
-        facts ??
-        [
-          VitTabletUtilityFact(label: 'Mã màn hình', value: semanticIdentifier),
-          const VitTabletUtilityFact(
-            label: 'Trạng thái',
-            value: 'Đang cập nhật',
-          ),
-          const VitTabletUtilityFact(
-            label: 'Bước tiếp theo',
-            value: 'Rà soát thông tin',
-          ),
-        ],
-    onBack: () => context.go(backPath),
-    actionLabel: actionLabel,
-    requiresConfirmation: requiresConfirmation,
-    confirmationTitle: confirmationTitle,
-    confirmationMessage: confirmationMessage,
-    icon: icon,
-  );
   final web = VitWebUtilityPage(
     semanticIdentifier: semanticIdentifier,
     title: title,
@@ -71,9 +46,8 @@ Widget buildSurfaceAwareTabletRoute({
   );
 
   return switch (surface) {
-    AppSurface.tablet => tablet,
     AppSurface.web => web,
-    AppSurface.phone || null => fallback,
+    AppSurface.phone || AppSurface.tablet || null => fallback,
   };
 }
 
@@ -88,7 +62,7 @@ List<RouteBase> buildTabletUtilityRouteFamily({
   required String subtitle,
   required String description,
   required String backPath,
-  AppSurface surface = AppSurface.tablet,
+  AppSurface surface = AppSurface.web,
   IconData icon = Icons.dashboard_customize_outlined,
   Widget Function(GoRoute route, Widget child)? wrapper,
 }) {

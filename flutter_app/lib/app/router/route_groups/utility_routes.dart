@@ -25,6 +25,7 @@ import 'package:vit_trade_flutter/features/referral/presentation/phone/pages/ref
 import 'package:vit_trade_flutter/features/referral/presentation/phone/pages/referral_friend_detail_page.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/internal_surface_gate.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/placeholder_routes.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 

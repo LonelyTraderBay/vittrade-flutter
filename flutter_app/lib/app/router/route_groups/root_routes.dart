@@ -72,17 +72,9 @@ ShellRoute _appShellRoute(
           }
 
           final appShell = switch (surface) {
-            AppSurface.phone || null => PhoneAppShell(
+            AppSurface.phone || AppSurface.tablet || null => PhoneAppShell(
               renderMode: shellRenderMode,
               currentPath: state.uri.path,
-              activeDestination: activeDestination,
-              notificationBadgeCount: notificationBadgeCount,
-              statusBarTime: statusBarTime,
-              onDestinationSelected: onDestinationSelected,
-              child: child,
-            ),
-            AppSurface.tablet => TabletAppShell(
-              renderMode: shellRenderMode,
               activeDestination: activeDestination,
               notificationBadgeCount: notificationBadgeCount,
               statusBarTime: statusBarTime,
@@ -109,9 +101,8 @@ ShellRoute _appShellRoute(
       ...marketsRoutes(shellRenderMode, surface: surface),
       ...predictionRoutes(shellRenderMode, surface: surface),
       // Markets terminal master-detail shell (tablet) đã gộp pair routes
-      // vào branch của nó — root chỉ mount riêng cho phone/web.
-      if (surface != AppSurface.tablet)
-        ...marketPairRoutes(shellRenderMode, surface: surface),
+      // vào branch của riêng nó — cây legacy này không còn nhận tablet.
+      ...marketPairRoutes(shellRenderMode, surface: surface),
       ...tradeComplianceRoutes(shellRenderMode, surface: surface),
       ...tradeCopyRoutes(shellRenderMode, surface: surface),
       ...tradeBotsRoutes(shellRenderMode, surface: surface),

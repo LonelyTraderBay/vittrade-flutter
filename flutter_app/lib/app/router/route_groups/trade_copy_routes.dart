@@ -29,6 +29,7 @@ import 'package:vit_trade_flutter/features/trade_copy/presentation/phone/pages/p
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/internal_surface_gate.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
 
 List<RouteBase> tradeCopyRoutes(

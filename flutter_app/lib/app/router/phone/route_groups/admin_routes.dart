@@ -11,7 +11,7 @@ import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/phone/phone_route_helpers.dart';
 
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
-import 'package:vit_trade_flutter/app/router/phone/phone_internal_surface_gate.dart';
+import 'package:vit_trade_flutter/app/router/internal_surface_gate.dart';
 
 List<RouteBase> adminRoutes(ShellRenderMode shellRenderMode) {
   return [

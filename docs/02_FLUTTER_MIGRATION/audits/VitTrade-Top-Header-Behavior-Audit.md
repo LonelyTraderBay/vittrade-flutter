@@ -4,10 +4,10 @@ Generated from `flutter_app/tool/top_header_behavior_audit.dart`.
 
 ```text
 total_routed_screens=409
-fixed_vit_header_remaining=172
-auto_hide_header=84
+fixed_vit_header_remaining=168
+auto_hide_header=116
 custom_scroll_header=1
-no_top_header=38
+no_top_header=10
 unresolved=114
 ```
 
@@ -21,8 +21,8 @@ unresolved=114
 | trade_copy | 22 |
 | markets | 21 |
 | trade_bots | 19 |
-| trade | 6 |
 | auth | 3 |
+| trade | 2 |
 | home | 1 |
 
 ## Route Header Inventory
@@ -294,32 +294,32 @@ unresolved=114
 | predictions | `AppRoutePaths.marketsPredictionsSocial` | `unresolved` | unresolved | unresolved | `unresolved` |
 | predictions | `AppRoutePaths.marketsPredictionsTournaments` | `unresolved` | unresolved | unresolved | `unresolved` |
 | profile | `AppRoutePaths.profile` | `ProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
-| profile | `AppRoutePaths.profileActivity` | `ProfileActivityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` |
-| profile | `AppRoutePaths.profileApi` | `ProfileApiPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_pane.dart` |
-| profile | `AppRoutePaths.profileApiCreate` | `ProfileApiCreatePane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart` |
-| profile | `AppRoutePaths.profileDevices` | `ProfileDevicesPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart` |
-| profile | `AppRoutePaths.profileEdit` | `ProfileEditPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_edit_pane.dart` |
-| profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
-| profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
-| profile | `AppRoutePaths.profileSettings` | `ProfileSettingsPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart` |
-| profile | `AppRoutePaths.profileSubAccounts` | `ProfileSubAccountsPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart` |
-| profile | `AppRoutePaths.profileVip` | `ProfileVipPane` | no_top_header | no_top_header | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` |
+| profile | `AppRoutePaths.profileActivity` | `ActivityLogPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/activity_log_page.dart` |
+| profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart` |
+| profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
+| profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |
+| profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
+| profile | `AppRoutePaths.profileKyc` | `KYCPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/kyc_page.dart` |
+| profile | `AppRoutePaths.profileSecurity` | `SecurityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/security_page.dart` |
+| profile | `AppRoutePaths.profileSettings` | `SettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` |
+| profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` |
+| profile | `AppRoutePaths.profileVip` | `VIPPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` |
 | support | `AppRoutePaths.support` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportAnnouncements` | `unresolved` | unresolved | unresolved | `unresolved` |
 | support | `AppRoutePaths.supportHelp` | `unresolved` | unresolved | unresolved | `unresolved` |
-| trade | `'/trade/:pairId'` | `TradeTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
-| trade | `'/trade/:pairId/futures'` | `FuturesTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/futures_tablet_page.dart` |
-| trade | `'/trade/:pairId/futures/leverage'` | `LeverageTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/leverage_tablet_page.dart` |
+| trade | `'/trade/:pairId'` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
+| trade | `'/trade/:pairId/futures'` | `FuturesPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/futures/futures_page.dart` |
+| trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/futures/leverage_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
-| trade | `AppRoutePaths.tradeConvert` | `ConvertTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/convert_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeMargin` | `MarginTradingTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeMarginHub` | `MarginHubTabletPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeConvert` | `ConvertPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/convert/convert_page.dart` |
+| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart` |
+| trade | `AppRoutePaths.tradeMargin` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
+| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
+| trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart` |
 | trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | fixed_vit_header | vit_header_default_with_actions | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
-| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` |
-| trade | `AppRoutePaths.tradePositions` | `PositionDashboardTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` |
-| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsTabletPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/orders_history_page.dart` |
+| trade | `AppRoutePaths.tradePositions` | `PositionDashboardPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/position_dashboard_page.dart` |
+| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotApiDocumentation` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotBacktesting` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotDrawdownAnalyzer` | `VitTabletUtilityPage` | fixed_vit_header | vit_header_default_title_subtitle | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
@@ -417,24 +417,24 @@ unresolved=114
 | utility | `AppRoutePaths.topicCrypto` | `unresolved` | unresolved | unresolved | `unresolved` |
 | utility | `AppRoutePaths.topics` | `unresolved` | unresolved | unresolved | `unresolved` |
 | utility | `AppRoutePaths.unifiedPortfolio` | `unresolved` | unresolved | unresolved | `unresolved` |
-| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
-| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
-| wallet | `'/wallet/asset/:assetId'` | `AssetDetailTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart` |
-| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart` |
+| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/deposit_page.dart` |
+| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/withdraw_page.dart` |
+| wallet | `'/wallet/asset/:assetId'` | `AssetDetailPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/assets/asset_detail_page.dart` |
+| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/transaction_detail_page.dart` |
 | wallet | `AppRoutePaths.wallet` | `WalletPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` |
-| wallet | `AppRoutePaths.walletAddressBook` | `AddressBookTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScoreTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletTransfer` | `TransferTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletAddressBook` | `AddressBookPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/address_book_page.dart` |
+| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/address_add_page.dart` |
+| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/assets/buy_crypto_page.dart` |
+| wallet | `AppRoutePaths.walletDeposit` | `DepositPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/deposit_page.dart` |
+| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/assets/dust_converter_page.dart` |
+| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_gas_optimizer_page.dart` |
+| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScorePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_health_score_page.dart` |
+| wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/transaction_history_page.dart` |
+| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/transfer/withdraw_limits_page.dart` |
+| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_multi_manager_page.dart` |
+| wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/network_status_page.dart` |
+| wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/pending_deposits_page.dart` |
+| wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/portfolio_analytics_page.dart` |
+| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart` |
+| wallet | `AppRoutePaths.walletTransfer` | `TransferPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/transfer_page.dart` |
+| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawPage` | no_top_header | no_top_header | `flutter_app/lib/features/wallet/presentation/phone/pages/withdraw_page.dart` |
