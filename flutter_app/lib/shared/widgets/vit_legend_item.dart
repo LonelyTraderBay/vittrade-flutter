@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Shape of the color swatch rendered by [VitLegendItem].
@@ -35,7 +35,7 @@ class VitLegendItem extends StatelessWidget {
   final String label;
 
   /// Preferred size of the color swatch. Falls back to [dotSize], then
-  /// [AppSpacing.x3].
+  /// [AppSurfaceSpacing.x3].
   final double? swatchSize;
 
   /// Alias used by existing chart legends; same as [swatchSize].
@@ -54,7 +54,7 @@ class VitLegendItem extends StatelessWidget {
   /// producing a 2-line legend item.
   final String? value;
 
-  double get _resolvedSwatch => swatchSize ?? dotSize ?? AppSpacing.x3;
+  double get _resolvedSwatch => swatchSize ?? dotSize ?? AppSurfaceSpacing.x3;
 
   Widget _buildSwatch(double size) {
     switch (shape) {
@@ -125,7 +125,7 @@ class VitLegendItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _buildSwatch(size),
-        const SizedBox(width: AppSpacing.x2),
+        SizedBox(width: AppSurfaceSpacing.x2),
         Flexible(child: labelColumn),
       ],
     );

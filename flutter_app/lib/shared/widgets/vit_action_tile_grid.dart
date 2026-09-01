@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_module_components.dart';
 
 /// Builds one tile at [index] inside a [VitActionTileGrid], given the
@@ -21,9 +21,9 @@ class VitActionTileGrid extends StatelessWidget {
     required this.itemCount,
     required this.itemBuilder,
     this.density = VitDensity.standard,
-    this.crossAxisCount = AppSpacing.serviceTileCrossAxisCount,
-    this.crossAxisSpacing = AppSpacing.gridGap,
-    this.mainAxisSpacing = AppSpacing.gridGap,
+    this.crossAxisCount,
+    this.crossAxisSpacing,
+    this.mainAxisSpacing,
     this.childAspectRatio,
     this.maxVisibleItems,
     this.shrinkWrap = true,
@@ -33,9 +33,9 @@ class VitActionTileGrid extends StatelessWidget {
   final int itemCount;
   final VitActionTileBuilder itemBuilder;
   final VitDensity density;
-  final int crossAxisCount;
-  final double crossAxisSpacing;
-  final double mainAxisSpacing;
+  final int? crossAxisCount;
+  final double? crossAxisSpacing;
+  final double? mainAxisSpacing;
   final double? childAspectRatio;
   final int? maxVisibleItems;
   final bool shrinkWrap;
@@ -50,8 +50,8 @@ class VitActionTileGrid extends StatelessWidget {
   double get _childAspectRatio {
     return childAspectRatio ??
         (density == VitDensity.compact
-            ? AppSpacing.serviceTileGridAspectCompact
-            : AppSpacing.serviceTileGridAspectStandard);
+            ? AppSurfaceSpacing.serviceTileGridAspectCompact
+            : AppSurfaceSpacing.serviceTileGridAspectStandard);
   }
 
   int get _resolvedItemCount {
@@ -65,14 +65,20 @@ class VitActionTileGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final tileDensity = _tileDensity;
     final resolvedItemCount = _resolvedItemCount;
+    final resolvedCrossAxisCount =
+        crossAxisCount ?? AppSurfaceSpacing.serviceTileCrossAxisCount;
+    final resolvedCrossAxisSpacing =
+        crossAxisSpacing ?? AppSurfaceSpacing.gridGap;
+    final resolvedMainAxisSpacing =
+        mainAxisSpacing ?? AppSurfaceSpacing.gridGap;
     return GridView.builder(
       shrinkWrap: shrinkWrap,
       physics: physics,
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: crossAxisSpacing,
-        mainAxisSpacing: mainAxisSpacing,
+        crossAxisCount: resolvedCrossAxisCount,
+        crossAxisSpacing: resolvedCrossAxisSpacing,
+        mainAxisSpacing: resolvedMainAxisSpacing,
         childAspectRatio: _childAspectRatio,
       ),
       itemCount: resolvedItemCount,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
@@ -21,7 +21,7 @@ class VitInfoCallout extends StatelessWidget {
     this.messageColor,
     this.messageStyle,
     this.messageWeight,
-    this.iconSize = AppSpacing.iconMd,
+    this.iconSize,
     this.variant = VitCardVariant.inner,
     this.maxLines,
     this.trailing,
@@ -44,8 +44,8 @@ class VitInfoCallout extends StatelessWidget {
   /// Overrides the message font weight without replacing [messageStyle].
   final FontWeight? messageWeight;
 
-  /// Leading icon size. Defaults to [AppSpacing.iconMd] (current behavior).
-  final double iconSize;
+  /// Leading icon size. Defaults to [AppSurfaceSpacing.iconMd] (current behavior).
+  final double? iconSize;
 
   /// [VitCard] surface variant. Defaults to [VitCardVariant.inner] (current
   /// behavior).
@@ -67,17 +67,18 @@ class VitInfoCallout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolvedMessageStyle = messageStyle ?? AppTextStyles.caption;
+    final resolvedIconSize = iconSize ?? AppSurfaceSpacing.iconMd;
     return VitCard(
       variant: variant,
       radius: radius,
       borderColor: accentColor.withValues(alpha: 0.22),
-      padding: padding ?? const EdgeInsetsDirectional.all(AppSpacing.x4),
+      padding: padding ?? EdgeInsetsDirectional.all(AppSurfaceSpacing.x4),
       onTap: onTap,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: accentColor, size: iconSize),
-          const SizedBox(width: AppSpacing.x3),
+          Icon(icon, color: accentColor, size: resolvedIconSize),
+          SizedBox(width: AppSurfaceSpacing.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +92,7 @@ class VitInfoCallout extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  SizedBox(height: AppSurfaceSpacing.x1),
                 ],
                 Text(
                   message,
@@ -107,7 +108,7 @@ class VitInfoCallout extends StatelessWidget {
             ),
           ),
           if (trailing != null) ...[
-            const SizedBox(width: AppSpacing.x2),
+            SizedBox(width: AppSurfaceSpacing.x2),
             trailing!,
           ],
         ],

@@ -14,13 +14,13 @@ Generated from `flutter_app/tool/body_component_consistency_audit.dart`.
 ## Summary
 
 ```text
-total_routed_screens=412
-grade_A=406
-grade_B=4
+total_routed_screens=409
+grade_A=408
+grade_B=0
 grade_C=0
 grade_D=0
-grade_Tool=2
-manual_review=2
+grade_Tool=1
+manual_review=1
 financial_safety_warn_or_fail=0
 copy_boundary_warn_or_fail=0
 ```
@@ -29,7 +29,7 @@ Header/chrome status remains governed by the top-header audit.
 Current expected header baseline:
 
 ```text
-total_routed_screens=414
+total_routed_screens=409
 strict_visual_issues=0
 screen_level_mismatches=0
 ```
@@ -38,16 +38,14 @@ screen_level_mismatches=0
 
 | Grade | Routes |
 | --- | ---: |
-| A | 406 |
-| B | 4 |
-| Tool | 2 |
+| A | 408 |
+| Tool | 1 |
 
 ## Issue Priority Counts
 
 | Priority | Routes |
 | --- | ---: |
-| P3 | 408 |
-| P2 | 4 |
+| P3 | 409 |
 
 ## Feature-Level Status
 
@@ -68,35 +66,32 @@ screen_level_mismatches=0
 | p2p_orders | 13 | 12 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 13 | 24.3 | 8.3 |
 | p2p_security | 24 | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 24 | 23.5 | 8.2 |
 | predictions | 18 | 18 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | 19.0 | 0.0 |
-| profile | 14 | 11 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 11 | 18.4 | 7.6 |
+| profile | 11 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 22.8 | 10.7 |
 | support | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 19.0 | 0.0 |
-| trade | 13 | 11 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 12 | 37.4 | 9.9 |
+| trade | 13 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 22.3 | 7.8 |
 | trade_bots | 19 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | 19.0 | 0.0 |
 | trade_compliance | 30 | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 19.0 | 0.0 |
 | trade_copy | 22 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 19.0 | 0.0 |
 | trade_terminal | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 19.0 | 0.0 |
 | utility | 20 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 19.0 | 0.0 |
-| wallet | 21 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 32.8 | 7.1 |
+| wallet | 21 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 33.0 | 8.3 |
 
 ## Screen-Level Grade Counts
 
 | Screen level / grade | Routes |
 | --- | ---: |
-| L2_detail / A | 185 |
-| L2_utilityDetail / A | 68 |
+| L2_detail / A | 189 |
+| L2_utilityDetail / A | 66 |
 | L3_transactionFlow / A | 55 |
-| L2_entityDetail / A | 39 |
+| L2_entityDetail / A | 41 |
 | L1_utilityHub / A | 23 |
 | L2_sectionHub / A | 13 |
 | L1_authFlow / A | 8 |
 | L1_productModuleHub / A | 7 |
-| L1_instrumentWorkspace / A | 3 |
 | L1_primaryTabRoot / A | 3 |
-| L2_utilityDetail / B | 3 |
 | L0_authEntry / A | 1 |
 | L0_homeRoot / A | 1 |
-| L1_instrumentWorkspace / Tool | 1 |
-| L2_entityDetail / B | 1 |
+| L1_instrumentWorkspace / A | 1 |
 | L3_fullscreenTool / Tool | 1 |
 
 ## D-Grade Pages
@@ -112,7 +107,6 @@ No C-grade pages detected.
 | Priority | Feature | Route | Page | Grade | Issue | Action |
 | --- | --- | --- | --- | --- | --- | --- |
 | P3 | p2p_orders | `'/p2p/chat/:orderId'` | `P2PChatPage` | Tool | fullscreen_tool_manual_visual_qa_required | Document fullscreen exception and verify safe close/back controls, safe areas, and nonblank rendering. |
-| P3 | trade | `'/trade/:pairId/futures'` | `FuturesPage` | Tool | fullscreen_tool_manual_visual_qa_required | Document fullscreen exception and verify safe close/back controls, safe areas, and nonblank rendering. |
 
 ## Financial Or Security Manual Review
 
@@ -414,36 +408,33 @@ flutter test --reporter=compact
 | predictions | `AppRoutePaths.marketsPredictionsSearch` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | predictions | `AppRoutePaths.marketsPredictionsSocial` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | predictions | `AppRoutePaths.marketsPredictionsTournaments` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.profileActivity` | `ActivityLogPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 8 | 7 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/activity_log_page.dart` |
-| profile | `AppRoutePaths.profileApiCreate` | `ApiKeyCreatePage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 26 | 10 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` |
-| profile | `AppRoutePaths.profileApi` | `ApiManagementPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 6 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart` |
-| profile | `AppRoutePaths.profileDevices` | `DeviceManagementPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 25 | 10 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/device_management_page.dart` |
-| profile | `AppRoutePaths.profileEdit` | `EditProfilePage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 11 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/edit_profile_page.dart` |
-| profile | `AppRoutePaths.profileKyc` | `KYCPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 14 | 5 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/kyc_page.dart` |
 | profile | `AppRoutePaths.profile` | `ProfilePage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 27 | 11 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/profile_page.dart` |
-| profile | `AppRoutePaths.profileSecurity` | `SecurityPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 14 | 8 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/security_page.dart` |
-| profile | `AppRoutePaths.profileSettings` | `SettingsPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 16 | 4 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/settings_page.dart` |
-| profile | `AppRoutePaths.profileSubAccounts` | `SubAccountPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 21 | 17 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` |
-| profile | `AppRoutePaths.profileVip` | `VIPPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 29 | 23 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` |
-| profile | `AppRoutePaths.settingsSecurity` | `ProfileTabletUtilityPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 16 | 0 | 0 | 0 | 1 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityBiometric` | `ProfileTabletUtilityPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 16 | 0 | 0 | 0 | 1 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
-| profile | `AppRoutePaths.settingsSecurityChangePassword` | `ProfileTabletUtilityPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 16 | 0 | 0 | 0 | 1 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart` |
+| profile | `AppRoutePaths.profileActivity` | `ProfileActivityPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 13 | 8 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_activity_pane.dart` |
+| profile | `AppRoutePaths.profileApiCreate` | `ProfileApiCreatePane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 32 | 10 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart` |
+| profile | `AppRoutePaths.profileApi` | `ProfileApiPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 24 | 7 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_api_pane.dart` |
+| profile | `AppRoutePaths.profileDevices` | `ProfileDevicesPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 27 | 11 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_devices_pane.dart` |
+| profile | `AppRoutePaths.profileEdit` | `ProfileEditPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 15 | 6 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_edit_pane.dart` |
+| profile | `AppRoutePaths.profileKyc` | `ProfileKycPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 20 | 6 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_kyc_pane.dart` |
+| profile | `AppRoutePaths.profileSecurity` | `ProfileSecurityPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 21 | 9 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_security_pane.dart` |
+| profile | `AppRoutePaths.profileSettings` | `ProfileSettingsPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 20 | 5 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart` |
+| profile | `AppRoutePaths.profileSubAccounts` | `ProfileSubAccountsPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 21 | 19 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart` |
+| profile | `AppRoutePaths.profileVip` | `ProfileVipPane` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 31 | 26 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart` |
 | support | `AppRoutePaths.support` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | support | `AppRoutePaths.supportAnnouncements` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | support | `AppRoutePaths.supportHelp` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
-| trade | `AppRoutePaths.tradeConvert` | `ConvertPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 47 | 9 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/convert/convert_page.dart` |
-| trade | `'/trade/:pairId/futures'` | `FuturesPage` | Tool | P3 | pass | pass | pass | pass | pass | pass | pass | 36 | 13 | 0 | 0 | 6 | fullscreen_tool_manual_visual_qa_required | Document fullscreen exception and verify safe close/back controls, safe areas, and nonblank rendering. | `flutter_app/lib/features/trade/presentation/phone/pages/futures/futures_page.dart` |
-| trade | `'/trade/:pairId/futures/leverage'` | `LeveragePage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 30 | 10 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/futures/leverage_page.dart` |
-| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 28 | 8 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/hub/orders_history_page.dart` |
-| trade | `AppRoutePaths.tradePositions` | `PositionDashboardPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 47 | 5 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/hub/position_dashboard_page.dart` |
-| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 43 | 8 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_history_export_page.dart` |
-| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 31 | 6 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/hub/trade_settings_page.dart` |
-| trade | `AppRoutePaths.tradeMarginHub` | `MarginTradingHubPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 39 | 11 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_hub_page.dart` |
-| trade | `AppRoutePaths.tradeMargin` | `MarginTradingPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 48 | 17 | 0 | 0 | 10 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
-| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 48 | 17 | 0 | 0 | 10 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/margin/margin_trading_page.dart` |
 | trade | `AppRoutePaths.tradeOrderReceipt` | `OrderReceiptPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 34 | 3 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/order_receipt_page.dart` |
 | trade | `AppRoutePaths.trade` | `TradePage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 35 | 12 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/phone/pages/trade_page.dart` |
-| trade | `'/trade/:pairId'` | `TradeTabletPage` | B | P2 | warn | pass | pass | pass | pass | pass | pass | 20 | 10 | 0 | 0 | 5 | partial_shared_body_layout | Complete shared body composition with VitPageContent and section primitives. | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeConvert` | `ConvertTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 9 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/convert_tablet_page.dart` |
+| trade | `'/trade/:pairId/futures'` | `FuturesTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 27 | 10 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/futures_tablet_page.dart` |
+| trade | `'/trade/:pairId/futures/leverage'` | `LeverageTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 16 | 7 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/leverage_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginHub` | `MarginHubTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 13 | 1 | 0 | 0 | 2 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMargin` | `MarginTradingTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 25 | 9 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeMarginBtcusdt` | `MarginTradingTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 25 | 9 | 0 | 0 | 3 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/margin_trading_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeOrdersHistory` | `OrdersHistoryTabletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 16 | 0 | 0 | 0 | 2 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` |
+| trade | `AppRoutePaths.tradePositions` | `PositionDashboardTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 13 | 2 | 0 | 0 | 2 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeExport` | `TradeHistoryExportTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 15 | 4 | 0 | 0 | 2 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart` |
+| trade | `AppRoutePaths.tradeSettings` | `TradeSettingsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 12 | 1 | 0 | 0 | 2 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` |
+| trade | `'/trade/:pairId'` | `TradeTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 37 | 35 | 0 | 0 | 10 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotApiDocumentation` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotBacktesting` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | trade_bots | `AppRoutePaths.tradeBotDrawdownAnalyzer` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
@@ -542,23 +533,23 @@ flutter test --reporter=compact
 | utility | `AppRoutePaths.topics` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | utility | `AppRoutePaths.unifiedPortfolio` | `VitTabletUtilityPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 19 | 0 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` |
 | wallet | `AppRoutePaths.wallet` | `WalletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 53 | 18 | 0 | 0 | 7 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` |
-| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 6 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletAddressBook` | `AddressBookTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 28 | 3 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart` |
-| wallet | `'/wallet/asset/:assetId'` | `AssetDetailTabletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 22 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 50 | 11 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart` |
-| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 26 | 2 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 54 | 13 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 34 | 7 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 25 | 6 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart` |
-| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailTabletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 24 | 3 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 27 | 3 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletAddressBookAdd` | `AddressAddTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 19 | 7 | 0 | 0 | 4 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletAddressBook` | `AddressBookTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 28 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart` |
+| wallet | `'/wallet/asset/:assetId'` | `AssetDetailTabletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 22 | 6 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletBuyCrypto` | `BuyCryptoTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 50 | 12 | 0 | 0 | 5 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart` |
+| wallet | `'${AppRoutePaths.walletDeposit}/:asset'` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 8 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletDeposit` | `DepositTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 22 | 8 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/deposit_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletDustConverter` | `DustConverterTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 26 | 3 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletNetworkStatus` | `NetworkStatusTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 56 | 14 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletPendingDeposits` | `PendingDepositsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 34 | 8 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletPortfolioAnalytics` | `PortfolioAnalyticsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 25 | 7 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart` |
+| wallet | `'/wallet/transaction/:txId'` | `TransactionDetailTabletPage` | A | P3 | pass | pass | pass | pass | not_applicable | pass | pass | 24 | 4 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletHistory` | `TransactionHistoryTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 28 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart` |
 | wallet | `AppRoutePaths.walletTransfer` | `TransferTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 36 | 9 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 36 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScoreTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 32 | 7 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 29 | 5 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 40 | 6 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 34 | 7 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart` |
-| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 12 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
-| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 12 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletGasOptimizer` | `WalletGasOptimizerTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 36 | 6 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletHealthScore` | `WalletHealthScoreTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 32 | 8 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletMultiManager` | `WalletMultiManagerTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 29 | 6 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletTokenApproval` | `WalletTokenApprovalTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 40 | 7 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletLimits` | `WithdrawLimitsTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 34 | 8 | 0 | 0 | 1 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart` |
+| wallet | `'${AppRoutePaths.walletWithdraw}/:asset'` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 13 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |
+| wallet | `AppRoutePaths.walletWithdraw` | `WithdrawTabletPage` | A | P3 | pass | pass | pass | pass | pass | pass | pass | 38 | 13 | 0 | 0 | 6 | none | No body refactor required; keep visual smoke coverage when touched. | `flutter_app/lib/features/wallet/presentation/tablet/pages/withdraw_tablet_page.dart` |

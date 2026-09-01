@@ -44,7 +44,7 @@ class TradeTerminalTapePanel extends StatelessWidget {
                       ),
                     )
                   : ListView.builder(
-                      // Luật 8pt 12dp: hàng cuối → viền dưới khi cuộn tới đáy.
+                      // Luật Base-8-derived 12dp: hàng cuối → viền dưới khi cuộn tới đáy.
                       padding: TradeSpacingTokens
                           .tradeTerminalPanelBodyBottomPadding,
                       itemCount: trades.length,
@@ -68,8 +68,8 @@ class _TradeTapeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Luật 8pt 12dp: không padding dọc — khoảng nhãn → header cột đã do label
-    // padding bottom 13 đảm nhiệm; chỉ inset ngang như hàng dữ liệu.
+    // Luật Base-8-derived 12dp: không padding dọc — khoảng nhãn → header cột đã do label
+    // padding bottom 12 đảm nhiệm; chỉ inset ngang như hàng dữ liệu.
     return Padding(
       padding: TradeSpacingTokens.tradeTerminalColumnHeaderPadding,
       child: Row(

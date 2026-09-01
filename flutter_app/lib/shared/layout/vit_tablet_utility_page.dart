@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
@@ -62,7 +62,7 @@ class VitTabletUtilityPage extends StatelessWidget {
             onBack: onBack,
             // Gutter-flush (S6): shell master-detail đã cấp outer margin —
             // header canh 0 cho thẳng hàng nội dung fullBleed bên dưới.
-            horizontalPadding: AppSpacing.zero,
+            horizontalPadding: TabletSpacingTokens.zero,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -74,6 +74,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                 fullBleed: true,
                 children: [
                   VitCard(
+                    padding: TabletSpacingTokens.zeroInsets,
                     variant: VitCardVariant.hero,
                     child: Row(
                       // AIB-R6: khối mô tả nhiều dòng căn giữa dọc theo ô
@@ -84,7 +85,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                         // nằm trong VitAccentIconBox — icon trần cho mực
                         // ~80% kích thước, trông nhỏ so với khối chữ.
                         VitAccentIconBox(icon: icon, color: AppColors.primary),
-                        const SizedBox(width: AppSpacing.x3),
+                        const SizedBox(width: TabletSpacingTokens.x3),
                         Expanded(
                           child: Text(
                             description,
@@ -115,6 +116,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                     rhythm: VitPageRhythm.standard,
                     children: [
                       VitCard(
+                        padding: TabletSpacingTokens.zeroInsets,
                         variant: VitCardVariant.inner,
                         child: Column(
                           children: [
@@ -148,6 +150,7 @@ class VitTabletUtilityPage extends StatelessWidget {
                       child: Text(actionLabel!),
                     ),
                   const VitCard(
+                    padding: TabletSpacingTokens.zeroInsets,
                     variant: VitCardVariant.ghost,
                     child: Text(
                       'Nội dung được bố trí riêng cho Tablet. Điều kiện thực thi cuối cùng sẽ được xác nhận ở bước tiếp theo.',

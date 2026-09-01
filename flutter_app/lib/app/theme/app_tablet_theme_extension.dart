@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 
 /// Read-facade exposing the tablet design tokens through `Theme.of(context)`.
 ///
 /// Every value delegates to the static const token layer
-/// (`AppSpacing`/`AppColors`/`TabletDashboardWidths`) — this extension never
+/// (`TabletSpacingTokens`/`AppColors`/`TabletDashboardWidths`) — this extension never
 /// owns a number, so the static tokens stay the single source of truth and
 /// the facade cannot drift (guarded by
 /// `test/app/theme/app_tablet_theme_extension_test.dart`).
@@ -25,16 +25,20 @@ class AppTabletThemeExtension extends ThemeExtension<AppTabletThemeExtension> {
   const AppTabletThemeExtension();
 
   // ── Spacing scale (role-based, see Tablet-Spacing-Gutter-Standard) ──
-  double get gapMicro => AppSpacing.x1; // 3 — pill↔pill inside a Wrap
-  double get gapItem => AppSpacing.rowGap; // 8 — rows/chips inside a section
-  double get gapCard => AppSpacing.cardGap; // 13 — sibling cards in a column
-  double get gapBlock => AppSpacing.x5; // 21 — roomy block breathing
-  double get contentPad => AppSpacing.contentPad; // 20 — screen edge inset
+  double get gapMicro => TabletSpacingTokens.x1; // 4 — pill↔pill inside a Wrap
+  double get gapItem =>
+      TabletSpacingTokens.rowGap; // 8 — rows/chips inside a section
+  double get gapCard =>
+      TabletSpacingTokens.cardGap; // 12 — sibling cards in a column
+  double get gapBlock =>
+      TabletSpacingTokens.pageRhythmStandardSectionGap; // 12 — block role
+  double get contentPad =>
+      TabletSpacingTokens.contentPad; // 20 — screen edge inset
 
   // ── Tablet frame gutters (never re-declared elsewhere) ──
-  double get outerMargin => TabletDashboardWidths.outerHorizontalMargin; // 20
-  double get columnGutter => TabletDashboardWidths.columnGutter; // 24
-  double get blockVerticalGap => TabletDashboardWidths.blockVerticalGap; // 16
+  double get outerMargin => TabletDashboardWidths.outerHorizontalMargin; // 12
+  double get columnGutter => TabletDashboardWidths.columnGutter; // 12
+  double get blockVerticalGap => TabletDashboardWidths.blockVerticalGap; // 12
 
   // ── Border tokens (1dp hairlines by standard) ──
   BorderSide get cardHairline =>

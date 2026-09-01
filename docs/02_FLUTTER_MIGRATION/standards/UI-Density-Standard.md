@@ -1,6 +1,8 @@
 # UI Density Standard
 
 **Authority:** Derived from the `VitDensity` tier contract in
+`lib/app/theme/app_density.dart`; Tablet role values are governed by
+[Tablet-Spacing-Gutter-Standard.md](./Tablet-Spacing-Gutter-Standard.md).
 **Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
 `lib/app/theme/app_density.dart` and the chained audit logic in
 `tool/ui_fullscreen_density_audit.dart` (fixed-size/local-literal debt per full
@@ -31,6 +33,26 @@ The five tiers in `VitDensityMetrics` (`lib/app/theme/app_density.dart`) are
 the only sanctioned density vocabulary — there is no ad-hoc "medium spacing"
 outside this enum. Each tier resolves to concrete pixel/token values, not
 prose:
+
+The `AppSpacing` references in the Phone/default table below describe the
+Phone surface. Tablet resolves the same density vocabulary through
+`TabletSpacingTokens` with the following closed role mapping:
+
+### Tablet mapping
+
+| Tier | Tablet control height | Tablet component vertical space | Tablet card padding | Tablet page top | Tablet page content gap |
+| --- | ---: | ---: | --- | ---: | ---: |
+| `.compact` | 44 | 8 | 12 × 12 | 8 | 8 |
+| `.standard` | 52 | 12 | 16 × 16 | 12 | 12 |
+| `.relaxed` | 58 | 24 | 24 × 24 | 16 | 12 |
+| `.hero` | 58 | 24 | 20 × 24 × 20 × 20 | 12 | 12 |
+| `.tool` | 44 | 8 | 12 × 4 | 8 | 8 |
+
+Tablet `relaxed`/`hero` 24px is component or hero breathing only; it is not
+an inter-block gap. `VitPageLayout` owns a separate `pageEndBreathing` token
+at 32px.
+
+### Phone/default mapping
 
 | Tier | Intent | Control height | Vertical rhythm | Card padding (h × v) | Page top padding | Page content gap |
 | --- | --- | ---: | --- | --- | --- | --- |
@@ -91,7 +113,7 @@ density debt per routed screen.
 | `P2_visual_density_review` | score ≥ 10 | 57 |
 | `P3_followup_review` | score ≥ 8 | 56 |
 | `Pass_or_low_signal` | else | 296 |
-| **Total routed screens** | | **414** |
+| **Total routed screens** | | **409** |
 
 ## Tool 2 — Visual Density Risk Audit
 
@@ -134,7 +156,7 @@ code 1 and a specific "run `<x>` first" message for whichever is missing.
 | `P2_MEDIUM_DENSITY_REVIEW` | risk score 25–39 | 104 |
 | `P3_LOW_DENSITY_REVIEW` | risk score 10–24 | 182 |
 | `PASS_MONITOR` | risk score < 10 | 83 |
-| **Total routed screens** | | **414** |
+| **Total routed screens** | | **409** |
 
 ### Root-cause factors (drive the priority rollup)
 
@@ -187,7 +209,7 @@ dart run tool/ui_fullscreen_density_audit.dart --check-allowlist \
   --baseline=test/quality/ui_density_p0_allowlist_baseline.txt
 flutter test test/quality/ui_density_p0_allowlist_guardrail_test.dart
 dart run tool/visual_density_risk_audit.dart                  # regenerate Visual-Density-Risk-Audit.md/.csv
-dart run tool/visual_density_risk_audit.dart --check          # verify risk artifacts current + total_routed_screens == 414
+dart run tool/visual_density_risk_audit.dart --check          # verify risk artifacts current + total_routed_screens == 409
 ```
 
 ## Related

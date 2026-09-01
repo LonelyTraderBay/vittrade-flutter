@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
@@ -27,8 +27,8 @@ class VitIconLabelCard extends StatelessWidget {
     this.eyebrow,
     this.onTap,
     this.borderColor,
-    this.padding = AppSpacing.cardPadding,
-    this.iconSize = AppSpacing.iconMd,
+    this.padding,
+    this.iconSize,
     this.labelHeight,
   });
 
@@ -38,25 +38,27 @@ class VitIconLabelCard extends StatelessWidget {
   final Color accentColor;
   final VoidCallback? onTap;
   final Color? borderColor;
-  final EdgeInsetsGeometry padding;
-  final double iconSize;
+  final EdgeInsetsGeometry? padding;
+  final double? iconSize;
   final double? labelHeight;
 
   @override
   Widget build(BuildContext context) {
     final hasEyebrow = eyebrow != null;
+    final resolvedPadding = padding ?? AppSurfaceSpacing.cardPadding;
+    final resolvedIconSize = iconSize ?? AppSurfaceSpacing.iconMd;
     return VitCard(
       radius: VitCardRadius.standard,
       borderColor: borderColor,
-      padding: padding,
+      padding: resolvedPadding,
       onTap: onTap,
       child: Row(
         mainAxisAlignment: hasEyebrow
             ? MainAxisAlignment.start
             : MainAxisAlignment.center,
         children: [
-          Icon(icon, color: accentColor, size: iconSize),
-          const SizedBox(width: AppSpacing.x3),
+          Icon(icon, color: accentColor, size: resolvedIconSize),
+          SizedBox(width: AppSurfaceSpacing.x3),
           if (hasEyebrow)
             Expanded(
               child: Column(

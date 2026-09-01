@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -90,6 +90,7 @@ class _WalletMultiManagerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             children: [
@@ -166,6 +167,7 @@ class _WalletMultiManagerTabletPageState
   Widget _walletCard(WalletManagerItem wallet) {
     final revealed = _revealedWalletIds.contains(wallet.id);
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: WalletMultiManagerTabletPage.walletKey(wallet.id),
       variant: VitCardVariant.inner,
       onTap: () => setState(() => _selectedWalletId = wallet.id),
@@ -258,6 +260,7 @@ class _WalletMultiManagerTabletPageState
       children: [
         for (final group in snapshot.groups)
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             variant: VitCardVariant.inner,
             child: VitInfoRow(
               label: group.name,
@@ -286,6 +289,7 @@ class _WalletMultiManagerTabletPageState
       rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: VitEmptyState(
             title: 'Hoạt động ví được bảo vệ',
@@ -324,6 +328,7 @@ class _WalletMultiManagerTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

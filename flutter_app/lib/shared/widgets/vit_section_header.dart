@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 
@@ -45,7 +45,7 @@ class VitSectionHeader extends StatelessWidget {
   final IconData? icon;
   final Color? iconColor;
 
-  /// Overrides the leading [icon]'s size. Defaults to [AppSpacing.iconMd].
+  /// Overrides the leading [icon]'s size. Defaults to [AppSurfaceSpacing.iconMd].
   final double? iconSize;
   final String? actionLabel;
   final VoidCallback? onAction;
@@ -107,10 +107,10 @@ class VitSectionHeader extends StatelessWidget {
       children: [
         if (showAccent) ...[
           SizedBox(
-            width: AppSpacing.serviceTileAccentBarThickness,
+            width: AppSurfaceSpacing.serviceTileAccentBarThickness,
             height: _isCompact
-                ? AppSpacing.pageSectionAccentHeight
-                : AppSpacing.serviceTileSectionBarHeight,
+                ? AppSurfaceSpacing.pageSectionAccentHeight
+                : AppSurfaceSpacing.serviceTileSectionBarHeight,
             child: DecoratedBox(
               decoration: ShapeDecoration(
                 color: accentColor,
@@ -120,12 +120,12 @@ class VitSectionHeader extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
         ],
         if (showMarkerTitle) ...[
           SizedBox(
-            width: AppSpacing.pageSectionAccentWidth,
-            height: AppSpacing.rowPy + AppSpacing.x1,
+            width: AppSurfaceSpacing.pageSectionAccentWidth,
+            height: AppSurfaceSpacing.rowPy + AppSurfaceSpacing.x1,
             child: DecoratedBox(
               decoration: ShapeDecoration(
                 color: accentColor,
@@ -135,13 +135,13 @@ class VitSectionHeader extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
         ],
         if (icon != null) ...[
           Icon(
             icon,
             color: iconColor ?? accentColor,
-            size: iconSize ?? AppSpacing.iconMd,
+            size: iconSize ?? AppSurfaceSpacing.iconMd,
           ),
           const SizedBox(width: SharedSpacingTokens.homeSectionHeaderIconGap),
         ],
@@ -176,9 +176,9 @@ class VitSectionHeader extends StatelessWidget {
                 onTap: onAction,
                 borderRadius: AppRadii.inputRadius,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.x3,
-                    vertical: AppSpacing.x2,
+                  padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSurfaceSpacing.x3,
+                    vertical: AppSurfaceSpacing.x2,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -191,7 +191,7 @@ class VitSectionHeader extends StatelessWidget {
                         ),
                       ),
                       if (actionShowChevron) ...[
-                        const SizedBox(width: AppSpacing.x1),
+                        SizedBox(width: AppSurfaceSpacing.x1),
                         Icon(
                           Icons.chevron_right_rounded,
                           color: accentColor,

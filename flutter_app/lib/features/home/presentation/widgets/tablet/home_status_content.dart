@@ -33,8 +33,6 @@ class HomeLoadingContent extends StatelessWidget {
         HomeRecentProductsSkeleton(),
         HomeDiscoverySkeleton(),
       ],
-      primaryContentGap: TabletSpacingTokens.x4,
-      secondaryContentGap: TabletSpacingTokens.x4,
     );
   }
 }
@@ -71,7 +69,7 @@ class HomeKpiStripSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       radius: VitCardRadius.standard,
-      padding: SharedSpacingTokens.homeCardPaddingDefault,
+      padding: TabletSpacingTokens.cardPaddingStandardDensity,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -183,10 +181,9 @@ class HomeNextActionSkeleton extends StatelessWidget {
           height: TabletSpacingTokens.x4,
         ),
         SizedBox(height: TabletSpacingTokens.x4),
+
         VitCard(
-          padding: EdgeInsetsDirectional.all(
-            SharedSpacingTokens.homeNextActionCardPadding,
-          ),
+          padding: TabletSpacingTokens.cardPaddingStandardDensity,
           child: Row(
             children: [
               VitSkeleton(
@@ -263,7 +260,9 @@ class HomeRecentProductsSkeleton extends StatelessWidget {
           height: TabletSpacingTokens.x4,
         ),
         SizedBox(height: TabletSpacingTokens.x4),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           child: Column(
             children: [
               _HomeRecentProductRowSkeleton(),
@@ -284,7 +283,7 @@ class _HomeRecentProductRowSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsetsDirectional.symmetric(
-        horizontal: HomeSpacingTokens.homeListRowPadding,
+        horizontal: TabletSpacingTokens.x4,
         vertical: TabletSpacingTokens.x3,
       ),
       child: Row(
@@ -328,7 +327,7 @@ class HomeAnnouncementSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const VitCard(
       radius: VitCardRadius.standard,
-      padding: SharedSpacingTokens.homeAnnouncementCardPaddingCompact,
+      padding: TabletSpacingTokens.cardPaddingCompactDensity,
       child: Row(
         children: [
           VitSkeleton(
@@ -371,6 +370,7 @@ class HomeDiscoverySkeleton extends StatelessWidget {
         ),
         SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           child: Column(
             children: [
               _HomeDiscoveryRowSkeleton(),
@@ -390,7 +390,7 @@ class _HomeDiscoveryRowSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsetsDirectional.symmetric(
-        horizontal: HomeSpacingTokens.homeListRowPadding,
+        horizontal: TabletSpacingTokens.x4,
         vertical: TabletSpacingTokens.x4,
       ),
       child: Row(

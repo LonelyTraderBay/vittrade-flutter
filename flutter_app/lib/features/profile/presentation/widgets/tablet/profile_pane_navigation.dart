@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 
 /// Opens [route] as the Profile master-detail detail pane with correct
 /// back-stack semantics (iPad-Settings behavior): the first pane opened

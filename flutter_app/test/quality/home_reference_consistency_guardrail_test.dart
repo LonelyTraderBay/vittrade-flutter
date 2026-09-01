@@ -193,7 +193,7 @@ void main() {
           ['item != news.last', 'SizedBox(height: AppSpacing.rowGap)'],
       'lib/features/profile/presentation/widgets/vip_history_widgets.dart': [
         'row != snapshot.history.last',
-        'SizedBox(height: AppSpacing.rowGap)',
+        'SizedBox(height: AppSurfaceSpacing.rowGap)',
       ],
       'lib/features/rewards/presentation/widgets/rewards_hub_hero_section.dart':
           ['width: AppSpacing.rowGap'],

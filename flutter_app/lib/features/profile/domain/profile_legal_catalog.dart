@@ -1,4 +1,4 @@
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
 
 /// STEP-P1.4 — 39 GOM routes under Profile › Pháp lý & báo cáo.

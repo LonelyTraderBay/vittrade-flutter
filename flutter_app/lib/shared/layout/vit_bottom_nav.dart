@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_gradients.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/device_metrics.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
@@ -99,11 +99,11 @@ class VitBottomNav extends StatelessWidget {
         ? DeviceMetrics.bottomChrome
         : DeviceMetrics.nativeBottomChrome;
     final capsuleHeight = renderMode.usesVisualQaFrame
-        ? AppSpacing.bottomNavCapsuleHeightVisual
-        : AppSpacing.bottomNavCapsuleHeightNative;
+        ? AppSurfaceSpacing.bottomNavCapsuleHeightVisual
+        : AppSurfaceSpacing.bottomNavCapsuleHeightNative;
     final bottomGap = renderMode.usesVisualQaFrame
-        ? AppSpacing.bottomNavBottomGapVisual
-        : AppSpacing.bottomNavBottomGapNative;
+        ? AppSurfaceSpacing.bottomNavBottomGapVisual
+        : AppSurfaceSpacing.bottomNavBottomGapNative;
 
     return SizedBox(
       height: height,
@@ -113,8 +113,8 @@ class VitBottomNav extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Positioned(
-              left: AppSpacing.bottomNavHorizontalInset,
-              right: AppSpacing.bottomNavHorizontalInset,
+              left: AppSurfaceSpacing.bottomNavHorizontalInset,
+              right: AppSurfaceSpacing.bottomNavHorizontalInset,
               bottom: bottomGap,
               height: capsuleHeight,
               child: DecoratedBox(
@@ -136,18 +136,18 @@ class VitBottomNav extends StatelessWidget {
                   shadows: [
                     BoxShadow(
                       color: AppColors.bg.withValues(alpha: .45),
-                      blurRadius: AppSpacing.bottomNavSurfaceShadowBlur,
-                      offset: const Offset(
+                      blurRadius: AppSurfaceSpacing.bottomNavSurfaceShadowBlur,
+                      offset: Offset(
                         0,
-                        AppSpacing.bottomNavSurfaceShadowOffsetY,
+                        AppSurfaceSpacing.bottomNavSurfaceShadowOffsetY,
                       ),
                     ),
                     BoxShadow(
                       color: AppColors.primary.withValues(alpha: .12),
-                      blurRadius: AppSpacing.bottomNavPrimaryShadowBlur,
-                      offset: const Offset(
+                      blurRadius: AppSurfaceSpacing.bottomNavPrimaryShadowBlur,
+                      offset: Offset(
                         0,
-                        AppSpacing.bottomNavPrimaryShadowOffsetY,
+                        AppSurfaceSpacing.bottomNavPrimaryShadowOffsetY,
                       ),
                     ),
                   ],
@@ -155,8 +155,8 @@ class VitBottomNav extends StatelessWidget {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     final horizontalPad = constraints.maxWidth < 340
-                        ? AppSpacing.bottomNavHorizontalPadCompact
-                        : AppSpacing.bottomNavHorizontalPad;
+                        ? AppSurfaceSpacing.bottomNavHorizontalPadCompact
+                        : AppSurfaceSpacing.bottomNavHorizontalPad;
                     return Padding(
                       padding: EdgeInsetsDirectional.symmetric(
                         horizontal: horizontalPad,
@@ -223,10 +223,10 @@ class _VitBottomNavButton extends StatelessWidget {
   final ShellRenderMode renderMode;
   final int badgeCount;
 
-  static const double _nativeCenterButtonTop =
-      AppSpacing.bottomNavCenterButtonTopNative;
-  static const double _visualQaCenterButtonTop =
-      AppSpacing.bottomNavCenterButtonTopVisual;
+  static final double _nativeCenterButtonTop =
+      AppSurfaceSpacing.bottomNavCenterButtonTopNative;
+  static final double _visualQaCenterButtonTop =
+      AppSurfaceSpacing.bottomNavCenterButtonTopVisual;
 
   @override
   Widget build(BuildContext context) {
@@ -262,11 +262,11 @@ class _VitBottomNavButton extends StatelessWidget {
                         ? Key('vit_bottom_nav_active_${item.destination.name}')
                         : null,
                     width: renderMode.usesVisualQaFrame
-                        ? AppSpacing.bottomNavCenterButtonSizeVisual
-                        : AppSpacing.bottomNavCenterButtonSizeNative,
+                        ? AppSurfaceSpacing.bottomNavCenterButtonSizeVisual
+                        : AppSurfaceSpacing.bottomNavCenterButtonSizeNative,
                     height: renderMode.usesVisualQaFrame
-                        ? AppSpacing.bottomNavCenterButtonSizeVisual
-                        : AppSpacing.bottomNavCenterButtonSizeNative,
+                        ? AppSurfaceSpacing.bottomNavCenterButtonSizeVisual
+                        : AppSurfaceSpacing.bottomNavCenterButtonSizeNative,
                     child: DecoratedBox(
                       decoration: ShapeDecoration(
                         gradient: AppGradients.navCenter,
@@ -279,22 +279,24 @@ class _VitBottomNavButton extends StatelessWidget {
                         shadows: [
                           BoxShadow(
                             color: activeShadow.withValues(alpha: .40),
-                            blurRadius: AppSpacing.bottomNavCenterGlowBlur,
-                            offset: const Offset(
+                            blurRadius:
+                                AppSurfaceSpacing.bottomNavCenterGlowBlur,
+                            offset: Offset(
                               0,
-                              AppSpacing.bottomNavCenterGlowOffsetY,
+                              AppSurfaceSpacing.bottomNavCenterGlowOffsetY,
                             ),
                           ),
                           BoxShadow(
                             color: activeShadow.withValues(alpha: .20),
-                            blurRadius: AppSpacing.bottomNavCenterGlowWeakBlur,
+                            blurRadius:
+                                AppSurfaceSpacing.bottomNavCenterGlowWeakBlur,
                           ),
                         ],
                       ),
                       child: Icon(
                         item.icon,
                         color: AppColors.navCenterIcon,
-                        size: AppSpacing.bottomNavCenterIconSize,
+                        size: AppSurfaceSpacing.bottomNavCenterIconSize,
                       ),
                     ),
                   ),
@@ -303,8 +305,8 @@ class _VitBottomNavButton extends StatelessWidget {
                   left: 0,
                   right: 0,
                   bottom: renderMode.usesVisualQaFrame
-                      ? AppSpacing.bottomNavBottomOffsetCompact
-                      : AppSpacing.bottomNavBottomOffsetRegular,
+                      ? AppSurfaceSpacing.bottomNavBottomOffsetCompact
+                      : AppSurfaceSpacing.bottomNavBottomOffsetRegular,
                   child: Text(
                     key: item.destination == VitBottomNavDestination.trade
                         ? const Key('vit_bottom_nav_trade_label')
@@ -336,7 +338,7 @@ class _VitBottomNavButton extends StatelessWidget {
         borderRadius: AppRadii.mdRadius,
         child: SizedBox(
           width: double.infinity,
-          height: AppSpacing.bottomNavItemHeight,
+          height: AppSurfaceSpacing.bottomNavItemHeight,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -347,16 +349,16 @@ class _VitBottomNavButton extends StatelessWidget {
                   Icon(
                     item.icon,
                     color: active ? activeColor : AppColors.navInactive,
-                    size: AppSpacing.iconMd,
+                    size: AppSurfaceSpacing.iconMd,
                   ),
                   if (active)
                     Positioned(
-                      bottom: AppSpacing.bottomNavActiveDotOffset,
+                      bottom: AppSurfaceSpacing.bottomNavActiveDotOffset,
                       child: SizedBox.square(
                         key: Key(
                           'vit_bottom_nav_active_${item.destination.name}',
                         ),
-                        dimension: AppSpacing.bottomNavActiveDotSize,
+                        dimension: AppSurfaceSpacing.bottomNavActiveDotSize,
                         child: DecoratedBox(
                           decoration: ShapeDecoration(
                             color: activeColor,
@@ -364,7 +366,8 @@ class _VitBottomNavButton extends StatelessWidget {
                             shadows: [
                               BoxShadow(
                                 color: activeShadow.withValues(alpha: .60),
-                                blurRadius: AppSpacing.bottomNavActiveDotBlur,
+                                blurRadius:
+                                    AppSurfaceSpacing.bottomNavActiveDotBlur,
                               ),
                             ],
                           ),
@@ -373,13 +376,13 @@ class _VitBottomNavButton extends StatelessWidget {
                     ),
                   if (badgeCount > 0)
                     Positioned(
-                      top: AppSpacing.bottomNavBadgeTopOffset,
-                      right: AppSpacing.bottomNavBadgeRightOffset,
+                      top: AppSurfaceSpacing.bottomNavBadgeTopOffset,
+                      right: AppSurfaceSpacing.bottomNavBadgeRightOffset,
                       child: _NavBadge(count: badgeCount),
                     ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.bottomNavLabelGap),
+              SizedBox(height: AppSurfaceSpacing.bottomNavLabelGap),
               Text(
                 item.label,
                 overflow: TextOverflow.ellipsis,
@@ -406,20 +409,20 @@ class _NavBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minWidth: AppSpacing.bottomNavBadgeMinWidth,
-        minHeight: AppSpacing.bottomNavBadgeHeight,
+      constraints: BoxConstraints(
+        minWidth: AppSurfaceSpacing.bottomNavBadgeMinWidth,
+        minHeight: AppSurfaceSpacing.bottomNavBadgeHeight,
       ),
       child: SizedBox(
-        height: AppSpacing.bottomNavBadgeHeight,
+        height: AppSurfaceSpacing.bottomNavBadgeHeight,
         child: DecoratedBox(
           decoration: const ShapeDecoration(
             color: AppColors.sell,
             shape: RoundedRectangleBorder(borderRadius: AppRadii.pillRadius),
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.bottomNavBadgeHorizontalPadding,
+            padding: EdgeInsetsDirectional.symmetric(
+              horizontal: AppSurfaceSpacing.bottomNavBadgeHorizontalPadding,
             ),
             child: Center(
               child: Text(

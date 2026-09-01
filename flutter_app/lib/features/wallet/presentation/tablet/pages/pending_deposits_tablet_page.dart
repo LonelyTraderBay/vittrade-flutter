@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -179,6 +179,7 @@ class _PendingDepositsTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -306,6 +307,7 @@ class _SummaryCard extends StatelessWidget {
     final hasPending = pendingCount > 0;
     final color = hasPending ? AppColors.caution : AppColors.buy;
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.hero,
       borderColor: color.withValues(alpha: .22),
       child: Row(

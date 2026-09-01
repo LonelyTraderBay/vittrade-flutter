@@ -19,8 +19,8 @@ import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 /// Top-level [children] must stay FLAT: the inner `VitPageContent(rhythm:)`
 /// already inserts the rhythm's section gap between every pair of
 /// children, so a manual `SizedBox(height:)` standing as an element of
-/// `children` stacks onto those gaps (e.g. 16+8+16=40dp instead of 16dp)
-/// and breaks the pane's vertical rhythm. Inner gaps belong inside child
+/// `children` stacks onto those gaps and breaks the pane's vertical rhythm.
+/// Inner gaps belong inside child
 /// widgets, never between them — locked by `tablet_spacing_audit` rule S4.
 class ProfilePaneScaffold extends StatelessWidget {
   const ProfilePaneScaffold({
@@ -32,7 +32,7 @@ class ProfilePaneScaffold extends StatelessWidget {
     this.onRefresh,
     this.headerActions,
     this.rhythm = VitPageRhythm.standard,
-    this.padding = VitContentPadding.relaxed,
+    this.padding = VitContentPadding.compact,
     this.scrollKey,
   });
 
@@ -54,6 +54,8 @@ class ProfilePaneScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomSafeInset =
+        TabletSpacingTokens.contentPad + MediaQuery.paddingOf(context).bottom;
     // The shell's gutter already separates the pane from the master menu,
     // so the pane bleeds horizontally to sit flush with the gutter —
     // otherwise the pane's own content pad stacks onto the 24dp gutter and
@@ -62,12 +64,17 @@ class ProfilePaneScaffold extends StatelessWidget {
     Widget body = SingleChildScrollView(
       key: scrollKey,
       physics: onRefresh == null ? null : const AlwaysScrollableScrollPhysics(),
-      child: VitPageContent(
-        rhythm: rhythm,
-        padding: padding,
-        density: VitDensity.compact,
-        fullBleed: true,
-        children: children,
+      child: Padding(
+        // The pane owns the end-of-scroll breathing room so the last action
+        // remains clear of system chrome on safe-area devices.
+        padding: EdgeInsetsDirectional.only(bottom: bottomSafeInset),
+        child: VitPageContent(
+          rhythm: rhythm,
+          padding: padding,
+          density: VitDensity.compact,
+          fullBleed: true,
+          children: children,
+        ),
       ),
     );
     if (onRefresh != null) {

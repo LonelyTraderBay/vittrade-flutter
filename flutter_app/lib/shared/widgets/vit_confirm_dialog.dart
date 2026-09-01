@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 
@@ -52,7 +52,7 @@ Future<bool> showVitConfirmDialog({
         children: [
           for (final row in rows)
             Padding(
-              padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.x2),
+              padding: EdgeInsetsDirectional.only(bottom: AppSurfaceSpacing.x2),
               child: Row(
                 children: [
                   Expanded(
@@ -79,7 +79,7 @@ Future<bool> showVitConfirmDialog({
             ),
           if (message != null) ...[
             if (rows.isNotEmpty)
-              const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+              SizedBox(height: AppSurfaceSpacing.pageRhythmStandardInnerGap),
             Text(
               message,
               style: AppTextStyles.caption.copyWith(color: AppColors.text2),
@@ -93,7 +93,7 @@ Future<bool> showVitConfirmDialog({
           onPressed: () => Navigator.of(dialogContext).pop(false),
           variant: VitCtaButtonVariant.secondary,
           fullWidth: false,
-          height: AppSpacing.buttonCompact,
+          height: AppSurfaceSpacing.buttonCompact,
           child: Text(cancelLabel),
         ),
         VitCtaButton(
@@ -101,7 +101,7 @@ Future<bool> showVitConfirmDialog({
           onPressed: () => Navigator.of(dialogContext).pop(true),
           variant: confirmVariant,
           fullWidth: false,
-          height: AppSpacing.buttonCompact,
+          height: AppSurfaceSpacing.buttonCompact,
           child: Text(confirmLabel),
         ),
       ],

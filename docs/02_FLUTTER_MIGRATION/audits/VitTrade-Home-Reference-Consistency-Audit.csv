@@ -1142,7 +1142,6 @@ wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/histo
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_detail_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_common.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/history/transaction_history_page_sections.dart,0,0,0,0,0,0,0,0,no,-
-wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_formatters.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_allocation_sections.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_asset_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/phone/wallet_page_balance_sections.dart,0,0,0,0,0,0,0,0,no,-
@@ -1200,3 +1199,4 @@ wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/trans
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_limits_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_network_picker.dart,0,0,0,0,0,0,0,0,no,-
 wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/transfer/withdraw_preview_sheet.dart,0,0,0,0,0,0,0,0,no,-
+wallet,feature_widget,flutter_app/lib/features/wallet/presentation/widgets/wallet_formatters.dart,0,0,0,0,0,0,0,0,no,-

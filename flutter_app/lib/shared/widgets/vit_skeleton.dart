@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
 /// Pulsing loading placeholder block of fixed [width]/[height], used to
@@ -84,9 +84,9 @@ class VitSkeletonRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.x4,
-        vertical: AppSpacing.rowPy,
+      padding: EdgeInsetsDirectional.symmetric(
+        horizontal: AppSurfaceSpacing.x4,
+        vertical: AppSurfaceSpacing.rowPy,
       ),
       child: Row(
         children: [
@@ -96,25 +96,25 @@ class VitSkeletonRow extends StatelessWidget {
               height: 40,
               borderRadius: AppRadii.smRadius,
             ),
-            const SizedBox(width: AppSpacing.x3),
+            SizedBox(width: AppSurfaceSpacing.x3),
           ],
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VitSkeleton(width: 150, height: 14),
-                SizedBox(height: AppSpacing.x3),
-                VitSkeleton(width: 92, height: 10),
+                const VitSkeleton(width: 150, height: 14),
+                SizedBox(height: AppSurfaceSpacing.x3),
+                const VitSkeleton(width: 92, height: 10),
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.x3),
-          const Column(
+          SizedBox(width: AppSurfaceSpacing.x3),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              VitSkeleton(width: 70, height: 14),
-              SizedBox(height: AppSpacing.x3),
-              VitSkeleton(width: 48, height: 18),
+              const VitSkeleton(width: 70, height: 14),
+              SizedBox(height: AppSurfaceSpacing.x3),
+              const VitSkeleton(width: 48, height: 18),
             ],
           ),
         ],
@@ -143,9 +143,9 @@ class VitSkeletonList extends StatelessWidget {
             for (var i = 0; i < rows; i++) ...[
               const VitSkeletonRow(),
               if (i < rows - 1)
-                const Divider(
-                  height: AppSpacing.dividerHairline,
-                  thickness: AppSpacing.dividerHairline,
+                Divider(
+                  height: AppSurfaceSpacing.dividerHairline,
+                  thickness: AppSurfaceSpacing.dividerHairline,
                   color: AppColors.divider,
                 ),
             ],

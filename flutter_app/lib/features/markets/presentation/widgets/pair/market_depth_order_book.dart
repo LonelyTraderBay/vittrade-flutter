@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/controllers/market_controller.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
@@ -21,24 +21,24 @@ class MarketDepthOrderBookView extends StatelessWidget {
     return Column(
       children: [
         _OrderBookHeader(pair: snapshot.pair),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         const MarketDepthSectionHeader(
           label: 'Lệnh bán (Ask)',
           accentColor: AppColors.sell,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _OrderBookRows(
           levels: snapshot.depth.asks.take(15).toList().reversed,
           side: MarketOrderSide.sell,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _MidPriceStrip(depth: snapshot.depth),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         const MarketDepthSectionHeader(
           label: 'Lệnh mua (Bid)',
           accentColor: AppColors.buy,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _OrderBookRows(
           levels: snapshot.depth.bids.take(15).toList(),
           side: MarketOrderSide.buy,
@@ -109,7 +109,7 @@ class _OrderBookRows extends StatelessWidget {
     );
     final color = side == MarketOrderSide.buy ? AppColors.buy : AppColors.sell;
     return VitCard(
-      padding: AppSpacing.zeroInsets,
+      padding: AppSurfaceSpacing.zeroInsets,
       clip: true,
       child: Column(
         children: [

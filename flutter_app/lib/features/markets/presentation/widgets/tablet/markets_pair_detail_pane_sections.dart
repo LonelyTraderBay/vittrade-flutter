@@ -377,7 +377,7 @@ class _PairRiskWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       // S7: chỉ inset ngang — margin dọc 10/13 của Phone từng stack thành
-      // 23–26dp trên section gap 13 của scaffold.
+      // 23–26dp trên section gap 12 của scaffold.
       padding: MarketsSpacingTokens.pairPaneChildFlushPadding,
       child: VitBanner(
         variant: VitBannerVariant.warning,

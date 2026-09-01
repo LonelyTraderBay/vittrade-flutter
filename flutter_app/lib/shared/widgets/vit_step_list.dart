@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// One numbered step (title + optional description) rendered by
@@ -23,20 +23,21 @@ class VitStepList extends StatelessWidget {
     super.key,
     required this.steps,
     this.accentColor = AppColors.accent,
-    this.gap = AppSpacing.pageRhythmStandardInnerGap,
+    this.gap,
   });
 
   final List<VitStepItem> steps;
   final Color accentColor;
-  final double gap;
+  final double? gap;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedGap = gap ?? AppSurfaceSpacing.pageRhythmStandardInnerGap;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (var i = 0; i < steps.length; i++) ...[
-          if (i > 0) SizedBox(height: gap),
+          if (i > 0) SizedBox(height: resolvedGap),
           _VitStepRow(
             step: steps[i],
             displayNumber: steps[i].stepNumber ?? (i + 1),
@@ -72,7 +73,7 @@ class _VitStepRow extends StatelessWidget {
             ),
           ),
           child: SizedBox.square(
-            dimension: AppSpacing.x6,
+            dimension: AppSurfaceSpacing.x6,
             child: Center(
               child: Text(
                 '$displayNumber',
@@ -84,14 +85,14 @@ class _VitStepRow extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x3),
+        SizedBox(width: AppSurfaceSpacing.x3),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(step.title, style: AppTextStyles.baseMedium),
               if (step.description != null) ...[
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   step.description!,
                   style: AppTextStyles.caption.copyWith(color: AppColors.text3),

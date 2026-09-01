@@ -1,6 +1,14 @@
 part of '../app_router.dart';
 
-GoRouter createAppRouter({
+const String _initialRouteFromEnvironment = String.fromEnvironment(
+  'INITIAL_ROUTE',
+);
+
+String get _defaultInitialLocation => _initialRouteFromEnvironment.isEmpty
+    ? AppRoutePaths.home
+    : _initialRouteFromEnvironment;
+
+GoRouter createLegacyAppRouter({
   String? initialLocation,
   ShellRenderMode shellRenderMode = ShellRenderMode.native,
   AppConfig? appConfig,
@@ -50,14 +58,14 @@ ShellRoute _appShellRoute(
 }) {
   return ShellRoute(
     builder: (context, state, child) {
-      final activeDestination = _activeDestinationForPath(state.uri.path);
+      final activeDestination = activeDestinationForPath(state.uri.path);
       return Consumer(
         builder: (context, ref, _) {
           final notificationBadgeCount = ref.watch(
             notificationUnreadCountProvider,
           );
           final statusBarTime = shellRenderMode.usesVisualQaFrame
-              ? _visualQaStatusBarTimeForUri(state.uri)
+              ? visualQaStatusBarTimeForUri(state.uri)
               : null;
           void onDestinationSelected(VitBottomNavDestination destination) {
             context.go(destination.routePath);

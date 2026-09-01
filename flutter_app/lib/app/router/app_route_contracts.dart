@@ -1,0 +1,22 @@
+import 'package:vit_trade_flutter/app/router/route_groups/admin_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/arena_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/auth_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/dca_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/earn_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/home_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/launchpad_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/markets_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/p2p_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/predictions_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/profile_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/support_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/trade_bots_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/trade_compliance_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/trade_copy_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/trade_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/trade_terminal_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/utility_route_ids.dart';
+import 'package:vit_trade_flutter/app/router/route_groups/wallet_route_ids.dart';
+
+part 'app_route_names.dart';
+part 'app_route_paths.dart';

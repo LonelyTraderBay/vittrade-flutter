@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -123,6 +123,7 @@ class _WalletGasOptimizerTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             children: [
@@ -178,7 +179,9 @@ class _WalletGasOptimizerTabletPageState
               variant: VitTabBarVariant.segment,
             ),
             const SizedBox(height: TabletSpacingTokens.x4),
+
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: VitInfoRow(
                 label: 'Ước tính phí',
@@ -200,6 +203,7 @@ class _WalletGasOptimizerTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -237,6 +241,7 @@ class _WalletGasOptimizerTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: SizedBox(
                 height: TabletSpacingTokens.x7 * 3,
@@ -261,6 +266,7 @@ class _WalletGasOptimizerTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -295,6 +301,7 @@ class _WalletGasOptimizerTabletPageState
       children: [
         for (final tip in snapshot.tips)
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             variant: VitCardVariant.inner,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,6 +346,7 @@ class _WalletGasOptimizerTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [

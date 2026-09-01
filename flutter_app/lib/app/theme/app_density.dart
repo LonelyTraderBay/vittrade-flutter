@@ -7,6 +7,14 @@ enum VitDensity { compact, standard, relaxed, hero, tool }
 
 extension VitDensityMetrics on VitDensity {
   double get controlHeight {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return switch (this) {
+        VitDensity.compact => 44,
+        VitDensity.standard => TabletSpacingTokens.ctaHeight,
+        VitDensity.relaxed || VitDensity.hero => 58,
+        VitDensity.tool => 44,
+      };
+    }
     switch (this) {
       case VitDensity.compact:
         return 44;
@@ -22,6 +30,14 @@ extension VitDensityMetrics on VitDensity {
   }
 
   double get verticalSpace {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return switch (this) {
+        VitDensity.compact ||
+        VitDensity.tool => TabletSpacingTokens.pageContentGapTight,
+        VitDensity.standard => TabletSpacingTokens.x4,
+        VitDensity.relaxed || VitDensity.hero => TabletSpacingTokens.x5,
+      };
+    }
     switch (this) {
       case VitDensity.compact:
         return AppSpacing.pageContentGapTight;
@@ -37,6 +53,9 @@ extension VitDensityMetrics on VitDensity {
   }
 
   double get cardHorizontalPadding {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return cardPadding.horizontal / 2;
+    }
     switch (this) {
       case VitDensity.compact:
         return 12;
@@ -52,6 +71,9 @@ extension VitDensityMetrics on VitDensity {
   }
 
   double get cardVerticalPadding {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return cardPadding.vertical / 2;
+    }
     switch (this) {
       case VitDensity.compact:
         return 12;
@@ -86,6 +108,15 @@ extension VitDensityMetrics on VitDensity {
   }
 
   double get pageContentTopPadding {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return switch (this) {
+        VitDensity.compact ||
+        VitDensity.tool => TabletSpacingTokens.pageContentTopCompact,
+        VitDensity.standard ||
+        VitDensity.hero => TabletSpacingTokens.pageContentTopDefault,
+        VitDensity.relaxed => TabletSpacingTokens.pageContentTopRelaxed,
+      };
+    }
     switch (this) {
       case VitDensity.compact:
       case VitDensity.tool:
@@ -99,6 +130,15 @@ extension VitDensityMetrics on VitDensity {
   }
 
   double get pageContentGap {
+    if (TabletSpacingTokens.tabletSurfaceActive) {
+      return switch (this) {
+        VitDensity.compact ||
+        VitDensity.tool => TabletSpacingTokens.pageContentGapTight,
+        VitDensity.standard ||
+        VitDensity.hero => TabletSpacingTokens.pageContentGapDefault,
+        VitDensity.relaxed => TabletSpacingTokens.pageContentGapRelaxed,
+      };
+    }
     switch (this) {
       case VitDensity.compact:
       case VitDensity.tool:

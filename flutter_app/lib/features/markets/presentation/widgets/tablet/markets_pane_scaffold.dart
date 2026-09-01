@@ -36,7 +36,7 @@ class MarketsPaneScaffold extends StatelessWidget {
     // pane tự vẽ grid cố định chiếm hết chiều cao (children/scrollKey bị
     // bỏ qua). Chỉ pane pair desk dùng; các pane khác giữ children.
     this.body,
-    // Detail scroll ⇒ tier standard (section gap 13dp) theo bảng
+    // Detail scroll ⇒ tier standard (section gap 12dp) theo bảng
     // Page-Rhythm; pane chart/terminal (depth) khai báo flush riêng.
     this.rhythm = VitPageRhythm.standard,
   });

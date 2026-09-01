@@ -28,7 +28,7 @@ class BuyInputContent {
         headerIconColor: _buyPrimary,
         headerVariant: VitSectionHeaderVariant.plain,
         accentColor: _buyPrimary,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         children: [
           _AmountCard(
             snapshot: snapshot,
@@ -48,7 +48,7 @@ class BuyInputContent {
         headerIconColor: _buyPrimary,
         headerVariant: VitSectionHeaderVariant.plain,
         accentColor: _buyPrimary,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         children: [
           _PaymentMethodGroup(
             icon: Icons.account_balance_rounded,
@@ -76,7 +76,7 @@ class BuyInputContent {
         headerIconColor: _buyGreen,
         headerVariant: VitSectionHeaderVariant.plain,
         accentColor: _buyGreen,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         children: [
           _RateInfoCard(crypto: selectedCrypto, payment: selectedPayment),
           _BuyButton(

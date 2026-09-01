@@ -94,7 +94,7 @@ class _ProfileLegalAccordionPanelState
           child: VitIconListRow(
             minHeight: VitDensity.standard.controlHeight,
             padding: ProfileSpacingTokens.profileMenuRowPadding,
-            gap: ProfileSpacingTokens.profileMenuGap,
+            gap: TabletSpacingTokens.x3,
             leading: SizedBox(
               width: ProfileSpacingTokens.profileMenuTabletIconBox,
               height: ProfileSpacingTokens.profileMenuTabletIconBox,
@@ -245,7 +245,7 @@ class _LegalGroupTile extends StatelessWidget {
             child: VitIconListRow(
               minHeight: VitDensity.compact.controlHeight,
               padding: ProfileSpacingTokens.profileMenuRowPadding,
-              gap: ProfileSpacingTokens.profileMenuGap,
+              gap: TabletSpacingTokens.x3,
               leading: SizedBox(
                 width: ProfileSpacingTokens.profileMenuTabletIconBox,
                 height: ProfileSpacingTokens.profileMenuTabletIconBox,
@@ -307,13 +307,13 @@ class _LegalItemRow extends StatelessWidget {
           padding: const EdgeInsetsDirectional.only(
             start:
                 ProfileSpacingTokens.profileMenuTabletIconBox +
-                ProfileSpacingTokens.profileMenuGap +
+                TabletSpacingTokens.x3 +
                 TabletSpacingTokens.x4,
             end: TabletSpacingTokens.x4,
             top: TabletSpacingTokens.x2,
             bottom: TabletSpacingTokens.x2,
           ),
-          gap: ProfileSpacingTokens.profileMenuGap,
+          gap: TabletSpacingTokens.x3,
           leading: const Icon(
             Icons.description_outlined,
             color: AppColors.text3,

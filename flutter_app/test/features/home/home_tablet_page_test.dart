@@ -125,7 +125,7 @@ void main() {
     },
   );
 
-  testWidgets('SC-007 tablet uses law-13 spacing between sidebar sections', (
+  testWidgets('SC-007 tablet uses law-12 spacing between sidebar sections', (
     tester,
   ) async {
     await pumpTabletHome(tester, size: const Size(1180, 820));
@@ -138,7 +138,7 @@ void main() {
       find.byKey(HomeTabletKeys.recentProductsSection),
     );
 
-    // Luật 13dp (2026-08-31): mọi section gap tablet = 13.
+    // Luật 12dp (2026-08-31): mọi section gap khối tablet = 12.
     expect(
       quickActions.top - nextAction.bottom,
       closeTo(TabletSpacingTokens.x4, 0.01),

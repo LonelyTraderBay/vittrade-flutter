@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -45,6 +45,7 @@ class ProfileTabletUtilityPage extends StatelessWidget {
       onBack: () => context.go(AppRoutePaths.profile),
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             // AIB-R6: khối mô tả căn giữa dọc theo ô icon.

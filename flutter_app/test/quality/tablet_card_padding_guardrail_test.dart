@@ -23,58 +23,9 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Baseline CB-R7 — 2026-08-28: 99 VitCard legacy trên 33 file (khung chứa
-/// nội dung tự quản padding). Migrate on touch: khi thêm `padding:` tường
-/// minh, giảm count; khi file về 0 thì xóa entry.
-const Map<String, int> kBaselineImplicitPaddingCards = {
-  'features/home/presentation/widgets/tablet/home_discovery_panel.dart': 1,
-  'features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart':
-      1,
-  'features/home/presentation/widgets/tablet/home_recent_products_section.dart':
-      1,
-  'features/home/presentation/widgets/tablet/home_status_content.dart': 2,
-  'features/markets/presentation/widgets/tablet/markets_status_content.dart': 1,
-  'features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart': 3,
-  'features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart':
-      1,
-  'features/profile/presentation/widgets/tablet/profile_kyc_pane.dart': 2,
-  'features/profile/presentation/widgets/tablet/profile_menu_panel.dart': 1,
-  'features/profile/presentation/widgets/tablet/profile_security_pane.dart': 2,
-  'features/profile/presentation/widgets/tablet/profile_settings_pane.dart': 2,
-  'features/profile/presentation/widgets/tablet/profile_status_content.dart': 2,
-  'features/profile/presentation/widgets/tablet/profile_vip_pane.dart': 1,
-  'features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart': 3,
-  'features/trade/presentation/widgets/tablet/trade_ticker_strip.dart': 1,
-  'features/wallet/presentation/tablet/pages/address_book_tablet_page.dart': 1,
-  'features/wallet/presentation/tablet/pages/asset_detail_tablet_page.dart': 3,
-  'features/wallet/presentation/tablet/pages/buy_crypto_tablet_page.dart': 2,
-  'features/wallet/presentation/tablet/pages/deposit_tablet_page.dart': 4,
-  'features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart':
-      4,
-  'features/wallet/presentation/tablet/pages/network_status_tablet_page.dart':
-      11,
-  'features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart':
-      2,
-  'features/wallet/presentation/tablet/pages/portfolio_analytics_tablet_page.dart':
-      4,
-  'features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart':
-      1,
-  'features/wallet/presentation/tablet/pages/transaction_history_tablet_page.dart':
-      2,
-  'features/wallet/presentation/tablet/pages/wallet_gas_optimizer_tablet_page.dart':
-      7,
-  'features/wallet/presentation/tablet/pages/wallet_health_score_tablet_page.dart':
-      7,
-  'features/wallet/presentation/tablet/pages/wallet_multi_manager_tablet_page.dart':
-      5,
-  'features/wallet/presentation/tablet/pages/wallet_token_approval_tablet_page.dart':
-      6,
-  'features/wallet/presentation/tablet/pages/withdraw_limits_tablet_page.dart':
-      6,
-  'features/wallet/presentation/widgets/tablet/wallet_page_asset_sections.dart':
-      3,
-  'shared/layout/vit_tablet_utility_page.dart': 3,
-};
+/// Baseline CB-R7 — 2026-09-01: đã xóa toàn bộ nợ 99 VitCard implicit.
+/// Card mới phải khai báo tường minh `padding:` hoặc `density:`.
+const Map<String, int> kBaselineImplicitPaddingCards = {};
 
 final _vitCardStartRe = RegExp(r'\bVitCard\s*\(');
 final _childRolePaddingTokenRe = RegExp(
@@ -146,41 +97,38 @@ void main() {
     );
   });
 
-  test(
-    'CB-R7 ratchet: VitCard thiếu padding+density chỉ giảm (path|count)',
-    () {
-      final grew = <String>[];
-      implicitByFile.forEach((file, count) {
-        final base = kBaselineImplicitPaddingCards[file] ?? 0;
-        if (count > base) grew.add('$file: $base -> $count');
-      });
-      expect(
-        grew,
-        isEmpty,
-        reason:
-            'File có VitCard MỚI thiếu cả padding lẫn density (CB-R7):\n'
-            '${grew.join('\n')}\n\n'
-            'Bẫy VitCard: padding & density cùng null ⇒ KHÔNG có Padding nào '
-            '(mặc định 0, không phải 8). Luôn truyền tường minh một trong hai '
-            '— card khung full-bleed thì `padding: AppSpacing.zeroInsets`.',
-      );
+  test('CB-R7 ratchet: VitCard thiếu padding+density chỉ giảm (path|count)', () {
+    final grew = <String>[];
+    implicitByFile.forEach((file, count) {
+      final base = kBaselineImplicitPaddingCards[file] ?? 0;
+      if (count > base) grew.add('$file: $base -> $count');
+    });
+    expect(
+      grew,
+      isEmpty,
+      reason:
+          'File có VitCard MỚI thiếu cả padding lẫn density (CB-R7):\n'
+          '${grew.join('\n')}\n\n'
+          'Bẫy VitCard: padding & density cùng null ⇒ KHÔNG có Padding nào '
+          '(mặc định 0, không phải 8). Luôn truyền tường minh một trong hai '
+          '— card khung full-bleed thì `padding: TabletSpacingTokens.zeroInsets`.',
+    );
 
-      final stale = <String>[];
-      kBaselineImplicitPaddingCards.forEach((file, base) {
-        final now = implicitByFile[file] ?? 0;
-        if (now < base) stale.add('$file: $base -> $now');
-      });
-      expect(
-        stale,
-        isEmpty,
-        reason:
-            'Baseline CB-R7 có file đã giảm nợ (đã tường minh hóa):\n'
-            '${stale.join('\n')}\n\n'
-            'Cập nhật count/xóa entry trong kBaselineImplicitPaddingCards — '
-            'nợ chỉ được giảm.',
-      );
-    },
-  );
+    final stale = <String>[];
+    kBaselineImplicitPaddingCards.forEach((file, base) {
+      final now = implicitByFile[file] ?? 0;
+      if (now < base) stale.add('$file: $base -> $now');
+    });
+    expect(
+      stale,
+      isEmpty,
+      reason:
+          'Baseline CB-R7 có file đã giảm nợ (đã tường minh hóa):\n'
+          '${stale.join('\n')}\n\n'
+          'Cập nhật count/xóa entry trong kBaselineImplicitPaddingCards — '
+          'nợ chỉ được giảm.',
+    );
+  });
 }
 
 int _matchingParen(String text, int open) {

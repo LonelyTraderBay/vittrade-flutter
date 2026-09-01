@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-08-21 (thêm mục Working Style — quy định phân tích → phương án → triển khai → test cho mọi tác vụ code)
+**Last Updated:** 2026-09-01 (khóa Tablet Base-8-derived Role Scale và guardrails trước khi mở rộng UI Tablet)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -167,10 +167,24 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   insets use `contentPad`, end-of-scroll breathing lives inside the last
   widget (rule S7, enforced by
   `flutter_app/test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart`;
-  the 2026-08-29 pair-detail bug stacked phone margins onto the 13dp
+  the 2026-08-29 pair-detail bug stacked phone margins onto the 12dp
   section gap and rendered 23–29dp). When touching tablet UI, verify the
   result is a tablet composition (scaffold-owned rhythm, tablet tokens),
   never a phone frame reused.
+- Tablet spacing is a **closed Base-8-derived Role Scale** on a 4dp alignment
+  substrate: public roles are micro 4dp, item/compact 8dp, block/panel/
+  sibling/gutter 12dp, standard card padding 16dp, relaxed/hero padding
+  24dp, content inset 20dp, and page-end breathing 32dp. The 4dp substrate
+  does not permit arbitrary 4dp multiples. `TabletSpacingTokens` is the
+  source of truth; shared Phone+Tablet widgets use `AppSurfaceSpacing`; new
+  Tablet UI must not read Phone `AppSpacing` directly. The full contract and
+  all checks live in
+  `docs/02_FLUTTER_MIGRATION/standards/Tablet-Spacing-Gutter-Standard.md`.
+  The role/value and call-site locks are
+  `tablet_base8_role_scale_guardrail_test.dart`,
+  `tablet_module_role_scale_guardrail_test.dart`,
+  `tablet_spacing_guardrail_test.dart`, and
+  `tablet_gap_12_guardrail_test.dart`.
 - Detailed per-component standards (page rhythm, content width, card tiles,
   segment pills, scroll auto-hide, notice acknowledgements, service tile
   badges, task cards, accent icon boxes, radius tokens, phone + tablet

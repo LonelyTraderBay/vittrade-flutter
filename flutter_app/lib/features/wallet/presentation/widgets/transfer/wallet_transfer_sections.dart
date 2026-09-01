@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/controllers/wallet_controller.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_asset_avatar.dart';
@@ -16,7 +16,7 @@ import 'package:vit_trade_flutter/shared/widgets/vit_info_row.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_input.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_sheet_handle.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/widgets/phone/wallet_formatters.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/wallet_formatters.dart';
 
 part 'wallet_transfer_confirm_sheet.dart';
 part 'wallet_transfer_wallet_cards.dart';
@@ -25,8 +25,8 @@ part 'wallet_transfer_history_picker.dart';
 
 const _transferPrimary = AppColors.primary;
 const _transferGreen = AppColors.buy;
-const _transferInlineGap = AppSpacing.rowGap;
-const _transferIconBox = AppSpacing.buttonCompact;
+final _transferInlineGap = AppSurfaceSpacing.rowGap;
+final _transferIconBox = AppSurfaceSpacing.buttonCompact;
 const _transferActionIcon = WalletSpacingTokens.transferActionIcon;
 
 String formatTransferUsd(double value) => formatWalletUsdGrouped(value);

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// One segment (value/label/accent) rendered inside a [VitSegmentedChoice].
@@ -41,11 +41,11 @@ class VitSegmentedChoice<T> extends StatelessWidget {
     this.density = VitDensity.compact,
     this.enabled = true,
     this.borderRadius = AppRadii.inputRadius,
-    this.gap = AppSpacing.x1,
+    this.gap,
     this.borderless = true,
     this.trackColor = AppColors.surface2,
     this.borderColor = AppColors.cardBorder,
-    this.padding = AppSpacing.vitChoicePillCompactPadding,
+    this.padding,
   });
 
   final List<VitSegmentedChoiceOption<T>> options;
@@ -55,11 +55,11 @@ class VitSegmentedChoice<T> extends StatelessWidget {
   final VitDensity density;
   final bool enabled;
   final BorderRadius borderRadius;
-  final double gap;
+  final double? gap;
   final bool borderless;
   final Color trackColor;
   final Color borderColor;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   bool get _interactive => enabled;
 
@@ -146,13 +146,16 @@ class VitSegmentedChoice<T> extends StatelessWidget {
     );
 
     final resolvedHeight = height ?? density.controlHeight;
+    final resolvedGap = gap ?? AppSurfaceSpacing.x1;
+    final resolvedPadding =
+        padding ?? AppSurfaceSpacing.vitChoicePillCompactPadding;
     final segments = [
       for (var i = 0; i < options.length; i++) ...[
-        if (i > 0) SizedBox(width: borderless ? gap : 0),
+        if (i > 0) SizedBox(width: borderless ? resolvedGap : 0),
         Expanded(
           child: KeyedSubtree(
             key: options[i].key,
-            child: _buildSegment(options[i]),
+            child: _buildSegment(options[i], padding: resolvedPadding),
           ),
         ),
       ],
@@ -188,7 +191,7 @@ class VitSegmentedChoice<T> extends StatelessWidget {
                 Expanded(
                   child: KeyedSubtree(
                     key: options[i].key,
-                    child: _buildSegment(options[i]),
+                    child: _buildSegment(options[i], padding: resolvedPadding),
                   ),
                 ),
               ],
@@ -199,7 +202,10 @@ class VitSegmentedChoice<T> extends StatelessWidget {
     );
   }
 
-  Widget _buildSegment(VitSegmentedChoiceOption<T> option) {
+  Widget _buildSegment(
+    VitSegmentedChoiceOption<T> option, {
+    required EdgeInsetsGeometry padding,
+  }) {
     final isSelected = option.value == selected;
     final accent = option.accentColor ?? AppColors.primarySoft;
     final foreground = !_interactive
@@ -235,10 +241,13 @@ class VitSegmentedChoice<T> extends StatelessWidget {
       children: [
         if (option.leading != null) ...[
           IconTheme(
-            data: IconThemeData(color: foreground, size: AppSpacing.iconSm),
+            data: IconThemeData(
+              color: foreground,
+              size: AppSurfaceSpacing.iconSm,
+            ),
             child: option.leading!,
           ),
-          const SizedBox(width: AppSpacing.x1),
+          SizedBox(width: AppSurfaceSpacing.x1),
         ],
         Flexible(child: labelText),
       ],

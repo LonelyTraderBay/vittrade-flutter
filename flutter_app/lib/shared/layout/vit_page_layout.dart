@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Bottom-padding treatment for [VitPageLayout]: `defaultPage` reserves
 /// loose bottom spacing, `flush` removes it (e.g. for sticky-footer pages).
@@ -43,9 +43,9 @@ class VitPageLayout extends StatelessWidget {
   double get _bottomPadding {
     switch (variant) {
       case VitPageVariant.flush:
-        return AppSpacing.zero;
+        return AppSurfaceSpacing.zero;
       case VitPageVariant.defaultPage:
-        return AppSpacing.pageContentGapLoose;
+        return AppSurfaceSpacing.pageEndBreathing;
     }
   }
 
@@ -96,11 +96,11 @@ class VitStickyFooter extends StatelessWidget {
             : const Border(),
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(
-          AppSpacing.contentPad,
-          AppSpacing.pageContentTopRelaxed,
-          AppSpacing.contentPad,
-          AppSpacing.contentPad,
+        padding: EdgeInsetsDirectional.fromSTEB(
+          AppSurfaceSpacing.contentPad,
+          AppSurfaceSpacing.pageContentTopRelaxed,
+          AppSurfaceSpacing.contentPad,
+          AppSurfaceSpacing.contentPad,
         ),
         child: child,
       ),

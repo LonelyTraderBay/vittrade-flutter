@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/controllers/wallet_controller.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart';
@@ -42,14 +42,14 @@ class AddressAddForm {
         headerIcon: Icons.account_tree_outlined,
         headerVariant: VitSectionHeaderVariant.plain,
         headerDensity: VitDensity.compact,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         gap: VitContentGap.tight,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const AddressFieldLabel(label: 'Mạng lưới', required: true),
-              const SizedBox(height: AppSpacing.formFieldLabelGap),
+              SizedBox(height: AppSurfaceSpacing.formFieldLabelGap),
               AddressNetworkGrid(
                 networks: snapshot.networks,
                 selectedId: selectedNetworkId,
@@ -61,7 +61,7 @@ class AddressAddForm {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const AddressFieldLabel(label: 'Tài sản'),
-              const SizedBox(height: AppSpacing.formFieldLabelGap),
+              SizedBox(height: AppSurfaceSpacing.formFieldLabelGap),
               AddressAssetSelector(
                 assets: snapshot.assets,
                 selectedAsset: selectedAsset,
@@ -76,7 +76,7 @@ class AddressAddForm {
         headerIcon: Icons.account_balance_wallet_outlined,
         headerVariant: VitSectionHeaderVariant.plain,
         headerDensity: VitDensity.compact,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         gap: VitContentGap.tight,
         children: [
           Column(
@@ -159,7 +159,7 @@ class AddressAddForm {
         headerIconColor: AppColors.caution,
         headerVariant: VitSectionHeaderVariant.plain,
         headerDensity: VitDensity.compact,
-        innerGap: AppSpacing.pageRhythmFormInnerGap,
+        innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
         gap: VitContentGap.tight,
         children: [
           AddressWhitelistCard(enabled: whitelist, onTap: onWhitelistChanged),

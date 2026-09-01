@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/device_metrics.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/controllers/trade_controller.dart';
@@ -25,8 +25,8 @@ double tradeScrollBottomInset(
 }) {
   final mode = shellRenderMode ?? defaultShellRenderMode();
   final base = mode.usesVisualQaFrame
-      ? AppSpacing.buttonStandard + AppSpacing.x7
-      : AppSpacing.buttonStandard + AppSpacing.x5;
+      ? AppSurfaceSpacing.buttonStandard + AppSurfaceSpacing.x7
+      : AppSurfaceSpacing.buttonStandard + AppSurfaceSpacing.x5;
   return base + MediaQuery.paddingOf(context).bottom;
 }
 
@@ -124,7 +124,7 @@ class VitTradeSection extends StatelessWidget {
   final VoidCallback? onAction;
   final Widget? headerTrailing;
 
-  /// Luật 13dp (2026-08-31): caller TABLET truyền 13 để tách nhịp khỏi
+  /// Luật 12dp (2026-08-31): caller TABLET truyền 12 để tách nhịp khỏi
   /// tier mặc định dùng chung với phone (8) — null giữ nguyên cho phone.
   final double? innerGap;
 
@@ -472,14 +472,14 @@ class VitBotRiskReviewFooter extends StatelessWidget {
           density: VitDensity.tool,
         ),
         if (statusLabel != null) ...[
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmCompactInnerGap),
           VitStatusPill(
             label: statusLabel!,
             status: status,
             size: VitStatusPillSize.sm,
           ),
         ],
-        const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmStandardInnerGap),
         const VitBotRiskDisclaimer(),
       ],
     );

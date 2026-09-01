@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_bottom_sheet.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
@@ -78,15 +78,15 @@ class VitTradeProductTabs extends StatelessWidget {
           return VitSheetPanel(
             title: moreSheetTitle,
             child: Wrap(
-              spacing: AppSpacing.x3,
-              runSpacing: AppSpacing.x3,
+              spacing: AppSurfaceSpacing.x3,
+              runSpacing: AppSurfaceSpacing.x3,
               children: [
                 for (final item in overflowItems)
                   SizedBox(
                     width:
                         (MediaQuery.sizeOf(sheetContext).width -
-                            AppSpacing.contentPad * 2 -
-                            AppSpacing.x3) /
+                            AppSurfaceSpacing.contentPad * 2 -
+                            AppSurfaceSpacing.x3) /
                         2,
                     child: VitServiceTile(
                       key: item.tileKey,
@@ -119,7 +119,7 @@ class VitTradeProductTabs extends StatelessWidget {
             child: Row(
               children: [
                 for (var i = 0; i < tabs.length; i++) ...[
-                  if (i > 0) const SizedBox(width: AppSpacing.x2),
+                  if (i > 0) SizedBox(width: AppSurfaceSpacing.x2),
                   _ProductTabChip(
                     key: tabs[i].tabKey,
                     label: tabs[i].label,
@@ -133,16 +133,16 @@ class VitTradeProductTabs extends StatelessWidget {
           ),
         ),
         if (overflowItems.isNotEmpty) ...[
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           VitCard(
             onTap: () => _openMoreSheet(context),
             variant: VitCardVariant.ghost,
             radius: VitCardRadius.standard,
-            padding: AppSpacing.zeroInsets.copyWith(
-              left: AppSpacing.x3,
-              right: AppSpacing.x3,
-              top: AppSpacing.x2,
-              bottom: AppSpacing.x2,
+            padding: AppSurfaceSpacing.zeroInsets.copyWith(
+              left: AppSurfaceSpacing.x3,
+              right: AppSurfaceSpacing.x3,
+              top: AppSurfaceSpacing.x2,
+              bottom: AppSurfaceSpacing.x2,
             ),
             borderColor: AppColors.borderSolid,
             child: Text(
@@ -184,11 +184,11 @@ class _ProductTabChip extends StatelessWidget {
         onTap: onTap,
         variant: VitCardVariant.ghost,
         radius: VitCardRadius.standard,
-        padding: AppSpacing.zeroInsets.copyWith(
-          left: AppSpacing.x3,
-          right: AppSpacing.x3,
-          top: AppSpacing.x2,
-          bottom: AppSpacing.x2,
+        padding: AppSurfaceSpacing.zeroInsets.copyWith(
+          left: AppSurfaceSpacing.x3,
+          right: AppSurfaceSpacing.x3,
+          top: AppSurfaceSpacing.x2,
+          bottom: AppSurfaceSpacing.x2,
         ),
         borderColor: active
             ? AppColors.primary.withValues(alpha: .45)
@@ -214,7 +214,7 @@ class _ProductTabChip extends StatelessWidget {
               ),
             ),
             if (riskBadge != null) ...[
-              const SizedBox(width: AppSpacing.x1),
+              SizedBox(width: AppSurfaceSpacing.x1),
               VitStatusPill(
                 label: riskBadge!,
                 status: VitStatusPillStatus.warning,

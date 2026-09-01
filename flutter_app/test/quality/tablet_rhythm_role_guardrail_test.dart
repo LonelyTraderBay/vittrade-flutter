@@ -4,21 +4,20 @@
 // Bug 2026-08-28 (user X đỏ "khoảng trống giữa tiêu đề vẫn rộng" — chỉ
 // trang Markets tablet): hub SC-008 dùng `relaxed` (24dp — tier của
 // hero/onboarding) trong khi bảng chuẩn ghi tab root = `compact` (8dp);
-// pane chi tiết = `standard` (13dp); chart/terminal = `flush`. Mọi token
+// pane chi tiết = `standard` (12dp); chart/terminal = `flush`. Mọi token
 // đơn lẻ đều "hợp lệ" — sai nằm ở THAM SỐ chọn tier.
 //
-// Vì sao audit không bắt: `page_rhythm_audit._tabRootPages` (rule "tab root
-// phải compact") là DANH SÁCH FILE chỉ có 5 hub phone + Markets tablet thêm
-// sau đó — hub tablet khác không nằm trong danh sách (blind-spot lớp 5:
-// bản đồ role→tier không cover surface). Guardrail này đóng 2 lỗ:
+// Vì sao audit không bắt trước đây: `page_rhythm_audit._tabRootPages` (rule
+// "tab root phải compact") là DANH SÁCH FILE chỉ có 5 hub phone + Markets
+// tablet thêm sau đó — hub tablet khác không nằm trong danh sách. Guardrail
+// này đóng 2 lỗ:
 //
 //   PR-T1 (absolute): `VitPageRhythm.relaxed` bị CẤM trên bề mặt tablet —
 //     tier hero/onboarding; duy nhất whitelist là wrapper secondary của
 //     VitTwoColumnTabletDashboard (by design của dashboard 2 cột).
 //   PR-T2 (ratchet exact-map): hub tablet của 5 tab (`<module>_tablet_page
-//     .dart`) phải compact — hoặc rhythm sống ở layout ('none'), hoặc nợ
-//     ghim trong map (Profile hub = standard, migrate khi module được
-//     chạm). Hub tablet MỚI khai báo non-compact → fail CI ngay.
+//     .dart`) phải compact — hoặc rhythm sống ở layout ('none'). Hub tablet
+//     MỚI khai báo non-compact → fail CI ngay.
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -34,7 +33,7 @@ const Set<String> kRelaxedWhitelist = {
 /// map — chỉ được tiến về 'compact'/'none', không lùi.
 const Map<String, Set<String>> kTabletHubTiers = {
   'features/home/presentation/tablet/pages/home_tablet_page.dart': {'none'},
-  // Luật 13dp (2026-08-31): hub tablet chuẩn standard(13) — compact(8)
+  // Luật 12dp (2026-08-31): hub tablet chuẩn standard(12) — compact(8)
   // không còn là tier hợp lệ cho hub tablet.
   'features/markets/presentation/tablet/pages/markets_tablet_page.dart': {
     'standard',
@@ -42,7 +41,7 @@ const Map<String, Set<String>> kTabletHubTiers = {
   'features/trade/presentation/tablet/pages/trade_tablet_page.dart': {'none'},
   'features/wallet/presentation/tablet/pages/wallet_tablet_page.dart': {'none'},
   'features/profile/presentation/tablet/pages/profile_tablet_page.dart': {
-    'standard', // DEBT: tab root phải compact — migrate on touch.
+    'compact',
   },
 };
 
@@ -161,6 +160,41 @@ void main() {
             'Baseline PR-T2 lệch thực trạng (hub đã migrate/dọn):\n'
             '${stale.join('\n')}\n\n'
             'Cập nhật kTabletHubTiers — chỉ tiến về compact/none.',
+      );
+    },
+  );
+
+  test(
+    'PR-T3 absolute: content gap relaxed/loose không được dùng trong Tablet',
+    () {
+      final violations = <String>[];
+      final forbidden = RegExp(r'VitContentGap\.(relaxed|loose)');
+
+      for (final entity in Directory('lib').listSync(recursive: true)) {
+        if (entity is! File || !entity.path.endsWith('.dart')) continue;
+        final normalized = entity.path.replaceAll('\\', '/');
+        if (!_isTabletSurface(normalized) ||
+            normalized.contains('/app/theme/')) {
+          continue;
+        }
+        final rel = normalized.replaceFirst('lib/', '');
+        final lines = entity.readAsLinesSync();
+        for (var i = 0; i < lines.length; i++) {
+          final line = lines[i];
+          if (line.trimLeft().startsWith('//')) continue;
+          if (forbidden.hasMatch(line)) {
+            violations.add('$rel|${i + 1}|${line.trim()}');
+          }
+        }
+      }
+
+      expect(
+        violations,
+        isEmpty,
+        reason:
+            'Tablet chỉ dùng content gap tight/default (8/12). Khoảng 24/32 '
+            'chỉ dành cho card/hero padding hoặc page-end breathing; không '
+            'dùng làm gap giữa các block:\n${violations.join('\n')}',
       );
     },
   );

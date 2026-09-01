@@ -11,6 +11,8 @@ import 'dart:io';
 /// purposes (e.g. `serviceTileIconContainer = 26`) where a coincidental
 /// value match is not evidence of duplication. See
 /// `docs/02_FLUTTER_MIGRATION/standards/Spacing-Token-Duplication-Standard.md`.
+/// The Tablet namespace is excluded: it is an intentionally independent
+/// Base-8-derived scale, not a Phone `AppSpacing` mirror.
 final class DuplicationEntry {
   const DuplicationEntry({
     required this.module,
@@ -40,6 +42,8 @@ const _coreScale = <String, double>{
   'x7': 55,
 };
 
+const _excludedModules = {'tablet'};
+
 // Frozen per-module baseline (ratchet) — captured 2026-07-09 from a fresh
 // run against every lib/app/theme/spacing/*_spacing_tokens.dart file that
 // exists today. `--check` fails only when current > baseline for a module,
@@ -65,11 +69,6 @@ const _moduleBaselines = <String, int>{
   'predictions': 0,
   'profile': 0,
   'referral': 0,
-  // 'tablet' (2026-09-01): namespace tablet_spacing_tokens cố ý mirror
-  // snapshot AppSpacing để tách surface (user duyệt) — 19 literal là
-  // chủ đích thiết kế, không phải nợ cần trả; ratchet giữ không-tăng.
-  'tablet': 10, // 8pt grid (01-09): giá trị lưới 4/8/12/16/24/32/56
-  // chủ đích trùng bội số — ratchet không tăng.
   'shared': 0,
   'support': 0,
   'trade': 0,
@@ -196,6 +195,7 @@ List<DuplicationEntry> _collectEntries(Directory appRoot, String repoRoot) {
   for (final file in files) {
     final fileName = file.uri.pathSegments.last;
     final module = fileName.replaceAll('_spacing_tokens.dart', '');
+    if (_excludedModules.contains(module)) continue;
     final source = file.readAsStringSync();
     final relativeFile = _relativePath(file, repoRoot);
 
@@ -277,6 +277,12 @@ String _renderMarkdown(List<DuplicationEntry> entries) {
       'scale steps (`x1`=3, `x2`=5, `x3`=8, `x4`=13, `x5`=21, `x6`=34, '
       '`x7`=55) — these should reference `AppSpacing.xN` directly instead of '
       'restating the literal under a module-specific name.',
+    )
+    ..writeln()
+    ..writeln(
+      'The Tablet namespace (`tablet_spacing_tokens.dart`) is intentionally '
+      'excluded because Tablet uses its own closed Base-8-derived role scale '
+      '(4/8/12/16/24/32/56).',
     )
     ..writeln()
     ..writeln('```text')

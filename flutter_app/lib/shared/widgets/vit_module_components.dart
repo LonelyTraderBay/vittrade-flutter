@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
@@ -15,30 +15,34 @@ extension VitServiceTileDensitySpacing on VitServiceTileDensity {
   double get iconContainer {
     return switch (this) {
       VitServiceTileDensity.compact =>
-        AppSpacing.serviceTileIconContainerCompact,
-      VitServiceTileDensity.standard => AppSpacing.serviceTileIconContainer,
+        AppSurfaceSpacing.serviceTileIconContainerCompact,
+      VitServiceTileDensity.standard =>
+        AppSurfaceSpacing.serviceTileIconContainer,
     };
   }
 
   double get iconSize {
     return switch (this) {
-      VitServiceTileDensity.compact => AppSpacing.serviceTileIconSizeCompact,
-      VitServiceTileDensity.standard => AppSpacing.serviceTileIconSize,
+      VitServiceTileDensity.compact =>
+        AppSurfaceSpacing.serviceTileIconSizeCompact,
+      VitServiceTileDensity.standard => AppSurfaceSpacing.serviceTileIconSize,
     };
   }
 
   double get padding {
     return switch (this) {
       VitServiceTileDensity.compact =>
-        AppSpacing.serviceTileContentPaddingCompact,
-      VitServiceTileDensity.standard => AppSpacing.serviceTileContentPadding,
+        AppSurfaceSpacing.serviceTileContentPaddingCompact,
+      VitServiceTileDensity.standard =>
+        AppSurfaceSpacing.serviceTileContentPadding,
     };
   }
 
   double get labelGap {
     return switch (this) {
-      VitServiceTileDensity.compact => AppSpacing.serviceTileLabelGapCompact,
-      VitServiceTileDensity.standard => AppSpacing.serviceTileLabelGap,
+      VitServiceTileDensity.compact =>
+        AppSurfaceSpacing.serviceTileLabelGapCompact,
+      VitServiceTileDensity.standard => AppSurfaceSpacing.serviceTileLabelGap,
     };
   }
 
@@ -93,13 +97,13 @@ class VitServiceTile extends StatelessWidget {
 
   EdgeInsetsDirectional get _contentSafeInsets {
     return EdgeInsetsDirectional.only(
-      top: badgeLabel != null ? AppSpacing.x2 : 0,
-      end: badgeLabel != null ? AppSpacing.x2 : 0,
+      top: badgeLabel != null ? AppSurfaceSpacing.x2 : 0,
+      end: badgeLabel != null ? AppSurfaceSpacing.x2 : 0,
       bottom: riskBadgeLabel != null
-          ? AppSpacing.serviceTileBadgeReserveVertical
+          ? AppSurfaceSpacing.serviceTileBadgeReserveVertical
           : 0,
       start: riskBadgeLabel != null
-          ? AppSpacing.serviceTileBadgeReserveHorizontal
+          ? AppSurfaceSpacing.serviceTileBadgeReserveHorizontal
           : 0,
     );
   }
@@ -107,15 +111,15 @@ class VitServiceTile extends StatelessWidget {
   bool get _useCompactedBody => riskBadgeLabel != null;
 
   double get _bodyIconContainer => _useCompactedBody
-      ? AppSpacing.serviceTileIconContainerCompact
+      ? AppSurfaceSpacing.serviceTileIconContainerCompact
       : density.iconContainer;
 
   double get _bodyIconSize => _useCompactedBody
-      ? AppSpacing.serviceTileIconSizeCompact
+      ? AppSurfaceSpacing.serviceTileIconSizeCompact
       : density.iconSize;
 
   double get _bodyLabelGap => _useCompactedBody
-      ? AppSpacing.serviceTileLabelGapCompact
+      ? AppSurfaceSpacing.serviceTileLabelGapCompact
       : density.labelGap;
 
   TextStyle get _bodyLabelStyle =>
@@ -138,7 +142,7 @@ class VitServiceTile extends StatelessWidget {
               top: 0,
               left: 0,
               right: 0,
-              height: AppSpacing.serviceTileTopStripeHeight,
+              height: AppSurfaceSpacing.serviceTileTopStripeHeight,
               child: DecoratedBox(
                 decoration: ShapeDecoration(
                   color: accentColor.withValues(alpha: .56),
@@ -153,11 +157,11 @@ class VitServiceTile extends StatelessWidget {
                 children: [
                   if (badgeLabel != null)
                     Positioned(
-                      top: -AppSpacing.serviceTileBadgeOffset,
-                      right: -AppSpacing.serviceTileBadgeOffset,
+                      top: -AppSurfaceSpacing.serviceTileBadgeOffset,
+                      right: -AppSurfaceSpacing.serviceTileBadgeOffset,
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: AppSpacing.serviceTileBadgeMaxWidth,
+                        constraints: BoxConstraints(
+                          maxWidth: AppSurfaceSpacing.serviceTileBadgeMaxWidth,
                         ),
                         child: DecoratedBox(
                           decoration: ShapeDecoration(
@@ -170,11 +174,11 @@ class VitServiceTile extends StatelessWidget {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal:
-                                  AppSpacing.serviceTileBadgePaddingHorizontal,
-                              vertical:
-                                  AppSpacing.serviceTileBadgePaddingVertical,
+                            padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: AppSurfaceSpacing
+                                  .serviceTileBadgePaddingHorizontal,
+                              vertical: AppSurfaceSpacing
+                                  .serviceTileBadgePaddingVertical,
                             ),
                             child: Text(
                               badgeLabel!,
@@ -192,11 +196,12 @@ class VitServiceTile extends StatelessWidget {
                     ),
                   if (riskBadgeLabel != null)
                     Positioned(
-                      bottom: -AppSpacing.serviceTileBadgeOffset,
-                      left: -AppSpacing.serviceTileBadgeOffset,
+                      bottom: -AppSurfaceSpacing.serviceTileBadgeOffset,
+                      left: -AppSurfaceSpacing.serviceTileBadgeOffset,
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: AppSpacing.serviceTileRiskBadgeMaxWidth,
+                        constraints: BoxConstraints(
+                          maxWidth:
+                              AppSurfaceSpacing.serviceTileRiskBadgeMaxWidth,
                         ),
                         child: DecoratedBox(
                           decoration: ShapeDecoration(
@@ -211,11 +216,11 @@ class VitServiceTile extends StatelessWidget {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal:
-                                  AppSpacing.serviceTileBadgePaddingHorizontal,
-                              vertical:
-                                  AppSpacing.serviceTileBadgePaddingVertical,
+                            padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: AppSurfaceSpacing
+                                  .serviceTileBadgePaddingHorizontal,
+                              vertical: AppSurfaceSpacing
+                                  .serviceTileBadgePaddingVertical,
                             ),
                             child: Text(
                               riskBadgeLabel!,
@@ -312,7 +317,7 @@ class VitModuleHeroCard extends StatelessWidget {
       padding:
           padding ??
           (density == null
-              ? const EdgeInsetsDirectional.all(AppSpacing.x5)
+              ? EdgeInsetsDirectional.all(AppSurfaceSpacing.x5)
               : density!.cardPadding),
       onTap: onTap,
       child: child,
@@ -344,13 +349,13 @@ class VitMetricCard extends StatelessWidget {
       variant: VitCardVariant.inner,
       radius: VitCardRadius.standard,
       padding: density == VitDensity.standard
-          ? const EdgeInsetsDirectional.all(AppSpacing.x4)
+          ? EdgeInsetsDirectional.all(AppSurfaceSpacing.x4)
           : density.cardPadding,
       child: Row(
         children: [
           SizedBox(
-            width: AppSpacing.serviceTileAccentBarThickness,
-            height: AppSpacing.serviceTileAccentBarHeight,
+            width: AppSurfaceSpacing.serviceTileAccentBarThickness,
+            height: AppSurfaceSpacing.serviceTileAccentBarHeight,
             child: DecoratedBox(
               decoration: ShapeDecoration(
                 color: accentColor,
@@ -360,7 +365,7 @@ class VitMetricCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -372,7 +377,7 @@ class VitMetricCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   value,
                   maxLines: 1,
@@ -391,7 +396,7 @@ class VitMetricCard extends StatelessWidget {
             ),
           ),
           if (trailing != null) ...[
-            const SizedBox(width: AppSpacing.x3),
+            SizedBox(width: AppSurfaceSpacing.x3),
             trailing!,
           ],
         ],
@@ -426,18 +431,18 @@ class VitModuleSectionHeader extends StatelessWidget {
   double get _resolvedBottomGap =>
       bottomGap ??
       (_isCompact
-          ? AppSpacing.pageRhythmCompactInnerGap
-          : AppSpacing.pageRhythmStandardInnerGap);
+          ? AppSurfaceSpacing.pageRhythmCompactInnerGap
+          : AppSurfaceSpacing.pageRhythmStandardInnerGap);
 
   @override
   Widget build(BuildContext context) {
     final header = Row(
       children: [
         SizedBox(
-          width: AppSpacing.serviceTileAccentBarThickness,
+          width: AppSurfaceSpacing.serviceTileAccentBarThickness,
           height: _isCompact
-              ? AppSpacing.pageSectionAccentHeight
-              : AppSpacing.serviceTileSectionBarHeight,
+              ? AppSurfaceSpacing.pageSectionAccentHeight
+              : AppSurfaceSpacing.serviceTileSectionBarHeight,
           child: DecoratedBox(
             decoration: ShapeDecoration(
               color: accentColor,
@@ -447,7 +452,7 @@ class VitModuleSectionHeader extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x3),
+        SizedBox(width: AppSurfaceSpacing.x3),
         Expanded(
           child: Text(
             title,
@@ -469,9 +474,9 @@ class VitModuleSectionHeader extends StatelessWidget {
             style: _isCompact
                 ? TextButton.styleFrom(
                     minimumSize: Size.zero,
-                    padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: AppSpacing.x2,
-                      vertical: AppSpacing.x1,
+                    padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: AppSurfaceSpacing.x2,
+                      vertical: AppSurfaceSpacing.x1,
                     ),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   )

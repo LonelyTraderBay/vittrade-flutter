@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_carousel_dots.dart';
@@ -45,9 +45,9 @@ class VitAnnouncementBanner extends StatelessWidget {
   EdgeInsetsGeometry get _padding {
     return switch (variant) {
       VitAnnouncementBannerVariant.standard =>
-        SharedSpacingTokens.homeCardPaddingDefault,
+        AppSurfaceSpacing.homeCardPaddingDefault,
       VitAnnouncementBannerVariant.compact =>
-        SharedSpacingTokens.homeAnnouncementCardPaddingCompact,
+        AppSurfaceSpacing.homeAnnouncementCardPaddingCompact,
     };
   }
 
@@ -67,9 +67,7 @@ class VitAnnouncementBanner extends StatelessWidget {
                 color: accentColor,
                 size: SharedSpacingTokens.homeAnnouncementIcon,
               ),
-              const SizedBox(
-                width: SharedSpacingTokens.homeAnnouncementIconGap,
-              ),
+              SizedBox(width: AppSurfaceSpacing.homeAnnouncementIconGap),
               Expanded(
                 child: Text(
                   message,
@@ -78,9 +76,7 @@ class VitAnnouncementBanner extends StatelessWidget {
                   style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
               ),
-              const SizedBox(
-                width: SharedSpacingTokens.homeAnnouncementArrowGap,
-              ),
+              SizedBox(width: AppSurfaceSpacing.homeAnnouncementArrowGap),
               if (onDismiss == null)
                 const Icon(
                   Icons.chevron_right_rounded,
@@ -98,7 +94,7 @@ class VitAnnouncementBanner extends StatelessWidget {
           ),
         ),
         if (_showDots) ...[
-          const SizedBox(height: AppSpacing.x3),
+          SizedBox(height: AppSurfaceSpacing.x3),
           VitCarouselDots(itemCount: itemCount, activeIndex: activeIndex),
         ],
       ],

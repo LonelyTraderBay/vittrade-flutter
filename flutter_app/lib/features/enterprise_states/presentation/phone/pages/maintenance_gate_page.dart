@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 // AppRoutePaths là part của app_router — import vòng theo đúng khuôn các
 // route group hiện có (hợp lệ Dart, không có chu trình giá trị const), xem
 // route_error_page.dart.
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';

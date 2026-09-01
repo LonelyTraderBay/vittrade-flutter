@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_empty_state.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_error_state.dart';
@@ -86,11 +86,11 @@ class VitHighRiskStatePanel extends StatelessWidget {
           trailing: Semantics(
             label: 'Đang xử lý',
             liveRegion: true,
-            child: const SizedBox(
-              width: AppSpacing.x4 + AppSpacing.x1,
-              height: AppSpacing.x4 + AppSpacing.x1,
+            child: SizedBox(
+              width: AppSurfaceSpacing.x4 + AppSurfaceSpacing.x1,
+              height: AppSurfaceSpacing.x4 + AppSurfaceSpacing.x1,
               child: CircularProgressIndicator(
-                strokeWidth: AppSpacing.hairlineStroke,
+                strokeWidth: AppSurfaceSpacing.hairlineStroke,
               ),
             ),
           ),
@@ -140,19 +140,19 @@ class _LoadingPanel extends StatelessWidget {
       border: AppColors.borderSolid,
       density: density,
       trailing: ConstrainedBox(
-        constraints: const BoxConstraints.tightFor(
+        constraints: BoxConstraints.tightFor(
           width:
-              AppSpacing.buttonStandard +
-              AppSpacing.buttonCompact +
-              AppSpacing.x1,
+              AppSurfaceSpacing.buttonStandard +
+              AppSurfaceSpacing.buttonCompact +
+              AppSurfaceSpacing.x1,
         ),
-        child: const Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            VitSkeleton(width: 72, height: 10),
-            SizedBox(height: AppSpacing.x2),
-            VitSkeleton(width: 48, height: 10),
+            const VitSkeleton(width: 72, height: 10),
+            SizedBox(height: AppSurfaceSpacing.x2),
+            const VitSkeleton(width: 48, height: 10),
           ],
         ),
       ),
@@ -186,7 +186,7 @@ class _CompactPanel extends StatelessWidget {
 
   EdgeInsetsGeometry get _padding {
     if (density == VitDensity.standard) {
-      return const EdgeInsetsDirectional.all(AppSpacing.x4);
+      return EdgeInsetsDirectional.all(AppSurfaceSpacing.x4);
     }
     return density.cardPadding;
   }
@@ -209,9 +209,13 @@ class _CompactPanel extends StatelessWidget {
             Icon(
               icon,
               color: foreground,
-              size: _isCompact ? AppSpacing.iconSm : AppSpacing.ctaLoadingIcon,
+              size: _isCompact
+                  ? AppSurfaceSpacing.iconSm
+                  : AppSurfaceSpacing.ctaLoadingIcon,
             ),
-            SizedBox(width: _isCompact ? AppSpacing.x2 : AppSpacing.x3),
+            SizedBox(
+              width: _isCompact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,7 +228,7 @@ class _CompactPanel extends StatelessWidget {
                       fontWeight: AppTextStyles.medium,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  SizedBox(height: AppSurfaceSpacing.x1),
                   Text(
                     message,
                     style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -233,7 +237,9 @@ class _CompactPanel extends StatelessWidget {
               ),
             ),
             if (trailing != null) ...[
-              SizedBox(width: _isCompact ? AppSpacing.x2 : AppSpacing.x3),
+              SizedBox(
+                width: _isCompact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
+              ),
               trailing!,
             ],
           ],

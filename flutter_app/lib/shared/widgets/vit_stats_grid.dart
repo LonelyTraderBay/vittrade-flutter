@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
@@ -29,7 +29,7 @@ class VitStatsGrid extends StatelessWidget {
     super.key,
     required this.cells,
     this.padding,
-    this.gap = AppSpacing.x3,
+    this.gap,
     this.radius = VitCardRadius.large,
     this.cellBackground = false,
     this.dividers = false,
@@ -37,7 +37,7 @@ class VitStatsGrid extends StatelessWidget {
 
   final List<VitStatCell> cells;
   final EdgeInsetsGeometry? padding;
-  final double gap;
+  final double? gap;
   final VitCardRadius radius;
 
   /// When true, wraps each cell in its own [AppColors.surface2] tile.
@@ -50,23 +50,24 @@ class VitStatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(cells.isNotEmpty, 'VitStatsGrid requires at least one cell.');
+    final resolvedGap = gap ?? AppSurfaceSpacing.x3;
 
     return VitCard(
       radius: radius,
-      padding: padding ?? const EdgeInsetsDirectional.all(AppSpacing.x4),
+      padding: padding ?? EdgeInsetsDirectional.all(AppSurfaceSpacing.x4),
       child: Row(
         children: [
           for (var i = 0; i < cells.length; i++) ...[
             if (i > 0)
               dividers
                   ? SizedBox(
-                      height: AppSpacing.x6,
+                      height: AppSurfaceSpacing.x6,
                       child: VerticalDivider(
-                        width: gap,
+                        width: resolvedGap,
                         color: AppColors.divider,
                       ),
                     )
-                  : SizedBox(width: gap),
+                  : SizedBox(width: resolvedGap),
             Expanded(
               child: _Cell(cell: cells[i], background: cellBackground),
             ),
@@ -97,7 +98,7 @@ class _Cell extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        SizedBox(height: AppSurfaceSpacing.x1),
         Text(
           cell.label,
           maxLines: 1,
@@ -118,9 +119,9 @@ class _Cell extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: AppRadii.cardRadius),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x3,
-          vertical: AppSpacing.x3,
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSurfaceSpacing.x3,
+          vertical: AppSurfaceSpacing.x3,
         ),
         child: content,
       ),

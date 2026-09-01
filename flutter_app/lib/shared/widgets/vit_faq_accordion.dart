@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 
@@ -55,7 +55,7 @@ class VitFaqAccordion extends StatelessWidget {
 
     return VitCard(
       radius: VitCardRadius.standard,
-      padding: const EdgeInsetsDirectional.all(AppSpacing.x4),
+      padding: EdgeInsetsDirectional.all(AppSurfaceSpacing.x4),
       borderColor: expanded ? accentColor.withValues(alpha: 0.28) : null,
       onTap: onTap,
       child: Column(
@@ -67,8 +67,12 @@ class VitFaqAccordion extends StatelessWidget {
                 : CrossAxisAlignment.start,
             children: [
               if (leadingIcon != null) ...[
-                Icon(leadingIcon, color: accentColor, size: AppSpacing.iconMd),
-                const SizedBox(width: AppSpacing.x3),
+                Icon(
+                  leadingIcon,
+                  color: accentColor,
+                  size: AppSurfaceSpacing.iconMd,
+                ),
+                SizedBox(width: AppSurfaceSpacing.x3),
               ],
               Expanded(
                 child: Text(
@@ -84,12 +88,12 @@ class VitFaqAccordion extends StatelessWidget {
                     ? Icons.expand_less_rounded
                     : Icons.expand_more_rounded,
                 color: AppColors.text3,
-                size: AppSpacing.iconMd,
+                size: AppSurfaceSpacing.iconMd,
               ),
             ],
           ),
           if (expanded) ...[
-            const SizedBox(height: AppSpacing.x3),
+            SizedBox(height: AppSurfaceSpacing.x3),
             answerBackground == VitFaqAnswerBackground.surface2
                 ? DecoratedBox(
                     decoration: const ShapeDecoration(
@@ -99,7 +103,7 @@ class VitFaqAccordion extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: AppSpacing.cardPaddingCompact,
+                      padding: AppSurfaceSpacing.cardPaddingCompact,
                       child: answerText,
                     ),
                   )
@@ -133,22 +137,23 @@ class VitFaqList extends StatelessWidget {
     required this.expandedIndex,
     required this.onToggle,
     this.accentColor = AppColors.primary,
-    this.gap = AppSpacing.pageRhythmStandardInnerGap,
+    this.gap,
   });
 
   final List<VitFaqItem> items;
   final int? expandedIndex;
   final ValueChanged<int> onToggle;
   final Color accentColor;
-  final double gap;
+  final double? gap;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedGap = gap ?? AppSurfaceSpacing.pageRhythmStandardInnerGap;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (var i = 0; i < items.length; i++) ...[
-          if (i > 0) SizedBox(height: gap),
+          if (i > 0) SizedBox(height: resolvedGap),
           VitFaqAccordion(
             key: items[i].widgetKey,
             question: items[i].question,

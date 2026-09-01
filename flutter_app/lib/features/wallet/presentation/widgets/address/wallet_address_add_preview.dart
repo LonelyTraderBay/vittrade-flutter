@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/controllers/wallet_controller.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/address/wallet_address_add_common.dart';
@@ -42,7 +42,7 @@ class AddressConfirmPreviewSheet extends StatelessWidget {
             preview.auditTrailNote,
             style: AppTextStyles.caption.copyWith(color: AppColors.text2),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmStandardInnerGap),
           AddressPreviewPanel(
             density: confirmDensity,
             rows: [
@@ -88,7 +88,7 @@ class AddressPreviewPanel extends StatelessWidget {
         children: [
           VitSectionHeader(
             title: 'Xem trước',
-            bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+            bottomGap: AppSurfaceSpacing.pageRhythmStandardInnerGap,
             icon: Icons.receipt_long_outlined,
             density: density,
           ),

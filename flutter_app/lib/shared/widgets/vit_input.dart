@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Standard text field surface: label, prefix/suffix slots, error text, and
@@ -134,7 +134,7 @@ class _VitInputState extends State<VitInput> {
   @override
   Widget build(BuildContext context) {
     final input = SizedBox(
-      height: AppSpacing.inputHeight,
+      height: AppSurfaceSpacing.inputHeight,
       child: DecoratedBox(
         decoration: ShapeDecoration(
           color: AppColors.surface2,
@@ -145,26 +145,26 @@ class _VitInputState extends State<VitInput> {
                   : _focused
                   ? AppInputStates.focusInputBorder
                   : AppColors.borderSolid,
-              width: AppSpacing.borderWidth,
+              width: AppSurfaceSpacing.borderWidth,
             ),
             borderRadius: AppRadii.inputRadius,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.x4,
+          padding: EdgeInsetsDirectional.symmetric(
+            horizontal: AppSurfaceSpacing.x4,
           ),
           child: Row(
             children: [
               if (widget.prefix != null) ...[
                 IconTheme(
-                  data: const IconThemeData(
+                  data: IconThemeData(
                     color: AppColors.text3,
-                    size: AppSpacing.inputPrefixIcon,
+                    size: AppSurfaceSpacing.inputPrefixIcon,
                   ),
                   child: widget.prefix!,
                 ),
-                const SizedBox(width: AppSpacing.x3),
+                SizedBox(width: AppSurfaceSpacing.x3),
               ],
               Expanded(
                 child: TextField(
@@ -193,7 +193,7 @@ class _VitInputState extends State<VitInput> {
                 ),
               ),
               if (widget.suffix != null) ...[
-                const SizedBox(width: AppSpacing.x3),
+                SizedBox(width: AppSurfaceSpacing.x3),
                 widget.suffix!,
               ],
             ],
@@ -210,7 +210,7 @@ class _VitInputState extends State<VitInput> {
             widget.label!,
             style: AppTextStyles.caption.copyWith(color: AppColors.text2),
           ),
-          const SizedBox(height: AppSpacing.formFieldLabelGap),
+          SizedBox(height: AppSurfaceSpacing.formFieldLabelGap),
         ],
         Semantics(
           textField: true,
@@ -220,7 +220,7 @@ class _VitInputState extends State<VitInput> {
           child: input,
         ),
         if (_showErrorText) ...[
-          const SizedBox(height: AppSpacing.x2),
+          SizedBox(height: AppSurfaceSpacing.x2),
           Text(
             widget.errorText!,
             style: AppTextStyles.micro.copyWith(color: AppColors.sell),

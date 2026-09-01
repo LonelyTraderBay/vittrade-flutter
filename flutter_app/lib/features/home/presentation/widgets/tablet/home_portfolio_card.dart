@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
@@ -77,7 +77,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
       variant: VitCardVariant.hero,
       radius: VitCardRadius.large,
       clip: true,
-      padding: SharedSpacingTokens.homeCardPaddingDefault,
+      padding: TabletSpacingTokens.cardPaddingHeroDensity,
       background: const VitHeroGlow(center: Alignment(0, -0.96)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -301,7 +301,7 @@ class _HomePortfolioCardState extends State<HomePortfolioCard> {
       variant: VitCardVariant.hero,
       radius: VitCardRadius.large,
       clip: true,
-      padding: SharedSpacingTokens.homeCardPaddingDefault,
+      padding: TabletSpacingTokens.cardPaddingHeroDensity,
       background: const VitHeroGlow(center: Alignment(0, -0.96)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

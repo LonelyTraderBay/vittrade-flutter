@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 
 /// Semantic status/color family for a [VitStatusPill] or [VitAccentPill].
@@ -98,28 +98,28 @@ class VitStatusPill extends StatelessWidget {
   _StatusMetrics get _metrics {
     switch (size) {
       case VitStatusPillSize.sm:
-        return const _StatusMetrics(
-          height: AppSpacing.statusPillHeightSm,
+        return _StatusMetrics(
+          height: AppSurfaceSpacing.statusPillHeightSm,
           labelStyle: AppTextStyles.numericMicro,
-          iconSize: AppSpacing.statusPillIconSizeSm,
-          paddingX: AppSpacing.statusPillHorizontalPaddingSm,
-          gap: AppSpacing.statusPillGapSm,
+          iconSize: AppSurfaceSpacing.statusPillIconSizeSm,
+          paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingSm,
+          gap: AppSurfaceSpacing.statusPillGapSm,
         );
       case VitStatusPillSize.md:
-        return const _StatusMetrics(
-          height: AppSpacing.statusPillHeightMd,
+        return _StatusMetrics(
+          height: AppSurfaceSpacing.statusPillHeightMd,
           labelStyle: AppTextStyles.navLabel,
-          iconSize: AppSpacing.statusPillIconSizeMd,
-          paddingX: AppSpacing.statusPillHorizontalPaddingMd,
-          gap: AppSpacing.statusPillGapMd,
+          iconSize: AppSurfaceSpacing.statusPillIconSizeMd,
+          paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingMd,
+          gap: AppSurfaceSpacing.statusPillGapMd,
         );
       case VitStatusPillSize.lg:
-        return const _StatusMetrics(
-          height: AppSpacing.statusPillHeightLg,
+        return _StatusMetrics(
+          height: AppSurfaceSpacing.statusPillHeightLg,
           labelStyle: AppTextStyles.navLabel,
-          iconSize: AppSpacing.statusPillIconSizeLg,
-          paddingX: AppSpacing.statusPillHorizontalPaddingLg,
-          gap: AppSpacing.statusPillGapLg,
+          iconSize: AppSurfaceSpacing.statusPillIconSizeLg,
+          paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingLg,
+          gap: AppSurfaceSpacing.statusPillGapLg,
         );
     }
   }
@@ -161,7 +161,7 @@ class VitStatusPill extends StatelessWidget {
                       shadows: [
                         BoxShadow(
                           color: palette.border,
-                          blurRadius: AppSpacing.statusPillBadgeBlur,
+                          blurRadius: AppSurfaceSpacing.statusPillBadgeBlur,
                         ),
                       ],
                     ),
@@ -189,11 +189,12 @@ class VitStatusPill extends StatelessWidget {
                   constraints: BoxConstraints(
                     minWidth:
                         metrics.height *
-                        AppSpacing.statusPillCountMinWidthFactor,
+                        AppSurfaceSpacing.statusPillCountMinWidthFactor,
                   ),
                   child: SizedBox(
                     height:
-                        metrics.height * AppSpacing.statusPillCountHeightFactor,
+                        metrics.height *
+                        AppSurfaceSpacing.statusPillCountHeightFactor,
                     child: DecoratedBox(
                       decoration: ShapeDecoration(
                         color: palette.foreground,
@@ -202,8 +203,8 @@ class VitStatusPill extends StatelessWidget {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: AppSpacing.statusPillCountPadding,
+                        padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: AppSurfaceSpacing.statusPillCountPadding,
                         ),
                         child: Center(
                           child: Text(

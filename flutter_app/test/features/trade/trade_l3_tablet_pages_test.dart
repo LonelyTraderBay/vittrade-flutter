@@ -119,6 +119,7 @@ void main() {
     expect(find.byType(TradeTabletUtilityPage), findsNothing);
     expect(find.byType(VitNavigationRail), findsOneWidget);
     expect(find.byKey(MarginHubTabletPage.statsKey), findsOneWidget);
+    expect(find.text('Xem lại rủi ro ký quỹ'), findsOneWidget);
     // Menu điều hướng nhanh wired push.
     final menuTile = find.byKey(const Key('sc090_tablet_menu_open-position'));
     if (menuTile.evaluate().isNotEmpty) {

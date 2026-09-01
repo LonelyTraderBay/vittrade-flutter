@@ -69,6 +69,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Cấu hình hiện tại'), findsOneWidget);
+    expect(find.text('Rà soát cài đặt trước khi giao dịch'), findsOneWidget);
     expect(find.byKey(TradeSettingsTabletPage.saveKey), findsOneWidget);
 
     // Bật/tắt công tắc wired — nhãn đổi theo trạng thái.

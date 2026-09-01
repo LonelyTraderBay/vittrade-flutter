@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_gradients.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Visual treatment of a [VitCard]'s background and border.
 enum VitCardVariant { standard, hero, inner, ghost }
@@ -106,12 +106,12 @@ class VitCard extends StatelessWidget {
               color: resolvedBorder ?? AppColors.portfolioBorder,
             ),
           ),
-          shadows: const [
+          shadows: [
             BoxShadow(
               color: AppColors.primary08,
-              blurRadius: AppSpacing.ctaElevationBlur,
-              spreadRadius: AppSpacing.ctaElevationSpread,
-              offset: Offset(0, AppSpacing.ctaElevationYOffset),
+              blurRadius: AppSurfaceSpacing.ctaElevationBlur,
+              spreadRadius: AppSurfaceSpacing.ctaElevationSpread,
+              offset: Offset(0, AppSurfaceSpacing.ctaElevationYOffset),
             ),
           ],
         );
@@ -211,14 +211,10 @@ class VitCard extends StatelessWidget {
 /// Small ghost-tinted inner stat tile, typically holding a metric label and
 /// value inside a parent [VitCard].
 class VitCardStat extends StatelessWidget {
-  const VitCardStat({
-    super.key,
-    required this.child,
-    this.padding = const EdgeInsetsDirectional.all(AppSpacing.x3),
-  });
+  const VitCardStat({super.key, required this.child, this.padding});
 
   final Widget child;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +223,10 @@ class VitCardStat extends StatelessWidget {
         color: AppColors.portfolioBtnGhost,
         shape: RoundedRectangleBorder(borderRadius: AppRadii.smRadius),
       ),
-      child: Padding(padding: padding, child: child),
+      child: Padding(
+        padding: padding ?? EdgeInsetsDirectional.all(AppSurfaceSpacing.x3),
+        child: child,
+      ),
     );
   }
 }

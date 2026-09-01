@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/core/utils/data_masking.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
@@ -44,7 +44,7 @@ class AddressFieldSection extends StatelessWidget {
           required: required,
           optionalText: optionalText,
         ),
-        const SizedBox(height: AppSpacing.formFieldLabelGap),
+        SizedBox(height: AppSurfaceSpacing.formFieldLabelGap),
         child,
       ],
     );
@@ -159,7 +159,7 @@ class AddressWalletInput extends StatelessWidget {
               onChanged();
             },
           ),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           AddressIconCircleButton(
             semanticLabel: 'Quét mã QR địa chỉ ví',
             icon: Icons.qr_code_scanner_rounded,
@@ -223,7 +223,7 @@ class AddressPrimaryActionButton extends StatelessWidget {
       label: semanticLabel ?? label,
       child: VitCtaButton(
         onPressed: enabled ? onTap : null,
-        height: AppSpacing.inputHeight,
+        height: AppSurfaceSpacing.inputHeight,
         child: Text(label),
       ),
     );

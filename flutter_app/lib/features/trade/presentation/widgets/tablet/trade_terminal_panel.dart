@@ -49,6 +49,7 @@ class TradeTerminalPanel extends StatelessWidget {
             Padding(
               padding: TradeSpacingTokens.tradeTerminalPanelHeaderPadding,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     labelValue,
@@ -57,7 +58,6 @@ class TradeTerminalPanel extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const Spacer(),
                   ?trailing,
                 ],
               ),

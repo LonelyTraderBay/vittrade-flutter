@@ -17,19 +17,19 @@ class WithdrawRecentAddresses extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(
+            Icon(
               Icons.menu_book_rounded,
               color: AppColors.text3,
-              size: AppSpacing.iconSm,
+              size: AppSurfaceSpacing.iconSm,
             ),
-            const SizedBox(width: AppSpacing.x2),
+            SizedBox(width: AppSurfaceSpacing.x2),
             Text(
               'Lịch sử địa chỉ gần đây',
               style: AppTextStyles.micro.copyWith(color: AppColors.text3),
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.rowGap),
+        SizedBox(height: AppSurfaceSpacing.rowGap),
         for (var i = 0; i < addresses.length; i++) ...[
           Semantics(
             button: true,
@@ -57,7 +57,7 @@ class WithdrawRecentAddresses extends StatelessWidget {
                             fontWeight: AppTextStyles.bold,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.x1),
+                        SizedBox(height: AppSurfaceSpacing.x1),
                         Text(
                           maskWithdrawAddress(addresses[i].address),
                           maxLines: 1,
@@ -69,7 +69,7 @@ class WithdrawRecentAddresses extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x2),
+                  SizedBox(width: AppSurfaceSpacing.x2),
                   Text(
                     addresses[i].lastUsed,
                     style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -79,7 +79,7 @@ class WithdrawRecentAddresses extends StatelessWidget {
             ),
           ),
           if (i < addresses.length - 1)
-            const SizedBox(height: AppSpacing.rowGap),
+            SizedBox(height: AppSurfaceSpacing.rowGap),
         ],
       ],
     );
@@ -134,12 +134,12 @@ class WithdrawPreviewBlockedNotice extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
+          Icon(
             Icons.info_outline_rounded,
             color: withdrawAmber,
-            size: AppSpacing.iconMd,
+            size: AppSurfaceSpacing.iconMd,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           Expanded(
             child: Text(
               message,
@@ -181,12 +181,12 @@ class WithdrawWarning extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
+          Icon(
             Icons.warning_amber_rounded,
             color: withdrawAmber,
-            size: AppSpacing.iconMd,
+            size: AppSurfaceSpacing.iconMd,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +198,7 @@ class WithdrawWarning extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 for (final item in warningItems) ...[
                   Text(
                     '• $item',
@@ -207,7 +207,7 @@ class WithdrawWarning extends StatelessWidget {
                       fontWeight: AppTextStyles.medium,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  SizedBox(height: AppSurfaceSpacing.x1),
                 ],
               ],
             ),
@@ -232,7 +232,7 @@ class WithdrawSupportLink extends StatelessWidget {
         key: withdrawSupportKey,
         onPressed: onTap,
         variant: VitCtaButtonVariant.ghost,
-        height: AppSpacing.inputHeight - AppSpacing.x2,
+        height: AppSurfaceSpacing.inputHeight - AppSurfaceSpacing.x2,
         leading: const Icon(Icons.support_agent_rounded),
         trailing: const Icon(Icons.chevron_right_rounded),
         child: const Text('Mở hồ sơ hỗ trợ'),
@@ -263,7 +263,7 @@ class WithdrawNextButton extends StatelessWidget {
         child: VitCtaButton(
           key: withdrawNextKey,
           onPressed: onTap,
-          height: AppSpacing.inputHeight,
+          height: AppSurfaceSpacing.inputHeight,
           child: const Text('Tiếp tục →'),
         ),
       ),

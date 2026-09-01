@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Spacing tokens for `trade_core` shared widgets (hero cards, section
 /// rhythm wrapper, scroll-inset helpers).
@@ -17,9 +17,8 @@ final class TradeCoreSpacingTokens {
   const TradeCoreSpacingTokens._();
 
   /// Left padding for the secondary stat column in a 2-KPI hero strip.
-  static const EdgeInsets tradeBotHeroSecondaryPadding = EdgeInsets.only(
-    left: AppSpacing.x4,
-  );
+  static EdgeInsets get tradeBotHeroSecondaryPadding =>
+      EdgeInsets.only(left: AppSurfaceSpacing.x4);
 
   /// L1 instrument terminal scroll-end clearance (visual QA frame).
   static const double tradeBottomInsetVisual = 54;
@@ -28,7 +27,7 @@ final class TradeCoreSpacingTokens {
   static const double tradeBottomInsetNative = 20;
 
   /// Home-aligned section rhythm for L2 trade pages (8px).
-  static const double tradePageContentGap = AppSpacing.x3;
+  static double get tradePageContentGap => AppSurfaceSpacing.x3;
 
   /// Copy-trading hub scroll-end clearance (visual QA frame).
   static const double copyTradingBottomInsetVisual = 126;
@@ -37,9 +36,9 @@ final class TradeCoreSpacingTokens {
   static const double copyTradingBottomInsetNative = 28;
 
   /// Progress bar height for entity-detail hero progress rows.
-  static const double traderProfileProgressHeight = AppSpacing.x3;
+  static double get traderProfileProgressHeight => AppSurfaceSpacing.x3;
 
   /// Icon size for the compliance/regulatory hero banner.
-  static const double regulatoryDisclosuresHeroIcon =
-      AppSpacing.iconMd + AppSpacing.x1;
+  static double get regulatoryDisclosuresHeroIcon =>
+      AppSurfaceSpacing.iconMd + AppSurfaceSpacing.x1;
 }

@@ -377,8 +377,8 @@ class _DeviceDetails extends StatelessWidget {
         ),
         const SizedBox(height: TabletSpacingTokens.x4),
         Wrap(
-          spacing: ProfileSpacingTokens.profileDevicesMetaSpacing,
-          runSpacing: ProfileSpacingTokens.profileDevicesMetaRunSpacing,
+          spacing: TabletSpacingTokens.x3,
+          runSpacing: TabletSpacingTokens.x3,
           children: [
             _DevicesMetaItem(
               icon: Icons.location_on_outlined,
@@ -416,7 +416,7 @@ class _DevicesMetaItem extends StatelessWidget {
           color: AppColors.text3,
           size: ProfileSpacingTokens.profileDevicesMetaIcon,
         ),
-        const SizedBox(width: TabletSpacingTokens.x4),
+        const SizedBox(width: TabletSpacingTokens.x3),
         Text(
           value,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -465,7 +465,7 @@ class _DeviceLogoutButton extends StatelessWidget {
       density: VitDensity.compact,
       variant: VitCtaButtonVariant.danger,
       fullWidth: false,
-      padding: ProfileSpacingTokens.profileDevicesLogoutButtonPadding,
+      padding: TabletSpacingTokens.profileDeviceLogoutButtonPadding,
       leading: const Icon(Icons.delete_outline_rounded),
       child: const Text('Đăng xuất'),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Chrome that a page's top-of-content tab/section switcher is wrapped in.
 ///
@@ -38,7 +38,7 @@ class VitScrollableTabHeader extends StatelessWidget {
   final VitScrollableTabHeaderStyle style;
 
   /// Pre-built pill widgets for [VitScrollableTabHeaderStyle.pillRow].
-  /// A [AppSpacing.x2] gap is inserted between items automatically.
+  /// A [AppSurfaceSpacing.x2] gap is inserted between items automatically.
   final List<Widget> items;
 
   /// The tab bar wrapped for [VitScrollableTabHeaderStyle.surfaceDivider].
@@ -56,7 +56,8 @@ class VitScrollableTabHeader extends StatelessWidget {
             children: [
               for (var i = 0; i < items.length; i++) ...[
                 items[i],
-                if (i != items.length - 1) const SizedBox(width: AppSpacing.x2),
+                if (i != items.length - 1)
+                  SizedBox(width: AppSurfaceSpacing.x2),
               ],
             ],
           ),
@@ -69,9 +70,9 @@ class VitScrollableTabHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               tabBar!,
-              const Divider(
-                height: AppSpacing.hairlineStroke,
-                thickness: AppSpacing.hairlineStroke,
+              Divider(
+                height: AppSurfaceSpacing.hairlineStroke,
+                thickness: AppSurfaceSpacing.hairlineStroke,
                 color: AppColors.border,
               ),
             ],

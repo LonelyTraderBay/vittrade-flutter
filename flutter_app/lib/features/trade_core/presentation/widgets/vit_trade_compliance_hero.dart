@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/theme/trade_core_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -41,7 +41,7 @@ class VitTradeComplianceHero extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: AppSpacing.x4,
+            radius: AppSurfaceSpacing.x4,
             backgroundColor: AppColors.surface2,
             child: Icon(
               icon,
@@ -49,7 +49,7 @@ class VitTradeComplianceHero extends StatelessWidget {
               size: TradeCoreSpacingTokens.regulatoryDisclosuresHeroIcon,
             ),
           ),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class VitTradeComplianceHero extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   description,
                   maxLines: 1,

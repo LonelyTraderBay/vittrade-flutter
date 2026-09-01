@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Accent color family for a [VitChoicePill] when [VitChoicePill.accentColor]
@@ -88,8 +89,10 @@ class VitChoicePill extends StatelessWidget {
     final resolvedPadding =
         padding ??
         (density == VitDensity.compact
-            ? AppSpacing.vitChoicePillCompactPadding
-            : AppSpacing.vitChoicePillComfortablePadding);
+            ? EdgeInsetsDirectional.symmetric(horizontal: AppSurfaceSpacing.x3)
+            : EdgeInsetsDirectional.symmetric(
+                horizontal: AppSurfaceSpacing.x4,
+              ));
 
     final labelText = Text(
       label,
@@ -106,14 +109,17 @@ class VitChoicePill extends StatelessWidget {
       mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
       children: [
         if (selected && showSelectedIcon) ...[
-          Icon(selectedIcon, color: accent, size: AppSpacing.iconSm),
-          const SizedBox(width: AppSpacing.x1),
+          Icon(selectedIcon, color: accent, size: AppSurfaceSpacing.iconSm),
+          SizedBox(width: AppSurfaceSpacing.x1),
         ] else if (leading != null) ...[
           IconTheme(
-            data: IconThemeData(color: foreground, size: AppSpacing.iconSm),
+            data: IconThemeData(
+              color: foreground,
+              size: AppSurfaceSpacing.iconSm,
+            ),
             child: leading!,
           ),
-          const SizedBox(width: AppSpacing.x1),
+          SizedBox(width: AppSurfaceSpacing.x1),
         ],
         if (fullWidth) Flexible(child: labelText) else labelText,
       ],
@@ -125,7 +131,7 @@ class VitChoicePill extends StatelessWidget {
       selected: selected,
       enabled: _interactive,
       child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 140),
+        duration: AppMotion.respect(context, AppMotion.feedback),
         opacity: enabled ? 1 : .52,
         child: SizedBox(
           width: fullWidth ? double.infinity : null,

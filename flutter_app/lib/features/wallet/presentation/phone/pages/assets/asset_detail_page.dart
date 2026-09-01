@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
@@ -16,7 +16,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/features/wallet/presentation/widgets/phone/wallet_formatters.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/wallet_formatters.dart';
 
 part '../../../widgets/assets/asset_detail_page_sections.dart';
 part '../../../widgets/assets/asset_detail_page_common.dart';

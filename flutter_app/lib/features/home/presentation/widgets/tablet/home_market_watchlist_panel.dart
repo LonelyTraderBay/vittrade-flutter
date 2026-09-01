@@ -67,6 +67,7 @@ class HomeMarketWatchlistPanel extends StatelessWidget {
           )
         else
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             clip: true,
             child: Column(
               children: [

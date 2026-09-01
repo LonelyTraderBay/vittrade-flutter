@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_sparkline.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -78,7 +78,7 @@ class VitMarketPairRow extends StatelessWidget {
                     fontWeight: AppTextStyles.medium,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   subtitle,
                   maxLines: 1,
@@ -110,7 +110,7 @@ class VitMarketPairRow extends StatelessWidget {
                     fontFeatures: AppTextStyles.tabularFigures,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   changeLabel,
                   maxLines: 1,

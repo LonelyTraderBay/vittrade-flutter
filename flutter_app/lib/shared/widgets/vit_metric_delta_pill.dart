@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 
@@ -64,9 +64,9 @@ class VitMetricDeltaPill extends StatelessWidget {
         iconSize: SharedSpacingTokens.homePortfolioBadgeIcon,
         textStyle: AppTextStyles.caption,
       ),
-      VitMetricDeltaPillSize.md => const _MetricDeltaMetrics(
-        paddingX: AppSpacing.statusPillHorizontalPaddingMd,
-        paddingY: AppSpacing.x2,
+      VitMetricDeltaPillSize.md => _MetricDeltaMetrics(
+        paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingMd,
+        paddingY: AppSurfaceSpacing.x2,
         iconSize: SharedSpacingTokens.homeNextActionIconSize,
         textStyle: AppTextStyles.caption,
       ),
@@ -103,7 +103,7 @@ class VitMetricDeltaPill extends StatelessWidget {
                   color: palette.foreground,
                   size: metrics.iconSize,
                 ),
-                const SizedBox(width: AppSpacing.x1),
+                SizedBox(width: AppSurfaceSpacing.x1),
               ],
               Flexible(
                 child: Text(

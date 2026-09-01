@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/trade_spacing_tokens.dart';
 
 final class WalletSpacingTokens {
@@ -80,6 +81,11 @@ final class WalletSpacingTokens {
   static const double walletHistoryEndListBottomPad = 20;
   static const double walletHistoryEndListGap = 10;
   static const double walletHistoryDividerHeight = 1;
+
+  /// Tablet surface alias (2026-09-01): divider metrics stay in the Tablet
+  /// namespace while Phone/shared history keeps the legacy token above.
+  static const double walletTabletHistoryDividerHeight =
+      TabletSpacingTokens.dividerHairline;
   static const double walletHistoryFilterTopPad = 24;
   static const double walletHistoryGroupTopPad = 22;
   static const double walletHistoryTitleSpacing = 17;
@@ -324,6 +330,10 @@ final class WalletSpacingTokens {
   static const double walletAllocationChartSize = 92;
   static const double walletAllocationChartStroke = 16;
   static const double walletAllocationChartInset = AppSpacing.x3;
+
+  /// Tablet surface alias (2026-09-01): keep the chart geometry owned by the
+  /// Tablet namespace while the shared/Phone counterpart stays on AppSpacing.
+  static const double walletTabletAllocationChartInset = TabletSpacingTokens.x3;
   static const double walletAllocationCenterRadius = 22;
   static const double walletAllocationLegendMarker = 10;
   static const double walletAllocationLegendGap = AppSpacing.x3;
@@ -355,6 +365,11 @@ final class WalletSpacingTokens {
   static const EdgeInsets walletAddressFilterPadding = EdgeInsets.symmetric(
     horizontal: 13,
   );
+
+  /// Tablet-only control inset (2026-09-01): the address-book ghost action
+  /// uses the Tablet block token 12dp; the Phone counterpart keeps 13dp.
+  static const EdgeInsets walletAddressTabletFilterPadding =
+      EdgeInsets.symmetric(horizontal: TabletSpacingTokens.x4);
   static const double walletAddressFilterGap = 16;
   static const double walletAddressStatsHeight = 70;
   static const double walletAddressStatsGap = AppSpacing.x3;

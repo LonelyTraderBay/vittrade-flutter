@@ -24,7 +24,9 @@ void main() {
       final normalized = entity.path.replaceAll('\\', '/');
       final fileName = normalized.split('/').last;
       final isTabletSurface =
-          normalized.contains('/tablet/') || fileName.contains('tablet');
+          normalized.contains('/tablet/') ||
+          fileName.contains('tablet') ||
+          normalized == 'lib/shared/layout/vit_navigation_rail.dart';
       if (!isTabletSurface || !normalized.endsWith('.dart')) continue;
       // Token files là nơi số liệu được phép sống (kể cả
       // tablet_spacing_tokens tách 2026-09-01) — scanner khóa literal

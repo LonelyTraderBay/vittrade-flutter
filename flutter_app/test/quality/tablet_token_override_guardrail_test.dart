@@ -3,9 +3,10 @@
 // Tablet-Spacing-Gutter-Standard.md).
 //
 // Nguyên tắc: KHÔNG fork token set per-surface. Chênh lệch phone/tablet đi
-// qua 3 lớp đúng thứ tự: context tier (VitDensity/VitPageRhythm) → frame
-// token (TabletDashboardWidths) → tablet-override cục bộ (ngoại lệ, 5 điều
-// kiện Rule 5). Test khóa 3 điều kiểm tra được bằng máy:
+// qua surface namespace + các lớp đúng thứ tự: context tier
+// (VitDensity/VitPageRhythm) → TabletSpacingTokens → frame token
+// (TabletDashboardWidths) → tablet-override cục bộ (ngoại lệ, 5 điều kiện
+// Rule 5). Test khóa 3 điều kiểm tra được bằng máy:
 //   T1 co-location: token `…Tablet…` phải khai báo cùng file với counterpart
 //      phone (tên counterpart = tên token bỏ "Tablet");
 //   T2 không rò rỉ: token `…Tablet…` chỉ được tham chiếu từ file bề mặt
@@ -17,13 +18,20 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Baseline 2026-08-27: 2/7034 module spacing token (~0.03%) là override.
+/// Baseline 2026-09-01: 6 module spacing token là local override; toàn bộ
+/// surface geometry đã tách vào `TabletSpacingTokens`. Hai override Wallet
+/// giữ counterpart Phone vì filter padding và divider height có giá trị khác
+/// nhau giữa hai surface.
 const List<String> kBaselineTabletOverrideTokens = [
   'profileMenuTabletIcon',
   'profileMenuTabletIconBox',
-  // Luật 13dp (2026-08-31): extent card expiry tablet 67 (gap mô tả 13) —
+  // Luật 12dp (2026-08-31): extent card expiry tablet 67 (gap mô tả 12) —
   // phone giữ 62 (gap 5), cùng role khác surface (Rule 5 đủ 5 điều kiện).
   'profileApiCreateTabletExpiryExtent',
+  // Wallet Tablet 12dp / 1dp; Phone giữ token gốc riêng.
+  'walletAddressTabletFilterPadding',
+  'walletTabletHistoryDividerHeight',
+  'walletTabletAllocationChartInset',
 ];
 
 final _declarationRe = RegExp(r'static\s+const\s+\S+\s+(\w+)\s*=');

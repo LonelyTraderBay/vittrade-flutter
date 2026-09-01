@@ -12,7 +12,11 @@ A trading app's most-read surface is the table. Tables fail in specific, repeata
 ## Rules
 
 1. **Figures are tabular, always.** Every price/quantity/PnL/percentage cell renders through an `amount*`/`numeric*` style (`Typography-Standard` Rule 2 — locked by `typography_scale_guardrail_test`). Never `body`/`base` "because it looks close".
-2. **Column widths are tokens, not literals.** Column min-widths and cell padding come from `AppSpacing`/module spacing tokens (`SharedSpacingTokens.homeRankedValueColumnWidth` is the exemplar) — the tablet spacing lock and the phone spacing audits already fail literals.
+2. **Column widths are tokens, not literals.** Column min-widths and cell
+   padding come from `AppSpacing`/module spacing tokens on Phone and
+   `AppSurfaceSpacing`/`TabletSpacingTokens` on Tablet
+   (`SharedSpacingTokens.homeRankedValueColumnWidth` is the exemplar) — the
+   tablet spacing lock and the phone spacing audits already fail literals.
 3. **Separators are hairlines.** Row separation is the 1px `dividerHairline` + `AppColors.divider` token (see the Markets rows and menu rows) — never zebra fills, never heavier borders, never a second stroke system.
 4. **The header stays reachable.** Phone: the filter/sort tier rides `Segment-Pill-Standard` (S1–S4 decision tree) above the list, inside the scroll as a sticky tier only via the sanctioned scaffolds. Tablet: column headers sort on tap and sit at the top of the table block — they never scroll away with the rows on a monitor dashboard (the banner/section owns them).
 5. **Rows are shared primitives.** Build rows from the shared ladder (`VitMarketPairRow`-style rows, `VitKeyValueRow`, `VitCard`-framed dense rows) so hover/focus (input states), tap targets, and masking ride the shared mechanisms — a table never hand-rolls its own row chrome.

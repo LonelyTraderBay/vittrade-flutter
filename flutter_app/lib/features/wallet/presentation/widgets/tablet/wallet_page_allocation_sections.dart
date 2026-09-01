@@ -90,7 +90,7 @@ class _AllocationPainter extends CustomPainter {
         ..color = AppColors.surface3;
       final rect = Offset.zero & size;
       canvas.drawArc(
-        rect.deflate(WalletSpacingTokens.walletAllocationChartInset),
+        rect.deflate(WalletSpacingTokens.walletTabletAllocationChartInset),
         -math.pi / 2,
         math.pi * 2,
         false,
@@ -114,7 +114,7 @@ class _AllocationPainter extends CustomPainter {
       final sweep = (asset.usdValue / total) * math.pi * 2;
       paint.color = Color(asset.colorHex).withValues(alpha: .88);
       canvas.drawArc(
-        rect.deflate(WalletSpacingTokens.walletAllocationChartInset),
+        rect.deflate(WalletSpacingTokens.walletTabletAllocationChartInset),
         start,
         sweep,
         false,

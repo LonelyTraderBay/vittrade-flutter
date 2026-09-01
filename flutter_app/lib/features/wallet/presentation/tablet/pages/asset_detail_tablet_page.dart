@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -84,6 +84,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           borderColor: accent.withValues(alpha: .22),
           child: Column(
@@ -193,7 +194,9 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
               variant: VitTabBarVariant.segment,
             ),
             const SizedBox(height: TabletSpacingTokens.x4),
+
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: SizedBox(
                 height: TabletSpacingTokens.x7 * 3,
@@ -224,6 +227,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [

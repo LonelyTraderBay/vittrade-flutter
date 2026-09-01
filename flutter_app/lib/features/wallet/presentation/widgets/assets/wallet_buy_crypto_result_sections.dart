@@ -27,7 +27,7 @@ class _BuyButton extends StatelessWidget {
           key: const Key('sc145_buy_crypto_buy'),
           onPressed: enabled ? onTap : null,
           variant: VitCtaButtonVariant.success,
-          height: AppSpacing.ctaHeight,
+          height: AppSurfaceSpacing.ctaHeight,
           child: Text(
             enabled ? 'Mua $symbol' : 'Nhập số tiền mua',
             style: AppTextStyles.baseMedium.copyWith(
@@ -69,7 +69,7 @@ class BuyConfirmContent extends StatelessWidget {
       headerIconColor: _buyPrimary,
       headerVariant: VitSectionHeaderVariant.plain,
       accentColor: _buyPrimary,
-      innerGap: AppSpacing.pageRhythmFormInnerGap,
+      innerGap: AppSurfaceSpacing.pageRhythmFormInnerGap,
       children: [
         VitCard(
           density: VitDensity.compact,
@@ -225,7 +225,7 @@ class _ActionButton extends StatelessWidget {
     return VitCtaButton(
       onPressed: enabled ? onTap : null,
       variant: VitCtaButtonVariant.primary,
-      height: AppSpacing.ctaHeight,
+      height: AppSurfaceSpacing.ctaHeight,
       child: Text(
         label,
         style: AppTextStyles.baseMedium.copyWith(
@@ -253,7 +253,7 @@ class _GhostButton extends StatelessWidget {
     return VitCtaButton(
       onPressed: enabled ? onTap : null,
       variant: VitCtaButtonVariant.ghost,
-      height: AppSpacing.ctaHeight,
+      height: AppSurfaceSpacing.ctaHeight,
       child: Text(
         label,
         style: AppTextStyles.baseMedium.copyWith(
@@ -299,10 +299,10 @@ class BuyCryptoOptionRow extends StatelessWidget {
             ),
           ),
           if (selected)
-            const Icon(
+            Icon(
               Icons.check_circle_rounded,
               color: _buyPrimary,
-              size: AppSpacing.iconMd,
+              size: AppSurfaceSpacing.iconMd,
             ),
         ],
       ),

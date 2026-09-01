@@ -188,7 +188,10 @@ class _ToolsSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(width: 120, height: TabletSpacingTokens.x4),
         SizedBox(height: TabletSpacingTokens.x4),
-        VitCard(child: VitSkeletonList(rows: 2)),
+        VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
+          child: VitSkeletonList(rows: 2),
+        ),
       ],
     );
   }

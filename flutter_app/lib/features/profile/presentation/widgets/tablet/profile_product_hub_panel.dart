@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/profile_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
@@ -26,13 +27,11 @@ class ProfileProductHubPanel extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final tileWidth =
-            (constraints.maxWidth -
-                ProfileSpacingTokens.profileProductGridGap) /
-            2;
+            (constraints.maxWidth - TabletSpacingTokens.cardGap) / 2;
         return Wrap(
           key: ProfileTabletKeys.productHub,
-          spacing: ProfileSpacingTokens.profileProductGridGap,
-          runSpacing: ProfileSpacingTokens.profileProductGridGap,
+          spacing: TabletSpacingTokens.cardGap,
+          runSpacing: TabletSpacingTokens.cardGap,
           children: [
             for (final shortcut in shortcuts)
               SizedBox(
@@ -60,7 +59,7 @@ class _ProfileProductTile extends StatelessWidget {
       density: VitDensity.compact,
       borderColor: accent.withValues(alpha: .22),
       child: VitIconListRow(
-        gap: ProfileSpacingTokens.profileProductGap,
+        gap: TabletSpacingTokens.x3,
         leading: SizedBox(
           width: ProfileSpacingTokens.profileProductIconBox,
           height: ProfileSpacingTokens.profileProductIconBox,

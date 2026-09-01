@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -180,7 +180,9 @@ class _TransactionHistoryTabletPageState
         const SizedBox(
           height: TabletSpacingTokens.pageRhythmStandardSectionGap,
         ),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,9 +248,11 @@ class _TransactionTabletCard extends StatelessWidget {
       child: Row(
         children: [
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             width: TabletSpacingTokens.buttonCompact,
             height: TabletSpacingTokens.buttonCompact,
             variant: VitCardVariant.inner,
+            radius: VitCardRadius.tight,
             alignment: Alignment.center,
             borderColor: meta.color.withValues(alpha: .22),
             child: Icon(

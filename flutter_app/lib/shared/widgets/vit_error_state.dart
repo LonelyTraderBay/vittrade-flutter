@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 
 /// Centered error placeholder: icon, title, message, and optional
@@ -14,14 +14,12 @@ class VitErrorState extends StatelessWidget {
     this.title = 'Đã xảy ra lỗi',
     this.message = 'Vui lòng thử lại hoặc kiểm tra kết nối.',
     this.icon = Icons.warning_amber_rounded,
-    this.iconContainerSize =
-        AppSpacing.buttonStandard + AppSpacing.contentPad + AppSpacing.x2,
-    this.iconSize = AppSpacing.iconLg + AppSpacing.hairlineStroke,
+    this.iconContainerSize,
+    this.iconSize,
     this.iconShape = BoxShape.rectangle,
     this.iconBorderRadius,
-    this.verticalPadding =
-        AppSpacing.buttonStandard + AppSpacing.x3 + AppSpacing.dividerHairline,
-    this.horizontalPadding = AppSpacing.x6,
+    this.verticalPadding,
+    this.horizontalPadding,
     this.titleStyle,
     this.messageStyle,
     this.actionLabel = 'Thử lại',
@@ -33,12 +31,12 @@ class VitErrorState extends StatelessWidget {
   final String title;
   final String message;
   final IconData icon;
-  final double iconContainerSize;
-  final double iconSize;
+  final double? iconContainerSize;
+  final double? iconSize;
   final BoxShape iconShape;
   final BorderRadius? iconBorderRadius;
-  final double verticalPadding;
-  final double horizontalPadding;
+  final double? verticalPadding;
+  final double? horizontalPadding;
   final TextStyle? titleStyle;
   final TextStyle? messageStyle;
   final String actionLabel;
@@ -48,6 +46,19 @@ class VitErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resolvedIconContainerSize =
+        iconContainerSize ??
+        AppSurfaceSpacing.buttonStandard +
+            AppSurfaceSpacing.contentPad +
+            AppSurfaceSpacing.x2;
+    final resolvedIconSize =
+        iconSize ?? AppSurfaceSpacing.iconLg + AppSurfaceSpacing.hairlineStroke;
+    final resolvedVerticalPadding =
+        verticalPadding ??
+        AppSurfaceSpacing.buttonStandard +
+            AppSurfaceSpacing.x3 +
+            AppSurfaceSpacing.dividerHairline;
+    final resolvedHorizontalPadding = horizontalPadding ?? AppSurfaceSpacing.x6;
     final iconShapeBorder = iconShape == BoxShape.circle
         ? const CircleBorder(side: BorderSide(color: AppColors.sell20))
         : RoundedRectangleBorder(
@@ -60,55 +71,59 @@ class VitErrorState extends StatelessWidget {
       liveRegion: true,
       child: Padding(
         padding: EdgeInsetsDirectional.symmetric(
-          horizontal: horizontalPadding,
-          vertical: verticalPadding,
+          horizontal: resolvedHorizontalPadding,
+          vertical: resolvedVerticalPadding,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              width: iconContainerSize,
-              height: iconContainerSize,
+              width: resolvedIconContainerSize,
+              height: resolvedIconContainerSize,
               child: DecoratedBox(
                 decoration: ShapeDecoration(
                   color: AppColors.sell10,
                   shape: iconShapeBorder,
                 ),
                 child: Center(
-                  child: Icon(icon, color: AppColors.sell, size: iconSize),
+                  child: Icon(
+                    icon,
+                    color: AppColors.sell,
+                    size: resolvedIconSize,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            SizedBox(height: AppSurfaceSpacing.x4),
             Text(
               title,
               textAlign: TextAlign.center,
               style: titleStyle ?? AppTextStyles.baseMedium,
             ),
-            const SizedBox(height: AppSpacing.x2),
+            SizedBox(height: AppSurfaceSpacing.x2),
             Text(
               message,
               textAlign: TextAlign.center,
               style: messageStyle ?? AppTextStyles.caption,
             ),
             if (onAction != null) ...[
-              const SizedBox(height: AppSpacing.x4),
+              SizedBox(height: AppSurfaceSpacing.x4),
               VitCtaButton(
                 onPressed: onAction,
                 variant: VitCtaButtonVariant.danger,
                 fullWidth: false,
-                height: AppSpacing.inputHeight - AppSpacing.x3,
+                height: AppSurfaceSpacing.inputHeight - AppSurfaceSpacing.x3,
                 leading: const Icon(Icons.refresh_rounded),
                 child: Text(actionLabel),
               ),
             ],
             if (secondaryLabel != null && onSecondary != null) ...[
-              const SizedBox(height: AppSpacing.x3),
+              SizedBox(height: AppSurfaceSpacing.x3),
               VitCtaButton(
                 onPressed: onSecondary,
                 variant: VitCtaButtonVariant.ghost,
                 fullWidth: false,
-                height: AppSpacing.inputHeight - AppSpacing.x3,
+                height: AppSurfaceSpacing.inputHeight - AppSurfaceSpacing.x3,
                 child: Text(secondaryLabel!),
               ),
             ],

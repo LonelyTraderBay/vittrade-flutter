@@ -33,6 +33,7 @@ class ProfileMenuPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = Color(section.accentHex);
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: AppColors.cardBorder,
       clip: true,
       child: Column(
@@ -78,7 +79,7 @@ class _MenuRow extends StatelessWidget {
         child: VitIconListRow(
           minHeight: VitDensity.standard.controlHeight,
           padding: ProfileSpacingTokens.profileMenuRowPadding,
-          gap: ProfileSpacingTokens.profileMenuGap,
+          gap: TabletSpacingTokens.x3,
           subtitleGap: TabletSpacingTokens.pageRhythmCompactInnerGap,
           leading: SizedBox(
             width: ProfileSpacingTokens.profileMenuTabletIconBox,

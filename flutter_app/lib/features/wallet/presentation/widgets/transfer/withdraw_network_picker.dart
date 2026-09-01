@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/domain/entities/wallet_entities.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/withdraw_common.dart';
@@ -28,7 +28,7 @@ class WithdrawNetworkPicker extends StatelessWidget {
       child: ListView.separated(
         shrinkWrap: true,
         itemCount: networks.length,
-        separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x1),
+        separatorBuilder: (_, _) => SizedBox(height: AppSurfaceSpacing.x1),
         itemBuilder: (context, index) {
           final network = networks[index];
           return WithdrawNetworkOption(
@@ -79,7 +79,7 @@ class WithdrawNetworkOption extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.x1),
+                  SizedBox(height: AppSurfaceSpacing.x1),
                   Text(
                     'Phí: ${formatWithdrawCompact(network.fee)} · Tối thiểu: ${formatWithdrawCompact(network.minWithdraw)}',
                     maxLines: 1,
@@ -93,10 +93,10 @@ class WithdrawNetworkOption extends StatelessWidget {
               ),
             ),
             if (selected)
-              const Icon(
+              Icon(
                 Icons.check_circle_rounded,
                 color: withdrawPrimary,
-                size: AppSpacing.iconMd,
+                size: AppSurfaceSpacing.iconMd,
               ),
           ],
         ),

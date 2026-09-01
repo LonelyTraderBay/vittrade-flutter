@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_accent_pill.dart';
@@ -34,7 +34,7 @@ class VitCompactProductCard extends StatelessWidget {
       onTap: onTap,
       height: SharedSpacingTokens.homeRecentProductHeight,
       contentAlign: VitCardContentAlign.center,
-      padding: AppSpacing.cardTilePadding,
+      padding: AppSurfaceSpacing.cardTilePadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -65,7 +65,7 @@ class VitCompactProductCard extends StatelessWidget {
                 VitAccentPill(label: badgeLabel!, accentColor: accentColor),
             ],
           ),
-          const SizedBox(height: AppSpacing.cardTileInnerGap),
+          SizedBox(height: AppSurfaceSpacing.cardTileInnerGap),
           Text(
             title,
             maxLines: 1,
@@ -75,7 +75,7 @@ class VitCompactProductCard extends StatelessWidget {
               fontWeight: AppTextStyles.bold,
             ),
           ),
-          const SizedBox(height: AppSpacing.cardTileInnerGap),
+          SizedBox(height: AppSurfaceSpacing.cardTileInnerGap),
           Text(
             subtitle,
             maxLines: 1,

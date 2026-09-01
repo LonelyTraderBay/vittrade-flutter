@@ -70,7 +70,7 @@ class TradeTerminalBookPanel extends StatelessWidget {
       child: Padding(
         padding: TradeSpacingTokens.tradeTerminalPanelBodyPadding,
         child: SingleChildScrollView(
-          // Luật 8pt 12dp: hàng cuối → viền dưới.
+          // Luật Base-8-derived 12dp: hàng cuối → viền dưới.
           padding: TradeSpacingTokens.tradeTerminalPanelBodyBottomPadding,
           child: Column(
             children: [

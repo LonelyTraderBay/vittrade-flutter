@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
-
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_choice_pill.dart';
 
 /// One selectable preset entry (value + label) rendered as a
@@ -33,8 +32,8 @@ class VitPresetChipRow<T> extends StatelessWidget {
     required this.onTap,
     this.selectedValue,
     this.accentColor,
-    this.gap = AppSpacing.vitPresetChipRowGap,
-    this.height = AppSpacing.vitPresetChipRowHeight,
+    this.gap,
+    this.height,
     this.fullWidth = true,
     this.density = VitDensity.compact,
     this.padding,
@@ -45,8 +44,8 @@ class VitPresetChipRow<T> extends StatelessWidget {
   final ValueChanged<T> onTap;
   final T? selectedValue;
   final Color? accentColor;
-  final double gap;
-  final double height;
+  final double? gap;
+  final double? height;
   final bool fullWidth;
   final VitDensity density;
   final EdgeInsetsGeometry? padding;
@@ -60,8 +59,8 @@ class VitPresetChipRow<T> extends StatelessWidget {
     required Key Function(int value) keyFor,
     int? selectedValue,
     Color accentColor = AppColors.primarySoft,
-    double gap = AppSpacing.vitPresetChipRowGap,
-    double height = AppSpacing.vitPresetChipRowHeight,
+    double? gap,
+    double? height,
     EdgeInsetsGeometry? padding,
   }) {
     return VitPresetChipRow<int>(
@@ -86,6 +85,8 @@ class VitPresetChipRow<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resolvedGap = gap ?? AppSurfaceSpacing.x1;
+    final resolvedHeight = height ?? AppSurfaceSpacing.buttonCompact;
     final row = Row(
       children: [
         for (var index = 0; index < items.length; index++) ...[
@@ -94,8 +95,11 @@ class VitPresetChipRow<T> extends StatelessWidget {
           // số này từng là ĐƯỜNG CHẾT vì Expanded bọc vô điều kiện
           // (2026-08-29: pane timeframe tablet + P2P tax-year đều hỏi
           // content-hug nhưng vẫn bị căng đều).
-          if (fullWidth) Expanded(child: _pillFor(index)) else _pillFor(index),
-          if (index != items.length - 1) SizedBox(width: gap),
+          if (fullWidth)
+            Expanded(child: _pillFor(index, height: resolvedHeight))
+          else
+            _pillFor(index, height: resolvedHeight),
+          if (index != items.length - 1) SizedBox(width: resolvedGap),
         ],
       ],
     );
@@ -103,7 +107,7 @@ class VitPresetChipRow<T> extends StatelessWidget {
     return row;
   }
 
-  VitChoicePill _pillFor(int index) => VitChoicePill(
+  VitChoicePill _pillFor(int index, {required double height}) => VitChoicePill(
     key: items[index].key,
     label: items[index].label,
     selected: selectedValue != null && selectedValue == items[index].value,

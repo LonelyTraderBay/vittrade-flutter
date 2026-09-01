@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -84,6 +84,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           key: WithdrawLimitsTabletPage.currentTierKey,
           variant: VitCardVariant.hero,
           child: Row(
@@ -144,7 +145,9 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
             ),
           ],
         ),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           borderColor: AppColors.caution.withValues(alpha: .34),
           child: Row(
@@ -189,6 +192,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
     required double percent,
   }) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: key,
       variant: VitCardVariant.inner,
       child: Column(
@@ -251,6 +255,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
       button: isLocked,
       label: '$stateLabel cấp KYC ${tier.level}, ${tier.name}',
       child: VitCard(
+        padding: TabletSpacingTokens.zeroInsets,
         key: WithdrawLimitsTabletPage.tierKey(tier.level),
         onTap: isLocked ? () => context.go(AppRoutePaths.profileKyc) : null,
         variant: isCurrent ? VitCardVariant.hero : VitCardVariant.inner,
@@ -325,6 +330,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -361,6 +367,7 @@ class WithdrawLimitsTabletPage extends ConsumerWidget {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

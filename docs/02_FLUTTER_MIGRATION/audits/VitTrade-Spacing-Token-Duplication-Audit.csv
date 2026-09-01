@@ -1,11 +1,1 @@
 module,file,constant_name,value,core_token
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,accentIconBoxSize,34,AppSpacing.x6
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,buttonCompact,34,AppSpacing.x6
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,buttonStandard,55,AppSpacing.x7
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,gridGap,8,AppSpacing.x3
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,iconLg,34,AppSpacing.x6
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,iconMd,21,AppSpacing.x5
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,iconSm,13,AppSpacing.x4
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,pageRhythmFormInnerGap,8,AppSpacing.x3
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,rowGap,8,AppSpacing.x3
-tablet,flutter_app/lib/app/theme/spacing/tablet_spacing_tokens.dart,x3,8,AppSpacing.x3

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_chart.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_order_book.dart';

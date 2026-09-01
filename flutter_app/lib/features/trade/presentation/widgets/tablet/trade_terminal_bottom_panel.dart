@@ -76,7 +76,7 @@ class _TradeTerminalBottomPanelState extends State<TradeTerminalBottomPanel> {
     return TradeTerminalPanel(
       panelKey: TradeTabletKeys.bottomPanel,
       child: Padding(
-        // Luật 8pt 12dp: mép panel → tab; body chỉ inset ngang.
+        // Luật Base-8-derived 12dp: mép panel → tab; body chỉ inset ngang.
         padding: TradeSpacingTokens.tradeTerminalPanelBodyTopPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

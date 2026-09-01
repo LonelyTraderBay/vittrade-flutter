@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 
@@ -47,16 +47,19 @@ class VitSheetPanel extends StatelessWidget {
     super.key,
     required this.title,
     required this.child,
-    this.maxHeightFactor = AppSpacing.sheetPanelMaxHeightFactor,
+    this.maxHeightFactor,
   });
 
   final String title;
   final Widget child;
-  final double maxHeightFactor;
+  final double? maxHeightFactor;
 
   @override
   Widget build(BuildContext context) {
-    final maxHeight = MediaQuery.sizeOf(context).height * maxHeightFactor;
+    final resolvedMaxHeightFactor =
+        maxHeightFactor ?? AppSurfaceSpacing.sheetPanelMaxHeightFactor;
+    final maxHeight =
+        MediaQuery.sizeOf(context).height * resolvedMaxHeightFactor;
 
     return SafeArea(
       top: false,
@@ -69,14 +72,14 @@ class VitSheetPanel extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const VitSheetHandle(),
-              const SizedBox(height: AppSpacing.x4),
+              SizedBox(height: AppSurfaceSpacing.x4),
               Text(
                 title,
                 style: AppTextStyles.sectionTitle.copyWith(
                   fontWeight: AppTextStyles.bold,
                 ),
               ),
-              const SizedBox(height: AppSpacing.x4),
+              SizedBox(height: AppSurfaceSpacing.x4),
               Flexible(child: child),
             ],
           ),

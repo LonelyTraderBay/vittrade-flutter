@@ -5,7 +5,7 @@ import 'package:vit_trade_flutter/app/theme/app_gradients.dart';
 import 'package:vit_trade_flutter/app/theme/app_input_states.dart';
 import 'package:vit_trade_flutter/app/theme/app_motion.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 
@@ -31,13 +31,11 @@ class VitCtaButton extends StatelessWidget {
     this.variant = VitCtaButtonVariant.primary,
     this.loading = false,
     this.fullWidth = true,
-    this.height = AppSpacing.ctaHeight,
+    this.height,
     this.density = VitDensity.standard,
     this.leading,
     this.trailing,
-    this.padding = const EdgeInsetsDirectional.symmetric(
-      horizontal: AppSpacing.x5,
-    ),
+    this.padding,
   });
 
   final Widget child;
@@ -45,11 +43,11 @@ class VitCtaButton extends StatelessWidget {
   final VitCtaButtonVariant variant;
   final bool loading;
   final bool fullWidth;
-  final double height;
+  final double? height;
   final VitDensity density;
   final Widget? leading;
   final Widget? trailing;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   bool get _enabled => onPressed != null && !loading;
 
@@ -109,9 +107,10 @@ class VitCtaButton extends StatelessWidget {
             background: AppColors.surface2,
             foreground: AppColors.text3,
           );
-    final resolvedHeight = height == AppSpacing.ctaHeight
-        ? density.controlHeight
-        : height;
+    final resolvedHeight = height ?? density.controlHeight;
+    final resolvedPadding =
+        padding ??
+        EdgeInsetsDirectional.symmetric(horizontal: AppSurfaceSpacing.x5);
 
     final button = ConstrainedBox(
       // A11Y-3: minHeight (not a tight height) lets the button grow taller
@@ -140,8 +139,8 @@ class VitCtaButton extends StatelessWidget {
                 : [
                     BoxShadow(
                       color: style.shadow!,
-                      blurRadius: AppSpacing.ctaElevationBlur,
-                      offset: const Offset(0, AppSpacing.ctaElevationYOffset),
+                      blurRadius: AppSurfaceSpacing.ctaElevationBlur,
+                      offset: Offset(0, AppSurfaceSpacing.ctaElevationYOffset),
                     ),
                   ],
           ),
@@ -151,32 +150,32 @@ class VitCtaButton extends StatelessWidget {
             hoverColor: AppInputStates.hoverOverlay,
             focusColor: AppInputStates.focusOverlay,
             child: Padding(
-              padding: padding,
+              padding: resolvedPadding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
                 children: [
                   if (loading) ...[
                     SizedBox(
-                      width: AppSpacing.ctaLoadingIcon,
-                      height: AppSpacing.ctaLoadingIcon,
+                      width: AppSurfaceSpacing.ctaLoadingIcon,
+                      height: AppSurfaceSpacing.ctaLoadingIcon,
                       child: CircularProgressIndicator(
-                        strokeWidth: AppSpacing.ctaStrokeWidth,
+                        strokeWidth: AppSurfaceSpacing.ctaStrokeWidth,
                         valueColor: AlwaysStoppedAnimation<Color>(
                           style.foreground,
                         ),
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.x3),
+                    SizedBox(width: AppSurfaceSpacing.x3),
                   ] else if (leading != null) ...[
                     IconTheme(
                       data: IconThemeData(
                         color: style.foreground,
-                        size: AppSpacing.iconMd,
+                        size: AppSurfaceSpacing.iconMd,
                       ),
                       child: leading!,
                     ),
-                    const SizedBox(width: AppSpacing.x3),
+                    SizedBox(width: AppSurfaceSpacing.x3),
                   ],
                   Flexible(
                     // A11Y-3: no FittedBox — let the label wrap (Row/height
@@ -189,11 +188,11 @@ class VitCtaButton extends StatelessWidget {
                     ),
                   ),
                   if (trailing != null) ...[
-                    const SizedBox(width: AppSpacing.x3),
+                    SizedBox(width: AppSurfaceSpacing.x3),
                     IconTheme(
                       data: IconThemeData(
                         color: style.foreground,
-                        size: AppSpacing.iconMd,
+                        size: AppSurfaceSpacing.iconMd,
                       ),
                       child: trailing!,
                     ),

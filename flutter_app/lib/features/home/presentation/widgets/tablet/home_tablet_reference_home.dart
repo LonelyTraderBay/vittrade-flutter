@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_discovery_panel.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart';
@@ -117,8 +116,6 @@ class HomeTabletReferenceHome extends StatelessWidget {
       ],
       secondaryChildren: secondaryChildren,
       onRefresh: onRefresh,
-      primaryContentGap: TabletSpacingTokens.x4,
-      secondaryContentGap: TabletSpacingTokens.x4,
     );
   }
 }

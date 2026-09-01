@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=408
+vit_header_total=409
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -17,13 +17,14 @@ action_groups_over_limit=0
 
 | Classification | Count |
 | --- | ---: |
-| canonical | 385 |
+| canonical | 386 |
 
 ## Action Inventory
 
 | Category | File | Line | Owner | Source | Icon/Action | Classification | Canonical | Needs migration | Notes |
 | --- | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 | vit_header | `flutter_app/lib/app/router/internal_surface_gate.dart` | 92 | `_InternalSurfaceRestrictedPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/app/router/phone/phone_internal_surface_gate.dart` | 93 | `_InternalSurfaceRestrictedPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/admin/presentation/phone/pages/ab_test_dashboard_page.dart` | 58 | `_ABTestDashboardPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/admin/presentation/phone/pages/admin_settings_page.dart` | 44 | `AdminSettingsPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/admin/presentation/phone/pages/analytics_dashboard_page.dart` | 66 | `_AnalyticsDashboardPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |

@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/cross_module_controller_providers.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 

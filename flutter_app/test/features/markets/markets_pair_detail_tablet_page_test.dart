@@ -335,7 +335,7 @@ void main() {
     );
   });
 
-  // S7 narrow: khuôn cuộn hẹp vẫn giữ section gap 13dp quanh banner.
+  // S7 narrow: khuôn cuộn hẹp vẫn giữ section gap 12dp quanh banner.
   testWidgets('SC-044 narrow pane keeps the 12dp section rhythm (S7)', (
     tester,
   ) async {
@@ -353,7 +353,8 @@ void main() {
     expect(
       link1.top - banner.bottom,
       TabletSpacingTokens.x4,
-      reason: 'Gap banner → link card phải đúng 12dp (luật 8pt tablet).',
+      reason:
+          'Gap banner → link card phải đúng 12dp (luật Base-8-derived Tablet).',
     );
   });
 }

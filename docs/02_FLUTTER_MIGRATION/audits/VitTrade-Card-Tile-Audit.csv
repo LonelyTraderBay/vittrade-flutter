@@ -1107,7 +1107,7 @@ shared,flutter_app/lib/shared/widgets/vit_faq_accordion.dart,1,0,0,C,0,0,0,pass,
 shared,flutter_app/lib/shared/widgets/vit_financial_safety_summary.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_icon_label_card.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_info_callout.dart,1,0,0,C,0,0,0,pass,-
-shared,flutter_app/lib/shared/widgets/vit_market_ticker.dart,1,1,1,A,0,0,0,pass,-
+shared,flutter_app/lib/shared/widgets/vit_market_ticker.dart,1,1,1,A,0,1,0,warn,strip_missing_card_tile_padding
 shared,flutter_app/lib/shared/widgets/vit_metric_box.dart,1,0,0,C,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_module_components.dart,3,0,0,E,0,0,0,pass,-
 shared,flutter_app/lib/shared/widgets/vit_next_action_card.dart,1,0,0,C,0,0,0,pass,-

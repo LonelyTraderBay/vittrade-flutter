@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -81,6 +81,7 @@ class _WalletHealthScoreTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             children: [
@@ -176,6 +177,7 @@ class _WalletHealthScoreTabletPageState
       children: [
         for (final recommendation in snapshot.priorityRecommendations)
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             key: WalletHealthScoreTabletPage.recommendationKey(
               recommendation.id,
             ),
@@ -219,6 +221,7 @@ class _WalletHealthScoreTabletPageState
       rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             children: [
@@ -260,6 +263,7 @@ class _WalletHealthScoreTabletPageState
       rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             children: [
@@ -279,6 +283,7 @@ class _WalletHealthScoreTabletPageState
           ),
         ),
         const VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.ghost,
           child: Text(
             'Đa dạng hóa giúp giảm rủi ro tập trung, nhưng không loại bỏ rủi ro thị trường.',
@@ -310,6 +315,7 @@ class _WalletHealthScoreTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -333,6 +339,7 @@ class _WalletHealthScoreTabletPageState
         ),
         if (snapshot.history.isNotEmpty)
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             variant: VitCardVariant.inner,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

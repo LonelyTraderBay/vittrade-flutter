@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -39,7 +39,7 @@ class VitCommunityRulesLink extends StatelessWidget {
             color: AppColors.primary,
             size: SharedSpacingTokens.arenaCommunityRulesLinkIcon,
           ),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           Text(
             label,
             style: AppTextStyles.caption.copyWith(

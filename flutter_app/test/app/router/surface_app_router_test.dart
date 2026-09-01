@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/router/phone/phone_app_router.dart';
 import 'package:vit_trade_flutter/app/router/tablet/tablet_app_router.dart';
+import 'package:vit_trade_flutter/app/router/tablet/tablet_route_manifest.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/app/shell/phone/phone_app_shell.dart';
 import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
@@ -99,5 +102,38 @@ void main() {
     final router = createAppRouter();
     addTearDown(router.dispose);
     expect(router.namedLocation(AppRouteNames.sc007Home), '/home');
+  });
+
+  test('Tablet router đăng ký đủ path/name trong route manifest', () {
+    final router = createTabletAppRouter();
+    addTearDown(router.dispose);
+
+    final namedRoutes = tabletRouteManifest.where((route) {
+      return route.name != null;
+    });
+    for (final route in namedRoutes) {
+      final parameterNames = RegExp(
+        r':([A-Za-z_]\w*)',
+      ).allMatches(route.path).map((match) => match.group(1)!).toSet();
+      final location = router.namedLocation(
+        route.name!,
+        pathParameters: {for (final name in parameterNames) name: 'sample'},
+      );
+      expect(
+        Uri.parse(location).path,
+        isNotEmpty,
+        reason: 'Tablet route chưa đăng ký: ${route.name}',
+      );
+    }
+    expect(namedRoutes.length, greaterThan(400));
+
+    final truthTable = File(
+      '../docs/02_FLUTTER_MIGRATION/Flutter-Route-Coverage-Truth-Table.md',
+    );
+    final auditedRows = truthTable
+        .readAsLinesSync()
+        .where((line) => line.startsWith('| `lib/app/router/'))
+        .length;
+    expect(tabletRouteManifest, hasLength(auditedRows));
   });
 }

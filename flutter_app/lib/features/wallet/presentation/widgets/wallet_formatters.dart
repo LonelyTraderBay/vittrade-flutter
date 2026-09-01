@@ -1,9 +1,7 @@
 /// Shared USD comma-grouping formatters for wallet widgets.
 ///
-/// Consolidates a formatter (`$1,234.56` style: fixed decimals, thousands
-/// separators, decimal portion always shown) that was previously
-/// copy-pasted byte-for-byte across `wallet_transfer_sections.dart` and
-/// `asset_detail_page_common.dart` / `asset_detail_page_sections.dart`.
+/// This file is surface-neutral: both Phone and Tablet wallet compositions
+/// may use the same display formatter without importing a surface namespace.
 library;
 
 /// Formats [value] as `$1,234.56` with [decimals] fixed decimal places.

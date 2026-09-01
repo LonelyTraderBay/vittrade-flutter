@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -64,9 +64,8 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 ///
 /// R6: the two-column path uses `VitContentPadding.relaxed` +
 /// `VitPageRhythm.standard`; the single-column fallback keeps `.standard`.
-/// Screen-specific [primaryContentGap] and [secondaryContentGap] overrides may
-/// tighten the major-section rhythm when the dashboard has a denser scan path;
-/// they only affect the two-column path and keep the fallback contract intact.
+/// Both columns use the Tablet major-section gap token so the two-column path
+/// and its single-column fallback cannot drift at a breakpoint.
 /// Both paths reserve [bottomContentInset] after the final content item so
 /// tablet columns never end flush against the viewport edge.
 /// R8: [primaryColumnMaxWidth]/[secondaryColumnMaxWidth] default to the
@@ -89,9 +88,7 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
     this.outerHorizontalMargin = TabletDashboardWidths.outerHorizontalMargin,
     this.columnGutter = TabletDashboardWidths.columnGutter,
     this.blockVerticalGap = TabletDashboardWidths.blockVerticalGap,
-    this.primaryContentGap,
-    this.secondaryContentGap,
-    this.bottomContentInset = AppSpacing.contentPad,
+    this.bottomContentInset = TabletSpacingTokens.contentPad,
   });
 
   /// Main-column content. Flush against the page background at the
@@ -149,15 +146,6 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
   /// header; the bottom gap keeps the scrollable columns off the viewport's
   /// bottom edge.
   final double blockVerticalGap;
-
-  /// Optional vertical gap between primary-column sections. When null, the
-  /// column keeps the rhythm selected below for backward compatibility.
-  final double? primaryContentGap;
-
-  /// Optional vertical gap between secondary-column sections. When null, the
-  /// sidebar keeps the relaxed rhythm selected below for backward
-  /// compatibility.
-  final double? secondaryContentGap;
 
   /// Bottom breathing room after the final content item in each scrollable
   /// column. The same inset is used by the single-column fallback so all
@@ -255,7 +243,8 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                                   padding: VitContentPadding.none,
                                   fullBleed: true,
                                   rhythm: VitPageRhythm.standard,
-                                  customGap: primaryContentGap ?? AppSpacing.x4,
+                                  customGap: TabletSpacingTokens
+                                      .pageRhythmStandardSectionGap,
                                   children: primaryChildren,
                                 ),
                               ),
@@ -296,8 +285,8 @@ class VitTwoColumnTabletDashboard extends StatelessWidget {
                                     child: VitPageContent(
                                       padding: VitContentPadding.relaxed,
                                       rhythm: VitPageRhythm.standard,
-                                      customGap:
-                                          secondaryContentGap ?? AppSpacing.x4,
+                                      customGap: TabletSpacingTokens
+                                          .pageRhythmStandardSectionGap,
                                       children: secondaryChildren,
                                     ),
                                   ),

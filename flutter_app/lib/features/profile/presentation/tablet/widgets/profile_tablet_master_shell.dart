@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_master_menu.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_status_content.dart';
@@ -176,7 +177,9 @@ class ProfileTabletMasterShell extends ConsumerWidget {
       variant: VitCardVariant.inner,
       borderColor: AppColors.borderSolid,
       clip: true,
-      padding: EdgeInsets.zero,
+      // The framed master card owns the complete 12dp inset. Its child
+      // content is full-bleed so page-level padding cannot stack here.
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: menu,
     );
   }
@@ -189,7 +192,8 @@ class _MasterMenuSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const VitPageContent(
       rhythm: VitPageRhythm.standard,
-      padding: VitContentPadding.compact,
+      padding: VitContentPadding.none,
+      fullBleed: true,
       children: [VitSectionSkeleton(), VitSectionSkeleton()],
     );
   }
@@ -204,7 +208,8 @@ class _MasterMenuError extends StatelessWidget {
   Widget build(BuildContext context) {
     return const VitPageContent(
       rhythm: VitPageRhythm.standard,
-      padding: VitContentPadding.compact,
+      padding: VitContentPadding.none,
+      fullBleed: true,
       children: [
         VitEmptyState(
           title: 'Không tải được menu',

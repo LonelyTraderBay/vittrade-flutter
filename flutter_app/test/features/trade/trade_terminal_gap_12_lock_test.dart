@@ -1,8 +1,8 @@
-// LUẬT 8PT/12DP (user chốt 2026-08-31): mọi khoảng trắng DỌC của terminal
+// LUẬT BASE-8-DERIVED/12DP (user chốt 2026-09-01): mọi khoảng trắng DỌC của terminal
 // Trade tablet đều bằng 12dp — không ngoại lệ. Test này đo RenderBox thật
 // của mọi cặp kề nhau (panel↔panel, mép panel→nội dung, nhãn→nội dung,
 // giữa các khối trong cột đặt lệnh) ở tầng đầy đủ 1280×800. Chạm vào
-// terminal mà quên khoảng 13 đâu đó thì test này đỏ đúng chỗ.
+// terminal mà quên khoảng 12 đâu đó thì test này đỏ đúng chỗ.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,12 +50,12 @@ void main() {
       return ro.localToGlobal(Offset.zero) & ro.size;
     }
 
-    void expectGap13(String label, Rect upper, Rect lower) {
+    void expectGap12(String label, Rect upper, Rect lower) {
       expect(
         lower.top - upper.bottom,
         moreOrLessEquals(12.0, epsilon: 0.1),
         reason:
-            '$label phải cách nhau đúng 12dp theo luật 8pt của tablet '
+            '$label phải cách nhau đúng 12dp theo luật Base-8-derived của tablet '
             '(thực tế ${lower.top - upper.bottom})',
       );
     }
@@ -67,21 +67,21 @@ void main() {
     final tape = rect(TradeTabletKeys.tapePanel);
 
     // Panel ↔ panel (gutter).
-    expectGap13(
+    expectGap12(
       'meta strip → product tabs',
       meta,
       rect(TradeTabletKeys.quickNav('spot')),
     );
-    expectGap13(
+    expectGap12(
       'product tabs → chart',
       rect(TradeTabletKeys.quickNav('spot')),
       chart,
     );
-    expectGap13('chart → panel tab dưới', chart, bottom);
-    expectGap13('sổ lệnh → tape', book, tape);
+    expectGap12('chart → panel tab dưới', chart, bottom);
+    expectGap12('sổ lệnh → tape', book, tape);
 
     // Mép panel → nội dung đầu tiên (so mép trên với mép trên).
-    void expectTop13(String label, Rect panel, Rect content) {
+    void expectTop12(String label, Rect panel, Rect content) {
       expect(
         content.top - panel.top,
         moreOrLessEquals(12.0, epsilon: 0.1),
@@ -94,31 +94,31 @@ void main() {
     // Đo theo phần tử CHẠM MÉP flow (IconButton làm mới cao nhất hàng) —
     // các phần tử thấp hơn bị crossAxisAlignment.center làm lệch tâm,
     // không phải gap.
-    expectTop13(
+    expectTop12(
       'mép meta → hàng nội dung',
       meta,
       rect(TradeTabletKeys.refresh),
     );
-    expectTop13(
+    expectTop12(
       'mép chart → nút khung giờ đầu',
       chart,
       rect(TradeTabletKeys.timeframe('1m')),
     );
     // Tab pill bị center trong Row 40dp (IconButton "Xem tất cả" cao
     // nhất) — đo theo phần tử chạm mép flow là nút icon.
-    expectTop13(
+    expectTop12(
       'mép panel dưới → hàng tab',
       bottom,
       rect(TradeTabletKeys.bottomTab('view_all')),
     );
 
     // Nhãn → nội dung (padding đáy của nhãn).
-    expectGap13(
+    expectGap12(
       'nhãn SỔ LỆNH → mức giá đầu',
       rectOf(find.text('SỔ LỆNH')),
       rect(TradeTabletKeys.bookRow('ask', 11)),
     );
-    expectGap13(
+    expectGap12(
       'nhãn GIAO DỊCH → header cột',
       rectOf(find.text('GIAO DỊCH')),
       rectOf(
@@ -131,13 +131,13 @@ void main() {
 
     // Cột đặt lệnh: nhãn → form → risk → disclaimer.
     final form = rectOf(find.byType(VitTradeSimpleOrderForm));
-    expectGap13('nhãn ĐẶT LỆNH → form', rectOf(find.text('ĐẶT LỆNH')), form);
-    expectGap13(
+    expectGap12('nhãn ĐẶT LỆNH → form', rectOf(find.text('ĐẶT LỆNH')), form);
+    expectGap12(
       'form → panel rủi ro',
       form,
       rectOf(find.byType(VitHighRiskStatePanel)),
     );
-    expectGap13(
+    expectGap12(
       'panel rủi ro → disclaimer',
       rectOf(find.byType(VitHighRiskStatePanel)),
       rectOf(

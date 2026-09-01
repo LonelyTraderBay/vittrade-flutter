@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_data_viz_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/controllers/market_controller.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
@@ -29,13 +29,13 @@ class MarketDepthChartView extends StatelessWidget {
     return Column(
       children: [
         _DepthMiniStats(snapshot: snapshot),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _DepthChartCard(
           snapshot: snapshot,
           levels: levels,
           onLevelSelected: onLevelSelected,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _DepthRatioCard(depth: snapshot.depth),
       ],
     );
@@ -188,8 +188,8 @@ class _DepthChartCard extends StatelessWidget {
           const SizedBox(
             height: MarketsSpacingTokens.marketAnalyticsCompactGap,
           ),
-          const Divider(
-            height: AppSpacing.dividerHairline,
+          Divider(
+            height: AppSurfaceSpacing.dividerHairline,
             color: AppColors.borderSolid,
           ),
           const SizedBox(height: MarketsSpacingTokens.marketAnalyticsMediumGap),

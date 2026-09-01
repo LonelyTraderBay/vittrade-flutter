@@ -21,6 +21,8 @@ copy, product content, or business data a template for other screens.
 - The page body owns horizontal insets through `VitPageContent`.
 - At the two-column tier, center the complete dashboard block with the shared
   `VitTwoColumnTabletDashboard` width cap.
+- The dashboard frame uses `outerHorizontalMargin = 12px` and
+  `columnGutter = 12px`; normal page content keeps `contentPad = 20px`.
 - Default caps are `800px` primary plus `400px` secondary. Do not add local
   width caps or a new breakpoint tier without empirical evidence.
 
@@ -40,10 +42,11 @@ copy, product content, or business data a template for other screens.
 
 - The fallback uses `VitContentPadding.compact` and
   `VitPageRhythm.compact`.
-- The two-column path uses `VitContentPadding.relaxed` and
-  `VitPageRhythm.relaxed` through the shared scaffold.
+- The primary column uses the standard 12px block rhythm. The shared
+  secondary wrapper may use the relaxed density only for its intentional
+  24px card padding; it must not create a 24px inter-block gap.
 - Parent layout owns section rhythm; child sections own only their internal
-  gaps.
+  gaps from the Tablet role scale (4/8/12).
 
 ## 5. Card and section archetypes
 

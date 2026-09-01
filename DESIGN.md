@@ -82,12 +82,29 @@ spacing:
   inputHeight: 52px
   ctaHeight: 52px
 
-# Tablet whitespace law — 8pt grid (2026-09-01, hướng A): tablet surface
-# runs a Base-8 scale (4·8·12·16·24·32·56) in TabletSpacingTokens; every
-# VERTICAL AND HORIZONTAL gap = 12px — no exceptions, zero tolerance.
-# One gap = one layer. Data-row extents, control sizes, borders are out
-# of scope (metrics). Phone keeps the Fibonacci AppSpacing scale.
-# Enforced by tablet_gap_12_guardrail_test + RenderBox layout locks.
+# Tablet-only namespace. These values are intentionally separate from the
+# Phone `spacing` block above; Tablet uses a closed role scale on a 4dp
+# alignment substrate rather than the Phone Fibonacci scale.
+tabletSpacing:
+  alignmentSubstrate: 4px
+  micro: 4px
+  item: 8px
+  block: 12px
+  standardCardPadding: 16px
+  relaxedHeroPadding: 24px
+  contentInset: 20px
+  pageEndBreathing: 32px
+  extendedMetric: 56px
+
+# Tablet Base-8-derived Role Scale (2026-09-01, hướng A): Tablet dùng nền
+# căn chỉnh 4dp nhưng public spacing là tập role đóng
+# (4·8·12·16·24·32·56) trong TabletSpacingTokens; không được tự do chọn mọi
+# bội số 4. Gap khối/panel/gutter = 12px; item/compact = 8px; micro = 4px.
+# One gap = one layer. Content inset 20px và page-end breathing 32px là role
+# riêng. Data-row extents, control sizes, borders nằm ngoài spacing scale.
+# Phone giữ Fibonacci AppSpacing độc lập.
+# Enforced by tablet_spacing_guardrail_test + tablet_base8_role_scale_guardrail_test
+# + tablet_gap_12_guardrail_test + RenderBox layout locks.
 # See Tablet-Spacing-Gutter-Standard Rule 6.
 components:
   button-primary:
@@ -145,14 +162,14 @@ semantic green/red for buy/sell, and layered surfaces for cards and terminals.
 | `rounded.cardLarge` | `AppRadii.cardLargeRadius` (24px) |
 | `rounded.sm` | `AppRadii.smRadius` (8px) |
 | `rounded.pill` | `AppRadii.pillRadius` (999px) |
-| `spacing.contentPad` | `AppSpacing.contentPad` |
-| `spacing.sectionGap` | `AppSpacing.sectionGap` (legacy 20px design token) |
-| `spacing.pageRhythm.compact.sectionGap` | `AppSpacing.pageRhythmCompactSectionGap` (8px) |
-| `spacing.pageRhythm.compact.innerGap` | `AppSpacing.pageRhythmCompactInnerGap` (5px) |
-| `spacing.pageRhythm.standard.sectionGap` | `AppSpacing.pageRhythmStandardSectionGap` (13px) |
-| `spacing.pageRhythm.standard.innerGap` | `AppSpacing.pageRhythmStandardInnerGap` (8px) |
-| `spacing.pageRhythm.form.sectionGap` | `AppSpacing.pageRhythmFormSectionGap` (16px) |
-| `spacing.pageRhythm.relaxed.sectionGap` | `AppSpacing.pageRhythmRelaxedSectionGap` (24px) |
+| `spacing.contentPad` | `AppSpacing.contentPad` (Phone) / `TabletSpacingTokens.contentPad` (Tablet, 20px) |
+| `spacing.sectionGap` | `AppSpacing.sectionGap` (Phone legacy 20px; không dùng cho Tablet) |
+| `spacing.pageRhythm.compact.sectionGap` | `AppSpacing.pageRhythmCompactSectionGap` (Phone 8px) / `TabletSpacingTokens.pageContentGapTight` (Tablet 8px) |
+| `spacing.pageRhythm.compact.innerGap` | `AppSpacing.pageRhythmCompactInnerGap` (Phone 5px) / `TabletSpacingTokens.pageRhythmCompactInnerGap` (Tablet 4px) |
+| `spacing.pageRhythm.standard.sectionGap` | `AppSpacing.pageRhythmStandardSectionGap` (Phone 13px) / `TabletSpacingTokens.pageRhythmStandardSectionGap` (Tablet 12px) |
+| `spacing.pageRhythm.standard.innerGap` | `AppSpacing.pageRhythmStandardInnerGap` (Phone 8px) / `TabletSpacingTokens.pageRhythmStandardInnerGap` (Tablet 12px) |
+| `spacing.pageRhythm.form.sectionGap` | `AppSpacing.pageRhythmFormSectionGap` (Phone 16px) / `TabletSpacingTokens.pageRhythmFormSectionGap` (Tablet 12px) |
+| `spacing.pageRhythm.relaxed.sectionGap` | `AppSpacing.pageRhythmRelaxedSectionGap` (Phone 24px) / Tablet 12px when explicitly allowed by the Tablet shell |
 | `VitPageRhythm` tier enum | `app_page_rhythm.dart` |
 | `typography.body` | `AppTextStyles.body` |
 | `typography.pageTitle` | `AppTextStyles.pageTitle` |
@@ -196,9 +213,13 @@ Do not introduce arbitrary font sizes outside `AppTextStyles`.
 
 Phone-first fluid layout with consistent horizontal padding.
 
-- **Content padding:** 20px (`AppSpacing.contentPad`).
-- **Section gap (legacy):** 20px design reference (`AppSpacing.sectionGap`). Runtime
-  pages use **page rhythm** tiers below — feed roots intentionally use compact 8px.
+- **Content padding:** Phone 20px (`AppSpacing.contentPad`); Tablet 20px
+  (`TabletSpacingTokens.contentPad`) unless a pane is gutter-flush.
+- **Tablet role scale:** micro 4px, item/compact 8px, block/panel/gutter 12px,
+  card standard padding 16px, relaxed/hero padding 24px, page-end breathing
+  32px. This is a closed role scale, not an unrestricted 4dp grid.
+- **Section gap (legacy):** 20px is a Phone-only design reference
+  (`AppSpacing.sectionGap`). Runtime pages use **page rhythm** tiers below.
 - **Page rhythm (3 levels):**
   1. **Section gap** — parent `VitPageContent` / `rhythm` / `customGap` between major blocks.
   2. **Inner gap** — section title → body (`pageRhythm*InnerGap`, `VitSectionHeader.bottomGap`).
@@ -207,7 +228,8 @@ Phone-first fluid layout with consistent horizontal padding.
   (wizard/KYC/bottom sheets), `.relaxed` (hero/onboarding icon blocks only), `.flush` (charts/terminals).
 - **Ownership:** parent owns section gaps; children must not add orphan `SizedBox`
   between top-level blocks.
-- **Scale:** Fibonacci-inspired steps x1–x7 (3, 5, 8, 13, 21, 34, 55).
+- **Scale:** Phone uses Fibonacci-inspired steps x1–x7 (3, 5, 8, 13, 21,
+  34, 55). Tablet uses the closed Base-8-derived role scale above.
 - **Controls:** CTA and input height 52px.
 - **Page content:** use `VitPageLayout` + `VitPageContent` — not raw `Scaffold` +
   manual padding.
@@ -215,7 +237,7 @@ Phone-first fluid layout with consistent horizontal padding.
 Migration checklist: `docs/02_FLUTTER_MIGRATION/checklists/Page-Rhythm-Migration-Checklist.md`.
 **Mandatory standard + CI:** `docs/02_FLUTTER_MIGRATION/standards/Page-Rhythm-Standard.md`.
 Audit: `dart run tool/page_rhythm_audit.dart --check` from `flutter_app/`.
-Guardrail: `flutter test test/quality/page_rhythm_guardrail_test.dart`.
+Guardrail: `flutter test test/quality/page_rhythm_audit_sync_guardrail_test.dart`.
 
 **Card tiles (Tier A strip):** fixed-height horizontal tiles use
 `VitCardContentAlign.center`, `AppSpacing.cardTilePadding`, and

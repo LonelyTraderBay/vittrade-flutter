@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/profile/domain/entities/profile_entities.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -19,7 +19,7 @@ class VipHistoryTab extends StatelessWidget {
         for (final row in snapshot.history) ...[
           _VipHistoryCard(row: row),
           if (row != snapshot.history.last)
-            const SizedBox(height: AppSpacing.rowGap),
+            SizedBox(height: AppSurfaceSpacing.rowGap),
         ],
       ],
     );
@@ -39,12 +39,12 @@ class _VipHistoryCard extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 row.date,
                 style: AppTextStyles.caption.copyWith(color: AppColors.text2),
               ),
-              const Spacer(),
               VitStatusPill(
                 label: row.level,
                 status: isVip
@@ -54,7 +54,7 @@ class _VipHistoryCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmStandardSectionGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmStandardSectionGap),
           Row(
             children: [
               _VipHistoryMetric(label: 'Khối lượng', value: row.volume),
@@ -93,7 +93,7 @@ class _VipHistoryMetric extends StatelessWidget {
             label,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmCompactInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmCompactInnerGap),
           Text(
             value,
             style: AppTextStyles.numericCode.copyWith(

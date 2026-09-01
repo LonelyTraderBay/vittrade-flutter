@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 import 'package:vit_trade_flutter/shared/widgets/vit_choice_pill.dart';
 
@@ -17,7 +17,7 @@ class VitFilterChip extends StatelessWidget {
     this.count,
     this.semanticCountSuffix,
     this.height,
-    this.padding = AppSpacing.vitFilterChipPadding,
+    this.padding,
     this.leading,
     this.semanticLabel,
   });
@@ -46,7 +46,9 @@ class VitFilterChip extends StatelessWidget {
       onTap: onTap,
       accentColor: color,
       height: height,
-      padding: padding,
+      padding:
+          padding ??
+          EdgeInsetsDirectional.symmetric(horizontal: AppSurfaceSpacing.x3),
       leading: leading,
       semanticLabel: resolvedSemanticLabel,
     );

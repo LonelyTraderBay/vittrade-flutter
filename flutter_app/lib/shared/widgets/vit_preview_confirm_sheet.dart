@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_bottom_sheet.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_financial_safety_summary.dart';
@@ -43,7 +43,7 @@ Future<bool> showVitPreviewConfirmSheet({
               footer: footer,
               density: VitDensity.compact,
             ),
-            const SizedBox(height: AppSpacing.x4),
+            SizedBox(height: AppSurfaceSpacing.x4),
             Row(
               children: [
                 Expanded(
@@ -55,7 +55,7 @@ Future<bool> showVitPreviewConfirmSheet({
                     child: Text(cancelLabel),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.x3),
+                SizedBox(width: AppSurfaceSpacing.x3),
                 Expanded(
                   child: VitCtaButton(
                     key: confirmKey,

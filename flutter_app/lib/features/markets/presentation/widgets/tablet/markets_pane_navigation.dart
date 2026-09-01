@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 
 /// Mở [route] làm detail pane của Markets terminal master-detail với ngữ
 /// nghĩa back-stack đúng (hành vi Binance-iPad): pane đầu tiên mở từ tổng

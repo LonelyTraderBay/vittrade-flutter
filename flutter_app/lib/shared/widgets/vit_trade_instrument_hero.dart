@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_hero_glow.dart';
@@ -67,7 +67,7 @@ class VitTradeInstrumentHero extends StatelessWidget {
       clip: true,
       density: VitDensity.tool,
       padding: _compact
-          ? AppSpacing.cardPaddingCompact
+          ? AppSurfaceSpacing.cardPaddingCompact
           : SharedSpacingTokens.tradeInstrumentHeroPadding,
       background: _compact ? null : const VitHeroGlow(),
       child: Column(
@@ -78,7 +78,9 @@ class VitTradeInstrumentHero extends StatelessWidget {
             style: (_compact ? AppTextStyles.micro : AppTextStyles.caption)
                 .copyWith(color: AppColors.text2),
           ),
-          SizedBox(height: _compact ? AppSpacing.x1 : AppSpacing.x2),
+          SizedBox(
+            height: _compact ? AppSurfaceSpacing.x1 : AppSurfaceSpacing.x2,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -97,12 +99,14 @@ class VitTradeInstrumentHero extends StatelessWidget {
                           ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x3),
+              SizedBox(width: AppSurfaceSpacing.x3),
               VitMetricDeltaPill(label: deltaLabel, tone: _deltaTone),
             ],
           ),
           if (sparklineValues != null && sparklineValues!.length >= 2) ...[
-            SizedBox(height: _compact ? AppSpacing.x2 : AppSpacing.x3),
+            SizedBox(
+              height: _compact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
+            ),
             SizedBox(
               height: SharedSpacingTokens.tradeInstrumentHeroSparklineHeight,
               width: double.infinity,
@@ -112,7 +116,7 @@ class VitTradeInstrumentHero extends StatelessWidget {
           if (highLabel != null || lowLabel != null || volumeLabel != null) ...[
             SizedBox(
               height: _compact
-                  ? AppSpacing.x2
+                  ? AppSurfaceSpacing.x2
                   : SharedSpacingTokens.tradeInstrumentHeroMetricGap,
             ),
             Row(
@@ -153,7 +157,7 @@ class _MetricCell extends StatelessWidget {
           label,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        const SizedBox(height: AppSpacing.x1),
+        SizedBox(height: AppSurfaceSpacing.x1),
         Text(
           value,
           maxLines: 1,
@@ -220,7 +224,7 @@ class VitTradeHeaderMetricsRow extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.x2),
+              SizedBox(width: AppSurfaceSpacing.x2),
               Text(
                 deltaLabel,
                 style: AppTextStyles.caption.copyWith(

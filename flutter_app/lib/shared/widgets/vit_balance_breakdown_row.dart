@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_status_pill.dart';
@@ -65,7 +65,7 @@ class VitBalanceBreakdownRow extends StatelessWidget {
                           icon: items[i].icon,
                           size: VitStatusPillSize.sm,
                         ),
-                        const SizedBox(height: AppSpacing.x1),
+                        SizedBox(height: AppSurfaceSpacing.x1),
                         Text(
                           items[i].value,
                           textAlign: TextAlign.center,
@@ -81,7 +81,7 @@ class VitBalanceBreakdownRow extends StatelessWidget {
                 ),
               ),
             ),
-            if (i != items.length - 1) const SizedBox(width: AppSpacing.x1),
+            if (i != items.length - 1) SizedBox(width: AppSurfaceSpacing.x1),
           ],
         ],
       ),

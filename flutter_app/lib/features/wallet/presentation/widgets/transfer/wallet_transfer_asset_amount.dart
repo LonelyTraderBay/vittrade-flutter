@@ -58,7 +58,7 @@ class TransferAmountCard extends StatelessWidget {
             ),
             onTap: onAssetTap,
           ),
-          const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmFormInnerGap),
           Row(
             children: [
               Expanded(
@@ -72,12 +72,12 @@ class TransferAmountCard extends StatelessWidget {
                 label: 'T\u1edbi \u0111a',
                 selected: false,
                 onTap: onMax,
-                height: AppSpacing.buttonCompact,
+                height: AppSurfaceSpacing.buttonCompact,
                 accentColor: _transferPrimary,
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmFormInnerGap),
           VitInput(
             fieldKey: const Key('sc146_transfer_amount'),
             controller: controller,
@@ -125,7 +125,7 @@ class TransferInfoNotice extends StatelessWidget {
     // card-tile: allow-start — fixed surface, not horizontal strip tile
     return VitCard(
       variant: VitCardVariant.inner,
-      constraints: const BoxConstraints(minHeight: AppSpacing.inputHeight),
+      constraints: BoxConstraints(minHeight: AppSurfaceSpacing.inputHeight),
       density: VitDensity.compact,
       borderColor: _transferPrimary.withValues(alpha: .20),
       child: Row(
@@ -136,7 +136,7 @@ class TransferInfoNotice extends StatelessWidget {
             color: _transferPrimary,
             size: _transferActionIcon,
           ),
-          const SizedBox(width: _transferInlineGap),
+          SizedBox(width: _transferInlineGap),
           Expanded(
             child: Text(
               'Chuy\u1ec3n gi\u1eefa v\u00ed VitTrade x\u1eed l\u00fd n\u1ed9i b\u1ed9. Xem l\u1ea1i v\u00ed ngu\u1ed3n, v\u00ed nh\u1eadn, s\u1ed1 l\u01b0\u1ee3ng v\u00e0 ph\u00ed tr\u01b0\u1edbc khi x\u00e1c nh\u1eadn.',
@@ -168,7 +168,7 @@ class TransferValidationNotice extends StatelessWidget {
             color: AppColors.sell,
             size: _transferActionIcon,
           ),
-          const SizedBox(width: _transferInlineGap),
+          SizedBox(width: _transferInlineGap),
           Expanded(
             child: Text(
               message,
@@ -208,7 +208,7 @@ class TransferButton extends StatelessWidget {
         message: disabledReason ?? 'Xem trước chuyển khoản nội bộ',
         child: VitCtaButton(
           onPressed: enabled ? onTap : null,
-          height: AppSpacing.inputHeight,
+          height: AppSurfaceSpacing.inputHeight,
           child: Text(
             'X\u00e1c nh\u1eadn chuy\u1ec3n',
             style: AppTextStyles.control.copyWith(

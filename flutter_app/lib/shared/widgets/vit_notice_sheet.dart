@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_bottom_sheet.dart';
@@ -57,7 +57,7 @@ Future<void> showVitNoticeSheet({
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 VitBanner(variant: variant, message: message),
-                const SizedBox(height: AppSpacing.x4),
+                SizedBox(height: AppSurfaceSpacing.x4),
                 if (secondaryText != null) ...[
                   VitCtaButton(
                     key: secondaryKey,
@@ -71,7 +71,7 @@ Future<void> showVitNoticeSheet({
                     },
                     child: Text(secondaryText),
                   ),
-                  const SizedBox(height: AppSpacing.x3),
+                  SizedBox(height: AppSurfaceSpacing.x3),
                 ],
                 VitCtaButton(
                   key: primaryKey,
@@ -140,9 +140,9 @@ class VitBanner extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(
-          horizontal: AppSpacing.x4,
-          vertical: AppSpacing.x2 + AppSpacing.x2,
+        padding: EdgeInsetsDirectional.symmetric(
+          horizontal: AppSurfaceSpacing.x4,
+          vertical: AppSurfaceSpacing.x2 + AppSurfaceSpacing.x2,
         ),
         child: Row(
           crossAxisAlignment: hasMultiline
@@ -151,7 +151,7 @@ class VitBanner extends StatelessWidget {
           children: [
             if (icon != null) ...[
               Icon(icon, color: palette.foreground, size: 16),
-              const SizedBox(width: AppSpacing.x3),
+              SizedBox(width: AppSurfaceSpacing.x3),
             ],
             Expanded(
               child: Column(
@@ -177,7 +177,7 @@ class VitBanner extends StatelessWidget {
                           ),
                   ),
                   if (detail != null) ...[
-                    const SizedBox(height: AppSpacing.x1),
+                    SizedBox(height: AppSurfaceSpacing.x1),
                     Text(
                       detail!,
                       style: AppTextStyles.micro.copyWith(
@@ -186,14 +186,14 @@ class VitBanner extends StatelessWidget {
                     ),
                   ],
                   if (action != null) ...[
-                    const SizedBox(height: AppSpacing.x3),
+                    SizedBox(height: AppSurfaceSpacing.x3),
                     action!,
                   ],
                 ],
               ),
             ),
             if (onDismiss != null) ...[
-              const SizedBox(width: AppSpacing.x3),
+              SizedBox(width: AppSurfaceSpacing.x3),
               VitIconButton(
                 onPressed: onDismiss,
                 icon: Icons.close_rounded,

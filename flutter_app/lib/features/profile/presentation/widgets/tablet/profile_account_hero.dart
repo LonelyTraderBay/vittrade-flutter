@@ -112,8 +112,8 @@ class ProfileAccountHero extends StatelessWidget {
         const SizedBox(height: TabletSpacingTokens.x4),
         Wrap(
           key: ProfileTabletKeys.heroPills,
-          spacing: ProfileSpacingTokens.profileHeroPillGap,
-          runSpacing: ProfileSpacingTokens.profileHeroPillRunGap,
+          spacing: TabletSpacingTokens.x3,
+          runSpacing: TabletSpacingTokens.x3,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             VitAccentPill(
@@ -210,7 +210,7 @@ class ProfileAccountHero extends StatelessWidget {
           variant: VitCardVariant.hero,
           radius: VitCardRadius.large,
           clip: true,
-          padding: ProfileSpacingTokens.profileHeroPadding,
+          padding: TabletSpacingTokens.cardPaddingHeroDensity,
           background: const VitHeroGlow(),
           child: compact
               ? Column(
@@ -278,7 +278,7 @@ class _HeroFactBox extends StatelessWidget {
       constraints: BoxConstraints(minHeight: VitDensity.compact.controlHeight),
       borderColor: AppColors.onAccent.withValues(alpha: .12),
       background: ColoredBox(color: AppColors.onAccent.withValues(alpha: .08)),
-      padding: ProfileSpacingTokens.profileHeroInfoPadding,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

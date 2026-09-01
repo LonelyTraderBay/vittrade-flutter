@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -48,7 +48,7 @@ class VitTradeOrderRow extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   record.detail,
                   style: AppTextStyles.micro.copyWith(
@@ -108,9 +108,9 @@ class VitTradeOrderList extends StatelessWidget {
               child: VitTradeOrderRow(record: records[i]),
             ),
             if (i < records.length - 1)
-              const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+              Divider(
+                height: AppSurfaceSpacing.dividerHairline,
+                thickness: AppSurfaceSpacing.dividerHairline,
                 color: AppColors.divider,
               ),
           ],

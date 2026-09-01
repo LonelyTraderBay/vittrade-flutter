@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
@@ -77,10 +77,9 @@ class _ProfileVipPaneState extends ConsumerState<ProfileVipPane> {
           ),
         ],
         data: (snapshot) => [
-          // Top-level blocks stay flat: VitPageContent(rhythm: form) inside
-          // ProfilePaneScaffold already inserts one 16dp section gap between
-          // each pair of children. A manual SizedBox separator here stacks
-          // onto those gaps (16+8+16=40dp) and breaks the pane's rhythm.
+          // Top-level blocks stay flat: the standard Tablet rhythm inside
+          // ProfilePaneScaffold already inserts one 12dp section gap between
+          // each pair of children. A manual separator would stack onto it.
           _VipHero(snapshot: snapshot),
           _VipTabs(
             active: _selectedTab,
@@ -233,7 +232,7 @@ class _HeroFeeBox extends StatelessWidget {
       constraints: BoxConstraints(minHeight: VitDensity.compact.controlHeight),
       borderColor: AppColors.onAccent.withValues(alpha: .12),
       background: ColoredBox(color: AppColors.onAccent.withValues(alpha: .08)),
-      padding: ProfileSpacingTokens.profileHeroInfoPadding,
+      padding: TabletSpacingTokens.cardPaddingCompact,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -747,6 +746,7 @@ class _BenefitTierCard extends StatelessWidget {
     return Opacity(
       opacity: unlocked ? 1 : .68,
       child: VitCard(
+        padding: TabletSpacingTokens.zeroInsets,
         borderColor: accent.withValues(alpha: unlocked ? .34 : .12),
         clip: true,
         child: Column(

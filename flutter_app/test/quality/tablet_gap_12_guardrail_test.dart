@@ -1,18 +1,20 @@
-// LUẬT 8PT/12DP TABLET (user chốt 2026-08-31, mở rộng chiều cùng ngày): mọi khoảng
-// trống DỌC VÀ NGANG trên toàn bộ surface tablet đều là 13dp — KHÔNG
-// NGOẠI LỆ, KHÔNG baseline. "Khoảng trống" = mọi SizedBox KHÔNG có child
-// (đứng giữa các phần tử làm khe). SizedBox CÓ child là kích thước của
-// phần tử (metric), không thuộc luật. Inset padding, extent hàng dữ
-// liệu, kích thước control/icon/viền không thuộc luật (không phải khe
-// giữa các phần tử).
+// LUẬT BASE-8-DERIVED/12DP TABLET (user chốt 2026-09-01): gap khối
+// DỌC VÀ NGANG trên surface tablet là 12dp — KHÔNG baseline. Khe
+// micro/item 4/8dp vẫn hợp lệ theo Role Scale và được phân biệt bằng token
+// role. "Khoảng trống" = mọi SizedBox KHÔNG có child (đứng giữa các phần tử
+// làm khe). SizedBox CÓ child là kích thước của phần tử (metric), không
+// thuộc luật. Inset padding, extent hàng dữ liệu, kích thước control/icon/
+// viền không thuộc luật (không phải khe giữa các phần tử).
 //
-// Giá trị hợp lệ: 13 (AppSpacing.x4 / cardGap / sectionGapCompact /
-// token module bị lock giá trị 13) — cộng các số không phải khoảng trắng
-// (0, hairline, border) và double.infinity.
+// Gap khối hợp lệ: 12 (TabletSpacingTokens.x4 / cardGap /
+// pageRhythmStandardSectionGap / token module bị lock giá trị 12) — cộng các
+// số không phải khoảng trắng (0, hairline, border) và double.infinity.
+// Compact/item/micro gap là role khác (8/4), được phép qua token role tương
+// ứng nhưng không được dùng thay gap khối.
 //
 // Buộc theo 2 lớp: guardrail này (nguồn, zero-tolerance) + layout-lock
 // RenderBox đo khoảng thật trên từng trang (bản mẫu
-// test/features/trade/trade_terminal_gap_13_lock_test.dart).
+// test/features/trade/trade_terminal_gap_12_lock_test.dart).
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -22,17 +24,15 @@ const _scannedDirs = ['lib/app/shell/tablet', 'lib/features'];
 /// Từ 2026-09-01 file tablet đọc `TabletSpacingTokens` (namespace tách
 /// riêng) — whitelist nhận cả hai namespace với cùng bộ tên.
 final _allowedGapExpr = RegExp(
-  r'^((?:AppSpacing|TabletSpacingTokens)\.x4'
-  r'|(?:AppSpacing|TabletSpacingTokens)\.cardGap'
-  r'|AppSpacing\.sectionGapCompact'
+  r'^(TabletSpacingTokens\.x1|TabletSpacingTokens\.x2|TabletSpacingTokens\.x3|TabletSpacingTokens\.x4'
+  r'|TabletSpacingTokens\.cardGap'
   r'|(?:AppSpacing|TabletSpacingTokens)\.zero|double\.infinity'
   r'|(?:AppSpacing|TabletSpacingTokens)\.dividerHairline'
   r'|(?:AppSpacing|TabletSpacingTokens)\.hairlineStroke'
   r'|(?:AppSpacing|TabletSpacingTokens)\.borderWidth'
   r'|TradeSpacingTokens\.tradeTerminalGutter'
-  // Token role giá trị đúng 13 (không phải khe mới, chỉ cách gọi tên).
-  r'|(?:AppSpacing|TabletSpacingTokens)\.pageRhythmStandardSectionGap'
-  r'|AppSpacing\.pageRhythmRelaxedInnerGap'
+  r'|TabletSpacingTokens\.pageRhythmStandardSectionGap'
+  r'|TabletSpacingTokens\.pageRhythmFormSectionGap'
   r'|TabletDashboardWidths\.columnGutter'
   r'|TabletDashboardWidths\.blockVerticalGap)$',
 );
@@ -42,6 +42,7 @@ final _sizedBoxStart = RegExp(r'SizedBox\s*\(');
 bool _isTabletPresentationPath(String path) {
   final p = path.replaceAll('\\', '/');
   if (p.startsWith('lib/app/shell/tablet/')) return true;
+  if (p == 'lib/shared/layout/vit_navigation_rail.dart') return true;
   if (!p.startsWith('lib/features/')) return false;
   return p.contains('/presentation/tablet/') ||
       p.contains('/presentation/widgets/tablet/');
@@ -91,7 +92,7 @@ List<String> _scanCurrent() {
           final expr = am.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
-              ? (literal == 0 || literal == 12)
+              ? (literal == 0 || literal == 4 || literal == 8 || literal == 12)
               : _allowedGapExpr.hasMatch(expr);
           if (!ok) {
             violations.add(
@@ -107,14 +108,17 @@ List<String> _scanCurrent() {
 }
 
 void main() {
-  test('Luật 13dp (dọc + ngang): ZERO khe SizedBox ≠ 13 trong tablet', () {
-    final violations = _scanCurrent();
-    expect(violations, isEmpty, reason: violations.take(10).join('\n'));
-  });
+  test(
+    'Luật Role Scale (block12/item8/micro4): ZERO khe ngoài scale trong tablet',
+    () {
+      final violations = _scanCurrent();
+      expect(violations, isEmpty, reason: violations.take(10).join('\n'));
+    },
+  );
 
-  test('Luật 13dp: self-test', () {
-    expect(_allowedGapExpr.hasMatch('AppSpacing.x4'), isTrue);
-    expect(_allowedGapExpr.hasMatch('AppSpacing.cardGap'), isTrue);
+  test('Luật 12dp: self-test', () {
+    expect(_allowedGapExpr.hasMatch('TabletSpacingTokens.x4'), isTrue);
+    expect(_allowedGapExpr.hasMatch('TabletSpacingTokens.cardGap'), isTrue);
     expect(_allowedGapExpr.hasMatch('AppSpacing.x2'), isFalse);
     expect(
       _allowedGapExpr.hasMatch('VitDensity.compact.verticalSpace'),
@@ -146,7 +150,7 @@ void main() {
     );
   });
 
-  test('Luật 13dp: section tablet (label/title) tự khai innerGap = 13', () {
+  test('Luật 12dp: section tablet (label/title) tự khai innerGap = 12', () {
     final violations = <String>[];
     for (final root in _scannedDirs) {
       final dir = Directory(root);
@@ -194,25 +198,24 @@ void main() {
             r'(?:^|,)\s*(?:label|title):\s*',
           ).hasMatch(topLevelArgs);
           if (!ownsLabel) continue;
-          if (!span.contains('innerGap: AppSpacing.x4') &&
-              !span.contains('innerGap: TabletSpacingTokens.x4')) {
+          if (!span.contains('innerGap: TabletSpacingTokens.x4')) {
             violations.add(
               '$path — ${src.substring(m.start, m.start + 40)}… thiếu '
-              'innerGap 13 (khoảng nhãn → nội dung tablet = 13)',
+              'innerGap 12 (khoảng nhãn → nội dung tablet = 12)',
             );
           }
         }
-        // bottomGap trực tiếp (label → nội dung) cũng phải 13.
+        // bottomGap trực tiếp (label → nội dung) cũng phải 12.
         for (final m in RegExp(r'bottomGap:\s*([^,)]+)').allMatches(src)) {
           final expr = m.group(1)!.replaceAll(RegExp(r'\s+'), '');
           final literal = double.tryParse(expr);
           final ok = literal != null
               ? literal == 12
-              : (expr == 'AppSpacing.x4' ||
-                    expr == 'TabletSpacingTokens.x4' ||
-                    expr == 'AppSpacing.cardGap' ||
+              : (expr == 'TabletSpacingTokens.x4' ||
                     expr == 'TabletSpacingTokens.cardGap' ||
-                    expr == 'AppSpacing.sectionGapCompact');
+                    expr ==
+                        'TabletSpacingTokens.pageRhythmStandardSectionGap' ||
+                    expr == 'TabletSpacingTokens.pageRhythmFormSectionGap');
           if (!ok) {
             violations.add('$path — bottomGap: $expr phải là 12');
           }

@@ -1,4 +1,4 @@
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 
 /// One Earn hub tool tile (label + route + icon key).
 final class EarnHubTool {

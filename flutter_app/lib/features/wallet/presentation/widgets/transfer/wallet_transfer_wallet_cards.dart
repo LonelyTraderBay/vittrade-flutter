@@ -34,9 +34,9 @@ class TransferDirectionCard extends StatelessWidget {
             onTap: onFromTap,
           ),
         ),
-        const SizedBox(width: AppSpacing.x2),
+        SizedBox(width: AppSurfaceSpacing.x2),
         TransferSwapButton(onTap: onSwap),
-        const SizedBox(width: AppSpacing.x2),
+        SizedBox(width: AppSurfaceSpacing.x2),
         Expanded(
           child: _TransferEndpointTile(
             key: toKey,
@@ -91,11 +91,11 @@ class _TransferEndpointTile extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x1),
+          SizedBox(height: AppSurfaceSpacing.x1),
           Row(
             children: [
               _WalletIcon(wallet: wallet, color: color),
-              const SizedBox(width: AppSpacing.x2),
+              SizedBox(width: AppSurfaceSpacing.x2),
               Expanded(
                 child: Text(
                   wallet.name,
@@ -106,7 +106,7 @@ class _TransferEndpointTile extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.x1),
+          SizedBox(height: AppSurfaceSpacing.x1),
           Text(
             formatTransferUsd(wallet.balanceUsd),
             maxLines: 1,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_market_rows.dart';
@@ -75,7 +75,7 @@ class VitMarketTickerCard extends StatelessWidget {
       child: VitCard(
         onTap: data.onTap,
         borderColor: data.trend.foreground.withValues(alpha: .24),
-        padding: AppSpacing.cardTilePadding,
+        padding: AppSurfaceSpacing.cardTilePadding,
         contentAlign: VitCardContentAlign.center,
         constraints: const BoxConstraints(
           minHeight: SharedSpacingTokens.homeMarketTickerCardMinHeight,
@@ -88,7 +88,7 @@ class VitMarketTickerCard extends StatelessWidget {
               children: [
                 if (data.leading != null) ...[
                   data.leading!,
-                  const SizedBox(width: AppSpacing.x2),
+                  SizedBox(width: AppSurfaceSpacing.x2),
                 ],
                 Expanded(
                   child: Text(
@@ -102,7 +102,7 @@ class VitMarketTickerCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.cardTileInnerGap),
+            SizedBox(height: AppSurfaceSpacing.cardTileInnerGap),
             Text(
               data.price,
               maxLines: 1,
@@ -113,7 +113,7 @@ class VitMarketTickerCard extends StatelessWidget {
                 fontFeatures: AppTextStyles.tabularFigures,
               ),
             ),
-            const SizedBox(height: AppSpacing.x1),
+            SizedBox(height: AppSurfaceSpacing.x1),
             DecoratedBox(
               decoration: ShapeDecoration(
                 color: data.trend.background,
@@ -122,9 +122,9 @@ class VitMarketTickerCard extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.x2,
-                  vertical: AppSpacing.x1,
+                padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: AppSurfaceSpacing.x2,
+                  vertical: AppSurfaceSpacing.x1,
                 ),
                 child: Text(
                   data.changeLabel,

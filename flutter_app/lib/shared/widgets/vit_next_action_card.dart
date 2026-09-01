@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_accent_pill.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
@@ -38,8 +38,8 @@ class VitNextActionCard extends StatelessWidget {
     final hasTrailingAction = onDismiss != null || ctaLabel != null;
     return VitCard(
       onTap: onTap,
-      padding: const EdgeInsetsDirectional.all(
-        SharedSpacingTokens.homeNextActionCardPadding,
+      padding: EdgeInsetsDirectional.all(
+        AppSurfaceSpacing.homeNextActionCardPadding,
       ),
       borderColor: accentColor.withValues(alpha: .28),
       child: Row(
@@ -63,7 +63,7 @@ class VitNextActionCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: SharedSpacingTokens.homeCommandRowSpacing),
+          SizedBox(width: AppSurfaceSpacing.homeNextActionIconGap),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +82,7 @@ class VitNextActionCard extends StatelessWidget {
                       ),
                     ),
                     if (statusLabel != null) ...[
-                      const SizedBox(width: AppSpacing.x2),
+                      SizedBox(width: AppSurfaceSpacing.x2),
                       VitAccentPill(
                         label: statusLabel!,
                         accentColor: accentColor,
@@ -90,7 +90,9 @@ class VitNextActionCard extends StatelessWidget {
                     ],
                   ],
                 ),
-                const SizedBox(height: SharedSpacingTokens.homeSectionInnerGap),
+                SizedBox(
+                  height: AppSurfaceSpacing.homeNextActionTitleSubtitleGap,
+                ),
                 Text(
                   subtitle,
                   maxLines: 1,
@@ -101,7 +103,7 @@ class VitNextActionCard extends StatelessWidget {
             ),
           ),
           if (hasTrailingAction) ...[
-            const SizedBox(width: AppSpacing.x3),
+            SizedBox(width: AppSurfaceSpacing.x3),
             if (onDismiss != null) ...[
               VitInlineIconAction(
                 icon: Icons.close_rounded,
@@ -109,7 +111,7 @@ class VitNextActionCard extends StatelessWidget {
                 color: AppColors.text3,
                 onPressed: onDismiss!,
               ),
-              const SizedBox(width: AppSpacing.x2),
+              SizedBox(width: AppSurfaceSpacing.x2),
             ],
             if (ctaLabel != null) ...[
               Text(
@@ -119,7 +121,7 @@ class VitNextActionCard extends StatelessWidget {
                   fontWeight: AppTextStyles.bold,
                 ),
               ),
-              const SizedBox(width: SharedSpacingTokens.homeChevronGap),
+              SizedBox(width: AppSurfaceSpacing.homeNextActionChevronGap),
               Icon(
                 Icons.chevron_right_rounded,
                 color: accentColor,

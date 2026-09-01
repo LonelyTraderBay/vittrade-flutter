@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Module accent icon container for list rows, bonus rows, and task cards.
 ///
@@ -28,13 +28,13 @@ class VitAccentIconBox extends StatelessWidget {
   /// Defaults to true to match the original bordered visual.
   final bool bordered;
 
-  /// Overrides [AppSpacing.accentIconBoxSize] (34px) when set.
+  /// Overrides [AppSurfaceSpacing.accentIconBoxSize] (34px) when set.
   final double? boxSize;
 
   @override
   Widget build(BuildContext context) {
-    final resolvedIconSize = iconSize ?? AppSpacing.iconMd;
-    final resolvedBoxSize = boxSize ?? AppSpacing.accentIconBoxSize;
+    final resolvedIconSize = iconSize ?? AppSurfaceSpacing.iconMd;
+    final resolvedBoxSize = boxSize ?? AppSurfaceSpacing.accentIconBoxSize;
 
     if (muted) {
       return SizedBox(
@@ -57,12 +57,12 @@ class VitAccentIconBox extends StatelessWidget {
       height: resolvedBoxSize,
       child: DecoratedBox(
         decoration: ShapeDecoration(
-          color: color.withValues(alpha: AppSpacing.accentIconFillAlpha),
+          color: color.withValues(alpha: AppSurfaceSpacing.accentIconFillAlpha),
           shape: RoundedRectangleBorder(
             side: bordered
                 ? BorderSide(
                     color: color.withValues(
-                      alpha: AppSpacing.accentIconBorderAlpha,
+                      alpha: AppSurfaceSpacing.accentIconBorderAlpha,
                     ),
                   )
                 : BorderSide.none,

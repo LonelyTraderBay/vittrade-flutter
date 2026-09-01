@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 
 /// Centered "nothing here" placeholder: icon, title, optional
@@ -42,28 +42,32 @@ class VitEmptyState extends StatelessWidget {
       container: true,
       liveRegion: true,
       child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(
-          horizontal: AppSpacing.x6,
+        padding: EdgeInsetsDirectional.symmetric(
+          horizontal: AppSurfaceSpacing.x6,
           vertical:
-              AppSpacing.buttonStandard +
-              AppSpacing.x3 +
-              AppSpacing.dividerHairline,
+              AppSurfaceSpacing.buttonStandard +
+              AppSurfaceSpacing.x3 +
+              AppSurfaceSpacing.dividerHairline,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (compact)
-              Icon(icon, color: AppColors.borderSolid, size: AppSpacing.iconLg)
+              Icon(
+                icon,
+                color: AppColors.borderSolid,
+                size: AppSurfaceSpacing.iconLg,
+              )
             else
               SizedBox(
                 width:
-                    AppSpacing.buttonStandard +
-                    AppSpacing.contentPad +
-                    AppSpacing.x2,
+                    AppSurfaceSpacing.buttonStandard +
+                    AppSurfaceSpacing.contentPad +
+                    AppSurfaceSpacing.x2,
                 height:
-                    AppSpacing.buttonStandard +
-                    AppSpacing.contentPad +
-                    AppSpacing.x2,
+                    AppSurfaceSpacing.buttonStandard +
+                    AppSurfaceSpacing.contentPad +
+                    AppSurfaceSpacing.x2,
                 child: DecoratedBox(
                   decoration: const ShapeDecoration(
                     color: AppColors.surface2,
@@ -76,15 +80,17 @@ class VitEmptyState extends StatelessWidget {
                     child: Icon(
                       icon,
                       color: AppColors.borderSolid,
-                      size: AppSpacing.iconLg + AppSpacing.hairlineStroke,
+                      size:
+                          AppSurfaceSpacing.iconLg +
+                          AppSurfaceSpacing.hairlineStroke,
                     ),
                   ),
                 ),
               ),
             SizedBox(
               height: compact
-                  ? AppSpacing.pageRhythmCompactInnerGap
-                  : AppSpacing.x4,
+                  ? AppSurfaceSpacing.pageRhythmCompactInnerGap
+                  : AppSurfaceSpacing.x4,
             ),
             Text(
               title,
@@ -94,7 +100,7 @@ class VitEmptyState extends StatelessWidget {
                   : AppTextStyles.baseMedium.copyWith(color: AppColors.text2),
             ),
             if (message != null) ...[
-              const SizedBox(height: AppSpacing.x2),
+              SizedBox(height: AppSurfaceSpacing.x2),
               Text(
                 message!,
                 textAlign: TextAlign.center,
@@ -102,7 +108,7 @@ class VitEmptyState extends StatelessWidget {
               ),
             ],
             if (secondaryMessage != null) ...[
-              const SizedBox(height: AppSpacing.x1),
+              SizedBox(height: AppSurfaceSpacing.x1),
               Text(
                 secondaryMessage!,
                 textAlign: TextAlign.center,
@@ -110,12 +116,12 @@ class VitEmptyState extends StatelessWidget {
               ),
             ],
             if (actionLabel != null && onAction != null) ...[
-              const SizedBox(height: AppSpacing.x4),
+              SizedBox(height: AppSurfaceSpacing.x4),
               VitCtaButton(
                 key: actionKey,
                 onPressed: onAction,
                 fullWidth: false,
-                height: AppSpacing.inputHeight - AppSpacing.x3,
+                height: AppSurfaceSpacing.inputHeight - AppSurfaceSpacing.x3,
                 child: Text(actionLabel!),
               ),
             ],

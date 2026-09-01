@@ -5,7 +5,6 @@ import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/home_action_tokens.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/home/domain/entities/home_entities.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_keys.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -48,6 +47,7 @@ class HomeRecentProductsSection extends StatelessWidget {
           )
         else
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             key: HomeTabletKeys.recentProducts,
             clip: true,
             child: Column(
@@ -84,7 +84,7 @@ class _HomeRecentProductRow extends StatelessWidget {
       key: HomeTabletKeys.recentProduct(product.id),
       onTap: onTap,
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: HomeSpacingTokens.homeListRowPadding,
+        horizontal: TabletSpacingTokens.x4,
         vertical: TabletSpacingTokens.x3,
       ),
       leading: VitAccentIconBox(

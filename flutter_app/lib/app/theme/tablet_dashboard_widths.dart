@@ -71,21 +71,21 @@ final class TabletDashboardWidths {
   static const double secondaryColumnMaxWidth = 400;
 
   /// Outer breathing room reserved on each side of the dashboard block.
-  /// LUẬT 13dp (user chốt 2026-08-31): mọi khoảng trống dọc + ngang trên
-  /// tablet = 13 — lề ngang khung đổi 20 → 13, tách khỏi `contentPad` của
+  /// LUẬT 12dp (user chốt 2026-08-31): gap khối dọc + ngang trên
+  /// tablet = 12 — lề ngang khung đổi 20 → 12, tách khỏi `contentPad` của
   /// phone (một quyết định khung tablet, không phải fork token module).
   /// Reserved inside the pair cap in [VitTwoColumnTabletDashboard], so the
   /// column caps themselves stay at their proven values (R8).
   static const double outerHorizontalMargin = 12;
 
-  /// Explicit gutter between the two dashboard columns — LUẬT 13dp
-  /// (2026-08-31): 24 → 13, cùng một khoảng trắng với mọi khe khác trên
+  /// Explicit gutter between the two dashboard columns — LUẬT 12dp
+  /// (2026-08-31): 24 → 12, cùng một khoảng trắng với mọi gap khối trên
   /// tablet để khung và nội dung đọc cùng một nhịp.
   static const double columnGutter = 12;
 
   /// Vertical breathing room above and below the two-column block: the top
   /// gap drops both columns below the fixed header on one shared line, and
   /// the bottom gap keeps scrolled content from pressing against the
-  /// viewport's bottom edge. LUẬT 13dp (2026-08-31): 16 → 13.
+  /// viewport's bottom edge. LUẬT 12dp (2026-08-31): 16 → 12.
   static const double blockVerticalGap = 12;
 }

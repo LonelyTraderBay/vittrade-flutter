@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -183,6 +183,7 @@ class _NetworkStatusTabletPageState
         : 'Tất cả mạng hoạt động tốt';
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.hero,
       borderColor: summaryColor.withValues(alpha: .34),
       child: Column(
@@ -191,10 +192,11 @@ class _NetworkStatusTabletPageState
           Row(
             children: [
               VitCard(
+                padding: TabletSpacingTokens.zeroInsets,
                 width: TabletSpacingTokens.iconLg,
                 height: TabletSpacingTokens.iconLg,
                 variant: VitCardVariant.ghost,
-                radius: VitCardRadius.standard,
+                radius: VitCardRadius.tight,
                 borderColor: summaryColor.withValues(alpha: .34),
                 background: ColoredBox(
                   color: summaryColor.withValues(alpha: .08),
@@ -293,6 +295,7 @@ class _NetworkStatusTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -329,6 +332,7 @@ class _NetworkStatusTabletPageState
         ),
         const _NetworkLegendCard(),
         const VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.ghost,
           child: Text(
             'Dữ liệu được cập nhật tự động. Thời gian xác nhận thực tế có thể khác tùy phí gas và mức tải mạng tại thời điểm giao dịch.',
@@ -392,8 +396,10 @@ class _SummaryStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: VitCard(
+        padding: TabletSpacingTokens.zeroInsets,
         variant: VitCardVariant.inner,
         height: TabletSpacingTokens.buttonStandard,
+        radius: VitCardRadius.tight,
         alignment: Alignment.center,
         borderColor: color.withValues(alpha: .34),
         child: Column(
@@ -433,6 +439,7 @@ class _NetworkStatusCard extends StatelessWidget {
       label:
           '${network.name}: ${_healthLabel(network.health)}, tắc nghẽn ${network.congestionPct}%, phí ${network.gasFee}, xác nhận ${network.avgConfirmTime}',
       child: VitCard(
+        padding: TabletSpacingTokens.zeroInsets,
         key: NetworkStatusTabletPage.networkKey(network.id),
         variant: VitCardVariant.inner,
         borderColor: healthColor.withValues(alpha: .34),
@@ -442,10 +449,11 @@ class _NetworkStatusCard extends StatelessWidget {
             Row(
               children: [
                 VitCard(
+                  padding: TabletSpacingTokens.zeroInsets,
                   width: TabletSpacingTokens.buttonCompact,
                   height: TabletSpacingTokens.buttonCompact,
                   variant: VitCardVariant.ghost,
-                  radius: VitCardRadius.standard,
+                  radius: VitCardRadius.tight,
                   background: ColoredBox(
                     color: networkColor.withValues(alpha: .1),
                   ),
@@ -601,8 +609,10 @@ class _NetworkStatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.ghost,
       height: TabletSpacingTokens.buttonStandard,
+      radius: VitCardRadius.tight,
       child: Row(
         children: [
           Icon(
@@ -665,6 +675,7 @@ class _AvailabilityChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.ghost,
       alignment: Alignment.center,
       child: VitStatusPill(
@@ -687,6 +698,7 @@ class _NetworkNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.ghost,
       radius: VitCardRadius.standard,
       background: ColoredBox(color: AppColors.caution.withValues(alpha: .06)),
@@ -727,6 +739,7 @@ class _NetworkLegendCard extends StatelessWidget {
       (label: 'Bảo trì', health: 'down'),
     ];
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.inner,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

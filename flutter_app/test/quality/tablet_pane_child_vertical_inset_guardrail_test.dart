@@ -4,10 +4,10 @@
 // Khóa TUYỆT ĐỐI (không baseline): children trực tiếp của các scaffold
 // sở hữu section gap (`MarketsPaneScaffold`, `ProfilePaneScaffold`,
 // `VitTwoColumnTabletDashboard`) KHÔNG được bọc trong `Padding` mang
-// thành phần DỌC dương — scaffold đã chèn section gap (13dp tier
+// thành phần DỌC dương — scaffold đã chèn section gap (12dp tier
 // standard) giữa mọi cặp children, margin dọc của children cộng dồn lên
 // đó và phá nhịp trang (lỗi pane pair-detail 2026-08-29: gap 23–29dp
-// thay vì 13dp do token margin Phone như `pairRiskMargin` 10/13 được
+// thay vì 12dp do token margin Phone như `pairRiskMargin` 10/13 được
 // mang nguyên sang). Token-blind: kể cả tokenized margin cũng vi phạm —
 // port Phone → Tablet là TÁI LẬP nhịp, không phải mang khung.
 //

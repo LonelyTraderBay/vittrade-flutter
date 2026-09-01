@@ -49,7 +49,7 @@ class VitHeader extends StatelessWidget {
 
   /// Horizontal inset override. Null (the default) keeps
   /// [AppTopHeaderTokens.horizontalPadding]; a pane living inside a shell
-  /// that already owns the outer inset passes `AppSpacing.zero` so the
+  /// that already owns the outer inset passes `AppSurfaceSpacing.zero` so the
   /// header aligns with full-bleed content in the same column.
   final double? horizontalPadding;
   final Key? backKey;

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -44,13 +44,12 @@ class ProfileMasterMenu extends ConsumerWidget {
     final user = snapshot.user;
 
     return VitPageContent(
-      // The compact rhythm's own 8dp section gap reads as ONE continuous
-      // block across the three business groups (Tài khoản / Bảo mật /
-      // Portfolio) — the menu's group boundary needs a deliberate wider
-      // break (16) so the eye can partition the account domains at a
-      // glance, while staying denser than platform reference sidebars
-      // (24-35) to keep the financial-app density (2026-08-27 spacing
-      // review).
+      // The master menu uses the standard Tablet block rhythm: one 12dp
+      // group boundary consistently separates the account domains.
+      // The outer master card owns the complete 12dp inset on all sides;
+      // keep this content full-bleed to avoid stacking page padding.
+      padding: VitContentPadding.none,
+      fullBleed: true,
       rhythm: VitPageRhythm.standard,
       customGap: TabletSpacingTokens.x4,
       children: [

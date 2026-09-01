@@ -155,17 +155,21 @@ class TradeTerminalMetaStrip extends StatelessWidget {
                 ),
               ),
             ],
-            const Spacer(),
-            IconButton(
-              key: TradeTabletKeys.refresh,
-              tooltip: 'Làm mới dữ liệu',
-              onPressed: onRefresh,
-              icon: const Icon(
-                Icons.refresh_rounded,
-                size: TabletSpacingTokens.iconMd,
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  key: TradeTabletKeys.refresh,
+                  tooltip: 'Làm mới dữ liệu',
+                  onPressed: onRefresh,
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    size: TabletSpacingTokens.iconMd,
+                  ),
+                  color: AppColors.text2,
+                  visualDensity: VisualDensity.compact,
+                ),
               ),
-              color: AppColors.text2,
-              visualDensity: VisualDensity.compact,
             ),
           ],
         ),

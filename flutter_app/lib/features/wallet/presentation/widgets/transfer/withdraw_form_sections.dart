@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/features/wallet/domain/entities/wallet_entities.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/withdraw_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
@@ -30,7 +30,7 @@ class WithdrawBalanceCard extends StatelessWidget {
     return VitCard(
       variant: VitCardVariant.inner,
       radius: VitCardRadius.standard,
-      height: AppSpacing.inputHeight,
+      height: AppSurfaceSpacing.inputHeight,
       density: VitDensity.tool,
       borderColor: AppColors.cardBorder,
       child: Row(
@@ -82,7 +82,7 @@ class WithdrawNetworkSelector extends StatelessWidget {
             onTap: onTap,
             variant: VitCardVariant.inner,
             radius: VitCardRadius.standard,
-            height: AppSpacing.inputHeight,
+            height: AppSurfaceSpacing.inputHeight,
             density: VitDensity.tool,
             borderColor: withdrawPrimary.withValues(alpha: .34),
             child: Row(
@@ -99,7 +99,7 @@ class WithdrawNetworkSelector extends StatelessWidget {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.x1),
+                      SizedBox(height: AppSurfaceSpacing.x1),
                       Text(
                         'Phí: ${formatWithdrawNetworkFee(network.fee)} $asset · Tối thiểu: ${formatWithdrawCompact(network.minWithdraw)}',
                         maxLines: 1,
@@ -120,17 +120,19 @@ class WithdrawNetworkSelector extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: AppSpacing.pageRhythmCompactInnerGap + AppSpacing.x1,
+        SizedBox(
+          height:
+              AppSurfaceSpacing.pageRhythmCompactInnerGap +
+              AppSurfaceSpacing.x1,
         ),
         Row(
           children: [
-            const SizedBox(
-              width: AppSpacing.x2,
-              height: AppSpacing.x2,
-              child: ClipOval(child: ColoredBox(color: withdrawGreen)),
+            SizedBox(
+              width: AppSurfaceSpacing.x2,
+              height: AppSurfaceSpacing.x2,
+              child: const ClipOval(child: ColoredBox(color: withdrawGreen)),
             ),
-            const SizedBox(width: AppSpacing.pageRhythmStandardInnerGap),
+            SizedBox(width: AppSurfaceSpacing.pageRhythmStandardInnerGap),
             Expanded(
               child: Text(
                 'Mạng hoạt động tốt  ·  Phí: ${formatWithdrawNetworkFee(network.fee)} $asset',

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
@@ -136,8 +136,8 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
           VitHeader(
             title: pair?.symbol ?? 'Giao dịch',
             subtitle: 'Giao dịch Spot',
-            // Luật 8pt 12dp: inset header terminal = 13, cùng mặt phẳng với
-            // lề ngang 13 của grid bên dưới (default token header dùng
+            // Luật Base-8-derived 12dp: inset header terminal = 12, cùng mặt phẳng với
+            // lề ngang 12 của grid bên dưới (default token header dùng
             // chung contentPad 20 của phone).
             horizontalPadding: TabletSpacingTokens.x4,
             showBack: showBack,
@@ -189,7 +189,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     final pair = snapshot.pair;
     final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
 
-    // Luật 8pt 12dp: khoảng trống hai bên trái/phải của terminal = 13 —
+    // Luật Base-8-derived 12dp: gap khối hai bên trái/phải của terminal = 12 —
     // grid không còn chạm mép màn hình (flush variant chỉ bỏ bottom pad,
     // không có ai cấp inset ngang cho trang đứng riêng như terminal).
     return Padding(
@@ -423,9 +423,9 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
       onConfirmedSubmit: () => _submitOrder(orderRequest),
     );
 
-    // Luật 8pt 12dp: mỗi khối chỉ inset ngang — khoảng dọc giữa các khối và
-    // tới viền panel đều là gutter 13 (label padding bottom đã cho form
-    // khoảng 13 đầu tiên).
+    // Luật Base-8-derived 12dp: mỗi khối chỉ inset ngang — khoảng dọc giữa các khối và
+    // tới viền panel đều là gutter 12 (label padding bottom đã cho form
+    // khoảng 12 đầu tiên).
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,

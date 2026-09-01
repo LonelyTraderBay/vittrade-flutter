@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
 /// Tablet-width sibling of [VitBottomNav]: the same five destinations and
@@ -38,7 +38,7 @@ class VitNavigationRail extends StatelessWidget {
         width: width,
         child: Column(
           children: [
-            const SizedBox(height: AppSpacing.x5),
+            const SizedBox(height: TabletSpacingTokens.x4),
             for (final destination in VitBottomNavDestination.values)
               _VitNavigationRailItem(
                 destination: destination,
@@ -76,7 +76,7 @@ class _VitNavigationRailItem extends StatelessWidget {
         : destination.navLabel;
 
     return Padding(
-      padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.x4),
+      padding: const EdgeInsetsDirectional.only(bottom: TabletSpacingTokens.x4),
       child: Semantics(
         key: Key('vit_navigation_rail_${destination.name}'),
         button: true,
@@ -95,10 +95,10 @@ class _VitNavigationRailItem extends StatelessWidget {
               ),
             ),
             child: SizedBox(
-              width: VitNavigationRail.width - AppSpacing.x4,
+              width: VitNavigationRail.width - TabletSpacingTokens.x4,
               child: Padding(
                 padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.x3,
+                  vertical: TabletSpacingTokens.x3,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -115,10 +115,10 @@ class _VitNavigationRailItem extends StatelessWidget {
                             : null,
                         destination.navIcon,
                         color: color,
-                        size: AppSpacing.iconMd,
+                        size: TabletSpacingTokens.iconMd,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.x2),
+                    const SizedBox(height: TabletSpacingTokens.x2),
                     Text(
                       destination.navLabel,
                       maxLines: 1,

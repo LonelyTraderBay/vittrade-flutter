@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_asset_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/controllers/market_controller.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
@@ -120,7 +120,7 @@ class MarketDepthSectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitSectionHeader(
       title: label,
-      bottomGap: AppSpacing.pageRhythmStandardInnerGap,
+      bottomGap: AppSurfaceSpacing.pageRhythmStandardInnerGap,
       variant: VitSectionHeaderVariant.accentBar,
       accentColor: accentColor,
     );

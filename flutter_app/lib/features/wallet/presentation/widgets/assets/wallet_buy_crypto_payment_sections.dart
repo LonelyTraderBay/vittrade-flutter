@@ -90,7 +90,7 @@ class _PaymentMethodCard extends StatelessWidget {
                     ),
             ),
           ),
-          const SizedBox(width: AppSpacing.cardGap),
+          SizedBox(width: AppSurfaceSpacing.cardGap),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class _PaymentMethodCard extends StatelessWidget {
                           ? Icons.flash_on_rounded
                           : Icons.access_time_rounded,
                       color: instant ? _buyGreen : AppColors.text3,
-                      size: AppSpacing.iconSm,
+                      size: AppSurfaceSpacing.iconSm,
                     ),
                     const SizedBox(
                       width: WalletSpacingTokens.walletBuyPaymentMetaGap,
@@ -177,7 +177,7 @@ class _RadioMark extends StatelessWidget {
           ? Icons.radio_button_checked_rounded
           : Icons.radio_button_unchecked_rounded,
       color: selected ? _buyPrimary : AppColors.borderSolid,
-      size: AppSpacing.iconMd,
+      size: AppSurfaceSpacing.iconMd,
     );
   }
 }

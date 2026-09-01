@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_section_header.dart';
 
@@ -22,13 +22,13 @@ double _resolveContentGap({
   if (density != null) return density.pageContentGap;
   switch (gap) {
     case VitContentGap.tight:
-      return AppSpacing.pageContentGapTight;
+      return AppSurfaceSpacing.pageContentGapTight;
     case VitContentGap.defaultGap:
-      return AppSpacing.pageContentGapDefault;
+      return AppSurfaceSpacing.pageContentGapDefault;
     case VitContentGap.relaxed:
-      return AppSpacing.pageContentGapRelaxed;
+      return AppSurfaceSpacing.pageContentGapRelaxed;
     case VitContentGap.loose:
-      return AppSpacing.pageContentGapLoose;
+      return AppSurfaceSpacing.pageContentGapLoose;
   }
 }
 
@@ -60,13 +60,13 @@ class VitPageContent extends StatelessWidget {
     if (density != null) return density!.pageContentTopPadding;
     switch (padding) {
       case VitContentPadding.compact:
-        return AppSpacing.pageContentTopCompact;
+        return AppSurfaceSpacing.pageContentTopCompact;
       case VitContentPadding.defaultPadding:
-        return AppSpacing.pageContentTopDefault;
+        return AppSurfaceSpacing.pageContentTopDefault;
       case VitContentPadding.relaxed:
-        return AppSpacing.pageContentTopRelaxed;
+        return AppSurfaceSpacing.pageContentTopRelaxed;
       case VitContentPadding.none:
-        return AppSpacing.zero;
+        return AppSurfaceSpacing.zero;
     }
   }
 
@@ -74,8 +74,10 @@ class VitPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final content = Padding(
       padding: EdgeInsetsDirectional.only(
-        start: fullBleed ? AppSpacing.zero : AppSpacing.contentPad,
-        end: fullBleed ? AppSpacing.zero : AppSpacing.contentPad,
+        start: fullBleed
+            ? AppSurfaceSpacing.zero
+            : AppSurfaceSpacing.contentPad,
+        end: fullBleed ? AppSurfaceSpacing.zero : AppSurfaceSpacing.contentPad,
         top: _topPadding,
       ),
       child: Column(
@@ -141,8 +143,25 @@ class VitPageSection extends StatelessWidget {
   /// renders bare (unchanged behavior).
   final Widget? headerTrailing;
 
-  double get _labelBottomGap =>
-      innerGap ?? rhythm?.innerGap ?? AppSpacing.pageRhythmStandardInnerGap;
+  double get _labelBottomGap {
+    if (innerGap != null) return innerGap!;
+    if (!TabletSpacingTokens.tabletSurfaceActive) {
+      return rhythm?.innerGap ?? AppSurfaceSpacing.pageRhythmStandardInnerGap;
+    }
+    if (rhythm != null) {
+      return switch (rhythm!) {
+        VitPageRhythm.compact => TabletSpacingTokens.pageRhythmCompactInnerGap,
+        VitPageRhythm.standard ||
+        VitPageRhythm.form ||
+        VitPageRhythm.relaxed => TabletSpacingTokens.x4,
+        VitPageRhythm.flush => TabletSpacingTokens.zero,
+      };
+    }
+    return headerDensity == VitDensity.compact ||
+            headerDensity == VitDensity.tool
+        ? TabletSpacingTokens.pageRhythmCompactInnerGap
+        : TabletSpacingTokens.x4;
+  }
 
   Widget _buildHeader() {
     final header = VitSectionHeader(
@@ -164,7 +183,7 @@ class VitPageSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(child: header),
-        const SizedBox(width: AppSpacing.x2),
+        SizedBox(width: AppSurfaceSpacing.x2),
         headerTrailing!,
       ],
     );
@@ -182,8 +201,8 @@ class VitPageSection extends StatelessWidget {
   }
 }
 
-/// Luật 8pt 12dp tablet (2026-09-01): khi surface tablet active, section
-/// gap của tier enum đọc TabletSpacingTokens (12) thay vì AppSpacing của
+/// Luật Base-8-derived tablet (2026-09-01): khi surface tablet active, section
+/// gap của tier enum đọc TabletSpacingTokens (12) thay vì token Phone của
 /// phone (13) — phone đường cũ nguyên vẹn.
 double _sectionGap(
   double? customGap,
@@ -195,7 +214,7 @@ double _sectionGap(
   if (rhythm != null) {
     return TabletSpacingTokens.tabletSurfaceActive
         ? switch (rhythm) {
-            // Luật 8pt 12dp: section gap tablet = 12 cho mọi tier dọc
+            // Base-8-derived: section gap Tablet = 12 cho mọi tier dọc
             // (compact giữ 8 khi scaffold chủ đích compact — map đủ 5
             // tier, phone đọc enum như cũ).
             VitPageRhythm.compact => TabletSpacingTokens.x3,

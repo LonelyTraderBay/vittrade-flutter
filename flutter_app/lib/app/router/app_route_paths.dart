@@ -1,4 +1,4 @@
-part of 'app_router.dart';
+part of 'app_route_contracts.dart';
 
 final class AppRoutePaths {
   const AppRoutePaths._();
@@ -684,11 +684,3 @@ final class AppRoutePaths {
   static const String maintenanceGate = UtilityRoutePaths.maintenanceGate;
   static const String forceUpdateGate = UtilityRoutePaths.forceUpdateGate;
 }
-
-const String _initialRouteFromEnvironment = String.fromEnvironment(
-  'INITIAL_ROUTE',
-);
-
-String get _defaultInitialLocation => _initialRouteFromEnvironment.isEmpty
-    ? AppRoutePaths.home
-    : _initialRouteFromEnvironment;

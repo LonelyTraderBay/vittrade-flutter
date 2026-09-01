@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=541
+visible_header_back_entries=542
 strict_back_issues=0
 high_risk_entries=125
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 472 |
+| parent_route_only | 473 |
 | history_then_fallback | 69 |
 
 ## Strict Issue Counts
@@ -36,6 +36,7 @@ sheet_result_baseline=9
 | File | Line | Owner | Widget | Classification | Mode | Fallback | High risk | Issue | Notes |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
 | `flutter_app/lib/app/router/internal_surface_gate.dart` | 92 | `_InternalSurfaceRestrictedPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
+| `flutter_app/lib/app/router/phone/phone_internal_surface_gate.dart` | 93 | `_InternalSurfaceRestrictedPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/ab_test_dashboard_page.dart` | 58 | `_ABTestDashboardPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/admin_settings_page.dart` | 44 | `AdminSettingsPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/admin/presentation/phone/pages/analytics_dashboard_page.dart` | 66 | `_AnalyticsDashboardPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.admin` | no | - | Back goes to an explicit parent route. |
@@ -535,7 +536,7 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/profile/presentation/phone/pages/sub_account_page.dart` | 75 | `_SubAccountPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
 | `flutter_app/lib/features/profile/presentation/phone/pages/vip_page.dart` | 81 | `_VIPPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
 | `flutter_app/lib/features/profile/presentation/widgets/profile_api_key_create_result.dart` | 132 | `_SimpleStepScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | yes | - | Reusable widget receives an owner-provided back callback. |
-| `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart` | 96 | `ProfilePaneScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
+| `flutter_app/lib/features/profile/presentation/widgets/tablet/profile_pane_scaffold.dart` | 103 | `ProfilePaneScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/referral/presentation/phone/pages/referral_friend_detail_page.dart` | 36 | `ReferralFriendDetailPage` | `VitHeader` | parent_route_only | parent_route_only | `-` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/referral/presentation/phone/pages/referral_history_page.dart` | 87 | `_ReferralHistoryPageState` | `VitHeader` | parent_route_only | parent_route_only | `-` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/referral/presentation/phone/pages/referral_home_page.dart` | 85 | `_ReferralHomePageState` | `VitHeader` | parent_route_only | parent_route_only | `homeAsync.value?.backRoute ?? AppRoutePaths.home` | no | - | Back goes to an explicit parent route. |
@@ -545,10 +546,10 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/support/presentation/phone/pages/announcements_page.dart` | 74 | `_AnnouncementsPageState` | `VitHeader` | parent_route_only | parent_route_only | `-` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/support/presentation/phone/pages/help_center_page.dart` | 91 | `_HelpCenterPageState` | `VitHeader` | parent_route_only | parent_route_only | `helpAsync.value?.backRoute ?? AppRoutePaths.support` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/support/presentation/phone/pages/support_page.dart` | 83 | `_SupportPageState` | `VitHeader` | parent_route_only | parent_route_only | `-` | no | - | Back goes to an explicit parent route. |
-| `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` | 40 | `MarginHubTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/trade/presentation/tablet/pages/margin_hub_tablet_page.dart` | 41 | `MarginHubTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/trade/presentation/tablet/pages/orders_history_tablet_page.dart` | 61 | `_OrdersHistoryTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/trade/presentation/tablet/pages/position_dashboard_tablet_page.dart` | 55 | `_PositionDashboardTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
-| `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` | 54 | `_TradeSettingsTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart` | 55 | `_TradeSettingsTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_page.dart` | 136 | `_TradeTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.trade` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart` | 55 | `TradeTabletDetailSurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/trade_core/presentation/widgets/trade_module_layout.dart` | 228 | `VitTradeDetailScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |

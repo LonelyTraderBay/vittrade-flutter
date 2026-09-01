@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Row of [segmentCount] equal pill segments with the leading [filledCount]
 /// segments highlighted — a **discrete** step/strength meter.
@@ -22,8 +22,8 @@ class VitSegmentedProgressBar extends StatelessWidget {
     required this.filledCount,
     this.filledColor = AppColors.primary,
     this.unfilledColor = AppColors.borderSolid,
-    this.height = AppSpacing.x1,
-    this.gap = AppSpacing.x2,
+    this.height,
+    this.gap,
     this.borderRadius,
   }) : assert(segmentCount > 0, 'segmentCount must be positive');
 
@@ -41,10 +41,10 @@ class VitSegmentedProgressBar extends StatelessWidget {
   final Color unfilledColor;
 
   /// Segment track height.
-  final double height;
+  final double? height;
 
   /// Horizontal gap between adjacent segments.
-  final double gap;
+  final double? gap;
 
   /// Corner radius for each segment. Defaults to [AppRadii.pillRadius].
   final BorderRadiusGeometry? borderRadius;
@@ -53,17 +53,19 @@ class VitSegmentedProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final filled = filledCount.clamp(0, segmentCount);
     final radius = borderRadius ?? AppRadii.pillRadius;
+    final resolvedHeight = height ?? AppSurfaceSpacing.x1;
+    final resolvedGap = gap ?? AppSurfaceSpacing.x2;
 
     return Row(
       children: [
         for (var index = 0; index < segmentCount; index++) ...[
-          if (index > 0) SizedBox(width: gap),
+          if (index > 0) SizedBox(width: resolvedGap),
           Expanded(
             child: ClipRRect(
               borderRadius: radius,
               child: ColoredBox(
                 color: index < filled ? filledColor : unfilledColor,
-                child: SizedBox(height: height),
+                child: SizedBox(height: resolvedHeight),
               ),
             ),
           ),

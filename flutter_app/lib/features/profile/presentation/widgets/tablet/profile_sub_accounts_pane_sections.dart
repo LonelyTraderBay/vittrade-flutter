@@ -540,8 +540,8 @@ class _SubsDetails extends StatelessWidget {
           ),
           const SizedBox(height: TabletSpacingTokens.x4),
           Wrap(
-            spacing: ProfileSpacingTokens.profileSubAccountPermissionGap,
-            runSpacing: ProfileSpacingTokens.profileSubAccountPermissionGap,
+            spacing: TabletSpacingTokens.x3,
+            runSpacing: TabletSpacingTokens.x3,
             children: [
               for (final permission in account.permissions)
                 VitAccentPill(

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -102,7 +102,9 @@ class _DustConverterTabletPageState
           contractId: '${_selectedIds.length} đã chọn / $_targetSymbol',
           density: VitDensity.compact,
         ),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             children: [
@@ -221,6 +223,7 @@ class _DustConverterTabletPageState
   Widget _assetCard(WalletDustAsset asset) {
     final selected = _selectedIds.contains(asset.id);
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: DustConverterTabletPage.assetKey(asset.id),
       variant: selected ? VitCardVariant.hero : VitCardVariant.inner,
       onTap: () => setState(() {
@@ -282,6 +285,7 @@ class _DustConverterTabletPageState
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -318,6 +322,7 @@ class _DustConverterTabletPageState
           ],
         ),
         const VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.ghost,
           child: Text(
             'Giá trị và phí có thể thay đổi trước khi xác nhận. Kiểm tra lại số nhận cuối cùng trong bước xem trước.',

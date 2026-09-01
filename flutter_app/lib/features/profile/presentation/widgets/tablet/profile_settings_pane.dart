@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
@@ -212,6 +212,7 @@ class _CurrencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       density: VitDensity.compact,
       borderColor: AppColors.cardBorder,
       child: Row(
@@ -235,7 +236,7 @@ class _CurrencyCard extends StatelessWidget {
                 ),
                 const SizedBox(height: TabletSpacingTokens.x4),
                 VitPresetChipRow<String>(
-                  gap: ProfileSpacingTokens.settingsCurrencyChipGap,
+                  gap: TabletSpacingTokens.x3,
                   selectedValue: selectedCurrency,
                   onTap: onChanged,
                   items: [
@@ -270,6 +271,7 @@ class _LanguageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: AppColors.cardBorder,
       clip: true,
       child: Column(
@@ -363,6 +365,7 @@ class _SettingsListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: AppColors.cardBorder,
       clip: true,
       child: Column(

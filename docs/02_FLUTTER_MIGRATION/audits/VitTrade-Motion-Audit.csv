@@ -51,7 +51,6 @@ features/trade_bots/presentation/widgets/settings/bot_emergency_stop_page_common
 features/trade_copy/presentation/widgets/safety/safety_education_page_sections.dart,131,M1-literal-duration,"duration: const Duration(milliseconds: 120),"
 features/wallet/presentation/widgets/tools/wallet_token_approval_settings_tab.dart,124,M1-literal-duration,"duration: const Duration(milliseconds: 150),"
 shared/layout/vit_auto_hide_header_scaffold.dart,161,M2-literal-curve,"const curve = Curves.easeOutCubic;"
-shared/widgets/vit_choice_pill.dart,128,M1-literal-duration,"duration: const Duration(milliseconds: 140),"
 shared/widgets/vit_skeleton.dart,37,M1-literal-duration,"duration: const Duration(milliseconds: 900),"
 shared/widgets/vit_skeleton.dart,44,M2-literal-curve,").animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));"
 shared/widgets/vit_tab_bar.dart,237,M1-literal-duration,"duration: const Duration(milliseconds: 180),"

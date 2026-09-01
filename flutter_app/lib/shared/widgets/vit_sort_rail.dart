@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_choice_pill.dart';
 
@@ -34,7 +34,7 @@ class VitSortRail<T> extends StatelessWidget {
     this.label = 'Sắp xếp:',
     this.icon = Icons.swap_vert_rounded,
     this.accentColor = AppColors.primary,
-    this.optionGap = AppSpacing.x2,
+    this.optionGap,
   });
 
   final List<VitSortRailOption<T>> options;
@@ -46,21 +46,22 @@ class VitSortRail<T> extends StatelessWidget {
   final String label;
   final IconData icon;
   final Color accentColor;
-  final double optionGap;
+  final double? optionGap;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedOptionGap = optionGap ?? AppSurfaceSpacing.x2;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           Icon(icon, color: AppColors.text3, size: iconSize),
-          const SizedBox(width: AppSpacing.x2),
+          SizedBox(width: AppSurfaceSpacing.x2),
           Text(
             label,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
           ),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
           for (final option in options) ...[
             VitChoicePill(
               key: option.key,
@@ -71,7 +72,7 @@ class VitSortRail<T> extends StatelessWidget {
               height: optionHeight,
               padding: optionPadding,
             ),
-            SizedBox(width: optionGap),
+            SizedBox(width: resolvedOptionGap),
           ],
         ],
       ),

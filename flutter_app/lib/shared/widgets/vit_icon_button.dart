@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Color treatment of a [VitIconButton].
@@ -45,28 +45,32 @@ class VitIconButton extends StatelessWidget {
   _IconButtonMetrics get _metrics {
     switch (size) {
       case VitIconButtonSize.sm:
-        return const _IconButtonMetrics(
-          height: AppSpacing.buttonCompact - AppSpacing.formFieldLabelGap,
-          iconSize: AppSpacing.rowPy,
+        return _IconButtonMetrics(
+          height:
+              AppSurfaceSpacing.buttonCompact -
+              AppSurfaceSpacing.formFieldLabelGap,
+          iconSize: AppSurfaceSpacing.rowPy,
           labelStyle: AppTextStyles.badge,
-          gap: AppSpacing.x1 + AppSpacing.dividerHairline,
-          paddingX: AppSpacing.x3,
+          gap: AppSurfaceSpacing.x1 + AppSurfaceSpacing.dividerHairline,
+          paddingX: AppSurfaceSpacing.x3,
         );
       case VitIconButtonSize.md:
-        return const _IconButtonMetrics(
-          height: AppSpacing.buttonCompact + AppSpacing.formFieldLabelGap,
-          iconSize: AppSpacing.iconMd,
+        return _IconButtonMetrics(
+          height:
+              AppSurfaceSpacing.buttonCompact +
+              AppSurfaceSpacing.formFieldLabelGap,
+          iconSize: AppSurfaceSpacing.iconMd,
           labelStyle: AppTextStyles.caption,
-          gap: AppSpacing.formFieldLabelGap,
-          paddingX: AppSpacing.rowPy - AppSpacing.hairlineStroke,
+          gap: AppSurfaceSpacing.formFieldLabelGap,
+          paddingX: AppSurfaceSpacing.rowPy - AppSurfaceSpacing.hairlineStroke,
         );
       case VitIconButtonSize.lg:
-        return const _IconButtonMetrics(
-          height: AppSpacing.inputHeight - AppSpacing.x3,
-          iconSize: AppSpacing.contentPad,
+        return _IconButtonMetrics(
+          height: AppSurfaceSpacing.inputHeight - AppSurfaceSpacing.x3,
+          iconSize: AppSurfaceSpacing.contentPad,
           labelStyle: AppTextStyles.control,
-          gap: AppSpacing.x3,
-          paddingX: AppSpacing.x4 + AppSpacing.x1,
+          gap: AppSurfaceSpacing.x3,
+          paddingX: AppSurfaceSpacing.x4 + AppSurfaceSpacing.x1,
         );
     }
   }
@@ -132,7 +136,7 @@ class VitIconButton extends StatelessWidget {
             width: metrics.iconSize,
             height: metrics.iconSize,
             child: CircularProgressIndicator(
-              strokeWidth: AppSpacing.hairlineStroke,
+              strokeWidth: AppSurfaceSpacing.hairlineStroke,
               valueColor: AlwaysStoppedAnimation<Color>(style.foreground),
             ),
           )
@@ -165,8 +169,8 @@ class VitIconButton extends StatelessWidget {
             borderRadius: radius,
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minWidth: hasLabel ? 0 : AppSpacing.minTapTarget,
-                minHeight: AppSpacing.minTapTarget,
+                minWidth: hasLabel ? 0 : AppSurfaceSpacing.minTapTarget,
+                minHeight: AppSurfaceSpacing.minTapTarget,
               ),
               child: Center(
                 // widthFactor/heightFactor: 1 makes Center shrink-wrap to

@@ -43,6 +43,7 @@ class TradeTickerStrip extends StatelessWidget {
     final trendColor = positive ? AppColors.buy : AppColors.sell;
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: TradeTabletKeys.tickerStrip,
       radius: VitCardRadius.standard,
       clip: true,

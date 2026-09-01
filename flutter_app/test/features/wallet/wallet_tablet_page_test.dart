@@ -152,7 +152,7 @@ void main() {
       matching: find.byType(VitPageSection),
     );
     final dcaSection = tester.getRect(dcaSectionFinder);
-    // Luật 8pt 12dp tablet: section gap + label→nội dung = 12.
+    // Luật Base-8-derived Tablet: section gap + label→nội dung = 12.
     final law12HeaderPadding = find.byWidgetPredicate(
       (widget) =>
           widget is Padding &&

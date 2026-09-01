@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
@@ -87,6 +88,14 @@ class _TradeSettingsTabletPageState
                       quickNavKey: TradeTabletKeys.quickNav,
                       navigationBuilder: buildTradeProductNavigation,
                       children: const [SizedBox.shrink()],
+                    ),
+                    const VitHighRiskStatePanel(
+                      state: VitHighRiskUiState.riskReview,
+                      title: 'Rà soát cài đặt trước khi giao dịch',
+                      message:
+                          'Giữ xác nhận lệnh và kiểm tra các tùy chọn hiển thị trước khi lưu để tránh gửi nhầm lệnh hoặc bỏ sót dữ liệu quan trọng.',
+                      contractId: 'SC-052 rà soát cài đặt giao dịch',
+                      density: VitDensity.compact,
                     ),
                     VitTradeSection(
                       innerGap: TabletSpacingTokens.x4,

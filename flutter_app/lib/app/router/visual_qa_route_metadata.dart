@@ -1,6 +1,7 @@
-part of 'app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
-VitBottomNavDestination _activeDestinationForPath(String path) {
+VitBottomNavDestination activeDestinationForPath(String path) {
   if (path == AppRoutePaths.news ||
       path == AppRoutePaths.search ||
       path == AppRoutePaths.notifications ||
@@ -68,7 +69,7 @@ VitBottomNavDestination _activeDestinationForPath(String path) {
   return VitBottomNavDestination.home;
 }
 
-String _visualQaStatusBarTimeForUri(Uri uri) {
+String visualQaStatusBarTimeForUri(Uri uri) {
   final path = uri.path;
   if (path == AppRoutePaths.rewards) {
     return uri.queryParameters['tab'] == 'arena' ? '23:34' : '23:38';

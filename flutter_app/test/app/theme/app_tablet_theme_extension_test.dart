@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_tablet_theme_extension.dart';
 import 'package:vit_trade_flutter/app/theme/app_theme.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 
 void main() {
@@ -20,11 +20,11 @@ void main() {
     // truth intact (Tablet-Spacing-Gutter + Card-Border standards).
     const tablet = AppTabletThemeExtension();
 
-    expect(tablet.gapMicro, AppSpacing.x1);
-    expect(tablet.gapItem, AppSpacing.rowGap);
-    expect(tablet.gapCard, AppSpacing.cardGap);
-    expect(tablet.gapBlock, AppSpacing.x5);
-    expect(tablet.contentPad, AppSpacing.contentPad);
+    expect(tablet.gapMicro, TabletSpacingTokens.x1);
+    expect(tablet.gapItem, TabletSpacingTokens.rowGap);
+    expect(tablet.gapCard, TabletSpacingTokens.cardGap);
+    expect(tablet.gapBlock, TabletSpacingTokens.pageRhythmStandardSectionGap);
+    expect(tablet.contentPad, TabletSpacingTokens.contentPad);
 
     expect(tablet.outerMargin, TabletDashboardWidths.outerHorizontalMargin);
     expect(tablet.columnGutter, TabletDashboardWidths.columnGutter);
@@ -104,7 +104,7 @@ void main() {
 
     // The const default keeps every token identical — consumers never see
     // null and never render off-scale spacing.
-    expect(resolved.gapItem, AppSpacing.rowGap);
+    expect(resolved.gapItem, TabletSpacingTokens.rowGap);
     expect(resolved.cardHairline.color, AppColors.cardBorder);
   });
 }

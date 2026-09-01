@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/markets_spacing_tokens.dart';
@@ -48,8 +48,8 @@ class MarketDepthTabs extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(
-              height: AppSpacing.dividerHairline,
+            Divider(
+              height: AppSurfaceSpacing.dividerHairline,
               color: AppColors.divider,
             ),
           ],

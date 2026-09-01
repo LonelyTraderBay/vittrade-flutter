@@ -40,8 +40,8 @@ final class TradeSpacingTokens {
   // nhịp; giữ token riêng vì guardrail cross-feature cấm dùng token
   // Markets từ trade.
   //
-  // LUẬT 13dp (user chốt 2026-08-31): mọi khoảng trắng DỌC của terminal
-  // đều là 13dp — gutter panel↔panel, mép panel→nội dung đầu, nhãn→nội
+  // LUẬT 12dp (user chốt 2026-08-31): mọi gap khối DỌC của terminal
+  // đều là 12dp — gutter panel↔panel, mép panel→nội dung đầu, nhãn→nội
   // dung, giữa hai khối trong panel, nội dung cuối→viền dưới. Một giá
   // trị, không ngoại lệ; inset NGANG và extent hàng dữ liệu không thuộc
   // phạm vi luật (không phải khoảng trắng dọc).
@@ -52,7 +52,7 @@ final class TradeSpacingTokens {
     vertical: TabletSpacingTokens.x4,
   );
 
-  /// LUẬT 13dp: khoảng ngang giữa các cụm số liệu meta = 13.
+  /// LUẬT 12dp: khoảng ngang giữa các cụm số liệu meta = 12.
   static const double tradeTerminalMetaGap = TabletSpacingTokens.x4;
   static const double tradeTerminalMetaDividerHeight = TabletSpacingTokens.x5;
   static const EdgeInsets tradeTerminalPanelHeaderPadding = EdgeInsets.fromLTRB(
@@ -62,8 +62,8 @@ final class TradeSpacingTokens {
     TabletSpacingTokens.x4,
   );
 
-  /// Body panel: CHỈ inset ngang — mọi khoảng dọc do luật 8pt 12dp đảm nhiệm
-  /// (header padding bottom 13 với panel có nhãn; body top/bottom padding
+  /// Body panel: CHỈ inset ngang — mọi khoảng dọc do luật Base-8-derived 12dp đảm nhiệm
+  /// (header padding bottom 12 với panel có nhãn; body top/bottom padding
   /// với panel không nhãn). Cấm bọc thêm padding dọc ở child.
   static const EdgeInsets tradeTerminalPanelBodyPadding = EdgeInsets.symmetric(
     horizontal: TabletSpacingTokens.x3,
@@ -93,7 +93,7 @@ final class TradeSpacingTokens {
   static const double tradeTerminalTradeRowExtent = 24;
 
   /// Inset ngang của hàng header cột (Khối lượng/Thời gian) trong tape —
-  /// chỉ ngang, không dọc (luật 8pt 12dp: khoảng nhãn → header do label
+  /// chỉ ngang, không dọc (luật Base-8-derived 12dp: khoảng nhãn → header do label
   /// padding bottom đảm nhiệm).
   static const EdgeInsets tradeTerminalColumnHeaderPadding =
       EdgeInsets.symmetric(horizontal: TabletSpacingTokens.x2);
@@ -113,7 +113,7 @@ final class TradeSpacingTokens {
         TabletSpacingTokens.x4,
       );
 
-  /// LUẬT 13dp: khoảng ngang giữa các nút khung giờ/chỉ báo = 13.
+  /// LUẬT 12dp: khoảng ngang giữa các nút khung giờ/chỉ báo = 12.
   static const double tradeTerminalIntervalGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalIntervalButtonPadding =
       EdgeInsets.symmetric(
@@ -122,8 +122,8 @@ final class TradeSpacingTokens {
       );
 
   /// Vùng tab dưới chart (Lệnh mở | Vị thế | Sổ lệnh tùy tầng).
-  /// Chiều cao vùng dưới chart sau luật 8pt 12dp: 13 (mép→tab) + tab (~29) +
-  /// 13 (tab→bảng) + 8 hàng × 24 + 13 (hàng cuối→viền).
+  /// Chiều cao vùng dưới chart sau luật Base-8-derived 12dp: 12 (mép→tab) + tab (~29) +
+  /// 12 (tab→bảng) + 8 hàng × 24 + 12 (hàng cuối→viền).
   static const double tradeTerminalBottomPanelHeight = 260;
 
   /// Chiều cao phần bảng trong panel dưới chart = 8 hàng × extent 24.
@@ -134,7 +134,7 @@ final class TradeSpacingTokens {
           TabletSpacingTokens.x2 +
           TabletSpacingTokens.x1);
 
-  /// LUẬT 13dp: khoảng ngang tab ↔ nút xem tất cả = 13.
+  /// LUẬT 12dp: khoảng ngang tab ↔ nút xem tất cả = 12.
   static const double tradeTerminalBottomTabGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
     horizontal: TabletSpacingTokens.x2,

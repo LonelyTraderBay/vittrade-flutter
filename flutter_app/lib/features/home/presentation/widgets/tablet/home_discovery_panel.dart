@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/home_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -26,7 +25,9 @@ class HomeDiscoveryPanel extends StatelessWidget {
           title: 'Dự đoán & Thách đấu',
           bottomGap: TabletSpacingTokens.x4,
         ),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           clip: true,
           child: Column(
             children: [
@@ -60,9 +61,7 @@ class HomeDiscoveryPanel extends StatelessWidget {
                 color: AppColors.divider,
               ),
               const Padding(
-                padding: EdgeInsetsDirectional.all(
-                  HomeSpacingTokens.homeListRowPadding,
-                ),
+                padding: EdgeInsetsDirectional.all(TabletSpacingTokens.x4),
                 child: VitRiskDisclaimerNote(
                   message:
                       'Dự đoán dùng vị thế thật. Arena chỉ dùng điểm (không phải tiền thật).',
@@ -105,7 +104,7 @@ class _DiscoveryRow extends StatelessWidget {
     return VitIconListRow(
       onTap: onTap,
       padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: HomeSpacingTokens.homeListRowPadding,
+        horizontal: TabletSpacingTokens.x4,
         vertical: TabletSpacingTokens.x4,
       ),
       leading: VitAccentIconBox(icon: icon, color: accentColor),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/launchpad_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_accent_icon_box.dart';
@@ -103,7 +103,7 @@ class VitCountedSectionHeader extends StatelessWidget {
         ? Row(
             children: [
               Flexible(child: titleText),
-              const SizedBox(width: AppSpacing.x2),
+              SizedBox(width: AppSurfaceSpacing.x2),
               _buildCountChip(),
             ],
           )
@@ -117,7 +117,7 @@ class VitCountedSectionHeader extends StatelessWidget {
     return Row(
       children: [
         VitAccentIconBox(icon: icon, color: color),
-        const SizedBox(width: AppSpacing.x3),
+        SizedBox(width: AppSurfaceSpacing.x3),
         Expanded(child: middle),
         if (hasAction)
           VitCard(
@@ -138,7 +138,7 @@ class VitCountedSectionHeader extends StatelessWidget {
                       fontWeight: AppTextStyles.bold,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.x1),
+                  SizedBox(width: AppSurfaceSpacing.x1),
                   Icon(Icons.arrow_forward_rounded, color: color, size: 11),
                 ],
               ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_icon_button.dart';
 
@@ -69,10 +69,10 @@ class _VitSearchBarState extends State<VitSearchBar> {
   double get _height {
     switch (widget.variant) {
       case VitSearchBarVariant.compact:
-        return AppSpacing.searchBarCompactHeight;
+        return AppSurfaceSpacing.searchBarCompactHeight;
       case VitSearchBarVariant.defaultSearch:
       case VitSearchBarVariant.header:
-        return AppSpacing.inputHeight;
+        return AppSurfaceSpacing.inputHeight;
     }
   }
 
@@ -145,7 +145,7 @@ class _VitSearchBarState extends State<VitSearchBar> {
             variant: VitIconButtonVariant.transparent,
             size: VitIconButtonSize.lg,
           ),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
         ],
         Expanded(
           child: SizedBox(
@@ -159,25 +159,25 @@ class _VitSearchBarState extends State<VitSearchBar> {
                         ? AppColors.primary
                         : AppColors.searchBorder,
                     width: _focusNode.hasFocus
-                        ? AppSpacing.searchBarFocusBorder
-                        : AppSpacing.searchBarNormalBorder,
+                        ? AppSurfaceSpacing.searchBarFocusBorder
+                        : AppSurfaceSpacing.searchBarNormalBorder,
                   ),
                   borderRadius: _radius,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  start: AppSpacing.searchBarHorizontalPadding,
-                  end: AppSpacing.searchBarHorizontalTrailingPadding,
+                padding: EdgeInsetsDirectional.only(
+                  start: AppSurfaceSpacing.searchBarHorizontalPadding,
+                  end: AppSurfaceSpacing.searchBarHorizontalTrailingPadding,
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.search_rounded,
                       color: AppColors.text3,
-                      size: AppSpacing.searchBarIcon,
+                      size: AppSurfaceSpacing.searchBarIcon,
                     ),
-                    const SizedBox(width: AppSpacing.x3),
+                    SizedBox(width: AppSurfaceSpacing.x3),
                     Expanded(
                       child: TextField(
                         key: widget.fieldKey,
@@ -228,7 +228,7 @@ class _VitSearchBarState extends State<VitSearchBar> {
         if (widget.onFilterTap != null &&
             widget.trailing == null &&
             !widget.filterInline) ...[
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
           VitIconButton(
             key: widget.filterKey,
             icon: Icons.tune_rounded,
@@ -243,7 +243,7 @@ class _VitSearchBarState extends State<VitSearchBar> {
           ),
         ],
         if (widget.trailing != null) ...[
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
           widget.trailing!,
         ],
       ],

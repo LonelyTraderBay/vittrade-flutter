@@ -3,7 +3,7 @@
 //
 // Bug 2026-08-28 (user X đỏ "khoảng trống rất nhiều chỗ"): trang tổng quan
 // Markets tự lắp VitInsetScrollView + VitPageContent mà KHÔNG fullBleed —
-// contentPad 20dp xếp chồng outerHorizontalMargin 20dp của shell (double
+// contentPad 20dp xếp chồng outerHorizontalMargin 12dp của shell (double
 // gutter ngang) và pageContentTopRelaxed 16dp xếp chồng blockVerticalGap
 // 16dp (double breathing dọc): 68dp trống đầu pane + card lệch 40px so khung
 // master. Cùng lớp bug 4a171046, tái xuất vì overview/utility là "hub route"
@@ -13,22 +13,19 @@
 // top-level `fullBleed:` một cách tường minh — chủ ý gutter thuộc về wrapper
 // ngoài (shell/master-detail/dashboard), không phải trang. Ngoại lệ legacy
 // (VitPageContent LÀ chủ gutter của chính nó) được ghim trong baseline
-// exact-set dưới đây: khung menu Profile + skeleton/error trong khung + 2
-// wrapper của VitTwoColumnTabletDashboard. Chỉ được GIẢM; VitPageContent
+// exact-set dưới đây: 2 wrapper của VitTwoColumnTabletDashboard. Chỉ được
+// GIẢM; VitPageContent
 // mới không fullBleed thì fail CI.
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Baseline 2026-08-28 — 5 wrapper hợp lệ sở hữu gutter riêng.
+/// Baseline 2026-09-01 — 2 wrapper hợp lệ sở hữu gutter riêng.
 /// Key `path|line`: nếu chỉ dịch dòng do edit phía trên, cập nhật số dòng
 /// kèm một dòng giải trình trong commit.
 const List<String> kBaselineNonFullBleedPageContents = [
-  'features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart|190',
-  'features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart|205',
-  'features/profile/presentation/widgets/tablet/profile_master_menu.dart|46',
-  'shared/layout/vit_two_column_tablet_dashboard.dart|202',
-  'shared/layout/vit_two_column_tablet_dashboard.dart|296',
+  'shared/layout/vit_two_column_tablet_dashboard.dart|190',
+  'shared/layout/vit_two_column_tablet_dashboard.dart|285',
 ];
 
 final _pageContentStartRe = RegExp(r'\bVitPageContent\s*\(');

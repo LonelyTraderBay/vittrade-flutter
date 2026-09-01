@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -57,6 +57,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
       onBack: () => context.go(AppRoutePaths.p2p),
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.hero,
           child: Row(
             // AIB-R6: khối mô tả căn giữa dọc theo ô icon.
@@ -97,6 +98,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               variant: VitCardVariant.inner,
               child: Column(
                 children: [
@@ -130,6 +132,7 @@ class P2PTabletUtilityPage extends StatelessWidget {
             child: Text(actionLabel!),
           ),
         const VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.ghost,
           child: Text(
             'Thông tin P2P hiển thị theo phạm vi hiện tại. Hệ thống sẽ kiểm tra lại điều kiện cuối cùng trước khi ghi nhận thay đổi.',

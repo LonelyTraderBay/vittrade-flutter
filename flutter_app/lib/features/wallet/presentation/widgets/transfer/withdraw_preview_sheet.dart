@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/controllers/wallet_controller.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/withdraw_common.dart';
@@ -27,9 +27,9 @@ class WithdrawPreviewSheet extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.x4,
-              vertical: AppSpacing.x3,
+            padding: EdgeInsetsDirectional.symmetric(
+              horizontal: AppSurfaceSpacing.x4,
+              vertical: AppSurfaceSpacing.x3,
             ),
             child: Row(
               children: [
@@ -57,9 +57,9 @@ class WithdrawPreviewSheet extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(
-            height: AppSpacing.dividerHairline,
-            thickness: AppSpacing.dividerHairline,
+          Divider(
+            height: AppSurfaceSpacing.dividerHairline,
+            thickness: AppSurfaceSpacing.dividerHairline,
             color: AppColors.border,
           ),
           VitInfoRow(
@@ -105,7 +105,7 @@ class WithdrawPreviewSheet extends StatelessWidget {
                   onTap: () => Navigator.of(context).pop(),
                 ),
               ),
-              const SizedBox(width: AppSpacing.pageRhythmStandardInnerGap),
+              SizedBox(width: AppSurfaceSpacing.pageRhythmStandardInnerGap),
               Expanded(
                 child: WithdrawConfirmActionButton(
                   key: withdrawConfirmWithdrawKey,
@@ -141,7 +141,7 @@ class WithdrawConfirmActionButton extends StatelessWidget {
       enabled: true,
       label: primary ? 'Xác nhận rút' : 'Hủy xem trước lệnh rút',
       child: VitCtaButton(
-        height: AppSpacing.ctaHeight,
+        height: AppSurfaceSpacing.ctaHeight,
         variant: primary
             ? VitCtaButtonVariant.warning
             : VitCtaButtonVariant.secondary,

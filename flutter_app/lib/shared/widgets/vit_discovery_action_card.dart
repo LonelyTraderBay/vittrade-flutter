@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_status_pill.dart';
@@ -43,8 +43,8 @@ class VitDiscoveryActionCard extends StatelessWidget {
 
   _DiscoveryCardMetrics get _metrics {
     return switch (variant) {
-      VitDiscoveryActionCardVariant.standard => const _DiscoveryCardMetrics(
-        padding: AppSpacing.cardPadding,
+      VitDiscoveryActionCardVariant.standard => _DiscoveryCardMetrics(
+        padding: AppSurfaceSpacing.cardPadding,
         iconContainerSize: SharedSpacingTokens.homeDiscoveryIconContainer,
         iconSize: SharedSpacingTokens.homeDiscoveryIconSize,
         titleStyle: AppTextStyles.body,
@@ -91,7 +91,7 @@ class VitDiscoveryActionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Wrap(
-                  spacing: AppSpacing.x3,
+                  spacing: AppSurfaceSpacing.x3,
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     Text(
@@ -107,7 +107,7 @@ class VitDiscoveryActionCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.x1),
+                SizedBox(height: AppSurfaceSpacing.x1),
                 Text(
                   subtitle,
                   maxLines: 1,
@@ -115,7 +115,7 @@ class VitDiscoveryActionCard extends StatelessWidget {
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
                 if (metrics.showActionLabel) ...[
-                  const SizedBox(height: AppSpacing.x2),
+                  SizedBox(height: AppSurfaceSpacing.x2),
                   Text(
                     actionLabel,
                     maxLines: 1,

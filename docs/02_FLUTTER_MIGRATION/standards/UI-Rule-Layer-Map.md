@@ -57,7 +57,7 @@
 | Standard | Notes |
 | --- | --- |
 | Tablet-Adaptive-Standard | R1–R9 surface contract, shells, tiers. |
-| Tablet-Spacing-Gutter-Standard | S1–S6 + Rule 5 token overrides. Its Rule-1 role table pins shared tokens (e.g. `cardGap`) for tablet — the tokens themselves are chung. |
+| Tablet-Spacing-Gutter-Standard | S1–S7 + closed Base-8-derived role scale + Rule 5 token overrides. `TabletSpacingTokens` owns Tablet geometry; `AppSurfaceSpacing` is the surface-aware bridge for shared widgets. |
 | Tablet-Card-Border-Standard | R1–R7 frames, radii, tints, card padding. |
 | Tablet-Input-Standard | I1–I5 hover/focus states. |
 | Home-Tablet-Reference-Contract | Home-as-reference extraction. |
@@ -79,6 +79,11 @@
 | Card frames | Current rules; tablet-grade frame rules may be adopted later. | VitCard-only, tint steps, CB-R1–R7. |
 | Input hover/focus | Inherits via shared widgets (not enforced). | I1–I5 enforced. |
 | Page horizontal inset | `contentPad` once (Recipe A/B). | Inside master-detail shells: `fullBleed` (S6) — the shell owns the gutter. |
+
+The Tablet spacing contract is one governed surface system: 4dp is only the
+alignment substrate; new UI may use only the named role values in
+`Tablet-Spacing-Gutter-Standard.md`. It must not introduce a second free-form
+4dp scale or read Phone `AppSpacing` directly.
 
 ## Verify
 

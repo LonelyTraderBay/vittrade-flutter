@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -126,7 +126,9 @@ class _AddressBookTabletPageState extends ConsumerState<AddressBookTabletPage> {
           rhythm: VitPageRhythm.standard,
           children: [
             _StatsRow(addresses: allAddresses),
+
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               key: AddressBookTabletPage.whitelistModeKey,
               variant: VitCardVariant.inner,
               onTap: () => setState(() => _whitelistOnly = !_whitelistOnly),
@@ -462,42 +464,48 @@ class _AddressTabletCard extends StatelessWidget {
                 height: WalletSpacingTokens.walletAddressCopyHeight,
                 accentColor: AppColors.primary,
               ),
-              const Spacer(),
-              VitIconButton(
-                key: AddressBookTabletPage.favoriteKey(address.id),
-                icon: address.isFavorite
-                    ? Icons.star_rounded
-                    : Icons.star_outline_rounded,
-                tooltip: 'Yêu thích địa chỉ',
-                onPressed: () => ref
-                    .read(addressBookStateControllerProvider.notifier)
-                    .toggleFavorite(address.id),
-                size: VitIconButtonSize.md,
-                variant: address.isFavorite
-                    ? VitIconButtonVariant.primary
-                    : VitIconButtonVariant.ghost,
-              ),
-              const SizedBox(width: TabletSpacingTokens.x4),
-              VitIconButton(
-                key: AddressBookTabletPage.editKey(address.id),
-                icon: Icons.edit_rounded,
-                tooltip: 'Sửa địa chỉ',
-                onPressed: () => showVitNoticeSheet(
-                  context: context,
-                  title: 'Thông báo',
-                  message: 'Chỉnh sửa địa chỉ sẽ mở trong bước kế tiếp.',
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    VitIconButton(
+                      key: AddressBookTabletPage.favoriteKey(address.id),
+                      icon: address.isFavorite
+                          ? Icons.star_rounded
+                          : Icons.star_outline_rounded,
+                      tooltip: 'Yêu thích địa chỉ',
+                      onPressed: () => ref
+                          .read(addressBookStateControllerProvider.notifier)
+                          .toggleFavorite(address.id),
+                      size: VitIconButtonSize.md,
+                      variant: address.isFavorite
+                          ? VitIconButtonVariant.primary
+                          : VitIconButtonVariant.ghost,
+                    ),
+                    const SizedBox(width: TabletSpacingTokens.x4),
+                    VitIconButton(
+                      key: AddressBookTabletPage.editKey(address.id),
+                      icon: Icons.edit_rounded,
+                      tooltip: 'Sửa địa chỉ',
+                      onPressed: () => showVitNoticeSheet(
+                        context: context,
+                        title: 'Thông báo',
+                        message: 'Chỉnh sửa địa chỉ sẽ mở trong bước kế tiếp.',
+                      ),
+                      size: VitIconButtonSize.md,
+                      variant: VitIconButtonVariant.ghost,
+                    ),
+                    const SizedBox(width: TabletSpacingTokens.x4),
+                    VitIconButton(
+                      key: AddressBookTabletPage.deleteKey(address.id),
+                      icon: Icons.delete_outline_rounded,
+                      tooltip: 'Xóa địa chỉ',
+                      onPressed: () => _delete(context, ref, address),
+                      size: VitIconButtonSize.md,
+                      variant: VitIconButtonVariant.danger,
+                    ),
+                  ],
                 ),
-                size: VitIconButtonSize.md,
-                variant: VitIconButtonVariant.ghost,
-              ),
-              const SizedBox(width: TabletSpacingTokens.x4),
-              VitIconButton(
-                key: AddressBookTabletPage.deleteKey(address.id),
-                icon: Icons.delete_outline_rounded,
-                tooltip: 'Xóa địa chỉ',
-                onPressed: () => _delete(context, ref, address),
-                size: VitIconButtonSize.md,
-                variant: VitIconButtonVariant.danger,
               ),
             ],
           ),

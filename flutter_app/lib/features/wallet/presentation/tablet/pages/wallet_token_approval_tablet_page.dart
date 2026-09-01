@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -124,6 +124,7 @@ class _WalletTokenApprovalTabletPageState
 
   Widget _securityOverview(WalletTokenApprovalSnapshot snapshot) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.hero,
       child: Row(
         children: [
@@ -195,6 +196,7 @@ class _WalletTokenApprovalTabletPageState
           child: const Text('Thu hồi tất cả quyền rủi ro cao'),
         ),
         const VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.ghost,
           child: Text(
             'Hợp đồng thông minh có thể sử dụng quyền đã cấp. Thu hồi các quyền không còn cần thiết để giảm rủi ro tài sản.',
@@ -209,6 +211,7 @@ class _WalletTokenApprovalTabletPageState
     WalletTokenApproval approval,
   ) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: WalletTokenApprovalTabletPage.approvalKey(approval.id),
       variant: VitCardVariant.inner,
       onTap: () => _showRevokeSheet(controller, approval),
@@ -271,6 +274,7 @@ class _WalletTokenApprovalTabletPageState
       children: [
         for (final item in snapshot.revokedApprovals)
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             variant: VitCardVariant.inner,
             child: VitInfoRow(
               label: '${item.token} · ${item.spenderName}',
@@ -295,6 +299,7 @@ class _WalletTokenApprovalTabletPageState
       rhythm: VitPageRhythm.standard,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             children: [
@@ -325,6 +330,7 @@ class _WalletTokenApprovalTabletPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             children: [

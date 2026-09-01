@@ -30,9 +30,9 @@ class TransferConfirmSheet extends StatelessWidget {
         shrinkWrap: true,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.x4,
-              vertical: AppSpacing.x3,
+            padding: EdgeInsetsDirectional.symmetric(
+              horizontal: AppSurfaceSpacing.x4,
+              vertical: AppSurfaceSpacing.x3,
             ),
             child: Row(
               children: [
@@ -63,9 +63,9 @@ class TransferConfirmSheet extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(
-            height: AppSpacing.dividerHairline,
-            thickness: AppSpacing.dividerHairline,
+          Divider(
+            height: AppSurfaceSpacing.dividerHairline,
+            thickness: AppSurfaceSpacing.dividerHairline,
             color: AppColors.border,
           ),
           VitInfoRow(
@@ -98,7 +98,7 @@ class TransferConfirmSheet extends StatelessWidget {
             valueColor: _transferGreen,
             density: confirmDensity,
           ),
-          const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmFormInnerGap),
           VitCard(
             variant: VitCardVariant.inner,
             density: confirmDensity,
@@ -108,7 +108,7 @@ class TransferConfirmSheet extends StatelessWidget {
               style: AppTextStyles.caption.copyWith(color: AppColors.text2),
             ),
           ),
-          const SizedBox(height: AppSpacing.pageRhythmFormInnerGap),
+          SizedBox(height: AppSurfaceSpacing.pageRhythmFormInnerGap),
           Row(
             children: [
               Expanded(
@@ -119,12 +119,12 @@ class TransferConfirmSheet extends StatelessWidget {
                   child: VitCtaButton(
                     onPressed: () => Navigator.of(context).pop(),
                     variant: VitCtaButtonVariant.secondary,
-                    height: AppSpacing.ctaHeight,
+                    height: AppSurfaceSpacing.ctaHeight,
                     child: const Text('Hủy'),
                   ),
                 ),
               ),
-              const SizedBox(width: _transferInlineGap),
+              SizedBox(width: _transferInlineGap),
               Expanded(
                 child: Semantics(
                   key: const Key('sc146_transfer_confirm'),
@@ -134,7 +134,7 @@ class TransferConfirmSheet extends StatelessWidget {
                   child: VitCtaButton(
                     onPressed: onConfirm,
                     variant: VitCtaButtonVariant.primary,
-                    height: AppSpacing.ctaHeight,
+                    height: AppSurfaceSpacing.ctaHeight,
                     child: const Text('Xác nhận'),
                   ),
                 ),

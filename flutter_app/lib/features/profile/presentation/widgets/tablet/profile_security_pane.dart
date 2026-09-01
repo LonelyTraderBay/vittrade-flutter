@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
@@ -158,6 +158,7 @@ class _SecurityScoreCard extends StatelessWidget {
     final scoreColor = Color(snapshot.scoreColorHex);
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: ProfileTabletKeys.securityPaneScore,
       density: VitDensity.compact,
       borderColor: _ProfileSecurityPaneState._securityBorder,
@@ -209,7 +210,7 @@ class _SecurityScoreCard extends StatelessWidget {
                 alpha: .12,
               ),
             ),
-            padding: ProfileSpacingTokens.securityScoreAlertPadding,
+            padding: TabletSpacingTokens.cardPaddingCompact,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -246,6 +247,7 @@ class _SecurityList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: _ProfileSecurityPaneState._securityBorder,
       clip: true,
       child: ClipRRect(
@@ -288,7 +290,7 @@ class _SecurityRow extends StatelessWidget {
       child: VitIconListRow(
         minHeight: VitDensity.compact.controlHeight + TabletSpacingTokens.x5,
         padding: ProfileSpacingTokens.securityRowPadding,
-        gap: ProfileSpacingTokens.securityRowGap,
+        gap: TabletSpacingTokens.x3,
         leading: VitAccentIconBox(
           icon: profileIconFor(item.iconKey),
           color: accent,
@@ -352,7 +354,9 @@ class _DeviceList extends StatelessWidget {
           style: AppTextStyles.badge.copyWith(color: AppColors.text2),
         ),
         const SizedBox(height: TabletSpacingTokens.x4),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           borderColor: _ProfileSecurityPaneState._securityBorder,
           clip: true,
           child: ClipRRect(
@@ -388,7 +392,7 @@ class _DeviceRow extends StatelessWidget {
         minHeight: ProfileSpacingTokens.securityDeviceMinHeight,
       ),
       child: Padding(
-        padding: ProfileSpacingTokens.securityDevicePadding,
+        padding: TabletSpacingTokens.cardPadding,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

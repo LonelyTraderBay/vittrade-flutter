@@ -712,14 +712,31 @@ String _layoutStatus({
     'VitPageLayout',
     'VitAutoHidePageScaffold',
     'VitAutoHideHeaderScaffold',
+    // Profile detail panes delegate both frame and content rhythm to this
+    // shared Tablet scaffold; the route page intentionally does not repeat
+    // VitPageContent inline.
+    'ProfilePaneScaffold',
     'RewardsArenaPointsBridge',
   ]);
   final hasSharedContent = _containsAny(source, const [
     'VitPageContent',
     'VitPageSection',
+    'VitTwoColumnTabletDashboard',
+    'ProfilePaneScaffold',
+  ]);
+
+  // The trading terminal is a deliberate full-height composition: its
+  // shared content is a fixed chart/order-book/entry grid rather than a
+  // scrolling VitPageContent column.
+  final hasSharedTradeTerminal = _containsAny(source, const [
+    'TradeTerminalMetaStrip',
+    'TradeTerminalChartPanel',
+    'TradeTerminalBookPanel',
+    'TradeTerminalTapePanel',
   ]);
 
   if (hasSharedLayout && hasSharedContent) return 'pass';
+  if (hasSharedLayout && hasSharedTradeTerminal) return 'pass';
   if (hasSharedLayout || hasSharedContent) return 'warn';
   return 'fail';
 }
@@ -1170,7 +1187,7 @@ String _renderMarkdown(List<BodyRouteEntry> entries) {
     ..writeln('Current expected header baseline:')
     ..writeln()
     ..writeln('```text')
-    ..writeln('total_routed_screens=414')
+    ..writeln('total_routed_screens=409')
     ..writeln('strict_visual_issues=0')
     ..writeln('screen_level_mismatches=0')
     ..writeln('```')

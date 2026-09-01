@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
@@ -66,6 +66,14 @@ class _ProfileActivityPaneState extends ConsumerState<ProfileActivityPane> {
               .where((log) => log.status == 'suspicious')
               .length;
           return [
+            const VitHighRiskStatePanel(
+              state: VitHighRiskUiState.riskReview,
+              title: 'Rà soát hoạt động tài khoản',
+              message:
+                  'Kiểm tra đăng nhập, thiết bị, API và địa chỉ IP; nếu có hoạt động lạ, hãy đổi mật khẩu và thu hồi quyền truy cập ngay.',
+              contractId: 'SC-161 activity review',
+              density: VitDensity.compact,
+            ),
             if (suspiciousCount > 0) _SuspiciousBanner(count: suspiciousCount),
             _ActivityFilterRow(
               filters: snapshot.filters,
@@ -122,8 +130,8 @@ class _ActivityFilterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: ProfileSpacingTokens.profileActivityFilterChipGap,
-      runSpacing: ProfileSpacingTokens.profileActivityFilterChipGap,
+      spacing: TabletSpacingTokens.x3,
+      runSpacing: TabletSpacingTokens.x3,
       children: [
         for (final filter in filters)
           VitChoicePill(
@@ -132,7 +140,7 @@ class _ActivityFilterRow extends StatelessWidget {
             selected: filter.id == activeFilter,
             onTap: () => onChanged(filter.id),
             height: VitDensity.compact.controlHeight,
-            padding: ProfileSpacingTokens.profileActivityFilterChipPadding,
+            padding: TabletSpacingTokens.vitFilterChipPadding,
             accentColor: AppColors.primary,
           ),
       ],
@@ -312,7 +320,7 @@ class _ActivityDetails extends StatelessWidget {
       color: AppColors.surface2.withValues(alpha: .72),
       shape: const RoundedRectangleBorder(borderRadius: AppRadii.cardRadius),
       child: Padding(
-        padding: ProfileSpacingTokens.profileActivityDetailsPadding,
+        padding: TabletSpacingTokens.cardPaddingCompact,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

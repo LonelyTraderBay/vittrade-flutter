@@ -60,17 +60,11 @@ final class ProfileSpacingTokens {
   static const double profileMenuSubtitleGap = AppSpacing.x3;
   static const double profileMenuChevron = 20;
 
-  /// Tablet master menu overrides (2026-08-27 spacing review) — the shared
-  /// phone tokens above stay untouched per R2. The tablet menu's icon box
-  /// slims 36 → 32 (glyph 20 → 18) so the 13px labels lead the row's visual
-  /// weight (financial info first, decoration second), and the group gap
-  /// between the master menu's business sections widens from the compact
-  /// rhythm's 8 to 16 — one deliberate rhythm break so the eye can
-  /// partition Tài khoản / Bảo mật / Portfolio at a glance while keeping
-  /// the financial-app density (reference platforms use 24-35).
+  /// Tablet master-menu icon metrics (2026-08-27) — the shared Phone tokens
+  /// above stay untouched per the surface boundary. Tablet spacing itself is
+  /// read directly from [TabletSpacingTokens] by the Tablet widgets.
   static const double profileMenuTabletIconBox = 32;
   static const double profileMenuTabletIcon = 18;
-  static const double profileMenuSectionGap = 16;
   static const double profileActivityButtonHeight = 44;
   static const double profileLogoutButtonHeight = 54;
   static const double profileLogoutIcon = AppSpacing.iconMd;
@@ -408,9 +402,9 @@ final class ProfileSpacingTokens {
 
   static const double profileApiCreateExpiryExtent = 62;
 
-  /// Luật 8pt 12dp tablet (2026-08-31): extent chứa label + gap 13 +
-  /// description sau khi gap mô tả trên tablet đổi 5 → 13 — phone giữ
-  /// 62 vì gap phone vẫn 5 (Rule 5: cùng role, khác surface).
+  /// Rule 5 tablet override (2026-09-01): expiry option tile keeps its
+  /// measured Tablet extent 67dp while the mirrored Phone tile stays 62dp;
+  /// this is a component extent, not a new spacing role.
   static const double profileApiCreateTabletExpiryExtent = 67;
   static const EdgeInsets profileApiCreateExpiryPadding = EdgeInsets.fromLTRB(
     13,

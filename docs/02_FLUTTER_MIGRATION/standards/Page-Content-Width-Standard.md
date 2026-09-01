@@ -16,6 +16,11 @@ headerHorizontalInset = bodyHorizontalInset = contentPad
 
 Header chrome uses `AppTopHeaderTokens.horizontalPadding = AppSpacing.contentPad` — body must not add a second horizontal `contentPad` on the `ScrollView → VitPageContent` chain.
 
+Tablet keeps the same 20px normal content inset through
+`TabletSpacingTokens.contentPad`. A Tablet dashboard frame is the explicit
+exception: `outerHorizontalMargin` and `columnGutter` are both 12px, and pane
+content is `fullBleed` so the shell remains the single horizontal owner.
+
 ## Six mandatory rules
 
 | # | Rule |

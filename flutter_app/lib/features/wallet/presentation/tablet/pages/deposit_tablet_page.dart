@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_module_accents.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -118,6 +118,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               key: DepositTabletPage.networkSelectorKey,
               variant: VitCardVariant.inner,
               borderColor: AppModuleAccents.wallet,
@@ -158,6 +159,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
           rhythm: VitPageRhythm.standard,
           children: [
             VitCard(
+              padding: TabletSpacingTokens.zeroInsets,
               child: Column(
                 children: [
                   const Icon(
@@ -224,7 +226,9 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
         const SizedBox(
           height: TabletSpacingTokens.pageRhythmStandardSectionGap,
         ),
+
         VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
           variant: VitCardVariant.inner,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,6 +297,7 @@ class _DepositTabletPageState extends ConsumerState<DepositTabletPage> {
             itemBuilder: (context, index) {
               final network = networks[index];
               return VitCard(
+                padding: TabletSpacingTokens.zeroInsets,
                 variant: VitCardVariant.inner,
                 onTap: () {
                   setState(() => _selectedNetworkId = network.id);

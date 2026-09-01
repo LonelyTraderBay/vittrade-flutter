@@ -35,7 +35,7 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | [Flutter-Page-Archetype-Standard.md](02_FLUTTER_MIGRATION/standards/Flutter-Page-Archetype-Standard.md) | Tabbed-detail / form-wizard page patterns |
 | [Phone-Composition-Standard.md](02_FLUTTER_MIGRATION/standards/Phone-Composition-Standard.md) | Mandatory phone composition: one-column grammar + module composition archetypes (foundation cứng vs khác biệt theo nghề module) |
 | [Tablet-Adaptive-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Adaptive-Standard.md) | Mandatory dedicated tablet layouts (R1–R9 incl. R1c zero orientation dispatch, module composition archetype table, master-detail selection rules, orientation policy + rotation lock) |
-| [Tablet-Spacing-Gutter-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Spacing-Gutter-Standard.md) | Mandatory tablet token-locked spacing/gutters (S1–S4, absolute) |
+| [Tablet-Spacing-Gutter-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Spacing-Gutter-Standard.md) | Mandatory closed Base-8-derived Tablet role scale + token-locked spacing/gutters (S1–S7, absolute) |
 | [Tablet-Card-Border-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Card-Border-Standard.md) | Mandatory tablet card frames + 3-step border tints (R1–R3, absolute) |
 | [Tablet-Input-Standard.md](02_FLUTTER_MIGRATION/standards/Tablet-Input-Standard.md) | Mandatory tablet hover/focus/traversal tokens (I1–I5, absolute) |
 | [Motion-Standard.md](02_FLUTTER_MIGRATION/standards/Motion-Standard.md) | Mandatory motion duration/easing tokens + reduced motion (M1–M5; tablet absolute + phone ratchet) |

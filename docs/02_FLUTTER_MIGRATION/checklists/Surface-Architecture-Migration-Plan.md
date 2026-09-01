@@ -7,7 +7,10 @@ Tài liệu theo dõi thực thi [ADR-013](../../05_ARCHITECTURE/decisions/ADR-0
 - Route truth table: `Flutter-Route-Coverage-Truth-Table.md`.
 - Route audit: `flutter_app/tool/route_coverage_audit.dart`.
 - Current public router facade: `flutter_app/lib/app/router/app_router.dart`.
-- Current router implementation: `flutter_app/lib/app/router/route_groups/root_routes.dart`.
+- Phone router implementation: `flutter_app/lib/app/router/phone/phone_route_tree.dart`.
+- Tablet router implementation: `flutter_app/lib/app/router/tablet/tablet_route_tree.dart`.
+- Web compatibility implementation: `flutter_app/lib/app/router/route_groups/root_routes.dart`.
+- Tablet route manifest generator: `flutter_app/tool/generate_tablet_route_manifest.dart`.
 - Current surface standard: `../standards/Surface-Architecture-Standard.md`.
 
 ## Baseline tại thời điểm bắt đầu
@@ -39,16 +42,19 @@ Tài liệu theo dõi thực thi [ADR-013](../../05_ARCHITECTURE/decisions/ADR-0
 
 ## Evidence thực thi đến P8
 
-- 412 route thật và 6 redirect alias vẫn giữ parity; route coverage `--check`: PASS.
-- Router/shell Phone, Tablet, Web được chọn ở bootstrap; ba surface router explicit không dùng chung UI, còn `createAppRouter()` chỉ giữ compatibility responsive cho caller cũ và QA.
+- 409 route thật và 6 redirect alias vẫn giữ parity; route coverage `--check`: PASS.
+- `createTabletAppRouter()` lắp ráp cây Tablet độc lập từ `tablet_route_tree.dart`, không gọi `createAppRouter()` và không import Phone/Web UI. `tablet_route_manifest.dart` giữ đủ 415 declaration; parity runtime được kiểm tra bằng test.
+- Import boundary đã kiểm chứng: 0 file Tablet import `app_router.dart`, Phone/Web presentation hoặc `AppSpacing`; 0 feature ngoài Tablet import ngược vào Tablet.
+- Router/shell Phone, Tablet, Web được chọn ở bootstrap; `createAppRouter()` chỉ giữ compatibility API cho caller cũ và QA.
+- Ngoại lệ composition-root có chủ đích: `app_router.dart` vẫn giữ compatibility facade cho caller cũ; mặc định và nhánh Tablet của facade đã gọi trực tiếp Phone/Tablet tree. Chỉ Web compatibility còn lắp ráp route groups hỗn hợp; Phone/Tablet production tree không đi qua facade.
 - Compatibility responsive dispatcher nằm tại composition root `app/bootstrap/responsive_surface_page.dart`; không được dùng bởi Phone/Tablet/Web router explicit.
 - Web có composition riêng cho Home/Auth và route-family Web cho Wallet/Trade/Profile/P2P cùng các bounded context còn lại.
 - Đã xóa 10 file `ResponsiveEntry` legacy sau khi xác minh caller về 0.
-- Page rhythm: 1537/1537 file pass; screen rollup 412/412 L1 và L2 pass, unknown 0, inner gap debt 0; 6 documented exceptions.
+- Page rhythm: 1537/1537 file pass; screen rollup 409/409 L1 và L2 pass, unknown 0, inner gap debt 0; 6 documented exceptions.
 - Header visual strict issues: 0; header action violations: 0; back-navigation strict issues: 0.
 - `flutter analyze --no-pub`: PASS.
 - `flutter test test/quality --reporter=compact --concurrency=1`: PASS; build Web là gate cuối của P9.
-- `flutter test --reporter=compact`: PASS (3715 tests).
+- `flutter test --reporter=compact`: PASS (đã xác nhận lại sau thay đổi router Tablet).
 - `flutter build web`: PASS; Wasm dry-run PASS.
 
 ## Điều kiện không bỏ sót route
@@ -75,9 +81,10 @@ Route chỉ được đánh dấu `completed` khi builder, test và audit của 
 ## Gate kết thúc
 
 ```text
-412/412 real routes có builder hợp lệ trên ba surface
+409/409 real routes có builder hợp lệ trên ba surface
 6/6 redirect alias giữ đúng target
-0 import chéo Phone ↔ Tablet ↔ Web
+0 import chéo giữa các presentation surface Phone ↔ Tablet ↔ Web
+compatibility facade chỉ còn ở app composition root, ngoài surface presentation
 0 caller tới ResponsiveEntry legacy
 0 Tablet fallback sang Phone UI
 0 Web fallback sang Phone/Tablet UI ở route surface đã migrate

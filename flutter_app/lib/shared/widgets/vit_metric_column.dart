@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Text style tier for [VitMetricColumn]'s value line.
@@ -19,7 +19,7 @@ class VitMetricColumn extends StatelessWidget {
     this.valueColor = AppColors.text1,
     this.valueStyle = VitMetricValueStyle.caption,
     this.align = CrossAxisAlignment.start,
-    this.gap = AppSpacing.pageRhythmCompactInnerGap,
+    this.gap,
     this.ellipsizeValue = true,
   });
 
@@ -28,7 +28,7 @@ class VitMetricColumn extends StatelessWidget {
   final Color valueColor;
   final VitMetricValueStyle valueStyle;
   final CrossAxisAlignment align;
-  final double gap;
+  final double? gap;
   final bool ellipsizeValue;
 
   TextStyle get _resolvedValueStyle {
@@ -44,6 +44,7 @@ class VitMetricColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resolvedGap = gap ?? AppSurfaceSpacing.pageRhythmCompactInnerGap;
     return Column(
       crossAxisAlignment: align,
       children: [
@@ -53,7 +54,7 @@ class VitMetricColumn extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: AppTextStyles.micro.copyWith(color: AppColors.text3),
         ),
-        SizedBox(height: gap),
+        SizedBox(height: resolvedGap),
         Text(
           value,
           maxLines: ellipsizeValue ? 1 : null,

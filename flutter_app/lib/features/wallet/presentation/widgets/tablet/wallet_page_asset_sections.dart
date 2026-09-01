@@ -38,6 +38,7 @@ class WalletSegmentedTabs extends StatelessWidget {
               for (final tab in tabs)
                 Expanded(
                   child: VitCard(
+                    padding: TabletSpacingTokens.zeroInsets,
                     key: Key('sc135_wallet_tab_${tab.key}'),
                     variant: VitCardVariant.ghost,
                     borderColor: AppColors.transparent,
@@ -149,7 +150,7 @@ class WalletAssetHeader extends StatelessWidget {
           density: VitDensity.compact,
           variant: VitCtaButtonVariant.ghost,
           fullWidth: false,
-          padding: WalletSpacingTokens.walletAddressFilterPadding,
+          padding: WalletSpacingTokens.walletAddressTabletFilterPadding,
           onPressed: () => onNavigate('/wallet/address-book'),
           child: const Text('S\u1ED5 \u0111\u1ECBa ch\u1EC9'),
         ),
@@ -215,6 +216,7 @@ class WalletAssetList extends StatelessWidget {
     }
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       variant: VitCardVariant.standard,
       clip: true,
       child: Column(
@@ -250,6 +252,7 @@ class _WalletTabletAssetRow extends StatelessWidget {
     final color = Color(asset.colorHex);
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: Key('sc135_wallet_asset_${asset.id}'),
       variant: VitCardVariant.ghost,
       borderColor: AppColors.transparent,
@@ -329,8 +332,8 @@ class _WalletTabletAssetRow extends StatelessWidget {
           ),
           if (!last)
             const Divider(
-              height: WalletSpacingTokens.walletHistoryDividerHeight,
-              thickness: WalletSpacingTokens.walletHistoryDividerHeight,
+              height: WalletSpacingTokens.walletTabletHistoryDividerHeight,
+              thickness: WalletSpacingTokens.walletTabletHistoryDividerHeight,
               color: AppColors.cardBorder,
             ),
         ],

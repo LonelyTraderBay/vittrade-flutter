@@ -124,7 +124,9 @@ void main() {
   ) async {
     await pumpAdvancedChart(tester);
 
-    await tester.tap(find.byKey(AdvancedChartPage.timeframeKey('4h')));
+    final timeframeButton = find.byKey(AdvancedChartPage.timeframeKey('4h'));
+    await tester.ensureVisible(timeframeButton);
+    await tester.tap(timeframeButton);
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(AdvancedChartPage.chartTypeKey('line')));
     await tester.pumpAndSettle();

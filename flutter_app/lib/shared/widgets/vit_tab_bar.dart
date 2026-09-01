@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 TextStyle _vitTabBarLabelStyle({required bool active}) {
@@ -68,16 +68,16 @@ class VitTabBar extends StatelessWidget {
       return Row(
         children: [
           for (var i = 0; i < tabs.length; i++) ...[
-            if (i > 0) const SizedBox(width: AppSpacing.x1),
+            if (i > 0) SizedBox(width: AppSurfaceSpacing.x1),
             _PillTab(
               tab: tabs[i],
               active: tabs[i].key == activeKey,
               onChanged: onChanged,
               fillParent: true,
               segmentStyle: true,
-              padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppSpacing.rowGapRegular,
-                vertical: AppSpacing.tabBarPillVertical,
+              padding: EdgeInsetsDirectional.symmetric(
+                horizontal: AppSurfaceSpacing.rowGapRegular,
+                vertical: AppSurfaceSpacing.tabBarPillVertical,
               ),
             ),
           ],
@@ -86,8 +86,8 @@ class VitTabBar extends StatelessWidget {
     }
 
     return Wrap(
-      spacing: AppSpacing.x3,
-      runSpacing: AppSpacing.x3,
+      spacing: AppSurfaceSpacing.x3,
+      runSpacing: AppSurfaceSpacing.x3,
       children: [
         for (final tab in tabs)
           _PillTab(
@@ -95,9 +95,9 @@ class VitTabBar extends StatelessWidget {
             active: tab.key == activeKey,
             onChanged: onChanged,
             fillParent: false,
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.rowGapRegular,
-              vertical: AppSpacing.tabBarPillVertical,
+            padding: EdgeInsetsDirectional.symmetric(
+              horizontal: AppSurfaceSpacing.rowGapRegular,
+              vertical: AppSurfaceSpacing.tabBarPillVertical,
             ),
           ),
       ],
@@ -153,9 +153,9 @@ class _PillTab extends StatelessWidget {
               Icon(
                 tab.icon,
                 color: active ? AppColors.primary : AppColors.text2,
-                size: AppSpacing.iconSm,
+                size: AppSurfaceSpacing.iconSm,
               ),
-              const SizedBox(width: AppSpacing.x2),
+              SizedBox(width: AppSurfaceSpacing.x2),
             ],
             if (fillParent)
               Flexible(
@@ -222,8 +222,8 @@ class _UnderlineTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: AppSpacing.x2,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: AppSurfaceSpacing.x2,
               ),
               child: Text(
                 tab.label,
@@ -237,8 +237,8 @@ class _UnderlineTab extends StatelessWidget {
               duration: const Duration(milliseconds: 180),
               alignment: Alignment.center,
               child: SizedBox(
-                height: AppSpacing.tabBarUnderlineHeight,
-                width: active ? AppSpacing.tabBarUnderlineWidth : 0,
+                height: AppSurfaceSpacing.tabBarUnderlineHeight,
+                width: active ? AppSurfaceSpacing.tabBarUnderlineWidth : 0,
                 child: const DecoratedBox(
                   decoration: ShapeDecoration(
                     color: AppColors.primary,

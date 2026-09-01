@@ -25,7 +25,8 @@ class ProfileLoadingContent extends StatelessWidget {
       rhythm: VitPageRhythm.standard,
       // Flat children: the scaffold's rhythm already inserts the section
       // gap between blocks — a manual SizedBox separator here stacks onto
-      // it (13+13+13=39dp) and is flagged by tablet_spacing_audit S4.
+      // it (two rhythm layers would compound to 24dp) and is flagged by
+      // tablet_spacing_audit S4.
       children: const [
         _AccountHeroSkeleton(),
         ProfileSecuritySummarySkeleton(),
@@ -43,6 +44,7 @@ class ProfileSecuritySummarySkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       density: VitDensity.compact,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,6 +77,7 @@ class _AccountHeroSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       radius: VitCardRadius.large,
       clip: true,
       child: Column(
@@ -171,7 +174,10 @@ class VitSectionSkeleton extends StatelessWidget {
       children: [
         VitSkeleton(width: 140, height: TabletSpacingTokens.x4),
         SizedBox(height: TabletSpacingTokens.x4),
-        VitCard(child: VitSkeletonList(rows: 4)),
+        VitCard(
+          padding: TabletSpacingTokens.zeroInsets,
+          child: VitSkeletonList(rows: 4),
+        ),
       ],
     );
   }

@@ -1326,12 +1326,12 @@ final class MarketsSpacingTokens {
   static EdgeInsets pairDetailScrollPadding(double bottomInset) =>
       EdgeInsets.only(bottom: bottomInset);
   // S7 (2026-08-29): children trực tiếp của pane scaffold chỉ được inset
-  // NGANG — scaffold owns section gap dọc (13dp tier standard). Token này là
+  // NGANG — scaffold owns section gap dọc (12dp tier standard). Token này là
   // vai trò flush ngang của pane tablet SC-044; margin dọc Phone
   // (pairRiskMargin/pairLinkMargin/pairTradeCtaPadding) không được mang
   // sang children list — từng stack thành gap 23–29dp.
   static const EdgeInsets pairPaneChildFlushPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.contentPad,
+    horizontal: TabletSpacingTokens.contentPad,
   );
   // Hàng điều khiển (khung giờ/chú giải) trong khung chart của pane — lề
   // trái contentPad thẳng hàng khối giá, đáy x2 (5) tạo nhịp giữa các hàng.
@@ -1349,15 +1349,15 @@ final class MarketsSpacingTokens {
   static const double pairDeskSplitMinWidth = 700;
   static const double pairDeskChartHeight = 400;
   static const double pairDeskSideWidth = 300;
-  static const double pairDeskGutter = AppSpacing.pageRhythmStandardSectionGap;
+  static const double pairDeskGutter = TabletSpacingTokens.cardGap;
   // Dải đáy ghim của desk: giá gọn + MUA/BÁN luôn nhìn thấy, không cuộn.
   static const EdgeInsets pairDeskFooterPadding = EdgeInsets.fromLTRB(
-    AppSpacing.contentPad,
-    AppSpacing.x2,
-    AppSpacing.contentPad,
-    AppSpacing.x2,
+    TabletSpacingTokens.contentPad,
+    TabletSpacingTokens.x2,
+    TabletSpacingTokens.contentPad,
+    TabletSpacingTokens.x2,
   );
-  static const double pairDeskFooterGap = AppSpacing.x3;
+  static const double pairDeskFooterGap = TabletSpacingTokens.x3;
   // V2 Bybit (2026-08-30): thanh công cụ MỘT hàng trong panel chart — nút
   // khung giờ text phẳng thay 3 hàng rời (chips + pills + legend) từng bị
   // gạch là "dính nhau".
@@ -1373,7 +1373,7 @@ final class MarketsSpacingTokens {
     horizontal: TabletSpacingTokens.x2,
     vertical: TabletSpacingTokens.x1,
   );
-  static const double pairIndicatorDot = AppSpacing.x1;
+  static const double pairIndicatorDot = TabletSpacingTokens.x1;
   // Terminal thuần (hướng C 2026-08-30): gutter đều giữa các panel phẳng,
   // hàng meta dày, mức sổ lệnh 26dp, dòng giao dịch 24dp.
   static const double pairTerminalGutter = TabletSpacingTokens.cardGap;

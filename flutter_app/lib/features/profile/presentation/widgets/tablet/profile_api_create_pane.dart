@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
@@ -124,7 +124,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                   'Tối thiểu 3 ký tự',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(width: TabletSpacingTokens.x4),
+                const SizedBox(width: TabletSpacingTokens.x3),
                 const Expanded(child: SizedBox.shrink()),
                 Text(
                   '${_nameController.text.length}/30',
@@ -169,7 +169,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                     onSubmitted: (_) => _addIp(),
                   ),
                 ),
-                const SizedBox(width: TabletSpacingTokens.x4),
+                const SizedBox(width: TabletSpacingTokens.x3),
                 SizedBox(
                   width: ProfileSpacingTokens.profileApiCreateIpAddWidth,
                   child: VitIconButton(
@@ -193,8 +193,8 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
               )
             else
               Wrap(
-                spacing: ProfileSpacingTokens.profileApiCreateIpChipGap,
-                runSpacing: ProfileSpacingTokens.profileApiCreateIpChipGap,
+                spacing: TabletSpacingTokens.x3,
+                runSpacing: TabletSpacingTokens.x3,
                 children: [
                   for (final ip in _ips)
                     VitChoicePill(
@@ -219,9 +219,8 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount:
                 ProfileSpacingTokens.profileApiCreateExpiryCrossAxisCount,
-            mainAxisSpacing: ProfileSpacingTokens.profileApiCreateExpirySpacing,
-            crossAxisSpacing:
-                ProfileSpacingTokens.profileApiCreateExpirySpacing,
+            mainAxisSpacing: TabletSpacingTokens.x3,
+            crossAxisSpacing: TabletSpacingTokens.x3,
             mainAxisExtent:
                 ProfileSpacingTokens.profileApiCreateTabletExpiryExtent,
           ),
@@ -242,7 +241,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
               borderColor: isSelected
                   ? AppColors.primary.withValues(alpha: .34)
                   : AppColors.cardBorder,
-              padding: ProfileSpacingTokens.profileApiCreateExpiryPadding,
+              padding: TabletSpacingTokens.cardPaddingCompact,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +255,7 @@ class _ProfileApiCreatePaneState extends ConsumerState<ProfileApiCreatePane> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: TabletSpacingTokens.x4),
+                  const SizedBox(height: TabletSpacingTokens.x3),
                   Text(
                     option.description,
                     maxLines: 1,

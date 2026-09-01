@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 
 /// Horizontal "icon box + title/subtitle column + trailing accessory" row.
 ///
@@ -20,8 +20,8 @@ class VitIconListRow extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.trailing,
-    this.gap = AppSpacing.x3,
-    this.subtitleGap = AppSpacing.x1,
+    this.gap,
+    this.subtitleGap,
     this.padding,
     this.minHeight,
     this.columnMainAxisAlignment = MainAxisAlignment.center,
@@ -44,10 +44,10 @@ class VitIconListRow extends StatelessWidget {
   final Widget? trailing;
 
   /// Gap between [leading] and the title/subtitle column.
-  final double gap;
+  final double? gap;
 
   /// Gap between [title] and [subtitle] when [subtitle] is set.
-  final double subtitleGap;
+  final double? subtitleGap;
 
   final EdgeInsetsGeometry? padding;
   final double? minHeight;
@@ -59,10 +59,12 @@ class VitIconListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resolvedGap = gap ?? AppSurfaceSpacing.x3;
+    final resolvedSubtitleGap = subtitleGap ?? AppSurfaceSpacing.x1;
     Widget content = Row(
       children: [
         leading,
-        SizedBox(width: gap),
+        SizedBox(width: resolvedGap),
         Expanded(
           child: Column(
             mainAxisAlignment: columnMainAxisAlignment,
@@ -70,7 +72,7 @@ class VitIconListRow extends StatelessWidget {
             children: [
               title,
               if (subtitle != null) ...[
-                SizedBox(height: subtitleGap),
+                SizedBox(height: resolvedSubtitleGap),
                 subtitle!,
               ],
             ],

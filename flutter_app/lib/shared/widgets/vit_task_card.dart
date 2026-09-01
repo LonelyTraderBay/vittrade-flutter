@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_accent_icon_box.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_card.dart';
@@ -46,12 +46,12 @@ class VitTaskCard extends StatelessWidget {
         : pendingRewardColor;
 
     return VitCard(
-      padding: AppSpacing.taskCardPadding,
+      padding: AppSurfaceSpacing.taskCardPadding,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VitAccentIconBox(icon: icon, color: accentColor),
-          const SizedBox(width: AppSpacing.x3),
+          SizedBox(width: AppSurfaceSpacing.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,20 +70,20 @@ class VitTaskCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.x2),
+                    SizedBox(width: AppSurfaceSpacing.x2),
                     _VitTaskCardStatusPill(status: status),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.taskCardTitleSubtitleGap),
+                SizedBox(height: AppSurfaceSpacing.taskCardTitleSubtitleGap),
                 Text(
                   subtitle,
-                  maxLines: AppSpacing.taskCardSubtitleMaxLines,
+                  maxLines: AppSurfaceSpacing.taskCardSubtitleMaxLines,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
-                const SizedBox(height: AppSpacing.taskCardProgressSectionGap),
+                SizedBox(height: AppSurfaceSpacing.taskCardProgressSectionGap),
                 _VitTaskCardProgressBar(value: progress, color: accentColor),
-                const SizedBox(height: AppSpacing.taskCardRewardRowGap),
+                SizedBox(height: AppSurfaceSpacing.taskCardRewardRowGap),
                 Row(
                   children: [
                     Expanded(
@@ -155,7 +155,7 @@ class _VitTaskCardProgressBar extends StatelessWidget {
     return ClipRRect(
       borderRadius: AppRadii.xsRadius,
       child: SizedBox(
-        height: AppSpacing.taskCardProgressHeight,
+        height: AppSurfaceSpacing.taskCardProgressHeight,
         child: ColoredBox(
           color: AppColors.surface3,
           child: Align(

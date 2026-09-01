@@ -123,8 +123,12 @@ class _MetaStripSkeleton extends StatelessWidget {
             VitSkeleton(width: 96, height: TabletSpacingTokens.x4),
             SizedBox(width: TabletSpacingTokens.x4),
             VitSkeleton(width: 88, height: TabletSpacingTokens.x4),
-            Spacer(),
-            VitSkeleton(width: 150, height: TabletSpacingTokens.x4),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: VitSkeleton(width: 150, height: TabletSpacingTokens.x4),
+              ),
+            ),
           ],
         ),
       ),

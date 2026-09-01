@@ -8,11 +8,26 @@
 
 ## Bối cảnh
 
-VitTrade hiện có một `createAppRouter()` và một `VitAppShell` dùng chung để
-chọn UI Phone hoặc Tablet. Năm màn root đã có composition Tablet riêng, nhưng
-route implementation vẫn đi qua `ResponsiveEntry`; Web chưa có presentation
-surface riêng. Route coverage hiện tại có 412 `real_page`, 6
-`redirect_alias`, tổng cộng 418 khai báo route.
+VitTrade từng có một `createAppRouter()` và một `VitAppShell` dùng chung để
+chọn UI Phone hoặc Tablet. Route implementation hiện đã được tách thành các
+composition root riêng; compatibility facade chỉ còn phục vụ caller cũ và
+nhánh Web chưa migrate hoàn toàn. Route coverage hiện tại có 409
+`real_page`, 6 `redirect_alias`, tổng cộng 415 khai báo route.
+
+> **Cập nhật kiểm chứng 2026-09-01:** số liệu hiện hành là 409
+> `real_page`, 6 `redirect_alias`, tổng cộng 415 khai báo. Tablet đã có cây
+> route độc lập tại `app/router/tablet/tablet_route_tree.dart`; manifest route
+> được sinh từ route truth table để giữ path/name/redirect parity. Các module
+> đã có composition Tablet dùng page/pane thật; module chưa port dùng utility
+> Tablet, không dùng Phone/Web page.
+>
+> Kiểm tra boundary cùng ngày: 0 import chéo giữa các presentation surface;
+> mọi feature chỉ lấy path/name từ route contract trung lập. `app_router.dart`
+> còn tồn tại như compatibility facade ở composition root. `createAppRouter()`
+> mặc định dùng Phone tree, nhánh `surface: tablet` dùng trực tiếp Tablet
+> tree; chỉ nhánh Web compatibility còn dùng route groups hỗn hợp. Đây là
+> ngoại lệ migration có chủ đích, không phải dependency của Phone hoặc Tablet
+> production tree.
 
 Mô hình responsive dispatcher phù hợp cho giai đoạn đầu nhưng không đủ tách
 ownership khi Phone, Tablet và Web cần phát triển theo các information
@@ -25,9 +40,10 @@ refactor mức CRITICAL vì có hàng trăm caller trực tiếp và gián tiế
    `tablet/` và `web/` dưới `presentation/`. Page, widget composition, UI
    controller và shell không được import chéo giữa các surface.
 2. **Tách route implementation.** Tạo `createPhoneAppRouter()`,
-   `createTabletAppRouter()` và `createWebAppRouter()`. Mỗi router chỉ lắp ráp
-   route builder của surface tương ứng. `ResponsiveEntry` chỉ là compatibility
-   trong migration và sẽ bị loại bỏ ở P8.
+   `createTabletAppRouter()` và `createWebAppRouter()`. Phone và Tablet router
+   lắp ráp trực tiếp route builder của surface tương ứng; Web compatibility
+   route groups được giữ ở composition root cho tới khi Web tree đạt parity
+   đầy đủ. `ResponsiveEntry` đã bị loại bỏ khỏi các router explicit.
 3. **Giữ route contract dùng chung.** Path, name, screen ID, dynamic parameter,
    deep-link và analytics ID nằm trong `app/router/contracts/`. Đây là hợp đồng
    ổn định, không phải UI dùng chung.

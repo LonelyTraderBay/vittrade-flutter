@@ -2,10 +2,15 @@
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules  
 **Scope:** every screen on both surfaces (phone + tablet) — See [UI-Rule-Layer-Map.md](./UI-Rule-Layer-Map.md).  
-**Enforcement:** `dart run tool/page_rhythm_audit.dart --check` · `test/quality/page_rhythm_guardrail_test.dart` · `test/quality/tablet_rhythm_role_guardrail_test.dart` (PR-T1 relaxed-ban · PR-T2 tablet-hub-compact)  
+**Enforcement:** `dart run tool/page_rhythm_audit.dart --check` · `test/quality/page_rhythm_audit_sync_guardrail_test.dart` · `test/quality/tablet_rhythm_role_guardrail_test.dart` (PR-T1 relaxed-ban · PR-T2 tablet-hub-compact)
 **Reference screen:** `flutter_app/lib/features/home/presentation/pages/home_page_part_01.dart`
 
 Page rhythm makes spacing **consistent across navigation** — not just wired with a `rhythm:` token.
+
+On the Tablet surface, this standard uses the closed Base-8-derived role
+scale from [Tablet-Spacing-Gutter-Standard.md](./Tablet-Spacing-Gutter-Standard.md):
+compact/item gaps are 8px, standard/form/relaxed block gaps are 12px, and
+compact inner gaps are 4px. The Phone surface keeps its independent values.
 
 ## Three gap levels
 
@@ -23,13 +28,13 @@ Parent owns section gaps. Children must **not** insert orphan `SizedBox` between
 
 ## Tier by navigation role
 
-| Role | `VitPageRhythm` | Section gap | Examples |
+| Role | `VitPageRhythm` | Phone / Tablet section gap | Examples |
 | --- | --- | --- | --- |
-| Bottom-nav tab root | `compact` | 8px | Home, Markets, Trade hub, Wallet, Profile |
-| Standard scroll | `standard` | 13px | Settings, VIP, earn lists, detail scroll |
-| Wizard / KYC / auth forms / bottom sheets | `form` | 16px | OTP, onboarding steps, savings guide, staking sheets, P2P merchant apply |
-| Hero / onboarding hero (icon→title blocks) — **phone-only: banned on tablet by PR-T1** | `relaxed` | 24px | Welcome hero blocks, ladder/backtest hero, provider apply intro |
-| Chart / terminal | `flush` | 0 | Depth, full-bleed chart |
+| Bottom-nav tab root | `compact` | 8px / 8px | Home, Markets, Trade hub, Wallet, Profile |
+| Standard scroll | `standard` | 13px / 12px | Settings, VIP, earn lists, detail scroll |
+| Wizard / KYC / auth forms / bottom sheets | `form` | 16px / 12px | OTP, onboarding steps, savings guide, staking sheets, P2P merchant apply |
+| Hero / onboarding hero (icon→title blocks) — **phone-only: banned on tablet by PR-T1** | `relaxed` | 24px / 12px | Welcome hero blocks, ladder/backtest hero, provider apply intro |
+| Chart / terminal | `flush` | 0 / 0 | Depth, full-bleed chart |
 
 Tab roots are listed in `flutter_app/tool/page_rhythm_audit.dart` (`_tabRootPages`).
 
@@ -43,18 +48,17 @@ rộng" bug). Two locks close that class:
   is the hero/onboarding tier; a terminal/detail page must never pick it.
 - **PR-T2 (ratchet):** every tablet hub of the five tabs
   (`<module>_tablet_page.dart`) declares `compact` (or owns no rhythm because
-  its layout does). Profile hub is pinned as known debt (`standard`) —
-  migrate to `compact` when the module is touched, then update the map. A NEW
-  tablet hub declaring a non-compact tier fails CI outright.
+  its layout does). A NEW tablet hub declaring a non-compact tier fails CI
+  outright.
 
 ## Six mandatory rules
 
 1. **One rhythm owner** — Each scroll surface has one top-level `VitPageContent` with `rhythm:` or `customGap:`.
 2. **Direct children = sections** — Major blocks (hero, stats, grid, menu) are **sibling** `VitPageContent` children, not one `_FooBody` `Column` wrapper.
-3. **No orphan section gaps** — No `SizedBox(height: AppSpacing.sectionGap|x3|x4|x5|x6|x7|…)` between `VitPageContent` direct children. Use `pageRhythm*SectionGap`, `pageRhythm*InnerGap`, or `rowGap` only.
+3. **No orphan section gaps** — No `SizedBox(height: AppSpacing.*|TabletSpacingTokens.*)` between `VitPageContent` direct children. Use `pageRhythm*SectionGap`, `pageRhythm*InnerGap`, or `rowGap` only.
 4. **No spacing-only nested VPC** — Do not nest `VitPageContent` only to inject gaps; flatten to direct children.
 5. **Inner gap after headers** — `VitSectionHeader` uses `bottomGap: rhythm.innerGap` (or tier token); do not rely on ad-hoc `SizedBox` under labels.
-6. **Tier matches role** — Tab roots use `compact`; do not use legacy `AppSpacing.sectionGap` (20px) for page section rhythm.
+6. **Tier matches role** — Tab roots use `compact`; do not use legacy `AppSpacing.sectionGap` (20px) for page section rhythm. Tablet `VitContentGap.relaxed` and `.loose` are not valid block-gap choices; use the `VitPageRhythm` role or a layout-owned end inset.
 7. **One horizontal inset owner** — Horizontal `AppSpacing.contentPad` between screen edge and page content applies **once** on the `ScrollView → VitPageContent` chain. See [Page-Content-Width-Standard.md](./Page-Content-Width-Standard.md) (Recipe A/B; never stack scroll horizontal pad + default `VitPageContent` padding).
 
 ## Wire pattern (tab root)
@@ -84,7 +88,7 @@ resolution order per concern is:
 | --- | --- |
 | Section gap between `VitPageContent`/`VitPageSection` children | `customGap` → `rhythm.sectionGap` → `density.pageContentGap` → `gap` enum default |
 | Top padding above the first child (`VitPageContent` only) | `density.pageContentTopPadding` → `padding` enum default — **`rhythm` has no effect on top padding at all** |
-| Section label → body gap (`VitPageSection._labelBottomGap`) | `innerGap` → `rhythm.innerGap` → fixed `pageRhythmStandardInnerGap` (8px) — **`density` has no effect here** |
+| Section label → body gap (`VitPageSection._labelBottomGap`) | `innerGap` → `rhythm.innerGap` → fixed `pageRhythmStandardInnerGap` (8px Phone / 12px Tablet) — **`density` has no effect here** |
 
 In short: `rhythm` governs vertical section/inner gaps; `density` governs top
 padding (and, when no `rhythm` is set, falls back to also driving the section
@@ -110,8 +114,8 @@ Allowed without comment: `/dev/*`, CustomPainter charts, bottom sheets, tab pane
 
 | Density | Default `bottomGap` |
 | --- | --- |
-| `compact` / `tool` | `pageRhythmCompactInnerGap` (5px) |
-| `standard` (default) | `pageRhythmStandardInnerGap` (8px) |
+| `compact` / `tool` | `pageRhythmCompactInnerGap` (5px Phone / 4px Tablet) |
+| `standard` (default) | `pageRhythmStandardInnerGap` (8px Phone / 12px Tablet) |
 
 Use `bottomGap: 0` when a subtitle sits in the same block; place one tier-matched gap **after** the subtitle block before body content.
 
@@ -119,11 +123,11 @@ Use `bottomGap: 0` when a subtitle sits in the same block; place one tier-matche
 
 | Usage | Token |
 | --- | --- |
-| Major section on standard scroll | `pageRhythmStandardSectionGap` (13px) |
-| Bottom sheet / modal wizard step | `pageRhythmFormSectionGap` (16px) |
-| Hero icon → title (intro blocks) | `pageRhythmRelaxedSectionGap` or `pageRhythmRelaxedInnerGap` (13px) |
-| Form / flush terminal (e.g. Market Depth) | `pageRhythmFormSectionGap` (16px) |
-| In-card field stack | `pageRhythmStandardInnerGap` (8px) or `rowGap` |
+| Major section on standard scroll | `pageRhythmStandardSectionGap` (13px Phone / 12px Tablet) |
+| Bottom sheet / modal wizard step | `pageRhythmFormSectionGap` (16px Phone / 12px Tablet) |
+| Hero icon → title (intro blocks) | `pageRhythmRelaxedSectionGap` or `pageRhythmRelaxedInnerGap` (13px Phone / 12px Tablet); Tablet only inside an explicitly approved secondary/hero wrapper |
+| Form / flush terminal (e.g. Market Depth) | `pageRhythmFormSectionGap` (16px Phone / 12px Tablet) |
+| In-card field stack | `pageRhythmFormInnerGap` (8px Phone / 8px Tablet) or `rowGap` |
 | Item row / chip gap inside a section | `rowGap`, `x1`, module **item** tokens — not `*SectionGap` |
 | Deprecated module section aliases | Migrate to `pageRhythmFormSectionGap` or rhythm tokens above |
 | **Banned** for vertical section rhythm | `AppSpacing.x5`, `x6`, `x7` in `SizedBox(height: …)` — use tier tokens above |
@@ -135,7 +139,7 @@ Visual-debt manifest: [VitTrade-Page-Rhythm-Visual-Debt-Manifest.csv](../audits/
 | Anti-pattern | Why |
 | --- | --- |
 | `VitPageContent` → single `_ProfileBody` `Column` | Parent rhythm never gaps hero / VIP / grid |
-| `standard` on Profile tab root | 13px vs Home 8px — tabs feel misaligned |
+| `standard` on Profile tab root | Tablet 12px vs Home 8px — tabs feel misaligned |
 | Module `profileSectionGap` for global section rhythm | Use `pageRhythm*SectionGap` |
 | Nested `VitPageContent` for spacing only | Double ownership, audit noise |
 
@@ -145,7 +149,7 @@ Visual-debt manifest: [VitTrade-Page-Rhythm-Visual-Debt-Manifest.csv](../audits/
 cd flutter_app
 dart run tool/page_rhythm_audit.dart          # regenerate CSV baseline
 dart run tool/page_rhythm_audit.dart --check  # CI: artifact current
-flutter test test/quality/page_rhythm_guardrail_test.dart --reporter=compact
+  flutter test test/quality/page_rhythm_audit_sync_guardrail_test.dart --reporter=compact
 ```
 
 ## Migration pointers

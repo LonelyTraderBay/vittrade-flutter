@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/trade_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
@@ -80,6 +81,14 @@ class MarginHubTabletPage extends ConsumerWidget {
                       innerGap: TabletSpacingTokens.x4,
                       title: 'Chỉ số tổng quan',
                       child: _HubStatsCard(stats: snapshot.stats),
+                    ),
+                    const VitHighRiskStatePanel(
+                      state: VitHighRiskUiState.riskReview,
+                      title: 'Xem lại rủi ro ký quỹ',
+                      message:
+                          'Kiểm tra hạn đòn bẩy, rủi ro thanh lý, phí và ký quỹ khả dụng trước khi mở bất kỳ luồng margin nào.',
+                      contractId: 'SC-090 margin hub review',
+                      density: VitDensity.tool,
                     ),
                     for (final feature in snapshot.features)
                       VitTradeSection(

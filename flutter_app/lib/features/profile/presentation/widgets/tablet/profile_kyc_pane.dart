@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_motion.dart';
@@ -124,11 +124,12 @@ class _KycStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       key: ProfileTabletKeys.kycStatusCard,
       density: VitDensity.compact,
       borderColor: _ProfileKycPaneState._kycGreen.withValues(alpha: .34),
       child: VitIconListRow(
-        gap: ProfileSpacingTokens.kycStatusGap,
+        gap: TabletSpacingTokens.x3,
         leading: SizedBox(
           width: ProfileSpacingTokens.kycStatusIconBox,
           height: ProfileSpacingTokens.kycStatusIconBox,
@@ -204,11 +205,13 @@ class _KycLevelCard extends StatelessWidget {
     final border = done ? accent.withValues(alpha: .34) : AppColors.borderSolid;
 
     return VitCard(
+      padding: TabletSpacingTokens.zeroInsets,
       borderColor: border,
       clip: true,
       child: Column(
         children: [
           VitCard(
+            padding: TabletSpacingTokens.zeroInsets,
             key: ProfileTabletKeys.kycLevel(level.level),
             onTap: onTap,
             variant: VitCardVariant.ghost,
@@ -217,7 +220,7 @@ class _KycLevelCard extends StatelessWidget {
               minHeight:
                   VitDensity.compact.controlHeight + TabletSpacingTokens.x5,
               padding: ProfileSpacingTokens.kycLevelRowPadding,
-              gap: ProfileSpacingTokens.kycLevelRowGap,
+              gap: TabletSpacingTokens.x3,
               leading: _LevelIcon(
                 level: level.level,
                 done: done,
@@ -272,7 +275,7 @@ class _KycLevelCard extends StatelessWidget {
               color: AppColors.divider,
             ),
             Padding(
-              padding: ProfileSpacingTokens.kycLevelDetailsPadding,
+              padding: TabletSpacingTokens.cardPadding,
               child: _ExpandedLevelDetails(
                 level: level,
                 done: done,

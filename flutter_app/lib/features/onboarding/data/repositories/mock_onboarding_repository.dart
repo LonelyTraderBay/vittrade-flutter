@@ -1,4 +1,4 @@
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/features/onboarding/domain/entities/onboarding_entities.dart';
 import 'package:vit_trade_flutter/features/onboarding/domain/repositories/onboarding_repository.dart';
 

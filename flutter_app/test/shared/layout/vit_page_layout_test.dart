@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 
 void main() {
+  tearDown(() {
+    TabletSpacingTokens.tabletSurfaceActive = false;
+  });
+
   testWidgets(
     'semanticIdentifier maps to Semantics.identifier, not the announced '
     'label (A11Y-1)',
@@ -45,5 +50,21 @@ void main() {
     expect(semantics.identifier, '');
 
     handle.dispose();
+  });
+
+  testWidgets('default tablet page uses the dedicated 32dp page-end role', (
+    tester,
+  ) async {
+    TabletSpacingTokens.tabletSurfaceActive = true;
+
+    await tester.pumpWidget(
+      const MaterialApp(home: VitPageLayout(child: Text('body'))),
+    );
+
+    final padding = tester.widget<Padding>(find.byType(Padding));
+    expect(
+      padding.padding.resolve(TextDirection.ltr).bottom,
+      TabletSpacingTokens.pageEndBreathing,
+    );
   });
 }

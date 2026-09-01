@@ -118,6 +118,36 @@ void main() {
     expect(find.byType(ProfileProductHubPanel), findsOneWidget);
   });
 
+  testWidgets('SC-156 master menu owns one 12dp inset on all four sides', (
+    tester,
+  ) async {
+    await pumpTabletProfile(tester);
+
+    final card = find.byKey(ProfileTabletKeys.masterMenu);
+    final scroll = find.descendant(
+      of: card,
+      matching: find.byType(SingleChildScrollView),
+    );
+    expect(scroll, findsOneWidget);
+
+    final cardBox = tester.renderObject<RenderBox>(card);
+    final scrollBox = tester.renderObject<RenderBox>(scroll);
+    final cardTopLeft = cardBox.localToGlobal(Offset.zero);
+    final scrollTopLeft = scrollBox.localToGlobal(Offset.zero);
+    final cardPadding = TabletSpacingTokens.cardPaddingCompact;
+
+    expect(scrollTopLeft.dx - cardTopLeft.dx, closeTo(cardPadding.left, 0.1));
+    expect(scrollTopLeft.dy - cardTopLeft.dy, closeTo(cardPadding.top, 0.1));
+    expect(
+      cardBox.size.width - scrollBox.size.width,
+      closeTo(cardPadding.horizontal, 0.1),
+    );
+    expect(
+      cardBox.size.height - scrollBox.size.height,
+      closeTo(cardPadding.vertical, 0.1),
+    );
+  });
+
   testWidgets('SC-156 tablet identity hero carries the identity facts', (
     tester,
   ) async {
@@ -391,6 +421,7 @@ void main() {
       expect(find.byKey(ProfileTabletKeys.masterMenu), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.activityPane), findsOneWidget);
       expect(find.byKey(ProfileTabletKeys.securityPane), findsNothing);
+      expect(find.text('Rà soát hoạt động tài khoản'), findsOneWidget);
 
       // …so a single back lands on the overview, not a dead-end stack.
       await tester.binding.handlePopRoute();
@@ -579,13 +610,13 @@ void main() {
       final productTitle = tester.getRect(find.text('LỐI TẮT SẢN PHẨM'));
       final productHub = tester.getRect(find.byType(ProfileProductHubPanel));
 
-      // Luật 13dp (2026-08-31): label → nội dung trên tablet = 13
+      // Luật 12dp (2026-08-31): label → nội dung trên tablet = 12
       // (innerGap khai riêng tại call-site tablet, tách khỏi tier phone).
       expect(
         prediction.top - predictionTitle.bottom,
         closeTo(TabletSpacingTokens.x4, 0.01),
       );
-      // Luật 13dp (2026-08-31): section gap tablet = 13 (tier standard).
+      // Luật 12dp (2026-08-31): section gap tablet = 12 (tier standard).
       expect(
         arena.top - prediction.bottom,
         closeTo(TabletSpacingTokens.x4, 0.01),
@@ -689,7 +720,7 @@ void main() {
 
       // ProfilePaneScaffold's VitPageContent owns the vertical rhythm
       // between top-level blocks, so hero→tabs must measure exactly one
-      // 13dp gap (luật 13dp tablet 2026-08-31 — tier standard). A manual
+      // 12dp gap (luật 12dp tablet 2026-08-31 — tier standard). A manual
       // SizedBox separator between the pane's children stacks onto the
       // rhythm gaps and breaks the pane's rhythm (bug 2026-08-23).
       final pane = find.byKey(ProfileTabletKeys.vipPane);

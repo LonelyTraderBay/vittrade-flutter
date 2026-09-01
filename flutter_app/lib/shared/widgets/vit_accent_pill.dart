@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_status_pill.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
@@ -40,16 +40,16 @@ class VitAccentPill extends StatelessWidget {
         paddingY: SharedSpacingTokens.homeChipVerticalPadding,
         style: AppTextStyles.micro,
       ),
-      VitStatusPillSize.md => const _AccentPillMetrics(
-        minHeight: AppSpacing.statusPillHeightMd,
-        paddingX: AppSpacing.statusPillHorizontalPaddingMd,
-        paddingY: AppSpacing.x1,
+      VitStatusPillSize.md => _AccentPillMetrics(
+        minHeight: AppSurfaceSpacing.statusPillHeightMd,
+        paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingMd,
+        paddingY: AppSurfaceSpacing.x1,
         style: AppTextStyles.navLabel,
       ),
-      VitStatusPillSize.lg => const _AccentPillMetrics(
-        minHeight: AppSpacing.statusPillHeightLg,
-        paddingX: AppSpacing.statusPillHorizontalPaddingLg,
-        paddingY: AppSpacing.x2,
+      VitStatusPillSize.lg => _AccentPillMetrics(
+        minHeight: AppSurfaceSpacing.statusPillHeightLg,
+        paddingX: AppSurfaceSpacing.statusPillHorizontalPaddingLg,
+        paddingY: AppSurfaceSpacing.x2,
         style: AppTextStyles.navLabel,
       ),
     };

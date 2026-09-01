@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/controllers/market_controller.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/pair/market_depth_common.dart';
@@ -19,18 +19,18 @@ class MarketDepthWhaleAlertsView extends StatelessWidget {
     return Column(
       children: [
         const _WhaleWarningCard(),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         const MarketDepthSectionHeader(
           label: 'Lệnh lớn gần đây',
           accentColor: AppColors.warn,
         ),
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         for (final order in snapshot.whaleOrders) ...[
           _WhaleOrderCard(order: order, baseAsset: snapshot.pair.baseAsset),
           if (order != snapshot.whaleOrders.last)
-            const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+            SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         ],
-        const SizedBox(height: AppSpacing.pageRhythmFormSectionGap),
+        SizedBox(height: AppSurfaceSpacing.pageRhythmFormSectionGap),
         _WhaleSummary(orders: snapshot.whaleOrders),
       ],
     );

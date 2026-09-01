@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/tablet_dashboard_widths.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
@@ -215,38 +216,19 @@ void main() {
   });
 
   testWidgets(
-    'the two-column path accepts independent primary and secondary section '
-    'rhythm overrides',
+    'the two-column path uses the Tablet section-gap token by default',
     (tester) async {
-      tester.view.devicePixelRatio = 1;
-      tester.view.physicalSize = const Size(1000, 900);
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+      await pumpDashboard(tester, 1000);
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: VitTwoColumnTabletDashboard(
-              primaryContentGap: 8,
-              secondaryContentGap: 13,
-              primaryChildren: [Text('Primary content')],
-              secondaryChildren: [Text('Secondary content')],
-            ),
-          ),
-        ),
-      );
-
-      expect(
-        find.byWidgetPredicate(
-          (widget) => widget is VitPageContent && widget.customGap == 8,
-        ),
-        findsOneWidget,
+      final pageContents = tester.widgetList<VitPageContent>(
+        find.byType(VitPageContent),
       );
       expect(
-        find.byWidgetPredicate(
-          (widget) => widget is VitPageContent && widget.customGap == 13,
-        ),
-        findsOneWidget,
+        pageContents.map((content) => content.customGap),
+        containsAll(<double?>[
+          TabletSpacingTokens.pageRhythmStandardSectionGap,
+          TabletSpacingTokens.pageRhythmStandardSectionGap,
+        ]),
       );
     },
   );

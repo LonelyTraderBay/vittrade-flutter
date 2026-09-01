@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/profile_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
@@ -49,7 +49,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
       loading: () => ProfileLoadingContent(onRefresh: _refreshProfile),
       error: (error, stackTrace) => ProfilePaneScaffold(
         onRefresh: _refreshProfile,
-        rhythm: VitPageRhythm.standard,
+        rhythm: VitPageRhythm.compact,
         children: const [
           VitErrorState(
             key: ProfileTabletKeys.error,
@@ -81,7 +81,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
         onRefresh: _refreshProfile,
       ),
       ProfileScreenState.error => ProfilePaneScaffold(
-        rhythm: VitPageRhythm.standard,
+        rhythm: VitPageRhythm.compact,
         children: [
           VitErrorState(
             key: ProfileTabletKeys.error,
@@ -93,7 +93,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
         ],
       ),
       ProfileScreenState.empty => const ProfilePaneScaffold(
-        rhythm: VitPageRhythm.standard,
+        rhythm: VitPageRhythm.compact,
         children: [
           VitEmptyState(
             key: ProfileTabletKeys.empty,
@@ -117,7 +117,7 @@ class _ProfileTabletPageState extends ConsumerState<ProfileTabletPage> {
   }) {
     return ProfilePaneScaffold(
       onRefresh: _refreshProfile,
-      rhythm: VitPageRhythm.standard,
+      rhythm: VitPageRhythm.compact,
       children: [
         if (showOfflineBanner)
           const VitOfflineBanner(

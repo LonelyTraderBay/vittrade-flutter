@@ -47,7 +47,7 @@ check the full domain map in
       review the diffed PNGs before committing.
 - [ ] Changed presentation pages follow page rhythm standard; `dart run
       tool/page_rhythm_audit.dart --check` passes and
-      `flutter test test/quality/page_rhythm_guardrail_test.dart` passes.
+      `flutter test test/quality/page_rhythm_audit_sync_guardrail_test.dart` passes.
 - [ ] Phone-first layout @ 360×800 has no overflow/constraint violations;
       `flutter test test/quality/page_rhythm_phone_visual_qa_test.dart` passes.
 - [ ] Scroll/detail pages use Recipe A or B from
@@ -179,7 +179,7 @@ cd flutter_app
 dart run tool/page_rhythm_audit.dart --check --strict-full
 dart run tool/page_rhythm_screen_rollup.dart --check --strict-layout
 dart run tool/page_rhythm_coverage_matrix.dart --check
-flutter test test/quality/page_rhythm_guardrail_test.dart --reporter=compact
+flutter test test/quality/page_rhythm_audit_sync_guardrail_test.dart --reporter=compact
 flutter test test/quality/page_rhythm_phone_visual_qa_test.dart --reporter=compact
 ```
 

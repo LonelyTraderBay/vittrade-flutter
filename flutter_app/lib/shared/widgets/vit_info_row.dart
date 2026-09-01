@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
-import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/app_surface_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 
 /// Label/value row (optional leading/trailing widgets, divider, tap
@@ -34,8 +34,8 @@ class VitInfoRow extends StatelessWidget {
 
   EdgeInsetsGeometry get _padding {
     return EdgeInsetsDirectional.symmetric(
-      horizontal: _isCompact ? AppSpacing.x3 : AppSpacing.x4,
-      vertical: _isCompact ? AppSpacing.x2 : AppSpacing.x3,
+      horizontal: _isCompact ? AppSurfaceSpacing.x3 : AppSurfaceSpacing.x4,
+      vertical: _isCompact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
     );
   }
 
@@ -51,11 +51,15 @@ class VitInfoRow extends StatelessWidget {
               IconTheme(
                 data: IconThemeData(
                   color: AppColors.text2,
-                  size: _isCompact ? AppSpacing.iconSm : AppSpacing.iconMd,
+                  size: _isCompact
+                      ? AppSurfaceSpacing.iconSm
+                      : AppSurfaceSpacing.iconMd,
                 ),
                 child: leading!,
               ),
-              SizedBox(width: _isCompact ? AppSpacing.x2 : AppSpacing.x3),
+              SizedBox(
+                width: _isCompact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
+              ),
             ],
             Expanded(
               child: Text(
@@ -65,7 +69,7 @@ class VitInfoRow extends StatelessWidget {
                 style: AppTextStyles.caption.copyWith(color: AppColors.text3),
               ),
             ),
-            const SizedBox(width: AppSpacing.x3),
+            SizedBox(width: AppSurfaceSpacing.x3),
             Flexible(
               child: Text(
                 value,
@@ -80,7 +84,9 @@ class VitInfoRow extends StatelessWidget {
               ),
             ),
             if (trailing != null) ...[
-              SizedBox(width: _isCompact ? AppSpacing.x2 : AppSpacing.x3),
+              SizedBox(
+                width: _isCompact ? AppSurfaceSpacing.x2 : AppSurfaceSpacing.x3,
+              ),
               trailing!,
             ],
           ],
@@ -93,9 +99,9 @@ class VitInfoRow extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               row,
-              const Divider(
-                height: AppSpacing.dividerHairline,
-                thickness: AppSpacing.dividerHairline,
+              Divider(
+                height: AppSurfaceSpacing.dividerHairline,
+                thickness: AppSurfaceSpacing.dividerHairline,
                 color: AppColors.border,
               ),
             ],
