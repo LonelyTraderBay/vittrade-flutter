@@ -55,13 +55,19 @@ final class TradeSyntheticDaySnapshot {
     required this.highLabel,
     required this.lowLabel,
     required this.volumeLabel,
+    required this.coinVolumeLabel,
   });
 
   /// Recent price series, oldest first, ending exactly at [price].
   final List<double> sparkline;
   final String highLabel;
   final String lowLabel;
+
+  /// Giá trị giao dịch 24h theo quote (USDT) — không kèm đơn vị.
   final String volumeLabel;
+
+  /// Khối lượng giao dịch 24h theo đồng base (BTC/ETH/…) — không kèm đơn vị.
+  final String coinVolumeLabel;
 }
 
 TradeSyntheticDaySnapshot tradeSyntheticDaySnapshot(
@@ -85,11 +91,17 @@ TradeSyntheticDaySnapshot tradeSyntheticDaySnapshot(
   // Arbitrary but deterministic 24h notional-volume multiplier for mock
   // data — not a real market figure.
   final volumeBillions = ((price * 18500) / 1e9).clamp(0.1, 999.9);
+  // KL theo đồng base = notional / giá — cùng nguồn mock deterministic.
+  final coinVolume = price <= 0 ? 0.0 : (volumeBillions * 1e9) / price;
+  final coinVolumeLabel = coinVolume >= 1000
+      ? '${(coinVolume / 1000).toStringAsFixed(1)}K'
+      : coinVolume.toStringAsFixed(0);
 
   return TradeSyntheticDaySnapshot(
     sparkline: sparkline,
     highLabel: formatTradePrice(high),
     lowLabel: formatTradePrice(low),
     volumeLabel: '${volumeBillions.toStringAsFixed(1)}B',
+    coinVolumeLabel: coinVolumeLabel,
   );
 }

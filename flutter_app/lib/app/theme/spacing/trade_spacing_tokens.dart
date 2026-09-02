@@ -123,10 +123,13 @@ final class TradeSpacingTokens {
 
   /// Vùng tab dưới chart (Lệnh mở | Vị thế | Sổ lệnh tùy tầng).
   /// Chiều cao vùng dưới chart sau luật Base-8-derived 12dp: 12 (mép→tab) + tab (~29) +
-  /// 12 (tab→bảng) + 8 hàng × 24 + 12 (hàng cuối→viền).
-  static const double tradeTerminalBottomPanelHeight = 260;
+  /// 12 (tab→bảng) + 4 hàng × 24 + 12 (hàng cuối→viền).
+  ///
+  /// 2026-09-02 (user chê card chính lùn): 8 hàng → 4 hàng — bảng phụ
+  /// không được nuốt chiều cao của chart; phần dư trả về canvas nến.
+  static const double tradeTerminalBottomPanelHeight = 164;
 
-  /// Chiều cao phần bảng trong panel dưới chart = 8 hàng × extent 24.
+  /// Chiều cao phần bảng trong panel dưới chart = 4 hàng × extent 24.
   static const double tradeTerminalBottomTableHeight =
       tradeTerminalBottomPanelHeight -
       TabletSpacingTokens.x4 * 3 -

@@ -188,6 +188,12 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
   Widget _buildTerminal(TradeScreenSnapshot snapshot) {
     final pair = snapshot.pair;
     final daySnapshot = tradeSyntheticDaySnapshot(pair.price, pair.changePct);
+    // Spread từ sổ lệnh thật của snapshot ('—' khi chưa có mức nào).
+    final spread =
+        snapshot.orderBook.asks.isNotEmpty && snapshot.orderBook.bids.isNotEmpty
+        ? snapshot.orderBook.asks.first.price -
+              snapshot.orderBook.bids.first.price
+        : null;
 
     // Luật Base-8-derived 12dp: gap khối hai bên trái/phải của terminal = 12 —
     // grid không còn chạm mép màn hình (flush variant chỉ bỏ bottom pad,
@@ -203,6 +209,8 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
             highLabel: daySnapshot.highLabel,
             lowLabel: daySnapshot.lowLabel,
             volumeLabel: daySnapshot.volumeLabel,
+            coinVolumeLabel: daySnapshot.coinVolumeLabel,
+            spreadLabel: spread == null ? '—' : spread.toStringAsFixed(2),
             // Đổi cặp = thay root của luồng giao dịch (khuôn Bybit), không
             // xếp chồng cặp cũ lên stack back.
             onPairSelected: (candidate) =>
