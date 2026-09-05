@@ -1,11 +1,11 @@
-# Two-Phase Codex Workflow
+# Two-Phase Agent Workflow
 
 Standard VitTrade pattern: **analyze once, execute in small chats**. Saves
 context and retry cost without manual model switching.
 
-Authority: `AGENTS.md` and the applicable `.codex/skills/*/SKILL.md` files win
+Authority: `AGENTS.md` and the applicable `.agents/skills/*/SKILL.md` files win
 on product, financial, architecture, and verification policy. This doc is the
-Codex operator runbook.
+ZCode operator runbook.
 
 ## Why two phases
 
@@ -31,7 +31,7 @@ Skip Plan (single Agent chat) for small, obvious edits (1–3 files, clear fix).
 ## Phase 1 — Plan (Chat A)
 
 1. Start in read-only planning mode.
-2. Load the relevant Codex skills.
+2. Load the relevant agent skills.
 3. Paste the **Plan prompt** below (fill `<task>`).
 4. Agent explores only targeted reads — no edits.
 5. **You approve** the batch plan before any Build / Execute chat.
@@ -48,15 +48,15 @@ Output bắt buộc:
 4. Mỗi batch: paths tường minh + domain Standard (nếu UI) + lệnh verify cụ thể từ Flutter-Design-System-Reference / prompt hiện hành
 5. Lệnh verify tổng (analyze + focused tests) sau batch cuối
 
-Tham chiếu Codex: `.codex/skills/planning-and-task-breakdown/SKILL.md`
+Tham chiếu skill: `.agents/skills/planning-and-task-breakdown/SKILL.md`
 Không mở rộng scope ngoài <task>.
 ```
 
-Codex là nguồn skill chuẩn; không cần runtime-specific agent runbook.
+ZCode là nguồn skill chuẩn; không cần runtime-specific agent runbook.
 
 ## Phase 2 — Execute (Chat B, C, …)
 
-1. **New Codex chat** per batch. Keep the approved scope and use implementation
+1. **New agent session** per batch. Keep the approved scope and use implementation
    mode.
 2. Attach only: approved batch slice (or `@` the plan section) + needed files.
 3. Paste the **Execute prompt** below.
@@ -71,18 +71,18 @@ Thực hiện đúng Batch <N> trong plan đã duyệt (dán / @ đoạn Batch N
 Ràng buộc:
 - Chỉ các file trong batch — không mở rộng scope
 - Giữ nguyên scope đã duyệt — không tự mở rộng yêu cầu
-- Xong: tự check minimal-diff (.codex/skills/vittrade-minimal-review/SKILL.md),
+- Xong: tự check minimal-diff (.agents/skills/vittrade-minimal-review/SKILL.md),
   rồi chạy verification gate (AI_PROMPT_SHELL § Verification) — analyze + focused tests
 - Báo evidence (lệnh + kết quả). Không hỏi “làm batch tiếp?” nếu plan đã định nghĩa batch kế
 
-Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
+Tham chiếu skill: `.agents/skills/incremental-implementation/SKILL.md`
 ```
 
 ## Cost and quality rules
 
 | Do | Don’t |
 | --- | --- |
-| Keep the approved Codex workflow | Change model when stuck |
+| Keep the approved agent workflow | Change model when stuck |
 | Plan → approve → Build/Execute | Implement while still unclear |
 | 5–10 files / chat; new chat after batch | One giant migration chat |
 | Load one prompt + one plan slice (`docs/INDEX.md`) | Paste full audit CSV / backlog + plan |
@@ -101,10 +101,10 @@ Tham chiếu Codex: `.codex/skills/incremental-implementation/SKILL.md`
 
 | Doc / tool | Role |
 | --- | --- |
-| `.codex/skills/vittrade-batch-gate/SKILL.md` | Batch completion gate |
+| `.agents/skills/vittrade-batch-gate/SKILL.md` | Batch completion gate |
 | `docs/01_AI_RULES/AI_PROMPT_SHELL.md` | Verification + batch discipline |
 | `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md` | Execution gate |
 | `docs/INDEX.md` | On-demand doc picker |
-| `.codex/skills/planning-and-task-breakdown/SKILL.md` | Batch plan procedure |
-| `.codex/skills/incremental-implementation/SKILL.md` | Single-batch implement procedure |
-| `.codex/skills/vittrade-minimal-review/SKILL.md` | Diff trim before batch done |
+| `.agents/skills/planning-and-task-breakdown/SKILL.md` | Batch plan procedure |
+| `.agents/skills/incremental-implementation/SKILL.md` | Single-batch implement procedure |
+| `.agents/skills/vittrade-minimal-review/SKILL.md` | Diff trim before batch done |

@@ -6,10 +6,10 @@ web screenshot baseline were removed on 2026-05-26.
 ## Required Reading Order
 
 1. `AGENTS.md`
-2. `.codex/README.md`
+2. `.agents/README.md`
 3. `docs/00_START_HERE.md`
 4. `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
-5. `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (Plan → Execute for large tasks)
+5. `docs/01_AI_RULES/Two-Phase-Agent-Workflow.md` (Plan → Execute for large tasks)
 6. `docs/01_AI_RULES/DOCUMENT_PRECEDENCE.md`
 7. `docs/02_FLUTTER_MIGRATION/Flutter-App-Foundation.md`
 8. `docs/02_FLUTTER_MIGRATION/standards/Flutter-Native-Design-Standard.md`
@@ -69,7 +69,7 @@ behavior changes.
 | Path | Purpose |
 | --- | --- |
 | `AGENTS.md` | Active coding constraints for agents. |
-| `.codex/README.md` | Codex session entrypoint and skill router. |
+| `.agents/README.md` | ZCode session entrypoint and skill router. |
 | `docs/INDEX.md` | Doc picker — which file to load per task (on-demand). |
 | `DESIGN.md` | Visual token contract and component ladder for UI work. |
 | `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md` | Execution rules after Flutter-only cleanup. |
@@ -80,7 +80,7 @@ behavior changes.
 | `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` | Map of every design-consistency audit domain — what enforces it, and the command to check it locally. |
 | `docs/02_FLUTTER_MIGRATION/checklists/Future-Feature-Onboarding-Checklist.md` | Required checklist before adding a feature, route, high-risk flow, or large test surface. |
 | `docs/02_FLUTTER_MIGRATION/checklists/Enterprise-PR-Review-Checklist.md` | Pull request review gates for architecture, router, product safety, and tests. |
-| `.codex/skills/` | Codex workflow skills for planning, implementation, UI, audits, testing, and review. |
+| `.agents/skills/` | Agent workflow skills for planning, implementation, UI, audits, testing, and review. |
 | `docs/03_DESIGN_SYSTEM/Guidelines.md` | Product and design rules. |
 | `docs/05_ARCHITECTURE/VitTrade-Enterprise-Architecture-Report.md` | Architecture reference; Flutter source wins on conflict. |
 

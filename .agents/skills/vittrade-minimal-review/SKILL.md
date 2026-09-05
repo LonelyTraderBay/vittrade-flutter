@@ -48,5 +48,5 @@ When invoked by batch completion (no user prompt):
 ## Boundaries
 
 Complexity only — correctness, security, and product-boundary bugs go to
-`.codex/skills/code-review-and-quality/SKILL.md`. Lists findings; batch gate
+`.agents/skills/code-review-and-quality/SKILL.md`. Lists findings; batch gate
 may apply safe trims. Does not run whole-repo audit.

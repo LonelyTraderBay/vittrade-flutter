@@ -1,7 +1,7 @@
 # Flutter Performance Checklist (VitTrade)
 
 Quick reference for Flutter/Dart performance work. Use with
-`.codex/skills/performance-optimization/SKILL.md`.
+`.agents/skills/performance-optimization/SKILL.md`.
 
 ## Before you optimize
 

@@ -71,7 +71,7 @@ For detailed security guidance, see `security-and-hardening`. Does the change in
 
 ### 5. Performance
 
-For detailed profiling and optimization, see `.codex/skills/performance-optimization/SKILL.md`.
+For detailed profiling and optimization, see `.agents/skills/performance-optimization/SKILL.md`.
 Does the change introduce performance problems?
 
 - Any N+1 query patterns?
@@ -326,7 +326,7 @@ When you are the author addressing PR or review comments:
 
 - Prefer existing `Vit*` shared widgets over new local duplicates.
 - Preserve Arena points-only and Prediction Markets financial boundaries (`AGENTS.md`).
-- YAGNI: grep or `.codex/skills/vittrade-minimal-review/SKILL.md` before
+- YAGNI: grep or `.agents/skills/vittrade-minimal-review/SKILL.md` before
   "implementing properly" for unused or speculative features.
 
 **Forbidden:** performative agreement ("Great point!", "You're absolutely right!");

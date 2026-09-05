@@ -1,4 +1,0 @@
-interface:
-  display_name: "VitTrade UI Checklists"
-  short_description: "Flutter-safe external UI checklist adapter"
-  default_prompt: "Use $vittrade-ui-checklists to apply Flutter-safe UI checklist guidance to this VitTrade screen."

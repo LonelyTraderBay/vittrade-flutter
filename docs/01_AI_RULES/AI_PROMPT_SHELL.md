@@ -15,7 +15,7 @@ must reference this shell instead of duplicating boilerplate.
 
 1. User instruction in the current conversation.
 2. `AGENTS.md`
-3. Applicable `.codex/skills/*/SKILL.md`
+3. Applicable `.agents/skills/*/SKILL.md`
 4. `docs/00_START_HERE.md`, `docs/01_AI_RULES/AI_EXECUTION_CONTRACT.md`
 5. Active task execution prompt (scope only — does not override product boundaries).
 6. Flutter source and tests.
@@ -65,16 +65,16 @@ flutter test --reporter=compact
 Add task-specific audits/tests from the active plan. Run focused tests for touched
 modules before marking a batch complete.
 
-## Two-phase Codex (large tasks)
+## Two-phase agent (large tasks)
 
 For work spanning ~10+ files or unclear scope, use Plan then Execute chats —
-see `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` (copy-paste prompts). Keep
-the same approved scope between phases; load only the relevant Codex skills.
+see `docs/01_AI_RULES/Two-Phase-Agent-Workflow.md` (copy-paste prompts). Keep
+the same approved scope between phases; load only the relevant agent skills.
 
 ## Batch discipline
 
 - 5–10 files per turn for migration work.
-- New Codex chat after each completed batch.
+- New agent session after each completed batch.
 - Load one execution prompt + one plan per task — see `docs/INDEX.md`.
 - Do not load backlog + full plan + full audit in one turn.
 
@@ -82,7 +82,7 @@ the same approved scope between phases; load only the relevant Codex skills.
 
 - Reuse `Vit*` shared widgets and theme tokens; shortest diff that passes the plan gate.
 - No one-caller abstractions or new pub deps unless explicitly requested.
-- **Batch completion gate:** before marking a batch done, self-check the diff (see `.codex/skills/vittrade-minimal-review/SKILL.md`), trim safe bloat, then verify.
+- **Batch completion gate:** before marking a batch done, self-check the diff (see `.agents/skills/vittrade-minimal-review/SKILL.md`), trim safe bloat, then verify.
 - `AGENTS.md` and the active execution prompt override YAGNI.
 
 ## Doc loading
@@ -94,7 +94,7 @@ and checklists only unless a specific section is required.
 
 | Task | Skill |
 | --- | --- |
-| UI review/polish | `.codex/skills/vittrade-ui-checklists/SKILL.md` |
-| Pre-merge review | `.codex/skills/code-review-and-quality/SKILL.md` |
-| Diff trim / batch self-check | `.codex/skills/vittrade-minimal-review/SKILL.md` |
+| UI review/polish | `.agents/skills/vittrade-ui-checklists/SKILL.md` |
+| Pre-merge review | `.agents/skills/code-review-and-quality/SKILL.md` |
+| Diff trim / batch self-check | `.agents/skills/vittrade-minimal-review/SKILL.md` |
 | Ponytail audit toàn module | `docs/02_FLUTTER_MIGRATION/checklists/ke-hoach-ponytail-audit-toan-module.md` v2.1 — **1 STEP/chat**; kết thúc **khối HANDOFF Section 1.2** (copy prompt STEP tiếp); MERGE dùng cùng khối, không chỉ `PONYTAIL AUDIT DONE` |

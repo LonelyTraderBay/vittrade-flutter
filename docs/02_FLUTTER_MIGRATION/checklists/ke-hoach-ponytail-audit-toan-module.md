@@ -1,9 +1,9 @@
 # Kế hoạch Ponytail Audit — Toàn module VitTrade (Sequential Runbook)
 
 **Phiên bản:** 2.1 (2026-07-02)
-**Mục đích:** Cho Codex quét over-engineering **từng bước một**, không bỏ sót, không gộp việc.
+**Mục đích:** Cho agent quét over-engineering **từng bước một**, không bỏ sót, không gộp việc.
 **Chế độ audit:** Chỉ ghi ledger — **KHÔNG sửa code** trong bước audit.
-**Skill:** `.codex/skills/ponytail-audit/SKILL.md`
+**Skill:** `.agents/skills/ponytail-audit/SKILL.md`
 **Shell chung:** `docs/01_AI_RULES/AI_PROMPT_SHELL.md`
 
 > **Ghi đè quy tắc:** File này **ghi đè** mục "Non-stop execution" trong `AI_PROMPT_SHELL.md`
@@ -35,7 +35,7 @@
 
 | Rule | Mo ta |
 | --- | --- |
-| **R1** | Mỗi phiên Codex chỉ được làm **đúng 1 STEP** trong bảng Section 4. |
+| **R1** | Mỗi phiên agent chỉ được làm **đúng 1 STEP** trong bảng Section 4. |
 | **R2** | Xong STEP → ghi ledger (hoac partial ledger) → cap nhat file tien do → **DUNG**. |
 | **R3** | **Cam** tu dong chay STEP tiep theo trong cung chat. |
 | **R4** | **Cam** gop audit + fix trong cung chat. |
@@ -145,7 +145,7 @@ Hoac doc file tien do va chon STEP co trang thai ⬜.
 
 ### Checklist nguoi van hanh
 
-- [ ] Mở **phiên Codex mới** cho mỗi STEP
+- [ ] Mở **phiên agent mới** cho mỗi STEP
 - [ ] Chi paste **1** prompt STEP
 - [ ] Xác nhận AI trả về **khối HANDOFF Section 1.2** (có dòng `Chạy STEP-NNN+1 theo docs/...`)
 - [ ] **Không** chấp nhận reply chỉ có `PONYTAIL AUDIT DONE` hoặc `Next step:` một dòng
@@ -352,7 +352,7 @@ Next step: STEP-NNN+1
 | ---: | --- | --- | --- |
 | 069 | AUDIT-25 | Toan repo comment `// ponytail:` | `ponytail-debt-...md` |
 
-Skill: `~/.codex/skills/ponytail-debt/SKILL.md`
+Skill: `.agents/skills/ponytail-audit/SKILL.md`
 
 ### Giai doan 9 — Master summary (STEP 070)
 
@@ -458,7 +458,7 @@ AI thuc hien **dung thu tu** trong 1 chat (1 STEP):
 ```text
 Doc va tuan thu:
 - docs/01_AI_RULES/AI_PROMPT_SHELL.md (tru Non-stop — uu tien file ke hoach nay)
-- .codex/skills/ponytail-audit/SKILL.md
+- .agents/skills/ponytail-audit/SKILL.md
 - docs/02_FLUTTER_MIGRATION/checklists/ke-hoach-ponytail-audit-toan-module.md
 
 NHIEM VU: PONYTAIL AUDIT — chi 1 STEP, chi ledger, KHONG sua code.
@@ -631,7 +631,7 @@ AI chi lam **merge + rank**, khong quet lai toan bo code.
 
 ```text
 Doc docs/01_AI_RULES/AI_PROMPT_SHELL.md
-Doc .codex/skills/vittrade-minimal-review/SKILL.md
+Doc .agents/skills/vittrade-minimal-review/SKILL.md
 Doc flutter_app/run-artifacts/ponytail-audit-master-summary-*.md
 
 FIX BATCH: <module> batch <n>

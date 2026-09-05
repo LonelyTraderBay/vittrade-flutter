@@ -56,3 +56,4 @@ output/
 
 # ZCode video-agent-kit plugin runtime marker — never commit
 .video_agent/
+.v2c/

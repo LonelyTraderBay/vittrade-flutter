@@ -6,7 +6,7 @@ Use this order when documents disagree.
 
 1. User instruction in the current conversation.
 2. Root `AGENTS.md` for coding and repository constraints.
-3. Applicable `.codex/skills/*/SKILL.md` for Codex workflow (does not override
+3. Applicable `.agents/skills/*/SKILL.md` for the ZCode workflow (does not override
    AGENTS.md product, financial, or architecture rules).
 4. Active execution prompt for the current task scope only (does not override
    AGENTS.md product boundaries).

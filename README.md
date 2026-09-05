@@ -8,7 +8,7 @@ React/Vite app, root npm tooling, and web screenshot baseline were retired on
 
 ```text
 .
-├── .codex/              # Agent skills and local AI tooling
+├── .agents/              # Agent skills and local AI tooling
 ├── docs/                # Product, design, engineering, QA, and legal docs
 ├── flutter_app/         # Flutter app package
 ├── AGENTS.md            # Coding rules for AI agents

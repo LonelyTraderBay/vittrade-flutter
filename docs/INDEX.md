@@ -1,6 +1,6 @@
 # VitTrade Docs Index
 
-**Last Updated:** 2026-08-15 (Codex-only workflow; archive completed playbooks → `docs/_archive/`)
+**Last Updated:** 2026-09-05 (ZCode-only workflow; archive completed playbooks → `docs/_archive/`)
 
 Load docs **on demand** — do not paste large audit output into chat. Shared rules:
 [AI_PROMPT_SHELL.md](01_AI_RULES/AI_PROMPT_SHELL.md).
@@ -10,11 +10,11 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | File | When |
 | --- | --- |
 | [AGENTS.md](../AGENTS.md) | Every session (workspace rule) |
-| [.codex/README.md](../.codex/README.md) | Codex entrypoint and skill router |
+| [.agents/README.md](../.agents/README.md) | ZCode entrypoint and skill router |
 | [DESIGN.md](../DESIGN.md) | UI work — tokens + component ladder |
 | [00_START_HERE.md](00_START_HERE.md) | First time / architecture |
 | [AI_EXECUTION_CONTRACT.md](01_AI_RULES/AI_EXECUTION_CONTRACT.md) | Execution gate |
-| [Two-Phase-Codex-Workflow.md](01_AI_RULES/Two-Phase-Codex-Workflow.md) | Plan → Execute batches; copy-paste prompts |
+| [Two-Phase-Agent-Workflow.md](01_AI_RULES/Two-Phase-Agent-Workflow.md) | Plan → Execute batches; copy-paste prompts |
 | [DOCUMENT_PRECEDENCE.md](01_AI_RULES/DOCUMENT_PRECEDENCE.md) | Doc conflicts |
 
 ## Status and remaining work
@@ -71,28 +71,33 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | File | When |
 | --- | --- |
 | [ke-hoach-ponytail-audit-toan-module.md](02_FLUTTER_MIGRATION/checklists/ke-hoach-ponytail-audit-toan-module.md) | Audit từng module v2.1 — khối HANDOFF Section 1.2 + bảng prompt Section 13 |
-| `.codex/skills/ponytail-audit/SKILL.md` | Skill ledger-only (không fix trong audit turn) |
-| `.codex/skills/vittrade-minimal-review/SKILL.md` | Fix batch sau audit |
+| `.agents/skills/ponytail-audit/SKILL.md` | Skill ledger-only (không fix trong audit turn) |
+| `.agents/skills/vittrade-minimal-review/SKILL.md` | Fix batch sau audit |
 
-## Codex workflow skills
+## Agent workflow skills
 
 Load only the skill needed for the current task. `AGENTS.md` remains the
 project contract and the skill files provide focused procedures.
 
 | Skill | When |
 | --- | --- |
-| `.codex/skills/planning-and-task-breakdown/SKILL.md` | Break down ambiguous or multi-file work |
-| `.codex/skills/incremental-implementation/SKILL.md` | Implement and verify changes in small slices |
-| `.codex/skills/frontend-ui-engineering/SKILL.md` | Build or redesign Flutter UI |
-| `.codex/skills/ui-ux-pro-max/SKILL.md` | Deep UI/UX direction and searchable design intelligence |
-| `.codex/skills/vittrade-ui-checklists/SKILL.md` | Review accessibility, density, states, motion, and shared primitives |
-| `.codex/skills/vittrade-design-domain/SKILL.md` | Select exact design audit commands |
-| `.codex/skills/vittrade-product-verify/SKILL.md` | Verify high-risk financial flows |
-| `.codex/skills/vittrade-button-wiring-audit/SKILL.md` | Find dead or ambiguously wired button handlers |
-| `.codex/skills/vittrade-minimal-review/SKILL.md` | Trim over-engineering from a diff |
-| `.codex/skills/code-review-and-quality/SKILL.md` | Pre-merge correctness, architecture, security, and performance review |
-| `.codex/skills/security-and-hardening/SKILL.md` | Security review and hardening |
-| `.codex/skills/test-driven-development/SKILL.md` | Test-first behavior changes |
+| `.agents/skills/planning-and-task-breakdown/SKILL.md` | Break down ambiguous or multi-file work |
+| `.agents/skills/incremental-implementation/SKILL.md` | Implement and verify changes in small slices |
+| `.agents/skills/frontend-ui-engineering/SKILL.md` | Build or redesign Flutter UI |
+| `.agents/skills/ui-ux-pro-max/SKILL.md` | Deep UI/UX direction and searchable design intelligence |
+| `.agents/skills/vittrade-ui-checklists/SKILL.md` | Review accessibility, density, states, motion, and shared primitives |
+| `.agents/skills/vittrade-design-domain/SKILL.md` | Select exact design audit commands |
+| `.agents/skills/vittrade-product-verify/SKILL.md` | Verify high-risk financial flows |
+| `.agents/skills/vittrade-button-wiring-audit/SKILL.md` | Find dead or ambiguously wired button handlers |
+| `.agents/skills/vittrade-minimal-review/SKILL.md` | Trim over-engineering from a diff |
+| `.agents/skills/vittrade-batch-gate/SKILL.md` | Batch completion gate — only mark done after diff self-check + verify |
+| `.agents/skills/code-review-and-quality/SKILL.md` | Pre-merge correctness, architecture, security, and performance review |
+| `.agents/skills/security-and-hardening/SKILL.md` | Security review and hardening |
+| `.agents/skills/test-driven-development/SKILL.md` | Test-first behavior changes |
+| `.agents/skills/debugging-and-error-recovery/SKILL.md` | Debug test failures, build failures, blocked batches |
+| `.agents/skills/performance-optimization/SKILL.md` | Flutter perf work, lag/jank, profiling bottlenecks |
+| `.agents/skills/spec-driven-development/SKILL.md` | Spec first for new feature / unclear requirements |
+| `.agents/skills/memory-for-ai-usage/SKILL.md` | Code-graph tracing: caller/blast-radius, architecture, fuzzy discovery |
 
 ## Checklists
 
@@ -140,15 +145,15 @@ Generated CSV/MD artifacts live under `docs/02_FLUTTER_MIGRATION/audits/` (not
 the `02_FLUTTER_MIGRATION/` top level — verified against the tools' own
 `docsDir.path` construction, e.g. `tool/design_token_consistency_audit.dart:154-159`).
 
-## Codex workflow setup
+## Agent workflow setup
 
 | Resource | Purpose |
 | --- | --- |
-| `.codex/skills/` | Repo-local Codex skills and VitTrade procedures |
-| `AGENTS.md` | Project contract and Codex workflow authority |
-| `docs/01_AI_RULES/Two-Phase-Codex-Workflow.md` | Plan → Execute batch discipline |
+| `.agents/skills/` | Repo-local agent skills and VitTrade procedures |
+| `AGENTS.md` | Project contract and ZCode workflow authority |
+| `docs/01_AI_RULES/Two-Phase-Agent-Workflow.md` | Plan → Execute batch discipline |
 
-Policy: use the smallest applicable Codex skill and keep the approved scope
+Policy: use the smallest applicable agent skill and keep the approved scope
 through verification.
 
 ## Removed / archived docs (2026-07-23)

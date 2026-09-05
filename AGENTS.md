@@ -4,7 +4,7 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-09-01 (khóa Tablet Base-8-derived Role Scale và guardrails trước khi mở rộng UI Tablet)
+**Last Updated:** 2026-09-05 (chuẩn hoá một agent surface duy nhất: ZCode — toàn bộ skill canonical ở `.agents/skills/`, `.codex/` đã gỡ bỏ)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -192,7 +192,7 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   typography roles + tabular figures, financial data tables, tablet
   orientation policy — zero orientation dispatch, WCAG contrast floor)
   live in
-  `.codex/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
+  `.agents/skills/vittrade-ui-checklists/references/ui-visual-standards.md` and
   the matching files under `docs/02_FLUTTER_MIGRATION/standards/` — read the
   applicable standard before touching presentation code; do not duplicate its
   content here.
@@ -262,12 +262,12 @@ test suite (flag `--fast` để bỏ test khi chỉ cần kiểm nhanh giữa ch
 Use focused tests for touched modules and full tests for router, shared layout,
 repository, or broad structural changes.
 
-## Codex Workflow
+## ZCode Workflow
 
-Codex is the default repository agent surface. Keep the working context small
-and load only the relevant local skill from `.codex/skills/` for each task:
+ZCode is the default repository agent surface. Keep the working context small
+and load only the relevant local skill from `.agents/skills/` for each task:
 
-- Session entrypoint: `.codex/README.md` → `docs/INDEX.md` → task-specific skill.
+- Session entrypoint: `AGENTS.md` → `.agents/README.md` → `docs/INDEX.md` → task-specific skill.
 
 - Multi-file or ambiguous work: use `planning-and-task-breakdown` first.
 - Implementation: use `incremental-implementation` and verify every slice.
@@ -279,7 +279,7 @@ and load only the relevant local skill from `.codex/skills/` for each task:
 
 ### Minimal diff (Ponytail-lite)
 
-- Rule `.codex/skills/vittrade-minimal-review/SKILL.md` governs diff trimming
+- Rule `.agents/skills/vittrade-minimal-review/SKILL.md` governs diff trimming
   when editing `flutter_app/**`.
 - Reuse `Vit*` shared widgets and theme tokens; shortest diff that passes the plan gate.
 - No one-caller abstractions, no new pub deps unless explicitly requested.
@@ -297,7 +297,7 @@ and load only the relevant local skill from `.codex/skills/` for each task:
 
 ## Agent Skills
 
-Local agent workflow skills live in `.codex/skills/`. Use them selectively for
+Local agent workflow skills live in `.agents/skills/`. Use them selectively for
 spec, planning, implementation, testing, debugging, review, security, and UI
 work. This AGENTS.md remains the higher-priority project contract; Flutter
 commands, financial safety, and Prediction Markets/Open Arena
@@ -305,16 +305,21 @@ boundaries always take precedence over generic skill guidance.
 
 | Task | Skill |
 | --- | --- |
-| UI review / screen polish | `.codex/skills/vittrade-ui-checklists/SKILL.md` |
-| Batch completion gate | `.codex/skills/vittrade-batch-gate/SKILL.md` |
-| Design-domain audit lookup | `.codex/skills/vittrade-design-domain/SKILL.md` |
-| High-risk product verification | `.codex/skills/vittrade-product-verify/SKILL.md` |
-| Button wiring audit | `.codex/skills/vittrade-button-wiring-audit/SKILL.md` |
-| Plan multi-file work | `.codex/skills/planning-and-task-breakdown/SKILL.md` |
-| Incremental implementation | `.codex/skills/incremental-implementation/SKILL.md` |
-| Pre-merge review | `.codex/skills/code-review-and-quality/SKILL.md` |
-| Over-engineering / diff trim | `.codex/skills/vittrade-minimal-review/SKILL.md` |
-| Debug / test failure / blocked batch | `.codex/skills/debugging-and-error-recovery/SKILL.md` |
-| Performance / jank / profiling | `.codex/skills/performance-optimization/SKILL.md` |
-| Trade module debt scan (sprint) | `.codex/skills/ponytail-audit/SKILL.md` |
-| UI/UX design intelligence (reference) | `.codex/skills/ui-ux-pro-max/SKILL.md` — tra cứu style/UX guidance; LUÔN thua DESIGN.md + tokens + Vit* ladder khi xung đột (xem install note trong SKILL.md) |
+| UI review / screen polish | `.agents/skills/vittrade-ui-checklists/SKILL.md` |
+| Build / redesign Flutter UI | `.agents/skills/frontend-ui-engineering/SKILL.md` |
+| Batch completion gate | `.agents/skills/vittrade-batch-gate/SKILL.md` |
+| Design-domain audit lookup | `.agents/skills/vittrade-design-domain/SKILL.md` |
+| High-risk product verification | `.agents/skills/vittrade-product-verify/SKILL.md` |
+| Security review / hardening | `.agents/skills/security-and-hardening/SKILL.md` |
+| Button wiring audit | `.agents/skills/vittrade-button-wiring-audit/SKILL.md` |
+| Plan multi-file work | `.agents/skills/planning-and-task-breakdown/SKILL.md` |
+| Spec before significant new work | `.agents/skills/spec-driven-development/SKILL.md` |
+| Incremental implementation | `.agents/skills/incremental-implementation/SKILL.md` |
+| Pre-merge review | `.agents/skills/code-review-and-quality/SKILL.md` |
+| Over-engineering / diff trim | `.agents/skills/vittrade-minimal-review/SKILL.md` |
+| Debug / test failure / blocked batch | `.agents/skills/debugging-and-error-recovery/SKILL.md` |
+| Performance / jank / profiling | `.agents/skills/performance-optimization/SKILL.md` |
+| Test-first behavior change | `.agents/skills/test-driven-development/SKILL.md` |
+| Trade module debt scan (sprint) | `.agents/skills/ponytail-audit/SKILL.md` |
+| UI/UX design intelligence (reference) | `.agents/skills/ui-ux-pro-max/SKILL.md` — tra cứu style/UX guidance; LUÔN thua DESIGN.md + tokens + Vit* ladder khi xung đột (xem install note trong SKILL.md) |
+| Code-graph tracing (memory-for-ai MCP) | `.agents/skills/memory-for-ai-usage/SKILL.md` — áp dụng tự động: trace caller/blast-radius TRƯỚC khi sửa shared widget/token/router; grep + Read vẫn thắng khi tìm usage tên chính xác và luôn là nguồn sự thật khi sửa |

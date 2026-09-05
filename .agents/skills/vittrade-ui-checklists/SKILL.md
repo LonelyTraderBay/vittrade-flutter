@@ -16,7 +16,7 @@ Apply this order every time:
 1. `AGENTS.md`
 2. `docs/00_START_HERE.md` and relevant Flutter/design docs
 3. Current Flutter code, theme tokens, and shared widgets
-4. `.codex/skills/ui-ux-pro-max`
+4. `.agents/skills/ui-ux-pro-max`
 5. Selected external `ui-skills` checklist from the allowlist below
 
 For detailed VitTrade visual contracts, also read
