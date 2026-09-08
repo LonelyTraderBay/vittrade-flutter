@@ -9,7 +9,20 @@ import 'package:vit_trade_flutter/features/auth/presentation/web/pages/auth_web_
 import 'package:vit_trade_flutter/features/home/presentation/web/pages/home_web_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_web_utility_page.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_overview_pane.dart';
+import 'package:vit_trade_flutter/features/rewards/presentation/tablet/pages/rewards_tablet_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart';
+import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/risk_management_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade_compliance/presentation/tablet/pages/regulatory_disclosures_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade_copy/presentation/tablet/pages/copy_trading_tablet_page.dart';
+import 'package:vit_trade_flutter/features/dca/presentation/tablet/pages/dca_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/earn_savings/presentation/tablet/pages/earn_savings_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/earn_staking/presentation/tablet/pages/staking_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/trade_bots/presentation/tablet/pages/trade_bots_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/launchpad/presentation/tablet/pages/launchpad_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/arena/presentation/tablet/pages/arena_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/cross_module/presentation/tablet/pages/cross_module_tablet_pages.dart';
 
 void main() {
   Future<void> pumpSurfaceRoute(
@@ -48,17 +61,20 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.support);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Hỗ trợ VitTrade'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(SupportHubTabletPage), findsOneWidget);
   });
 
-  testWidgets('SC-319 Tablet uses the independent rewards composition', (
+  testWidgets('SC-319 Tablet renders the real rewards hub page', (
     tester,
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.rewards);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Trung tâm phần thưởng'), findsOneWidget);
+    // SC-319 đã port trang thật (GĐ1.3) — KHÔNG còn placeholder.
+    expect(find.byType(RewardsTabletPage), findsOneWidget);
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.text('Điểm hiện có'), findsOneWidget);
   });
 
   testWidgets('SC-410 Tablet keeps admin settings behind the internal gate', (
@@ -66,8 +82,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.adminSettings);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Cài đặt quản trị'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(AdminSettingsTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-027 Tablet uses the independent prediction composition', (
@@ -75,8 +92,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.marketsPredictions);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Prediction Markets'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(PredictionsHomeTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-044 Tablet uses the independent pair composition', (
@@ -95,22 +113,28 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.dca);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('DCA'), findsOneWidget);
+    // SC-169 đã port composition thật (GĐ3 DCA) — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(DcaOverviewTabletPage), findsOneWidget);
   });
 
-  testWidgets('SC-060 Tablet keeps trade risk review explicit', (tester) async {
+  testWidgets('SC-060 Tablet renders the real risk-management composition', (
+    tester,
+  ) async {
     await pumpTabletRoute(tester, AppRoutePaths.tradeRiskManagement);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Rà soát trước khi xác nhận'), findsOneWidget);
+    // SC-060 đã port composition thật (GĐ1.1) — KHÔNG còn placeholder.
+    expect(find.byType(RiskManagementTabletPage), findsOneWidget);
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.text('Xem lại công cụ rủi ro'), findsOneWidget);
   });
 
   testWidgets('SC-184 Tablet keeps Arena points separate', (tester) async {
     await pumpTabletRoute(tester, AppRoutePaths.arena);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Open Arena'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(ArenaHomeTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-295 Tablet uses the independent Launchpad composition', (
@@ -118,8 +142,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.launchpad);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Launchpad'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(LaunchpadHomeTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-329 Tablet uses the independent Savings composition', (
@@ -127,8 +152,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.earnSavings);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Earn Savings'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(SavingsHubTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-327 Tablet uses the independent Staking composition', (
@@ -136,8 +162,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.earn);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Earn Staking'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(StakingEarnTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-059 Tablet uses the independent Trading Bots composition', (
@@ -145,35 +172,36 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.tradeBots);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Trading Bots'), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.byType(TradingBotsTabletPage), findsOneWidget);
   });
 
-  testWidgets('SC-063 Tablet uses the independent Copy Trading composition', (
+  testWidgets('SC-063 Tablet renders the real Copy Trading hub', (
     tester,
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.tradeCopyTrading);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Copy Trading'), findsOneWidget);
+    expect(find.byType(CopyTradingTabletPage), findsOneWidget);
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
   });
 
-  testWidgets('SC-084 Tablet uses the independent compliance composition', (
-    tester,
-  ) async {
+  testWidgets('SC-084 Tablet renders the real compliance hub', (tester) async {
     await pumpTabletRoute(tester, AppRoutePaths.tradeCopyRegulatoryDisclosures);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Tuân thủ giao dịch'), findsOneWidget);
+    expect(find.byType(RegulatoryDisclosuresTabletPage), findsOneWidget);
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
   });
 
-  testWidgets('SC-009 Tablet uses the independent market tool composition', (
+  testWidgets('SC-009 Tablet renders the real market overview pane', (
     tester,
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.marketsOverview);
 
-    expect(find.byType(VitTabletUtilityPage), findsOneWidget);
-    expect(find.text('Công cụ thị trường'), findsOneWidget);
+    // SC-009 đã port pane thật (GĐ1.2) — KHÔNG còn placeholder.
+    expect(find.byType(MarketsOverviewPane), findsOneWidget);
+    expect(find.byType(VitTabletUtilityPage), findsNothing);
+    expect(find.text('Vốn hóa toàn thị trường'), findsOneWidget);
   });
 
   testWidgets('Web Wallet uses an independent Web composition', (tester) async {

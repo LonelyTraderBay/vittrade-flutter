@@ -25,6 +25,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
 part '../../../widgets/tools/wallet_health_score_page_shell.dart';
 part '../../../widgets/tools/wallet_health_score_cards.dart';
 part '../../../widgets/tools/wallet_health_score_charts.dart';
+part 'wallet_health_score_cards_sections.dart';
 
 const _healthBackground = AppColors.bg;
 const _healthPanel = AppColors.surface;

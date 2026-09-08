@@ -19,6 +19,7 @@ import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 part 'profile_sub_accounts_pane_sections.dart';
+part 'profile_sub_accounts_pane_more_sections.dart';
 
 /// Tablet sub-accounts detail pane (SC-166) for the Profile master-detail
 /// shell — a public port of the phone `SubAccountPage`'s content (total

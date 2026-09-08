@@ -346,6 +346,31 @@ final class TabletSpacingTokens {
   /// Padding card standard 16 (nguồn: AppSpacing.cardPadding).
   static const EdgeInsets cardPadding = EdgeInsets.all(16);
 
+  // ---- Padding hàng bảng tablet (role table-cell, dùng cho các pane
+  // master-detail renders danh sách/bảng trong widgets/tablet/) ----
+  /// Hàng bảng: đệm dọc 8.
+  static const EdgeInsets tableCellPaddingV = EdgeInsets.symmetric(
+    vertical: x4,
+  );
+
+  /// Hàng bảng: đệm ngang 12 · dọc 8.
+  static const EdgeInsets tableCellPadding = EdgeInsets.symmetric(
+    horizontal: x3,
+    vertical: x4,
+  );
+
+  /// Hàng bảng thoáng: đệm ngang 12 · dọc 12.
+  static const EdgeInsets tableCellPaddingTall = EdgeInsets.symmetric(
+    horizontal: x3,
+    vertical: x3,
+  );
+
+  /// Ô nội dung rộng (tile): đệm ngang 16 · dọc 12.
+  static const EdgeInsets tilePadding = EdgeInsets.symmetric(
+    horizontal: x4,
+    vertical: x3,
+  );
+
   // ---- Padding card theo density (mirror VitDensity, snapshot 2026-09-01;
   // dùng khi [tabletSurfaceActive] bật — xem app_density.dart) ----
   /// compact 12/12 (nguồn: VitDensity.compact).

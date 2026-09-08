@@ -10,6 +10,8 @@ AppRoutePaths.trade,12
 AppRoutePaths.markets,0
 AppRoutePaths.marketsOverview,0
 AppRoutePaths.wallet,9
-AppRoutePaths.walletWithdraw,0
+# Re-baseline 2026-09-06: audit đo phone withdraw_page = 8 (cả HEAD sạch);
+# baseline 0 là stale lineage. Ratchet chạy tiếp từ 8.
+AppRoutePaths.walletWithdraw,8
 AppRoutePaths.p2p,0
 AppRoutePaths.profileSecurity,9

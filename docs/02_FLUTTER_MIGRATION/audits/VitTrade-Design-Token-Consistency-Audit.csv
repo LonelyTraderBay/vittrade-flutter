@@ -532,7 +532,18 @@ feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/mar
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_header.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_movers.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/market_list_tools.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_alerts_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_calendar_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_compare_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_correlations_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_depth_pane.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_derivatives_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_heatmap_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_master_list.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_movers_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_news_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_overview_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_chart_math.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_depth_pane.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: orderbook
@@ -544,12 +555,19 @@ feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/mar
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pair_detail_pane_terminal.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_navigation.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pane_scaffold.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_portfolio_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_pulse_strip.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_screener_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_sectors_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_sentiment_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_signals_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_status_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_tablet_keys.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_details.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_token_info_pane_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_unlocks_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tablet/markets_watchlist_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_common.dart,exception,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: custompainter
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/markets/presentation/widgets/tools/comparison_tool_tokens.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
@@ -820,9 +838,11 @@ feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/pro
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_settings_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_status_content.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane_more_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_tablet_keys.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/profile/presentation/widgets/tablet/profile_vip_pane_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/profile/presentation/widgets/vip_history_widgets.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/referral/presentation/widgets/referral_history_page_common.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/referral/presentation/widgets/referral_history_page_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
@@ -1058,6 +1078,7 @@ feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/c
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/copy_trading_card_demo_widgets.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/copy_trading_hero.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/copy_trading_list.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/copy_trading_list_sections.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/phone/copy_trading_metrics_common.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/provider/provider_application_common.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 feature_widget,,flutter_app/lib/features/trade_copy/presentation/widgets/provider/provider_application_progress_intro.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-

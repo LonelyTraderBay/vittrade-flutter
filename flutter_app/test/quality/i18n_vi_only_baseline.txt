@@ -36,7 +36,6 @@ lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.d
 lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart|Some allocations deviate from target. Next purchase will rebalance automatically.
 lib/features/dca/presentation/phone/pages/portfolio/dca_performance_compare_page.dart|DCA is optimal for volatile markets and when you want to reduce timing risk. Lump sum can win in steady bull markets with low volatility.
 lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart|Target allocations, strategy, threshold, frequency, advanced settings, auto-execute risk, preview sheet, fees, and disabled save state remain visible before saving rebalance automation.
-lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page_settings_and_preview.dart|Review trade count, estimated fees, and automation risk before saving rebalance execution.
 lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_dashboard_page.dart|Rebalance changes can move funds between assets. Show allocation delta, fees, limits, and confirmation before execution.
 lib/features/dca/presentation/phone/pages/schedule/dca_smart_rules_page.dart|Rule conditions, automated trade actions, trigger history, success rate, delete preview, and create-rule confirmation are reviewed before DCA automation changes.
 lib/features/dca/presentation/widgets/phone/dca_overview_demo_shell.dart|Hide balance
@@ -100,6 +99,7 @@ lib/features/launchpad/presentation/widgets/tools/launchpad_limit_orders_history
 lib/features/launchpad/presentation/widgets/tools/launchpad_limit_orders_preview_widgets.dart|Create a limit order to get started
 lib/features/launchpad/presentation/widgets/tools/launchpad_risk_report_common.dart|Risk analysis is for reference only. Always do your own research before investing. Past performance does not guarantee future results.
 lib/features/markets/presentation/widgets/pair/market_depth_whale_alerts.dart|@ \$${formatMarketDepthPrice(order.price)}  ≈ ${formatMarketDepthCompact(order.usdValue, prefix: r
+lib/features/p2p_core/presentation/tablet/pages/p2p_order_tablet_pages.dart|${formatP2PCrypto(snapshot.order.amount)} ${snapshot.order.asset}
 lib/features/predictions/presentation/phone/pages/event/prediction_advanced_chart_page.dart|Timeframe, probability movement, volume, indicators, support/resistance, order flow, pattern signals, and disclaimer states are reviewed before acting on chart analysis.
 lib/features/predictions/presentation/phone/pages/event/prediction_event_detail_page.dart|Rules, amount setup, probability preview, confirmation, submitted receipt and recovery are tracked in one prediction contract.
 lib/features/predictions/presentation/phone/pages/portfolio/prediction_portfolio_analyzer_page.dart|Portfolio value, category exposure, P/L attribution, probability drift, risk concentration, diversification, and warning states are reviewed before portfolio decisions.
@@ -270,7 +270,6 @@ lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart
 lib/features/wallet/presentation/widgets/tools/network_status_summary.dart|Refresh network status
 lib/features/wallet/presentation/widgets/tools/wallet_gas_optimizer_tips.dart|Set Gas Price Alert
 lib/features/wallet/presentation/widgets/tools/wallet_gas_optimizer_trends.dart|Historically, fees have often been lower between 2 AM - 6 AM UTC. Confirm live fees before signing.
-lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|42% of your portfolio is in BTC. Consider rebalancing to reduce single-asset risk.
 lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|Advisory snapshot only. Your wallet is ${snapshot.overallMessage}
 lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|Diversification reduces portfolio volatility. Aim for balance across asset types and risk levels.
 lib/features/wallet/presentation/widgets/tools/wallet_health_score_cards.dart|Limit single asset to max 30% of portfolio

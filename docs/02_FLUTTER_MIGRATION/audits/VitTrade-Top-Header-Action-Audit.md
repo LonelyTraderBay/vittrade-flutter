@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=408
+vit_header_total=467
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -51,7 +51,7 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/points/arena_points_entry_detail_page.dart` | 82 | `_ArenaPointsEntryDetailPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/points/arena_points_ledger_page.dart` | 75 | `_ArenaPointsLedgerPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_creator_page.dart` | 85 | `_ArenaCreatorPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_smart_rule_builder_page.dart` | 138 | `_ArenaSmartRuleBuilderPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_smart_rule_builder_page.dart` | 139 | `_ArenaSmartRuleBuilderPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_studio_page.dart` | 82 | `_ArenaStudioPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page.dart` | 82 | `_ArenaUniversalPresetLibraryPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/auth/presentation/phone/pages/forgot_password_page.dart` | 239 | `_ForgotPasswordPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
@@ -64,7 +64,7 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/portfolio/dca_multi_asset_page_setup.dart` | 53 | `_DCAMultiAssetPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/portfolio/dca_performance_compare_page.dart` | 65 | `_DCAPerformanceComparePageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/portfolio/dca_portfolio_optimizer_page.dart` | 93 | `_DCAPortfolioOptimizerPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart` | 97 | `_DCARebalanceConfigPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/portfolio/dca_rebalance_config_page.dart` | 98 | `_DCARebalanceConfigPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/research/dca_backtester_page.dart` | 62 | `_DCABacktesterPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/research/dca_dynamic_amount_page.dart` | 74 | `_DCADynamicAmountPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/dca/presentation/phone/pages/schedule/dca_schedule_config_page.dart` | 88 | `_DCAScheduleConfigPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |

@@ -28,6 +28,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 part 'dca_rebalance_config_page_allocation_strategy.dart';
 part 'dca_rebalance_config_page_settings_and_preview.dart';
 part 'dca_rebalance_config_page_common.dart';
+part 'dca_rebalance_config_page_settings_and_preview_sections.dart';
 
 const _dcaRebalancePreviewNavClearance = 72.0;
 const _dcaRebalanceSummaryRingSize = 104.0;

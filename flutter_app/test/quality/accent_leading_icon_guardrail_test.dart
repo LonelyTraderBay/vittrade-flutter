@@ -159,8 +159,11 @@ Row(
       '/features/profile/presentation/widgets/tablet/profile_settings_pane.dart':
           1,
       '/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane_sections.dart':
-          3,
-      '/features/profile/presentation/widgets/tablet/profile_vip_pane.dart': 1,
+          1,
+      '/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane_more_sections.dart':
+          2,
+      '/features/profile/presentation/widgets/tablet/profile_vip_pane_sections.dart':
+          1,
       '/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart':
           2,
       '/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart':
@@ -169,7 +172,7 @@ Row(
           1,
       '/features/wallet/presentation/tablet/pages/dust_converter_tablet_page.dart':
           1,
-      '/features/wallet/presentation/tablet/pages/network_status_tablet_page.dart':
+      '/features/wallet/presentation/tablet/pages/network_status_tablet_page_sections.dart':
           2,
       '/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart':
           1,

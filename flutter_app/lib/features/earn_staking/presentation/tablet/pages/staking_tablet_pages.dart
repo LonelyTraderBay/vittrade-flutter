@@ -1,0 +1,308 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:vit_trade_flutter/app/providers/earn_staking_controller_providers.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
+import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
+import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+
+part 'staking_tablet_pages_policies.dart';
+part 'staking_tablet_pages_operators.dart';
+part 'staking_tablet_pages_operators2.dart';
+part 'staking_tablet_pages_reports.dart';
+part 'staking_tablet_pages_reports2.dart';
+part 'staking_tablet_pages_community.dart';
+part 'staking_tablet_pages_community2.dart';
+part 'staking_tablet_pages_core2.dart';
+
+String _stkUsd(num v) => VitFormat.usd(v.toDouble());
+String _stkUsdS(num v) => VitFormat.usdSigned(v.toDouble());
+String _stkPct(num v, [int d = 2]) => VitFormat.percent(v, fractionDigits: d);
+String _stkDec(num v, [int d = 2]) => v.toStringAsFixed(d);
+
+Widget _stkFrame({
+  required BuildContext context,
+  required String semanticIdentifier,
+  required String semanticLabel,
+  required String title,
+  required String subtitle,
+  required Widget child,
+  Key? contentKey,
+}) {
+  final showBack = context.canPop();
+  return VitPageLayout(
+    variant: VitPageVariant.flush,
+    semanticLabel: semanticLabel,
+    semanticIdentifier: semanticIdentifier,
+    child: Column(
+      children: [
+        VitHeader(
+          title: title,
+          subtitle: subtitle,
+          showBack: showBack,
+          onBack: showBack
+              ? () => goBackOrFallback(
+                  context,
+                  fallbackPath: AppRoutePaths.earn,
+                  mode: BackNavigationMode.historyThenFallback,
+                )
+              : null,
+        ),
+        Expanded(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1080),
+              child: SingleChildScrollView(
+                key: contentKey,
+                padding: const EdgeInsets.fromLTRB(
+                  TabletSpacingTokens.x6,
+                  TabletSpacingTokens.x4,
+                  TabletSpacingTokens.x6,
+                  TabletSpacingTokens.x6,
+                ),
+                child: child,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _stkError(String title, VoidCallback onRetry) {
+  return VitErrorState(
+    title: title,
+    message: 'Vui lòng kiểm tra kết nối và thử lại.',
+    actionLabel: 'Thử lại',
+    onAction: onRetry,
+  );
+}
+
+Widget _stkSection({required String title, required List<Widget> rows}) {
+  return VitCard(
+    radius: VitCardRadius.tight,
+    padding: TabletSpacingTokens.cardPaddingCompact,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: AppTextStyles.control.copyWith(
+            fontWeight: AppTextStyles.bold,
+            color: AppColors.text1,
+          ),
+        ),
+        const SizedBox(height: TabletSpacingTokens.x2),
+        ...rows,
+      ],
+    ),
+  );
+}
+
+List<Widget> _stkRows(List<(String, String)> pairs) {
+  return [
+    for (final (label, value) in pairs)
+      Padding(
+        padding: TabletSpacingTokens.tableCellPaddingV,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: AppTextStyles.caption.copyWith(color: AppColors.text2),
+              ),
+            ),
+            Flexible(
+              child: Text(
+                value,
+                textAlign: TextAlign.end,
+                style: AppTextStyles.caption.copyWith(
+                  color: AppColors.text1,
+                  fontWeight: AppTextStyles.bold,
+                  fontFeatures: AppTextStyles.tabularFigures,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+  ];
+}
+
+List<Widget> _stkBullets(List<String> notes) {
+  return [
+    for (final note in notes)
+      Padding(
+        padding: TabletSpacingTokens.tableCellPaddingV,
+        child: VitBulletRow(text: note),
+      ),
+  ];
+}
+
+Widget _stkBody(String text) {
+  return Text(
+    text,
+    style: AppTextStyles.caption.copyWith(color: AppColors.text2, height: 1.3),
+  );
+}
+
+List<Widget> _stkTitleBody(List<(String, String)> pairs) {
+  return [
+    for (final (title, body) in pairs)
+      Padding(
+        padding: TabletSpacingTokens.tableCellPaddingV,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: AppTextStyles.caption.copyWith(
+                fontWeight: AppTextStyles.bold,
+                color: AppColors.text1,
+              ),
+            ),
+            Text(
+              body,
+              style: AppTextStyles.caption.copyWith(
+                color: AppColors.text2,
+                height: 1.3,
+              ),
+            ),
+          ],
+        ),
+      ),
+  ];
+}
+
+/// SC-257: Hub Staking.
+class StakingEarnTabletPage extends ConsumerWidget {
+  const StakingEarnTabletPage({super.key});
+
+  static const contentKey = Key('sc257_tablet_content');
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final snapshotAsync = ref.watch(
+      stakingEarnSnapshotProvider(StakingEarnRoute.earn),
+    );
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _stkFrame(
+        context: context,
+        semanticIdentifier: 'SC-257',
+        semanticLabel: 'Bảng staking',
+        title: snapshotAsync.value?.title ?? 'Staking',
+        subtitle: 'Staking · Phần thưởng',
+        contentKey: StakingEarnTabletPage.contentKey,
+        child: _stkError(
+          'Không tải được staking',
+          () => ref.invalidate(
+            stakingEarnSnapshotProvider(StakingEarnRoute.earn),
+          ),
+        ),
+      ),
+      data: (snapshot) => _stkFrame(
+        context: context,
+        semanticIdentifier: 'SC-257',
+        semanticLabel: 'Bảng staking',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: StakingEarnTabletPage.contentKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _stkSection(
+              title: 'Tổng quan',
+              rows: _stkRows([
+                ('Tổng đã kiếm', snapshot.totalEarnedUsd),
+                ('Vị thế đang chạy', '${snapshot.activePositions}'),
+                ('APY cao nhất', snapshot.maxApyLabel),
+                ('Bảo vệ quỹ', snapshot.fundProtectionLabel),
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _stkSection(
+              title: 'Sản phẩm',
+              rows: [
+                for (final product in snapshot.products)
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${product.name} (${product.asset})',
+                                style: AppTextStyles.caption.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                              Text(
+                                '${product.lockLabel} · đã stake ${product.totalStaked}',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text2,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          product.apy,
+                          style: AppTextStyles.caption.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.buy,
+                            fontFeatures: AppTextStyles.tabularFigures,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _stkSection(
+              title: 'Vị thế của bạn',
+              rows: [
+                for (final position in snapshot.positions)
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${position.product} · ${position.asset} ${position.amount}',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Đã kiếm ${position.earned}',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                            fontFeatures: AppTextStyles.tabularFigures,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

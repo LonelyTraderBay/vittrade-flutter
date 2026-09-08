@@ -30,6 +30,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/arena_spacing_tokens.dart';
 part '../../../widgets/studio/arena_smart_rule_builder_page_basics_fields.dart';
 part '../../../widgets/studio/arena_smart_rule_builder_page_condition_timing_fields.dart';
 part 'arena_smart_rule_builder_page_review_submit.dart';
+part 'arena_smart_rule_builder_page_review_submit_sections.dart';
 
 const _arenaAccent = AppModuleAccents.arena;
 final double _smartRuleActionExtent = VitDensity.compact.controlHeight;

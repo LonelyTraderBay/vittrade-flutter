@@ -7,6 +7,9 @@ analyzer:
     - run-artifacts/**
     - tmp/**
     - tool/vittrade_lints/**
+    - android/**
+    - ios/**
+    - web/**
   plugins:
     - custom_lint
   language:

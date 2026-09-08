@@ -72,31 +72,22 @@ void main() {
     expect(find.text('Email không thể thay đổi'), findsOneWidget);
   });
 
-  testWidgets('SC-405 biometric placeholder carries its own copy', (
+  testWidgets('SC-405 biometric route renders the real security pane', (
     tester,
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.settingsSecurityBiometric);
 
-    expect(find.byType(ProfileTabletUtilityPage), findsOneWidget);
-    expect(find.byIcon(Icons.fingerprint), findsOneWidget);
-    expect(
-      find.text('Bật hoặc tắt xác thực sinh trắc học cho thiết bị này.'),
-      findsOneWidget,
-    );
+    // SC-405 giờ mirror phone: cùng SecurityPane với /profile/security.
+    expect(find.byType(ProfileSecurityPane), findsOneWidget);
+    expect(find.byType(ProfileTabletUtilityPage), findsNothing);
   });
 
-  testWidgets('SC-406 change-password placeholder carries its own copy', (
+  testWidgets('SC-406 change-password route renders the real security pane', (
     tester,
   ) async {
-    // SC-405 and SC-406 used to share byte-identical placeholder copy; each
-    // route now describes its own flow.
     await pumpTabletRoute(tester, AppRoutePaths.settingsSecurityChangePassword);
 
-    expect(find.byType(ProfileTabletUtilityPage), findsOneWidget);
-    expect(find.byIcon(Icons.lock_outline_rounded), findsOneWidget);
-    expect(
-      find.text('Đặt mật khẩu mới và xác minh qua bước bảo mật tiếp theo.'),
-      findsOneWidget,
-    );
+    expect(find.byType(ProfileSecurityPane), findsOneWidget);
+    expect(find.byType(ProfileTabletUtilityPage), findsNothing);
   });
 }

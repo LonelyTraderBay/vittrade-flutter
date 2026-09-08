@@ -5,7 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_home_tablet_page.dart';
+import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_security_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_dispute_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_order_tablet_pages.dart';
 
 void main() {
   Future<void> pumpTabletRoute(WidgetTester tester, String location) async {
@@ -32,11 +36,9 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.p2pSecurity2fa);
 
-    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
-    expect(find.text('Cài đặt 2FA P2P'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('SC-254-tablet-action')));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('SC-254-tablet-cancel')), findsOneWidget);
+    // Đã port composition thật — KHÔNG còn placeholder.
+    expect(find.byType(P2PTabletUtilityPage), findsNothing);
+    expect(find.byType(P2PTwoFactorSettingsTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-221 Tablet uses independent P2P dispute composition', (
@@ -44,9 +46,8 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.p2pDispute('order-123'));
 
-    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
-    expect(find.text('Mở tranh chấp P2P'), findsOneWidget);
-    expect(find.text('Chưa gửi'), findsOneWidget);
+    expect(find.byType(P2PTabletUtilityPage), findsNothing);
+    expect(find.byType(P2PDisputeOpenTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-282 Tablet uses independent P2P marketplace composition', (
@@ -54,8 +55,8 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, AppRoutePaths.p2p);
 
-    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
-    expect(find.text('P2P Marketplace'), findsOneWidget);
+    expect(find.byType(P2PTabletUtilityPage), findsNothing);
+    expect(find.byType(P2PHomeTabletPage), findsOneWidget);
   });
 
   testWidgets('SC-214 Tablet keeps order cancellation behind confirmation', (
@@ -63,9 +64,7 @@ void main() {
   ) async {
     await pumpTabletRoute(tester, '/p2p/order/cancel/order-123');
 
-    expect(find.byType(P2PTabletUtilityPage), findsOneWidget);
-    await tester.tap(find.byKey(const Key('SC-214-tablet-action')));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('SC-214-tablet-cancel')), findsOneWidget);
+    expect(find.byType(P2PTabletUtilityPage), findsNothing);
+    expect(find.byType(P2POrderCancelTabletPage), findsOneWidget);
   });
 }

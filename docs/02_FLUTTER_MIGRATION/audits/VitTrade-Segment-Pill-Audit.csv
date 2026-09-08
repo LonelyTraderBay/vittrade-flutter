@@ -141,8 +141,21 @@ markets,markets/presentation/widgets/research/social_sentiment_token_widgets.dar
 markets,markets/presentation/widgets/research/token_info_tabs_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 markets,markets/presentation/widgets/tablet/market_list_filters.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/market_list_tools.dart,VitChoicePill,chip,3,44,hug,-,pass,
+markets,markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_alerts_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+markets,markets/presentation/widgets/tablet/markets_correlations_pane.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_correlations_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+markets,markets/presentation/widgets/tablet/markets_movers_pane.dart,VitFilterChip,filter_accent,4,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_movers_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+markets,markets/presentation/widgets/tablet/markets_news_pane.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/markets_pair_detail_pane_sections.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
+markets,markets/presentation/widgets/tablet/markets_portfolio_pane.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_screener_pane.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_sentiment_pane.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_sentiment_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+markets,markets/presentation/widgets/tablet/markets_signals_pane.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/markets_token_info_pane_sections.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
+markets,markets/presentation/widgets/tablet/markets_unlocks_pane.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tools/comparison_tool_tokens.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/tools/market_calendar_filters.dart,VitChoicePill,chip,1,44,hug,-,pass,
 markets,markets/presentation/widgets/tools/market_calendar_filters.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
@@ -155,6 +168,7 @@ markets,markets/presentation/widgets/tools/market_derivatives_tabs.dart,VitTabBa
 markets,markets/presentation/widgets/tools/market_movers_filters.dart,VitFilterChip,filter_accent,4,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tools/market_screener_filters.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tools/market_sector_controls.dart,VitChoicePill,chip,2,44,hug,-,pass,
+news,news/presentation/tablet/pages/news_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 news,news/presentation/widgets/news_page_sections.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 notifications,notifications/presentation/widgets/notifications_page_sections.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
 p2p_account,p2p_account/presentation/phone/pages/merchant/p2p_merchant_apply_steps.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
@@ -163,6 +177,22 @@ p2p_account,p2p_account/presentation/phone/pages/payment/p2p_payment_method_owne
 p2p_account,p2p_account/presentation/widgets/payment/p2p_payment_method_add_page_sections.dart,VitChoicePill,chip,1,44,hug,-,pass,
 p2p_account,p2p_account/presentation/widgets/payment/p2p_payment_method_add_page_sections.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
 p2p_account,p2p_account/presentation/widgets/payment/p2p_payment_methods_page_sections.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
+p2p_core,p2p_core/presentation/tablet/pages/p2p_account_tablet_pages_extra.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_chat_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_compliance_tablet_pages_sections.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_create_ad_tablet_page.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_create_ad_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+p2p_core,p2p_core/presentation/tablet/pages/p2p_dashboard_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_dispute_tablet_pages_sections.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_express_tablet_page.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_express_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+p2p_core,p2p_core/presentation/tablet/pages/p2p_home_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_home_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+p2p_core,p2p_core/presentation/tablet/pages/p2p_my_ads_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_my_orders_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_order_book_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_order_tablet_pages_sections.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+p2p_core,p2p_core/presentation/tablet/pages/p2p_payment_method_tablet_pages.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 p2p_dispute,p2p_dispute/presentation/phone/pages/dispute/p2p_claim_detail_page_sections.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 p2p_dispute,p2p_dispute/presentation/phone/pages/dispute/p2p_dispute_evidence_page.dart,VitChoicePill,chip,1,44,hug,-,pass,
 p2p_dispute,p2p_dispute/presentation/phone/pages/dispute/p2p_insurance_fund_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
@@ -237,9 +267,14 @@ profile,profile/presentation/widgets/tablet/profile_sub_accounts_pane_sections.d
 profile,profile/presentation/widgets/tablet/profile_vip_pane.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 referral,referral/presentation/phone/pages/referral_rewards_page_ledger_sections.dart,VitSegmentedChoice,primaryAccent,2,44,equal_expanded,-,pass,
 referral,referral/presentation/widgets/referral_history_page_sections.dart,VitChoicePill,chip,1,44,hug,-,pass,
+rewards,rewards/presentation/tablet/pages/rewards_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 rewards,rewards/presentation/widgets/rewards_hub_task_section.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 support,support/presentation/widgets/announcements_filters_widgets.dart,VitChoicePill,chip,1,44,hug,-,pass,
 support,support/presentation/widgets/support_quick_contacts_tabs.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+trade,trade/presentation/tablet/pages/advanced_analytics_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade,trade/presentation/tablet/pages/advanced_tools_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+trade,trade/presentation/tablet/pages/advanced_trading_demo_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade,trade/presentation/tablet/pages/advanced_trading_demo_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/tablet/pages/convert_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade,trade/presentation/tablet/pages/futures_tablet_page.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade,trade/presentation/tablet/pages/futures_tablet_page.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
@@ -247,10 +282,12 @@ trade,trade/presentation/tablet/pages/leverage_tablet_page.dart,VitFilterChip,fi
 trade,trade/presentation/tablet/pages/margin_trading_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade,trade/presentation/tablet/pages/margin_trading_tablet_page.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 trade,trade/presentation/tablet/pages/margin_trading_tablet_page.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
+trade,trade/presentation/tablet/pages/market_data_analytics_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/tablet/pages/orders_history_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade,trade/presentation/tablet/pages/orders_history_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade,trade/presentation/tablet/pages/position_dashboard_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
+trade,trade/presentation/tablet/pages/risk_management_tablet_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade,trade/presentation/tablet/pages/trade_history_export_tablet_page.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade,trade/presentation/widgets/convert/convert_page_amount_widgets.dart,VitChoicePill,chip,1,44,hug,-,pass,
 trade,trade/presentation/widgets/convert/convert_page_amount_widgets.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
@@ -302,6 +339,9 @@ trade_compliance,trade_compliance/presentation/widgets/governance/transaction_re
 trade_copy,trade_copy/presentation/phone/pages/hub/active_copies_page.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade_copy,trade_copy/presentation/phone/pages/hub/copy_notifications_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade_copy,trade_copy/presentation/phone/pages/safety/copy_audit_log_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+trade_copy,trade_copy/presentation/tablet/pages/copy_flow_tablet_pages.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade_copy,trade_copy/presentation/tablet/pages/copy_trading_extended_tablet_pages_extra.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+trade_copy,trade_copy/presentation/tablet/pages/copy_trading_tablet_page.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 trade_copy,trade_copy/presentation/widgets/analytics/copy_performance_summary_tabs.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 trade_copy,trade_copy/presentation/widgets/analytics/performance_attribution_summary_tabs.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 trade_copy,trade_copy/presentation/widgets/analytics/portfolio_risk_analysis_page_sections.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment

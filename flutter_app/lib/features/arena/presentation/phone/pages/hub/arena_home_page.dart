@@ -28,6 +28,7 @@ import 'package:vit_trade_flutter/app/theme/spacing/shared_spacing_tokens.dart';
 part 'arena_home_page_hero_and_templates.dart';
 part 'arena_home_page_modes_and_rooms_section.dart';
 part 'arena_home_page_search_and_shared_widgets.dart';
+part 'arena_home_page_hero_and_templates_sections.dart';
 
 const _arenaAccent = AppModuleAccents.arena;
 const _arenaHomeHeroTitleLineHeight = 1.06;
