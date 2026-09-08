@@ -1,0 +1,71 @@
+# Build IPA demo iOS (unsigned) để sideload qua Sideloadly.
+#
+# Triggers: manual workflow_dispatch — không tự chạy mỗi push (runner macOS
+# tính phút gấp 10x trên repo private, chỉ chạy khi cần lấy IPA demo).
+#
+# Build policy:
+#   - flutter build ios --release --no-codesign: bản release để app mở được
+#     từ màn hình chính (bản debug bị iOS 14+ chặn launch standalone);
+#     --no-codesign vì Sideloadly sẽ ký lại bằng Apple ID cá nhân.
+#   - KHÔNG truyền dart-define: APP_ENV mặc định development ⇒ mock data
+#     bật (AppEnvironment.parseMockDataFlag) — demo chạy không cần backend.
+#     Khác với flutter-release.yml (production, ENABLE_MOCK_DATA=false).
+name: iOS Demo Build
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-demo-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-ipa:
+    name: Build unsigned demo IPA (Sideloadly)
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: flutter_app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          flutter-version: '3.41.9'
+          channel: stable
+          cache: true
+
+      - name: Cache pub dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.pub-cache
+          key: pub-${{ runner.os }}-${{ hashFiles('flutter_app/pubspec.lock') }}
+          restore-keys: pub-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS app (release, unsigned)
+        run: flutter build ios --release --no-codesign
+
+      # Gói .app thành IPA thủ công (Payload/<App>.app) — Sideloadly nhận IPA.
+      # zip -y giữ symlink trong Runner.app (Frameworks) để IPA còn hợp lệ.
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/Runner.app
+          zip -qry vittrade-demo.ipa Payload
+
+      - name: Upload unsigned IPA artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: vittrade-demo-ipa
+          path: flutter_app/vittrade-demo.ipa
+          retention-days: 14
+          if-no-files-found: error
