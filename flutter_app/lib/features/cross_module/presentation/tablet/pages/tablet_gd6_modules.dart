@@ -8,25 +8,53 @@ class EnterpriseStatesTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-320',
-      semanticLabel: 'Trạng thái doanh nghiệp',
-      title: 'Trạng thái doanh nghiệp',
-      subtitle: 'Cổng vận hành',
-      contentKey: EnterpriseStatesTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Các cổng trạng thái',
-            rows: _g6Bullets([
-              'Hoạt động bình thường — giao dịch mở',
-              'Chế độ chỉ đọc khi bảo trì hệ thống',
-              'Cổng force-update bắt buộc nâng phiên bản ứng dụng',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(enterpriseStatesSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-320',
+        semanticLabel: 'Trạng thái doanh nghiệp',
+        title: 'Trạng thái doanh nghiệp',
+        subtitle: 'Cổng vận hành',
+        contentKey: EnterpriseStatesTabletPage.contentKey,
+        child: _g6Body('Không tải được trạng thái doanh nghiệp.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-320',
+        semanticLabel: 'Trạng thái doanh nghiệp',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: EnterpriseStatesTabletPage.contentKey,
+        child: _g6Section(
+          title: 'Các cổng trạng thái',
+          rows: [
+            for (final tab in snapshot.tabs)
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        tab.label,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      tab.section.name,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -72,25 +100,53 @@ class CrossModuleAnalyticsTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-322',
-      semanticLabel: 'Phân tích liên mô-đun',
-      title: 'Phân tích liên mô-đun',
-      subtitle: 'ROI · Tỷ lệ thắng',
-      contentKey: CrossModuleAnalyticsTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Chỉ số hợp nhất',
-            rows: _g6Bullets([
-              'ROI bình quân theo mô-đun giao dịch',
-              'Tỷ lệ thắng trung bình toàn nền tảng',
-              'Khối lượng giao dịch hợp nhất theo tháng',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(crossModuleAnalyticsSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-322',
+        semanticLabel: 'Phân tích liên mô-đun',
+        title: 'Phân tích liên mô-đun',
+        subtitle: 'ROI · Tỷ lệ thắng',
+        contentKey: CrossModuleAnalyticsTabletPage.contentKey,
+        child: _g6Body('Không tải được phân tích liên mô-đun.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-322',
+        semanticLabel: 'Phân tích liên mô-đun',
+        title: snapshot.title,
+        subtitle: 'ROI ${snapshot.averageRoi.toStringAsFixed(1)}%',
+        contentKey: CrossModuleAnalyticsTabletPage.contentKey,
+        child: _g6Section(
+          title: 'Chỉ số theo mô-đun',
+          rows: [
+            for (final module in snapshot.modules)
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        module.name,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'ROI ${module.roi.toStringAsFixed(1)}% · thắng ${module.winRate.toStringAsFixed(1)}% · ${module.totalTrades} lệnh',
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -168,26 +224,58 @@ class NotificationsHubTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-325',
-      semanticLabel: 'Thông báo hợp nhất',
-      title: 'Thông báo',
-      subtitle: 'Toàn nền tảng',
-      contentKey: NotificationsHubTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Nhóm thông báo',
-            rows: _g6Bullets([
-              'Giao dịch: khớp lệnh, hủy, biên lai',
-              'Tài chính: nạp, rút, chuyển nội bộ',
-              'Bảo mật: đăng nhập mới, thay đổi thiết bị',
-              'Sản phẩm: staking, tiết kiệm, dự đoán',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(notificationsSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-325',
+        semanticLabel: 'Thông báo hợp nhất',
+        title: 'Thông báo',
+        subtitle: 'Toàn nền tảng',
+        contentKey: NotificationsHubTabletPage.contentKey,
+        child: _g6Body('Không tải được thông báo.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-325',
+        semanticLabel: 'Thông báo hợp nhất',
+        title: snapshot.title,
+        subtitle: '${snapshot.notifications.length} thông báo',
+        contentKey: NotificationsHubTabletPage.contentKey,
+        child: _g6Section(
+          title: 'Thông báo',
+          rows: [
+            for (final notification in snapshot.notifications.take(10))
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${notification.title} · ${notification.time}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: notification.isRead
+                              ? AppColors.text2
+                              : AppColors.text1,
+                          fontWeight: notification.isRead
+                              ? AppTextStyles.normal
+                              : AppTextStyles.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      notification.type.name,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

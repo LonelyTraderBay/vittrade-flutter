@@ -31,6 +31,9 @@ class _P2PCreateAdTabletPageState extends ConsumerState<P2PCreateAdTabletPage> {
   final _minLimitController = TextEditingController();
   final _maxLimitController = TextEditingController();
   P2PTradeType _tradeType = P2PTradeType.buy;
+  String? _selectedAsset;
+  String? _selectedPayment;
+  String? _selectedHours;
 
   @override
   void dispose() {
@@ -123,8 +126,13 @@ class _P2PCreateAdTabletPageState extends ConsumerState<P2PCreateAdTabletPage> {
                                     for (final asset in snapshot.assets)
                                       VitFilterChip(
                                         label: asset,
-                                        active: asset == snapshot.defaultAsset,
-                                        onTap: () {},
+                                        active:
+                                            asset ==
+                                            (_selectedAsset ??
+                                                snapshot.defaultAsset),
+                                        onTap: () => setState(
+                                          () => _selectedAsset = asset,
+                                        ),
                                         color: AppColors.primary,
                                       ),
                                   ],
@@ -184,8 +192,10 @@ class _P2PCreateAdTabletPageState extends ConsumerState<P2PCreateAdTabletPage> {
                                         in snapshot.paymentOptions)
                                       VitFilterChip(
                                         label: option,
-                                        onTap: () {},
-                                        active: false,
+                                        onTap: () => setState(
+                                          () => _selectedPayment = option,
+                                        ),
+                                        active: option == _selectedPayment,
                                         color: AppColors.primary,
                                       ),
                                   ],
@@ -202,10 +212,13 @@ class _P2PCreateAdTabletPageState extends ConsumerState<P2PCreateAdTabletPage> {
                                         in snapshot.tradingHours.take(6))
                                       VitFilterChip(
                                         label: hours,
-                                        onTap: () {},
+                                        onTap: () => setState(
+                                          () => _selectedHours = hours,
+                                        ),
                                         active:
                                             hours ==
-                                            snapshot.defaultTradingHours,
+                                            (_selectedHours ??
+                                                snapshot.defaultTradingHours),
                                         color: AppColors.primary,
                                       ),
                                   ],

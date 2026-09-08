@@ -132,6 +132,22 @@ Widget _lpdBody(String text) {
   );
 }
 
+Widget _lpdQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
 /// SC-360: Hub Launchpad.
 class LaunchpadHomeTabletPage extends ConsumerWidget {
   const LaunchpadHomeTabletPage({super.key});
@@ -209,10 +225,44 @@ class LaunchpadHomeTabletPage extends ConsumerWidget {
             const SizedBox(height: TabletSpacingTokens.x3),
             _lpdSection(
               title: 'Công cụ nâng cao',
-              rows: _lpdRows([
+              rows: [
                 for (final tool in snapshot.advancedTools)
-                  (tool.label, tool.route),
-              ]),
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(tool.route),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                tool.label,
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              tool.route,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: TabletSpacingTokens.x2),
+                _lpdQuickLinks(context, [
+                  ('Dự án mẫu', AppRoutePaths.launchpadSample),
+                  ('Danh mục', AppRoutePaths.launchpadPortfolio),
+                  ('Hiệu suất', AppRoutePaths.launchpadPerformance),
+                  ('Staking', AppRoutePaths.launchpadStaking),
+                  ('Nhận theo lô', AppRoutePaths.launchpadBatchClaim),
+                ]),
+              ],
             ),
           ],
         ),

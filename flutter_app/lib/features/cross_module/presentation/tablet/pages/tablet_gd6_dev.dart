@@ -8,25 +8,71 @@ class ReferralHomeTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-329',
-      semanticLabel: 'Giới thiệu bạn bè',
-      title: 'Giới thiệu bạn bè',
-      subtitle: 'Mã · Thưởng',
-      contentKey: ReferralHomeTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Cách hoạt động',
-            rows: _g6Bullets([
-              'Chia sẻ mã giới thiệu cá nhân',
-              'Bạn bè đăng ký và hoàn tất xác minh',
-              'Nhận thưởng khi điều kiện khối lượng đạt mục tiêu',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(referralHomeSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-329',
+        semanticLabel: 'Giới thiệu bạn bè',
+        title: 'Giới thiệu bạn bè',
+        subtitle: 'Mã · Thưởng',
+        contentKey: ReferralHomeTabletPage.contentKey,
+        child: _g6Body('Không tải được chương trình giới thiệu.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-329',
+        semanticLabel: 'Giới thiệu bạn bè',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: ReferralHomeTabletPage.contentKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _g6Section(
+              title: 'Mã giới thiệu của bạn',
+              rows: _g6Bullets([
+                'Mã: ${snapshot.referralCode}',
+                'Liên kết: ${snapshot.referralLink}',
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(
+              title: 'Thống kê',
+              rows: _g6Bullets([
+                'Tổng bạn bè: ${snapshot.stats.totalFriends}',
+                'Đã xác minh: ${snapshot.stats.kycCompleted}',
+                'Đang hoạt động: ${snapshot.stats.activeFriends}',
+                'Hoa hồng tích lũy: ${snapshot.stats.totalCommission}',
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(
+              title: 'Khám phá',
+              rows: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x2,
+                  runSpacing: TabletSpacingTokens.x2,
+                  children: [
+                    for (final (label, path) in [
+                      ('Lịch sử giới thiệu', AppRoutePaths.referralHistory),
+                      ('Phần thưởng', AppRoutePaths.referralRewards),
+                      ('Quy tắc', AppRoutePaths.referralRules),
+                    ])
+                      VitFilterChip(
+                        label: label,
+                        active: false,
+                        color: AppColors.primary,
+                        onTap: () => context.go(path),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -40,24 +86,65 @@ class ReferralHistoryTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-330',
-      semanticLabel: 'Lịch sử giới thiệu',
-      title: 'Lịch sử giới thiệu',
-      subtitle: 'Trạng thái · Thưởng',
-      contentKey: ReferralHistoryTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Theo dõi',
-            rows: _g6Bullets([
-              'Trạng thái từng lượt giới thiệu: chờ, hoàn tất',
-              'Thưởng ghi nhận theo mốc khối lượng của người được mời',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(
+      referralHistorySnapshotProvider((
+        filter: ReferralFriendFilter.all,
+        sort: ReferralHistorySort.date,
+        query: '',
+      )),
+    );
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-330',
+        semanticLabel: 'Lịch sử giới thiệu',
+        title: 'Lịch sử giới thiệu',
+        subtitle: 'Trạng thái · Thưởng',
+        contentKey: ReferralHistoryTabletPage.contentKey,
+        child: _g6Body('Không tải được lịch sử giới thiệu.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-330',
+        semanticLabel: 'Lịch sử giới thiệu',
+        title: snapshot.title,
+        subtitle: '${snapshot.friends.length} bạn bè',
+        contentKey: ReferralHistoryTabletPage.contentKey,
+        child: _g6Section(
+          title: 'Bạn bè đã giới thiệu',
+          rows: [
+            for (final friend in snapshot.friends.take(10))
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Material(
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    onTap: () => context.go(friend.route),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${friend.name} · ${friend.joinedDate}',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '${friend.status.name} · ${friend.totalCommission}',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -71,25 +158,59 @@ class ReferralRewardsTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-331',
-      semanticLabel: 'Phần thưởng giới thiệu',
-      title: 'Phần thưởng',
-      subtitle: 'Điều kiện nhận',
-      contentKey: ReferralRewardsTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Điều kiện',
-            rows: _g6Bullets([
-              'Người được mời hoàn tất xác minh danh tính',
-              'Khối lượng giao dịch đạt mốc quy định',
-              'Thưởng tự ghi vào số dư khả dụng',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(
+      referralRewardsSnapshotProvider((
+        filter: ReferralRewardFilter.all,
+        sort: ReferralRewardSort.date,
+      )),
+    );
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-331',
+        semanticLabel: 'Phần thưởng giới thiệu',
+        title: 'Phần thưởng',
+        subtitle: 'Điều kiện nhận',
+        contentKey: ReferralRewardsTabletPage.contentKey,
+        child: _g6Body('Không tải được phần thưởng giới thiệu.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-331',
+        semanticLabel: 'Phần thưởng giới thiệu',
+        title: snapshot.title,
+        subtitle:
+            'Hoa hồng ${snapshot.totalCommission} · chờ ${snapshot.pendingCommission}',
+        contentKey: ReferralRewardsTabletPage.contentKey,
+        child: _g6Section(
+          title: 'Khoản thưởng',
+          rows: [
+            for (final record in snapshot.records.take(10))
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${record.friendName} · ${record.type.name}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '${record.amount} ${record.currency} · ${record.status.name}',
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -103,25 +224,60 @@ class ReferralRulesTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-332',
-      semanticLabel: 'Quy tắc giới thiệu',
-      title: 'Quy tắc chương trình',
-      subtitle: 'Điều khoản áp dụng',
-      contentKey: ReferralRulesTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Nguyên tắc',
-            rows: _g6Bullets([
-              'Một tài khoản chỉ tham gia với một mã giới thiệu',
-              'Cấm tự giới thiệu hoặc gian lận địa chỉ',
-              'Nền tảng giữ quyền hủy thưởng khi phát hiện lạm dụng',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(referralRulesSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-332',
+        semanticLabel: 'Quy tắc giới thiệu',
+        title: 'Quy tắc chương trình',
+        subtitle: 'Điều khoản áp dụng',
+        contentKey: ReferralRulesTabletPage.contentKey,
+        child: _g6Body('Không tải được quy tắc chương trình.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-332',
+        semanticLabel: 'Quy tắc giới thiệu',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: ReferralRulesTabletPage.contentKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _g6Section(
+              title: 'Cấp bậc',
+              rows: [
+                for (final tier in snapshot.tiers)
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${tier.name} · từ ${tier.minFriends} bạn bè',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Hoa hồng ${tier.commissionPercent}%',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(title: 'Điều khoản', rows: _g6Bullets(snapshot.terms)),
+          ],
+        ),
       ),
     );
   }

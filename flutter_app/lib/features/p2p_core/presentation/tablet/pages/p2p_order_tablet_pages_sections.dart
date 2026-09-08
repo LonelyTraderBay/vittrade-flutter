@@ -17,6 +17,7 @@ class P2POrderRateTabletPage extends ConsumerStatefulWidget {
 class _P2POrderRateTabletPageState
     extends ConsumerState<P2POrderRateTabletPage> {
   final TextEditingController _commentController = TextEditingController();
+  String? _selectedTag;
 
   @override
   void dispose() {
@@ -76,8 +77,8 @@ class _P2POrderRateTabletPageState
                       for (final tag in snapshot.quickTags)
                         VitFilterChip(
                           label: tag.label,
-                          onTap: () {},
-                          active: false,
+                          onTap: () => setState(() => _selectedTag = tag.label),
+                          active: tag.label == _selectedTag,
                           color: AppColors.primary,
                         ),
                     ],
@@ -105,7 +106,7 @@ class _P2POrderRateTabletPageState
 }
 
 /// Hủy lệnh P2P (SC-214) — financial safety: lý do + cảnh báo + xác nhận.
-class P2POrderCancelTabletPage extends ConsumerWidget {
+class P2POrderCancelTabletPage extends ConsumerStatefulWidget {
   const P2POrderCancelTabletPage({super.key, required this.orderId});
 
   static const contentKey = Key('sc214_tablet_content');
@@ -114,8 +115,17 @@ class P2POrderCancelTabletPage extends ConsumerWidget {
   final String orderId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(p2pOrderCancelProvider(orderId));
+  ConsumerState<P2POrderCancelTabletPage> createState() =>
+      _P2POrderCancelTabletPageState();
+}
+
+class _P2POrderCancelTabletPageState
+    extends ConsumerState<P2POrderCancelTabletPage> {
+  String? _selectedReason;
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshotAsync = ref.watch(p2pOrderCancelProvider(widget.orderId));
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
@@ -124,11 +134,11 @@ class P2POrderCancelTabletPage extends ConsumerWidget {
         semanticIdentifier: 'SC-214',
         semanticLabel: 'Hủy lệnh P2P',
         title: 'Hủy lệnh',
-        subtitle: orderId,
+        subtitle: widget.orderId,
         contractNotes: '',
         body: p2pErrorBody(
           title: 'Không tải được lệnh',
-          onRetry: () => ref.invalidate(p2pOrderCancelProvider(orderId)),
+          onRetry: () => ref.invalidate(p2pOrderCancelProvider(widget.orderId)),
         ),
       ),
       data: (snapshot) => p2pOrderPageFrame(
@@ -227,8 +237,8 @@ class P2POrderCancelTabletPage extends ConsumerWidget {
                       for (final reason in snapshot.reasons)
                         VitFilterChip(
                           label: reason,
-                          onTap: () {},
-                          active: false,
+                          onTap: () => setState(() => _selectedReason = reason),
+                          active: reason == _selectedReason,
                           color: AppColors.primary,
                         ),
                     ],
@@ -297,7 +307,7 @@ class P2POrderProofTabletPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: TabletSpacingTokens.x3),
-            VitCard(
+            const VitCard(
               radius: VitCardRadius.tight,
               padding: TabletSpacingTokens.cardPaddingCompact,
               child: SizedBox(
@@ -306,18 +316,18 @@ class P2POrderProofTabletPage extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.upload_file_outlined,
                         size: TabletSpacingTokens.x7,
                         color: AppColors.primary,
                       ),
-                      const SizedBox(height: TabletSpacingTokens.x2),
+                      SizedBox(height: TabletSpacingTokens.x2),
                       VitCtaButton(
                         key: P2POrderProofTabletPage.uploadKey,
                         fullWidth: false,
                         variant: VitCtaButtonVariant.secondary,
-                        onPressed: () {},
-                        child: const Text('Tải lên bằng chứng'),
+                        onPressed: null,
+                        child: Text('Tải lên bằng chứng'),
                       ),
                     ],
                   ),

@@ -378,7 +378,8 @@ class P2PTwoFactorSettingsTabletPage extends ConsumerWidget {
                           VitCtaButton(
                             fullWidth: false,
                             variant: VitCtaButtonVariant.secondary,
-                            onPressed: () {},
+                            onPressed: () =>
+                                context.go(AppRoutePaths.p2pSecurity2fa),
                             child: const Text('Thiết lập'),
                           ),
                       ],

@@ -111,10 +111,18 @@ class ArenaPointsLedgerTabletPage extends ConsumerWidget {
                 for (final entry in snapshot.entries.take(12))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      entry.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(
+                          AppRoutePaths.arenaLedgerEntry(entry.id),
+                        ),
+                        child: Text(
+                          entry.id,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -214,10 +222,16 @@ class ArenaFlowMapTabletPage extends ConsumerWidget {
                 for (final route in snapshot.routes.take(8))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      route.path,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(route.path),
+                        child: Text(
+                          route.path,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),

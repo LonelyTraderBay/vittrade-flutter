@@ -191,35 +191,43 @@ class StakingProposalsTabletPage extends ConsumerWidget {
                 for (final proposal in snapshot.proposals)
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                proposal.title,
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              Text(
-                                '${proposal.category} · hết hạn ${proposal.endsIn}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
-                              ),
-                            ],
-                          ),
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(
+                          AppRoutePaths.earnVotingProposal(proposal.id),
                         ),
-                        Text(
-                          proposal.status,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text3,
-                          ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    proposal.title,
+                                    style: AppTextStyles.caption.copyWith(
+                                      fontWeight: AppTextStyles.bold,
+                                      color: AppColors.text1,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${proposal.category} · hết hạn ${proposal.endsIn}',
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text(
+                              proposal.status,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
               ],

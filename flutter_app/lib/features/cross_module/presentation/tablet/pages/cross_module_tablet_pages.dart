@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/providers/admin_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/cross_module_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/enterprise_states_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/notifications_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/referral_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/support_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
@@ -111,37 +117,93 @@ class SupportHubTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-314',
-      semanticLabel: 'Trung tâm hỗ trợ',
-      title: 'Hỗ trợ VitTrade',
-      subtitle: 'Kênh hỗ trợ · Yêu cầu',
-      contentKey: SupportHubTabletPage.contentKey,
-      backFallback: AppRoutePaths.profile,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Kênh hỗ trợ',
-            rows: _g6Bullets([
-              'Trò chuyện trực tiếp với bộ phận chăm sóc',
-              'Gửi yêu cầu và theo dõi trạng thái xử lý',
-              'Câu hỏi thường gặp theo chủ đề',
-              'Thông báo vận hành và bảo trì hệ thống',
-            ]),
-          ),
-          const SizedBox(height: TabletSpacingTokens.x3),
-          _g6Section(
-            title: 'Cam kết phục vụ',
-            rows: [
-              _g6Body(
-                'Mọi yêu cầu đều được ghi nhận với mã theo dõi; thời hạn phản hồi '
-                'đầu tiên được hiển thị ngay khi gửi.',
-              ),
-            ],
-          ),
-        ],
+    final snapshotAsync = ref.watch(supportHubSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-314',
+        semanticLabel: 'Trung tâm hỗ trợ',
+        title: 'Hỗ trợ VitTrade',
+        subtitle: 'Kênh hỗ trợ · Yêu cầu',
+        contentKey: SupportHubTabletPage.contentKey,
+        backFallback: AppRoutePaths.profile,
+        child: _g6Body('Không tải được trung tâm hỗ trợ.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-314',
+        semanticLabel: 'Trung tâm hỗ trợ',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: SupportHubTabletPage.contentKey,
+        backFallback: AppRoutePaths.profile,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _g6Section(
+              title: 'Kênh hỗ trợ',
+              rows: _g6Bullets([
+                'Email: ${snapshot.email}',
+                'Hotline: ${snapshot.hotline}',
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(
+              title: 'Yêu cầu gần đây',
+              rows: [
+                for (final ticket in snapshot.tickets.take(6))
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${ticket.subject} · ${ticket.category.name}',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '${ticket.status.name} · ${ticket.priority.name}',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(
+              title: 'Khám phá',
+              rows: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x2,
+                  runSpacing: TabletSpacingTokens.x2,
+                  children: [
+                    for (final (label, path) in [
+                      ('Trung tâm trợ giúp', AppRoutePaths.supportHelp),
+                      (
+                        'Thông báo vận hành',
+                        AppRoutePaths.supportAnnouncements,
+                      ),
+                    ])
+                      VitFilterChip(
+                        label: label,
+                        active: false,
+                        color: AppColors.primary,
+                        onTap: () => context.go(path),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -155,27 +217,32 @@ class SupportHelpTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-315',
-      semanticLabel: 'Trung tâm trợ giúp',
-      title: 'Trợ giúp',
-      subtitle: 'Hướng dẫn · Giải đáp',
-      contentKey: SupportHelpTabletPage.contentKey,
-      backFallback: AppRoutePaths.support,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Chủ đề phổ biến',
-            rows: _g6Bullets([
-              'Xác minh danh tính và bảo mật tài khoản',
-              'Nạp và rút tiền — quy trình, thời gian, phí',
-              'Giao dịch và sổ lệnh: cách đọc, cách hủy',
-              'Sự cố đăng nhập và xác thực hai lớp',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(helpCenterSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-315',
+        semanticLabel: 'Trung tâm trợ giúp',
+        title: 'Trợ giúp',
+        subtitle: 'Hướng dẫn · Giải đáp',
+        contentKey: SupportHelpTabletPage.contentKey,
+        backFallback: AppRoutePaths.support,
+        child: _g6Body('Không tải được trung tâm trợ giúp.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-315',
+        semanticLabel: 'Trung tâm trợ giúp',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: SupportHelpTabletPage.contentKey,
+        backFallback: AppRoutePaths.support,
+        child: _g6Section(
+          title: snapshot.heroTitle,
+          rows: [_g6Body(snapshot.heroBody)],
+        ),
       ),
     );
   }
@@ -189,26 +256,55 @@ class SupportAnnouncementsTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-316',
-      semanticLabel: 'Thông báo vận hành',
-      title: 'Thông báo',
-      subtitle: 'Bảo trì · Cập nhật',
-      contentKey: SupportAnnouncementsTabletPage.contentKey,
-      backFallback: AppRoutePaths.support,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Theo dõi',
-            rows: _g6Bullets([
-              'Bảo trì định kỳ được thông báo trước ít nhất 48 giờ',
-              'Cập nhật tính năng kèm ghi chú chi tiết',
-              'Cảnh báo sự cố hiển thị ở mức ưu tiên cao nhất',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(announcementsSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-316',
+        semanticLabel: 'Thông báo vận hành',
+        title: 'Thông báo',
+        subtitle: 'Bảo trì · Cập nhật',
+        contentKey: SupportAnnouncementsTabletPage.contentKey,
+        backFallback: AppRoutePaths.support,
+        child: _g6Body('Không tải được thông báo vận hành.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-316',
+        semanticLabel: 'Thông báo vận hành',
+        title: snapshot.title,
+        subtitle: snapshot.subtitle,
+        contentKey: SupportAnnouncementsTabletPage.contentKey,
+        backFallback: AppRoutePaths.support,
+        child: _g6Section(
+          title: 'Thông báo',
+          rows: [
+            for (final announcement in snapshot.announcements.take(8))
+              Padding(
+                padding: TabletSpacingTokens.tableCellPaddingV,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${announcement.title} · ${announcement.publishedDate}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      announcement.type.name,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -222,27 +318,114 @@ class AdminHomeTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
-      semanticIdentifier: 'SC-180',
-      semanticLabel: 'Quản trị',
-      title: 'Quản trị',
-      subtitle: 'Giám sát hệ thống',
-      contentKey: AdminHomeTabletPage.contentKey,
-      backFallback: AppRoutePaths.home,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Khối chức năng',
-            rows: _g6Bullets([
-              'Bảng điều khiển phân tích tổng hợp',
-              'Phễu chuyển đổi người dùng',
-              'Thí nghiệm A/B và kết quả',
-              'Cài đặt quyền và cấu hình nền tảng',
-            ]),
-          ),
-        ],
+    final snapshotAsync = ref.watch(adminHomeSnapshotProvider);
+
+    return snapshotAsync.when(
+      loading: () => const Center(child: VitSkeletonList(rows: 6)),
+      error: (error, stackTrace) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-180',
+        semanticLabel: 'Quản trị',
+        title: 'Quản trị',
+        subtitle: 'Giám sát hệ thống',
+        contentKey: AdminHomeTabletPage.contentKey,
+        backFallback: AppRoutePaths.home,
+        child: _g6Body('Không tải được bảng quản trị.'),
+      ),
+      data: (snapshot) => _g6Frame(
+        context: context,
+        semanticIdentifier: 'SC-180',
+        semanticLabel: 'Quản trị',
+        title: 'Quản trị',
+        subtitle: 'Giám sát hệ thống',
+        contentKey: AdminHomeTabletPage.contentKey,
+        backFallback: AppRoutePaths.home,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _g6Section(
+              title: 'Chỉ số nhanh',
+              rows: [
+                for (final stat in snapshot.quickStats.take(6))
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            stat.label,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text2,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '${stat.value} · ${stat.deltaLabel}',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                            fontWeight: AppTextStyles.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _g6Section(
+              title: 'Bảng điều khiển',
+              rows: [
+                for (final link in snapshot.dashboards)
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(link.route),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${link.title} — ${link.description}',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              link.stat,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: TabletSpacingTokens.x2),
+                Wrap(
+                  spacing: TabletSpacingTokens.x2,
+                  runSpacing: TabletSpacingTokens.x2,
+                  children: [
+                    for (final (label, path) in [
+                      ('Phân tích', AppRoutePaths.adminAnalytics),
+                      ('Thí nghiệm A/B', AppRoutePaths.adminAbtests),
+                      ('Phễu chuyển đổi', AppRoutePaths.adminFunnels),
+                      ('Cài đặt', AppRoutePaths.adminSettings),
+                    ])
+                      VitFilterChip(
+                        label: label,
+                        active: false,
+                        color: AppColors.primary,
+                        onTap: () => context.go(path),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

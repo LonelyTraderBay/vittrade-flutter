@@ -47,13 +47,22 @@ class P2PBlacklistTabletPage extends ConsumerWidget {
 }
 
 /// SC-276: Thêm vào blacklist.
-class P2PBlacklistAddTabletPage extends ConsumerWidget {
+class P2PBlacklistAddTabletPage extends ConsumerStatefulWidget {
   const P2PBlacklistAddTabletPage({super.key});
 
   static const contentKey = Key('sc276_tablet_content');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<P2PBlacklistAddTabletPage> createState() =>
+      _P2PBlacklistAddTabletPageState();
+}
+
+class _P2PBlacklistAddTabletPageState
+    extends ConsumerState<P2PBlacklistAddTabletPage> {
+  String? _selectedReason;
+
+  @override
+  Widget build(BuildContext context) {
     final snapshotAsync = ref.watch(p2pBlacklistAddProvider);
 
     return snapshotAsync.when(
@@ -113,8 +122,9 @@ class P2PBlacklistAddTabletPage extends ConsumerWidget {
                     for (final reason in snapshot.reasons)
                       VitFilterChip(
                         label: reason.label,
-                        onTap: () {},
-                        active: false,
+                        onTap: () =>
+                            setState(() => _selectedReason = reason.label),
+                        active: reason.label == _selectedReason,
                         color: AppColors.primary,
                       ),
                   ],

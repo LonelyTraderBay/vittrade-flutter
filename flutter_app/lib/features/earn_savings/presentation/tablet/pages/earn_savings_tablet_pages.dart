@@ -145,6 +145,22 @@ Widget _esvBody(String text) {
   );
 }
 
+Widget _esvQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
 /// SC-296: Hub tiết kiệm Earn.
 class SavingsHubTabletPage extends ConsumerWidget {
   const SavingsHubTabletPage({super.key});
@@ -194,6 +210,40 @@ class SavingsHubTabletPage extends ConsumerWidget {
               ),
               const SizedBox(height: TabletSpacingTokens.x3),
             ],
+            _esvSection(
+              title: 'Khám phá',
+              rows: [
+                _esvQuickLinks(context, [
+                  ('Danh mục', AppRoutePaths.earnSavingsPortfolio),
+                  ('Lịch sử', AppRoutePaths.earnSavingsHistory),
+                  ('Hướng dẫn', AppRoutePaths.earnSavingsGuide),
+                  ('Câu hỏi thường gặp', AppRoutePaths.earnSavingsFAQ),
+                  ('Thông báo', AppRoutePaths.earnSavingsNotifications),
+                  ('Gợi ý', AppRoutePaths.earnSavingsRecommendations),
+                  ('Đánh giá rủi ro', AppRoutePaths.earnSavingsRiskAssessment),
+                  ('So sánh', AppRoutePaths.earnSavingsComparison),
+                  ('Tự cộng dồn', AppRoutePaths.earnSavingsAutoCompound),
+                  ('Mục tiêu', AppRoutePaths.earnSavingsGoals),
+                  ('Phân tích', AppRoutePaths.earnSavingsAnalytics),
+                  ('Cân bằng lại', AppRoutePaths.earnSavingsRebalance),
+                  (
+                    'Tuỳ chọn thông báo',
+                    AppRoutePaths.earnSavingsNotificationPreferences,
+                  ),
+                  ('DCA tiết kiệm', AppRoutePaths.earnSavingsDca),
+                  (
+                    'Gợi ý thông minh',
+                    AppRoutePaths.earnSavingsSmartSuggestions,
+                  ),
+                  ('Xuất dữ liệu', AppRoutePaths.earnSavingsExport),
+                  ('Kiểm thử lại', AppRoutePaths.earnSavingsBacktest),
+                  ('Tự động', AppRoutePaths.earnSavingsAutoPilot),
+                  ('Thang bậc', AppRoutePaths.earnSavingsLadder),
+                  ('Giả định', AppRoutePaths.earnSavingsWhatIf),
+                  ('Staking', AppRoutePaths.earnStaking),
+                ]),
+              ],
+            ),
           ],
         ),
       ),

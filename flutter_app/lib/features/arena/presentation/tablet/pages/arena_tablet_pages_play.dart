@@ -111,6 +111,10 @@ class ArenaChallengeDetailTabletPage extends ConsumerWidget {
                       ),
                     ),
                   ),
+                const SizedBox(height: TabletSpacingTokens.x2),
+                _ardQuickLinks(context, [
+                  ('Tham gia thử thách', AppRoutePaths.arenaJoin(challengeId)),
+                ]),
               ],
             ),
           ],
@@ -213,6 +217,36 @@ class ArenaCreatorTabletPage extends ConsumerWidget {
                       '${metric.label}: ${metric.value}',
                       style: AppTextStyles.caption.copyWith(
                         color: AppColors.text1,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: TabletSpacingTokens.x2),
+                _ardQuickLinks(context, [
+                  (
+                    'Chi tiết uy tín',
+                    AppRoutePaths.arenaTrust(snapshot.creator.id),
+                  ),
+                ]),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _ardSection(
+              title: 'Phòng live',
+              rows: [
+                for (final room in snapshot.liveRooms.take(8))
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () =>
+                            context.go(AppRoutePaths.arenaChallenge(room.id)),
+                        child: Text(
+                          room.title,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -422,10 +456,17 @@ class MyArenaTabletPage extends ConsumerWidget {
                 for (final room in snapshot.myRooms.take(8))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      room.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () =>
+                            context.go(AppRoutePaths.arenaChallenge(room.id)),
+                        child: Text(
+                          room.id,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -477,10 +518,18 @@ class MyArenaReportsTabletPage extends ConsumerWidget {
                 for (final report in snapshot.reports.take(10))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      report.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(
+                          AppRoutePaths.arenaReportCase(report.id),
+                        ),
+                        child: Text(
+                          report.id,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -534,10 +583,18 @@ class ArenaReportCaseTabletPage extends ConsumerWidget {
                 for (final report in snapshot.relatedReports.take(6))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      report.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.go(
+                          AppRoutePaths.arenaReportCase(report.id),
+                        ),
+                        child: Text(
+                          report.id,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
                       ),
                     ),
                   ),

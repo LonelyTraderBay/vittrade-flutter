@@ -27,6 +27,24 @@ class P2PChatTabletPage extends ConsumerStatefulWidget {
 
 class _P2PChatTabletPageState extends ConsumerState<P2PChatTabletPage> {
   final TextEditingController _messageController = TextEditingController();
+  final List<P2PChatMessageDraft> _sentMessages = [];
+
+  void _sendCurrentMessage() {
+    final text = _messageController.text.trim();
+    if (text.isEmpty) return;
+    setState(() {
+      _sentMessages.add(
+        P2PChatMessageDraft(
+          id: 'local-${_sentMessages.length}',
+          sender: P2PChatSender.me,
+          text: text,
+          time: 'Vừa gửi',
+          isRead: false,
+        ),
+      );
+    });
+    _messageController.clear();
+  }
 
   @override
   void dispose() {
@@ -116,6 +134,8 @@ class _P2PChatTabletPageState extends ConsumerState<P2PChatTabletPage> {
                               children: [
                                 for (final message in snapshot.messages)
                                   _MessageBubble(message: message),
+                                for (final message in _sentMessages)
+                                  _MessageBubble(message: message),
                               ],
                             ),
                           ),
@@ -142,7 +162,7 @@ class _P2PChatTabletPageState extends ConsumerState<P2PChatTabletPage> {
                               const SizedBox(width: TabletSpacingTokens.x3),
                               VitCtaButton(
                                 fullWidth: false,
-                                onPressed: () {},
+                                onPressed: _sendCurrentMessage,
                                 child: const Icon(Icons.send_rounded),
                               ),
                             ],
@@ -216,7 +236,8 @@ class _P2PChatTabletPageState extends ConsumerState<P2PChatTabletPage> {
                                     ),
                                     child: VitFilterChip(
                                       label: reply,
-                                      onTap: () {},
+                                      onTap: () =>
+                                          _messageController.text = reply,
                                       active: false,
                                       color: AppColors.primary,
                                     ),

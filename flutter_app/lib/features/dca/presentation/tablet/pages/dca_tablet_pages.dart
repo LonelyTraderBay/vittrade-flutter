@@ -153,12 +153,53 @@ class DcaOverviewTabletPage extends ConsumerWidget {
         title: 'DCA',
         subtitle: 'Chiến lược tích lũy',
         contentKey: DcaOverviewTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Tổng quan DCA',
-          rows: _dcaRows([
-            ('Trạng thái', 'Đang hoạt động'),
-            ('Cập nhật', 'Mới nhất'),
-          ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _dcaSection(
+              title: 'Tổng quan DCA',
+              rows: _dcaRows([
+                ('Trạng thái', 'Đang hoạt động'),
+                ('Cập nhật', 'Mới nhất'),
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _dcaSection(
+              title: 'Khám phá',
+              rows: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x2,
+                  runSpacing: TabletSpacingTokens.x2,
+                  children: [
+                    for (final (label, path) in [
+                      ('Tạo lịch DCA', AppRoutePaths.dcaScheduleConfig),
+                      (
+                        'Phân tích lịch DCA',
+                        AppRoutePaths.dcaScheduleAnalytics,
+                      ),
+                      ('Cấu hình rebalance', AppRoutePaths.dcaRebalanceConfig),
+                      ('Bảng rebalance', AppRoutePaths.dcaRebalanceDashboard),
+                      ('Tối ưu danh mục', AppRoutePaths.dcaPortfolioOptimizer),
+                      ('Số tiền linh hoạt', AppRoutePaths.dcaDynamicAmount),
+                      ('Kiểm thử lại', AppRoutePaths.dcaBacktester),
+                      ('Đa tài sản', AppRoutePaths.dcaMultiAsset),
+                      (
+                        'So sánh hiệu suất',
+                        AppRoutePaths.dcaPerformanceCompare,
+                      ),
+                      ('Quy tắc thông minh', AppRoutePaths.dcaSmartRules),
+                    ])
+                      VitFilterChip(
+                        label: label,
+                        active: false,
+                        color: AppColors.primary,
+                        onTap: () => context.go(path),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

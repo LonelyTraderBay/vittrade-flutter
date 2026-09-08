@@ -197,6 +197,77 @@ class _CopyTradingTabletPageState extends ConsumerState<CopyTradingTabletPage> {
                         ],
                       ),
                     ),
+                    VitCard(
+                      radius: VitCardRadius.tight,
+                      padding: TabletSpacingTokens.cardPaddingCompact,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Khám phá',
+                            style: AppTextStyles.control.copyWith(
+                              fontWeight: AppTextStyles.bold,
+                              color: AppColors.text1,
+                            ),
+                          ),
+                          const SizedBox(height: TabletSpacingTokens.x2),
+                          Wrap(
+                            spacing: TabletSpacingTokens.x2,
+                            runSpacing: TabletSpacingTokens.x2,
+                            children: [
+                              for (final (label, path) in [
+                                (
+                                  'Đang sao chép',
+                                  AppRoutePaths.tradeCopyActive,
+                                ),
+                                (
+                                  'So sánh nhà cung cấp',
+                                  AppRoutePaths.tradeCopyComparison,
+                                ),
+                                (
+                                  'Bảng xếp hạng',
+                                  AppRoutePaths.tradeCopyLeaderboard,
+                                ),
+                                (
+                                  'Phân tích rủi ro',
+                                  AppRoutePaths.tradeCopyRiskAnalysis,
+                                ),
+                                ('An toàn', AppRoutePaths.tradeCopySafety),
+                                (
+                                  'Trung tâm an toàn',
+                                  AppRoutePaths.tradeCopySafetyCenter,
+                                ),
+                                ('Cài đặt', AppRoutePaths.tradeCopySettings),
+                                ('Giáo dục', AppRoutePaths.tradeCopyEducation),
+                                (
+                                  'Thông báo',
+                                  AppRoutePaths.tradeCopyNotifications,
+                                ),
+                                (
+                                  'Tiết lộ quản trị',
+                                  AppRoutePaths.tradeCopyProviderGovernance,
+                                ),
+                                (
+                                  'Giải quyết tranh chấp',
+                                  AppRoutePaths.tradeCopyDisputeResolution,
+                                ),
+                                (
+                                  'Báo cáo quản trị',
+                                  AppRoutePaths
+                                      .tradeCopyRegulatoryReportsDashboard,
+                                ),
+                              ])
+                                VitFilterChip(
+                                  label: label,
+                                  active: false,
+                                  color: AppColors.primary,
+                                  onTap: () => context.go(path),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               },
@@ -216,75 +287,85 @@ class _TraderRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pnlColor = trader.totalPnl >= 0 ? AppColors.buy : AppColors.sell;
-    return Padding(
-      padding: TabletSpacingTokens.tableCellPaddingTall,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  trader.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+    return Material(
+      color: AppColors.transparent,
+      child: InkWell(
+        onTap: () => context.go(AppRoutePaths.tradeCopyProvider(trader.id)),
+        child: Padding(
+          padding: TabletSpacingTokens.tableCellPaddingTall,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      trader.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.caption.copyWith(
+                        fontWeight: AppTextStyles.bold,
+                        color: AppColors.text1,
+                      ),
+                    ),
+                    Text(
+                      '${trader.copiers}/${trader.maxCopiers} copiers · ${trader.tags.take(2).join(" · ")}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  'Win ${trader.winRate.toStringAsFixed(1)}%',
                   style: AppTextStyles.caption.copyWith(
+                    color: trader.winRate >= 50
+                        ? AppColors.buy
+                        : AppColors.sell,
                     fontWeight: AppTextStyles.bold,
-                    color: AppColors.text1,
+                    fontFeatures: AppTextStyles.tabularFigures,
                   ),
                 ),
-                Text(
-                  '${trader.copiers}/${trader.maxCopiers} copiers · ${trader.tags.take(2).join(" · ")}',
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  formatTradeSignedUsdRounded(trader.totalPnl),
+                  style: AppTextStyles.caption.copyWith(
+                    color: pnlColor,
+                    fontWeight: AppTextStyles.bold,
+                    fontFeatures: AppTextStyles.tabularFigures,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  formatTradeUsdWhole(trader.aum),
+                  style: AppTextStyles.caption.copyWith(
+                    color: AppColors.text2,
+                    fontFeatures: AppTextStyles.tabularFigures,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  'Rủi ro ${trader.riskLevel.name}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                  style: AppTextStyles.caption.copyWith(color: AppColors.text2),
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Win ${trader.winRate.toStringAsFixed(1)}%',
-              style: AppTextStyles.caption.copyWith(
-                color: trader.winRate >= 50 ? AppColors.buy : AppColors.sell,
-                fontWeight: AppTextStyles.bold,
-                fontFeatures: AppTextStyles.tabularFigures,
               ),
-            ),
+            ],
           ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              formatTradeSignedUsdRounded(trader.totalPnl),
-              style: AppTextStyles.caption.copyWith(
-                color: pnlColor,
-                fontWeight: AppTextStyles.bold,
-                fontFeatures: AppTextStyles.tabularFigures,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              formatTradeUsdWhole(trader.aum),
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.text2,
-                fontFeatures: AppTextStyles.tabularFigures,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Rủi ro ${trader.riskLevel.name}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.caption.copyWith(color: AppColors.text2),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

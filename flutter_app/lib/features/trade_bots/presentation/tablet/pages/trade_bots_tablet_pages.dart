@@ -143,6 +143,22 @@ List<Widget> _tbpBullets(List<String> notes) {
   ];
 }
 
+Widget _tbpQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
 Widget _tbpBody(String text) {
   return Text(
     text,
@@ -268,6 +284,44 @@ class TradingBotsTabletPage extends ConsumerWidget {
                       ],
                     ),
                   ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _tbpSection(
+              title: 'Khám phá',
+              rows: [
+                _tbpQuickLinks(context, [
+                  ('Lịch sử', AppRoutePaths.tradeBotHistory),
+                  (
+                    'Phân tích hiệu suất',
+                    AppRoutePaths.tradeBotPerformanceAnalytics,
+                  ),
+                  ('Kiểm thử lại', AppRoutePaths.tradeBotBacktesting),
+                  ('So sánh chiến lược', AppRoutePaths.tradeBotStrategyCompare),
+                  ('Tối ưu hoá', AppRoutePaths.tradeBotOptimization),
+                  (
+                    'Bảng điều khiển danh mục',
+                    AppRoutePaths.tradeBotPortfolioDashboard,
+                  ),
+                  (
+                    'Phân tích sụt giảm',
+                    AppRoutePaths.tradeBotDrawdownAnalyzer,
+                  ),
+                  ('Đường cong vốn', AppRoutePaths.tradeBotEquityCurve),
+                  ('Bảng rủi ro', AppRoutePaths.tradeBotRiskDashboard),
+                  ('Dừng khẩn cấp', AppRoutePaths.tradeBotEmergencyStop),
+                  ('Cài đặt bảo mật', AppRoutePaths.tradeBotSecuritySettings),
+                  (
+                    'Đánh giá phù hợp',
+                    AppRoutePaths.tradeBotSuitabilityAssessment,
+                  ),
+                  ('Hướng dẫn', AppRoutePaths.tradeBotGuide),
+                  ('Câu hỏi thường gặp', AppRoutePaths.tradeBotFaq),
+                  ('Báo cáo thuế', AppRoutePaths.tradeBotTaxReporting),
+                  ('Tài liệu API', AppRoutePaths.tradeBotApiDocumentation),
+                  ('Điều khoản dịch vụ', AppRoutePaths.tradeBotTermsOfService),
+                  ('Tiết lộ rủi ro', AppRoutePaths.tradeBotRiskDisclosure),
+                ]),
               ],
             ),
           ],

@@ -120,6 +120,7 @@ class P2PSourceOfFundsTabletPage extends ConsumerStatefulWidget {
 class _P2PSourceOfFundsTabletPageState
     extends ConsumerState<P2PSourceOfFundsTabletPage> {
   final TextEditingController _detailController = TextEditingController();
+  String? _selectedSource;
 
   @override
   void dispose() {
@@ -190,8 +191,9 @@ class _P2PSourceOfFundsTabletPageState
                     for (final source in snapshot.sources)
                       VitFilterChip(
                         label: source.label,
-                        onTap: () {},
-                        active: false,
+                        onTap: () =>
+                            setState(() => _selectedSource = source.label),
+                        active: source.label == _selectedSource,
                         color: AppColors.primary,
                       ),
                   ],
@@ -243,6 +245,7 @@ class P2PLargeTransactionJustificationTabletPage
 class _P2PLargeTransactionJustificationTabletPageState
     extends ConsumerState<P2PLargeTransactionJustificationTabletPage> {
   final TextEditingController _purposeController = TextEditingController();
+  String? _selectedPurpose;
   final TextEditingController _detailsController = TextEditingController();
 
   @override
@@ -319,8 +322,8 @@ class _P2PLargeTransactionJustificationTabletPageState
                     for (final purpose in snapshot.purposes)
                       VitFilterChip(
                         label: purpose,
-                        onTap: () {},
-                        active: false,
+                        onTap: () => setState(() => _selectedPurpose = purpose),
+                        active: purpose == _selectedPurpose,
                         color: AppColors.primary,
                       ),
                   ],

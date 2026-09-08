@@ -6,7 +6,7 @@
 > Chuẩn kỹ thuật nguồn: `Tablet-Adaptive-Standard.md`, `AGENTS.md` UI Rules,
 > memory `tablet-port-audit-traps` + `tablet-porting-playbook`.
 
-## 1. Trạng thái hiện tại (GĐ1→GĐ7 HOÀN THÀNH — gate test pass: toàn bộ route probe KHÔNG render utility page)
+## 1. Trạng thái hiện tại (GĐ1→GĐ7 HOÀN THÀNH 412/412; GĐ8 wiring pass HOÀN THÀNH 2026-09-09)
 
 | Mốc | Số route thật | Ghi chú |
 | --- | ---: | --- |
@@ -45,10 +45,11 @@
 | + GĐ5-LPD 24 trang (SC-360→386: hub/portfolio/performance/launchpool/detail/receipt/contract/ido-bridge/bridge-compare/bridge-order/claim-receipt/batch-claim/notif-sound/event-log/abi-diff/address-book/webhooks/gas-tracker/rebalance/multisig/swap-aggregator/limit-orders/dca-builder/risk-analytics) | 350/412 | launchpad_tablet_pages.dart + 2 part (_tools/_ops) |
 | + GĐ5-ARENA 25 trang (SC-184→208: home/guide/studio/smart-rules/presets/governance/mode-detail/challenge-detail/join/creator/resolution/leaderboard/verified/points/flow-map/safety/blocked/my-reports/my/production/bridge/ecosystem/trust/ledger-entry/ledger/report-case) | 375/412 | arena_tablet_pages.dart + 3 part (_studio/_play/_points) |
 | + GĐ6 26 trang (support×3, admin×5, enterprise-states, unified-portfolio, cross-module-analytics, smart-alerts, tax-reports, notifications, search, topics×2, referral×4, dev×5: route-checker/perf-monitor/showcase/design-system/dca-demo + onboarding + p2p-escrow + referral-friend) | 401+/412 | cross_module_tablet_pages.dart + 2 part (_modules/_dev) + misc_gate_tablet_pages.dart |
-| **Còn lại** | **202/412** | P2P 75 · Copy 48 · Bots 19 · DCA 13 · Savings 24 · Staking 46 · Predictions 18 · Launchpad 24 · Arena 25 · Support 3 · Referral 5 · Discovery 4 · Admin 5 · Enterprise/Dev 10 · Gates 3 · ROOT/other 1 |
+| + GĐ7 gate test toàn route (443 probe path) + 2 quyết định chính sách | **412/412** | tablet_full_route_gate_test.dart; part-split 24 file + density re-baseline 0→8 |
+| + GĐ8 wiring pass (2026-09-09): nối luồng điều hướng + dữ liệu thật cho module port giai đoạn sau | 412/412 (không thêm route) | xem mục 4a |
 
 Chỉ báo nhanh: `grep -c "if (path ==" lib/app/router/tablet/tablet_route_tree.dart`
-(= 99 hiện tại) và số construction utility còn lại (5 hiện tại — về 0 ở GĐ7).
+(= 418 hiện tại); số construction utility còn lại = 0 (GĐ7).
 
 ## 2. Recipe chuẩn mỗi batch (áp nguyên khối, không suy biến)
 
@@ -278,19 +279,73 @@ wallet/history→FundLock, tax-report/detailed/:year→TaxReporting.
 - [ ] **GĐ6-4** Gates 3 (onboarding/maintenance/force-update) + ROOT/other 1
   (path literal còn sót — tra `tabletRouteManifest` so `_buildTabletPage`) — 4.
 
-### GĐ7 · Cổng hoàn thiện 100%
+### GĐ7 · Cổng hoàn thiện 100% — HOÀN THÀNH 2026-09-06
 
-- [ ] **GĐ7-1** Viết test cơ học: duyệt toàn bộ `tabletRouteManifest` (412
+- [x] **GĐ7-1** Viết test cơ học: duyệt toàn bộ `tabletRouteManifest` (412
   path) + 3 route settings/security — pump từng route ở viewport 1024×768,
   assert KHÔNG render `VitTabletUtilityPage`/`P2PTabletUtilityPage`/
   `TradeTabletUtilityPage`/`ProfileTabletUtilityPage`/`VitWebUtilityPage`.
   Test này là bằng chứng 412/412.
-- [ ] **GĐ7-2** Xóa `_tabletUtilityTitle`/`_p2pUtilityForRoute`/
+- [x] **GĐ7-2** Xóa `_tabletUtilityTitle`/`_p2pUtilityForRoute`/
   `_profileUtilityForRoute` + branch utility còn sót; đồng bộ 5 construction
   utility về 0 (xem mục 1).
-- [ ] **GĐ7-3** Chạy `preflight_check.dart` full; cập nhật
+- [x] **GĐ7-3** Chạy `preflight_check.dart` full; cập nhật
   `Flutter-Route-Coverage-Truth-Table.md` + memory roadmap "100%"; báo cáo
   tổng cho user.
+
+### GĐ8 · Wiring pass luồng điều hướng + dữ liệu (2026-09-09) — HOÀN THÀNH
+
+Bối cảnh: báo cáo rà soát 2026-09-09 phát hiện các module port GĐ3–GĐ6 có
+**0 lệnh điều hướng trong trang** (tablet 219 nav-edge vs phone 1208) — vào
+được hub rồi bế tắc, ~300 route không thể tới bằng thao tác UI; 26+3 trang
+GĐ6 render bullet tĩnh không ăn provider; 20 nút bấm rỗng (18 p2p_core +
+2 trade_copy).
+
+- [x] **GĐ8.1 Predictions** — event rows (home/search/breaking) → event
+  detail; portfolio → receipts; receipt → event; tournament → bảng xếp hạng
+  giải; event detail → advanced chart + cộng đồng; hub có 13 quick-links
+  (search→data-integration). 134 test pass.
+- [x] **GĐ8.2 Arena** — liveRooms/featuredModes → challenge/mode detail;
+  challenge → join; creator → trust + phòng live; my/my-reports/report-case
+  → detail; ledger entries → entry detail; flow-map routes → go(path);
+  podium có creatorId → creator; hub 13 quick-links. 212 test pass.
+- [x] **GĐ8.3 Staking** — earn hub 16 quick-links (dashboard→savings);
+  proposals → voting proposal detail (family theo id). 266 test pass.
+- [x] **GĐ8.4 Savings** — hub 21 quick-links (portfolio→what-if + staking).
+  134 test pass.
+- [x] **GĐ8.5 Launchpad** — advancedTools (data `.route`) tappable; hub
+  quick-links (sample/portfolio/performance/staking/batch-claim). 183 test
+  pass.
+- [x] **GĐ8.6 Bots** — hub 18 quick-links (history→risk-disclosure). 126
+  test pass.
+- [x] **GĐ8.7 Copy + DCA + Compliance** — copy hub trader rows → provider
+  detail + 12 quick-links secondary; DCA hub 10 quick-links; compliance
+  dashboard 20 quick-links. 414 test pass.
+- [x] **GĐ8.8 GĐ6 modules** — referral×4 + support×3 + admin home +
+  notifications + cross-module-analytics + enterprise-states chuyển từ
+  bullet tĩnh sang provider thật (`referralHomeSnapshotProvider`,
+  `supportHubSnapshotProvider`, `adminHomeSnapshotProvider`,
+  `notificationsSnapshotProvider`, ...); admin dashboards data-links + 4
+  quick-links; referral history friend rows → friend detail (route từ
+  data). 66 test pass. Còn lại static: admin analytics/abtests/funnels/
+  settings, unified-portfolio, smart-alerts, tax-reports, search, topics,
+  dev×5 (trang nội bộ/đơn dữ liệu — chấp nhận ở mock stage).
+- [x] **GĐ8.9 Sửa 20 nút rỗng** — chat: send append tin nhắn local + quick
+  reply điền input; create-ad/payment/compliance/order/dispute/account/
+  copy: chuyển stateful + selection thật (`_selectedAsset`, `_selectedBank`,
+  `_selectedReason`, `_answers`, `_selectedFormat`...); security setup →
+  `p2pSecurity2fa`; whitelist toggle state; nút upload/attach không thể có
+  hành vi thật ở mock → `onPressed: null` (render disabled trung thực).
+  Kết quả: **0 empty handler trong tablet scope**.
+- [x] **GĐ8.10 Khoá chất lượng** — regen 7 artifact audit (nav-edges, page
+  rhythm, segment pill, card tile, back nav); test ratchet mới
+  `tablet_navigation_parity_guardrail_test.dart`: (a) 10 module GĐ3+ mỗi
+  module ≥1 lệnh điều hướng + floor tổng 33, (b) tablet scope 0 nút rỗng.
+  Preflight P1+P3 21/21 PASS (P2 chỉ fail drift SDK đã biết).
+
+Lưu ý đo lường: audit navigation-edge chỉ bắt literal `AppRoutePaths.x` —
+quick-links dùng biến vòng lặp nên CSV tăng khiêm tốn (219→248 literal) nhưng
+số cạnh thực tế mở rộng lớn hơn nhiều (mỗi helper render N chip theo data).
 
 ## 5. Chống gián đoạn (chạy một mạch)
 

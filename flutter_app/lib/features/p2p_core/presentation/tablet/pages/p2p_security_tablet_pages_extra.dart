@@ -472,13 +472,22 @@ class P2PSuspiciousActivityTabletPage extends ConsumerWidget {
 }
 
 /// SC-404: Chế độ whitelist rút tiền.
-class P2PWhitelistModeTabletPage extends ConsumerWidget {
+class P2PWhitelistModeTabletPage extends ConsumerStatefulWidget {
   const P2PWhitelistModeTabletPage({super.key});
 
   static const contentKey = Key('sc404_tablet_content');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<P2PWhitelistModeTabletPage> createState() =>
+      _P2PWhitelistModeTabletPageState();
+}
+
+class _P2PWhitelistModeTabletPageState
+    extends ConsumerState<P2PWhitelistModeTabletPage> {
+  bool _whitelistEnabled = false;
+
+  @override
+  Widget build(BuildContext context) {
     return _secPageFrame(
       context: context,
       semanticIdentifier: 'SC-404',
@@ -507,8 +516,11 @@ class P2PWhitelistModeTabletPage extends ConsumerWidget {
                   VitCtaButton(
                     fullWidth: false,
                     variant: VitCtaButtonVariant.secondary,
-                    onPressed: () {},
-                    child: const Text('Bật whitelist'),
+                    onPressed: () =>
+                        setState(() => _whitelistEnabled = !_whitelistEnabled),
+                    child: Text(
+                      _whitelistEnabled ? 'Tắt whitelist' : 'Bật whitelist',
+                    ),
                   ),
                   VitCtaButton(
                     fullWidth: false,

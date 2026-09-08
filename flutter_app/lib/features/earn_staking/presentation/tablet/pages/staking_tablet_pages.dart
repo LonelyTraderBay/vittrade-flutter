@@ -154,6 +154,22 @@ Widget _stkBody(String text) {
   );
 }
 
+Widget _stkQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
 List<Widget> _stkTitleBody(List<(String, String)> pairs) {
   return [
     for (final (title, body) in pairs)
@@ -298,6 +314,33 @@ class StakingEarnTabletPage extends ConsumerWidget {
                       ],
                     ),
                   ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _stkSection(
+              title: 'Khám phá',
+              rows: [
+                _stkQuickLinks(context, [
+                  ('Bảng điều khiển', AppRoutePaths.earnDashboard),
+                  ('Phân tích', AppRoutePaths.earnAnalytics),
+                  ('Lịch sử', AppRoutePaths.earnHistory),
+                  ('Lịch trả thưởng', AppRoutePaths.earnCalendar),
+                  ('Chọn validator', AppRoutePaths.earnValidatorSelection),
+                  (
+                    'Sức khoẻ validator',
+                    AppRoutePaths.earnValidatorHealthMonitor,
+                  ),
+                  ('Tự động cộng dồn', AppRoutePaths.earnAutoCompound),
+                  ('Liquid staking', AppRoutePaths.earnLiquidStaking),
+                  ('Lệnh nâng cao', AppRoutePaths.earnAdvancedOrders),
+                  ('Đa chuỗi', AppRoutePaths.earnMultiChain),
+                  ('Bảo hiểm', AppRoutePaths.earnInsurance),
+                  ('Bảng rủi ro', AppRoutePaths.earnRiskDashboard),
+                  ('Lịch sử slashing', AppRoutePaths.earnSlashingHistory),
+                  ('Quản trị cộng đồng', AppRoutePaths.earnCommunityGovernance),
+                  ('Đề xuất', AppRoutePaths.earnProposals),
+                  ('Gửi tiết kiệm', AppRoutePaths.earnSavings),
+                ]),
               ],
             ),
           ],

@@ -1023,7 +1023,7 @@ trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_re
 trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_trading_core_tablet_pages.dart,3,0,0,C,0,0,0,pass,-
 trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_trading_core_tablet_pages_extra.dart,2,0,0,E,0,0,0,pass,-
 trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_trading_extended_tablet_pages.dart,1,0,0,C,0,0,0,pass,-
-trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_trading_tablet_page.dart,3,0,0,C,0,0,0,pass,-
+trade_copy,flutter_app/lib/features/trade_copy/presentation/tablet/pages/copy_trading_tablet_page.dart,4,0,0,C,0,0,0,pass,-
 trade_copy,flutter_app/lib/features/trade_copy/presentation/widgets/analytics/copy_performance_common.dart,1,0,0,C,0,0,0,pass,-
 trade_copy,flutter_app/lib/features/trade_copy/presentation/widgets/analytics/copy_performance_details.dart,4,0,0,C,0,0,0,pass,-
 trade_copy,flutter_app/lib/features/trade_copy/presentation/widgets/analytics/copy_performance_summary_tabs.dart,4,2,0,C,0,0,0,pass,-

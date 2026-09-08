@@ -113,6 +113,22 @@ Widget _ardBody(String text) {
   );
 }
 
+Widget _ardQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
 /// SC-184: Hub Open Arena.
 class ArenaHomeTabletPage extends ConsumerWidget {
   const ArenaHomeTabletPage({super.key});
@@ -153,10 +169,29 @@ class ArenaHomeTabletPage extends ConsumerWidget {
                 for (final room in snapshot.liveRooms.take(8))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      room.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () =>
+                            context.go(AppRoutePaths.arenaChallenge(room.id)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                room.title,
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              room.format,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -169,13 +204,41 @@ class ArenaHomeTabletPage extends ConsumerWidget {
                 for (final mode in snapshot.featuredModes.take(8))
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      mode.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text2,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () =>
+                            context.go(AppRoutePaths.arenaMode(mode.id)),
+                        child: Text(
+                          mode.id,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                          ),
+                        ),
                       ),
                     ),
                   ),
+              ],
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _ardSection(
+              title: 'Khám phá',
+              rows: [
+                _ardQuickLinks(context, [
+                  ('Hướng dẫn', AppRoutePaths.arenaGuide),
+                  ('Studio', AppRoutePaths.arenaStudio),
+                  ('Bảng xếp hạng', AppRoutePaths.arenaLeaderboard),
+                  ('Thử thách đã xác thực', AppRoutePaths.arenaVerified),
+                  ('Điểm Arena', AppRoutePaths.arenaPoints),
+                  ('Sổ điểm', AppRoutePaths.arenaLedger),
+                  ('Arena của tôi', AppRoutePaths.arenaMy),
+                  ('Báo cáo của tôi', AppRoutePaths.arenaMyReports),
+                  ('Sơ đồ luồng', AppRoutePaths.arenaFlowMap),
+                  ('Trung tâm an toàn', AppRoutePaths.arenaSafety),
+                  ('Trung tâm phân định', AppRoutePaths.arenaResolution),
+                  ('Cầu nối Prediction', AppRoutePaths.arenaBridge),
+                  ('Hệ sinh thái', AppRoutePaths.arenaEcosystem),
+                ]),
               ],
             ),
           ],

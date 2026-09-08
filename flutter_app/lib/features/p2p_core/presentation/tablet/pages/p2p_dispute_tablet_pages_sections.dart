@@ -92,11 +92,11 @@ class P2PDisputeEvidenceTabletPage extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: TabletSpacingTokens.x2),
-                VitCtaButton(
+                const VitCtaButton(
                   fullWidth: false,
                   variant: VitCtaButtonVariant.secondary,
-                  onPressed: () {},
-                  child: const Text('Chọn tệp'),
+                  onPressed: null,
+                  child: Text('Chọn tệp'),
                 ),
               ],
             ),
@@ -226,6 +226,7 @@ class P2PDisputeOpenTabletPage extends ConsumerStatefulWidget {
 class _P2PDisputeOpenTabletPageState
     extends ConsumerState<P2PDisputeOpenTabletPage> {
   final TextEditingController _descriptionController = TextEditingController();
+  String? _selectedReason;
 
   @override
   void dispose() {
@@ -271,8 +272,8 @@ class _P2PDisputeOpenTabletPageState
                     for (final reason in snapshot.reasons)
                       VitFilterChip(
                         label: reason,
-                        onTap: () {},
-                        active: false,
+                        onTap: () => setState(() => _selectedReason = reason),
+                        active: reason == _selectedReason,
                         color: AppColors.primary,
                       ),
                   ],
@@ -301,11 +302,11 @@ class _P2PDisputeOpenTabletPageState
                   ),
                 ),
                 const SizedBox(height: TabletSpacingTokens.x2),
-                VitCtaButton(
+                const VitCtaButton(
                   fullWidth: false,
                   variant: VitCtaButtonVariant.secondary,
-                  onPressed: () {},
-                  child: const Text('Chọn tệp'),
+                  onPressed: null,
+                  child: Text('Chọn tệp'),
                 ),
               ],
             ),

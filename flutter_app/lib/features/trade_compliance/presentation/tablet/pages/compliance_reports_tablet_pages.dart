@@ -256,6 +256,97 @@ class RegulatoryReportsDashboardTabletPage extends ConsumerWidget {
                   ),
               ],
             ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _rptSection(
+              title: 'Khám phá',
+              rows: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x2,
+                  runSpacing: TabletSpacingTokens.x2,
+                  children: [
+                    for (final (label, path) in [
+                      (
+                        'Báo cáo giao dịch',
+                        AppRoutePaths.tradeCopyTransactionReporting,
+                      ),
+                      (
+                        'Trạng thái tích hợp ARM',
+                        AppRoutePaths.tradeCopyArmIntegrationStatus,
+                      ),
+                      (
+                        'Báo cáo thực thi tốt nhất',
+                        AppRoutePaths.tradeCopyBestExecutionReports,
+                      ),
+                      (
+                        'Phân tích nơi thực thi',
+                        AppRoutePaths.tradeCopyExecutionVenueAnalysis,
+                      ),
+                      (
+                        'Giám sát trượt giá',
+                        AppRoutePaths.tradeCopySlippageMonitoring,
+                      ),
+                      (
+                        'Phân loại khách hàng',
+                        AppRoutePaths.tradeCopyClientCategorization,
+                      ),
+                      (
+                        'Yêu cầu nâng hạng',
+                        AppRoutePaths.tradeCopyClientOptUpRequest,
+                      ),
+                      (
+                        'Định nghĩa thị trường mục tiêu',
+                        AppRoutePaths.tradeCopyTargetMarketDefinition,
+                      ),
+                      (
+                        'Bảo vệ tiền khách hàng',
+                        AppRoutePaths.tradeCopyClientMoneyProtection,
+                      ),
+                      (
+                        'Đối soát CASS',
+                        AppRoutePaths.tradeCopyCassReconciliation,
+                      ),
+                      (
+                        'Bồi thường nhà đầu tư',
+                        AppRoutePaths.tradeCopyInvestorCompensation,
+                      ),
+                      (
+                        'Chi phí trước giao dịch',
+                        AppRoutePaths.tradeCopyExAnteCosts,
+                      ),
+                      ('Máy tính RIY', AppRoutePaths.tradeCopyRiyCalculator),
+                      (
+                        'Chi phí sau giao dịch',
+                        AppRoutePaths.tradeCopyExPostCostsReport,
+                      ),
+                      (
+                        'Tiết lộ quy định',
+                        AppRoutePaths.tradeCopyRegulatoryDisclosures,
+                      ),
+                      (
+                        'Theo dõi khiếu nại',
+                        AppRoutePaths.tradeCopyComplaintTrackingBase,
+                      ),
+                      (
+                        'Gửi khiếu nại',
+                        AppRoutePaths.tradeCopyComplaintSubmission,
+                      ),
+                      (
+                        'Chuyển tiếp ombudsman',
+                        AppRoutePaths.tradeCopyOmbudsmanReferral,
+                      ),
+                      ('Truy vết kiểm toán', AppRoutePaths.tradeCopyAuditTrail),
+                      ('Trình tạo KID', AppRoutePaths.tradeCopyKidGenerator),
+                    ])
+                      VitFilterChip(
+                        label: label,
+                        active: false,
+                        color: AppColors.primary,
+                        onTap: () => context.go(path),
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),

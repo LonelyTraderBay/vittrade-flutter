@@ -254,6 +254,8 @@ class _P2PPaymentMethodAddTabletPageState
   final TextEditingController _bankAccountController = TextEditingController();
   final TextEditingController _ewalletAccountController =
       TextEditingController();
+  String? _selectedBank;
+  String? _selectedEwallet;
 
   @override
   void dispose() {
@@ -301,8 +303,8 @@ class _P2PPaymentMethodAddTabletPageState
                   for (final bank in snapshot.bankOptions)
                     VitFilterChip(
                       label: bank,
-                      onTap: () {},
-                      active: false,
+                      onTap: () => setState(() => _selectedBank = bank),
+                      active: bank == _selectedBank,
                       color: AppColors.primary,
                     ),
                 ],
@@ -318,8 +320,8 @@ class _P2PPaymentMethodAddTabletPageState
                   for (final ewallet in snapshot.ewalletOptions)
                     VitFilterChip(
                       label: ewallet,
-                      onTap: () {},
-                      active: false,
+                      onTap: () => setState(() => _selectedEwallet = ewallet),
+                      active: ewallet == _selectedEwallet,
                       color: AppColors.primary,
                     ),
                 ],

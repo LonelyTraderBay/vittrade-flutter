@@ -149,39 +149,65 @@ Widget _pdmBody(String text) {
   );
 }
 
-List<Widget> _pdmEventRows(List<PredictionEventDraft> events) {
+Widget _pdmQuickLinks(BuildContext context, List<(String, String)> links) {
+  return Wrap(
+    spacing: TabletSpacingTokens.x2,
+    runSpacing: TabletSpacingTokens.x2,
+    children: [
+      for (final (label, path) in links)
+        VitFilterChip(
+          label: label,
+          active: false,
+          color: AppColors.primary,
+          onTap: () => context.go(path),
+        ),
+    ],
+  );
+}
+
+List<Widget> _pdmEventRows(
+  BuildContext context,
+  List<PredictionEventDraft> events,
+) {
   return [
     for (final event in events.take(10))
       Padding(
         padding: TabletSpacingTokens.tableCellPaddingV,
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    event.title,
-                    style: AppTextStyles.caption.copyWith(
-                      fontWeight: AppTextStyles.bold,
-                      color: AppColors.text1,
-                    ),
+        child: Material(
+          color: AppColors.transparent,
+          child: InkWell(
+            onTap: () =>
+                context.go(AppRoutePaths.marketsPredictionEvent(event.id)),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        event.title,
+                        style: AppTextStyles.caption.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.text1,
+                        ),
+                      ),
+                      Text(
+                        '${event.category} · khối lượng 24h ${_pdmUsd(event.volume24h)}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text2,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${event.category} · khối lượng 24h ${_pdmUsd(event.volume24h)}',
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.text2,
-                      fontFeatures: AppTextStyles.tabularFigures,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                Text(
+                  '${event.outcomes.length} kết quả',
+                  style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+                ),
+              ],
             ),
-            Text(
-              '${event.outcomes.length} kết quả',
-              style: AppTextStyles.caption.copyWith(color: AppColors.text3),
-            ),
-          ],
+          ),
         ),
       ),
   ];
@@ -235,12 +261,48 @@ class PredictionsHomeTabletPage extends ConsumerWidget {
           children: [
             _pdmSection(
               title: 'Sự kiện nổi bật',
-              rows: _pdmEventRows(snapshot.events),
+              rows: _pdmEventRows(context, snapshot.events),
             ),
             const SizedBox(height: TabletSpacingTokens.x3),
             _pdmSection(
               title: 'Danh mục',
               rows: _pdmBullets(snapshot.categories),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _pdmSection(
+              title: 'Khám phá',
+              rows: [
+                _pdmQuickLinks(context, [
+                  ('Tìm kiếm', AppRoutePaths.marketsPredictionsSearch),
+                  ('Biến động mạnh', AppRoutePaths.marketsPredictionsBreaking),
+                  ('Danh mục', AppRoutePaths.marketsPredictionsPortfolio),
+                  ('Phần thưởng', AppRoutePaths.marketsPredictionsRewards),
+                  (
+                    'Bảng xếp hạng',
+                    AppRoutePaths.marketsPredictionsLeaderboard,
+                  ),
+                  ('Hoạt động', AppRoutePaths.marketsPredictionsActivity),
+                  ('Giải đấu', AppRoutePaths.marketsPredictionsTournaments),
+                  (
+                    'Lịch sự kiện',
+                    AppRoutePaths.marketsPredictionsEventCalendar,
+                  ),
+                  (
+                    'Máy tính rủi ro',
+                    AppRoutePaths.marketsPredictionsRiskCalculator,
+                  ),
+                  ('Market maker', AppRoutePaths.marketsPredictionsMarketMaker),
+                  (
+                    'Phân tích danh mục',
+                    AppRoutePaths.marketsPredictionsPortfolioAnalyzer,
+                  ),
+                  ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
+                  (
+                    'Tích hợp dữ liệu',
+                    AppRoutePaths.marketsPredictionsDataIntegration,
+                  ),
+                ]),
+              ],
             ),
           ],
         ),
@@ -299,7 +361,7 @@ class PredictionsSearchTabletPage extends ConsumerWidget {
           children: [
             _pdmSection(
               title: 'Kết quả',
-              rows: _pdmEventRows(snapshot.results),
+              rows: _pdmEventRows(context, snapshot.results),
             ),
             const SizedBox(height: TabletSpacingTokens.x3),
             _pdmSection(
@@ -347,7 +409,10 @@ class PredictionsBreakingTabletPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _pdmSection(title: 'Movers', rows: _pdmEventRows(snapshot.movers)),
+            _pdmSection(
+              title: 'Movers',
+              rows: _pdmEventRows(context, snapshot.movers),
+            ),
           ],
         ),
       ),
@@ -396,6 +461,19 @@ class PredictionEventDetailTabletPage extends ConsumerWidget {
             _pdmSection(title: 'Quy tắc', rows: _pdmBullets(snapshot.rules)),
             const SizedBox(height: TabletSpacingTokens.x3),
             _stkLikeHolders(snapshot.topHolders),
+            const SizedBox(height: TabletSpacingTokens.x3),
+            _pdmSection(
+              title: 'Liên quan',
+              rows: [
+                _pdmQuickLinks(context, [
+                  (
+                    'Biểu đồ nâng cao',
+                    AppRoutePaths.marketsPredictionsAdvancedChart(eventId),
+                  ),
+                  ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
+                ]),
+              ],
+            ),
           ],
         ),
       ),
@@ -495,6 +573,44 @@ class PredictionsPortfolioTabletPage extends ConsumerWidget {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: TabletSpacingTokens.x3),
+              _pdmSection(
+                title: 'Biên lai',
+                rows: [
+                  for (final receipt in value.receipts.take(6))
+                    Padding(
+                      padding: TabletSpacingTokens.tableCellPaddingV,
+                      child: Material(
+                        color: AppColors.transparent,
+                        child: InkWell(
+                          onTap: () => context.go(
+                            AppRoutePaths.marketsPredictionReceipt(receipt.id),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${receipt.outcome} · ${receipt.status}',
+                                  style: AppTextStyles.caption.copyWith(
+                                    color: AppColors.text1,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                _pdmUsd(receipt.total),
+                                style: AppTextStyles.caption.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
+                                  fontFeatures: AppTextStyles.tabularFigures,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                 ],

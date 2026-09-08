@@ -200,16 +200,25 @@ class PredictionTournamentsTabletPage extends ConsumerWidget {
             for (final tournament in snapshot.tournaments) ...[
               _pdmSection(
                 title: tournament.name,
-                rows: _pdmRows([
-                  ('Mô tả', tournament.description),
-                  ('Giá thưởng', '\$${tournament.prizePool}'),
-                  (
-                    'Tham gia',
-                    '${tournament.participants}/${tournament.maxParticipants}',
-                  ),
-                  ('Phí vào', '\$${tournament.entryFee}'),
-                  ('Trạng thái', tournament.status.name),
-                ]),
+                rows: [
+                  ..._pdmRows([
+                    ('Mô tả', tournament.description),
+                    ('Giá thưởng', '\$${tournament.prizePool}'),
+                    (
+                      'Tham gia',
+                      '${tournament.participants}/${tournament.maxParticipants}',
+                    ),
+                    ('Phí vào', '\$${tournament.entryFee}'),
+                    ('Trạng thái', tournament.status.name),
+                  ]),
+                  const SizedBox(height: TabletSpacingTokens.x2),
+                  _pdmQuickLinks(context, [
+                    (
+                      'Bảng xếp hạng giải',
+                      AppRoutePaths.marketsPredictionTournament(tournament.id),
+                    ),
+                  ]),
+                ],
               ),
               const SizedBox(height: TabletSpacingTokens.x3),
             ],
@@ -448,7 +457,7 @@ class PredictionOrderReceiptTabletPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (snapshot.receipt != null)
+            if (snapshot.receipt != null) ...[
               _pdmSection(
                 title: 'Chi tiết',
                 rows: _pdmRows([
@@ -461,6 +470,22 @@ class PredictionOrderReceiptTabletPage extends ConsumerWidget {
                   ('Thời điểm', snapshot.receipt!.createdAt),
                 ]),
               ),
+              const SizedBox(height: TabletSpacingTokens.x3),
+              _pdmSection(
+                title: 'Liên quan',
+                rows: [
+                  _pdmQuickLinks(context, [
+                    (
+                      'Xem sự kiện',
+                      AppRoutePaths.marketsPredictionEvent(
+                        snapshot.receipt!.eventId,
+                      ),
+                    ),
+                    ('Danh mục', AppRoutePaths.marketsPredictionsPortfolio),
+                  ]),
+                ],
+              ),
+            ],
           ],
         ),
       ),

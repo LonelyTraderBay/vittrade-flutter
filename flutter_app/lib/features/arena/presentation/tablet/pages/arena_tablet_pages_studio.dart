@@ -261,10 +261,32 @@ class ArenaLeaderboardTabletPage extends ConsumerWidget {
                 for (final entry in snapshot.podium)
                   Padding(
                     padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      entry.name,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: entry.creatorId == null
+                            ? null
+                            : () => context.go(
+                                AppRoutePaths.arenaCreator(entry.creatorId!),
+                              ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                entry.name,
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              entry.value,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

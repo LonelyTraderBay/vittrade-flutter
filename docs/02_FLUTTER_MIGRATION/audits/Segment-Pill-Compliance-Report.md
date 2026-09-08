@@ -6,11 +6,11 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 394 |
-| Files with shared widgets | 349 |
+| Audit rows | 404 |
+| Files with shared widgets | 359 |
 | Compliance pass | 254 |
 | Compliance warn | 0 |
-| Compliance review | 140 |
+| Compliance review | 150 |
 | Interactive local classes | 0 |
 | P0 local classes | 0 |
 
@@ -23,24 +23,24 @@
 | VitSegmentedChoice | 95 |
 | VitSegmentedTabBar | 40 |
 | VitPresetChipRow | 34 |
-| VitFilterChip | 110 |
+| VitFilterChip | 122 |
 
 ## Module heat map
 
 | Module | Audit rows |
 | --- | ---: |
 | admin | 1 |
-| arena | 13 |
+| arena | 14 |
 | auth | 2 |
-| cross_module | 5 |
-| dca | 12 |
+| cross_module | 7 |
+| dca | 13 |
 | dev | 4 |
 | discovery | 2 |
-| earn_savings | 26 |
-| earn_staking | 25 |
+| earn_savings | 27 |
+| earn_staking | 26 |
 | enterprise_states | 2 |
 | home | 2 |
-| launchpad | 24 |
+| launchpad | 25 |
 | markets | 51 |
 | news | 2 |
 | notifications | 1 |
@@ -50,14 +50,14 @@
 | p2p_marketplace | 19 |
 | p2p_orders | 9 |
 | p2p_security | 8 |
-| predictions | 22 |
+| predictions | 23 |
 | profile | 10 |
 | referral | 2 |
 | rewards | 2 |
 | support | 2 |
 | trade | 35 |
-| trade_bots | 10 |
-| trade_compliance | 20 |
+| trade_bots | 11 |
+| trade_compliance | 21 |
 | trade_copy | 20 |
 | trade_terminal | 7 |
 | wallet | 30 |

@@ -263,7 +263,7 @@ List<Widget> _rowsCopy(List<(String, String)> pairs) {
 }
 
 /// SC-071: Đánh giá trước khi sao chép.
-class PreCopyAssessmentTabletPage extends ConsumerWidget {
+class PreCopyAssessmentTabletPage extends ConsumerStatefulWidget {
   const PreCopyAssessmentTabletPage({super.key, required this.providerId});
 
   static const contentKey = Key('sc071_tablet_content');
@@ -271,8 +271,19 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
   final String providerId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(tradePreCopyAssessmentProvider(providerId));
+  ConsumerState<PreCopyAssessmentTabletPage> createState() =>
+      _PreCopyAssessmentTabletPageState();
+}
+
+class _PreCopyAssessmentTabletPageState
+    extends ConsumerState<PreCopyAssessmentTabletPage> {
+  final Map<int, String> _answers = {};
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshotAsync = ref.watch(
+      tradePreCopyAssessmentProvider(widget.providerId),
+    );
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
@@ -281,12 +292,13 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
         semanticIdentifier: 'SC-071',
         semanticLabel: 'Đánh giá trước sao chép',
         title: 'Đánh giá trước khi sao chép',
-        subtitle: providerId,
-        providerId: providerId,
+        subtitle: widget.providerId,
+        providerId: widget.providerId,
         contentKey: PreCopyAssessmentTabletPage.contentKey,
         child: _flowError(
           'Không tải được đánh giá',
-          () => ref.invalidate(tradePreCopyAssessmentProvider(providerId)),
+          () =>
+              ref.invalidate(tradePreCopyAssessmentProvider(widget.providerId)),
         ),
       ),
       data: (snapshot) => _flowFrame(
@@ -295,12 +307,16 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
         semanticLabel: 'Đánh giá trước sao chép',
         title: 'Đánh giá trước khi sao chép',
         subtitle: '${snapshot.questions.length} câu hỏi',
-        providerId: providerId,
+        providerId: widget.providerId,
         contentKey: PreCopyAssessmentTabletPage.contentKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            for (final question in snapshot.questions)
+            for (
+              var questionIndex = 0;
+              questionIndex < snapshot.questions.length;
+              questionIndex++
+            )
               Padding(
                 padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x3),
                 child: VitCard(
@@ -310,7 +326,7 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        question.question,
+                        snapshot.questions[questionIndex].question,
                         style: AppTextStyles.caption.copyWith(
                           fontWeight: AppTextStyles.bold,
                           color: AppColors.text1,
@@ -318,7 +334,7 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
-                        question.description,
+                        snapshot.questions[questionIndex].description,
                         style: AppTextStyles.micro.copyWith(
                           color: AppColors.text3,
                           height: 1.3,
@@ -329,11 +345,14 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
                         spacing: TabletSpacingTokens.x3,
                         runSpacing: TabletSpacingTokens.x2,
                         children: [
-                          for (final option in question.options)
+                          for (final option
+                              in snapshot.questions[questionIndex].options)
                             VitFilterChip(
                               label: option.label,
-                              onTap: () {},
-                              active: false,
+                              onTap: () => setState(
+                                () => _answers[questionIndex] = option.label,
+                              ),
+                              active: _answers[questionIndex] == option.label,
                               color: AppColors.primary,
                             ),
                         ],
@@ -345,7 +364,7 @@ class PreCopyAssessmentTabletPage extends ConsumerWidget {
             const SizedBox(height: TabletSpacingTokens.x1),
             VitCtaButton(
               onPressed: () => context.go(
-                AppRoutePaths.tradeCopyProviderConfiguration(providerId),
+                AppRoutePaths.tradeCopyProviderConfiguration(widget.providerId),
               ),
               child: const Text('Tiếp tục cấu hình'),
             ),

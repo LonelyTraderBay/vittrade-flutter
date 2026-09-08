@@ -117,7 +117,7 @@ class CopyDisputeResolutionTabletPage extends ConsumerWidget {
 }
 
 /// SC-077: Nhật ký kiểm toán bản sao.
-class CopyAuditLogTabletPage extends ConsumerWidget {
+class CopyAuditLogTabletPage extends ConsumerStatefulWidget {
   const CopyAuditLogTabletPage({super.key, required this.copyId});
 
   static const contentKey = Key('sc077_tablet_content');
@@ -125,8 +125,17 @@ class CopyAuditLogTabletPage extends ConsumerWidget {
   final String copyId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(tradeCopyAuditLogProvider(copyId));
+  ConsumerState<CopyAuditLogTabletPage> createState() =>
+      _CopyAuditLogTabletPageState();
+}
+
+class _CopyAuditLogTabletPageState
+    extends ConsumerState<CopyAuditLogTabletPage> {
+  String? _selectedFormat;
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshotAsync = ref.watch(tradeCopyAuditLogProvider(widget.copyId));
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
@@ -135,11 +144,11 @@ class CopyAuditLogTabletPage extends ConsumerWidget {
         semanticIdentifier: 'SC-077',
         semanticLabel: 'Nhật ký kiểm toán P2P',
         title: 'Nhật ký kiểm toán',
-        subtitle: copyId,
+        subtitle: widget.copyId,
         contentKey: CopyAuditLogTabletPage.contentKey,
         child: _extError(
           'Không tải được nhật ký',
-          () => ref.invalidate(tradeCopyAuditLogProvider(copyId)),
+          () => ref.invalidate(tradeCopyAuditLogProvider(widget.copyId)),
         ),
       ),
       data: (snapshot) => _extFrame(
@@ -189,8 +198,9 @@ class CopyAuditLogTabletPage extends ConsumerWidget {
                     for (final format in snapshot.exportFormats)
                       VitFilterChip(
                         label: format.label,
-                        onTap: () {},
-                        active: false,
+                        onTap: () =>
+                            setState(() => _selectedFormat = format.label),
+                        active: format.label == _selectedFormat,
                         color: AppColors.primary,
                       ),
                   ],
