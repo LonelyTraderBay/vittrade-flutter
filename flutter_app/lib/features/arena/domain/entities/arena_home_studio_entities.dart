@@ -186,3 +186,16 @@ final class ArenaTrustSignalDraft {
   final String label;
   final String value;
 }
+
+/// Nhãn tiếng Việt user-facing cho trạng thái phòng đấu (pattern viLabel,
+/// B2 composition 2026-09-09) — tablet home SC-184 dùng thay `.name`.
+extension ArenaChallengeStateViLabel on ArenaChallengeState {
+  String get viLabel => switch (this) {
+    ArenaChallengeState.open => 'Đang mở',
+    ArenaChallengeState.full => 'Đã đầy',
+    ArenaChallengeState.live => 'Đang chạy',
+    ArenaChallengeState.pendingResult => 'Chờ kết quả',
+    ArenaChallengeState.resolved => 'Đã phân định',
+    ArenaChallengeState.canceled => 'Đã huỷ',
+  };
+}

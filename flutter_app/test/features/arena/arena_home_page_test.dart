@@ -72,7 +72,7 @@ void main() {
     expect(find.text('Mẫu thách đấu'), findsOneWidget);
     expect(find.text('Prediction'), findsWidgets);
     expect(find.text('Mode nổi bật'), findsOneWidget);
-    expect(find.text('BTC Weekly Predict'), findsOneWidget);
+    expect(find.text('Dự đoán BTC hàng tuần'), findsOneWidget);
     expect(find.text('Phòng đang mở'), findsOneWidget);
     expect(find.text('BTC \$70K? — Tuần 9'), findsOneWidget);
   });
@@ -130,7 +130,7 @@ void main() {
     expect(find.text('2 kết quả cho "BTC"'), findsOneWidget);
     expect(find.text('Modes (1)'), findsOneWidget);
     expect(find.text('Phòng (1)'), findsOneWidget);
-    expect(find.text('BTC Weekly Predict'), findsOneWidget);
+    expect(find.text('Dự đoán BTC hàng tuần'), findsOneWidget);
     expect(find.text('BTC \$70K? — Tuần 9'), findsOneWidget);
   });
 
