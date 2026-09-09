@@ -143,7 +143,9 @@ VitTrade is an enterprise crypto trading app with a **dark baseline** UI. The vi
 identity is dense but readable: deep ink backgrounds, warm amber primary actions,
 semantic green/red for buy/sell, and layered surfaces for cards and terminals.
 
-- **Baseline:** dark theme only for new work.
+- **Baseline:** dark theme only for new work — chốt chính sách dark-only tại
+  [ADR-014](docs/05_ARCHITECTURE/decisions/ADR-014-dark-only-theme.md): không
+  `ThemeMode`, không nhánh `ThemeData.light`, không đọc brightness để nhánh màu.
 - **Layout:** phone-first from **360px** width upward; tablet-adaptive shell
   (nav rail) from **600px** (`AppBreakpoints.tablet`) — see AGENTS.md UI Rules.
 - **Architecture:** reuse shared `Vit*` widgets before local scaffolds.

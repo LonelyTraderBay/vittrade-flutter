@@ -41,4 +41,6 @@ Không viết ADR cho: tinh chỉnh UI một trang, đổi copy, sửa lỗi c�
 | [ADR-009](ADR-009-chien-luoc-realtime.md) | Realtime: Stream 3 surface lõi, mock-phát-trước, WS-sau | Đã chốt |
 | [ADR-010](ADR-010-dto-provisional.md) | Serialization: DTO tách entity, pilot auth, provisional chờ contract ký | Đã chốt |
 | [ADR-011](ADR-011-earn-family-split.md) | Tách module Earn thành earn_core + earn_staking + earn_savings (parity ADR-002) | Đã chốt |
+| [ADR-012](ADR-012-p2p-family-split.md) | Tách module P2P thành 7 feature sibling theo họ p2p_* | Đã chốt |
 | [ADR-013](ADR-013-surface-ui-architecture.md) | Tách UI/router theo surface Phone, Tablet, Web; giữ chung domain/data/contract | Đã chốt — migration P0–P9 |
+| [ADR-014](ADR-014-dark-only-theme.md) | Chính sách theme dark-only: không dựng nhánh light | Đã chốt |
