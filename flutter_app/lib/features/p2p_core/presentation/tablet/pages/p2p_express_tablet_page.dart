@@ -110,6 +110,7 @@ class _P2PExpressTabletPageState extends ConsumerState<P2PExpressTabletPage> {
                     ? 0.0
                     : _fiatAmount / bestAd.price;
                 return VitTwoColumnTabletDashboard(
+                  key: P2PExpressTabletPage.contentKey,
                   primaryChildren: [
                     VitSegmentedTabBar(
                       tabs: const [

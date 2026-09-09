@@ -45,8 +45,8 @@ void main() {
       expect(snapshot.averageRoi.toStringAsFixed(1), '10.4');
       expect(snapshot.totalTrades, 372);
       expect(snapshot.totalVolume, 281690);
-      expect(snapshot.bestRoiModule.name, 'Prediction Markets');
-      expect(snapshot.mostActiveModule.name, 'Spot Trading');
+      expect(snapshot.bestRoiModule.name, 'Thị trường dự đoán');
+      expect(snapshot.mostActiveModule.name, 'Giao dịch Spot');
       expect(snapshot.contractNotes, contains('Open Arena is points-only'));
       expect(
         snapshot.supportedStates,
@@ -110,7 +110,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 220));
     expect(find.text('Multi-Metric Comparison'), findsOneWidget);
     expect(find.text('Chi tiet chi so'), findsOneWidget);
-    expect(find.text('Spot Trading'), findsOneWidget);
+    expect(find.text('Giao dịch Spot'), findsOneWidget);
 
     await tester.tap(
       find.byKey(
