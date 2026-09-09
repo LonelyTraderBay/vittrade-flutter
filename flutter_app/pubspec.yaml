@@ -31,6 +31,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Nhóm A (2026-09-10): smoke tier vận hành — integration_test/smoke_tablet_test.dart
+  integration_test:
+    sdk: flutter
+
   flutter_lints: ^6.0.0
   # GĐ4-F8: codegen DTO — CI job static kiểm git-diff sạch sau build_runner
   build_runner: ^2.4.15

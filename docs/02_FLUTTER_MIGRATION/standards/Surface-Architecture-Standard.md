@@ -91,6 +91,21 @@ features/markets/routes/web_markets_routes.dart
 - Golden/visual test theo surface khi UI thay đổi.
 - Financial preview/confirm/risk test cho flow nhạy cảm.
 
+## Web surface quy ước (Đợt 3 chuẩn bị — chốt 2026-09-10)
+
+- **Web = tier Tablet**: composition và token của web đọc từ cùng hệ
+  tablet (`AppSurfaceSpacing`/`TabletSpacingTokens`/
+  `TabletDashboardWidths`) qua `AppSurfaceResolver` — **KHÔNG fork token
+  web riêng**. `VitWebUtilityPage` dùng
+  `TabletDashboardWidths.readingContentMaxWidth`; trang web mới đổ vào
+  `VitTabletSectionFrame`/`VitTwoColumnTabletDashboard` thay vì tự lắp
+  `Center + ConstrainedBox(maxWidth: …)`.
+- Audit hiện trạng (2026-09-10): `auth_web_page.dart` cap form 720
+  (hẹp hợp lý cho form đăng nhập — token hóa khi có quyết định
+  web-form-width), `home_web_page.dart` cap 1240 tự chế — việc kế tiếp:
+  chuyển home web sang `VitTwoColumnTabletDashboard` khi nâng cấp.
+- Breakpoint 2 cột dùng chung `twoColumnMinWidth` 900.
+
 ## Migration rule
 
 - Mỗi batch gọn trong một feature/bounded context (kích thước theo scope).
