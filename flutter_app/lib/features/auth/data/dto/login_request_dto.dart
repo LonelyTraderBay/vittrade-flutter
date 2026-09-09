@@ -9,10 +9,10 @@ part 'login_request_dto.g.dart';
 /// Mirrors the parameters already accepted by `AuthController.login` /
 /// `AuthRepository.login` (`identifier`, `password`, `demo`) — the only
 /// shape confidently inferable from existing, tested code ahead of a signed
-/// contract. Not yet wired to a network transport (no remote `AuthRepository`
-/// exists yet — see `FailClosedAuthRepository`); this DTO exists to pin the
-/// request shape so only `data/dto/` needs to change once the contract is
-/// signed.
+/// contract. Wired to the network transport by `RemoteAuthRepository` (remote
+/// pilot — chưa nối vào provider P0 chờ backend, xem
+/// `docs/05_ARCHITECTURE/remote-repository-playbook.md`); when the contract
+/// is signed only `data/dto/` + the remote repository should need to change.
 ///
 /// `checked: true` makes generated `fromJson` throw a controlled
 /// [CheckedFromJsonException] (rather than a raw cast failure) when a field
