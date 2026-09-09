@@ -29,8 +29,8 @@ final class TradeRiskManagementViewState {
 final class TradeRiskManagementController {
   const TradeRiskManagementController({
     required this.state,
-    required SpotTradeRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeRiskManagementViewState state;
   final SpotTradeRepository _repository;

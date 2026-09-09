@@ -26,8 +26,8 @@ final class TradeCopyConfirmationViewState {
 final class TradeCopyConfirmationController {
   const TradeCopyConfirmationController({
     required this.state,
-    required TradeCopyTradingRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeCopyConfirmationViewState state;
   final TradeCopyTradingRepository _repository;
@@ -79,8 +79,8 @@ final class TradeActiveCopiesViewState {
 final class TradeActiveCopiesController {
   const TradeActiveCopiesController({
     required this.state,
-    required TradeCopyTradingRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeActiveCopiesViewState state;
   final TradeCopyTradingRepository _repository;
@@ -132,8 +132,8 @@ final class TradeCopySettingsViewState {
 final class TradeCopySettingsController {
   const TradeCopySettingsController({
     required this.state,
-    required TradeCopyTradingRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeCopySettingsViewState state;
   final TradeCopyTradingRepository _repository;
@@ -221,8 +221,8 @@ final class TradeProviderApplicationViewState {
 final class TradeProviderApplicationController {
   const TradeProviderApplicationController({
     required this.state,
-    required TradeCopyTradingRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeProviderApplicationViewState state;
   final TradeCopyTradingRepository _repository;

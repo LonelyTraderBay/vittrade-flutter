@@ -12,8 +12,7 @@ String authOperationErrorMessage(Object error) {
 }
 
 final class AuthController {
-  const AuthController({required AuthRepository repository})
-    : _repository = repository;
+  const AuthController({required this._repository});
 
   final AuthRepository _repository;
 

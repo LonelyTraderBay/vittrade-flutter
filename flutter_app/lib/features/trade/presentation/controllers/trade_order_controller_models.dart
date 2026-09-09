@@ -56,8 +56,8 @@ final class TradeOrdersHistoryViewState {
 final class TradeOrdersHistoryController {
   const TradeOrdersHistoryController({
     required this.state,
-    required TradeRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeOrdersHistoryViewState state;
   final TradeRepository _repository;

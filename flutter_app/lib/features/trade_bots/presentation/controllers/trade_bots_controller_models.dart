@@ -27,8 +27,8 @@ final class TradeBotEmergencyStopViewState {
 final class TradeBotEmergencyStopController {
   const TradeBotEmergencyStopController({
     required this.state,
-    required TradingBotsRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeBotEmergencyStopViewState state;
   final TradingBotsRepository _repository;
@@ -76,8 +76,8 @@ final class TradeBotSecuritySettingsViewState {
 final class TradeBotSecuritySettingsController {
   const TradeBotSecuritySettingsController({
     required this.state,
-    required TradingBotsRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeBotSecuritySettingsViewState state;
   final TradingBotsRepository _repository;

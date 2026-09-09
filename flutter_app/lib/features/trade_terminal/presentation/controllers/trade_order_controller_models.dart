@@ -23,8 +23,8 @@ final class TradeAdvancedToolsViewState {
 final class TradeAdvancedToolsController {
   const TradeAdvancedToolsController({
     required this.state,
-    required SpotTradeRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   final TradeAdvancedToolsViewState state;
   final SpotTradeRepository _repository;
