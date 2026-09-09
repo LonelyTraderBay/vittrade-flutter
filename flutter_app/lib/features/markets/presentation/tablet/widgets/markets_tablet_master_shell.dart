@@ -59,7 +59,7 @@ class MarketsTabletMasterShell extends ConsumerWidget {
       child: Column(
         children: [
           MarketListHeader(
-            onNavigate: (path) => context.go(path),
+            onNavigate: (path) => context.push(path),
             lastUpdatedLabel: lastUpdatedLabel,
           ),
           Expanded(

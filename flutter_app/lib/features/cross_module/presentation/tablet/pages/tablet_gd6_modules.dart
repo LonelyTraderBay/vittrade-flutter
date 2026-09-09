@@ -12,49 +12,49 @@ class EnterpriseStatesTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _g6Frame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-320',
         semanticLabel: 'Trạng thái doanh nghiệp',
         title: 'Trạng thái doanh nghiệp',
         subtitle: 'Cổng vận hành',
         contentKey: EnterpriseStatesTabletPage.contentKey,
-        child: _g6Body('Không tải được trạng thái doanh nghiệp.'),
+        children: [_g6Body('Không tải được trạng thái doanh nghiệp.')],
       ),
-      data: (snapshot) => _g6Frame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-320',
         semanticLabel: 'Trạng thái doanh nghiệp',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: EnterpriseStatesTabletPage.contentKey,
-        child: _g6Section(
-          title: 'Các cổng trạng thái',
-          rows: [
-            for (final tab in snapshot.tabs)
-              Padding(
-                padding: TabletSpacingTokens.tableCellPaddingV,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        tab.label,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text1,
+        children: [
+          _g6Section(
+            title: 'Các cổng trạng thái',
+            rows: [
+              for (final tab in snapshot.tabs)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          tab.label,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      tab.section.name,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text3,
+                      Text(
+                        tab.section.viLabel,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text3,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -68,26 +68,22 @@ class UnifiedPortfolioTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-321',
       semanticLabel: 'Danh mục hợp nhất',
       title: 'Danh mục hợp nhất',
       subtitle: 'Spot · Kiếm · Dự đoán',
       contentKey: UnifiedPortfolioTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Phạm vi hợp nhất',
-            rows: _g6Bullets([
-              'Số dư giao dịch spot theo tài sản',
-              'Vị thế kiếm (staking, tiết kiệm) đang chạy',
-              'Vị thế thị trường dự đoán và phần thưởng',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Phạm vi hợp nhất',
+          rows: _g6Bullets([
+            'Số dư giao dịch spot theo tài sản',
+            'Vị thế kiếm (staking, tiết kiệm) đang chạy',
+            'Vị thế thị trường dự đoán và phần thưởng',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -104,49 +100,49 @@ class CrossModuleAnalyticsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _g6Frame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-322',
         semanticLabel: 'Phân tích liên mô-đun',
         title: 'Phân tích liên mô-đun',
         subtitle: 'ROI · Tỷ lệ thắng',
         contentKey: CrossModuleAnalyticsTabletPage.contentKey,
-        child: _g6Body('Không tải được phân tích liên mô-đun.'),
+        children: [_g6Body('Không tải được phân tích liên mô-đun.')],
       ),
-      data: (snapshot) => _g6Frame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-322',
         semanticLabel: 'Phân tích liên mô-đun',
         title: snapshot.title,
         subtitle: 'ROI ${snapshot.averageRoi.toStringAsFixed(1)}%',
         contentKey: CrossModuleAnalyticsTabletPage.contentKey,
-        child: _g6Section(
-          title: 'Chỉ số theo mô-đun',
-          rows: [
-            for (final module in snapshot.modules)
-              Padding(
-                padding: TabletSpacingTokens.tableCellPaddingV,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        module.name,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text1,
+        children: [
+          _g6Section(
+            title: 'Chỉ số theo mô-đun',
+            rows: [
+              for (final module in snapshot.modules)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          module.name,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      'ROI ${module.roi.toStringAsFixed(1)}% · thắng ${module.winRate.toStringAsFixed(1)}% · ${module.totalTrades} lệnh',
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text3,
+                      Text(
+                        'ROI ${module.roi.toStringAsFixed(1)}% · thắng ${module.winRate.toStringAsFixed(1)}% · ${module.totalTrades} lệnh',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text3,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -160,26 +156,22 @@ class SmartAlertCenterTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-323',
       semanticLabel: 'Cảnh báo thông minh',
       title: 'Cảnh báo thông minh',
       subtitle: 'Kích hoạt · Điều kiện',
       contentKey: SmartAlertCenterTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Loại cảnh báo',
-            rows: _g6Bullets([
-              'Giá vượt ngưỡng theo tài sản theo dõi',
-              'Biến động tỷ lệ phần trăm bất thường trong ngày',
-              'Sự kiện lịch quan trọng sắp diễn ra',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Loại cảnh báo',
+          rows: _g6Bullets([
+            'Giá vượt ngưỡng theo tài sản theo dõi',
+            'Biến động tỷ lệ phần trăm bất thường trong ngày',
+            'Sự kiện lịch quan trọng sắp diễn ra',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -192,26 +184,22 @@ class TaxReportCenterTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-324',
       semanticLabel: 'Trung tâm báo cáo thuế',
       title: 'Báo cáo thuế',
       subtitle: 'Tổng hợp · Xuất',
       contentKey: TaxReportCenterTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Nội dung báo cáo',
-            rows: _g6Bullets([
-              'Thu nhập staking và tiết kiệm theo năm',
-              'Lãi vốn từ giao dịch spot',
-              'Xuất theo định dạng phục vụ kê khai',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Nội dung báo cáo',
+          rows: _g6Bullets([
+            'Thu nhập staking và tiết kiệm theo năm',
+            'Lãi vốn từ giao dịch spot',
+            'Xuất theo định dạng phục vụ kê khai',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -228,54 +216,54 @@ class NotificationsHubTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _g6Frame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-325',
         semanticLabel: 'Thông báo hợp nhất',
         title: 'Thông báo',
         subtitle: 'Toàn nền tảng',
         contentKey: NotificationsHubTabletPage.contentKey,
-        child: _g6Body('Không tải được thông báo.'),
+        children: [_g6Body('Không tải được thông báo.')],
       ),
-      data: (snapshot) => _g6Frame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-325',
         semanticLabel: 'Thông báo hợp nhất',
         title: snapshot.title,
         subtitle: '${snapshot.notifications.length} thông báo',
         contentKey: NotificationsHubTabletPage.contentKey,
-        child: _g6Section(
-          title: 'Thông báo',
-          rows: [
-            for (final notification in snapshot.notifications.take(10))
-              Padding(
-                padding: TabletSpacingTokens.tableCellPaddingV,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        '${notification.title} · ${notification.time}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: notification.isRead
-                              ? AppColors.text2
-                              : AppColors.text1,
-                          fontWeight: notification.isRead
-                              ? AppTextStyles.normal
-                              : AppTextStyles.bold,
+        children: [
+          _g6Section(
+            title: 'Thông báo',
+            rows: [
+              for (final notification in snapshot.notifications.take(10))
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${notification.title} · ${notification.time}',
+                          style: AppTextStyles.caption.copyWith(
+                            color: notification.isRead
+                                ? AppColors.text2
+                                : AppColors.text1,
+                            fontWeight: notification.isRead
+                                ? AppTextStyles.normal
+                                : AppTextStyles.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      notification.type.name,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text3,
+                      Text(
+                        notification.type.viLabel,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text3,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -289,26 +277,22 @@ class UnifiedSearchTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-326',
       semanticLabel: 'Tìm kiếm hợp nhất',
       title: 'Tìm kiếm',
       subtitle: 'Cặp · Token · Chủ đề',
       contentKey: UnifiedSearchTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Phạm vi tìm kiếm',
-            rows: _g6Bullets([
-              'Cặp giao dịch và token theo mã/tên',
-              'Chủ đề thị trường và sự kiện',
-              'Trang tính năng trong ứng dụng',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Phạm vi tìm kiếm',
+          rows: _g6Bullets([
+            'Cặp giao dịch và token theo mã/tên',
+            'Chủ đề thị trường và sự kiện',
+            'Trang tính năng trong ứng dụng',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -321,26 +305,22 @@ class TopicHubTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-327',
       semanticLabel: 'Hub chủ đề',
       title: 'Chủ đề',
       subtitle: 'Khám phá theo mối quan tâm',
       contentKey: TopicHubTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Chủ đề nổi bật',
-            rows: _g6Bullets([
-              'Tiền điện tử — tin tức và phân tích theo tài sản',
-              'Khối lượng và xu hướng thị trường',
-              'Giáo dục giao dịch cho người mới',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Chủ đề nổi bật',
+          rows: _g6Bullets([
+            'Tiền điện tử — tin tức và phân tích theo tài sản',
+            'Khối lượng và xu hướng thị trường',
+            'Giáo dục giao dịch cho người mới',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -353,26 +333,22 @@ class TopicCryptoTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _g6Frame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-328',
       semanticLabel: 'Chủ đề tiền điện tử',
       title: 'Chủ đề: Tiền điện tử',
       subtitle: 'Bài viết · Tài sản liên quan',
       contentKey: TopicCryptoTabletPage.contentKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _g6Section(
-            title: 'Nội dung',
-            rows: _g6Bullets([
-              'Tin nhanh theo tài sản và chuỗi',
-              'Phân tích kỹ thuật tổng hợp từ mô-đun markets',
-              'Liên kết nhanh tới chi tiết token',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _g6Section(
+          title: 'Nội dung',
+          rows: _g6Bullets([
+            'Tin nhanh theo tài sản và chuỗi',
+            'Phân tích kỹ thuật tổng hợp từ mô-đun markets',
+            'Liên kết nhanh tới chi tiết token',
+          ]),
+        ),
+      ],
     );
   }
 }

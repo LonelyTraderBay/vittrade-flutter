@@ -154,7 +154,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
         semanticIdentifier: 'SC-057',
         title: 'Futures ${widget.pairId.toUpperCase()}',
         subtitle: 'Hợp đồng tương lai',
-        onBack: () => context.go(AppRoutePaths.tradePair(widget.pairId)),
+        onBack: () => context.push(AppRoutePaths.tradePair(widget.pairId)),
         primary: const VitSkeletonList(rows: 5),
         secondary: const VitSkeletonList(rows: 4),
       ),
@@ -163,7 +163,7 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
         semanticIdentifier: 'SC-057',
         title: 'Futures ${widget.pairId.toUpperCase()}',
         subtitle: 'Hợp đồng tương lai',
-        onBack: () => context.go(AppRoutePaths.tradePair(widget.pairId)),
+        onBack: () => context.push(AppRoutePaths.tradePair(widget.pairId)),
         primary: VitErrorState(
           title: 'Không tải được màn hình futures',
           message: 'Vui lòng kiểm tra kết nối và thử lại.',

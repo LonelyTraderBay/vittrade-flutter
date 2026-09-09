@@ -12,41 +12,39 @@ class StakingTermsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-262',
         semanticLabel: 'Điều khoản staking',
         title: snapshotAsync.value?.documentTitle ?? 'Điều khoản staking',
         subtitle: 'Phiên bản ${snapshotAsync.value?.version ?? '-'}',
         contentKey: StakingTermsTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được điều khoản',
-          () => ref.invalidate(stakingTermsSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được điều khoản',
+            () => ref.invalidate(stakingTermsSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-262',
         semanticLabel: 'Điều khoản staking',
         title: snapshot.documentTitle,
         subtitle: 'Phiên bản ${snapshot.version} · ${snapshot.lastUpdated}',
         contentKey: StakingTermsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final section in snapshot.sections) ...[
-              _stkSection(
-                title: section.title,
-                rows: _stkBullets(section.content),
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-            ],
+        children: [
+          for (final section in snapshot.sections) ...[
             _stkSection(
-              title: 'Xác nhận',
-              rows: [_stkBody(snapshot.acceptanceText)],
+              title: section.title,
+              rows: _stkBullets(section.content),
             ),
+            const SizedBox(height: TabletSpacingTokens.x3),
           ],
-        ),
+
+          _stkSection(
+            title: 'Xác nhận',
+            rows: [_stkBody(snapshot.acceptanceText)],
+          ),
+        ],
       ),
     );
   }
@@ -64,45 +62,42 @@ class StakingRiskDisclosureTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-263',
         semanticLabel: 'Công bố rủi ro staking',
         title: snapshotAsync.value?.warningTitle ?? 'Công bố rủi ro',
         subtitle: 'Rủi ro · Chi tiết',
         contentKey: StakingRiskDisclosureTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được công bố rủi ro',
-          () => ref.invalidate(stakingRiskDisclosureSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được công bố rủi ro',
+            () => ref.invalidate(stakingRiskDisclosureSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-263',
         semanticLabel: 'Công bố rủi ro staking',
         title: snapshot.warningTitle,
         subtitle: snapshot.warningBody,
         contentKey: StakingRiskDisclosureTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        children: [
+          _stkSection(
+            title: snapshot.summaryTitle,
+            rows: [_stkBody(snapshot.summaryBody)],
+          ),
+
+          for (final category in snapshot.categories) ...[
             _stkSection(
-              title: snapshot.summaryTitle,
-              rows: [_stkBody(snapshot.summaryBody)],
+              title: category.title,
+              rows: [
+                _stkBody(category.description),
+                ..._stkBullets(category.details),
+              ],
             ),
             const SizedBox(height: TabletSpacingTokens.x3),
-            for (final category in snapshot.categories) ...[
-              _stkSection(
-                title: category.title,
-                rows: [
-                  _stkBody(category.description),
-                  ..._stkBullets(category.details),
-                ],
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-            ],
           ],
-        ),
+        ],
       ),
     );
   }
@@ -120,42 +115,39 @@ class StakingTaxGuideTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-264',
         semanticLabel: 'Thuế staking',
         title: 'Cẩm nang thuế',
         subtitle: 'Sự kiện chịu thuế',
         contentKey: StakingTaxGuideTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được cẩm nang thuế',
-          () => ref.invalidate(stakingTaxGuideSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được cẩm nang thuế',
+            () => ref.invalidate(stakingTaxGuideSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-264',
         semanticLabel: 'Thuế staking',
         title: snapshot.disclaimerTitle,
         subtitle: snapshot.disclaimerBody,
         contentKey: StakingTaxGuideTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stkSection(
-              title: snapshot.overviewTitle,
-              rows: [_stkBody(snapshot.overviewBody)],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Sự kiện chịu thuế',
-              rows: _stkTitleBody([
-                for (final event in snapshot.incomeEvents)
-                  (event.title, event.description),
-              ]),
-            ),
-          ],
-        ),
+        children: [
+          _stkSection(
+            title: snapshot.overviewTitle,
+            rows: [_stkBody(snapshot.overviewBody)],
+          ),
+
+          _stkSection(
+            title: 'Sự kiện chịu thuế',
+            rows: _stkTitleBody([
+              for (final event in snapshot.incomeEvents)
+                (event.title, event.description),
+            ]),
+          ),
+        ],
       ),
     );
   }
@@ -173,46 +165,44 @@ class StakingRiskAssessmentTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-265',
         semanticLabel: 'Đánh giá rủi ro staking',
         title: 'Đánh giá rủi ro',
         subtitle: 'Câu hỏi · Hồ sơ',
         contentKey: StakingRiskAssessmentTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được đánh giá rủi ro',
-          () => ref.invalidate(stakingRiskAssessmentSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được đánh giá rủi ro',
+            () => ref.invalidate(stakingRiskAssessmentSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-265',
         semanticLabel: 'Đánh giá rủi ro staking',
         title: snapshot.title,
         subtitle: snapshot.resultTitle,
         contentKey: StakingRiskAssessmentTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final question in snapshot.questions) ...[
-              _stkSection(
-                title: question.question,
-                rows: _stkBullets([
-                  for (final option in question.options) option.label,
-                ]),
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-            ],
+        children: [
+          for (final question in snapshot.questions) ...[
             _stkSection(
-              title: 'Lưu ý',
-              rows: [
-                _stkBody(snapshot.infoText),
-                _stkBody(snapshot.footerDisclaimer),
-              ],
+              title: question.question,
+              rows: _stkBullets([
+                for (final option in question.options) option.label,
+              ]),
             ),
+            const SizedBox(height: TabletSpacingTokens.x3),
           ],
-        ),
+
+          _stkSection(
+            title: 'Lưu ý',
+            rows: [
+              _stkBody(snapshot.infoText),
+              _stkBody(snapshot.footerDisclaimer),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -232,39 +222,36 @@ class StakingSuitabilityAssessmentTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-266',
         semanticLabel: 'Đánh giá phù hợp staking',
         title: snapshotAsync.value?.infoTitle ?? 'Đánh giá phù hợp',
         subtitle: 'Câu hỏi · Hồ sơ',
         contentKey: StakingSuitabilityAssessmentTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được đánh giá phù hợp',
-          () => ref.invalidate(stakingSuitabilityAssessmentSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được đánh giá phù hợp',
+            () => ref.invalidate(stakingSuitabilityAssessmentSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-266',
         semanticLabel: 'Đánh giá phù hợp staking',
         title: snapshot.infoTitle,
         subtitle: snapshot.infoBody,
         contentKey: StakingSuitabilityAssessmentTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final question in snapshot.questions) ...[
-              _stkSection(
-                title: question.question,
-                rows: _stkBullets([
-                  for (final option in question.options) option.label,
-                ]),
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-            ],
+        children: [
+          for (final question in snapshot.questions) ...[
+            _stkSection(
+              title: question.question,
+              rows: _stkBullets([
+                for (final option in question.options) option.label,
+              ]),
+            ),
+            const SizedBox(height: TabletSpacingTokens.x3),
           ],
-        ),
+        ],
       ),
     );
   }
@@ -282,48 +269,42 @@ class StakingEmergencyActionsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-267',
         semanticLabel: 'Hành động khẩn staking',
         title: snapshotAsync.value?.warningTitle ?? 'Hành động khẩn cấp',
         subtitle: 'Rủi ro cao',
         contentKey: StakingEmergencyActionsTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được hành động khẩn cấp',
-          () => ref.invalidate(stakingEmergencyActionsSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được hành động khẩn cấp',
+            () => ref.invalidate(stakingEmergencyActionsSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-267',
         semanticLabel: 'Hành động khẩn staking',
         title: snapshot.warningTitle,
         subtitle: snapshot.warningBody,
         contentKey: StakingEmergencyActionsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stkSection(
-              title: 'Hành động',
-              rows: _stkTitleBody([
-                for (final action in snapshot.actions)
-                  ('${action.title} (${action.impact})', action.body),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Tình huống sử dụng',
-              rows: _stkTitleBody([
-                for (final useCase in snapshot.useCases)
-                  (
-                    '${useCase.title} — ${useCase.severity}',
-                    useCase.description,
-                  ),
-              ]),
-            ),
-          ],
-        ),
+        children: [
+          _stkSection(
+            title: 'Hành động',
+            rows: _stkTitleBody([
+              for (final action in snapshot.actions)
+                ('${action.title} (${action.impact})', action.body),
+            ]),
+          ),
+
+          _stkSection(
+            title: 'Tình huống sử dụng',
+            rows: _stkTitleBody([
+              for (final useCase in snapshot.useCases)
+                ('${useCase.title} — ${useCase.severity}', useCase.description),
+            ]),
+          ),
+        ],
       ),
     );
   }
@@ -341,50 +322,47 @@ class StakingContingencyPlanTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-268',
         semanticLabel: 'Kế hoạch dự phòng staking',
         title: 'Kế hoạch dự phòng',
         subtitle: 'Kịch bản · Ứng phó',
         contentKey: StakingContingencyPlanTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được kế hoạch dự phòng',
-          () => ref.invalidate(stakingContingencyPlanSnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được kế hoạch dự phòng',
+            () => ref.invalidate(stakingContingencyPlanSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-268',
         semanticLabel: 'Kế hoạch dự phòng staking',
         title: snapshot.infoTitle,
         subtitle: snapshot.infoBody,
         contentKey: StakingContingencyPlanTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        children: [
+          _stkSection(
+            title: 'Chỉ số sẵn sàng',
+            rows: _stkRows([
+              for (final metric in snapshot.metrics)
+                (metric.label, metric.value),
+            ]),
+          ),
+
+          for (final scenario in snapshot.scenarios) ...[
             _stkSection(
-              title: 'Chỉ số sẵn sàng',
-              rows: _stkRows([
-                for (final metric in snapshot.metrics)
-                  (metric.label, metric.value),
-              ]),
+              title: scenario.scenario,
+              rows: [
+                _stkBody(
+                  'Khả năng: ${scenario.likelihood} · Tác động: ${scenario.impact}',
+                ),
+                ..._stkBullets(scenario.response),
+              ],
             ),
             const SizedBox(height: TabletSpacingTokens.x3),
-            for (final scenario in snapshot.scenarios) ...[
-              _stkSection(
-                title: scenario.scenario,
-                rows: [
-                  _stkBody(
-                    'Khả năng: ${scenario.likelihood} · Tác động: ${scenario.impact}',
-                  ),
-                  ..._stkBullets(scenario.response),
-                ],
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-            ],
           ],
-        ),
+        ],
       ),
     );
   }
@@ -402,94 +380,91 @@ class StakingWithdrawalPolicyTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-268',
         semanticLabel: 'Chính sách rút staking',
         title: snapshotAsync.value?.infoTitle ?? 'Chính sách rút',
         subtitle: 'Quy trình · Thời gian',
         contentKey: StakingWithdrawalPolicyTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được chính sách rút',
-          () => ref.invalidate(stakingWithdrawalPolicySnapshotProvider),
-        ),
+        children: [
+          _stkError(
+            'Không tải được chính sách rút',
+            () => ref.invalidate(stakingWithdrawalPolicySnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-268',
         semanticLabel: 'Chính sách rút staking',
         title: snapshot.infoTitle,
         subtitle: snapshot.infoBody,
         contentKey: StakingWithdrawalPolicyTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stkSection(
-              title: snapshot.processTitle,
-              rows: [
-                for (final step in snapshot.processSteps)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: TabletSpacingTokens.x5,
-                          child: Text(
-                            '${step.step}',
-                            style: AppTextStyles.caption.copyWith(
-                              fontWeight: AppTextStyles.bold,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            step.title,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: snapshot.timelineTitle,
-              rows: [
-                for (final timeline in snapshot.timelines)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            timeline.product,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text1,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Khởi tạo ${timeline.initiate} · nhận ${timeline.receive}',
+        children: [
+          _stkSection(
+            title: snapshot.processTitle,
+            rows: [
+              for (final step in snapshot.processSteps)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: TabletSpacingTokens.x5,
+                        child: Text(
+                          '${step.step}',
                           style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text2,
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.primary,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          step.title,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Ghi chú',
-              rows: [_stkBody(snapshot.timelineNote)],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+
+          _stkSection(
+            title: snapshot.timelineTitle,
+            rows: [
+              for (final timeline in snapshot.timelines)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          timeline.product,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Khởi tạo ${timeline.initiate} · nhận ${timeline.receive}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _stkSection(
+            title: 'Ghi chú',
+            rows: [_stkBody(snapshot.timelineNote)],
+          ),
+        ],
       ),
     );
   }

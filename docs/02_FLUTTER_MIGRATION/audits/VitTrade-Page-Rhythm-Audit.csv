@@ -40,6 +40,9 @@ arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_creat
 arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_smart_rule_builder_page.dart,standard,standard,0,,0,,0,0,pass
 arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_studio_page.dart,standard,standard,0,,0,,0,0,pass
 arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page.dart,standard,standard,0,,0,,0,0,pass
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_home.dart,standard,,0,,0,,3,0,pass
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs.dart,standard,,0,,0,,1,0,pass
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs_extra.dart,standard,,0,,0,,0,0,pass
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_common.dart,standard,,0,,0,,0,0,pass
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_sections.dart,standard,,0,,0,,0,0,pass
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_leaderboard_body.dart,standard,,0,,0,,1,0,pass
@@ -809,11 +812,12 @@ p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_common.dart,standard,,0,,0,,0,0,pass
 p2p_account,flutter_app/lib/features/p2p_account/presentation/widgets/payment/p2p_payment_methods_page_sections.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_ad_analytics_tablet_page.dart,standard,,0,,0,,0,0,pass
+p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_create_ad_tablet_page.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_dashboard_tablet_page.dart,standard,,0,,0,,0,0,pass
+p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_express_tablet_page.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_home_tablet_page.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_insurance_tablet_pages.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_merchant_tablet_pages.dart,standard,,0,,0,,0,0,pass
-p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_order_book_tablet_page.dart,standard,compact,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_security_tablet_pages.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/pages/p2p_wallet_tablet_pages.dart,standard,,0,,0,,0,0,pass
 p2p_core,flutter_app/lib/features/p2p_core/presentation/tablet/widgets/p2p_tablet_utility_surface.dart,standard,standard,0,,0,,0,0,pass
@@ -1198,7 +1202,7 @@ trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_p
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,standard,,0,,0,,0,0,pass
-trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart,standard,standard,0,,0,,0,0,pass
+trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_keys.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_book_panel.dart,standard,,0,,0,,0,0,pass
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_bottom_panel.dart,standard,,0,,0,,0,0,pass
@@ -1531,7 +1535,7 @@ wallet,flutter_app/lib/features/wallet/presentation/phone/pages/transfer/withdra
 wallet,flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart,compact,compact,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart,standard,,0,,0,,0,0,pass
-wallet,flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart,standard,standard,0,,0,,0,0,pass
+wallet,flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_agreement.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_common.dart,standard,,0,,0,,0,0,pass
 wallet,flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_form.dart,standard,,0,,0,,0,0,pass

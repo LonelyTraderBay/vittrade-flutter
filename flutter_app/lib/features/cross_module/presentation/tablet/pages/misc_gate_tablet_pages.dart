@@ -1,67 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:vit_trade_flutter/app/providers/onboarding_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-
-Widget _mgFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-  String backFallback = AppRoutePaths.home,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: backFallback,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _mgSection({required String title, required List<Widget> rows}) {
   return VitCard(
@@ -113,39 +58,33 @@ class OnboardingTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _mgFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-000',
         semanticLabel: 'Làm quen nền tảng',
         title: 'Bắt đầu',
         subtitle: 'Lộ trình làm quen',
         contentKey: OnboardingTabletPage.contentKey,
-        child: _mgSection(
-          title: 'Không tải được',
-          rows: [_mgBody('Vui lòng thử lại.')],
-        ),
+        children: [
+          _mgSection(
+            title: 'Không tải được',
+            rows: [_mgBody('Vui lòng thử lại.')],
+          ),
+        ],
       ),
-      data: (snapshot) => _mgFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-000',
         semanticLabel: 'Làm quen nền tảng',
         title: 'Bắt đầu',
         subtitle: snapshot.contractNotes,
         contentKey: OnboardingTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _mgSection(
-              title: 'Các bước',
-              rows: _mgBullets([for (final step in snapshot.steps) step.name]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _mgSection(
-              title: 'Cam kết',
-              rows: _mgBullets(snapshot.commitments),
-            ),
-          ],
-        ),
+        children: [
+          _mgSection(
+            title: 'Các bước',
+            rows: _mgBullets([for (final step in snapshot.steps) step.name]),
+          ),
+
+          _mgSection(title: 'Cam kết', rows: _mgBullets(snapshot.commitments)),
+        ],
       ),
     );
   }
@@ -161,27 +100,23 @@ class P2PEscrowTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _mgFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-265',
       semanticLabel: 'Ký quỹ P2P',
       title: 'Ký quỹ',
       subtitle: 'Lệnh $orderId',
       contentKey: P2PEscrowTabletPage.contentKey,
       backFallback: AppRoutePaths.p2p,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _mgSection(
-            title: 'Cơ chế ký quỹ',
-            rows: _mgBullets([
-              'Tài sản được khóa trong quỹ trung gian đến khi lệnh hoàn tất',
-              'Mọi giải phóng ký quỹ cần xác nhận của hai bên hoặc phân xử',
-              'Trạng thái ký quỹ hiển thị theo thời gian thực trong chi tiết lệnh',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _mgSection(
+          title: 'Cơ chế ký quỹ',
+          rows: _mgBullets([
+            'Tài sản được khóa trong quỹ trung gian đến khi lệnh hoàn tất',
+            'Mọi giải phóng ký quỹ cần xác nhận của hai bên hoặc phân xử',
+            'Trạng thái ký quỹ hiển thị theo thời gian thực trong chi tiết lệnh',
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -194,26 +129,22 @@ class ReferralFriendDetailTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _mgFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-333',
       semanticLabel: 'Chi tiết bạn giới thiệu',
       title: 'Chi tiết bạn bè',
       subtitle: 'Tiến độ · Thưởng',
       contentKey: ReferralFriendDetailTabletPage.contentKey,
       backFallback: AppRoutePaths.referral,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _mgSection(
-            title: 'Theo dõi',
-            rows: _mgBullets([
-              'Trạng thái xác minh và mốc khối lượng của người được mời',
-              'Phần thưởng tương ứng hiển thị khi điều kiện đủ',
-            ]),
-          ),
-        ],
-      ),
+      children: [
+        _mgSection(
+          title: 'Theo dõi',
+          rows: _mgBullets([
+            'Trạng thái xác minh và mốc khối lượng của người được mời',
+            'Phần thưởng tương ứng hiển thị khi điều kiện đủ',
+          ]),
+        ),
+      ],
     );
   }
 }

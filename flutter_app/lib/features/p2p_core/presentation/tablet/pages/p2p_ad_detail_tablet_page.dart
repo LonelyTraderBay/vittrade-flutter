@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_for
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Chi tiết quảng cáo (SC-224): thông tin offer + độ tin
 /// cậy + bảng tham số giao dịch, CTA giao dịch theo hướng quảng cáo.
@@ -58,168 +59,145 @@ class P2PAdDetailTabletPage extends ConsumerWidget {
               ),
               data: (snapshot) {
                 final ad = snapshot.ad;
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 900),
-                    child: SingleChildScrollView(
-                      key: P2PAdDetailTabletPage.contentKey,
-                      padding: const EdgeInsets.fromLTRB(
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x4,
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x6,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                return VitTabletSectionBody(
+                  contentKey: P2PAdDetailTabletPage.contentKey,
+                  children: [
+                    VitCard(
+                      radius: VitCardRadius.tight,
+                      padding: TabletSpacingTokens.cardPaddingCompact,
+                      child: Row(
                         children: [
-                          VitCard(
-                            radius: VitCardRadius.tight,
-                            padding: TabletSpacingTokens.cardPaddingCompact,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        ad.type == P2PTradeType.buy
-                                            ? 'BÁN ${ad.asset}'
-                                            : 'MUA ${ad.asset}',
-                                        style: AppTextStyles.control.copyWith(
-                                          fontWeight: AppTextStyles.bold,
-                                          color: ad.type == P2PTradeType.buy
-                                              ? AppColors.sell
-                                              : AppColors.buy,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: TabletSpacingTokens.x1,
-                                      ),
-                                      Text(
-                                        '${ad.merchant} · ${ad.completedOrders} đơn · '
-                                        '${ad.completionRate.toStringAsFixed(1)}% hoàn tất',
-                                        style: AppTextStyles.caption.copyWith(
-                                          color: AppColors.text2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      formatP2PVnd(ad.price),
-                                      style: AppTextStyles.control.copyWith(
-                                        fontWeight: AppTextStyles.bold,
-                                        color: AppColors.text1,
-                                        fontFeatures:
-                                            AppTextStyles.tabularFigures,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${snapshot.priceDiffPct >= 0 ? '+' : ''}'
-                                      '${snapshot.priceDiffPct.toStringAsFixed(2)}% thị trường',
-                                      style: AppTextStyles.micro.copyWith(
-                                        color: snapshot.priceDiffPct >= 0
-                                            ? AppColors.sell
-                                            : AppColors.buy,
-                                        fontFeatures:
-                                            AppTextStyles.tabularFigures,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          VitCard(
-                            radius: VitCardRadius.tight,
-                            padding: TabletSpacingTokens.cardPaddingCompact,
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                for (final (label, value) in [
-                                  (
-                                    'Hạn mức',
-                                    '${formatP2PVnd(ad.minLimit)} - ${formatP2PVnd(ad.maxLimit)}',
+                                Text(
+                                  ad.type == P2PTradeType.buy
+                                      ? 'BÁN ${ad.asset}'
+                                      : 'MUA ${ad.asset}',
+                                  style: AppTextStyles.control.copyWith(
+                                    fontWeight: AppTextStyles.bold,
+                                    color: ad.type == P2PTradeType.buy
+                                        ? AppColors.sell
+                                        : AppColors.buy,
                                   ),
-                                  (
-                                    'Phương thức',
-                                    ad.paymentMethods.join(' · '),
+                                ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
+                                Text(
+                                  '${ad.merchant} · ${ad.completedOrders} đơn · '
+                                  '${ad.completionRate.toStringAsFixed(1)}% hoàn tất',
+                                  style: AppTextStyles.caption.copyWith(
+                                    color: AppColors.text2,
                                   ),
-                                  (
-                                    'Độ tin cậy',
-                                    '${snapshot.trustScore} (${snapshot.trustLabel})',
-                                  ),
-                                  ('Đang xem', '${snapshot.viewerCount} người'),
-                                  (
-                                    'Khối lượng 30 ngày',
-                                    formatP2PVnd(snapshot.totalVolume30dUsd),
-                                  ),
-                                  ('Giờ giao dịch', snapshot.tradingHours),
-                                ])
-                                  Padding(
-                                    padding:
-                                        TabletSpacingTokens.tableCellPaddingV,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            label,
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  color: AppColors.text2,
-                                                ),
-                                          ),
-                                        ),
-                                        Text(
-                                          value,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text1,
-                                            fontWeight: AppTextStyles.bold,
-                                            fontFeatures:
-                                                AppTextStyles.tabularFigures,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          if (snapshot.remarks.isNotEmpty)
-                            VitCard(
-                              radius: VitCardRadius.tight,
-                              padding: TabletSpacingTokens.cardPaddingCompact,
-                              child: Text(
-                                snapshot.remarks,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  height: 1.3,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                formatP2PVnd(ad.price),
+                                style: AppTextStyles.control.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
+                                  fontFeatures: AppTextStyles.tabularFigures,
                                 ),
                               ),
-                            ),
-                          const SizedBox(height: TabletSpacingTokens.x4),
-                          VitCtaButton(
-                            variant: ad.type == P2PTradeType.buy
-                                ? VitCtaButtonVariant.success
-                                : VitCtaButtonVariant.danger,
-                            onPressed: () =>
-                                context.go(AppRoutePaths.p2pExpress),
-                            child: Text(
-                              ad.type == P2PTradeType.buy
-                                  ? 'Mua nhanh ${ad.asset}'
-                                  : 'Bán nhanh ${ad.asset}',
-                            ),
+                              Text(
+                                '${snapshot.priceDiffPct >= 0 ? '+' : ''}'
+                                '${snapshot.priceDiffPct.toStringAsFixed(2)}% thị trường',
+                                style: AppTextStyles.micro.copyWith(
+                                  color: snapshot.priceDiffPct >= 0
+                                      ? AppColors.sell
+                                      : AppColors.buy,
+                                  fontFeatures: AppTextStyles.tabularFigures,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  ),
+
+                    VitCard(
+                      radius: VitCardRadius.tight,
+                      padding: TabletSpacingTokens.cardPaddingCompact,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for (final (label, value) in [
+                            (
+                              'Hạn mức',
+                              '${formatP2PVnd(ad.minLimit)} - ${formatP2PVnd(ad.maxLimit)}',
+                            ),
+                            ('Phương thức', ad.paymentMethods.join(' · ')),
+                            (
+                              'Độ tin cậy',
+                              '${snapshot.trustScore} (${snapshot.trustLabel})',
+                            ),
+                            ('Đang xem', '${snapshot.viewerCount} người'),
+                            (
+                              'Khối lượng 30 ngày',
+                              formatP2PVnd(snapshot.totalVolume30dUsd),
+                            ),
+                            ('Giờ giao dịch', snapshot.tradingHours),
+                          ])
+                            Padding(
+                              padding: TabletSpacingTokens.tableCellPaddingV,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      label,
+                                      style: AppTextStyles.caption.copyWith(
+                                        color: AppColors.text2,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    value,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text1,
+                                      fontWeight: AppTextStyles.bold,
+                                      fontFeatures:
+                                          AppTextStyles.tabularFigures,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+
+                    if (snapshot.remarks.isNotEmpty)
+                      VitCard(
+                        radius: VitCardRadius.tight,
+                        padding: TabletSpacingTokens.cardPaddingCompact,
+                        child: Text(
+                          snapshot.remarks,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                            height: 1.3,
+                          ),
+                        ),
+                      ),
+
+                    const SizedBox(height: TabletSpacingTokens.x4),
+
+                    VitCtaButton(
+                      variant: ad.type == P2PTradeType.buy
+                          ? VitCtaButtonVariant.success
+                          : VitCtaButtonVariant.danger,
+                      onPressed: () => context.push(AppRoutePaths.p2pExpress),
+                      child: Text(
+                        ad.type == P2PTradeType.buy
+                            ? 'Mua nhanh ${ad.asset}'
+                            : 'Bán nhanh ${ad.asset}',
+                      ),
+                    ),
+                  ],
                 );
               },
             ),

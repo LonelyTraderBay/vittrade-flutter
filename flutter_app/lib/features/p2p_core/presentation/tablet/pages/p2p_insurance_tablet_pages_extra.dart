@@ -38,23 +38,57 @@ class P2PInsuranceScoreTabletPage extends ConsumerWidget {
                   () => ref.invalidate(p2pInsuranceScoreProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PInsuranceScoreTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PInsuranceScoreTabletPage.contentKey,
+                children: [
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${snapshot.overallScore}/${snapshot.maxScore} · Hạng ${snapshot.grade}',
+                                style: AppTextStyles.control.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
+                                  fontFeatures: AppTextStyles.tabularFigures,
+                                ),
+                              ),
+                            ),
+                            VitStatusPill(
+                              label: snapshot.gradeLabel,
+                              status: VitStatusPillStatus.info,
+                              size: VitStatusPillSize.sm,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: TabletSpacingTokens.x2),
+                        VitProgressBar(
+                          progress: snapshot.overallScore / snapshot.maxScore,
+                          color: AppColors.primary,
+                        ),
+                        const SizedBox(height: TabletSpacingTokens.x2),
+                        Text(
+                          snapshot.gradeDescription,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  _insSection(
+                    title: 'Các yếu tố điểm',
+                    rows: [
+                      for (final factor in snapshot.factors)
+                        Padding(
+                          padding: TabletSpacingTokens.tableCellPaddingV,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -62,128 +96,76 @@ class P2PInsuranceScoreTabletPage extends ConsumerWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      '${snapshot.overallScore}/${snapshot.maxScore} · Hạng ${snapshot.grade}',
-                                      style: AppTextStyles.control.copyWith(
+                                      factor.label,
+                                      style: AppTextStyles.caption.copyWith(
                                         fontWeight: AppTextStyles.bold,
                                         color: AppColors.text1,
-                                        fontFeatures:
-                                            AppTextStyles.tabularFigures,
                                       ),
                                     ),
                                   ),
-                                  VitStatusPill(
-                                    label: snapshot.gradeLabel,
-                                    status: VitStatusPillStatus.info,
-                                    size: VitStatusPillSize.sm,
+                                  Text(
+                                    '${factor.score}/${factor.maxScore} · ${factor.statusLabel}',
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                      fontFeatures:
+                                          AppTextStyles.tabularFigures,
+                                    ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: TabletSpacingTokens.x2),
-                              VitProgressBar(
-                                progress:
-                                    snapshot.overallScore / snapshot.maxScore,
-                                color: AppColors.primary,
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x2),
                               Text(
-                                snapshot.gradeDescription,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  height: 1.3,
+                                factor.description,
+                                style: AppTextStyles.micro.copyWith(
+                                  color: AppColors.text3,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Các yếu tố điểm',
-                          rows: [
-                            for (final factor in snapshot.factors)
-                              Padding(
-                                padding: TabletSpacingTokens.tableCellPaddingV,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            factor.label,
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  fontWeight:
-                                                      AppTextStyles.bold,
-                                                  color: AppColors.text1,
-                                                ),
-                                          ),
-                                        ),
-                                        Text(
-                                          '${factor.score}/${factor.maxScore} · ${factor.statusLabel}',
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                            fontFeatures:
-                                                AppTextStyles.tabularFigures,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      factor.description,
-                                      style: AppTextStyles.micro.copyWith(
-                                        color: AppColors.text3,
-                                      ),
-                                    ),
-                                  ],
+                    ],
+                  ),
+
+                  _insSection(
+                    title: 'Yêu cầu hạng',
+                    rows: [
+                      for (final tier in snapshot.tierRequirements)
+                        Padding(
+                          padding: TabletSpacingTokens.tableCellPaddingV,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${tier.name} · cần ${tier.requiredScore} điểm',
+                                  style: AppTextStyles.caption.copyWith(
+                                    fontWeight: tier.isCurrent
+                                        ? AppTextStyles.bold
+                                        : AppTextStyles.normal,
+                                    color: tier.isCurrent
+                                        ? AppColors.primary
+                                        : AppColors.text2,
+                                  ),
                                 ),
                               ),
-                          ],
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Yêu cầu hạng',
-                          rows: [
-                            for (final tier in snapshot.tierRequirements)
-                              Padding(
-                                padding: TabletSpacingTokens.tableCellPaddingV,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '${tier.name} · cần ${tier.requiredScore} điểm',
-                                        style: AppTextStyles.caption.copyWith(
-                                          fontWeight: tier.isCurrent
-                                              ? AppTextStyles.bold
-                                              : AppTextStyles.normal,
-                                          color: tier.isCurrent
-                                              ? AppColors.primary
-                                              : AppColors.text2,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '${tier.coveragePct} bao phủ',
-                                      style: AppTextStyles.caption.copyWith(
-                                        color: AppColors.text1,
-                                      ),
-                                    ),
-                                  ],
+                              Text(
+                                '${tier.coveragePct} bao phủ',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
                                 ),
                               ),
-                          ],
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.disclosure,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                            height: 1.3,
+                            ],
                           ),
                         ),
-                      ],
+                    ],
+                  ),
+
+                  Text(
+                    snapshot.disclosure,
+                    style: AppTextStyles.micro.copyWith(
+                      color: AppColors.text3,
+                      height: 1.3,
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           ),
@@ -231,70 +213,56 @@ class P2PInsurancePolicyTabletPage extends ConsumerWidget {
                   () => ref.invalidate(p2pInsurancePolicyProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PInsurancePolicyTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          '${snapshot.subtitle} · v${snapshot.version} · cập nhật ${snapshot.lastUpdated}',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Text(
-                            snapshot.notice,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                              height: 1.3,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        for (final section in snapshot.sections) ...[
-                          _insSection(
-                            title: section.title,
-                            rows: [
-                              for (final paragraph in section.content)
-                                Padding(
-                                  padding:
-                                      TabletSpacingTokens.tableCellPaddingV,
-                                  child: Text(
-                                    paragraph,
-                                    style: AppTextStyles.caption.copyWith(
-                                      color: AppColors.text2,
-                                      height: 1.3,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                        ],
-                        Text(
-                          snapshot.privacyNotice,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PInsurancePolicyTabletPage.contentKey,
+                children: [
+                  Text(
+                    '${snapshot.subtitle} · v${snapshot.version} · cập nhật ${snapshot.lastUpdated}',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text3,
                     ),
                   ),
-                ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Text(
+                      snapshot.notice,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text2,
+                        height: 1.3,
+                      ),
+                    ),
+                  ),
+
+                  for (final section in snapshot.sections) ...[
+                    _insSection(
+                      title: section.title,
+                      rows: [
+                        for (final paragraph in section.content)
+                          Padding(
+                            padding: TabletSpacingTokens.tableCellPaddingV,
+                            child: Text(
+                              paragraph,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: TabletSpacingTokens.x3),
+                  ],
+
+                  Text(
+                    snapshot.privacyNotice,
+                    style: AppTextStyles.micro.copyWith(
+                      color: AppColors.text3,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -344,92 +312,80 @@ class P2PClaimDetailTabletPage extends ConsumerWidget {
                   () => ref.invalidate(p2pClaimDetailProvider(claimId)),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PClaimDetailTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        _insSection(
-                          title:
-                              'Claim ${snapshot.claim.claimCode} · ${snapshot.claim.orderNumber}',
-                          rows: _insRows([
-                            ('Lý do', snapshot.claim.reason),
-                            ('Mô tả', snapshot.claim.description),
-                            ('Số tiền', formatP2PVnd(snapshot.claim.amount)),
-                            (
-                              'Đã chi trả',
-                              snapshot.claim.paidAmount == null
-                                  ? '—'
-                                  : formatP2PVnd(snapshot.claim.paidAmount!),
-                            ),
-                          ]),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Tham chiếu',
-                          rows: [
-                            for (final benchmark in snapshot.benchmarks)
-                              Padding(
-                                padding: TabletSpacingTokens.tableCellPaddingV,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        benchmark.title,
-                                        style: AppTextStyles.caption.copyWith(
-                                          color: AppColors.text2,
-                                        ),
-                                      ),
-                                    ),
-                                    Flexible(
-                                      child: Text(
-                                        benchmark.value,
-                                        textAlign: TextAlign.end,
-                                        style: AppTextStyles.caption.copyWith(
-                                          color: AppColors.text1,
-                                          fontWeight: AppTextStyles.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Phân bổ lý do',
-                          rows: [
-                            for (final share in snapshot.reasonShares)
-                              Padding(
-                                padding: TabletSpacingTokens.tableCellPaddingV,
-                                child: VitProgressBar(
-                                  progress: share.percent / 100,
-                                  label: share.label,
-                                  trailingLabel: '${share.percent}%',
-                                  color: AppColors.primary,
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x4),
-                        VitCtaButton(
-                          onPressed: () => context.go(snapshot.orderRoute),
-                          child: const Text('Xem lệnh gốc'),
-                        ),
-                      ],
-                    ),
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PClaimDetailTabletPage.contentKey,
+                children: [
+                  _insSection(
+                    title:
+                        'Claim ${snapshot.claim.claimCode} · ${snapshot.claim.orderNumber}',
+                    rows: _insRows([
+                      ('Lý do', snapshot.claim.reason),
+                      ('Mô tả', snapshot.claim.description),
+                      ('Số tiền', formatP2PVnd(snapshot.claim.amount)),
+                      (
+                        'Đã chi trả',
+                        snapshot.claim.paidAmount == null
+                            ? '—'
+                            : formatP2PVnd(snapshot.claim.paidAmount!),
+                      ),
+                    ]),
                   ),
-                ),
+
+                  _insSection(
+                    title: 'Tham chiếu',
+                    rows: [
+                      for (final benchmark in snapshot.benchmarks)
+                        Padding(
+                          padding: TabletSpacingTokens.tableCellPaddingV,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  benchmark.title,
+                                  style: AppTextStyles.caption.copyWith(
+                                    color: AppColors.text2,
+                                  ),
+                                ),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  benchmark.value,
+                                  textAlign: TextAlign.end,
+                                  style: AppTextStyles.caption.copyWith(
+                                    color: AppColors.text1,
+                                    fontWeight: AppTextStyles.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+
+                  _insSection(
+                    title: 'Phân bổ lý do',
+                    rows: [
+                      for (final share in snapshot.reasonShares)
+                        Padding(
+                          padding: TabletSpacingTokens.tableCellPaddingV,
+                          child: VitProgressBar(
+                            progress: share.percent / 100,
+                            label: share.label,
+                            trailingLabel: '${share.percent}%',
+                            color: AppColors.primary,
+                          ),
+                        ),
+                    ],
+                  ),
+
+                  const SizedBox(height: TabletSpacingTokens.x4),
+
+                  VitCtaButton(
+                    onPressed: () => context.push(snapshot.orderRoute),
+                    child: const Text('Xem lệnh gốc'),
+                  ),
+                ],
               ),
             ),
           ),

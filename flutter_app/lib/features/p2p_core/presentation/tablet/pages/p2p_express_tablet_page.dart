@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +14,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_for
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 
 /// Bố cục tablet của P2P Express (SC-211): form mua/bán nhanh ở cột trái
 /// (tài sản · số lượng · phương thức), offer tốt nhất + escrow ở cột phải.
@@ -58,7 +61,7 @@ class _P2PExpressTabletPageState extends ConsumerState<P2PExpressTabletPage> {
         'payment': _paymentMethod,
       },
     ).query;
-    context.go('${AppRoutePaths.p2pExpressConfirm}?$query');
+    unawaited(context.push('${AppRoutePaths.p2pExpressConfirm}?$query'));
   }
 
   @override
@@ -106,127 +109,89 @@ class _P2PExpressTabletPageState extends ConsumerState<P2PExpressTabletPage> {
                 final cryptoAmount = bestAd == null || _fiatAmount <= 0
                     ? 0.0
                     : _fiatAmount / bestAd.price;
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1180),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 7,
-                          child: SingleChildScrollView(
-                            key: P2PExpressTabletPage.contentKey,
-                            padding: const EdgeInsets.fromLTRB(
-                              TabletSpacingTokens.x6,
-                              TabletSpacingTokens.x4,
-                              TabletSpacingTokens.x3,
-                              TabletSpacingTokens.x6,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                VitSegmentedTabBar(
-                                  tabs: const [
-                                    VitTabItem(key: 'buy', label: 'Mua'),
-                                    VitTabItem(key: 'sell', label: 'Bán'),
-                                  ],
-                                  activeKey: _tradeType == P2PTradeType.buy
-                                      ? 'buy'
-                                      : 'sell',
-                                  onChanged: (value) => setState(() {
-                                    _tradeType = value == 'buy'
-                                        ? P2PTradeType.buy
-                                        : P2PTradeType.sell;
-                                  }),
-                                ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                _ExpressAssetCard(
-                                  assets: snapshot.assets,
-                                  selected: selectedAsset,
-                                  onSelected: (asset) => setState(() {
-                                    _asset = asset.symbol;
-                                  }),
-                                ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                _ExpressAmountCard(
-                                  controller: _amountController,
-                                  quickAmounts: snapshot.quickAmountsVnd,
-                                  cryptoAmount: cryptoAmount,
-                                  onChanged: () => setState(() {}),
-                                  onQuickAmount: (amount) => setState(() {
-                                    _amountController.text = '$amount';
-                                  }),
-                                ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                _PaymentCard(
-                                  paymentMethods: snapshot.paymentMethods,
-                                  selected: _paymentMethod,
-                                  onSelected: (id) => setState(() {
-                                    _paymentMethod = id;
-                                  }),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.fromLTRB(
-                              TabletSpacingTokens.x3,
-                              TabletSpacingTokens.x4,
-                              TabletSpacingTokens.x6,
-                              TabletSpacingTokens.x6,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (bestAd != null && _fiatAmount > 0)
-                                  _BestOfferCard(
-                                    tradeType: _tradeType,
-                                    ad: bestAd,
-                                    marketPrice: selectedAsset.marketPriceVnd,
-                                    cryptoAmount: cryptoAmount,
-                                  )
-                                else
-                                  const VitEmptyState(
-                                    icon: Icons.bolt_outlined,
-                                    title: 'Chưa có offer phù hợp',
-                                    message:
-                                        'Nhập số lượng để khớp offer tốt nhất.',
-                                  ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                VitCtaButton(
-                                  onPressed: bestAd == null
-                                      ? null
-                                      : () => _openConfirm(
-                                          context,
-                                          snapshot,
-                                          selectedAsset.symbol,
-                                          bestAd,
-                                          cryptoAmount,
-                                        ),
-                                  variant: _tradeType == P2PTradeType.buy
-                                      ? VitCtaButtonVariant.success
-                                      : VitCtaButtonVariant.danger,
-                                  child: Text(
-                                    '${_tradeType == P2PTradeType.buy ? 'Mua nhanh' : 'Bán nhanh'} ${selectedAsset.symbol}',
-                                  ),
-                                ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                _ExpressEscrowCard(
-                                  snapshot: snapshot,
-                                  tradeType: _tradeType,
-                                ),
-                                const SizedBox(height: TabletSpacingTokens.x3),
-                                _StepsCard(steps: snapshot.steps),
-                              ],
-                            ),
-                          ),
-                        ),
+                return VitTwoColumnTabletDashboard(
+                  primaryChildren: [
+                    VitSegmentedTabBar(
+                      tabs: const [
+                        VitTabItem(key: 'buy', label: 'Mua'),
+                        VitTabItem(key: 'sell', label: 'Bán'),
                       ],
+                      activeKey: _tradeType == P2PTradeType.buy
+                          ? 'buy'
+                          : 'sell',
+                      onChanged: (value) => setState(() {
+                        _tradeType = value == 'buy'
+                            ? P2PTradeType.buy
+                            : P2PTradeType.sell;
+                      }),
                     ),
-                  ),
+
+                    _ExpressAssetCard(
+                      assets: snapshot.assets,
+                      selected: selectedAsset,
+                      onSelected: (asset) => setState(() {
+                        _asset = asset.symbol;
+                      }),
+                    ),
+
+                    _ExpressAmountCard(
+                      controller: _amountController,
+                      quickAmounts: snapshot.quickAmountsVnd,
+                      cryptoAmount: cryptoAmount,
+                      onChanged: () => setState(() {}),
+                      onQuickAmount: (amount) => setState(() {
+                        _amountController.text = '$amount';
+                      }),
+                    ),
+
+                    _PaymentCard(
+                      paymentMethods: snapshot.paymentMethods,
+                      selected: _paymentMethod,
+                      onSelected: (id) => setState(() {
+                        _paymentMethod = id;
+                      }),
+                    ),
+                  ],
+                  secondaryChildren: [
+                    if (bestAd != null && _fiatAmount > 0)
+                      _BestOfferCard(
+                        tradeType: _tradeType,
+                        ad: bestAd,
+                        marketPrice: selectedAsset.marketPriceVnd,
+                        cryptoAmount: cryptoAmount,
+                      )
+                    else
+                      const VitEmptyState(
+                        icon: Icons.bolt_outlined,
+                        title: 'Chưa có offer phù hợp',
+                        message: 'Nhập số lượng để khớp offer tốt nhất.',
+                      ),
+
+                    VitCtaButton(
+                      onPressed: bestAd == null
+                          ? null
+                          : () => _openConfirm(
+                              context,
+                              snapshot,
+                              selectedAsset.symbol,
+                              bestAd,
+                              cryptoAmount,
+                            ),
+                      variant: _tradeType == P2PTradeType.buy
+                          ? VitCtaButtonVariant.success
+                          : VitCtaButtonVariant.danger,
+                      child: Text(
+                        '${_tradeType == P2PTradeType.buy ? 'Mua nhanh' : 'Bán nhanh'} ${selectedAsset.symbol}',
+                      ),
+                    ),
+
+                    _ExpressEscrowCard(
+                      snapshot: snapshot,
+                      tradeType: _tradeType,
+                    ),
+
+                    _StepsCard(steps: snapshot.steps),
+                  ],
                 );
               },
             ),

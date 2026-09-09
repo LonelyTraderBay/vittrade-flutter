@@ -16,7 +16,7 @@ class _ReceiptCard extends StatelessWidget {
       headerTrailing: _StatusBadge(
         key: TradeTabletOrderReceiptPage.openOrdersKey,
         status: receipt.status,
-        onTap: () => context.go(AppRoutePaths.tradeOrdersHistory),
+        onTap: () => context.push(AppRoutePaths.tradeOrdersHistory),
       ),
       child: VitCard(
         clip: true,

@@ -1,67 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/trade_compliance_controller_providers.dart';
-import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-
-Widget _cdFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.trade,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 Widget _cdError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -135,83 +81,80 @@ class ExAnteCostsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-105',
         semanticLabel: 'Chi phí trước đầu tư',
         title: 'Chi phí trước đầu tư',
         subtitle: 'Ex-Ante',
         contentKey: ExAnteCostsTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được chi phí',
-          () => ref.invalidate(tradeExAnteCostsProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được chi phí',
+            () => ref.invalidate(tradeExAnteCostsProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-105',
         semanticLabel: 'Chi phí trước đầu tư',
         title: 'Chi phí trước đầu tư',
         subtitle: 'Ex-Ante',
         contentKey: ExAnteCostsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _cdSection(
-              title:
-                  'Đầu tư ${formatCdUsd(snapshot.investmentAmount)} · ${snapshot.holdingPeriodYears} năm',
-              rows: [
-                for (final cost in snapshot.costs)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                cost.type,
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              Text(
-                                cost.description,
-                                style: AppTextStyles.micro.copyWith(
-                                  color: AppColors.text3,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          _cdSection(
+            title:
+                'Đầu tư ${formatCdUsd(snapshot.investmentAmount)} · ${snapshot.holdingPeriodYears} năm',
+            rows: [
+              for (final cost in snapshot.costs)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              formatCdUsd(cost.amountEur),
+                              cost.type,
                               style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
                                 color: AppColors.text1,
-                                fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
                             Text(
-                              '${cost.percentOfInvestment.toStringAsFixed(2)}%',
+                              cost.description,
                               style: AppTextStyles.micro.copyWith(
                                 color: AppColors.text3,
-                                fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            formatCdUsd(cost.amountEur),
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                              fontFeatures: AppTextStyles.tabularFigures,
+                            ),
+                          ),
+                          Text(
+                            '${cost.percentOfInvestment.toStringAsFixed(2)}%',
+                            style: AppTextStyles.micro.copyWith(
+                              color: AppColors.text3,
+                              fontFeatures: AppTextStyles.tabularFigures,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -229,37 +172,39 @@ class RiyCalculatorTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-106',
         semanticLabel: 'Bộ tính toán RIY',
         title: 'Bộ tính toán RIY',
         subtitle: 'Reduction in Yield',
         contentKey: RiyCalculatorTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được RIY',
-          () => ref.invalidate(tradeRiyCalculatorProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được RIY',
+            () => ref.invalidate(tradeRiyCalculatorProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-106',
         semanticLabel: 'Bộ tính toán RIY',
         title: 'Bộ tính toán RIY',
         subtitle: 'Reduction in Yield',
         contentKey: RiyCalculatorTabletPage.contentKey,
-        child: _cdSection(
-          title: 'Tham số đầu vào',
-          rows: _cdRows([
-            ('Số tiền đầu tư', formatCdUsd(snapshot.investmentAmount)),
-            (
-              'Lợi nhuận kỳ vọng',
-              '${snapshot.expectedReturnPct.toStringAsFixed(1)}%',
-            ),
-            ('Tổng chi phí', '${snapshot.totalCostsPct.toStringAsFixed(2)}%'),
-            ('Thời gian giữ', '${snapshot.holdingPeriodYears} năm'),
-          ]),
-        ),
+        children: [
+          _cdSection(
+            title: 'Tham số đầu vào',
+            rows: _cdRows([
+              ('Số tiền đầu tư', formatCdUsd(snapshot.investmentAmount)),
+              (
+                'Lợi nhuận kỳ vọng',
+                '${snapshot.expectedReturnPct.toStringAsFixed(1)}%',
+              ),
+              ('Tổng chi phí', '${snapshot.totalCostsPct.toStringAsFixed(2)}%'),
+              ('Thời gian giữ', '${snapshot.holdingPeriodYears} năm'),
+            ]),
+          ),
+        ],
       ),
     );
   }
@@ -277,51 +222,45 @@ class ExPostCostsReportTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-107',
         semanticLabel: 'Báo cáo chi phí sau đầu tư',
         title: 'Chi phí sau đầu tư',
         subtitle: 'Ex-Post',
         contentKey: ExPostCostsReportTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được báo cáo chi phí',
-          () => ref.invalidate(tradeExPostCostsReportProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được báo cáo chi phí',
+            () => ref.invalidate(tradeExPostCostsReportProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-107',
         semanticLabel: 'Báo cáo chi phí sau đầu tư',
         title: 'Chi phí sau đầu tư',
         subtitle: 'Ex-Post',
         contentKey: ExPostCostsReportTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final report in snapshot.reports)
-              Padding(
-                padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x3),
-                child: _cdSection(
-                  title: 'Năm ${report.year}',
-                  rows: _cdRows([
-                    ('Một lần', formatCdUsd(report.oneOff)),
-                    ('Định kỳ', formatCdUsd(report.recurring)),
-                    ('Phát sinh', formatCdUsd(report.incidental)),
-                    ('Ước tính một lần', formatCdUsd(report.estimatedOneOff)),
-                    (
-                      'Ước tính định kỳ',
-                      formatCdUsd(report.estimatedRecurring),
-                    ),
-                    (
-                      'Ước tính phát sinh',
-                      formatCdUsd(report.estimatedIncidental),
-                    ),
-                  ]),
-                ),
+        children: [
+          for (final report in snapshot.reports)
+            Padding(
+              padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x3),
+              child: _cdSection(
+                title: 'Năm ${report.year}',
+                rows: _cdRows([
+                  ('Một lần', formatCdUsd(report.oneOff)),
+                  ('Định kỳ', formatCdUsd(report.recurring)),
+                  ('Phát sinh', formatCdUsd(report.incidental)),
+                  ('Ước tính một lần', formatCdUsd(report.estimatedOneOff)),
+                  ('Ước tính định kỳ', formatCdUsd(report.estimatedRecurring)),
+                  (
+                    'Ước tính phát sinh',
+                    formatCdUsd(report.estimatedIncidental),
+                  ),
+                ]),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -339,72 +278,69 @@ class KidGeneratorTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-108',
         semanticLabel: 'Tài liệu KID',
         title: 'Tài liệu KID',
         subtitle: 'Key Information Document',
         contentKey: KidGeneratorTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được KID',
-          () => ref.invalidate(tradeKidGeneratorProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được KID',
+            () => ref.invalidate(tradeKidGeneratorProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-108',
         semanticLabel: 'Tài liệu KID',
         title: 'Tài liệu KID',
         subtitle: '${snapshot.document.title} · v${snapshot.document.version}',
         contentKey: KidGeneratorTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _cdSection(
-              title: 'Thông tin tài liệu',
-              rows: _cdRows([
-                ('Loại', snapshot.document.documentType),
-                ('Số trang', '${snapshot.document.pages}'),
-                ('Tối đa', '${snapshot.document.maxPages}'),
-                ('Cập nhật', snapshot.document.lastUpdated),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            for (final section in snapshot.sections)
-              Padding(
-                padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x2),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.zero,
-                      child: Icon(
-                        Icons.description_outlined,
-                        size: TabletSpacingTokens.iconSm,
-                        color: AppColors.primary,
+        children: [
+          _cdSection(
+            title: 'Thông tin tài liệu',
+            rows: _cdRows([
+              ('Loại', snapshot.document.documentType),
+              ('Số trang', '${snapshot.document.pages}'),
+              ('Tối đa', '${snapshot.document.maxPages}'),
+              ('Cập nhật', snapshot.document.lastUpdated),
+            ]),
+          ),
+
+          for (final section in snapshot.sections)
+            Padding(
+              padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x2),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.zero,
+                    child: Icon(
+                      Icons.description_outlined,
+                      size: TabletSpacingTokens.iconSm,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  const SizedBox(width: TabletSpacingTokens.x2),
+                  Expanded(
+                    child: Text(
+                      section.title,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text2,
                       ),
                     ),
-                    const SizedBox(width: TabletSpacingTokens.x2),
-                    Expanded(
-                      child: Text(
-                        section.title,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                        ),
-                      ),
-                    ),
-                    VitStatusPill(
-                      label: section.status,
-                      status: section.status.contains('Hoàn thành')
-                          ? VitStatusPillStatus.success
-                          : VitStatusPillStatus.warning,
-                      size: VitStatusPillSize.sm,
-                    ),
-                  ],
-                ),
+                  ),
+                  VitStatusPill(
+                    label: section.status,
+                    status: section.status.contains('Hoàn thành')
+                        ? VitStatusPillStatus.success
+                        : VitStatusPillStatus.warning,
+                    size: VitStatusPillSize.sm,
+                  ),
+                ],
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -422,62 +358,59 @@ class PerformanceScenariosTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-109',
         semanticLabel: 'Kịch bản hiệu suất',
         title: 'Kịch bản hiệu suất',
         subtitle: 'Mô phỏng',
         contentKey: PerformanceScenariosTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được kịch bản',
-          () => ref.invalidate(tradePerformanceScenariosProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được kịch bản',
+            () => ref.invalidate(tradePerformanceScenariosProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-109',
         semanticLabel: 'Kịch bản hiệu suất',
         title: 'Kịch bản hiệu suất',
         subtitle:
             'Đầu tư ${formatCdUsd(snapshot.investment)} · ${snapshot.defaultHoldingPeriod} năm',
         contentKey: PerformanceScenariosTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _cdSection(
-              title: 'Kịch bản mô phỏng',
-              rows: [
-                for (final scenario in snapshot.scenarios)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            scenario.label,
-                            style: AppTextStyles.caption.copyWith(
-                              fontWeight: AppTextStyles.bold,
-                              color: AppColors.text1,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '${scenario.annualReturnPct >= 0 ? '+' : ''}${scenario.annualReturnPct.toStringAsFixed(1)}%/năm',
+        children: [
+          _cdSection(
+            title: 'Kịch bản mô phỏng',
+            rows: [
+              for (final scenario in snapshot.scenarios)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          scenario.label,
                           style: AppTextStyles.caption.copyWith(
-                            color: scenario.annualReturnPct >= 0
-                                ? AppColors.buy
-                                : AppColors.sell,
-                            fontFeatures: AppTextStyles.tabularFigures,
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '${scenario.annualReturnPct >= 0 ? '+' : ''}${scenario.annualReturnPct.toStringAsFixed(1)}%/năm',
+                        style: AppTextStyles.caption.copyWith(
+                          color: scenario.annualReturnPct >= 0
+                              ? AppColors.buy
+                              : AppColors.sell,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -495,68 +428,65 @@ class RiskIndicatorExplainerTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-110',
         semanticLabel: 'Giải thích chỉ báo rủi ro',
         title: 'Chỉ báo rủi ro',
         subtitle: 'SRI · Giải thích',
         contentKey: RiskIndicatorExplainerTabletPage.contentKey,
-        child: _cdError(
-          'Không tải được chỉ báo rủi ro',
-          () => ref.invalidate(tradeRiskIndicatorExplainerProvider),
-        ),
+        children: [
+          _cdError(
+            'Không tải được chỉ báo rủi ro',
+            () => ref.invalidate(tradeRiskIndicatorExplainerProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-110',
         semanticLabel: 'Giải thích chỉ báo rủi ro',
         title: 'Chỉ báo rủi ro',
         subtitle: '${snapshot.productName} · SRI ${snapshot.productSri}/7',
         contentKey: RiskIndicatorExplainerTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _cdSection(
-              title: 'Thang SRI',
-              rows: [
-                for (final level in snapshot.levels)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            level.label,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
+        children: [
+          _cdSection(
+            title: 'Thang SRI',
+            rows: [
+              for (final level in snapshot.levels)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          level.label,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _cdSection(
-              title: 'Rủi ro bổ sung',
-              rows: [
-                for (final risk in snapshot.additionalRisks)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      '• ${risk.title}',
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text2,
-                        height: 1.3,
                       ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _cdSection(
+            title: 'Rủi ro bổ sung',
+            rows: [
+              for (final risk in snapshot.additionalRisks)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Text(
+                    '• ${risk.title}',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text2,
+                      height: 1.3,
                     ),
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

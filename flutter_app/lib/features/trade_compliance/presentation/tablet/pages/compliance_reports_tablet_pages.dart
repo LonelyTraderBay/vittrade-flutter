@@ -7,62 +7,9 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'compliance_reports_tablet_pages_extra.dart';
-
-/// Khuôn chung cho các trang compliance/regulatory P2P tablet (port mỏng).
-Widget _rptFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.trade,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _rptError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -175,180 +122,177 @@ class RegulatoryReportsDashboardTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _rptFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-094',
         semanticLabel: 'Bảng điều khiển báo cáo quy định',
         title: 'Báo cáo quy định',
         subtitle: 'Dashboard',
         contentKey: RegulatoryReportsDashboardTabletPage.contentKey,
-        child: _rptError(
-          'Không tải được dashboard',
-          () => ref.invalidate(tradeRegulatoryReportsDashboardProvider),
-        ),
+        children: [
+          _rptError(
+            'Không tải được dashboard',
+            () => ref.invalidate(tradeRegulatoryReportsDashboardProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _rptFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-094',
         semanticLabel: 'Bảng điều khiển báo cáo quy định',
         title: 'Báo cáo quy định',
         subtitle: 'Dashboard',
         contentKey: RegulatoryReportsDashboardTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _rptSection(
-              title: 'Thống kê theo ngày',
-              rows: [
-                for (final stat in snapshot.dailyStats.take(7))
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            stat.date,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                              fontFeatures: AppTextStyles.tabularFigures,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '${stat.total} báo cáo',
+        children: [
+          _rptSection(
+            title: 'Thống kê theo ngày',
+            rows: [
+              for (final stat in snapshot.dailyStats.take(7))
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          stat.date,
                           style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
+                            color: AppColors.text2,
                             fontFeatures: AppTextStyles.tabularFigures,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _rptSection(
-              title: 'ARM providers',
-              rows: [
-                for (final provider in snapshot.providers)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            provider.name,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
-                          ),
+                      ),
+                      Text(
+                        '${stat.total} báo cáo',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                          fontFeatures: AppTextStyles.tabularFigures,
                         ),
-                        Text(
-                          '${provider.reports} báo cáo · ${provider.successRate.toStringAsFixed(1)}% · ${provider.avgLatency}ms',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                            fontWeight: AppTextStyles.bold,
-                            fontFeatures: AppTextStyles.tabularFigures,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _rptSection(
-              title: 'Khám phá',
-              rows: [
-                Wrap(
-                  spacing: TabletSpacingTokens.x2,
-                  runSpacing: TabletSpacingTokens.x2,
-                  children: [
-                    for (final (label, path) in [
-                      (
-                        'Báo cáo giao dịch',
-                        AppRoutePaths.tradeCopyTransactionReporting,
-                      ),
-                      (
-                        'Trạng thái tích hợp ARM',
-                        AppRoutePaths.tradeCopyArmIntegrationStatus,
-                      ),
-                      (
-                        'Báo cáo thực thi tốt nhất',
-                        AppRoutePaths.tradeCopyBestExecutionReports,
-                      ),
-                      (
-                        'Phân tích nơi thực thi',
-                        AppRoutePaths.tradeCopyExecutionVenueAnalysis,
-                      ),
-                      (
-                        'Giám sát trượt giá',
-                        AppRoutePaths.tradeCopySlippageMonitoring,
-                      ),
-                      (
-                        'Phân loại khách hàng',
-                        AppRoutePaths.tradeCopyClientCategorization,
-                      ),
-                      (
-                        'Yêu cầu nâng hạng',
-                        AppRoutePaths.tradeCopyClientOptUpRequest,
-                      ),
-                      (
-                        'Định nghĩa thị trường mục tiêu',
-                        AppRoutePaths.tradeCopyTargetMarketDefinition,
-                      ),
-                      (
-                        'Bảo vệ tiền khách hàng',
-                        AppRoutePaths.tradeCopyClientMoneyProtection,
-                      ),
-                      (
-                        'Đối soát CASS',
-                        AppRoutePaths.tradeCopyCassReconciliation,
-                      ),
-                      (
-                        'Bồi thường nhà đầu tư',
-                        AppRoutePaths.tradeCopyInvestorCompensation,
-                      ),
-                      (
-                        'Chi phí trước giao dịch',
-                        AppRoutePaths.tradeCopyExAnteCosts,
-                      ),
-                      ('Máy tính RIY', AppRoutePaths.tradeCopyRiyCalculator),
-                      (
-                        'Chi phí sau giao dịch',
-                        AppRoutePaths.tradeCopyExPostCostsReport,
-                      ),
-                      (
-                        'Tiết lộ quy định',
-                        AppRoutePaths.tradeCopyRegulatoryDisclosures,
-                      ),
-                      (
-                        'Theo dõi khiếu nại',
-                        AppRoutePaths.tradeCopyComplaintTrackingBase,
-                      ),
-                      (
-                        'Gửi khiếu nại',
-                        AppRoutePaths.tradeCopyComplaintSubmission,
-                      ),
-                      (
-                        'Chuyển tiếp ombudsman',
-                        AppRoutePaths.tradeCopyOmbudsmanReferral,
-                      ),
-                      ('Truy vết kiểm toán', AppRoutePaths.tradeCopyAuditTrail),
-                      ('Trình tạo KID', AppRoutePaths.tradeCopyKidGenerator),
-                    ])
-                      VitFilterChip(
-                        label: label,
-                        active: false,
-                        color: AppColors.primary,
-                        onTap: () => context.go(path),
-                      ),
-                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+
+          _rptSection(
+            title: 'ARM providers',
+            rows: [
+              for (final provider in snapshot.providers)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          provider.name,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '${provider.reports} báo cáo · ${provider.successRate.toStringAsFixed(1)}% · ${provider.avgLatency}ms',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                          fontWeight: AppTextStyles.bold,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _rptSection(
+            title: 'Khám phá',
+            rows: [
+              Wrap(
+                spacing: TabletSpacingTokens.x2,
+                runSpacing: TabletSpacingTokens.x2,
+                children: [
+                  for (final (label, path) in [
+                    (
+                      'Báo cáo giao dịch',
+                      AppRoutePaths.tradeCopyTransactionReporting,
+                    ),
+                    (
+                      'Trạng thái tích hợp ARM',
+                      AppRoutePaths.tradeCopyArmIntegrationStatus,
+                    ),
+                    (
+                      'Báo cáo thực thi tốt nhất',
+                      AppRoutePaths.tradeCopyBestExecutionReports,
+                    ),
+                    (
+                      'Phân tích nơi thực thi',
+                      AppRoutePaths.tradeCopyExecutionVenueAnalysis,
+                    ),
+                    (
+                      'Giám sát trượt giá',
+                      AppRoutePaths.tradeCopySlippageMonitoring,
+                    ),
+                    (
+                      'Phân loại khách hàng',
+                      AppRoutePaths.tradeCopyClientCategorization,
+                    ),
+                    (
+                      'Yêu cầu nâng hạng',
+                      AppRoutePaths.tradeCopyClientOptUpRequest,
+                    ),
+                    (
+                      'Định nghĩa thị trường mục tiêu',
+                      AppRoutePaths.tradeCopyTargetMarketDefinition,
+                    ),
+                    (
+                      'Bảo vệ tiền khách hàng',
+                      AppRoutePaths.tradeCopyClientMoneyProtection,
+                    ),
+                    (
+                      'Đối soát CASS',
+                      AppRoutePaths.tradeCopyCassReconciliation,
+                    ),
+                    (
+                      'Bồi thường nhà đầu tư',
+                      AppRoutePaths.tradeCopyInvestorCompensation,
+                    ),
+                    (
+                      'Chi phí trước giao dịch',
+                      AppRoutePaths.tradeCopyExAnteCosts,
+                    ),
+                    ('Máy tính RIY', AppRoutePaths.tradeCopyRiyCalculator),
+                    (
+                      'Chi phí sau giao dịch',
+                      AppRoutePaths.tradeCopyExPostCostsReport,
+                    ),
+                    (
+                      'Tiết lộ quy định',
+                      AppRoutePaths.tradeCopyRegulatoryDisclosures,
+                    ),
+                    (
+                      'Theo dõi khiếu nại',
+                      AppRoutePaths.tradeCopyComplaintTrackingBase,
+                    ),
+                    (
+                      'Gửi khiếu nại',
+                      AppRoutePaths.tradeCopyComplaintSubmission,
+                    ),
+                    (
+                      'Chuyển tiếp ombudsman',
+                      AppRoutePaths.tradeCopyOmbudsmanReferral,
+                    ),
+                    ('Truy vết kiểm toán', AppRoutePaths.tradeCopyAuditTrail),
+                    ('Trình tạo KID', AppRoutePaths.tradeCopyKidGenerator),
+                  ])
+                    VitFilterChip(
+                      label: label,
+                      active: false,
+                      color: AppColors.primary,
+                      onTap: () => context.push(path),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -366,59 +310,56 @@ class ArmIntegrationStatusTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _rptFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-095',
         semanticLabel: 'Trạng thái tích hợp ARM',
         title: 'Tích hợp ARM',
         subtitle: 'Kết nối · SLA',
         contentKey: ArmIntegrationStatusTabletPage.contentKey,
-        child: _rptError(
-          'Không tải được trạng thái ARM',
-          () => ref.invalidate(tradeArmIntegrationStatusProvider),
-        ),
+        children: [
+          _rptError(
+            'Không tải được trạng thái ARM',
+            () => ref.invalidate(tradeArmIntegrationStatusProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _rptFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-095',
         semanticLabel: 'Trạng thái tích hợp ARM',
         title: 'Tích hợp ARM',
         subtitle: 'Kết nối · SLA',
         contentKey: ArmIntegrationStatusTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _rptSection(
-              title: 'Kết nối',
-              rows: [
-                for (final connection in snapshot.connections)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            connection.provider,
-                            style: AppTextStyles.caption.copyWith(
-                              fontWeight: AppTextStyles.bold,
-                              color: AppColors.text1,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '${connection.region} · uptime ${connection.uptime.toStringAsFixed(1)}%',
+        children: [
+          _rptSection(
+            title: 'Kết nối',
+            rows: [
+              for (final connection in snapshot.connections)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          connection.provider,
                           style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text2,
-                            fontFeatures: AppTextStyles.tabularFigures,
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '${connection.region} · uptime ${connection.uptime.toStringAsFixed(1)}%',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text2,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

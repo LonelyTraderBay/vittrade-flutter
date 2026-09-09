@@ -46,169 +46,151 @@ class _P2PWalletTransferTabletPageState
                       ref.invalidate(p2pWalletTransferProvider(request)),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 900),
-                  child: SingleChildScrollView(
-                    key: P2PWalletTransferTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PWalletTransferTabletPage.contentKey,
+                children: [
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Số tiền chuyển (${snapshot.defaultAsset})',
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x2),
-                              VitInput(
-                                controller: _amountController,
-                                keyboardType: TextInputType.number,
-                                semanticLabel: 'Số tiền chuyển',
-                                hintText: 'Nhập số tiền',
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.zeroInsets,
-                          clip: true,
-                          child: Column(
-                            children: [
-                              for (
-                                var i = 0;
-                                i < snapshot.balances.length;
-                                i++
-                              ) ...[
-                                Padding(
-                                  padding: TabletSpacingTokens.tableCellPadding,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                          snapshot.balances[i].walletLabel,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                          snapshot.balances[i].asset,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                          formatP2PCrypto(
-                                            snapshot.balances[i].available,
-                                          ),
-                                          textAlign: TextAlign.end,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text1,
-                                            fontWeight: AppTextStyles.bold,
-                                            fontFeatures:
-                                                AppTextStyles.tabularFigures,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                if (i < snapshot.balances.length - 1)
-                                  const Divider(
-                                    height: TabletSpacingTokens.dividerHairline,
-                                    thickness:
-                                        TabletSpacingTokens.dividerHairline,
-                                    color: AppColors.divider,
-                                  ),
-                              ],
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (final (label, note) in [
-                                ('Phí', snapshot.feeLabel),
-                                ('Thời gian xử lý', snapshot.processingLabel),
-                              ])
-                                Padding(
-                                  padding:
-                                      TabletSpacingTokens.tableCellPaddingV,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          label,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        note,
-                                        style: AppTextStyles.caption.copyWith(
-                                          color: AppColors.text1,
-                                          fontWeight: AppTextStyles.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        const VitHighRiskStatePanel(
-                          state: VitHighRiskUiState.riskReview,
-                          title: 'Xem lại chuyển nội bộ',
-                          message:
-                              'Kiểm tra số tiền và ví đích. Chuyển nội bộ không thể hoàn tác sau khi gửi.',
-                          contractId: 'p2p-wallet-transfer-tablet',
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x4),
-                        VitCtaButton(
-                          key: P2PWalletTransferTabletPage.submitKey,
-                          onPressed: () => context.go(AppRoutePaths.p2pWallet),
-                          child: const Text('Xem trước & gửi'),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
                         Text(
-                          snapshot.escrowNote,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                            height: 1.3,
+                          'Số tiền chuyển (${snapshot.defaultAsset})',
+                          style: AppTextStyles.caption.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
                           ),
+                        ),
+                        const SizedBox(height: TabletSpacingTokens.x2),
+                        VitInput(
+                          controller: _amountController,
+                          keyboardType: TextInputType.number,
+                          semanticLabel: 'Số tiền chuyển',
+                          hintText: 'Nhập số tiền',
                         ),
                       ],
                     ),
                   ),
-                ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.zeroInsets,
+                    clip: true,
+                    child: Column(
+                      children: [
+                        for (var i = 0; i < snapshot.balances.length; i++) ...[
+                          Padding(
+                            padding: TabletSpacingTokens.tableCellPadding,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    snapshot.balances[i].walletLabel,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    snapshot.balances[i].asset,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    formatP2PCrypto(
+                                      snapshot.balances[i].available,
+                                    ),
+                                    textAlign: TextAlign.end,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text1,
+                                      fontWeight: AppTextStyles.bold,
+                                      fontFeatures:
+                                          AppTextStyles.tabularFigures,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (i < snapshot.balances.length - 1)
+                            const Divider(
+                              height: TabletSpacingTokens.dividerHairline,
+                              thickness: TabletSpacingTokens.dividerHairline,
+                              color: AppColors.divider,
+                            ),
+                        ],
+                      ],
+                    ),
+                  ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final (label, note) in [
+                          ('Phí', snapshot.feeLabel),
+                          ('Thời gian xử lý', snapshot.processingLabel),
+                        ])
+                          Padding(
+                            padding: TabletSpacingTokens.tableCellPaddingV,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    label,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  note,
+                                  style: AppTextStyles.caption.copyWith(
+                                    color: AppColors.text1,
+                                    fontWeight: AppTextStyles.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  const VitHighRiskStatePanel(
+                    state: VitHighRiskUiState.riskReview,
+                    title: 'Xem lại chuyển nội bộ',
+                    message:
+                        'Kiểm tra số tiền và ví đích. Chuyển nội bộ không thể hoàn tác sau khi gửi.',
+                    contractId: 'p2p-wallet-transfer-tablet',
+                  ),
+
+                  const SizedBox(height: TabletSpacingTokens.x4),
+
+                  VitCtaButton(
+                    key: P2PWalletTransferTabletPage.submitKey,
+                    onPressed: () => context.push(AppRoutePaths.p2pWallet),
+                    child: const Text('Xem trước & gửi'),
+                  ),
+
+                  Text(
+                    snapshot.escrowNote,
+                    style: AppTextStyles.micro.copyWith(
+                      color: AppColors.text3,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -272,151 +254,124 @@ class P2PFundLockHistoryTabletPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PFundLockHistoryTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PFundLockHistoryTabletPage.contentKey,
+                children: [
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Row(
                       children: [
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Row(
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      snapshot.heroTitle,
-                                      style: AppTextStyles.control.copyWith(
-                                        fontWeight: AppTextStyles.bold,
-                                        color: AppColors.text1,
-                                      ),
-                                    ),
-                                  ],
+                              Text(
+                                snapshot.heroTitle,
+                                style: AppTextStyles.control.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        if (snapshot.records.isEmpty)
-                          VitEmptyState(
-                            icon: Icons.lock_outline_rounded,
-                            title: snapshot.emptyTitle,
-                            message: snapshot.subtitle,
-                          )
-                        else
-                          VitCard(
-                            radius: VitCardRadius.tight,
-                            padding: TabletSpacingTokens.zeroInsets,
-                            clip: true,
-                            child: Column(
-                              children: [
-                                for (
-                                  var i = 0;
-                                  i < snapshot.records.length;
-                                  i++
-                                ) ...[
-                                  Padding(
-                                    padding:
-                                        TabletSpacingTokens.tableCellPadding,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            snapshot.records[i].type,
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  color: AppColors.text2,
-                                                ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            snapshot.records[i].asset,
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  color: AppColors.text2,
-                                                ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            formatP2PCrypto(
-                                              snapshot.records[i].amount,
-                                            ),
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  color: AppColors.text1,
-                                                  fontWeight:
-                                                      AppTextStyles.bold,
-                                                  fontFeatures: AppTextStyles
-                                                      .tabularFigures,
-                                                ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: Text(
-                                            snapshot.records[i].reason,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: AppTextStyles.micro.copyWith(
-                                              color: AppColors.text3,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            snapshot.records[i].timestamp,
-                                            textAlign: TextAlign.end,
-                                            style: AppTextStyles.micro.copyWith(
-                                              color: AppColors.text3,
-                                              fontFeatures:
-                                                  AppTextStyles.tabularFigures,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  if (i < snapshot.records.length - 1)
-                                    const Divider(
-                                      height:
-                                          TabletSpacingTokens.dividerHairline,
-                                      thickness:
-                                          TabletSpacingTokens.dividerHairline,
-                                      color: AppColors.divider,
-                                    ),
-                                ],
-                              ],
-                            ),
-                          ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.contractNotes,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
                       ],
                     ),
                   ),
-                ),
+
+                  if (snapshot.records.isEmpty)
+                    VitEmptyState(
+                      icon: Icons.lock_outline_rounded,
+                      title: snapshot.emptyTitle,
+                      message: snapshot.subtitle,
+                    )
+                  else
+                    VitCard(
+                      radius: VitCardRadius.tight,
+                      padding: TabletSpacingTokens.zeroInsets,
+                      clip: true,
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < snapshot.records.length; i++) ...[
+                            Padding(
+                              padding: TabletSpacingTokens.tableCellPadding,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      snapshot.records[i].type,
+                                      style: AppTextStyles.caption.copyWith(
+                                        color: AppColors.text2,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      snapshot.records[i].asset,
+                                      style: AppTextStyles.caption.copyWith(
+                                        color: AppColors.text2,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      formatP2PCrypto(
+                                        snapshot.records[i].amount,
+                                      ),
+                                      style: AppTextStyles.caption.copyWith(
+                                        color: AppColors.text1,
+                                        fontWeight: AppTextStyles.bold,
+                                        fontFeatures:
+                                            AppTextStyles.tabularFigures,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Text(
+                                      snapshot.records[i].reason,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppTextStyles.micro.copyWith(
+                                        color: AppColors.text3,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      snapshot.records[i].timestamp,
+                                      textAlign: TextAlign.end,
+                                      style: AppTextStyles.micro.copyWith(
+                                        color: AppColors.text3,
+                                        fontFeatures:
+                                            AppTextStyles.tabularFigures,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (i < snapshot.records.length - 1)
+                              const Divider(
+                                height: TabletSpacingTokens.dividerHairline,
+                                thickness: TabletSpacingTokens.dividerHairline,
+                                color: AppColors.divider,
+                              ),
+                          ],
+                        ],
+                      ),
+                    ),
+
+                  Text(
+                    snapshot.contractNotes,
+                    style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                  ),
+                ],
               ),
             ),
           ),

@@ -54,7 +54,7 @@ class TradeTabletUtilityPage extends StatelessWidget {
       semanticLabel: '$title trên tablet',
       semanticIdentifier: '$semanticIdentifier-TABLET',
       contentKey: contentKey,
-      onBack: () => context.go(AppRoutePaths.trade),
+      onBack: () => context.push(AppRoutePaths.trade),
       children: [
         VitCard(
           padding: TabletSpacingTokens.zeroInsets,

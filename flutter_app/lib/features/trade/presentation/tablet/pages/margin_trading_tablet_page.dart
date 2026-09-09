@@ -82,7 +82,7 @@ class _MarginTradingTabletPageState
         semanticIdentifier: widget.pairRouteVariant ? 'SC-086' : 'SC-085',
         title: 'Margin ${widget.pairId.toUpperCase()}',
         subtitle: 'Giao dịch Margin',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: const VitSkeletonList(rows: 5),
         secondary: const VitSkeletonList(rows: 4),
       ),
@@ -91,7 +91,7 @@ class _MarginTradingTabletPageState
         semanticIdentifier: widget.pairRouteVariant ? 'SC-086' : 'SC-085',
         title: 'Margin ${widget.pairId.toUpperCase()}',
         subtitle: 'Giao dịch Margin',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: VitErrorState(
           title: 'Không tải được giao dịch Margin',
           message: 'Vui lòng kiểm tra kết nối và thử lại.',

@@ -5,16 +5,14 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/p2p_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_formatters.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Sổ lệnh P2P (SC-273): chips tài sản + ticker + giá tốt
 /// nhất + hai cột bid/ask cạnh nhau (khác phone xếp chồng), panel rủi ro.
@@ -69,76 +67,62 @@ class _P2POrderBookTabletPageState
                       ref.invalidate(p2pOrderBookProvider(_selectedAsset)),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1180),
-                  child: SingleChildScrollView(
-                    key: P2POrderBookTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: VitPageContent(
-                      fullBleed: true,
-                      rhythm: VitPageRhythm.compact,
-                      density: VitDensity.compact,
-                      children: [
-                        Wrap(
-                          spacing: TabletSpacingTokens.x3,
-                          runSpacing: TabletSpacingTokens.x2,
-                          children: [
-                            for (final market in snapshot.markets)
-                              VitFilterChip(
-                                label: market.asset,
-                                active: _selectedAsset == market.asset,
-                                onTap: () => setState(() {
-                                  _selectedAsset = market.asset;
-                                }),
-                                color: AppColors.primary,
-                              ),
-                          ],
+              data: (snapshot) => VitTabletSectionBody(
+                children: [
+                  Wrap(
+                    spacing: TabletSpacingTokens.x3,
+                    runSpacing: TabletSpacingTokens.x2,
+                    children: [
+                      for (final market in snapshot.markets)
+                        VitFilterChip(
+                          label: market.asset,
+                          active: _selectedAsset == market.asset,
+                          onTap: () => setState(() {
+                            _selectedAsset = market.asset;
+                          }),
+                          color: AppColors.primary,
                         ),
-                        _MarketTicker(market: snapshot.selectedAsset),
-                        _BestPriceRow(snapshot: snapshot),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: _BookSide(
-                                title: 'Lệnh mua (Bid)',
-                                entries: snapshot.bids,
-                                color: AppColors.buy,
-                              ),
-                            ),
-                            const SizedBox(width: TabletSpacingTokens.x4),
-                            Expanded(
-                              child: _BookSide(
-                                title: 'Lệnh bán (Ask)',
-                                entries: snapshot.asks,
-                                color: AppColors.sell,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const VitHighRiskStatePanel(
-                          state: VitHighRiskUiState.riskReview,
-                          title: 'Xem lại thanh khoản sổ lệnh',
-                          message:
-                              'Tài sản, làm mới dữ liệu, biểu đồ độ sâu, giá bid/ask tốt nhất và rủi ro thanh khoản được xem lại trước khi khớp lệnh P2P.',
-                          contractId: 'p2p-order-book-tablet-review',
-                        ),
-                        Text(
-                          snapshot.contractNotes,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                      ],
-                    ),
+                    ],
                   ),
-                ),
+
+                  _MarketTicker(market: snapshot.selectedAsset),
+
+                  _BestPriceRow(snapshot: snapshot),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _BookSide(
+                          title: 'Lệnh mua (Bid)',
+                          entries: snapshot.bids,
+                          color: AppColors.buy,
+                        ),
+                      ),
+                      const SizedBox(width: TabletSpacingTokens.x4),
+                      Expanded(
+                        child: _BookSide(
+                          title: 'Lệnh bán (Ask)',
+                          entries: snapshot.asks,
+                          color: AppColors.sell,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const VitHighRiskStatePanel(
+                    state: VitHighRiskUiState.riskReview,
+                    title: 'Xem lại thanh khoản sổ lệnh',
+                    message:
+                        'Tài sản, làm mới dữ liệu, biểu đồ độ sâu, giá bid/ask tốt nhất và rủi ro thanh khoản được xem lại trước khi khớp lệnh P2P.',
+                    contractId: 'p2p-order-book-tablet-review',
+                  ),
+
+                  Text(
+                    snapshot.contractNotes,
+                    style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                  ),
+                ],
               ),
             ),
           ),

@@ -7,11 +7,9 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 part 'staking_tablet_pages_policies.dart';
 part 'staking_tablet_pages_operators.dart';
@@ -26,56 +24,6 @@ String _stkUsd(num v) => VitFormat.usd(v.toDouble());
 String _stkUsdS(num v) => VitFormat.usdSigned(v.toDouble());
 String _stkPct(num v, [int d = 2]) => VitFormat.percent(v, fractionDigits: d);
 String _stkDec(num v, [int d = 2]) => v.toStringAsFixed(d);
-
-Widget _stkFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.earn,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _stkError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -164,7 +112,7 @@ Widget _stkQuickLinks(BuildContext context, List<(String, String)> links) {
           label: label,
           active: false,
           color: AppColors.primary,
-          onTap: () => context.go(path),
+          onTap: () => context.push(path),
         ),
     ],
   );
@@ -212,139 +160,136 @@ class StakingEarnTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stkFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-257',
         semanticLabel: 'Bảng staking',
         title: snapshotAsync.value?.title ?? 'Staking',
         subtitle: 'Staking · Phần thưởng',
         contentKey: StakingEarnTabletPage.contentKey,
-        child: _stkError(
-          'Không tải được staking',
-          () => ref.invalidate(
-            stakingEarnSnapshotProvider(StakingEarnRoute.earn),
+        children: [
+          _stkError(
+            'Không tải được staking',
+            () => ref.invalidate(
+              stakingEarnSnapshotProvider(StakingEarnRoute.earn),
+            ),
           ),
-        ),
+        ],
       ),
-      data: (snapshot) => _stkFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-257',
         semanticLabel: 'Bảng staking',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: StakingEarnTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stkSection(
-              title: 'Tổng quan',
-              rows: _stkRows([
-                ('Tổng đã kiếm', snapshot.totalEarnedUsd),
-                ('Vị thế đang chạy', '${snapshot.activePositions}'),
-                ('APY cao nhất', snapshot.maxApyLabel),
-                ('Bảo vệ quỹ', snapshot.fundProtectionLabel),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Sản phẩm',
-              rows: [
-                for (final product in snapshot.products)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${product.name} (${product.asset})',
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
+        children: [
+          _stkSection(
+            title: 'Tổng quan',
+            rows: _stkRows([
+              ('Tổng đã kiếm', snapshot.totalEarnedUsd),
+              ('Vị thế đang chạy', '${snapshot.activePositions}'),
+              ('APY cao nhất', snapshot.maxApyLabel),
+              ('Bảo vệ quỹ', snapshot.fundProtectionLabel),
+            ]),
+          ),
+
+          _stkSection(
+            title: 'Sản phẩm',
+            rows: [
+              for (final product in snapshot.products)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${product.name} (${product.asset})',
+                              style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
+                                color: AppColors.text1,
                               ),
-                              Text(
-                                '${product.lockLabel} · đã stake ${product.totalStaked}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          product.apy,
-                          style: AppTextStyles.caption.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.buy,
-                            fontFeatures: AppTextStyles.tabularFigures,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Vị thế của bạn',
-              rows: [
-                for (final position in snapshot.positions)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '${position.product} · ${position.asset} ${position.amount}',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text1,
                             ),
-                          ),
+                            Text(
+                              '${product.lockLabel} · đã stake ${product.totalStaked}',
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Đã kiếm ${position.earned}',
+                      ),
+                      Text(
+                        product.apy,
+                        style: AppTextStyles.caption.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.buy,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _stkSection(
+            title: 'Vị thế của bạn',
+            rows: [
+              for (final position in snapshot.positions)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${position.product} · ${position.asset} ${position.amount}',
                           style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text2,
-                            fontFeatures: AppTextStyles.tabularFigures,
+                            color: AppColors.text1,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Đã kiếm ${position.earned}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text2,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkSection(
-              title: 'Khám phá',
-              rows: [
-                _stkQuickLinks(context, [
-                  ('Bảng điều khiển', AppRoutePaths.earnDashboard),
-                  ('Phân tích', AppRoutePaths.earnAnalytics),
-                  ('Lịch sử', AppRoutePaths.earnHistory),
-                  ('Lịch trả thưởng', AppRoutePaths.earnCalendar),
-                  ('Chọn validator', AppRoutePaths.earnValidatorSelection),
-                  (
-                    'Sức khoẻ validator',
-                    AppRoutePaths.earnValidatorHealthMonitor,
-                  ),
-                  ('Tự động cộng dồn', AppRoutePaths.earnAutoCompound),
-                  ('Liquid staking', AppRoutePaths.earnLiquidStaking),
-                  ('Lệnh nâng cao', AppRoutePaths.earnAdvancedOrders),
-                  ('Đa chuỗi', AppRoutePaths.earnMultiChain),
-                  ('Bảo hiểm', AppRoutePaths.earnInsurance),
-                  ('Bảng rủi ro', AppRoutePaths.earnRiskDashboard),
-                  ('Lịch sử slashing', AppRoutePaths.earnSlashingHistory),
-                  ('Quản trị cộng đồng', AppRoutePaths.earnCommunityGovernance),
-                  ('Đề xuất', AppRoutePaths.earnProposals),
-                  ('Gửi tiết kiệm', AppRoutePaths.earnSavings),
-                ]),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+
+          _stkSection(
+            title: 'Khám phá',
+            rows: [
+              _stkQuickLinks(context, [
+                ('Bảng điều khiển', AppRoutePaths.earnDashboard),
+                ('Phân tích', AppRoutePaths.earnAnalytics),
+                ('Lịch sử', AppRoutePaths.earnHistory),
+                ('Lịch trả thưởng', AppRoutePaths.earnCalendar),
+                ('Chọn validator', AppRoutePaths.earnValidatorSelection),
+                (
+                  'Sức khoẻ validator',
+                  AppRoutePaths.earnValidatorHealthMonitor,
+                ),
+                ('Tự động cộng dồn', AppRoutePaths.earnAutoCompound),
+                ('Liquid staking', AppRoutePaths.earnLiquidStaking),
+                ('Lệnh nâng cao', AppRoutePaths.earnAdvancedOrders),
+                ('Đa chuỗi', AppRoutePaths.earnMultiChain),
+                ('Bảo hiểm', AppRoutePaths.earnInsurance),
+                ('Bảng rủi ro', AppRoutePaths.earnRiskDashboard),
+                ('Lịch sử slashing', AppRoutePaths.earnSlashingHistory),
+                ('Quản trị cộng đồng', AppRoutePaths.earnCommunityGovernance),
+                ('Đề xuất', AppRoutePaths.earnProposals),
+                ('Gửi tiết kiệm', AppRoutePaths.earnSavings),
+              ]),
+            ],
+          ),
+        ],
       ),
     );
   }

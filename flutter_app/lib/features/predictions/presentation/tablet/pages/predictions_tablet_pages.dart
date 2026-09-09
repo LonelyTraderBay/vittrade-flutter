@@ -8,11 +8,9 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 part 'predictions_tablet_pages_explore.dart';
 part 'predictions_tablet_pages_explore2.dart';
@@ -21,56 +19,6 @@ String _pdmUsd(num v) => VitFormat.usd(v.toDouble());
 String _pdmUsdS(num v) => VitFormat.usdSigned(v.toDouble());
 String _pdmPct(num v, [int d = 1]) => VitFormat.percent(v, fractionDigits: d);
 String _pdmDec(num v, [int d = 2]) => v.toStringAsFixed(d);
-
-Widget _pdmFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.marketsPredictions,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _pdmError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -159,7 +107,7 @@ Widget _pdmQuickLinks(BuildContext context, List<(String, String)> links) {
           label: label,
           active: false,
           color: AppColors.primary,
-          onTap: () => context.go(path),
+          onTap: () => context.push(path),
         ),
     ],
   );
@@ -177,7 +125,7 @@ List<Widget> _pdmEventRows(
           color: AppColors.transparent,
           child: InkWell(
             onTap: () =>
-                context.go(AppRoutePaths.marketsPredictionEvent(event.id)),
+                context.push(AppRoutePaths.marketsPredictionEvent(event.id)),
             child: Row(
               children: [
                 Expanded(
@@ -231,81 +179,72 @@ class PredictionsHomeTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-208',
         semanticLabel: 'Thị trường dự đoán',
         title: 'Prediction Markets',
         subtitle: 'Sự kiện · Xác suất',
         contentKey: PredictionsHomeTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được prediction',
-          () => ref.invalidate(
-            predictionsHomeSnapshotProvider((
-              filter: PredictionFilterTab.trending,
-              category: null,
-              searchQuery: '',
-            )),
+        children: [
+          _pdmError(
+            'Không tải được prediction',
+            () => ref.invalidate(
+              predictionsHomeSnapshotProvider((
+                filter: PredictionFilterTab.trending,
+                category: null,
+                searchQuery: '',
+              )),
+            ),
           ),
-        ),
+        ],
       ),
-      data: (snapshot) => _pdmFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-208',
         semanticLabel: 'Thị trường dự đoán',
         title: 'Prediction Markets',
         subtitle: '${snapshot.openPositionCount} vị thế mở',
         contentKey: PredictionsHomeTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _pdmSection(
-              title: 'Sự kiện nổi bật',
-              rows: _pdmEventRows(context, snapshot.events),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _pdmSection(
-              title: 'Danh mục',
-              rows: _pdmBullets(snapshot.categories),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _pdmSection(
-              title: 'Khám phá',
-              rows: [
-                _pdmQuickLinks(context, [
-                  ('Tìm kiếm', AppRoutePaths.marketsPredictionsSearch),
-                  ('Biến động mạnh', AppRoutePaths.marketsPredictionsBreaking),
-                  ('Danh mục', AppRoutePaths.marketsPredictionsPortfolio),
-                  ('Phần thưởng', AppRoutePaths.marketsPredictionsRewards),
-                  (
-                    'Bảng xếp hạng',
-                    AppRoutePaths.marketsPredictionsLeaderboard,
-                  ),
-                  ('Hoạt động', AppRoutePaths.marketsPredictionsActivity),
-                  ('Giải đấu', AppRoutePaths.marketsPredictionsTournaments),
-                  (
-                    'Lịch sự kiện',
-                    AppRoutePaths.marketsPredictionsEventCalendar,
-                  ),
-                  (
-                    'Máy tính rủi ro',
-                    AppRoutePaths.marketsPredictionsRiskCalculator,
-                  ),
-                  ('Market maker', AppRoutePaths.marketsPredictionsMarketMaker),
-                  (
-                    'Phân tích danh mục',
-                    AppRoutePaths.marketsPredictionsPortfolioAnalyzer,
-                  ),
-                  ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
-                  (
-                    'Tích hợp dữ liệu',
-                    AppRoutePaths.marketsPredictionsDataIntegration,
-                  ),
-                ]),
-              ],
-            ),
-          ],
-        ),
+        children: [
+          _pdmSection(
+            title: 'Sự kiện nổi bật',
+            rows: _pdmEventRows(context, snapshot.events),
+          ),
+
+          _pdmSection(
+            title: 'Danh mục',
+            rows: _pdmBullets(snapshot.categories),
+          ),
+
+          _pdmSection(
+            title: 'Khám phá',
+            rows: [
+              _pdmQuickLinks(context, [
+                ('Tìm kiếm', AppRoutePaths.marketsPredictionsSearch),
+                ('Biến động mạnh', AppRoutePaths.marketsPredictionsBreaking),
+                ('Danh mục', AppRoutePaths.marketsPredictionsPortfolio),
+                ('Phần thưởng', AppRoutePaths.marketsPredictionsRewards),
+                ('Bảng xếp hạng', AppRoutePaths.marketsPredictionsLeaderboard),
+                ('Hoạt động', AppRoutePaths.marketsPredictionsActivity),
+                ('Giải đấu', AppRoutePaths.marketsPredictionsTournaments),
+                ('Lịch sự kiện', AppRoutePaths.marketsPredictionsEventCalendar),
+                (
+                  'Máy tính rủi ro',
+                  AppRoutePaths.marketsPredictionsRiskCalculator,
+                ),
+                ('Market maker', AppRoutePaths.marketsPredictionsMarketMaker),
+                (
+                  'Phân tích danh mục',
+                  AppRoutePaths.marketsPredictionsPortfolioAnalyzer,
+                ),
+                ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
+                (
+                  'Tích hợp dữ liệu',
+                  AppRoutePaths.marketsPredictionsDataIntegration,
+                ),
+              ]),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -330,46 +269,43 @@ class PredictionsSearchTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-209',
         semanticLabel: 'Tìm kiếm prediction',
         title: 'Tìm kiếm',
         subtitle: 'Sự kiện · Kết quả',
         contentKey: PredictionsSearchTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được tìm kiếm',
-          () => ref.invalidate(
-            predictionsSearchSnapshotProvider((
-              sort: PredictionSearchSort.trending,
-              status: PredictionStatusFilter.all,
-              category: null,
-              searchQuery: '',
-            )),
+        children: [
+          _pdmError(
+            'Không tải được tìm kiếm',
+            () => ref.invalidate(
+              predictionsSearchSnapshotProvider((
+                sort: PredictionSearchSort.trending,
+                status: PredictionStatusFilter.all,
+                category: null,
+                searchQuery: '',
+              )),
+            ),
           ),
-        ),
+        ],
       ),
-      data: (snapshot) => _pdmFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-209',
         semanticLabel: 'Tìm kiếm prediction',
         title: 'Tìm kiếm',
         subtitle: '${snapshot.results.length} kết quả',
         contentKey: PredictionsSearchTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _pdmSection(
-              title: 'Kết quả',
-              rows: _pdmEventRows(context, snapshot.results),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _pdmSection(
-              title: 'Cập nhật',
-              rows: [_pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}')],
-            ),
-          ],
-        ),
+        children: [
+          _pdmSection(
+            title: 'Kết quả',
+            rows: _pdmEventRows(context, snapshot.results),
+          ),
+
+          _pdmSection(
+            title: 'Cập nhật',
+            rows: [_pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}')],
+          ),
+        ],
       ),
     );
   }
@@ -387,34 +323,31 @@ class PredictionsBreakingTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-210',
         semanticLabel: 'Biến động prediction',
         title: 'Biến động mạnh',
         subtitle: 'Tăng · Giảm',
         contentKey: PredictionsBreakingTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được biến động',
-          () => ref.invalidate(predictionsBreakingSnapshotProvider(null)),
-        ),
+        children: [
+          _pdmError(
+            'Không tải được biến động',
+            () => ref.invalidate(predictionsBreakingSnapshotProvider(null)),
+          ),
+        ],
       ),
-      data: (snapshot) => _pdmFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-210',
         semanticLabel: 'Biến động prediction',
         title: 'Biến động mạnh',
         subtitle: '${snapshot.upCount} tăng · ${snapshot.downCount} giảm',
         contentKey: PredictionsBreakingTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _pdmSection(
-              title: 'Movers',
-              rows: _pdmEventRows(context, snapshot.movers),
-            ),
-          ],
-        ),
+        children: [
+          _pdmSection(
+            title: 'Movers',
+            rows: _pdmEventRows(context, snapshot.movers),
+          ),
+        ],
       ),
     );
   }
@@ -436,46 +369,44 @@ class PredictionEventDetailTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-211',
         semanticLabel: 'Chi tiết sự kiện prediction',
         title: 'Chi tiết sự kiện',
         subtitle: eventId,
         contentKey: PredictionEventDetailTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được sự kiện',
-          () => ref.invalidate(predictionsEventDetailSnapshotProvider(eventId)),
-        ),
+        children: [
+          _pdmError(
+            'Không tải được sự kiện',
+            () =>
+                ref.invalidate(predictionsEventDetailSnapshotProvider(eventId)),
+          ),
+        ],
       ),
-      data: (snapshot) => _pdmFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-211',
         semanticLabel: 'Chi tiết sự kiện prediction',
         title: snapshot.event.title,
         subtitle: snapshot.event.category,
         contentKey: PredictionEventDetailTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _pdmSection(title: 'Quy tắc', rows: _pdmBullets(snapshot.rules)),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stkLikeHolders(snapshot.topHolders),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _pdmSection(
-              title: 'Liên quan',
-              rows: [
-                _pdmQuickLinks(context, [
-                  (
-                    'Biểu đồ nâng cao',
-                    AppRoutePaths.marketsPredictionsAdvancedChart(eventId),
-                  ),
-                  ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
-                ]),
-              ],
-            ),
-          ],
-        ),
+        children: [
+          _pdmSection(title: 'Quy tắc', rows: _pdmBullets(snapshot.rules)),
+
+          _stkLikeHolders(snapshot.topHolders),
+
+          _pdmSection(
+            title: 'Liên quan',
+            rows: [
+              _pdmQuickLinks(context, [
+                (
+                  'Biểu đồ nâng cao',
+                  AppRoutePaths.marketsPredictionsAdvancedChart(eventId),
+                ),
+                ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
+              ]),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -503,120 +434,117 @@ class PredictionsPortfolioTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-212',
         semanticLabel: 'Danh mục prediction',
         title: 'Danh mục prediction',
         subtitle: 'Vị thế · Lãi lỗ',
         contentKey: PredictionsPortfolioTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được danh mục',
-          () => ref.invalidate(predictionsPortfolioSnapshotProvider),
-        ),
+        children: [
+          _pdmError(
+            'Không tải được danh mục',
+            () => ref.invalidate(predictionsPortfolioSnapshotProvider),
+          ),
+        ],
       ),
       data: (value) {
-        return _pdmFrame(
-          context: context,
+        return VitTabletSectionFrame(
           semanticIdentifier: 'SC-212',
           semanticLabel: 'Danh mục prediction',
           title: 'Danh mục prediction',
           subtitle: 'Giá trị ${_pdmUsd(value.totalCurrentValue)}',
           contentKey: PredictionsPortfolioTabletPage.contentKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _pdmSection(
-                title: 'Tổng quan',
-                rows: _pdmRows([
-                  ('Giá trị hiện tại', _pdmUsd(value.totalCurrentValue)),
-                  ('Đã đầu tư', _pdmUsd(value.totalInvested)),
-                  ('Lãi lỗ', _pdmUsdS(value.totalPnl)),
-                ]),
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-              _pdmSection(
-                title: 'Vị thế',
-                rows: [
-                  for (final position in value.positions)
-                    Padding(
-                      padding: TabletSpacingTokens.tableCellPaddingV,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  position.outcome,
-                                  style: AppTextStyles.caption.copyWith(
-                                    fontWeight: AppTextStyles.bold,
-                                    color: AppColors.text1,
-                                  ),
-                                ),
-                                Text(
-                                  '${_pdmDec(position.shares, 1)} cổ phần · giá TB ${_pdmDec(position.avgPrice)}',
-                                  style: AppTextStyles.caption.copyWith(
-                                    color: AppColors.text2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            _pdmUsdS(position.pnl),
-                            style: AppTextStyles.caption.copyWith(
-                              fontWeight: AppTextStyles.bold,
-                              color: position.pnl >= 0
-                                  ? AppColors.buy
-                                  : AppColors.sell,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(height: TabletSpacingTokens.x3),
-              _pdmSection(
-                title: 'Biên lai',
-                rows: [
-                  for (final receipt in value.receipts.take(6))
-                    Padding(
-                      padding: TabletSpacingTokens.tableCellPaddingV,
-                      child: Material(
-                        color: AppColors.transparent,
-                        child: InkWell(
-                          onTap: () => context.go(
-                            AppRoutePaths.marketsPredictionReceipt(receipt.id),
-                          ),
-                          child: Row(
+          children: [
+            _pdmSection(
+              title: 'Tổng quan',
+              rows: _pdmRows([
+                ('Giá trị hiện tại', _pdmUsd(value.totalCurrentValue)),
+                ('Đã đầu tư', _pdmUsd(value.totalInvested)),
+                ('Lãi lỗ', _pdmUsdS(value.totalPnl)),
+              ]),
+            ),
+
+            _pdmSection(
+              title: 'Vị thế',
+              rows: [
+                for (final position in value.positions)
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Text(
-                                  '${receipt.outcome} · ${receipt.status}',
-                                  style: AppTextStyles.caption.copyWith(
-                                    color: AppColors.text1,
-                                  ),
-                                ),
-                              ),
                               Text(
-                                _pdmUsd(receipt.total),
+                                position.outcome,
                                 style: AppTextStyles.caption.copyWith(
                                   fontWeight: AppTextStyles.bold,
                                   color: AppColors.text1,
-                                  fontFeatures: AppTextStyles.tabularFigures,
+                                ),
+                              ),
+                              Text(
+                                '${_pdmDec(position.shares, 1)} cổ phần · giá TB ${_pdmDec(position.avgPrice)}',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text2,
                                 ),
                               ),
                             ],
                           ),
                         ),
+                        Text(
+                          _pdmUsdS(position.pnl),
+                          style: AppTextStyles.caption.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: position.pnl >= 0
+                                ? AppColors.buy
+                                : AppColors.sell,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+
+            _pdmSection(
+              title: 'Biên lai',
+              rows: [
+                for (final receipt in value.receipts.take(6))
+                  Padding(
+                    padding: TabletSpacingTokens.tableCellPaddingV,
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        onTap: () => context.push(
+                          AppRoutePaths.marketsPredictionReceipt(receipt.id),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${receipt.outcome} · ${receipt.status}',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              _pdmUsd(receipt.total),
+                              style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
+                                color: AppColors.text1,
+                                fontFeatures: AppTextStyles.tabularFigures,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                ],
-              ),
-            ],
-          ),
+                  ),
+              ],
+            ),
+          ],
         );
       },
     );
@@ -635,58 +563,55 @@ class PredictionsRewardsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _pdmFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-213',
         semanticLabel: 'Phần thưởng prediction',
         title: 'Phần thưởng',
         subtitle: 'Quỹ hàng ngày',
         contentKey: PredictionsRewardsTabletPage.contentKey,
-        child: _pdmError(
-          'Không tải được phần thưởng',
-          () => ref.invalidate(predictionsRewardsSnapshotProvider),
-        ),
+        children: [
+          _pdmError(
+            'Không tải được phần thưởng',
+            () => ref.invalidate(predictionsRewardsSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _pdmFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-213',
         semanticLabel: 'Phần thưởng prediction',
         title: 'Phần thưởng',
         subtitle: 'Quỹ ngày ${_pdmUsd(snapshot.totalDailyPool)}',
         contentKey: PredictionsRewardsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _pdmSection(
-              title: 'Cơ hội kiếm thưởng',
-              rows: [
-                for (final reward in snapshot.rewards.take(8))
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '${reward.category} · chênh lệch tối đa ${_pdmPct(reward.maxSpread)}',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text1,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '${_pdmUsd(reward.dailyReward)}/ngày',
+        children: [
+          _pdmSection(
+            title: 'Cơ hội kiếm thưởng',
+            rows: [
+              for (final reward in snapshot.rewards.take(8))
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${reward.category} · chênh lệch tối đa ${_pdmPct(reward.maxSpread)}',
                           style: AppTextStyles.caption.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.buy,
+                            color: AppColors.text1,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '${_pdmUsd(reward.dailyReward)}/ngày',
+                        style: AppTextStyles.caption.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.buy,
+                        ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

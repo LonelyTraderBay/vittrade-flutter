@@ -1,0 +1,9 @@
+# Baseline C2 — bootstrap 2026-09-09; ĐỢT 1 TRẢ XONG 2026-09-09 (B1 arena, B2 cross_module, B3+B3.5 p2p, B4-B6 sweep toàn module, surfaces trade/wallet). Chỉ còn ngoại lệ hợp lệ — KHÔNG được thêm dòng mới.
+# Ngoại lệ 1: auth — form đăng nhập căn giữa viewport là chủ đích UX (không phải bug khung đọc).
+features/auth/presentation/tablet/widgets/auth_tablet_surface.dart 1
+# Ngoại lệ 2: markets master shell — Center bọc cap ĐỘNG (biến maxBlockWidth của shell chuẩn GĐ1-4).
+features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart 1
+# Ngoại lệ 3: profile master shell — cùng lớp shell chuẩn GĐ1-4 (cap động).
+features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart 1
+# Ngoại lệ 4: chính scaffold dashboard chuẩn — chủ sở hữu hợp pháp của Center (wide tier căn giữa cặp cột).
+shared/layout/vit_two_column_tablet_dashboard.dart 1

@@ -11,6 +11,7 @@ import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// SC-084: Tuân thủ giao dịch — hub công bố quy định (MiFID, bảo vệ tiền
 /// khách hàng, hạn chế, trách nhiệm pháp lý, liên hệ, tài liệu).
@@ -54,75 +55,61 @@ class RegulatoryDisclosuresTabletPage extends ConsumerWidget {
                       ref.invalidate(tradeRegulatoryDisclosuresProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: RegulatoryDisclosuresTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        _HeroCard(
-                          title: snapshot.heroTitle,
-                          description: snapshot.heroDescription,
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DisclosureBlockCard(
-                          title: snapshot.mifidTitle,
-                          body: snapshot.mifidArticles.isEmpty
-                              ? ''
-                              : snapshot.mifidArticles.first.body,
-                          items: [
-                            for (final article in snapshot.mifidArticles)
-                              ...article.items,
-                          ],
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.commitmentText,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text2,
-                            height: 1.3,
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DisclosureBlockCard(
-                          title: snapshot.protection.coverage.title,
-                          body: snapshot.protection.coverage.body,
-                          items: snapshot.protection.coverage.items,
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DisclosureBlockCard(
-                          title: snapshot.restrictions.taxReporting.title,
-                          body: snapshot.restrictions.taxReporting.body,
-                          items: snapshot.restrictions.taxReporting.items,
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DisclosureBlockCard(
-                          title: snapshot.liability.limitation.title,
-                          body: snapshot.liability.limitation.body,
-                          items: snapshot.liability.limitation.items,
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DisclosureBlockCard(
-                          title: snapshot.whistleblower.title,
-                          body: snapshot.whistleblower.body,
-                          items: snapshot.whistleblower.items,
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _ContactsCard(contacts: snapshot.contacts),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DocumentsCard(terms: snapshot.terms),
-                      ],
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: RegulatoryDisclosuresTabletPage.contentKey,
+                children: [
+                  _HeroCard(
+                    title: snapshot.heroTitle,
+                    description: snapshot.heroDescription,
+                  ),
+
+                  _DisclosureBlockCard(
+                    title: snapshot.mifidTitle,
+                    body: snapshot.mifidArticles.isEmpty
+                        ? ''
+                        : snapshot.mifidArticles.first.body,
+                    items: [
+                      for (final article in snapshot.mifidArticles)
+                        ...article.items,
+                    ],
+                  ),
+
+                  Text(
+                    snapshot.commitmentText,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text2,
+                      height: 1.3,
                     ),
                   ),
-                ),
+
+                  _DisclosureBlockCard(
+                    title: snapshot.protection.coverage.title,
+                    body: snapshot.protection.coverage.body,
+                    items: snapshot.protection.coverage.items,
+                  ),
+
+                  _DisclosureBlockCard(
+                    title: snapshot.restrictions.taxReporting.title,
+                    body: snapshot.restrictions.taxReporting.body,
+                    items: snapshot.restrictions.taxReporting.items,
+                  ),
+
+                  _DisclosureBlockCard(
+                    title: snapshot.liability.limitation.title,
+                    body: snapshot.liability.limitation.body,
+                    items: snapshot.liability.limitation.items,
+                  ),
+
+                  _DisclosureBlockCard(
+                    title: snapshot.whistleblower.title,
+                    body: snapshot.whistleblower.body,
+                    items: snapshot.whistleblower.items,
+                  ),
+
+                  _ContactsCard(contacts: snapshot.contacts),
+
+                  _DocumentsCard(terms: snapshot.terms),
+                ],
               ),
             ),
           ),

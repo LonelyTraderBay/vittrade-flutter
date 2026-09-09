@@ -1232,6 +1232,7 @@ shared_layout,,flutter_app/lib/shared/layout/vit_page_content.dart,pass,0,0,0,0,
 shared_layout,,flutter_app/lib/shared/layout/vit_page_layout.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_phone_frame.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_status_bar.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
+shared_layout,,flutter_app/lib/shared/layout/vit_tablet_section_frame.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_tablet_utility_page.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_top_chrome.dart,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,no,-
 shared_layout,,flutter_app/lib/shared/layout/vit_two_column_tablet_dashboard.dart,fail,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,7,no,-

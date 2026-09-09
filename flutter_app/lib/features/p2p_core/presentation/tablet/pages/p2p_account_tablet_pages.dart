@@ -7,63 +7,10 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_formatters.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'p2p_account_tablet_pages_extra.dart';
-
-Widget _accFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-  String backFallback = AppRoutePaths.p2p,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: backFallback,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _accSection({required String title, required List<Widget> rows}) {
   return VitCard(
@@ -156,63 +103,56 @@ class P2PReviewsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _accFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-231',
         semanticLabel: 'Đánh giá P2P',
         title: 'Đánh giá',
         subtitle: 'Nhận · Đã gửi',
         contentKey: P2PReviewsTabletPage.contentKey,
-        child: VitErrorState(
-          title: 'Không tải được đánh giá',
-          message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => ref.invalidate(p2pReviewsProvider),
-        ),
+        children: [
+          VitErrorState(
+            title: 'Không tải được đánh giá',
+            message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: () => ref.invalidate(p2pReviewsProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _accFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-231',
         semanticLabel: 'Đánh giá P2P',
         title: 'Đánh giá',
         subtitle: 'Nhận · Đã gửi',
         contentKey: P2PReviewsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _accSection(
-              title: 'Đánh giá nhận được',
-              rows: [
-                if (snapshot.receivedReviews.isEmpty)
-                  Text(
-                    snapshot.emptyTitle,
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.text3,
-                    ),
-                  )
-                else
-                  for (final review in snapshot.receivedReviews.take(8))
-                    _ReviewTile(review: review),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _accSection(
-              title: 'Đánh giá đã gửi',
-              rows: [
-                if (snapshot.givenReviews.isEmpty)
-                  Text(
-                    snapshot.emptyTitle,
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.text3,
-                    ),
-                  )
-                else
-                  for (final review in snapshot.givenReviews.take(8))
-                    _ReviewTile(review: review),
-              ],
-            ),
-          ],
-        ),
+        children: [
+          _accSection(
+            title: 'Đánh giá nhận được',
+            rows: [
+              if (snapshot.receivedReviews.isEmpty)
+                Text(
+                  snapshot.emptyTitle,
+                  style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+                )
+              else
+                for (final review in snapshot.receivedReviews.take(8))
+                  _ReviewTile(review: review),
+            ],
+          ),
+
+          _accSection(
+            title: 'Đánh giá đã gửi',
+            rows: [
+              if (snapshot.givenReviews.isEmpty)
+                Text(
+                  snapshot.emptyTitle,
+                  style: AppTextStyles.caption.copyWith(color: AppColors.text3),
+                )
+              else
+                for (final review in snapshot.givenReviews.take(8))
+                  _ReviewTile(review: review),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -278,114 +218,111 @@ class P2PContributionHistoryTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _accFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-242',
         semanticLabel: 'Lịch sử đóng góp P2P',
         title: 'Lịch sử đóng góp',
         subtitle: 'Quỹ bảo hiểm',
         contentKey: P2PContributionHistoryTabletPage.contentKey,
-        child: VitErrorState(
-          title: 'Không tải được lịch sử đóng góp',
-          message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => ref.invalidate(p2pContributionHistoryProvider),
-        ),
+        children: [
+          VitErrorState(
+            title: 'Không tải được lịch sử đóng góp',
+            message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: () => ref.invalidate(p2pContributionHistoryProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _accFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-242',
         semanticLabel: 'Lịch sử đóng góp P2P',
         title: 'Lịch sử đóng góp',
         subtitle: snapshot.contributionRateLabel,
         contentKey: P2PContributionHistoryTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (snapshot.contributions.isEmpty)
-              VitEmptyState(
-                icon: Icons.savings_outlined,
-                title: snapshot.emptyTitle,
-                message: snapshot.contributionRateLabel,
-              )
-            else
-              VitCard(
-                radius: VitCardRadius.tight,
-                padding: TabletSpacingTokens.zeroInsets,
-                clip: true,
-                child: Column(
-                  children: [
-                    for (var i = 0; i < snapshot.contributions.length; i++) ...[
-                      Padding(
-                        padding: TabletSpacingTokens.tableCellPadding,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                snapshot.contributions[i].date,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text3,
-                                  fontFeatures: AppTextStyles.tabularFigures,
-                                ),
+        children: [
+          if (snapshot.contributions.isEmpty)
+            VitEmptyState(
+              icon: Icons.savings_outlined,
+              title: snapshot.emptyTitle,
+              message: snapshot.contributionRateLabel,
+            )
+          else
+            VitCard(
+              radius: VitCardRadius.tight,
+              padding: TabletSpacingTokens.zeroInsets,
+              clip: true,
+              child: Column(
+                children: [
+                  for (var i = 0; i < snapshot.contributions.length; i++) ...[
+                    Padding(
+                      padding: TabletSpacingTokens.tableCellPadding,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              snapshot.contributions[i].date,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text3,
+                                fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
-                            Expanded(
-                              flex: 3,
-                              child: Text(
-                                snapshot.contributions[i].orderId,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              snapshot.contributions[i].orderId,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                formatP2PVnd(
-                                  snapshot.contributions[i].orderAmount,
-                                ),
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  fontFeatures: AppTextStyles.tabularFigures,
-                                ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              formatP2PVnd(
+                                snapshot.contributions[i].orderAmount,
+                              ),
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
+                                fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                formatP2PVnd(
-                                  snapshot.contributions[i].contributionAmount,
-                                ),
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text1,
-                                  fontWeight: AppTextStyles.bold,
-                                  fontFeatures: AppTextStyles.tabularFigures,
-                                ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              formatP2PVnd(
+                                snapshot.contributions[i].contributionAmount,
+                              ),
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text1,
+                                fontWeight: AppTextStyles.bold,
+                                fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      if (i < snapshot.contributions.length - 1)
-                        const Divider(
-                          height: TabletSpacingTokens.dividerHairline,
-                          thickness: TabletSpacingTokens.dividerHairline,
-                          color: AppColors.divider,
-                        ),
-                    ],
+                    ),
+                    if (i < snapshot.contributions.length - 1)
+                      const Divider(
+                        height: TabletSpacingTokens.dividerHairline,
+                        thickness: TabletSpacingTokens.dividerHairline,
+                        color: AppColors.divider,
+                      ),
                   ],
-                ),
+                ],
               ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            Text(
-              snapshot.contractNotes,
-              style: AppTextStyles.micro.copyWith(color: AppColors.text3),
             ),
-          ],
-        ),
+
+          Text(
+            snapshot.contractNotes,
+            style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+          ),
+        ],
       ),
     );
   }

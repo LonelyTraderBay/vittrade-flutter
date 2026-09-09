@@ -91,7 +91,7 @@ class _OrderSupportLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return VitCard(
       key: TradeTabletOrderReceiptPage.supportKey,
-      onTap: () => context.go(supportRoute),
+      onTap: () => context.push(supportRoute),
       radius: VitCardRadius.tight,
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: TabletSpacingTokens.x3,

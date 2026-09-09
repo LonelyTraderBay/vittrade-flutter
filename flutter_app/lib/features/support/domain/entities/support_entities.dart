@@ -236,3 +236,48 @@ final class AnnouncementDraft {
   final bool isPinned;
   final List<String> tags;
 }
+
+/// Nhãn tiếng Việt user-facing (B2 composition 2026-09-09): presentation
+/// render `viLabel` thay vì `.name` — identifier camelCase không lộ UI.
+extension SupportTicketStatusViLabel on SupportTicketStatus {
+  String get viLabel => switch (this) {
+    SupportTicketStatus.open => 'Đang mở',
+    SupportTicketStatus.inProgress => 'Đang xử lý',
+    SupportTicketStatus.resolved => 'Đã xử lý',
+    SupportTicketStatus.closed => 'Đã đóng',
+  };
+}
+
+/// Nhãn tiếng Việt cho mức ưu tiên phiếu hỗ trợ.
+extension SupportTicketPriorityViLabel on SupportTicketPriority {
+  String get viLabel => switch (this) {
+    SupportTicketPriority.low => 'Thấp',
+    SupportTicketPriority.medium => 'Trung bình',
+    SupportTicketPriority.high => 'Cao',
+    SupportTicketPriority.urgent => 'Khẩn cấp',
+  };
+}
+
+/// Nhãn tiếng Việt cho nhóm chủ đề phiếu hỗ trợ.
+extension SupportTicketCategoryViLabel on SupportTicketCategory {
+  String get viLabel => switch (this) {
+    SupportTicketCategory.technical => 'Kỹ thuật',
+    SupportTicketCategory.trading => 'Giao dịch',
+    SupportTicketCategory.deposit => 'Nạp tiền',
+    SupportTicketCategory.withdraw => 'Rút tiền',
+    SupportTicketCategory.kyc => 'Định danh KYC',
+    SupportTicketCategory.other => 'Khác',
+  };
+}
+
+/// Nhãn tiếng Việt cho loại thông báo vận hành.
+extension AnnouncementTypeViLabel on AnnouncementType {
+  String get viLabel => switch (this) {
+    AnnouncementType.promotion => 'Khuyến mãi',
+    AnnouncementType.newFeature => 'Tính năng mới',
+    AnnouncementType.listing => 'Niêm yết',
+    AnnouncementType.maintenance => 'Bảo trì',
+    AnnouncementType.security => 'Bảo mật',
+    AnnouncementType.general => 'Chung',
+  };
+}

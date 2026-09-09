@@ -42,6 +42,9 @@ arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_unive
 arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page_domains_suggestions_dropdowns.dart,7,0,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page_titles_and_shared_widgets.dart,7,0,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages.dart,1,0,0,C,0,0,0,pass,-
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_home.dart,9,0,0,C,0,0,0,pass,-
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs.dart,5,0,0,C,0,0,0,pass,-
+arena,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs_extra.dart,5,0,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_common.dart,1,0,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_sections.dart,4,0,0,C,0,0,0,pass,-
 arena,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_leaderboard_body.dart,1,0,0,E,0,0,0,pass,-

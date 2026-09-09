@@ -11,6 +11,7 @@ import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Tin tức & Thông báo (SC-047): chip lọc loại tin +
 /// danh sách bài dạng hàng rộng (mở rộng xem nội dung), resolve snapshot
@@ -91,69 +92,52 @@ class _NewsTabletPageState extends ConsumerState<NewsTabletPage> {
               ),
               data: (_) {
                 final snapshot = resolved!;
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1180),
-                    child: SingleChildScrollView(
-                      key: NewsTabletPage.contentKey,
-                      padding: const EdgeInsets.fromLTRB(
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x4,
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x6,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Wrap(
-                            spacing: TabletSpacingTokens.x3,
-                            runSpacing: TabletSpacingTokens.x2,
-                            children: [
-                              for (final type
-                                  in snapshot.newsReferenceData.filters)
-                                VitFilterChip(
-                                  label: type.label,
-                                  active: _activeType == type,
-                                  onTap: () => setState(() {
-                                    _activeType = _activeType == type
-                                        ? null
-                                        : type;
-                                  }),
-                                  color: AppColors.primary,
-                                ),
-                            ],
+                return VitTabletSectionBody(
+                  contentKey: NewsTabletPage.contentKey,
+                  children: [
+                    Wrap(
+                      spacing: TabletSpacingTokens.x3,
+                      runSpacing: TabletSpacingTokens.x2,
+                      children: [
+                        for (final type in snapshot.newsReferenceData.filters)
+                          VitFilterChip(
+                            label: type.label,
+                            active: _activeType == type,
+                            onTap: () => setState(() {
+                              _activeType = _activeType == type ? null : type;
+                            }),
+                            color: AppColors.primary,
                           ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          if (snapshot.articles.isEmpty)
-                            const VitEmptyState(
-                              icon: Icons.newspaper_rounded,
-                              title: 'Khong co tin phu hop',
-                              message: 'Thu bo loc loai tin.',
-                            )
-                          else
-                            VitCard(
-                              radius: VitCardRadius.tight,
-                              padding: TabletSpacingTokens.zeroInsets,
-                              clip: true,
-                              child: Column(
-                                children: [
-                                  for (final article in snapshot.articles)
-                                    _ArticleTile(
-                                      article: article,
-                                      expanded: _expandedId == article.id,
-                                      onToggle: () => setState(() {
-                                        _expandedId = _expandedId == article.id
-                                            ? null
-                                            : article.id;
-                                      }),
-                                    ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
+                      ],
                     ),
-                  ),
+
+                    if (snapshot.articles.isEmpty)
+                      const VitEmptyState(
+                        icon: Icons.newspaper_rounded,
+                        title: 'Khong co tin phu hop',
+                        message: 'Thu bo loc loai tin.',
+                      )
+                    else
+                      VitCard(
+                        radius: VitCardRadius.tight,
+                        padding: TabletSpacingTokens.zeroInsets,
+                        clip: true,
+                        child: Column(
+                          children: [
+                            for (final article in snapshot.articles)
+                              _ArticleTile(
+                                article: article,
+                                expanded: _expandedId == article.id,
+                                onToggle: () => setState(() {
+                                  _expandedId = _expandedId == article.id
+                                      ? null
+                                      : article.id;
+                                }),
+                              ),
+                          ],
+                        ),
+                      ),
+                  ],
                 );
               },
             ),

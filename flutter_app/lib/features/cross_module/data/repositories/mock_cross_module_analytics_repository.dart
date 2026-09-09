@@ -45,7 +45,7 @@ final class MockCrossModuleAnalyticsRepository
       modules: [
         CrossModuleMetricDraft(
           id: AnalyticsModuleId.trading,
-          name: 'Spot Trading',
+          name: 'Giao dịch Spot',
           roi: 12.5,
           totalTrades: 245,
           winRate: 62,
@@ -56,7 +56,7 @@ final class MockCrossModuleAnalyticsRepository
         ),
         CrossModuleMetricDraft(
           id: AnalyticsModuleId.p2p,
-          name: 'P2P Trading',
+          name: 'Giao dịch P2P',
           roi: 1.2,
           totalTrades: 28,
           winRate: 96,
@@ -67,7 +67,7 @@ final class MockCrossModuleAnalyticsRepository
         ),
         CrossModuleMetricDraft(
           id: AnalyticsModuleId.predictions,
-          name: 'Prediction Markets',
+          name: 'Thị trường dự đoán',
           roi: 18.3,
           totalTrades: 87,
           winRate: 58,
@@ -78,7 +78,7 @@ final class MockCrossModuleAnalyticsRepository
         ),
         CrossModuleMetricDraft(
           id: AnalyticsModuleId.dca,
-          name: 'DCA Strategy',
+          name: 'Chiến lược DCA',
           roi: 9.8,
           totalTrades: 12,
           winRate: 100,

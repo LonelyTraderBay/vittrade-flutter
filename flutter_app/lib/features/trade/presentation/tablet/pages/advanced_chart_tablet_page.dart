@@ -70,7 +70,7 @@ class _AdvancedChartTabletPageState
                   mode: BackNavigationMode.historyThenFallback,
                 ),
                 pairTapKey: const Key('sc055_tablet_pair_selector'),
-                onPairTap: () => context.go(AppRoutePaths.markets),
+                onPairTap: () => context.push(AppRoutePaths.markets),
                 priceLabel: formatTradePrice(pair.price),
                 changePct: pair.changePct,
               ),
@@ -146,7 +146,7 @@ class _AdvancedChartTabletPageState
                           fullWidth: false,
                           variant: VitCtaButtonVariant.success,
                           onPressed: () =>
-                              context.go(AppRoutePaths.tradePair(pair.id)),
+                              context.push(AppRoutePaths.tradePair(pair.id)),
                           child: const Text('MUA'),
                         ),
                       ),
@@ -157,7 +157,7 @@ class _AdvancedChartTabletPageState
                           fullWidth: false,
                           variant: VitCtaButtonVariant.danger,
                           onPressed: () =>
-                              context.go(AppRoutePaths.tradePair(pair.id)),
+                              context.push(AppRoutePaths.tradePair(pair.id)),
                           child: const Text('BÁN'),
                         ),
                       ),

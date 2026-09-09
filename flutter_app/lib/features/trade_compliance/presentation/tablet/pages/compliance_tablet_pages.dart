@@ -9,10 +9,8 @@ import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/features/trade_compliance/domain/entities/trade_compliance_entities.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_formatters.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'compliance_tablet_pages_extra.dart';
 
 Widget _cmp2Error(String title, VoidCallback onRetry) {
@@ -21,57 +19,6 @@ Widget _cmp2Error(String title, VoidCallback onRetry) {
     message: 'Vui lòng kiểm tra kết nối và thử lại.',
     actionLabel: 'Thử lại',
     onAction: onRetry,
-  );
-}
-
-Widget _cmp2Frame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-  String backFallback = AppRoutePaths.trade,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: backFallback,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
   );
 }
 
@@ -166,92 +113,89 @@ class ClientMoneyProtectionTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cmp2Frame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-102',
         semanticLabel: 'Bảo vệ tiền khách hàng',
         title: 'Bảo vệ tiền khách hàng',
         subtitle: 'Tài khoản ủy thác',
         contentKey: ClientMoneyProtectionTabletPage.contentKey,
-        child: _cmp2Error(
-          'Không tải được bảo vệ tiền khách hàng',
-          () => ref.invalidate(tradeClientMoneyProtectionProvider),
-        ),
+        children: [
+          _cmp2Error(
+            'Không tải được bảo vệ tiền khách hàng',
+            () => ref.invalidate(tradeClientMoneyProtectionProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cmp2Frame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-102',
         semanticLabel: 'Bảo vệ tiền khách hàng',
         title: 'Bảo vệ tiền khách hàng',
         subtitle: 'Tài khoản ủy thác',
         contentKey: ClientMoneyProtectionTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _cmp2Section(
-              title: 'Số dư quỹ khách hàng',
-              rows: _cmp2Rows([
-                ('Số dư', formatTradeUsdWhole(snapshot.balance)),
-                ('Tài khoản ủy thác', snapshot.trustAccount),
-                ('Đối chiếu cuối', snapshot.lastReconciled),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _cmp2Section(
-              title: 'Các cơ chế bảo vệ',
-              rows: [
-                for (final protection in snapshot.protections)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.zero,
-                          child: Icon(
-                            Icons.shield_outlined,
-                            size: TabletSpacingTokens.iconSm,
-                            color: AppColors.buy,
+        children: [
+          _cmp2Section(
+            title: 'Số dư quỹ khách hàng',
+            rows: _cmp2Rows([
+              ('Số dư', formatTradeUsdWhole(snapshot.balance)),
+              ('Tài khoản ủy thác', snapshot.trustAccount),
+              ('Đối chiếu cuối', snapshot.lastReconciled),
+            ]),
+          ),
+
+          _cmp2Section(
+            title: 'Các cơ chế bảo vệ',
+            rows: [
+              for (final protection in snapshot.protections)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.zero,
+                        child: Icon(
+                          Icons.shield_outlined,
+                          size: TabletSpacingTokens.iconSm,
+                          color: AppColors.buy,
+                        ),
+                      ),
+                      const SizedBox(width: TabletSpacingTokens.x2),
+                      Expanded(
+                        child: Text(
+                          protection.title,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                            height: 1.3,
                           ),
                         ),
-                        const SizedBox(width: TabletSpacingTokens.x2),
-                        Expanded(
-                          child: Text(
-                            protection.title,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                              height: 1.3,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _cmp2Section(
-              title: 'Nếu công ty phá sản',
-              rows: [
-                Text(
-                  snapshot.insolvencySummary,
-                  style: AppTextStyles.caption.copyWith(
-                    color: AppColors.text2,
-                    height: 1.3,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: TabletSpacingTokens.x1),
-                Text(
-                  snapshot.insolvencyDetail,
-                  style: AppTextStyles.micro.copyWith(
-                    color: AppColors.text3,
-                    height: 1.3,
-                  ),
+            ],
+          ),
+
+          _cmp2Section(
+            title: 'Nếu công ty phá sản',
+            rows: [
+              Text(
+                snapshot.insolvencySummary,
+                style: AppTextStyles.caption.copyWith(
+                  color: AppColors.text2,
+                  height: 1.3,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              const SizedBox(height: TabletSpacingTokens.x1),
+              Text(
+                snapshot.insolvencyDetail,
+                style: AppTextStyles.micro.copyWith(
+                  color: AppColors.text3,
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -271,145 +215,141 @@ class CassReconciliationTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _cmp2Frame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-103',
         semanticLabel: 'Đối chiếu CASS',
         title: 'Đối chiếu CASS',
         subtitle: 'Báo cáo · Ghi nhận',
         contentKey: CassReconciliationTabletPage.contentKey,
-        child: _cmp2Error(
-          'Không tải được đối chiếu CASS',
-          () => ref.invalidate(tradeCassReconciliationProvider),
-        ),
+        children: [
+          _cmp2Error(
+            'Không tải được đối chiếu CASS',
+            () => ref.invalidate(tradeCassReconciliationProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _cmp2Frame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-103',
         semanticLabel: 'Đối chiếu CASS',
         title: 'Đối chiếu CASS',
         subtitle: 'Chuẩn CASS',
         contentKey: CassReconciliationTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            VitCard(
-              radius: VitCardRadius.tight,
-              padding: TabletSpacingTokens.cardPaddingCompact,
+        children: [
+          VitCard(
+            radius: VitCardRadius.tight,
+            padding: TabletSpacingTokens.cardPaddingCompact,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Đã đối chiếu',
+                        style: AppTextStyles.micro.copyWith(
+                          color: AppColors.text3,
+                        ),
+                      ),
+                      Text(
+                        '${snapshot.reconciledCount}',
+                        style: AppTextStyles.control.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.buy,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Đã xử lý',
+                        style: AppTextStyles.micro.copyWith(
+                          color: AppColors.text3,
+                        ),
+                      ),
+                      Text(
+                        '${snapshot.resolvedCount}',
+                        style: AppTextStyles.control.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.text1,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ngoại lệ',
+                        style: AppTextStyles.micro.copyWith(
+                          color: AppColors.text3,
+                        ),
+                      ),
+                      Text(
+                        '${snapshot.outstandingCount}',
+                        style: AppTextStyles.control.copyWith(
+                          fontWeight: AppTextStyles.bold,
+                          color: AppColors.caution,
+                          fontFeatures: AppTextStyles.tabularFigures,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          for (final record in snapshot.records.take(10))
+            Padding(
+              padding: TabletSpacingTokens.tableCellPaddingV,
               child: Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Đã đối chiếu',
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                        Text(
-                          '${snapshot.reconciledCount}',
-                          style: AppTextStyles.control.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.buy,
-                            fontFeatures: AppTextStyles.tabularFigures,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      record.displayDate,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text3,
+                        fontFeatures: AppTextStyles.tabularFigures,
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Đã xử lý',
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                        Text(
-                          '${snapshot.resolvedCount}',
-                          style: AppTextStyles.control.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.text1,
-                            fontFeatures: AppTextStyles.tabularFigures,
-                          ),
-                        ),
-                      ],
+                    flex: 3,
+                    child: Text(
+                      record.notes ?? '—',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text2,
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Ngoại lệ',
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                        Text(
-                          '${snapshot.outstandingCount}',
-                          style: AppTextStyles.control.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.caution,
-                            fontFeatures: AppTextStyles.tabularFigures,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    switch (record.status) {
+                      TradeCassReconciliationStatus.matched => 'Khớp',
+                      TradeCassReconciliationStatus.discrepancyResolved =>
+                        'Đã xử lý lệch',
+                      TradeCassReconciliationStatus.discrepancy => 'Lệch',
+                    },
+                    style: AppTextStyles.caption.copyWith(
+                      color:
+                          record.status == TradeCassReconciliationStatus.matched
+                          ? AppColors.buy
+                          : AppColors.caution,
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            for (final record in snapshot.records.take(10))
-              Padding(
-                padding: TabletSpacingTokens.tableCellPaddingV,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        record.displayDate,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text3,
-                          fontFeatures: AppTextStyles.tabularFigures,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Text(
-                        record.notes ?? '—',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      switch (record.status) {
-                        TradeCassReconciliationStatus.matched => 'Khớp',
-                        TradeCassReconciliationStatus.discrepancyResolved =>
-                          'Đã xử lý lệch',
-                        TradeCassReconciliationStatus.discrepancy => 'Lệch',
-                      },
-                      style: AppTextStyles.caption.copyWith(
-                        color:
-                            record.status ==
-                                TradeCassReconciliationStatus.matched
-                            ? AppColors.buy
-                            : AppColors.caution,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }

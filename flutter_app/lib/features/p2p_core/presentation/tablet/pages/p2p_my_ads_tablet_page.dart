@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_for
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Quảng cáo của tôi (SC-225): bảng quảng cáo độ dày tablet
 /// (cặp · giá · khả dụng · thanh toán · trạng thái) + quick links.
@@ -54,89 +55,72 @@ class P2PMyAdsTabletPage extends ConsumerWidget {
                   onAction: () => ref.invalidate(p2pMyAdsProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1180),
-                  child: SingleChildScrollView(
-                    key: P2PMyAdsTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                snapshot.ads.isEmpty
-                                    ? snapshot.emptyTitle
-                                    : '${snapshot.ads.length} quảng cáo đang quản lý',
-                                style: AppTextStyles.control.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                            ),
-                            VitCtaButton(
-                              fullWidth: false,
-                              onPressed: () =>
-                                  context.go(AppRoutePaths.p2pCreate),
-                              child: const Text('Tạo quảng cáo'),
-                            ),
-                          ],
+              data: (snapshot) => VitTabletSectionBody(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          snapshot.ads.isEmpty
+                              ? snapshot.emptyTitle
+                              : '${snapshot.ads.length} quảng cáo đang quản lý',
+                          style: AppTextStyles.control.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
+                          ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        if (snapshot.ads.isEmpty)
-                          VitEmptyState(
-                            icon: Icons.storefront_outlined,
-                            title: snapshot.emptyTitle,
-                            message: snapshot.emptyActionLabel,
-                            actionLabel: 'Tạo quảng cáo đầu tiên',
-                            onAction: () => context.go(AppRoutePaths.p2pCreate),
-                          )
-                        else
-                          VitCard(
-                            radius: VitCardRadius.tight,
-                            padding: TabletSpacingTokens.zeroInsets,
-                            clip: true,
-                            child: Column(
-                              children: [
-                                for (var i = 0; i < snapshot.ads.length; i++)
-                                  _MyAdRow(ad: snapshot.ads[i]),
-                              ],
-                            ),
-                          ),
-                        if (snapshot.quickLinks.isNotEmpty) ...[
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          Wrap(
-                            spacing: TabletSpacingTokens.x3,
-                            runSpacing: TabletSpacingTokens.x2,
-                            children: [
-                              for (final link in snapshot.quickLinks)
-                                VitFilterChip(
-                                  label: link.title,
-                                  onTap: () => context.go(link.route),
-                                  active: false,
-                                  color: AppColors.primary,
-                                ),
-                            ],
-                          ),
+                      ),
+                      VitCtaButton(
+                        fullWidth: false,
+                        onPressed: () => context.push(AppRoutePaths.p2pCreate),
+                        child: const Text('Tạo quảng cáo'),
+                      ),
+                    ],
+                  ),
+
+                  if (snapshot.ads.isEmpty)
+                    VitEmptyState(
+                      icon: Icons.storefront_outlined,
+                      title: snapshot.emptyTitle,
+                      message: snapshot.emptyActionLabel,
+                      actionLabel: 'Tạo quảng cáo đầu tiên',
+                      onAction: () => context.push(AppRoutePaths.p2pCreate),
+                    )
+                  else
+                    VitCard(
+                      radius: VitCardRadius.tight,
+                      padding: TabletSpacingTokens.zeroInsets,
+                      clip: true,
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < snapshot.ads.length; i++)
+                            _MyAdRow(ad: snapshot.ads[i]),
                         ],
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.contractNotes,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
+                      ),
+                    ),
+
+                  if (snapshot.quickLinks.isNotEmpty) ...[
+                    const SizedBox(height: TabletSpacingTokens.x3),
+                    Wrap(
+                      spacing: TabletSpacingTokens.x3,
+                      runSpacing: TabletSpacingTokens.x2,
+                      children: [
+                        for (final link in snapshot.quickLinks)
+                          VitFilterChip(
+                            label: link.title,
+                            onTap: () => context.push(link.route),
+                            active: false,
+                            color: AppColors.primary,
                           ),
-                        ),
                       ],
                     ),
+                  ],
+
+                  Text(
+                    snapshot.contractNotes,
+                    style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                   ),
-                ),
+                ],
               ),
             ),
           ),

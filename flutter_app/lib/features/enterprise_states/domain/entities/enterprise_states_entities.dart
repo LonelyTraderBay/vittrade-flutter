@@ -83,3 +83,12 @@ final class EnterpriseBannerDraft {
   final String title;
   final String? detail;
 }
+
+/// Nhãn tiếng Việt user-facing (B2 composition 2026-09-09).
+extension EnterpriseStateSectionViLabel on EnterpriseStateSection {
+  String get viLabel => switch (this) {
+    EnterpriseStateSection.stateKit => 'Bộ trạng thái',
+    EnterpriseStateSection.applied => 'Đã áp dụng',
+    EnterpriseStateSection.security => 'Bảo mật',
+  };
+}

@@ -111,3 +111,29 @@ final class ReferralFriendDraft {
   bool get kycCompleted => status != ReferralFriendStatus.pendingKyc;
   bool get canRemindKyc => status == ReferralFriendStatus.pendingKyc;
 }
+
+/// Nhãn tiếng Việt user-facing (B2 composition 2026-09-09).
+extension ReferralFriendStatusViLabel on ReferralFriendStatus {
+  String get viLabel => switch (this) {
+    ReferralFriendStatus.pendingKyc => 'Chờ KYC',
+    ReferralFriendStatus.kycDone => 'Đã KYC',
+    ReferralFriendStatus.activeTrader => 'Đang giao dịch',
+    ReferralFriendStatus.inactive => 'Không hoạt động',
+  };
+}
+
+/// Nhãn tiếng Việt cho loại phần thưởng giới thiệu.
+extension ReferralRewardTypeViLabel on ReferralRewardType {
+  String get viLabel => switch (this) {
+    ReferralRewardType.kycBonus => 'Thưởng KYC',
+    ReferralRewardType.tradeCommission => 'Hoa hồng giao dịch',
+  };
+}
+
+/// Nhãn tiếng Việt cho trạng thái phần thưởng giới thiệu.
+extension ReferralRewardStatusViLabel on ReferralRewardStatus {
+  String get viLabel => switch (this) {
+    ReferralRewardStatus.completed => 'Hoàn tất',
+    ReferralRewardStatus.pending => 'Đang chờ',
+  };
+}

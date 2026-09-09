@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,7 +57,7 @@ class _TradeTabletOrderReceiptPageState
       secondaryPressedLabel: 'Đã chia sẻ',
       secondaryKey: TradeTabletOrderReceiptPage.shareKey,
       onPrimary: () {
-        context.go(AppRoutePaths.tradePair('btcusdt'));
+        unawaited(context.push(AppRoutePaths.tradePair('btcusdt')));
       },
     );
   }

@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/widgets/p2p_for
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Đơn hàng P2P của tôi (SC-281): chip tab trạng thái +
 /// bảng đơn độ dày tablet (mã · loại · tài sản · giá trị · trạng thái · thời
@@ -73,87 +74,65 @@ class _P2PMyOrdersTabletPageState extends ConsumerState<P2PMyOrdersTabletPage> {
                             .isEmpty)
                       order,
                 ];
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1180),
-                    child: SingleChildScrollView(
-                      key: P2PMyOrdersTabletPage.contentKey,
-                      padding: const EdgeInsets.fromLTRB(
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x4,
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x6,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Wrap(
-                            spacing: TabletSpacingTokens.x3,
-                            runSpacing: TabletSpacingTokens.x2,
-                            children: [
-                              for (final tab in snapshot.tabs)
-                                VitFilterChip(
-                                  label: tab.label,
-                                  active: activeTabId == tab.id,
-                                  onTap: () => setState(() {
-                                    _activeTabId = tab.id;
-                                  }),
-                                  color: AppColors.primary,
+                return VitTabletSectionBody(
+                  children: [
+                    Wrap(
+                      spacing: TabletSpacingTokens.x3,
+                      runSpacing: TabletSpacingTokens.x2,
+                      children: [
+                        for (final tab in snapshot.tabs)
+                          VitFilterChip(
+                            label: tab.label,
+                            active: activeTabId == tab.id,
+                            onTap: () => setState(() {
+                              _activeTabId = tab.id;
+                            }),
+                            color: AppColors.primary,
+                          ),
+                      ],
+                    ),
+
+                    if (visibleOrders.isEmpty)
+                      VitEmptyState(
+                        icon: Icons.receipt_long_outlined,
+                        title: snapshot.emptyTitle,
+                        message: snapshot.searchHint,
+                        actionLabel: 'Về chợ P2P',
+                        onAction: () => context.push(AppRoutePaths.p2p),
+                      )
+                    else
+                      VitCard(
+                        radius: VitCardRadius.tight,
+                        padding: TabletSpacingTokens.zeroInsets,
+                        clip: true,
+                        child: Column(
+                          children: [
+                            for (var i = 0; i < visibleOrders.length; i++) ...[
+                              _OrderRow(
+                                order: visibleOrders[i],
+                                onTap: () => context.push(
+                                  AppRoutePaths.p2pOrder(visibleOrders[i].id),
+                                ),
+                              ),
+                              if (i < visibleOrders.length - 1)
+                                const Divider(
+                                  height: TabletSpacingTokens.dividerHairline,
+                                  thickness:
+                                      TabletSpacingTokens.dividerHairline,
+                                  color: AppColors.divider,
                                 ),
                             ],
-                          ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          if (visibleOrders.isEmpty)
-                            VitEmptyState(
-                              icon: Icons.receipt_long_outlined,
-                              title: snapshot.emptyTitle,
-                              message: snapshot.searchHint,
-                              actionLabel: 'Về chợ P2P',
-                              onAction: () => context.go(AppRoutePaths.p2p),
-                            )
-                          else
-                            VitCard(
-                              radius: VitCardRadius.tight,
-                              padding: TabletSpacingTokens.zeroInsets,
-                              clip: true,
-                              child: Column(
-                                children: [
-                                  for (
-                                    var i = 0;
-                                    i < visibleOrders.length;
-                                    i++
-                                  ) ...[
-                                    _OrderRow(
-                                      order: visibleOrders[i],
-                                      onTap: () => context.go(
-                                        AppRoutePaths.p2pOrder(
-                                          visibleOrders[i].id,
-                                        ),
-                                      ),
-                                    ),
-                                    if (i < visibleOrders.length - 1)
-                                      const Divider(
-                                        height:
-                                            TabletSpacingTokens.dividerHairline,
-                                        thickness:
-                                            TabletSpacingTokens.dividerHairline,
-                                        color: AppColors.divider,
-                                      ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          Text(
-                            snapshot.contractNotes,
-                            style: AppTextStyles.micro.copyWith(
-                              color: AppColors.text3,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+
+                    Text(
+                      snapshot.contractNotes,
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text3,
                       ),
                     ),
-                  ),
+                  ],
                 );
               },
             ),

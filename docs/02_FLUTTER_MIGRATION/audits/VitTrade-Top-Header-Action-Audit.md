@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/top_header_action_audit.dart`.
 
 ```text
-vit_header_total=467
+vit_header_total=445
 vit_header_with_custom_trailing=0
 vit_header_with_legacy_action=0
 custom_header_targets=0
@@ -395,7 +395,7 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/announcements_page.dart` | 74 | `_AnnouncementsPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/help_center_page.dart` | 91 | `_HelpCenterPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/support/presentation/phone/pages/support_page.dart` | 83 | `_SupportPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart` | 55 | `TradeTabletDetailSurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart` | 54 | `TradeTabletDetailSurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/address_add_page.dart` | 101 | `_AddressAddPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/address_book_page.dart` | 80 | `_AddressBookPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/pending_deposits_page.dart` | 87 | `_PendingDepositsPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
@@ -403,8 +403,8 @@ action_groups_over_limit=0
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_gas_optimizer_page.dart` | 81 | `_WalletGasOptimizerPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/tools/wallet_token_approval_page.dart` | 72 | `_WalletTokenApprovalPageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/phone/pages/transfer/withdraw_limits_page.dart` | 63 | `WithdrawLimitsPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart` | 41 | `WalletTabletDetailSurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart` | 39 | `WalletTabletDetailSurface` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart` | 132 | `AddressSavedState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_health_score_page_shell.dart` | 19 | `_WalletHealthScorePageState` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
 | vit_header | `flutter_app/lib/shared/layout/vit_tablet_utility_page.dart` | 58 | `VitTabletUtilityPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
-| vit_header | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | 58 | `VitWebUtilityPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |
+| vit_header | `flutter_app/lib/shared/layout/vit_web_utility_page.dart` | 59 | `VitWebUtilityPage` | `showBack` `-` | `Icons.chevron_left_rounded` | canonical | back / `Icons.chevron_left_rounded` | no | Back action is present. |

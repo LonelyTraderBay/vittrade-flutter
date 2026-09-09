@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -91,7 +93,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
     final orderState = ref.read(provider);
     if (orderState.status == TradeHighRiskFlowStatus.success) {
       final orderId = orderState.receipt?.orderId ?? 'lệnh';
-      context.go(AppRoutePaths.tradeOrderReceipt);
+      unawaited(context.push(AppRoutePaths.tradeOrderReceipt));
       if (!context.mounted) return;
       await showVitNoticeSheet(
         context: context,
@@ -105,7 +107,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
         secondaryPressedLabel: 'Đã chia sẻ',
         secondaryKey: TradeTabletOrderReceiptPage.shareKey,
         onPrimary: () {
-          context.go(AppRoutePaths.tradePair(widget.pairId));
+          unawaited(context.push(AppRoutePaths.tradePair(widget.pairId)));
         },
       );
       return;
@@ -214,7 +216,7 @@ class _TradeTabletPageState extends ConsumerState<TradeTabletPage> {
             // Đổi cặp = thay root của luồng giao dịch (khuôn Bybit), không
             // xếp chồng cặp cũ lên stack back.
             onPairSelected: (candidate) =>
-                context.go(AppRoutePaths.tradePair(candidate.id)),
+                context.push(AppRoutePaths.tradePair(candidate.id)),
             onRefresh: () => _refreshScreen(),
           ),
           const SizedBox(height: TradeSpacingTokens.tradeTerminalGutter),

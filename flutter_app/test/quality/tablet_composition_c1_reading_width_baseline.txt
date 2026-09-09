@@ -1,0 +1,3 @@
+# Baseline C1 — bootstrap 2026-09-09; ĐỢT 1 TRẢ XONG 2026-09-09 (B1 arena, B2 cross_module, B3+B3.5 p2p, B4-B6 sweep toàn module). Chỉ còn ngoại lệ hợp lệ dưới đây — KHÔNG được thêm dòng mới.
+# Ngoại lệ: auth surface là composition 2 cột brand+form của màn đăng nhập (cap riêng 1120, không phải trang section đọc) — giữ literal, không map readingContentMaxWidth.
+features/auth/presentation/tablet/widgets/auth_tablet_surface.dart 1

@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'p2p_wallet_tablet_pages_sections.dart';
 
 /// Bố cục tablet của Ví P2P (SC-264): banner số dư tổng (mask theo financial
@@ -90,7 +91,7 @@ class P2PWalletTabletPage extends ConsumerWidget {
                       ),
                       VitCtaButton(
                         fullWidth: false,
-                        onPressed: () => context.go(snapshot.transferRoute),
+                        onPressed: () => context.push(snapshot.transferRoute),
                         child: const Text('Chuyển nội bộ'),
                       ),
                     ],
@@ -311,7 +312,7 @@ class _WalletLinksCard extends StatelessWidget {
             Padding(
               padding: TabletSpacingTokens.tableCellPaddingV,
               child: InkWell(
-                onTap: () => context.go(route),
+                onTap: () => context.push(route),
                 child: Row(
                   children: [
                     Expanded(

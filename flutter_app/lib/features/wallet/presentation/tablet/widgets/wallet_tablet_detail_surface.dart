@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 
 /// Tablet-only detail frame for Wallet money-movement flows.
 ///
@@ -45,44 +43,9 @@ class WalletTabletDetailSurface extends StatelessWidget {
             onBack: onBack,
           ),
           Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final wide = constraints.maxWidth >= 900;
-                return SingleChildScrollView(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                    TabletSpacingTokens.x6,
-                    TabletSpacingTokens.pageRhythmStandardSectionGap,
-                    TabletSpacingTokens.x6,
-                    TabletSpacingTokens.x7,
-                  ),
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1180),
-                      child: VitPageContent(
-                        rhythm: VitPageRhythm.standard,
-                        padding: VitContentPadding.none,
-                        fullBleed: true,
-                        children: [
-                          if (wide)
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(flex: 7, child: primary),
-                                const SizedBox(width: TabletSpacingTokens.x4),
-                                Expanded(flex: 5, child: secondary),
-                              ],
-                            )
-                          else ...[
-                            primary,
-                            const SizedBox(height: TabletSpacingTokens.x4),
-                            secondary,
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
+            child: VitTwoColumnTabletDashboard(
+              primaryChildren: [primary],
+              secondaryChildren: [secondary],
             ),
           ),
         ],

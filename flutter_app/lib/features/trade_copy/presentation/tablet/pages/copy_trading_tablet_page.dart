@@ -261,7 +261,7 @@ class _CopyTradingTabletPageState extends ConsumerState<CopyTradingTabletPage> {
                                   label: label,
                                   active: false,
                                   color: AppColors.primary,
-                                  onTap: () => context.go(path),
+                                  onTap: () => context.push(path),
                                 ),
                             ],
                           ),
@@ -290,7 +290,7 @@ class _TraderRow extends StatelessWidget {
     return Material(
       color: AppColors.transparent,
       child: InkWell(
-        onTap: () => context.go(AppRoutePaths.tradeCopyProvider(trader.id)),
+        onTap: () => context.push(AppRoutePaths.tradeCopyProvider(trader.id)),
         child: Padding(
           padding: TabletSpacingTokens.tableCellPaddingTall,
           child: Row(

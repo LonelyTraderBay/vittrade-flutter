@@ -75,7 +75,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
         semanticIdentifier: 'SC-056',
         title: 'Chuyển đổi tài sản',
         subtitle: 'Đổi tài sản · xem trước tỷ giá và phí',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: const VitSkeletonList(rows: 5),
         secondary: const VitSkeletonList(rows: 4),
       ),
@@ -84,7 +84,7 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
         semanticIdentifier: 'SC-056',
         title: 'Chuyển đổi tài sản',
         subtitle: 'Đổi tài sản · xem trước tỷ giá và phí',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: VitErrorState(
           title: 'Không tải được chuyển đổi tài sản',
           message: 'Vui lòng kiểm tra kết nối và thử lại.',

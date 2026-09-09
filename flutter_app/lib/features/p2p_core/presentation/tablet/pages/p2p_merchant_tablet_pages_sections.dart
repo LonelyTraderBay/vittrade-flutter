@@ -39,141 +39,123 @@ class P2PMerchantApplyTabletPage extends ConsumerWidget {
                   onAction: () => ref.invalidate(p2pMerchantApplyProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PMerchantApplyTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PMerchantApplyTabletPage.contentKey,
+                children: [
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Row(
                       children: [
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: _MerchantStatCell(
-                                  label: 'Giao dịch của bạn',
-                                  value: '${snapshot.stats.totalTrades}',
-                                ),
-                              ),
-                              Expanded(
-                                child: _MerchantStatCell(
-                                  label: 'Hoàn tất',
-                                  value:
-                                      '${snapshot.stats.completionRate.toStringAsFixed(1)}%',
-                                  color: AppColors.buy,
-                                ),
-                              ),
-                              Expanded(
-                                child: _MerchantStatCell(
-                                  label: 'Phản hồi TB',
-                                  value: snapshot.stats.avgResponseTime,
-                                ),
-                              ),
-                              Expanded(
-                                child: _MerchantStatCell(
-                                  label: 'Tuổi tài khoản',
-                                  value:
-                                      '${snapshot.stats.accountAgeDays} ngày',
-                                ),
-                              ),
-                            ],
+                        Expanded(
+                          child: _MerchantStatCell(
+                            label: 'Giao dịch của bạn',
+                            value: '${snapshot.stats.totalTrades}',
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _RequirementsCard(requirements: snapshot.requirements),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _DocumentsCard(documents: snapshot.documents),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _MerchantBenefitsCard(benefits: snapshot.benefits),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Quy trình duyệt',
-                                style: AppTextStyles.control.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x2),
-                              for (
-                                var i = 0;
-                                i < snapshot.reviewSteps.length;
-                                i++
-                              )
-                                Padding(
-                                  padding:
-                                      TabletSpacingTokens.tableCellPaddingV,
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: TabletSpacingTokens.x7,
-                                        child: Text(
-                                          '${i + 1}',
-                                          style: AppTextStyles.control.copyWith(
-                                            color: AppColors.primary,
-                                            fontWeight: AppTextStyles.bold,
-                                            fontFeatures:
-                                                AppTextStyles.tabularFigures,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          snapshot.reviewSteps[i],
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            ],
+                        Expanded(
+                          child: _MerchantStatCell(
+                            label: 'Hoàn tất',
+                            value:
+                                '${snapshot.stats.completionRate.toStringAsFixed(1)}%',
+                            color: AppColors.buy,
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Text(
-                            snapshot.securityNote,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                              height: 1.3,
-                            ),
+                        Expanded(
+                          child: _MerchantStatCell(
+                            label: 'Phản hồi TB',
+                            value: snapshot.stats.avgResponseTime,
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.reviewNotice,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                            height: 1.3,
+                        Expanded(
+                          child: _MerchantStatCell(
+                            label: 'Tuổi tài khoản',
+                            value: '${snapshot.stats.accountAgeDays} ngày',
                           ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x4),
-                        VitCtaButton(
-                          onPressed: () => context.go(AppRoutePaths.p2p),
-                          child: const Text('Gửi hồ sơ đăng ký'),
                         ),
                       ],
                     ),
                   ),
-                ),
+
+                  _RequirementsCard(requirements: snapshot.requirements),
+
+                  _DocumentsCard(documents: snapshot.documents),
+
+                  _MerchantBenefitsCard(benefits: snapshot.benefits),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Quy trình duyệt',
+                          style: AppTextStyles.control.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
+                          ),
+                        ),
+                        const SizedBox(height: TabletSpacingTokens.x2),
+                        for (var i = 0; i < snapshot.reviewSteps.length; i++)
+                          Padding(
+                            padding: TabletSpacingTokens.tableCellPaddingV,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: TabletSpacingTokens.x7,
+                                  child: Text(
+                                    '${i + 1}',
+                                    style: AppTextStyles.control.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: AppTextStyles.bold,
+                                      fontFeatures:
+                                          AppTextStyles.tabularFigures,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    snapshot.reviewSteps[i],
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Text(
+                      snapshot.securityNote,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text2,
+                        height: 1.3,
+                      ),
+                    ),
+                  ),
+
+                  Text(
+                    snapshot.reviewNotice,
+                    style: AppTextStyles.micro.copyWith(
+                      color: AppColors.text3,
+                      height: 1.3,
+                    ),
+                  ),
+
+                  const SizedBox(height: TabletSpacingTokens.x4),
+
+                  VitCtaButton(
+                    onPressed: () => context.push(AppRoutePaths.p2p),
+                    child: const Text('Gửi hồ sơ đăng ký'),
+                  ),
+                ],
               ),
             ),
           ),
@@ -391,114 +373,101 @@ class P2PReportMerchantTabletPage extends ConsumerWidget {
                       ref.invalidate(p2pReportMerchantProvider(merchantId)),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 900),
-                  child: SingleChildScrollView(
-                    key: P2PReportMerchantTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PReportMerchantTabletPage.contentKey,
+                children: [
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Merchant bị báo cáo: ${snapshot.merchant.name}',
-                                style: AppTextStyles.control.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x1),
-                              Text(
-                                snapshot.detailPrompt,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  height: 1.3,
-                                ),
-                              ),
-                            ],
+                        Text(
+                          'Merchant bị báo cáo: ${snapshot.merchant.name}',
+                          style: AppTextStyles.control.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
                           ),
                         ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Lý do báo cáo',
-                                style: AppTextStyles.control.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x2),
-                              for (final reason in snapshot.reasons)
-                                Padding(
-                                  padding:
-                                      TabletSpacingTokens.tableCellPaddingV,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          reason.label,
-                                          style: AppTextStyles.caption.copyWith(
-                                            fontWeight: AppTextStyles.bold,
-                                            color: AppColors.text1,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                          reason.description,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text2,
-                                            height: 1.3,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            ],
+                        const SizedBox(height: TabletSpacingTokens.x1),
+                        Text(
+                          snapshot.detailPrompt,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                            height: 1.3,
                           ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        VitCard(
-                          radius: VitCardRadius.tight,
-                          padding: TabletSpacingTokens.cardPaddingCompact,
-                          child: Text(
-                            snapshot.reviewNotice,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                              height: 1.3,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x4),
-                        VitCtaButton(
-                          key: P2PReportMerchantTabletPage.submitKey,
-                          variant: VitCtaButtonVariant.danger,
-                          onPressed: () =>
-                              context.go(snapshot.merchantProfileRoute),
-                          child: const Text('Gửi báo cáo'),
                         ),
                       ],
                     ),
                   ),
-                ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Lý do báo cáo',
+                          style: AppTextStyles.control.copyWith(
+                            fontWeight: AppTextStyles.bold,
+                            color: AppColors.text1,
+                          ),
+                        ),
+                        const SizedBox(height: TabletSpacingTokens.x2),
+                        for (final reason in snapshot.reasons)
+                          Padding(
+                            padding: TabletSpacingTokens.tableCellPaddingV,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    reason.label,
+                                    style: AppTextStyles.caption.copyWith(
+                                      fontWeight: AppTextStyles.bold,
+                                      color: AppColors.text1,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    reason.description,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.text2,
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  VitCard(
+                    radius: VitCardRadius.tight,
+                    padding: TabletSpacingTokens.cardPaddingCompact,
+                    child: Text(
+                      snapshot.reviewNotice,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text2,
+                        height: 1.3,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: TabletSpacingTokens.x4),
+
+                  VitCtaButton(
+                    key: P2PReportMerchantTabletPage.submitKey,
+                    variant: VitCtaButtonVariant.danger,
+                    onPressed: () =>
+                        context.push(snapshot.merchantProfileRoute),
+                    child: const Text('Gửi báo cáo'),
+                  ),
+                ],
               ),
             ),
           ),

@@ -12,64 +12,60 @@ class P2PNotificationsSettingsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-278',
         semanticLabel: 'Cài đặt thông báo P2P',
         title: 'Thông báo',
         subtitle: 'Kênh · Sự kiện',
         contentKey: P2PNotificationsSettingsTabletPage.contentKey,
-        child: VitErrorState(
-          title: 'Không tải được thông báo',
-          message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => ref.invalidate(p2pNotificationSettingsProvider),
-        ),
+        children: [
+          VitErrorState(
+            title: 'Không tải được thông báo',
+            message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: () => ref.invalidate(p2pNotificationSettingsProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-278',
         semanticLabel: 'Cài đặt thông báo P2P',
         title: snapshot.heroTitle,
         subtitle: snapshot.subtitle,
         contentKey: P2PNotificationsSettingsTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final setting in snapshot.settings)
-              Padding(
-                padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x3),
-                child: _stSection(
-                  title: setting.label,
-                  rows: [
-                    Text(
-                      setting.description,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text2,
-                        height: 1.3,
-                      ),
+        children: [
+          for (final setting in snapshot.settings)
+            Padding(
+              padding: const EdgeInsets.only(bottom: TabletSpacingTokens.x3),
+              child: _stSection(
+                title: setting.label,
+                rows: [
+                  Text(
+                    setting.description,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text2,
+                      height: 1.3,
                     ),
-                    const SizedBox(height: TabletSpacingTokens.x2),
-                    Wrap(
-                      spacing: TabletSpacingTokens.x3,
-                      runSpacing: TabletSpacingTokens.x2,
-                      children: [
-                        for (final entry in setting.channels.entries)
-                          VitStatusPill(
-                            label:
-                                '${entry.key}: ${entry.value ? 'Bật' : 'Tắt'}',
-                            status: entry.value
-                                ? VitStatusPillStatus.success
-                                : VitStatusPillStatus.neutral,
-                            size: VitStatusPillSize.sm,
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: TabletSpacingTokens.x2),
+                  Wrap(
+                    spacing: TabletSpacingTokens.x3,
+                    runSpacing: TabletSpacingTokens.x2,
+                    children: [
+                      for (final entry in setting.channels.entries)
+                        VitStatusPill(
+                          label: '${entry.key}: ${entry.value ? 'Bật' : 'Tắt'}',
+                          status: entry.value
+                              ? VitStatusPillStatus.success
+                              : VitStatusPillStatus.neutral,
+                          size: VitStatusPillSize.sm,
+                        ),
+                    ],
+                  ),
+                ],
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -87,133 +83,132 @@ class P2PGuideTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-280',
         semanticLabel: 'Hướng dẫn P2P',
         title: 'Hướng dẫn',
         subtitle: 'Các bước · FAQ',
         contentKey: P2PGuideTabletPage.contentKey,
-        child: VitErrorState(
-          title: 'Không tải được hướng dẫn',
-          message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => ref.invalidate(p2pGuideProvider),
-        ),
+        children: [
+          VitErrorState(
+            title: 'Không tải được hướng dẫn',
+            message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: () => ref.invalidate(p2pGuideProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _stFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-280',
         semanticLabel: 'Hướng dẫn P2P',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: P2PGuideTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stSection(
-              title: 'Các bước mua',
-              rows: [
-                for (var i = 0; i < snapshot.buySteps.length; i++)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: TabletSpacingTokens.x7,
-                          child: Text(
-                            '${i + 1}',
-                            style: AppTextStyles.control.copyWith(
-                              color: AppColors.buy,
-                              fontWeight: AppTextStyles.bold,
-                              fontFeatures: AppTextStyles.tabularFigures,
-                            ),
+        children: [
+          _stSection(
+            title: 'Các bước mua',
+            rows: [
+              for (var i = 0; i < snapshot.buySteps.length; i++)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: TabletSpacingTokens.x7,
+                        child: Text(
+                          '${i + 1}',
+                          style: AppTextStyles.control.copyWith(
+                            color: AppColors.buy,
+                            fontWeight: AppTextStyles.bold,
+                            fontFeatures: AppTextStyles.tabularFigures,
                           ),
                         ),
-                        Expanded(
-                          child: Text(
-                            snapshot.buySteps[i].title,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stSection(
-              title: 'Các bước bán',
-              rows: [
-                for (var i = 0; i < snapshot.sellSteps.length; i++)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: TabletSpacingTokens.x7,
-                          child: Text(
-                            '${i + 1}',
-                            style: AppTextStyles.control.copyWith(
-                              color: AppColors.sell,
-                              fontWeight: AppTextStyles.bold,
-                              fontFeatures: AppTextStyles.tabularFigures,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            snapshot.sellSteps[i].title,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stSection(
-              title: 'An toàn',
-              rows: [
-                for (final tip in snapshot.safetyTips)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      '• ${tip.title}',
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text2,
-                        height: 1.3,
                       ),
+                      Expanded(
+                        child: Text(
+                          snapshot.buySteps[i].title,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _stSection(
+            title: 'Các bước bán',
+            rows: [
+              for (var i = 0; i < snapshot.sellSteps.length; i++)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: TabletSpacingTokens.x7,
+                        child: Text(
+                          '${i + 1}',
+                          style: AppTextStyles.control.copyWith(
+                            color: AppColors.sell,
+                            fontWeight: AppTextStyles.bold,
+                            fontFeatures: AppTextStyles.tabularFigures,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          snapshot.sellSteps[i].title,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _stSection(
+            title: 'An toàn',
+            rows: [
+              for (final tip in snapshot.safetyTips)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Text(
+                    '• ${tip.title}',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text2,
+                      height: 1.3,
                     ),
                   ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x4),
-            Wrap(
-              spacing: TabletSpacingTokens.x3,
-              runSpacing: TabletSpacingTokens.x2,
-              children: [
-                VitCtaButton(
-                  fullWidth: false,
-                  variant: VitCtaButtonVariant.secondary,
-                  onPressed: () => context.go(snapshot.marketRoute),
-                  child: const Text('Về chợ P2P'),
                 ),
-                VitCtaButton(
-                  fullWidth: false,
-                  variant: VitCtaButtonVariant.ghost,
-                  onPressed: () => context.go(snapshot.supportRoute),
-                  child: const Text('Hỗ trợ'),
-                ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+
+          const SizedBox(height: TabletSpacingTokens.x4),
+
+          Wrap(
+            spacing: TabletSpacingTokens.x3,
+            runSpacing: TabletSpacingTokens.x2,
+            children: [
+              VitCtaButton(
+                fullWidth: false,
+                variant: VitCtaButtonVariant.secondary,
+                onPressed: () => context.push(snapshot.marketRoute),
+                child: const Text('Về chợ P2P'),
+              ),
+              VitCtaButton(
+                fullWidth: false,
+                variant: VitCtaButtonVariant.ghost,
+                onPressed: () => context.push(snapshot.supportRoute),
+                child: const Text('Hỗ trợ'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -242,88 +237,85 @@ class P2PTaxReportingTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _stFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-272',
         semanticLabel: 'Báo cáo thuế P2P',
         title: 'Báo cáo thuế',
         subtitle: 'Tổng hợp · Tài liệu',
         contentKey: P2PTaxReportingTabletPage.contentKey,
-        child: VitErrorState(
-          title: 'Không tải được báo cáo thuế',
-          message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
-          actionLabel: 'Thử lại',
-          onAction: () => ref.invalidate(p2pTaxReportingProvider(request)),
-        ),
+        children: [
+          VitErrorState(
+            title: 'Không tải được báo cáo thuế',
+            message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
+            actionLabel: 'Thử lại',
+            onAction: () => ref.invalidate(p2pTaxReportingProvider(request)),
+          ),
+        ],
       ),
-      data: (snapshot) => _stFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-272',
         semanticLabel: 'Báo cáo thuế P2P',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: P2PTaxReportingTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _stSection(
-              title:
-                  'Năm ${snapshot.selectedYear} · ${snapshot.selectedJurisdiction.name} (${snapshot.selectedJurisdiction.form})',
-              rows: _stRows([
-                ('Số giao dịch', '${snapshot.summary.totalTransactions}'),
-                ('Tổng khối lượng', snapshot.summary.totalVolumeLabel),
-                ('Lãi vốn', snapshot.summary.capitalGainsLabel),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _stSection(
-              title: 'Tài liệu tải về',
-              rows: [
-                for (final doc in snapshot.documents)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                doc.title,
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
+        children: [
+          _stSection(
+            title:
+                'Năm ${snapshot.selectedYear} · ${snapshot.selectedJurisdiction.name} (${snapshot.selectedJurisdiction.form})',
+            rows: _stRows([
+              ('Số giao dịch', '${snapshot.summary.totalTransactions}'),
+              ('Tổng khối lượng', snapshot.summary.totalVolumeLabel),
+              ('Lãi vốn', snapshot.summary.capitalGainsLabel),
+            ]),
+          ),
+
+          _stSection(
+            title: 'Tài liệu tải về',
+            rows: [
+              for (final doc in snapshot.documents)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              doc.title,
+                              style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
+                                color: AppColors.text1,
                               ),
-                              Text(
-                                doc.subtitle,
-                                style: AppTextStyles.micro.copyWith(
-                                  color: AppColors.text3,
-                                ),
+                            ),
+                            Text(
+                              doc.subtitle,
+                              style: AppTextStyles.micro.copyWith(
+                                color: AppColors.text3,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        VitStatusPill(
-                          label: doc.format,
-                          status: VitStatusPillStatus.info,
-                          size: VitStatusPillSize.sm,
-                        ),
-                      ],
-                    ),
+                      ),
+                      VitStatusPill(
+                        label: doc.format,
+                        status: VitStatusPillStatus.info,
+                        size: VitStatusPillSize.sm,
+                      ),
+                    ],
                   ),
-              ],
+                ),
+            ],
+          ),
+
+          Text(
+            snapshot.disclaimer,
+            style: AppTextStyles.micro.copyWith(
+              color: AppColors.text3,
+              height: 1.3,
             ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            Text(
-              snapshot.disclaimer,
-              style: AppTextStyles.micro.copyWith(
-                color: AppColors.text3,
-                height: 1.3,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

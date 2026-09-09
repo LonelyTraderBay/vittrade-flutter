@@ -31,7 +31,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
         semanticIdentifier: 'SC-054',
         title: 'Xuất lịch sử giao dịch',
         subtitle: 'Chọn phạm vi · định dạng · trường kèm theo',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: const Center(child: CircularProgressIndicator()),
         secondary: const SizedBox.shrink(),
       ),
@@ -40,7 +40,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
         semanticIdentifier: 'SC-054',
         title: 'Xuất lịch sử giao dịch',
         subtitle: 'Chọn phạm vi · định dạng · trường kèm theo',
-        onBack: () => context.go(AppRoutePaths.trade),
+        onBack: () => context.push(AppRoutePaths.trade),
         primary: VitErrorState(
           title: 'Không tải được dữ liệu xuất',
           message: 'Vui lòng kiểm tra kết nối và thử lại.',

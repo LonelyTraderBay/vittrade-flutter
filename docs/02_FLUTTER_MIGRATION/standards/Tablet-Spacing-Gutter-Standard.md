@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet) · `test/quality/tablet_composition_guardrail_test.dart` (**2026-09-09 — composition contract C1/C2/C3 ratchet**: không reading-width literal, không khung `Center` dọc, không `.name` lộ presentation; khung chuẩn cho trang section top-level là `VitTabletSectionFrame` — `shared/layout/vit_tablet_section_frame.dart`)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -198,11 +198,11 @@ nhất của luật.
 
 ## Recipe for new tablet UI
 
-1. Vertical page rhythm → `VitPageContent(rhythm: …)` by navigation role (see [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md)).
+1. Vertical page rhythm → `VitPageContent(rhythm: …)` by navigation role (see [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md)). Trang top-level dạng một cột "header + danh sách section" (không nằm trong master-detail/pane shell) → dùng khung chuẩn `VitTabletSectionFrame`: cột đọc top-start cap `TabletDashboardWidths.readingContentMaxWidth`, gap section 12 do frame sở hữu, caller chỉ đưa children — KHÔNG tự lắp `Center + ConstrainedBox` (C1/C2).
 2. Every gap inside a section → Rule 1 table by role.
 3. Frame layout (rail/margins/gutters/columns) → `VitTwoColumnTabletDashboard` / master-detail shell with `TabletDashboardWidths` untouched; pane content gutter-flush.
 4. Any line/divider → hairline token (Rule 3).
-5. Before commit: `dart run tool/tablet_spacing_audit.dart --check` + `flutter test test/quality/tablet_base8_role_scale_guardrail_test.dart test/quality/tablet_module_role_scale_guardrail_test.dart test/quality/tablet_spacing_guardrail_test.dart`.
+5. Before commit: `dart run tool/tablet_spacing_audit.dart --check` + `flutter test test/quality/tablet_base8_role_scale_guardrail_test.dart test/quality/tablet_module_role_scale_guardrail_test.dart test/quality/tablet_spacing_guardrail_test.dart test/quality/tablet_composition_guardrail_test.dart`.
 
 ## Verify
 

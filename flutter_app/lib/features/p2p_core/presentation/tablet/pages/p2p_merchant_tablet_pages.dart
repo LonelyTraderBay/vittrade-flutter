@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'p2p_merchant_tablet_pages_sections.dart';
 
 /// Bố cục tablet của Hồ sơ merchant (SC-228): banner danh tính + thống kê,
@@ -153,7 +154,7 @@ class P2PMerchantProfileTabletPage extends ConsumerWidget {
                           VitCtaButton(
                             fullWidth: false,
                             variant: VitCtaButtonVariant.secondary,
-                            onPressed: () => context.go(snapshot.reportRoute),
+                            onPressed: () => context.push(snapshot.reportRoute),
                             child: const Text('Báo cáo merchant'),
                           ),
                           const SizedBox(height: TabletSpacingTokens.x2),
@@ -161,7 +162,7 @@ class P2PMerchantProfileTabletPage extends ConsumerWidget {
                             fullWidth: false,
                             variant: VitCtaButtonVariant.danger,
                             onPressed: () =>
-                                context.go(snapshot.blacklistAddRoute),
+                                context.push(snapshot.blacklistAddRoute),
                             child: const Text('Chặn merchant'),
                           ),
                         ],

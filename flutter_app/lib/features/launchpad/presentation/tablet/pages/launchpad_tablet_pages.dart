@@ -7,63 +7,11 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 part 'launchpad_tablet_pages_tools.dart';
 part 'launchpad_tablet_pages_ops.dart';
-
-Widget _lpdFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.launchpad,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
 Widget _lpdError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -142,7 +90,7 @@ Widget _lpdQuickLinks(BuildContext context, List<(String, String)> links) {
           label: label,
           active: false,
           color: AppColors.primary,
-          onTap: () => context.go(path),
+          onTap: () => context.push(path),
         ),
     ],
   );
@@ -160,112 +108,109 @@ class LaunchpadHomeTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-360',
         semanticLabel: 'Sàn phát hành',
         title: snapshotAsync.value?.title ?? 'Launchpad',
         subtitle: 'Dự án · Đăng ký',
         contentKey: LaunchpadHomeTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được launchpad',
-          () => ref.invalidate(launchpadHomeSnapshotProvider),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được launchpad',
+            () => ref.invalidate(launchpadHomeSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-360',
         semanticLabel: 'Sàn phát hành',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: LaunchpadHomeTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _lpdSection(
-              title: 'Dự án',
-              rows: [
-                for (final project in snapshot.projects)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${project.name} (${project.symbol})',
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              Text(
-                                project.description,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  height: 1.3,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          '${project.totalRaise} · ${project.status.name}',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _lpdSection(
-              title: 'Công cụ nâng cao',
-              rows: [
-                for (final tool in snapshot.advancedTools)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Material(
-                      color: AppColors.transparent,
-                      child: InkWell(
-                        onTap: () => context.go(tool.route),
-                        child: Row(
+        children: [
+          _lpdSection(
+            title: 'Dự án',
+            rows: [
+              for (final project in snapshot.projects)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Text(
-                                tool.label,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text1,
-                                ),
+                            Text(
+                              '${project.name} (${project.symbol})',
+                              style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
+                                color: AppColors.text1,
                               ),
                             ),
                             Text(
-                              tool.route,
+                              project.description,
                               style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text3,
+                                color: AppColors.text2,
+                                height: 1.3,
                               ),
                             ),
                           ],
                         ),
                       ),
+                      Text(
+                        '${project.totalRaise} · ${project.status.name}',
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text3,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+
+          _lpdSection(
+            title: 'Công cụ nâng cao',
+            rows: [
+              for (final tool in snapshot.advancedTools)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Material(
+                    color: AppColors.transparent,
+                    child: InkWell(
+                      onTap: () => context.push(tool.route),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              tool.label,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text1,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            tool.route,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text3,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                const SizedBox(height: TabletSpacingTokens.x2),
-                _lpdQuickLinks(context, [
-                  ('Dự án mẫu', AppRoutePaths.launchpadSample),
-                  ('Danh mục', AppRoutePaths.launchpadPortfolio),
-                  ('Hiệu suất', AppRoutePaths.launchpadPerformance),
-                  ('Staking', AppRoutePaths.launchpadStaking),
-                  ('Nhận theo lô', AppRoutePaths.launchpadBatchClaim),
-                ]),
-              ],
-            ),
-          ],
-        ),
+                ),
+              const SizedBox(height: TabletSpacingTokens.x2),
+              _lpdQuickLinks(context, [
+                ('Dự án mẫu', AppRoutePaths.launchpadSample),
+                ('Danh mục', AppRoutePaths.launchpadPortfolio),
+                ('Hiệu suất', AppRoutePaths.launchpadPerformance),
+                ('Staking', AppRoutePaths.launchpadStaking),
+                ('Nhận theo lô', AppRoutePaths.launchpadBatchClaim),
+              ]),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -283,69 +228,66 @@ class LaunchpadPortfolioTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-361',
         semanticLabel: 'Danh mục launchpad',
         title: 'Đăng ký của bạn',
         subtitle: 'Lịch sử',
         contentKey: LaunchpadPortfolioTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được danh mục',
-          () => ref.invalidate(launchpadPortfolioSnapshotProvider),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được danh mục',
+            () => ref.invalidate(launchpadPortfolioSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-361',
         semanticLabel: 'Danh mục launchpad',
         title: snapshot.title,
         subtitle: '${snapshot.subscriptions.length} đăng ký',
         contentKey: LaunchpadPortfolioTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _lpdSection(
-              title: 'Đăng ký',
-              rows: [
-                for (final sub in snapshot.subscriptions)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${sub.projectName} (${sub.projectSymbol})',
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
+        children: [
+          _lpdSection(
+            title: 'Đăng ký',
+            rows: [
+              for (final sub in snapshot.subscriptions)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${sub.projectName} (${sub.projectSymbol})',
+                              style: AppTextStyles.caption.copyWith(
+                                fontWeight: AppTextStyles.bold,
+                                color: AppColors.text1,
                               ),
-                              Text(
-                                '${sub.tokensAllocated} token · phân bổ ${sub.allocationRatio.toStringAsFixed(2)}× · ${sub.timestamp}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
+                            ),
+                            Text(
+                              '${sub.tokensAllocated} token · phân bổ ${sub.allocationRatio.toStringAsFixed(2)}× · ${sub.timestamp}',
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          sub.status.name,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text3,
-                          ),
+                      ),
+                      Text(
+                        sub.status.name,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text3,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -363,45 +305,42 @@ class LaunchpadPerformanceTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-362',
         semanticLabel: 'Hiệu suất launchpad',
         title: 'Hiệu suất',
         subtitle: 'Dự án quá khứ',
         contentKey: LaunchpadPerformanceTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được hiệu suất',
-          () => ref.invalidate(launchpadPerformanceSnapshotProvider),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được hiệu suất',
+            () => ref.invalidate(launchpadPerformanceSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-362',
         semanticLabel: 'Hiệu suất launchpad',
         title: snapshot.title,
         subtitle: snapshot.subtitle,
         contentKey: LaunchpadPerformanceTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _lpdSection(
-              title: 'Dự án lịch sử',
-              rows: [
-                for (final project in snapshot.projects)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      project.name,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
-                      ),
+        children: [
+          _lpdSection(
+            title: 'Dự án lịch sử',
+            rows: [
+              for (final project in snapshot.projects)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Text(
+                    project.name,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text1,
                     ),
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -419,45 +358,42 @@ class LaunchpadStakingTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-363',
         semanticLabel: 'Bể stake',
         title: 'Launchpool',
         subtitle: 'Pool · Vị thế',
         contentKey: LaunchpadStakingTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được launchpool',
-          () => ref.invalidate(launchpadStakingSnapshotProvider),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được launchpool',
+            () => ref.invalidate(launchpadStakingSnapshotProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-363',
         semanticLabel: 'Bể stake',
         title: snapshot.title,
         subtitle: '${snapshot.pools.length} pool',
         contentKey: LaunchpadStakingTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _lpdSection(
-              title: 'Pool',
-              rows: [
-                for (final pool in snapshot.pools)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      pool.id,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text1,
-                      ),
+        children: [
+          _lpdSection(
+            title: 'Pool',
+            rows: [
+              for (final pool in snapshot.pools)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Text(
+                    pool.id,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text1,
                     ),
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -477,40 +413,37 @@ class LaunchpadDetailTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-364',
         semanticLabel: 'Chi tiết dự án launchpad',
         title: 'Chi tiết dự án',
         subtitle: projectId,
         contentKey: LaunchpadDetailTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được dự án',
-          () => ref.invalidate(launchpadDetailSnapshotProvider(projectId)),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được dự án',
+            () => ref.invalidate(launchpadDetailSnapshotProvider(projectId)),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-364',
         semanticLabel: 'Chi tiết dự án launchpad',
         title: snapshot.title,
         subtitle: snapshot.project?.name ?? snapshot.projectId,
         contentKey: LaunchpadDetailTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (snapshot.project != null)
-              _lpdSection(
-                title: 'Thông tin dự án',
-                rows: _lpdRows([
-                  ('Mã', snapshot.project!.symbol),
-                  ('Loại', snapshot.project!.type.name),
-                  ('Trạng thái', snapshot.project!.status.name),
-                  ('Tổng huy động', snapshot.project!.totalRaise),
-                ]),
-              ),
-          ],
-        ),
+        children: [
+          if (snapshot.project != null)
+            _lpdSection(
+              title: 'Thông tin dự án',
+              rows: _lpdRows([
+                ('Mã', snapshot.project!.symbol),
+                ('Loại', snapshot.project!.type.name),
+                ('Trạng thái', snapshot.project!.status.name),
+                ('Tổng huy động', snapshot.project!.totalRaise),
+              ]),
+            ),
+        ],
       ),
     );
   }
@@ -527,40 +460,37 @@ class LaunchpadReceiptTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-365',
         semanticLabel: 'Biên lai đăng ký launchpad',
         title: 'Biên lai đăng ký',
         subtitle: 'sub001',
         contentKey: LaunchpadReceiptTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được biên lai',
-          () => ref.invalidate(launchpadReceiptSnapshotProvider('sub001')),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được biên lai',
+            () => ref.invalidate(launchpadReceiptSnapshotProvider('sub001')),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-365',
         semanticLabel: 'Biên lai đăng ký launchpad',
         title: snapshot.title,
         subtitle: 'Đăng ký ${snapshot.subscriptionId}',
         contentKey: LaunchpadReceiptTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (snapshot.subscription != null)
-              _lpdSection(
-                title: 'Chi tiết',
-                rows: _lpdRows([
-                  ('Dự án', snapshot.subscription!.projectName),
-                  ('Số tiền', snapshot.subscription!.amount.toStringAsFixed(2)),
-                  ('Token nhận', '${snapshot.subscription!.tokensAllocated}'),
-                  ('Trạng thái', snapshot.subscription!.status.name),
-                ]),
-              ),
-          ],
-        ),
+        children: [
+          if (snapshot.subscription != null)
+            _lpdSection(
+              title: 'Chi tiết',
+              rows: _lpdRows([
+                ('Dự án', snapshot.subscription!.projectName),
+                ('Số tiền', snapshot.subscription!.amount.toStringAsFixed(2)),
+                ('Token nhận', '${snapshot.subscription!.tokensAllocated}'),
+                ('Trạng thái', snapshot.subscription!.status.name),
+              ]),
+            ),
+        ],
       ),
     );
   }
@@ -580,45 +510,42 @@ class LaunchpadContractTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _lpdFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-368',
         semanticLabel: 'Hợp đồng launchpad',
         title: 'Hợp đồng',
         subtitle: 'Hàm · Mô phỏng',
         contentKey: LaunchpadContractTabletPage.contentKey,
-        child: _lpdError(
-          'Không tải được hợp đồng',
-          () => ref.invalidate(launchpadContractSnapshotProvider('sample')),
-        ),
+        children: [
+          _lpdError(
+            'Không tải được hợp đồng',
+            () => ref.invalidate(launchpadContractSnapshotProvider('sample')),
+          ),
+        ],
       ),
-      data: (snapshot) => _lpdFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-368',
         semanticLabel: 'Hợp đồng launchpad',
         title: snapshot.title,
         subtitle: '${snapshot.functions.length} hàm',
         contentKey: LaunchpadContractTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _lpdSection(
-              title: 'Hàm hợp đồng',
-              rows: [
-                for (final function in snapshot.functions.take(8))
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Text(
-                      function.name,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.primary,
-                      ),
+        children: [
+          _lpdSection(
+            title: 'Hàm hợp đồng',
+            rows: [
+              for (final function in snapshot.functions.take(8))
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
+                  child: Text(
+                    function.name,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.primary,
                     ),
                   ),
-              ],
-            ),
-          ],
-        ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

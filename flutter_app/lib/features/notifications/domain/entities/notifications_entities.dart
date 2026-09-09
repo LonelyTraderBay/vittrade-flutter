@@ -72,3 +72,18 @@ final class AppNotificationDraft {
     );
   }
 }
+
+/// Nhãn tiếng Việt user-facing (B2 composition 2026-09-09).
+extension AppNotificationTypeViLabel on AppNotificationType {
+  String get viLabel => switch (this) {
+    AppNotificationType.trade => 'Giao dịch',
+    AppNotificationType.deposit => 'Nạp tiền',
+    AppNotificationType.withdraw => 'Rút tiền',
+    AppNotificationType.security => 'Bảo mật',
+    AppNotificationType.system => 'Hệ thống',
+    AppNotificationType.p2p => 'P2P',
+    AppNotificationType.priceAlert => 'Cảnh báo giá',
+    AppNotificationType.referral => 'Giới thiệu',
+    AppNotificationType.arena => 'Đấu trường',
+  };
+}

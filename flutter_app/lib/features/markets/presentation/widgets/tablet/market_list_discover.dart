@@ -28,7 +28,7 @@ class MarketListDiscoverMoreSection extends StatelessWidget {
             subtitle: 'Lối tắt từ Markets · Xác suất · Vị thế',
             badge: 'Lối tắt',
             color: marketListPredictionAccent,
-            onTap: () => context.go(AppRoutePaths.marketsPredictions),
+            onTap: () => context.push(AppRoutePaths.marketsPredictions),
           ),
           const Divider(
             height: TabletSpacingTokens.dividerHairline,
@@ -41,7 +41,7 @@ class MarketListDiscoverMoreSection extends StatelessWidget {
             subtitle: 'Lối tắt từ Markets · ưu tiên Home · Điểm Arena',
             badge: 'Lối tắt',
             color: marketListArenaAccent,
-            onTap: () => context.go(AppRoutePaths.arena),
+            onTap: () => context.push(AppRoutePaths.arena),
           ),
         ],
       ),

@@ -88,4 +88,16 @@ final class TabletDashboardWidths {
   /// the bottom gap keeps scrolled content from pressing against the
   /// viewport's bottom edge. LUẬT 12dp (2026-08-31): 16 → 12.
   static const double blockVerticalGap = 12;
+
+  /// Reading-width cap cho trang tablet top-level dạng một cột "header +
+  /// danh sách section" (không nằm trong master-detail shell). Born
+  /// 2026-09-09 khi hợp nhất 44 khung tự chế `Center + ConstrainedBox`
+  /// rải rác ở 1080/1120/1180/1200/1240 — quy về một con số duy nhất
+  /// (`VitTabletSectionFrame`) để mọi trang dạng danh sách/thông tin đọc
+  /// cùng một độ rộng trên mọi tablet. Cột nội dung top-start anchored,
+  /// KHÔNG `Center` dọc; mép ngang do frame cấp qua
+  /// `TabletSpacingTokens.contentPad`. Đổi số này = dịch nhịp đọc của mọi
+  /// trang section — re-verify on-device trước khi đổi, không bump vì "nhìn
+  /// gần đúng".
+  static const double readingContentMaxWidth = 1080;
 }

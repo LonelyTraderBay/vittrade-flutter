@@ -13,6 +13,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 part 'p2p_insurance_tablet_pages_extra.dart';
 
 Widget _insError(String title, VoidCallback onRetry) {
@@ -282,7 +283,7 @@ class P2PInsuranceFundTabletPage extends ConsumerWidget {
                       Padding(
                         padding: TabletSpacingTokens.tableCellPaddingV,
                         child: InkWell(
-                          onTap: () => context.go(snapshot.certificateRoute),
+                          onTap: () => context.push(snapshot.certificateRoute),
                           child: Row(
                             children: [
                               Expanded(
@@ -382,62 +383,48 @@ class P2PInsuranceCertificateTabletPage extends ConsumerWidget {
                   () => ref.invalidate(p2pInsuranceCertificateProvider),
                 ),
               ),
-              data: (snapshot) => Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1080),
-                  child: SingleChildScrollView(
-                    key: P2PInsuranceCertificateTabletPage.contentKey,
-                    padding: const EdgeInsets.fromLTRB(
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x4,
-                      TabletSpacingTokens.x6,
-                      TabletSpacingTokens.x6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        _insSection(
-                          title: 'Chứng chỉ ${snapshot.certId}',
-                          rows: _insRows([
-                            ('Người giữ', snapshot.holderName),
-                            ('Mã danh tính', snapshot.holderId),
-                            ('Hạng', snapshot.tierName),
-                            ('Bao phủ', '${snapshot.coveragePct}%'),
-                            (
-                              'Tối đa/claim',
-                              formatP2PVnd(snapshot.maxCoveragePerClaim),
-                            ),
-                            (
-                              'Tối đa/30 ngày',
-                              formatP2PVnd(snapshot.maxCoveragePer30Days),
-                            ),
-                            ('Tỷ lệ đóng góp', snapshot.contributionRate),
-                            ('Cấp ngày', snapshot.issueDate),
-                            ('Có hiệu lực đến', snapshot.validUntil),
-                          ]),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Trường hợp được bao phủ',
-                          rows: _bulletIns(snapshot.coveredCases),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        _insSection(
-                          title: 'Loại trừ',
-                          rows: _bulletIns(snapshot.exclusions),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x3),
-                        Text(
-                          snapshot.disclosure,
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
+              data: (snapshot) => VitTabletSectionBody(
+                contentKey: P2PInsuranceCertificateTabletPage.contentKey,
+                children: [
+                  _insSection(
+                    title: 'Chứng chỉ ${snapshot.certId}',
+                    rows: _insRows([
+                      ('Người giữ', snapshot.holderName),
+                      ('Mã danh tính', snapshot.holderId),
+                      ('Hạng', snapshot.tierName),
+                      ('Bao phủ', '${snapshot.coveragePct}%'),
+                      (
+                        'Tối đa/claim',
+                        formatP2PVnd(snapshot.maxCoveragePerClaim),
+                      ),
+                      (
+                        'Tối đa/30 ngày',
+                        formatP2PVnd(snapshot.maxCoveragePer30Days),
+                      ),
+                      ('Tỷ lệ đóng góp', snapshot.contributionRate),
+                      ('Cấp ngày', snapshot.issueDate),
+                      ('Có hiệu lực đến', snapshot.validUntil),
+                    ]),
+                  ),
+
+                  _insSection(
+                    title: 'Trường hợp được bao phủ',
+                    rows: _bulletIns(snapshot.coveredCases),
+                  ),
+
+                  _insSection(
+                    title: 'Loại trừ',
+                    rows: _bulletIns(snapshot.exclusions),
+                  ),
+
+                  Text(
+                    snapshot.disclosure,
+                    style: AppTextStyles.micro.copyWith(
+                      color: AppColors.text3,
+                      height: 1.3,
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           ),

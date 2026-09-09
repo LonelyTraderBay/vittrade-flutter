@@ -11,6 +11,7 @@ import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 /// Bố cục tablet của Trung tâm phần thưởng (SC-319): thẻ tổng quan điểm +
 /// check-in + lọc nhiệm vụ + danh sách nhiệm vụ/bonus dạng hàng rộng.
@@ -67,79 +68,57 @@ class _RewardsTabletPageState extends ConsumerState<RewardsTabletPage> {
                         task.filter == _activeFilter)
                       task,
                 ];
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1180),
-                    child: SingleChildScrollView(
-                      key: RewardsTabletPage.contentKey,
-                      padding: const EdgeInsets.fromLTRB(
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x4,
-                        TabletSpacingTokens.x6,
-                        TabletSpacingTokens.x6,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          _RewardsSummaryCard(summary: snapshot.summary),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          Wrap(
-                            spacing: TabletSpacingTokens.x3,
-                            runSpacing: TabletSpacingTokens.x2,
-                            children: [
-                              for (final filter in [
-                                'Tất cả',
-                                ...snapshot.filters,
-                              ])
-                                VitFilterChip(
-                                  label: filter,
-                                  active: _activeFilter == filter,
-                                  onTap: () => setState(() {
-                                    _activeFilter = filter;
-                                  }),
-                                  color: AppColors.primary,
+                return VitTabletSectionBody(
+                  contentKey: RewardsTabletPage.contentKey,
+                  children: [
+                    _RewardsSummaryCard(summary: snapshot.summary),
+
+                    Wrap(
+                      spacing: TabletSpacingTokens.x3,
+                      runSpacing: TabletSpacingTokens.x2,
+                      children: [
+                        for (final filter in ['Tất cả', ...snapshot.filters])
+                          VitFilterChip(
+                            label: filter,
+                            active: _activeFilter == filter,
+                            onTap: () => setState(() {
+                              _activeFilter = filter;
+                            }),
+                            color: AppColors.primary,
+                          ),
+                      ],
+                    ),
+
+                    if (visibleTasks.isEmpty)
+                      const VitEmptyState(
+                        icon: Icons.emoji_events_outlined,
+                        title: 'Không có nhiệm vụ phù hợp',
+                        message: 'Thử chọn bộ lọc khác.',
+                      )
+                    else
+                      VitCard(
+                        radius: VitCardRadius.tight,
+                        padding: TabletSpacingTokens.zeroInsets,
+                        clip: true,
+                        child: Column(
+                          children: [
+                            for (var i = 0; i < visibleTasks.length; i++) ...[
+                              _TaskRow(task: visibleTasks[i]),
+                              if (i < visibleTasks.length - 1)
+                                const Divider(
+                                  height: TabletSpacingTokens.dividerHairline,
+                                  thickness:
+                                      TabletSpacingTokens.dividerHairline,
+                                  color: AppColors.divider,
                                 ),
                             ],
-                          ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          if (visibleTasks.isEmpty)
-                            const VitEmptyState(
-                              icon: Icons.emoji_events_outlined,
-                              title: 'Không có nhiệm vụ phù hợp',
-                              message: 'Thử chọn bộ lọc khác.',
-                            )
-                          else
-                            VitCard(
-                              radius: VitCardRadius.tight,
-                              padding: TabletSpacingTokens.zeroInsets,
-                              clip: true,
-                              child: Column(
-                                children: [
-                                  for (
-                                    var i = 0;
-                                    i < visibleTasks.length;
-                                    i++
-                                  ) ...[
-                                    _TaskRow(task: visibleTasks[i]),
-                                    if (i < visibleTasks.length - 1)
-                                      const Divider(
-                                        height:
-                                            TabletSpacingTokens.dividerHairline,
-                                        thickness:
-                                            TabletSpacingTokens.dividerHairline,
-                                        color: AppColors.divider,
-                                      ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          const SizedBox(height: TabletSpacingTokens.x3),
-                          if (snapshot.bonusRows.isNotEmpty)
-                            _BonusCard(rows: snapshot.bonusRows),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
+
+                    if (snapshot.bonusRows.isNotEmpty)
+                      _BonusCard(rows: snapshot.bonusRows),
+                  ],
                 );
               },
             ),

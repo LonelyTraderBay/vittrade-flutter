@@ -7,60 +7,8 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
-
-Widget _dcaFrame({
-  required BuildContext context,
-  required String semanticIdentifier,
-  required String semanticLabel,
-  required String title,
-  required String subtitle,
-  required Widget child,
-  Key? contentKey,
-}) {
-  final showBack = context.canPop();
-  return VitPageLayout(
-    variant: VitPageVariant.flush,
-    semanticLabel: semanticLabel,
-    semanticIdentifier: semanticIdentifier,
-    child: Column(
-      children: [
-        VitHeader(
-          title: title,
-          subtitle: subtitle,
-          showBack: showBack,
-          onBack: showBack
-              ? () => goBackOrFallback(
-                  context,
-                  fallbackPath: AppRoutePaths.home,
-                  mode: BackNavigationMode.historyThenFallback,
-                )
-              : null,
-        ),
-        Expanded(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1080),
-              child: SingleChildScrollView(
-                key: contentKey,
-                padding: const EdgeInsets.fromLTRB(
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x4,
-                  TabletSpacingTokens.x6,
-                  TabletSpacingTokens.x6,
-                ),
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 Widget _dcaError(String title, VoidCallback onRetry) {
   return VitErrorState(
@@ -134,73 +82,64 @@ class DcaOverviewTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-169',
         semanticLabel: 'DCA tổng quan',
         title: 'DCA',
         subtitle: 'Chiến lược · Tổng quan',
         contentKey: DcaOverviewTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được DCA',
-          () => ref.invalidate(dcaDashboardProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được DCA',
+            () => ref.invalidate(dcaDashboardProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-169',
         semanticLabel: 'DCA tổng quan',
         title: 'DCA',
         subtitle: 'Chiến lược tích lũy',
         contentKey: DcaOverviewTabletPage.contentKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _dcaSection(
-              title: 'Tổng quan DCA',
-              rows: _dcaRows([
-                ('Trạng thái', 'Đang hoạt động'),
-                ('Cập nhật', 'Mới nhất'),
-              ]),
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            _dcaSection(
-              title: 'Khám phá',
-              rows: [
-                Wrap(
-                  spacing: TabletSpacingTokens.x2,
-                  runSpacing: TabletSpacingTokens.x2,
-                  children: [
-                    for (final (label, path) in [
-                      ('Tạo lịch DCA', AppRoutePaths.dcaScheduleConfig),
-                      (
-                        'Phân tích lịch DCA',
-                        AppRoutePaths.dcaScheduleAnalytics,
-                      ),
-                      ('Cấu hình rebalance', AppRoutePaths.dcaRebalanceConfig),
-                      ('Bảng rebalance', AppRoutePaths.dcaRebalanceDashboard),
-                      ('Tối ưu danh mục', AppRoutePaths.dcaPortfolioOptimizer),
-                      ('Số tiền linh hoạt', AppRoutePaths.dcaDynamicAmount),
-                      ('Kiểm thử lại', AppRoutePaths.dcaBacktester),
-                      ('Đa tài sản', AppRoutePaths.dcaMultiAsset),
-                      (
-                        'So sánh hiệu suất',
-                        AppRoutePaths.dcaPerformanceCompare,
-                      ),
-                      ('Quy tắc thông minh', AppRoutePaths.dcaSmartRules),
-                    ])
-                      VitFilterChip(
-                        label: label,
-                        active: false,
-                        color: AppColors.primary,
-                        onTap: () => context.go(path),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+        children: [
+          _dcaSection(
+            title: 'Tổng quan DCA',
+            rows: _dcaRows([
+              ('Trạng thái', 'Đang hoạt động'),
+              ('Cập nhật', 'Mới nhất'),
+            ]),
+          ),
+
+          _dcaSection(
+            title: 'Khám phá',
+            rows: [
+              Wrap(
+                spacing: TabletSpacingTokens.x2,
+                runSpacing: TabletSpacingTokens.x2,
+                children: [
+                  for (final (label, path) in [
+                    ('Tạo lịch DCA', AppRoutePaths.dcaScheduleConfig),
+                    ('Phân tích lịch DCA', AppRoutePaths.dcaScheduleAnalytics),
+                    ('Cấu hình rebalance', AppRoutePaths.dcaRebalanceConfig),
+                    ('Bảng rebalance', AppRoutePaths.dcaRebalanceDashboard),
+                    ('Tối ưu danh mục', AppRoutePaths.dcaPortfolioOptimizer),
+                    ('Số tiền linh hoạt', AppRoutePaths.dcaDynamicAmount),
+                    ('Kiểm thử lại', AppRoutePaths.dcaBacktester),
+                    ('Đa tài sản', AppRoutePaths.dcaMultiAsset),
+                    ('So sánh hiệu suất', AppRoutePaths.dcaPerformanceCompare),
+                    ('Quy tắc thông minh', AppRoutePaths.dcaSmartRules),
+                  ])
+                    VitFilterChip(
+                      label: label,
+                      active: false,
+                      color: AppColors.primary,
+                      onTap: () => context.push(path),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -218,29 +157,31 @@ class DcaRebalanceConfigTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-170',
         semanticLabel: 'Cấu hình rebalance DCA',
         title: 'Cấu hình rebalance',
         subtitle: 'Phân bổ',
         contentKey: DcaRebalanceConfigTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được cấu hình rebalance',
-          () => ref.invalidate(dcaRebalanceConfigProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được cấu hình rebalance',
+            () => ref.invalidate(dcaRebalanceConfigProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-170',
         semanticLabel: 'Cấu hình rebalance DCA',
         title: 'Cấu hình rebalance',
         subtitle: 'Phân bổ tài sản',
         contentKey: DcaRebalanceConfigTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Trạng thái',
-          rows: _dcaRows([('Trạng thái', 'Đang cấu hình')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Trạng thái',
+            rows: _dcaRows([('Trạng thái', 'Đang cấu hình')]),
+          ),
+        ],
       ),
     );
   }
@@ -258,29 +199,31 @@ class DcaRebalanceDashboardTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-171',
         semanticLabel: 'Bảng điều khiển rebalance DCA',
         title: 'Dashboard rebalance',
         subtitle: 'Theo dõi',
         contentKey: DcaRebalanceDashboardTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được dashboard',
-          () => ref.invalidate(dcaRebalanceConfigProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được dashboard',
+            () => ref.invalidate(dcaRebalanceConfigProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-171',
         semanticLabel: 'Bảng điều khiển rebalance DCA',
         title: 'Dashboard rebalance',
         subtitle: 'Theo dõi',
         contentKey: DcaRebalanceDashboardTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Dashboard',
-          rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Dashboard',
+            rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
+          ),
+        ],
       ),
     );
   }
@@ -298,29 +241,31 @@ class DcaScheduleConfigTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-172',
         semanticLabel: 'Cấu hình lịch DCA',
         title: 'Lịch DCA',
         subtitle: 'Cấu hình',
         contentKey: DcaScheduleConfigTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được lịch DCA',
-          () => ref.invalidate(dcaScheduleConfigProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được lịch DCA',
+            () => ref.invalidate(dcaScheduleConfigProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-172',
         semanticLabel: 'Cấu hình lịch DCA',
         title: 'Lịch DCA',
         subtitle: 'Cấu hình',
         contentKey: DcaScheduleConfigTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Lịch',
-          rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Lịch',
+            rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
+          ),
+        ],
       ),
     );
   }
@@ -338,29 +283,31 @@ class DcaScheduleAnalyticsTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-173',
         semanticLabel: 'Phân tích lịch DCA',
         title: 'Phân tích lịch',
         subtitle: 'Thống kê',
         contentKey: DcaScheduleAnalyticsTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được phân tích lịch',
-          () => ref.invalidate(dcaScheduleConfigProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được phân tích lịch',
+            () => ref.invalidate(dcaScheduleConfigProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-173',
         semanticLabel: 'Phân tích lịch DCA',
         title: 'Phân tích lịch',
         subtitle: 'Thống kê',
         contentKey: DcaScheduleAnalyticsTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Thống kê',
-          rows: _dcaRows([('Trạng thái', 'Đang theo dõi')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Thống kê',
+            rows: _dcaRows([('Trạng thái', 'Đang theo dõi')]),
+          ),
+        ],
       ),
     );
   }
@@ -374,17 +321,18 @@ class DcaPortfolioOptimizerTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _dcaFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-174',
       semanticLabel: 'Tối ưu danh mục DCA',
       title: 'Tối ưu danh mục',
       subtitle: 'Portfolio optimizer',
       contentKey: DcaPortfolioOptimizerTabletPage.contentKey,
-      child: _dcaSection(
-        title: 'Tối ưu hóa',
-        rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
-      ),
+      children: [
+        _dcaSection(
+          title: 'Tối ưu hóa',
+          rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
+        ),
+      ],
     );
   }
 }
@@ -401,29 +349,31 @@ class DcaDynamicAmountTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-175',
         semanticLabel: 'DCA số tiền động',
         title: 'Số tiền động',
         subtitle: 'Chiến lược',
         contentKey: DcaDynamicAmountTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được số tiền động',
-          () => ref.invalidate(dcaDynamicAmountProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được số tiền động',
+            () => ref.invalidate(dcaDynamicAmountProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-175',
         semanticLabel: 'DCA số tiền động',
         title: 'Số tiền động',
         subtitle: 'Chiến lược',
         contentKey: DcaDynamicAmountTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Chiến lược',
-          rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Chiến lược',
+            rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
+          ),
+        ],
       ),
     );
   }
@@ -441,29 +391,31 @@ class DcaBacktesterTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-176',
         semanticLabel: 'Trình kiểm thử DCA',
         title: 'Backtester',
         subtitle: 'Kiểm tra lịch sử',
         contentKey: DcaBacktesterTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được backtester',
-          () => ref.invalidate(dcaBacktesterProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được backtester',
+            () => ref.invalidate(dcaBacktesterProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-176',
         semanticLabel: 'Trình kiểm thử DCA',
         title: 'Backtester',
         subtitle: 'Kiểm tra lịch sử',
         contentKey: DcaBacktesterTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Kiểm tra',
-          rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Kiểm tra',
+            rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
+          ),
+        ],
       ),
     );
   }
@@ -481,29 +433,31 @@ class DcaMultiAssetTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-177',
         semanticLabel: 'DCA đa tài sản',
         title: 'Multi-asset DCA',
         subtitle: 'Đa tài sản',
         contentKey: DcaMultiAssetTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được multi-asset DCA',
-          () => ref.invalidate(dcaMultiAssetProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được multi-asset DCA',
+            () => ref.invalidate(dcaMultiAssetProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-177',
         semanticLabel: 'DCA đa tài sản',
         title: 'Multi-asset DCA',
         subtitle: 'Đa tài sản',
         contentKey: DcaMultiAssetTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Danh sách tài sản',
-          rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Danh sách tài sản',
+            rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
+          ),
+        ],
       ),
     );
   }
@@ -517,17 +471,18 @@ class DcaPerformanceCompareTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _dcaFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-178',
       semanticLabel: 'So sánh hiệu suất DCA',
       title: 'So sánh hiệu suất',
       subtitle: 'DCA · So sánh',
       contentKey: DcaPerformanceCompareTabletPage.contentKey,
-      child: _dcaSection(
-        title: 'So sánh',
-        rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
-      ),
+      children: [
+        _dcaSection(
+          title: 'So sánh',
+          rows: _dcaRows([('Trạng thái', 'Sẵn sàng')]),
+        ),
+      ],
     );
   }
 }
@@ -544,29 +499,31 @@ class DcaSmartRulesTabletPage extends ConsumerWidget {
 
     return snapshotAsync.when(
       loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => _dcaFrame(
-        context: context,
+      error: (error, stackTrace) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-179',
         semanticLabel: 'Quy tắc thông minh DCA',
         title: 'Smart Rules',
         subtitle: 'Quy tắc thông minh',
         contentKey: DcaSmartRulesTabletPage.contentKey,
-        child: _dcaError(
-          'Không tải được smart rules',
-          () => ref.invalidate(dcaSmartRulesProvider),
-        ),
+        children: [
+          _dcaError(
+            'Không tải được smart rules',
+            () => ref.invalidate(dcaSmartRulesProvider),
+          ),
+        ],
       ),
-      data: (snapshot) => _dcaFrame(
-        context: context,
+      data: (snapshot) => VitTabletSectionFrame(
         semanticIdentifier: 'SC-179',
         semanticLabel: 'Quy tắc thông minh DCA',
         title: 'Smart Rules',
         subtitle: 'Quy tắc thông minh',
         contentKey: DcaSmartRulesTabletPage.contentKey,
-        child: _dcaSection(
-          title: 'Quy tắc',
-          rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
-        ),
+        children: [
+          _dcaSection(
+            title: 'Quy tắc',
+            rows: _dcaRows([('Trạng thái', 'Đang hoạt động')]),
+          ),
+        ],
       ),
     );
   }
@@ -582,17 +539,18 @@ class DcaRebalanceEditTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _dcaFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-408',
       semanticLabel: 'Sửa rebalance DCA',
       title: 'Sửa rebalance',
       subtitle: configId,
       contentKey: DcaRebalanceEditTabletPage.contentKey,
-      child: _dcaSection(
-        title: 'Sửa cấu hình',
-        rows: _dcaRows([('Config ID', configId)]),
-      ),
+      children: [
+        _dcaSection(
+          title: 'Sửa cấu hình',
+          rows: _dcaRows([('Config ID', configId)]),
+        ),
+      ],
     );
   }
 }
@@ -607,17 +565,18 @@ class DcaRebalanceHistoryTabletPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _dcaFrame(
-      context: context,
+    return VitTabletSectionFrame(
       semanticIdentifier: 'SC-409',
       semanticLabel: 'Lịch sử rebalance DCA',
       title: 'Lịch sử rebalance',
       subtitle: configId,
       contentKey: DcaRebalanceHistoryTabletPage.contentKey,
-      child: _dcaSection(
-        title: 'Lịch sử',
-        rows: _dcaRows([('Config ID', configId)]),
-      ),
+      children: [
+        _dcaSection(
+          title: 'Lịch sử',
+          rows: _dcaRows([('Config ID', configId)]),
+        ),
+      ],
     );
   }
 }
