@@ -274,7 +274,8 @@ and load only the relevant local skill from `.agents/skills/` for each task:
 - UI work: use `vittrade-ui-checklists` plus the matching design-domain
   standard.
 - High-risk financial flows: use `vittrade-product-verify`.
-- Batch size: 5–10 files; load one execution prompt and one plan slice from
+- Batch size follows task scope — small enough to self-review the diff and
+  verify each slice; load one execution prompt and one plan slice from
   `docs/INDEX.md` at a time.
 
 ### Minimal diff (Ponytail-lite)

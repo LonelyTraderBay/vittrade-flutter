@@ -230,7 +230,7 @@ def render(changed: set[str], today: str, *, title: str, intro: str, doc_name: s
                 "",
                 *load_lines(batch_id, special, module_prompt),
                 "",
-                "STEP 0→5. Max 5-10 files code + tests this chat.",
+                "STEP 0→5. Batch gọn theo scope, gồm code + tests trong chat này.",
                 "",
                 "BẮT BUỘC: redesign TOÀN BỘ TARGET PAGES bên dưới — Vit* · AppRadii · states.",
                 "Không bỏ sót file. Không chỉ sửa widget/part file thay thế page gốc.",

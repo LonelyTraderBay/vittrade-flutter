@@ -93,6 +93,6 @@ features/markets/routes/web_markets_routes.dart
 
 ## Migration rule
 
-- Batch 5–10 file, một feature/bounded context.
+- Mỗi batch gọn trong một feature/bounded context (kích thước theo scope).
 - Analyze + focused test sau mỗi batch.
 - Không xóa legacy khi còn caller.

@@ -73,7 +73,8 @@ the same approved scope between phases; load only the relevant agent skills.
 
 ## Batch discipline
 
-- 5–10 files per turn for migration work.
+- Batch size follows task scope — small enough to self-review the diff and
+  verify each slice.
 - New agent session after each completed batch.
 - Load one execution prompt + one plan per task — see `docs/INDEX.md`.
 - Do not load backlog + full plan + full audit in one turn.

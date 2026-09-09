@@ -44,7 +44,7 @@ Phân tích <task>. Chỉ đọc / khám phá — không sửa code.
 Output bắt buộc:
 1. Mục tiêu + out-of-scope (1 đoạn ngắn)
 2. Rủi ro / boundary (Prediction Markets vs Open Arena, financial preview-confirm nếu có)
-3. Danh sách batch theo thứ tự — mỗi batch 5–10 file, ưu tiên domain → data → presentation, một feature/module
+3. Danh sách batch theo thứ tự — mỗi batch gọn trong một feature/module (kích thước theo scope), ưu tiên domain → data → presentation
 4. Mỗi batch: paths tường minh + domain Standard (nếu UI) + lệnh verify cụ thể từ Flutter-Design-System-Reference / prompt hiện hành
 5. Lệnh verify tổng (analyze + focused tests) sau batch cuối
 
@@ -84,14 +84,14 @@ Tham chiếu skill: `.agents/skills/incremental-implementation/SKILL.md`
 | --- | --- |
 | Keep the approved agent workflow | Change model when stuck |
 | Plan → approve → Build/Execute | Implement while still unclear |
-| 5–10 files / chat; new chat after batch | One giant migration chat |
+| Batch theo scope, gọn một feature/module; new chat after batch | One giant migration chat |
 | Load one prompt + one plan slice (`docs/INDEX.md`) | Paste full audit CSV / backlog + plan |
 | QA in a **separate** chat | Mix visual QA into migration batch |
 | Hard task → smaller batch / Plan | Assume a higher model tier |
 
 ## Stuck recovery
 
-1. Shrink to the next **half-batch** (≤5 files).
+1. Shrink to the next **half-batch**.
 2. Re-enter Plan for the blocked slice only.
 3. Handoff line if context full: `RESUME FROM: <phase> - <batch>` (see
    `AI_PROMPT_SHELL.md`).
