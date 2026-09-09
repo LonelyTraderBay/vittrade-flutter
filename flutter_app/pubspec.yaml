@@ -38,6 +38,19 @@ dev_dependencies:
   custom_lint: ^0.8.1
   vittrade_lints:
     path: tool/vittrade_lints
+  flutter_launcher_icons: ^0.14.4
+
+# Logo VitTrade "Chart V" (concept C, 2026-09-09) — nguồn sự thật ở
+# design/logo/ (SVG master + gen_adaptive_foreground.py). Bản raster launcher
+# bỏ glow (vô hình ở size nhỏ); nền iOS đặc, không alpha.
+flutter_launcher_icons:
+  image_path: "assets/brand/app_icon.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: "#07090D"
+  adaptive_icon_foreground: "assets/brand/app_icon_foreground.png"
+  adaptive_icon_monochrome: "assets/brand/app_icon_foreground.png"
 
 flutter:
   uses-material-design: true

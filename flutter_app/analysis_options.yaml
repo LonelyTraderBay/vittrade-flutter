@@ -12,6 +12,12 @@ analyzer:
     - web/**
   plugins:
     - custom_lint
+  # SDK-drift (2026-09-09): Dart 3.47 local deprecate hệ plugin legacy của
+  # custom_lint; CI pin 3.41.9 chưa có cảnh báo này nên không phát sinh gì.
+  # Bỏ dòng ignore này khi nâng toolchain và chuyển custom_lint sang hệ
+  # plugin mới của analyzer.
+  errors:
+    analysis_options_deprecated_plugins: ignore
   language:
     strict-casts: true
     strict-inference: true

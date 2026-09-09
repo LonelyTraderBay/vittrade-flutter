@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:vit_trade_flutter/app/app_splash_gate.dart';
 import 'package:vit_trade_flutter/app/providers/auth_controller_providers.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/bootstrap/surface_router_host.dart';
@@ -24,6 +25,7 @@ class VitTradeApp extends StatefulWidget {
     this.routerConfig,
     this.shellRenderMode,
     this.surface,
+    this.showSplash = false,
     this.overrides = const [],
   });
 
@@ -33,6 +35,11 @@ class VitTradeApp extends StatefulWidget {
   /// Cho phép entrypoint/test chốt surface. Khi bỏ trống, bootstrap chọn
   /// Web hoặc Phone/Tablet theo viewport hiện tại.
   final AppSurface? surface;
+
+  /// Bật màn splash logo khi khởi động (opt-in). Chỉ entrypoint thật
+  /// (`main.dart`) đặt true — test dựng app mặc định giữ nguyên cây
+  /// widget, không chịu overlay/chồng timing của splash.
+  final bool showSplash;
 
   /// GĐ4-F1: điểm bơm DI runtime từ bootstrap (storage thật, error reporter
   /// hợp nhất). Test không truyền gì — provider mặc định là impl in-memory.
@@ -114,7 +121,10 @@ class _VitTradeAppState extends State<VitTradeApp> with WidgetsBindingObserver {
         child: SessionBootstrap(
           child: resolvedRouter == null
               ? const ColoredBox(color: AppColors.bg)
-              : _VitTradeMaterialApp(routerConfig: resolvedRouter),
+              : _VitTradeMaterialApp(
+                  routerConfig: resolvedRouter,
+                  showSplash: widget.showSplash,
+                ),
         ),
       ),
     );
@@ -169,9 +179,13 @@ class _VitTradeAppState extends State<VitTradeApp> with WidgetsBindingObserver {
 }
 
 class _VitTradeMaterialApp extends StatelessWidget {
-  const _VitTradeMaterialApp({required this.routerConfig});
+  const _VitTradeMaterialApp({
+    required this.routerConfig,
+    this.showSplash = false,
+  });
 
   final GoRouter routerConfig;
+  final bool showSplash;
 
   @override
   Widget build(BuildContext context) {
@@ -199,8 +213,14 @@ class _VitTradeMaterialApp extends StatelessWidget {
       // showDatePicker) thành min == max và nổ assert `maxScale > minScale`
       // ở chế độ debug; chữ thu nhỏ dưới 1.0 không gây overflow nên sàn
       // không bảo vệ layout nào cả.
-      builder: (context, child) =>
-          MediaQuery.withClampedTextScaling(maxScaleFactor: 1.3, child: child!),
+      builder: (context, child) {
+        final content = MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.3,
+          child: child!,
+        );
+        // Splash chỉ phủ khi entrypoint bật (xem AppSplashGate).
+        return showSplash ? AppSplashGate(child: content) : content;
+      },
       theme: AppTheme.dark,
     );
   }

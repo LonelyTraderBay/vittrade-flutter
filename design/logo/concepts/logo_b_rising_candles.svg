@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <title>Logo VitTrade — concept B: ba nen tang</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#131922"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <g>
+    <path d="M250 544 L740 184" stroke="#10B981" stroke-width="46" stroke-linecap="round" fill="none"/>
+    <path d="M796 143 L773 228 L707 140 Z" fill="#10B981"/>
+  </g>
+  <g>
+    <line x1="316" y1="554" x2="316" y2="864" stroke="#B96000" stroke-width="32" stroke-linecap="round"/>
+    <rect x="251" y="614" width="130" height="180" rx="28" fill="#B96000"/>
+    <line x1="498" y1="394" x2="498" y2="864" stroke="#E58A00" stroke-width="32" stroke-linecap="round"/>
+    <rect x="433" y="474" width="130" height="320" rx="28" fill="#E58A00"/>
+    <line x1="680" y1="294" x2="680" y2="864" stroke="#F5A524" stroke-width="32" stroke-linecap="round"/>
+    <rect x="615" y="354" width="130" height="440" rx="28" fill="#F5A524"/>
+  </g>
+</svg>

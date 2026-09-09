@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <title>Logo VitTrade — concept C: duong gia ve chu V</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#131922"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </linearGradient>
+    <radialGradient id="dotGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#10B981" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <line x1="736" y1="350" x2="824" y2="350" stroke="#667085" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+  <line x1="512" y1="610" x2="512" y2="838" stroke="#E58A00" stroke-width="34" stroke-linecap="round"/>
+  <path d="M268 350 L512 720" stroke="#E58A00" stroke-width="98" stroke-linecap="round" fill="none"/>
+  <path d="M512 720 L756 256" stroke="#F5A524" stroke-width="98" stroke-linecap="round" fill="none"/>
+  <circle cx="811" cy="151" r="96" fill="url(#dotGlow)"/>
+  <circle cx="811" cy="151" r="46" fill="#10B981"/>
+</svg>

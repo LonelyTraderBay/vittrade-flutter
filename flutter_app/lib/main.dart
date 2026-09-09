@@ -58,6 +58,8 @@ void main() {
 
         runApp(
           VitTradeApp(
+            // Splash logo chỉ phát ở app thật (opt-in) — test không bật.
+            showSplash: true,
             overrides: [
               errorReporterProvider.overrideWithValue(errorReporter),
               keyValueStoreProvider.overrideWithValue(

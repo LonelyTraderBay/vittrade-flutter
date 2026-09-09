@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><title>VitTrade — export PNG icon</title></head>
+<body>
+<!-- Công cụ regen: mở file này trong Chrome, chạy raster() trong console,
+     decode base64 ra PNG. Nguồn sự thật là vittrade_app_icon.svg và
+     vittrade_adaptive_foreground.svg cạnh file này. -->
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#131922"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </linearGradient>
+    <radialGradient id="dotGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#10B981" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <line x1="736" y1="350" x2="824" y2="350" stroke="#667085" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+  <line x1="512" y1="610" x2="512" y2="838" stroke="#E58A00" stroke-width="34" stroke-linecap="round"/>
+  <path d="M268 350 L512 720" stroke="#E58A00" stroke-width="98" stroke-linecap="round" fill="none"/>
+  <path d="M512 720 L756 256" stroke="#F5A524" stroke-width="98" stroke-linecap="round" fill="none"/>
+  <circle cx="811" cy="151" r="96" class="glow" fill="url(#dotGlow)"/>
+  <circle cx="811" cy="151" r="46" fill="#10B981"/>
+</svg>
+
+<svg id="fg" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="fgDotGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#10B981" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(178.4 214.4) scale(0.62)">
+    <line x1="736" y1="350" x2="824" y2="350" stroke="#667085" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+    <line x1="512" y1="610" x2="512" y2="838" stroke="#E58A00" stroke-width="34" stroke-linecap="round"/>
+    <path d="M268 350 L512 720" stroke="#E58A00" stroke-width="98" stroke-linecap="round" fill="none"/>
+    <path d="M512 720 L756 256" stroke="#F5A524" stroke-width="98" stroke-linecap="round" fill="none"/>
+    <circle cx="811" cy="151" r="96" class="glow" fill="url(#fgDotGlow)"/>
+    <circle cx="811" cy="151" r="46" fill="#10B981"/>
+  </g>
+</svg>
+
+<script>
+async function raster(id, stripGlow) {
+  const svg = document.getElementById(id);
+  const node = stripGlow ? svg.cloneNode(true) : svg;
+  if (stripGlow) node.querySelectorAll('.glow').forEach((el) => el.remove());
+  const xml = new XMLSerializer().serializeToString(node);
+  const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  return await new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = 1024; c.height = 1024;
+      c.getContext('2d').drawImage(img, 0, 0, 1024, 1024);
+      resolve(c.toDataURL('image/png').split(',')[1]);
+    };
+    img.src = url;
+  });
+}
+window.__ready = true;
+</script>
+</body>
+</html>
