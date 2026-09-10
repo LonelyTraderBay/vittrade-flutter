@@ -448,10 +448,13 @@ class StakingWithdrawalPolicyTabletPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'Khởi tạo ${timeline.initiate} · nhận ${timeline.receive}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
+                      Flexible(
+                        child: Text(
+                          'Khởi tạo ${timeline.initiate} · nhận ${timeline.receive}',
+                          textAlign: TextAlign.right,
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text2,
+                          ),
                         ),
                       ),
                     ],
