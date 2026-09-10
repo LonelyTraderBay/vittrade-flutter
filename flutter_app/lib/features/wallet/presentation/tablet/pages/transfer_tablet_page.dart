@@ -361,14 +361,17 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
       showVitBottomSheet<void>(
         context: pageContext,
         isScrollControlled: true,
-        builder: (_) => TransferConfirmSheet(
+        builder: (sheetContext) => TransferConfirmSheet(
           fromWallet: fromWallet,
           toWallet: toWallet,
           asset: asset,
           amount: amount,
           usdValue: usdValue,
           onConfirm: () {
-            Navigator.of(context).pop();
+            // Pop bằng context của sheet (khuôn picker) — pop qua context
+            // trang rơi vào navigator của GoRouter và trúng assert
+            // currentConfiguration.isNotEmpty khi stack chỉ còn 1 page.
+            Navigator.of(sheetContext).pop();
             _amountController.clear();
             setState(() {});
             if (mounted) {
