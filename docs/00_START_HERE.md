@@ -39,12 +39,14 @@ web screenshot baseline were removed on 2026-05-26.
 flutter_app/lib/
 ├── app/        # Bootstrap, router facade, theme
 ├── core/       # config, data (repository guards), navigation, network,
-│               # product_flow (high-risk flow contracts), utils
+│               # observability (reporter seams), product_flow (high-risk
+│               # flow contracts), storage (KeyValue/Secure seams), utils
 ├── features/   # Feature modules with domain/data/presentation layers
 └── shared/     # Shared layout and design-system widgets
 ```
 
-Screens live under `features/<feature>/presentation/pages/`. The router facade
+Screens live under `features/<feature>/presentation/{phone,tablet}/pages/`
+(web: auth + home only; surface resolves once at bootstrap — ADR-013). The router facade
 keeps the public `createAppRouter`, `appRouter`, `AppRoutePaths`, and
 `AppRouteNames` API while delegating implementation to router part files.
 

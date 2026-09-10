@@ -113,7 +113,7 @@ shared/widgets dependency problem) and were left untouched.
   checks that Home still consumes the three shared widgets above instead of
   re-forking a local copy).
 - `test/features/home/golden/` — pixel baselines for Home's loading/error/data
-  states and the three shared widgets above, pinned to Flutter 3.41.9 stable
+  states and the three shared widgets above, pinned to Flutter 3.47.2 stable
   (matches CI) at 360×800. No `golden_toolkit` dependency; uses `flutter_test`'s
   native `matchesGoldenFile`, so custom fonts render as their test-environment
   fallback rather than the real typeface — goldens catch structural/layout

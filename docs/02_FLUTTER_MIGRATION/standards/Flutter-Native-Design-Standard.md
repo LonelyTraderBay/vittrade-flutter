@@ -18,7 +18,8 @@ This file defines the active Flutter-native UI standard for VitTrade.
   professional trading terminal reads best on one dark canvas; there is
   exactly one theme and no light mode to maintain. Do not add
   `ThemeData.light`, light-surface tokens, or theme-mode toggles — a
-  light theme is a new product decision, not a UI task.
+  light theme is a new product decision, not a UI task — đã chốt dark-only
+  tại ADR-014 (mở lại chỉ bằng ADR mới).
 - Keep primary brand, app chrome, bottom navigation, shared cards, and primary
   CTAs globally consistent.
 - Module identity is an accent layer only.

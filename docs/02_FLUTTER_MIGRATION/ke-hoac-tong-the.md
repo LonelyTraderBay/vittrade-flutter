@@ -1,6 +1,6 @@
 # Kế hoạch tổng thể cho AI triển khai
 
-Updated: 2026-07-23
+Updated: 2026-09-10
 Scope: Flutter-only VitTrade app trong `flutter_app/`.
 
 Tài liệu này là dashboard trạng thái và hướng dẫn cho các lượt AI tiếp theo.
@@ -41,8 +41,8 @@ baseline**:
 - Runtime source nằm dưới `flutter_app/lib/`.
 - `lib/` có đủ các vùng trách nhiệm chính: `app/`, `core/`, `features/`,
   `shared/` và `main.dart`.
-- Toàn bộ `23/23` feature modules đang có đủ `domain/`, `data/` và
-  `presentation/`.
+- Toàn bộ `35/35` feature modules đang có đủ `domain/`, `data/` và
+  `presentation/` (composition phone + tablet đầy đủ cho mọi route).
 - Router facade nằm đúng tại `flutter_app/lib/app/router/app_router.dart`.
 - Shared layout/design primitives đã được tách dưới `shared/`.
 - Test suite đã bám theo app, feature, shared và quality guardrails.
@@ -52,21 +52,23 @@ Lý do chính không còn nằm ở top-level folder layout, mà nằm ở các 
 bên trong:
 
 - Production backend path vẫn chủ yếu fail-closed vì chưa có backend contracts
-  và remote repositories thật cho các critical modules.
-- Release signing/hosted release CI vẫn là external ops blocker; không được gọi
-  production enterprise-grade khi chưa có signing secrets và artifact xác nhận.
-- S7 emulator smoke đã pass core navigation và đa số high-risk smoke, nhưng
-  Address Add và P2P Payment Add completion còn bị chặn bởi emulator text-entry
-  reliability.
-- File-size debt còn đáng kể: `239` feature files trên 600 dòng và `4` feature
-  files trên 1200 dòng.
+  và remote repositories thật cho các critical modules — pilot auth đã chứng
+  minh công thức (`RemoteAuthRepository` + playbook), phần còn lại là thao tác
+  cơ học chờ contract ký.
+- Release signing/hosted release CI vẫn là external ops blocker; pipeline
+  release + obfuscate đã có sẵn, nhưng chưa có signing secrets thật và artifact
+  phát hành xác nhận.
+- File-size debt đã trả gần hết: `36` feature files trên 600 dòng và `2` file
+  trên 1200 dòng (khóa bởi guardrail `architecture_size_style_debt`, ngưỡng
+  ratchet không được tăng).
 - Một số file `part` vẫn nằm trong `presentation/pages/`; chấp nhận được cho
   giai đoạn port/refactor, nhưng về lâu dài cần tiếp tục đẩy widget nhỏ sang
   `presentation/widgets/`, state sang `presentation/controllers/`, và value
   objects sang `domain/`.
-- Core backend boundary còn mỏng so với yêu cầu production thật: cần DTO mapping,
-  typed errors, timeout/offline policy, auth/session injection và repository
-  tests theo contract thật.
+- Core backend boundary đã đủ khung production: DTO mapping (ADR-010, pilot
+  auth), typed errors (`ApiFailure`/`OfflineFailure` tiếng Việt),
+  timeout/offline policy, auth/session injection qua interceptor — còn thiếu
+  đúng một thứ: backend thật để 34 feature còn lại theo playbook.
 
 Verdict ngắn: **đạt chuẩn cấu trúc nền enterprise-grade Flutter; chưa đạt chuẩn
 production enterprise-grade hoàn chỉnh.**
@@ -82,10 +84,13 @@ flutter_app/
 |   |   |-- router/
 |   |   `-- theme/
 |   |-- core/
-|   |   |-- config/
-|   |   |-- data/
-|   |   |-- errors/
-|   |   |-- network/
+|   |   |-- config/        # AppConfig dart-defines (env, mock, kill-switch)
+|   |   |-- data/          # repository guard + OfflineFailure
+|   |   |-- navigation/    # back-navigation an toàn
+|   |   |-- network/       # ApiClient + chuỗi interceptor (SEC-S46)
+|   |   |-- observability/ # ErrorReporter/AnalyticsReporter seams (ADR-008)
+|   |   |-- product_flow/  # hợp đồng high-risk flow
+|   |   |-- storage/       # KeyValueStore/SecureStore seams (GĐ4-F1)
 |   |   `-- utils/
 |   |-- features/
 |   |   `-- <feature>/
@@ -93,7 +98,8 @@ flutter_app/
 |   |       |-- data/
 |   |       `-- presentation/
 |   |           |-- controllers/   # khi feature có state/controller riêng
-|   |           |-- pages/
+|   |           |-- phone/pages/
+|   |           |-- tablet/pages/
 |   |           `-- widgets/       # khi feature có widget local reusable
 |   `-- shared/
 |       |-- layout/
@@ -108,7 +114,8 @@ Quy tắc giữ nguyên:
 - Config, network boundary, typed errors, repository guard và cross-cutting
   utilities nằm trong `core/`.
 - Mỗi business capability nằm trong `features/<feature>/`.
-- Screen/page nằm trong `features/<feature>/presentation/pages/`.
+- Screen/page nằm trong `features/<feature>/presentation/{phone,tablet}/pages/`
+  (web chỉ auth + home; surface được chốt một lần ở bootstrap — xem ADR-013).
 - State/controller cho presentation nằm trong
   `features/<feature>/presentation/controllers/`.
 - Widget tái sử dụng trong cùng feature nằm trong

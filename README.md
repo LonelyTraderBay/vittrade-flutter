@@ -30,7 +30,7 @@ flutter_app/lib/
 │       ├── domain/      # Entities, repository contracts, use cases
 │       ├── data/        # Data sources, implementations, providers
 │       └── presentation/
-│           ├── pages/
+│           ├── phone/pages/ + tablet/pages/
 │           ├── widgets/
 │           └── controllers/
 └── shared/              # Reusable layout and design-system widgets

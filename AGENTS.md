@@ -4,7 +4,9 @@
 **Tech Stack:** Flutter, Dart, Riverpod, GoRouter  
 **Package Manager:** Flutter/Dart pub  
 **Test Framework:** flutter_test  
-**Last Updated:** 2026-09-05 (chuẩn hoá một agent surface duy nhất: ZCode — toàn bộ skill canonical ở `.agents/skills/`, `.codex/` đã gỡ bỏ)
+**Last Updated:** 2026-09-10 (đồng bộ tài liệu sống theo hiện trạng: toolchain
+pin 3.47.2 + riverpod 3.4, tablet composition hoàn tất toàn bộ route, ADR-014
+dark-only, pilot remote auth)
 
 Read `docs/00_START_HERE.md` before using long-form design, architecture, or QA
 guidance.
@@ -33,7 +35,7 @@ flutter_app/lib/
 │       ├── domain/
 │       ├── data/
 │       └── presentation/
-│           ├── pages/
+│           ├── phone/pages/ + tablet/pages/
 │           ├── widgets/
 │           └── controllers/
 └── shared/
@@ -51,13 +53,14 @@ Rules:
     helpers in the same file (`resolveSafeBackPath`, `_normalizeInternalPath`)
     are pure Dart and stay non-UI.
 - Keep reusable UI primitives in `shared/`.
-- Keep screen widgets under `features/<feature>/presentation/pages/`.
+- Keep screen widgets under `features/<feature>/presentation/{phone,tablet}/pages/`
+  (web chỉ auth + home).
 - Put repository contracts and value objects under `domain/`.
 - Put mock/remote repository implementations and their base Riverpod provider
   under `data/`; feature/screen-level controller providers that wire a
   repository provider together with `presentation/controllers/` models live
   in `app/providers/<feature>_controller_providers.dart` (composition root —
-  27 provider files covering 27/28 feature modules as of 2026-07-18; naming
+  34 provider files covering 34/35 feature modules as of 2026-09-10; naming
   variants: `dev` → `dev_tools_controller_providers.dart`, `markets` →
   `market_controller_providers.dart`. `trade_core` intentionally has none —
   it is the shared entity kernel with no screens/controllers of its own).
@@ -153,11 +156,11 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   width at runtime. `createAppRouter()` without `surface:` renders the Phone
   composition at every width — it is the compat API for tests, not a
   responsive mode.
-- Per-feature tablet composition rolls out module by module (done: auth,
-  home, markets hub, trade, wallet, profile, và các trang tablet dùng chung
-  của P2P trong `p2p_core`). A module without its own tablet composition
-  routes to the `VitTabletUtilityPage` placeholder (`P2PTabletUtilityPage`
-  cho P2P) — tablet surface **không** render lại phone page. Real web pages
+- Per-feature tablet composition is **complete for every route** (closed
+  2026-09-06 — gate test duyệt toàn bộ probe path, 0 route còn utility
+  placeholder). A new feature must ship **both** its phone and tablet pages
+  in cùng một batch (khóa bởi route coverage + tablet route surface
+  guardrails); tablet surface **không** render lại phone page. Real web pages
   exist only for auth and home; mọi web route khác là placeholder
   `VitWebUtilityPage`.
 - Porting phone content into a tablet pane is a **re-compose, not a copy**:

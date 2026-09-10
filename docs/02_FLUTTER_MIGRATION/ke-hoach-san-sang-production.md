@@ -1,6 +1,7 @@
 # Kế hoạch sẵn sàng production - VitTrade Flutter FE
 
-Updated: 2026-06-11
+Updated: 2026-09-10 (đồng bộ sau toolchain align 3.47.2, ADR-014 dark-only,
+pilot remote auth — xem CHANGELOG)
 
 Phạm vi tài liệu này là **Frontend Flutter** của VitTrade. Tài liệu này không
 thay thế checklist production của Backend, DevOps, pháp lý, bảo mật hạ tầng,
@@ -10,20 +11,23 @@ môi trường staging/production, kiểm thử bảo mật và quy trình relea
 ## Kết luận hiện tại
 
 VitTrade Flutter **chưa production-ready hoàn chỉnh** theo nghĩa phát hành thật
-cho người dùng cuối, vì phần tích hợp Backend/API thật, auth/session, release CI
-và observability vẫn còn thiếu.
+cho người dùng cuối — lý do còn lại thu hẹp về **phía ngoài FE**: chưa có
+Backend/API thật (0/34 feature có remote repository sản xuất; pilot auth đã
+chứng minh công thức), chưa cấu hình signing secrets + tag phát hành, chưa cắm
+crash/analytics vendor, chưa có store track.
 
-Tuy nhiên phần **FE UI/UX, router, navigation, product-copy guardrails và test
-gate hiện tại đã đạt mức rất tốt**:
+Tầng **khung FE đã đóng và có khóa** (guardrail + CI 7 job + preflight):
 
 ```text
 Body component audit: 409 A, 0 B, 0 C, 0 D, 5 Tool
 Header strict audit: strict_visual_issues=0, screen_level_mismatches=0
 Back navigation audit: strict_back_issues=0
 Home-entry back audit: 44 passed, 0 failed
-flutter analyze: pass
-flutter test --reporter=compact: pass
+flutter analyze: pass (0 issue)
+flutter test --reporter=compact: 3.984 pass / 30 fail golden font Windows
+  (baseline môi trường — golden chỉ đọc composition, không phải lỗi logic)
 Debug APK trên Android emulator: build/install/launch pass
+preflight_check.dart: P1/P2/P3 PASS sạch (P4 = 30 golden baseline trên Windows)
 ```
 
 ## Bảng trạng thái thực tế
@@ -36,14 +40,14 @@ Debug APK trên Android emulator: build/install/launch pass
 | Accessibility semantics critical flows | `[x]` Hoàn tất gate hiện tại | Có test cho withdraw, address add, P2P payment add, token approval, admin dashboards. |
 | High-risk text-entry smoke tests | `[x]` Hoàn tất gate hiện tại | Address Add và P2P Payment Add enterText harness đã có và pass. |
 | Architecture guardrails | `[~]` Đang kiểm soát | Guardrail pass, nhưng vẫn còn nợ kỹ thuật part-file/file lớn cần giảm dần. |
-| Network foundation | `[~]` Partial | Đã có Dio `ApiClient`, timeout, base URL config. Chưa có error mapper/auth interceptor/refresh token đầy đủ. |
-| Mock/remote repository switch | `[~]` Partial | Đã có `AppConfig` và `guardedRepository`. Chưa có remote repository thật theo feature. |
-| Backend API contracts/DTO | `[ ]` Chưa sẵn sàng production | Chưa thấy bộ DTO/remote API đầy đủ theo Swagger/OpenAPI thật. |
-| Auth/session/token security | `[ ]` Chưa sẵn sàng production | Chưa thấy secure token storage, Authorization interceptor, refresh-token flow. |
-| Android release signing | `[~]` Partial | Gradle đã đọc `key.properties` hoặc env vars, nhưng CI release/secrets chưa hoàn tất. |
-| CI quality gates | `[x]` Hoàn tất cho debug gate | CI chạy format, route/nav checks, analyze, tests, debug APK. |
-| CI release build | `[ ]` Chưa hoàn tất | Workflow hiện chỉ `flutter build apk --debug`, chưa build release APK/AAB bằng secrets. |
-| Observability/crash reporting | `[ ]` Chưa có bằng chứng | Chưa thấy crash reporting, analytics, production log policy. |
+| Network foundation | `[x]` Hoàn tất | `ApiClient` Dio + chuỗi interceptor đầy đủ (auth-token → session-refresh → safe-retry GET → error-map `ApiFailure`/`OfflineFailure` tiếng Việt) + certificate pinning fail-closed (SEC-S46); timeout 3 mức. |
+| Mock/remote repository switch | `[~]` Pilot xong | `AppConfig` + `guardedRepository` (mock/remote/fail-closed). `RemoteAuthRepository` + 9 test hợp đồng + playbook 5 bước đã chứng minh công thức; 0/34 feature còn lại có remote — chờ backend contract (ratchet guardrail cấm nối sớm). |
+| Backend API contracts/DTO | `[ ]` Chưa sẵn sàng production | Chưa có Swagger/OpenAPI ký thật. FE có sẵn ADR-010 (DTO provisional, pilot auth) + Auth-Backend-Contract-Skeleton.md. |
+| Auth/session/token security | `[x]` Hoàn tất khung | SecureStore (`flutter_secure_storage` giới hạn trong `core/storage/`), interceptor `Authorization: Bearer`, refresh-token flow nối `AuthSessionController` ↔ ApiClient, logout-forced khi refresh fail. Token demo — giá trị thật thay khi backend về, cơ chế không đổi. |
+| Android release signing | `[~]` Partial | Gradle đọc `key.properties`/env; workflow `release.yml` đã có pipeline signing (decode keystore base64 từ secrets). Còn thiếu: cấu hình 4 secrets thật + tag phát hành đầu tiên. |
+| CI quality gates | `[x]` Hoàn tất cho debug gate | CI 7 job (static, guardrails, tests, build-android, golden-windows, secret-scan, gate) + preflight_check.dart mô phỏng trọn chuỗi tại local. |
+| CI release build | `[x]` Hoàn tất pipeline | `flutter-release.yml` + `release.yml`: build release theo tag, `--obfuscate --split-debug-info=build/symbols/prod`, signing secrets. Chưa chạy thật lần nào (chờ secrets + tag). |
+| Observability/crash reporting | `[~]` Seam xong, vendor chưa cắm | ADR-008: `ErrorReporter`/`AnalyticsReporter` interface + `LocalLogErrorReporter` (ring-buffer); kill-switch bảo trì + force-update gate đã có route. Cắm Sentry/Crashlytics chỉ đổi 1 chỗ. |
 | Store/internal distribution | `[ ]` Chưa có bằng chứng | Chưa có Play/internal track, versioning/release notes pipeline. |
 
 ## Bằng chứng từ code hiện tại
@@ -88,6 +92,19 @@ Debug APK trên Android emulator: build/install/launch pass
 
 5. Không đúng khi xem các smoke/accessibility/product-copy tests là chưa có.
    Các test này đã tồn tại và pass trong lần kiểm tra gần nhất.
+
+6. Không đúng (từ 2026-09-10) khi xem Network foundation là thiếu error
+   mapper/auth interceptor/refresh token — cả ba đã hoàn thiện kèm test
+   (`api_client_error_mapping_test`, `api_client_auth_session_test`,
+   `api_client_retry_test`).
+
+7. Không đúng khi xem Auth/session/token là chưa bắt đầu — SecureStore,
+   Authorization interceptor và refresh-token flow đã wired
+   (`auth_controller_providers.dart`).
+
+8. Không đúng khi xem CI release là chưa có — `flutter-release.yml` và
+   `release.yml` đã build release có obfuscate + signing theo tag; việc còn
+   lại là cấu hình secrets thật và tag phiên bản đầu tiên.
 
 ## Chiến lược FE-first: giữ Mock Data để demo, chuẩn bị sẵn BE
 
@@ -149,7 +166,8 @@ Page / Widget
  -> Backend API
 ```
 
-Mẫu cấu trúc feature cần hướng tới:
+Mẫu cấu trúc feature theo quy ước thực tế của repo (ADR-010 — DTO đặt trong
+`data/dto/`, không phải `data/models/`; tham chiếu sống: `features/auth/`):
 
 ```text
 flutter_app/lib/features/<feature>/
@@ -158,18 +176,18 @@ flutter_app/lib/features/<feature>/
 │   └── repositories/
 │       └── <feature>_repository.dart
 ├── data/
-│   ├── models/
-│   │   └── <feature>_dto.dart
-│   ├── mappers/
-│   │   └── <feature>_mapper.dart
+│   ├── dto/
+│   │   ├── <feature>_dto.dart        # + .g.dart sinh từ build_runner
+│   │   └── <feature>_dto_mappers.dart
 │   ├── providers/
-│   │   └── <feature>_repository_provider.dart
+│   │   └── <feature>_repository_provider.dart   # qua guardedRepository
 │   └── repositories/
 │       ├── mock_<feature>_repository.dart
-│       └── remote_<feature>_repository.dart
+│       ├── remote_<feature>_repository.dart     # theo playbook khi BE ký
+│       └── fail_closed_<feature>_repository.dart
 └── presentation/
     ├── controllers/
-    ├── pages/
+    ├── phone/pages/ + tablet/pages/ (+ web nếu được duyệt)
     └── widgets/
 ```
 
@@ -396,8 +414,13 @@ flutter_app/lib/features/<feature>/data/repositories/remote_*_repository.dart
 
 ### P0.2 - Hoàn thiện remote repositories
 
-Hiện trạng: chưa tìm thấy `remote_*_repository.dart` đầy đủ theo feature. App
-đang phụ thuộc chủ yếu vào mock repositories/fixtures.
+Hiện trạng (2026-09-10): **pilot đã xong** — `RemoteAuthRepository` +
+9 test hợp đồng + playbook 5 bước
+(`docs/05_ARCHITECTURE/remote-repository-playbook.md`). Guardrail
+`repository_guard_coverage` cố ý cấm nối `remote:` vào provider P0 chờ
+backend thật (nối sớm làm production fail với thông báo sai nghĩa). Mỗi
+feature còn lại làm theo playbook khi contract ký — thao tác cơ học, không
+thiết kế lại.
 
 - [ ] Tạo remote repository cho các module P0:
   Auth, Wallet, Trade, P2P, Markets, Profile.
@@ -410,38 +433,48 @@ Hiện trạng: chưa tìm thấy `remote_*_repository.dart` đầy đủ theo f
 
 ### P0.3 - Error mapper và offline/network state thật
 
-Hiện trạng: `ApiClient` đã có Dio timeout, nhưng chưa đủ error handling chuẩn
-production.
+Hiện trạng: **hoàn tất** — `core/network/api_error_mapper.dart` map
+400/401/403/404/409/422/429/5xx + timeout/mất mạng → `ApiFailure`/
+`OfflineFailure` tiếng Việt; retry có kiểm soát qua `safe_retry` (GET tạm
+thời); test trong `api_client_error_mapping_test.dart` /
+`api_client_retry_test.dart`.
 
-- [ ] Map lỗi HTTP phổ biến: 400, 401, 403, 404, 409, 422, 429, 500, timeout.
-- [ ] Chuyển lỗi network thành state UI rõ ràng:
+- [x] Map lỗi HTTP phổ biến: 400, 401, 403, 404, 409, 422, 429, 500, timeout.
+- [x] Chuyển lỗi network thành state UI rõ ràng:
   loading, empty, error, offline, submitting, success.
-- [ ] Không expose raw exception hoặc stack trace ra UI người dùng.
-- [ ] Có retry policy có kiểm soát cho các request an toàn.
-- [ ] Có test cho error mapper và controller state transition.
+- [x] Không expose raw exception hoặc stack trace ra UI người dùng.
+- [x] Có retry policy có kiểm soát cho các request an toàn.
+- [x] Có test cho error mapper và controller state transition.
 
 ### P0.4 - Auth/session/token security
 
-Hiện trạng: chưa thấy Authorization interceptor, refresh token flow hoặc secure
-token storage trong `lib/`.
+Hiện trạng: **hoàn tất khung (GĐ4-F1, P0.4)** — secure storage qua seam
+`SecureStore`, interceptor `Authorization: Bearer`, refresh 401 qua
+`sessionRefreshInterceptor` nối `AuthSessionController.tryRefreshAccessToken`,
+refresh fail → logout toàn cục; masking PII có guardrail `secret_material`.
+Token hiện là giá trị demo — backend thật chỉ đổi giá trị ghi vào store.
 
-- [ ] Thêm secure token storage phù hợp Flutter mobile.
-- [ ] Thêm Dio interceptor gắn `Authorization: Bearer <token>`.
-- [ ] Bắt 401 và xử lý refresh token theo contract Backend.
-- [ ] Nếu refresh fail, clear session và điều hướng về login an toàn.
-- [ ] Không log token, refresh token, email/phone/address đầy đủ.
-- [ ] Có test cho 401, refresh success, refresh fail, logout forced.
+- [x] Thêm secure token storage phù hợp Flutter mobile.
+- [x] Thêm Dio interceptor gắn `Authorization: Bearer <token>`.
+- [x] Bắt 401 và xử lý refresh token theo contract Backend.
+- [x] Nếu refresh fail, clear session và điều hướng về login an toàn.
+- [x] Không log token, refresh token, email/phone/address đầy đủ.
+- [x] Có test cho 401, refresh success, refresh fail, logout forced
+  (`api_client_auth_session_test.dart`).
 
 ### P0.5 - Release CI/CD thật
 
-Hiện trạng: `.github/workflows/flutter-ci.yml` đang chạy debug gate và
-`flutter build apk --debug`; chưa build release artifact.
+Hiện trạng (2026-09-10): **pipeline đã có** — `release.yml` (tag → build AAB
+flavor prod, decode keystore từ `VITTRADE_KEYSTORE_BASE64`, ký, obfuscate +
+`--split-debug-info=build/symbols/prod`) và `flutter-release.yml`; thêm
+`ios-demo-build.yml` cho IPA demo Sideloadly. Việc còn lại là vận hành:
+cấu hình 4 secrets thật, bump version + CHANGELOG, tag `v<x.y.z>` đầu tiên.
 
-- [ ] Thêm job release riêng, chỉ chạy trên tag hoặc protected branch.
+- [x] Thêm job release riêng, chỉ chạy trên tag hoặc protected branch.
 - [ ] Cấu hình GitHub/GitLab secrets cho signing:
-  `VITTRADE_KEYSTORE_PATH`, `VITTRADE_KEYSTORE_PASSWORD`,
-  `VITTRADE_KEY_ALIAS`, `VITTRADE_KEY_PASSWORD`.
-- [ ] Build release APK hoặc AAB:
+  `VITTRADE_KEYSTORE_BASE64`, `VITTRADE_KEYSTORE_PASSWORD`,
+  `VITTRADE_KEY_ALIAS`, `VITTRADE_KEY_PASSWORD` (pipeline sẵn, chờ giá trị).
+- [x] Build release APK/AAB:
 
 ```powershell
 flutter build appbundle --release `
@@ -493,10 +526,14 @@ production nếu gate không tăng.
 
 ### P1.4 - Observability và vận hành
 
-- [ ] Thêm crash reporting phù hợp chính sách dự án.
-- [ ] Định nghĩa log policy: không log PII/token/address đầy đủ.
+- [ ] Thêm crash reporting phù hợp chính sách dự án (seam `ErrorReporter`/
+  `AnalyticsReporter` sẵn theo ADR-008 — cắm vendor ở 1 chỗ, không đụng file khác).
+- [x] Định nghĩa log policy: không log PII/token/address đầy đủ (guardrail
+  `secret_material` + `LocalLogErrorReporter` ring-buffer không PII).
 - [ ] Thêm build metadata vào app: version, environment, commit SHA.
-- [ ] Có cơ chế remote kill switch/maintenance state nếu Backend yêu cầu.
+- [x] Có cơ chế remote kill switch/maintenance state nếu Backend yêu cầu
+  (`MAINTENANCE_MODE` redirect toàn app + `MIN_SUPPORTED_BUILD` force-update
+  gate; `RuntimeConfigSource` là chỗ cắm remote-config server-side).
 
 ## P2 - Việc cải thiện sau beta
 
@@ -508,7 +545,15 @@ production nếu gate không tăng.
 
 ## Checklist lệnh kiểm tra hiện tại
 
-Chạy từ `flutter_app/`:
+Một lệnh duy nhất mô phỏng trọn chuỗi CI tại local (format, analyze, 21 audit
+`--check`, full test — chạy trên bản checkout sạch tái tạo từ git index):
+
+```powershell
+dart run tool\preflight_check.dart          # thêm --fast để bỏ test giữa chừng
+```
+
+Kỳ vọng trên máy Windows: P1/P2/P3 PASS; P4 chỉ fail đúng 30 golden font
+(baseline môi trường). Chi tiết từng lệnh (chạy từ `flutter_app/`):
 
 ```powershell
 flutter pub get

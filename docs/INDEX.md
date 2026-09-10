@@ -1,6 +1,6 @@
 # VitTrade Docs Index
 
-**Last Updated:** 2026-09-05 (ZCode-only workflow; archive completed playbooks → `docs/_archive/`)
+**Last Updated:** 2026-09-10 (đồng bộ tài liệu sống theo hiện trạng: toolchain 3.47.2, tablet composition hoàn tất, ADR-014 dark-only, pilot remote auth; workflow ZCode-only giữ nguyên)
 
 Load docs **on demand** — do not paste large audit output into chat. Shared rules:
 [AI_PROMPT_SHELL.md](01_AI_RULES/AI_PROMPT_SHELL.md).

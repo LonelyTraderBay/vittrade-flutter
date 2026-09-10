@@ -42,4 +42,5 @@ text thường; **3:1** text lớn/đậm + thành phần UI (icon/viền).
 - Đây là **cảnh báo hồi quy**, không phải giấy phép đổi màu. Đổi token màu là
   việc design riêng; nếu một cặp mới tụt dưới ngưỡng, hoặc sửa màu, hoặc thêm
   vào allowlist của guardrail kèm lý do + cập nhật bảng này.
-- Chưa cần light theme ở giai đoạn mock — khi có, bổ sung cột nền sáng.
+- Không có light theme — đã chốt dark-only tại ADR-014; bảng này chỉ cần
+  cột nền tối trừ khi một ADR mới thay thế quyết định đó.
