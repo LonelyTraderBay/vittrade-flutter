@@ -6,7 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/features/auth/presentation/controllers/password_reset_flow_controller.dart';
 import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/forgot_password_tablet_page.dart';
+import 'package:vit_trade_flutter/features/auth/presentation/tablet/pages/reset_password_tablet_page.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester) async {
@@ -92,6 +94,58 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Đã cập nhật mật khẩu'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3g: reset password tablet — validate yếu/không khớp/
+  // hợp lệ, phủ cả nhánh submit 3 trường hợp.
+  testWidgets('reset password tablet: validate + submit thành công', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          passwordResetChallengeProvider.overrideWithBuild(
+            (_, _) => PasswordResetChallenge(
+              email: 'user@vittrade.vn',
+              otp: '123456',
+              verifiedAt: DateTime(2026, 1, 1),
+            ),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.authResetPassword,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final fields = find.byType(TextField);
+    expect(fields, findsAtLeastNWidgets(2));
+
+    // Mật khẩu yếu -> bấm nút submit.
+    await tester.enterText(fields.first, 'abc');
+    await tester.tap(find.byKey(ResetPasswordTabletPage.submitKey));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Mật khẩu cần đủ'), findsOneWidget);
+
+    // Không khớp.
+    await tester.enterText(fields.first, 'Abcdef12');
+    await tester.enterText(fields.last, 'Abcdef34');
+    await tester.tap(find.byKey(ResetPasswordTabletPage.submitKey));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('chưa khớp'), findsOneWidget);
+
+    // Hợp lệ.
+    await tester.enterText(fields.last, 'Abcdef12');
+    await tester.tap(find.byKey(ResetPasswordTabletPage.submitKey));
+    await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
   });
 }

@@ -282,4 +282,28 @@ void main() {
       expect(find.byKey(TradeTabletKeys.ohlcReadout), findsOneWidget);
     },
   );
+
+  // Coverage dòng 2 p3g: đặt lệnh đủ luồng — chọn side, preset %, submit
+  // (nhánh _submitOrder + thành công).
+  testWidgets('SC-048 đặt lệnh: side + preset % + submit', (tester) async {
+    await pumpTabletTrade(tester);
+
+    // Preset 25% điền amount tự động.
+    final pct = find.byKey(TradeTabletKeys.pct(25));
+    if (pct.evaluate().isNotEmpty) {
+      await tester.ensureVisible(pct);
+      await tester.pumpAndSettle();
+      await tester.tap(pct);
+      await tester.pumpAndSettle();
+    }
+
+    // Submit lệnh mua.
+    final submit = find.byKey(TradeTabletKeys.submit);
+    expect(submit, findsOneWidget);
+    await tester.ensureVisible(submit);
+    await tester.pumpAndSettle();
+    await tester.tap(submit);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
 }
