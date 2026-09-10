@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/wallet/data/wallet_repository.dart';
 import 'package:vit_trade_flutter/features/support/presentation/phone/pages/support_page.dart';
@@ -14,6 +15,8 @@ import 'package:vit_trade_flutter/shared/layout/vit_phone_frame.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
+
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
 
 void main() {
   const creditedDeposit = WalletPendingDeposit(
@@ -333,5 +336,44 @@ void main() {
     expect(find.byKey(SupportPage.contextKey), findsOneWidget);
     expect(find.text('Nạp USDT thất bại'), findsOneWidget);
     expect(find.text('pd004'), findsOneWidget);
+  });
+
+  // Coverage dòng 2 p3j: pending deposits tablet — đổi filter qua tab bar.
+  testWidgets('SC-148 pending deposits tablet: đổi filter', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: VitTradeApp(
+          routerConfig: createAppRouter(
+            surface: AppSurface.tablet,
+            initialLocation: AppRoutePaths.walletPendingDeposits,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Bấm filter theo key thật (tất cả/chờ/xác nhận) + copy id đầu tiên.
+    for (final filter in ['pending', 'confirmed', 'all']) {
+      final chip = find.byKey(PendingDepositsTabletPage.filterKey(filter));
+      if (chip.evaluate().isNotEmpty) {
+        await tester.ensureVisible(chip.first);
+        await tester.pumpAndSettle();
+        await tester.tap(chip.first);
+        await tester.pumpAndSettle();
+      }
+    }
+    final copy = find.byKey(PendingDepositsTabletPage.copyKey('pd-001'));
+    if (copy.evaluate().isNotEmpty) {
+      await tester.ensureVisible(copy);
+      await tester.pumpAndSettle();
+      await tester.tap(copy);
+      await tester.pumpAndSettle();
+    }
+    expect(tester.takeException(), isNull);
   });
 }

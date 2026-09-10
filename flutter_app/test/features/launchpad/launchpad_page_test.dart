@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
+import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/app/providers/launchpad_controller_providers.dart';
 import 'package:vit_trade_flutter/features/launchpad/data/launchpad_repository.dart';
 import 'package:vit_trade_flutter/features/launchpad/presentation/phone/pages/hub/launchpad_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_auto_hide_header_scaffold.dart';
@@ -189,5 +191,33 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('VitTrade'), findsOneWidget);
+  });
+
+  // Coverage dòng 2 p3j: error các trang hub launchpad tablet qua override.
+  testWidgets('SC-357 launchpad home tablet error', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          launchpadHomeSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+          launchpadPortfolioSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.launchpad,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(tester.takeException(), isNull);
   });
 }

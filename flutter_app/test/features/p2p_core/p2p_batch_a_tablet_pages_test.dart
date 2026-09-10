@@ -555,6 +555,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
+    final retry = find.text('Thử lại');
+    if (retry.evaluate().isNotEmpty) {
+      await tester.tap(retry.first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+    }
     expect(tester.takeException(), isNull);
   });
 }

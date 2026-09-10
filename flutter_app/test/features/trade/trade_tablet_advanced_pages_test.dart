@@ -15,6 +15,7 @@ import 'package:vit_trade_flutter/features/trade_terminal/presentation/widgets/t
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/app/providers/trade_compliance_controller_providers.dart';
+import 'package:vit_trade_flutter/app/providers/trade_terminal_controller_providers.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -173,6 +174,31 @@ void main() {
         routerConfig: createAppRouter(
           surface: AppSurface.tablet,
           initialLocation: AppRoutePaths.tradeMarginMarketDataAnalytics,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3j: nhánh error advanced tools (override snapshot).
+  testWidgets('advanced tools tablet error', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          tradeAdvancedToolsSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.tradeAdvancedTools,
         ),
       ),
     );
