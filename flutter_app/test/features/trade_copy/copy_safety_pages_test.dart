@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/app/providers/trade_copy_controller_providers.dart';
 
 void main() {
   Future<void> pumpPhone(WidgetTester tester, String location) async {
@@ -60,6 +61,30 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(metricsTab);
     await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3f: nhánh error safety education.
+  testWidgets('safety education error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          tradeSafetyEducationProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.tradeCopySafety,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     expect(tester.takeException(), isNull);
   });
 }

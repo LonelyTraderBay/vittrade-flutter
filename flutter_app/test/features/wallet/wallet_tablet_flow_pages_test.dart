@@ -187,4 +187,55 @@ void main() {
     await pumpErr('/wallet/deposit/usdt');
     await pumpErr('/wallet/pending-deposits');
   });
+
+  // Coverage dòng 2 p3f: nhánh error transfer tablet.
+  testWidgets('transfer tablet error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          walletTransferProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.walletTransfer,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được dữ liệu chuyển nội bộ'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3f: nhánh error gas optimizer tablet.
+  testWidgets('gas optimizer tablet error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          walletGasOptimizerProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.walletGasOptimizer,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(tester.takeException(), isNull);
+  });
 }

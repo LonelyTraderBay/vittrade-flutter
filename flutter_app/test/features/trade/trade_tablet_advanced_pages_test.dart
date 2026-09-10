@@ -14,6 +14,7 @@ import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/execu
 import 'package:vit_trade_flutter/features/trade_terminal/presentation/widgets/tools/execution_quality_overview.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/app/providers/trade_compliance_controller_providers.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -152,6 +153,31 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Đã chọn hành động demo'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3f: nhánh error market data analytics tablet.
+  testWidgets('market data analytics tablet error', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          tradeMarketDataAnalyticsProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.tradeMarginMarketDataAnalytics,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     expect(tester.takeException(), isNull);
   });
 }
