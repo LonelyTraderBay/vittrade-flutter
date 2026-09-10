@@ -27,6 +27,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_home_tablet_page.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_order_book_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 /// Khóa Batch A (GĐ2) P2P tablet: order-book/dashboard/express/confirm
 /// render trang thật, KHÔNG rơi vào placeholder.
@@ -432,5 +433,49 @@ void main() {
       );
       expect(tester.takeException(), isNull, reason: 'overflow tại $location');
     }
+  });
+
+  // Coverage đợt 2: tương tác P2P Express tablet — chọn tài sản, nhập số
+  // tiền qua quick amount, chọn phương thức thanh toán, CTA dẫn trang xác nhận.
+  testWidgets('SC-211 express: chọn asset + quick amount + payment + CTA', (
+    tester,
+  ) async {
+    await pumpTablet(tester, initialLocation: '/p2p/express');
+
+    // Chip tài sản khác mặc định (USDT) nếu còn chip khác.
+    final assetChips = find.byType(VitFilterChip);
+    if (assetChips.evaluate().length > 1) {
+      await tester.tap(assetChips.at(1));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(VitFilterChip).first);
+      await tester.pumpAndSettle();
+    }
+
+    // Quick amount đầu tiên trong danh sách.
+    await tester.tap(find.byType(VitFilterChip).last);
+    await tester.pumpAndSettle();
+
+    // CTA "Mua nhanh" chuyển sang trang xác nhận express.
+    final cta = find.byType(VitCtaButton);
+    expect(cta.evaluate(), isNotEmpty);
+    await tester.tap(cta.first);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage đợt 2: tương tác P2P home tablet — lọc tài sản, đổi chiều mua/bán.
+  testWidgets('P2P home: lọc asset và đổi chiều mua/bán', (tester) async {
+    await pumpTablet(tester, initialLocation: '/p2p');
+
+    await tester.tap(find.text('Bán'));
+    await tester.pumpAndSettle();
+
+    final chips = find.byType(VitFilterChip);
+    if (chips.evaluate().length > 1) {
+      await tester.tap(chips.at(1));
+      await tester.pumpAndSettle();
+    }
+    expect(find.byType(P2PDashboardTabletPage), findsNothing);
+    expect(tester.takeException(), isNull);
   });
 }

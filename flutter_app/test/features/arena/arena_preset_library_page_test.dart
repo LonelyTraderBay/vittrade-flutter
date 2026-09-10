@@ -32,4 +32,22 @@ void main() {
     expect(find.byType(ArenaUniversalPresetLibraryPage), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  // Coverage đợt 2: duyệt đủ 4 section (domains/suggestions/dropdowns/
+  // demo_flows) — section demo_flows render bộ card luồng demo.
+  testWidgets('đổi section: suggestions, dropdowns, demo flows', (
+    tester,
+  ) async {
+    await pumpPhone(tester);
+
+    for (final id in ['suggestions', 'dropdowns', 'demo_flows']) {
+      final tab = find.byKey(ArenaUniversalPresetLibraryPage.sectionKey(id));
+      await Scrollable.ensureVisible(tester.element(tab));
+      await tester.pumpAndSettle();
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: id);
+    }
+    expect(find.byType(ArenaUniversalPresetLibraryPage), findsOneWidget);
+  });
 }

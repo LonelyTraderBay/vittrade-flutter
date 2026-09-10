@@ -11,7 +11,9 @@ import 'package:vit_trade_flutter/features/trade/data/trade_repository.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/advanced_tools_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/advanced_trading_demo_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/execution_quality_tablet_page.dart';
+import 'package:vit_trade_flutter/features/trade_terminal/presentation/widgets/tools/execution_quality_overview.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -48,6 +50,20 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  // Coverage đợt 2: bấm các feature card để đổi tab execution/amendment/slippage.
+  testWidgets('chất lượng thực thi: đổi tab qua feature card', (tester) async {
+    await pumpTablet(tester, AppRoutePaths.tradeExecutionQuality);
+
+    final cards = find.byType(ExecutionQualityFeatureCard);
+    expect(cards.evaluate(), isNotEmpty);
+    final count = cards.evaluate().length;
+    for (var i = 0; i < count && i < 3; i++) {
+      await tester.tap(cards.at(i));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    }
+  });
+
   testWidgets('trang công cụ nâng cao render thật, không utility', (
     tester,
   ) async {
@@ -65,6 +81,38 @@ void main() {
 
     expect(find.byType(AdvancedTradingDemoTabletPage), findsOneWidget);
     expect(find.byType(TradeTabletUtilityPage), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage đợt 2: các nhánh tương tác — đổi tab Vị thế/Lệnh/Phân tích,
+  // đổi chip chế độ vị thế, bấm hành động demo (card "Đã chọn" ở cột phụ).
+  testWidgets('đổi tab, chế độ vị thế và hành động demo', (tester) async {
+    await pumpTablet(tester, AppRoutePaths.tradeMarginAdvancedDemo);
+
+    // Chip chế độ vị thế: một chiều -> hai chiều.
+    await tester.tap(
+      find.byKey(AdvancedTradingDemoTabletPage.modeKey('hedge')),
+    );
+    await tester.pumpAndSettle();
+
+    // Tab Lệnh: card lệnh render thay card vị thế.
+    await tester.tap(find.text('Lệnh'));
+    await tester.pumpAndSettle();
+    expect(find.byType(AdvancedTradingDemoTabletPage), findsOneWidget);
+    expect(tester.takeException(), isNull);
+
+    // Tab Phân tích: metric hiệu suất + PnL.
+    await tester.tap(find.text('Phân tích'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+
+    // Về tab Vị thế và bấm hành động demo -> card "Đã chọn hành động demo".
+    await tester.tap(find.text('Vị thế'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(VitCtaButton).first);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Đã chọn hành động demo'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
