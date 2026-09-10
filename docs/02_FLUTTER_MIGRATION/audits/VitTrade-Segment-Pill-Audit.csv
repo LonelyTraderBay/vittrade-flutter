@@ -148,7 +148,7 @@ markets,markets/presentation/widgets/research/social_sentiment_token_widgets.dar
 markets,markets/presentation/widgets/research/token_info_tabs_widgets.dart,VitTabBar,underline,1,54,equal_expanded,-,review,nav underline — different tier
 markets,markets/presentation/widgets/tablet/market_list_filters.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/market_list_tools.dart,VitChoicePill,chip,3,44,hug,-,pass,
-markets,markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
+markets,markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/markets_alerts_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 markets,markets/presentation/widgets/tablet/markets_correlations_pane.dart,VitFilterChip,filter_accent,3,44,hug_scroll,-,review,wrapper over VitChoicePill
 markets,markets/presentation/widgets/tablet/markets_correlations_pane.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment

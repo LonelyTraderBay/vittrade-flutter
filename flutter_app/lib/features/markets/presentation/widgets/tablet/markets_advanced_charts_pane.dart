@@ -25,7 +25,7 @@ class _MarketsAdvancedChartsPaneState
     extends ConsumerState<MarketsAdvancedChartsPane> {
   final String _tab = 'indicators';
   String _indicatorCategory = 'all';
-  String _drawingCategory = 'all';
+  final String _drawingCategory = 'all';
   final Set<String> _activeIndicatorIds = <String>{};
 
   void _toggleIndicator(String id) {
@@ -91,42 +91,6 @@ class _MarketsAdvancedChartsPaneState
                     snapshot.activeIndicatorIds.contains(indicator.id),
                 onToggle: () => _toggleIndicator(indicator.id),
               ),
-          ] else if (_tab == 'drawing') ...[
-            Wrap(
-              spacing: TabletSpacingTokens.x3,
-              runSpacing: TabletSpacingTokens.x2,
-              children: [
-                for (final category in snapshot.drawingCategories)
-                  VitFilterChip(
-                    label: category.label,
-                    active: _drawingCategory == category.id,
-                    onTap: () => setState(() {
-                      _drawingCategory = category.id;
-                    }),
-                    color: AppColors.primary,
-                  ),
-              ],
-            ),
-            const SizedBox(height: TabletSpacingTokens.x3),
-            Wrap(
-              spacing: TabletSpacingTokens.x3,
-              runSpacing: TabletSpacingTokens.x2,
-              children: [
-                for (final tool in snapshot.drawingTools.where(
-                  (item) =>
-                      _drawingCategory == 'all' ||
-                      item.categoryId == _drawingCategory,
-                ))
-                  VitStatusPill(
-                    label: tool.name,
-                    status: VitStatusPillStatus.neutral,
-                    size: VitStatusPillSize.sm,
-                  ),
-              ],
-            ),
-          ] else ...[
-            for (final summary in snapshot.signalSummaries)
-              _SignalSummaryRow(summary: summary),
           ],
         ],
       ),
@@ -165,88 +129,6 @@ class _IndicatorRow extends StatelessWidget {
             active: active,
             onTap: onToggle,
             color: AppColors.primary,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SignalSummaryRow extends StatelessWidget {
-  const _SignalSummaryRow({required this.summary});
-
-  final TechSignalSummaryDraft summary;
-
-  String _signalLabel(TechSignal signal) => switch (signal) {
-    TechSignal.strongBuy => 'Mua mạnh',
-    TechSignal.buy => 'Mua',
-    TechSignal.neutral => 'Trung tính',
-    TechSignal.sell => 'Bán',
-    TechSignal.strongSell => 'Bán mạnh',
-  };
-
-  Color _signalColor(TechSignal signal) => switch (signal) {
-    TechSignal.strongBuy || TechSignal.buy => AppColors.buy,
-    TechSignal.neutral => AppColors.text2,
-    TechSignal.sell || TechSignal.strongSell => AppColors.sell,
-  };
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: TabletSpacingTokens.tableCellPadding,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Text(
-              '${summary.pair} · ${summary.timeframe}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.caption.copyWith(
-                fontWeight: AppTextStyles.bold,
-                color: AppColors.text1,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Tổng: ${_signalLabel(summary.overallSignal)}',
-              style: AppTextStyles.caption.copyWith(
-                color: _signalColor(summary.overallSignal),
-                fontWeight: AppTextStyles.bold,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'MA: ${_signalLabel(summary.maSummary)}',
-              style: AppTextStyles.caption.copyWith(
-                color: _signalColor(summary.maSummary),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'OSC: ${_signalLabel(summary.oscSummary)}',
-              style: AppTextStyles.caption.copyWith(
-                color: _signalColor(summary.oscSummary),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              '${summary.buyCount}/${summary.neutralCount}/${summary.sellCount}',
-              textAlign: TextAlign.end,
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.text2,
-                fontFeatures: AppTextStyles.tabularFigures,
-              ),
-            ),
           ),
         ],
       ),

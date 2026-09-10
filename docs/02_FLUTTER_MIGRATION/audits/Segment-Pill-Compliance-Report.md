@@ -23,7 +23,7 @@
 | VitSegmentedChoice | 95 |
 | VitSegmentedTabBar | 40 |
 | VitPresetChipRow | 34 |
-| VitFilterChip | 122 |
+| VitFilterChip | 121 |
 
 ## Module heat map
 

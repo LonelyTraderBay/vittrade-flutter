@@ -6,7 +6,6 @@ import 'package:vit_trade_flutter/app/theme/spacing/trade_copy_spacing_tokens.da
 
 import 'package:vit_trade_flutter/app/theme/app_spacing.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
-import 'package:vit_trade_flutter/app/theme/spacing/launchpad_spacing_tokens.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/wallet_spacing_tokens.dart';
 
 final class TradeSpacingTokens {
@@ -20,8 +19,7 @@ final class TradeSpacingTokens {
       TradeBotsSpacingTokens.tradeBottomInsetVisual;
   static const double tradeBottomInsetNative =
       TradeBotsSpacingTokens.tradeBottomInsetNative;
-  static const double tradeHistoryBottomInsetVisual = 42;
-  static const double tradeHistoryBottomInsetNative = 20;
+
   static const double tradeHorizontalPadding = AppSpacing.contentPad;
   static const EdgeInsets tradeMarketPanelPadding = EdgeInsets.fromLTRB(
     tradeHorizontalPadding,
@@ -29,10 +27,6 @@ final class TradeSpacingTokens {
     tradeHorizontalPadding,
     12,
   );
-  static const EdgeInsets tradeHorizontalInsets = EdgeInsets.symmetric(
-    horizontal: tradeHorizontalPadding,
-  );
-  static const EdgeInsets tradeRiskPanelPadding = tradeMarketPanelPadding;
 
   // Terminal 3 vùng (SC-048 tablet, hướng Bybit 2026-08-31): grid cố định
   // không cuộn trang, panel phẳng viền hairline — mật độ trùng chuẩn
@@ -113,8 +107,6 @@ final class TradeSpacingTokens {
         TabletSpacingTokens.x4,
       );
 
-  /// LUẬT 12dp: khoảng ngang giữa các nút khung giờ/chỉ báo = 12.
-  static const double tradeTerminalIntervalGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalIntervalButtonPadding =
       EdgeInsets.symmetric(
         horizontal: TabletSpacingTokens.x2,
@@ -137,8 +129,6 @@ final class TradeSpacingTokens {
           TabletSpacingTokens.x2 +
           TabletSpacingTokens.x1);
 
-  /// LUẬT 12dp: khoảng ngang tab ↔ nút xem tất cả = 12.
-  static const double tradeTerminalBottomTabGap = TabletSpacingTokens.x4;
   static const EdgeInsets tradeTerminalBottomRowPadding = EdgeInsets.symmetric(
     horizontal: TabletSpacingTokens.x2,
     vertical: TabletSpacingTokens.x1,
@@ -178,45 +168,17 @@ final class TradeSpacingTokens {
   @Deprecated(
     'Use AppSpacing.sectionGap or AppSpacing.pageRhythmStandardSectionGap',
   )
-  static const double tradeSectionGap = AppSpacing.sectionGap;
-  static const double tradeHeaderLogo = 32;
   static const EdgeInsets tradeHeaderBodyPadding = EdgeInsets.symmetric(
     horizontal: 6,
     vertical: AppSpacing.rowGap,
   );
   static const double tradeHeaderChevronGap = AppSpacing.x2;
   static const double tradeHeaderChevron = 18;
-  static const double tradeHeaderTrailingWidth = 128;
-  static const double tradeQuickNavHeight = 74;
-  static const EdgeInsets tradeQuickNavPadding = EdgeInsets.symmetric(
-    horizontal: tradeHorizontalPadding,
-    vertical: 6,
-  );
-  static const double tradeQuickNavGap = AppSpacing.rowGap;
-  static const double tradeQuickChipWidth = 96;
-  static const EdgeInsets tradeQuickChipPadding = EdgeInsets.symmetric(
-    horizontal: 10,
-    vertical: WalletSpacingTokens.walletAssetSmallGap,
-  );
+
   static const double tradeQuickChipIcon = 15;
-  static const double tradeQuickChipIconGap = AppSpacing.x2;
-  static const double tradeQuickChipBadgeGap = 6;
-  static const double tradeQuickChipBadgeMaxWidth = 74;
-  static const EdgeInsets tradeQuickChipBadgePadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x2,
-    vertical: AppSpacing.hairlineStroke,
-  );
-  static const EdgeInsets tradeDataTabsPadding = EdgeInsets.fromLTRB(
-    tradeHorizontalPadding,
-    4,
-    tradeHorizontalPadding,
-    AppSpacing.rowGap,
-  );
-  static const double tradeDataTabsHeight = AppSpacing.x6;
+
   static const double tradeChartHeight = 122;
-  static const double tradeChartOverlayInset = 10;
-  static const double tradeChartOverlayTop = 12;
-  static const double tradeChartLogoSize = 44;
+
   static const double copyTradingBottomInsetVisual =
       TradeCopySpacingTokens.copyTradingBottomInsetVisual;
   static const double copyTradingBottomInsetNative =
@@ -232,14 +194,10 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyTradingHeroMetricGap;
   static const double copyTradingHeroLabelGap =
       TradeCopySpacingTokens.copyTradingHeroLabelGap;
-  static const double copyTradingMetricIcon =
-      tradeBotSmallIcon + AppSpacing.hairlineStroke / 2;
-  static const double copyTradingMetricIconGap = tradeBotNarrowIconGap;
+
   static const double copyTradingMetricCellGap =
       TradeCopySpacingTokens.copyTradingMetricCellGap;
-  static const double copyTradingWeeklyTitleGap = tradeBotNarrowIconGap;
-  static const double copyTradingWeeklyChartHeight =
-      AppSpacing.buttonCompact - tradeBotNarrowIconGap;
+
   static const double copyTradingWeeklyStrokeWidth =
       TradeCopySpacingTokens.copyTradingWeeklyStrokeWidth;
   static const double copyTradingDisclaimerLineHeight =
@@ -250,9 +208,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyTradingDisclaimerBottomPad;
   static const EdgeInsets copyTradingHeroPanelPadding =
       TradeCopySpacingTokens.copyTradingHeroPanelPadding;
-  static const EdgeInsets copyTradingHeroAumPadding = EdgeInsets.all(
-    copyTradingHeroAumPaddingValue,
-  );
+
   static const EdgeInsets copyTradingHeroMetricPadding =
       TradeCopySpacingTokens.copyTradingHeroMetricPadding;
   static const EdgeInsets copyTradingDisclaimerPadding =
@@ -264,12 +220,10 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         bottomInset,
       );
-  static const double preCopyAssessmentBottomInsetVisualExtra = 104;
-  static const double preCopyAssessmentBottomInsetNativeExtra = 28;
+
   static const double preCopyAssessmentContentTopPadding =
       AppSpacing.x4 + AppSpacing.x1;
-  static const double preCopyAssessmentContentGap =
-      AppSpacing.x4 + AppSpacing.x1 - AppSpacing.hairlineStroke;
+
   static const double preCopyAssessmentCtaGap = 12;
   static const EdgeInsets preCopyAssessmentCardPadding = EdgeInsets.all(
     AppSpacing.x4 + AppSpacing.x1,
@@ -291,8 +245,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyProviderDetailBottomInsetNativeExtra;
   static const double copyProviderDetailDisclaimerLineHeight =
       tradeBotLineHeightReadable;
-  static const double copyProviderDetailRiskLineHeight =
-      tradeBotLineHeightMedium;
+
   static const int copyProviderDetailMetricColumns =
       TradeCopySpacingTokens.copyProviderDetailMetricColumns;
   static const double copyProviderDetailMetricAspectRatio =
@@ -309,37 +262,23 @@ final class TradeSpacingTokens {
   static const double positionDashboardLabelLineHeight = 1.1;
   static const double positionDashboardTightLineHeight =
       tradeBotLineHeightTight;
-  static const double futuresPriceLineHeight = tradeBotLineHeightTight;
-  static const double futuresMarketStatCardHeight =
-      WalletSpacingTokens.walletAddressStatsHeight;
+
   static const double futuresSideSwitchHeight = 56;
-  static const double futuresOrderTypeSelectorHeight =
-      AppSpacing.searchBarCompactHeight;
-  static const double futuresPercentButtonLineHeight = tradeBotLineHeightTight;
-  static const double futuresSafetyTitleLineHeight = 1.1;
-  static const double convertPairSparklineWidth = 72;
-  static const double convertPairSparklineHeight = 31;
-  static const double convertSlippageCardHeight = 108;
-  static const double convertModeTabHeight = AppSpacing.searchBarCompactHeight;
+
   static const double convertControlHeight =
       AppSpacing.buttonCompact + AppSpacing.x1;
   static const double convertChipHeight =
       AppSpacing.buttonCompact - AppSpacing.x3;
   static const double convertFavoriteChipHeight =
       AppSpacing.searchBarCompactHeight;
-  static const double convertHeroFlipSize =
-      AppSpacing.buttonCompact + AppSpacing.x1;
+
   static const double convertSubmitHeight = AppSpacing.searchBarCompactHeight;
   static const double convertStickyCtaClearance =
       AppSpacing.ctaHeight + AppSpacing.x5;
-  static const double leverageControlButtonLineHeight = tradeBotLineHeightTight;
-  static const double leverageImpactRowLineHeight = tradeBotLineHeightShort;
-  static const double leverageHeroHeight = 178;
-  static const double leverageHeroValueLineHeight = tradeBotLineHeightTight;
+
   static const int leveragePresetGridColumns = 5;
   static const double leveragePresetGridAspectRatio = 1.78;
-  static const double botDrawdownUnderwaterChartHeight = 200;
-  static const double botDrawdownDurationChartHeight = 160;
+
   static const double copyPerformanceBottomInsetVisualExtra =
       TradeCopySpacingTokens.copyPerformanceBottomInsetVisualExtra;
   static const double copyPerformanceBottomInsetNativeExtra =
@@ -350,7 +289,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyPerformanceTabsHeight;
   static const double copyPerformanceEquityChartHeight =
       TradeCopySpacingTokens.copyPerformanceEquityChartHeight;
-  static const double copyPerformanceInfoLineHeight = tradeBotLineHeightCompact;
+
   static EdgeInsets copyPerformanceScrollPadding(double bottomInset) =>
       EdgeInsets.fromLTRB(
         AppSpacing.contentPad,
@@ -391,30 +330,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.providerComparisonMetricLabelPadding;
   static const EdgeInsets providerComparisonCategoryPadding =
       TradeCopySpacingTokens.providerComparisonCategoryPadding;
-  static const double bestExecutionActionButtonHeight = 40;
-  static const double bestExecutionSummaryLineHeight = 1;
-  static const double bestExecutionReportTitleLineHeight =
-      tradeBotLineHeightCaption;
-  static const double bestExecutionReportMetaLineHeight =
-      tradeBotLineHeightBody;
-  static const EdgeInsets bestExecutionSummaryCardPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x4 - AppSpacing.x1,
-    AppSpacing.x4,
-    AppSpacing.x4 - AppSpacing.x1,
-    AppSpacing.x4 - AppSpacing.x1,
-  );
-  static const EdgeInsets bestExecutionReportActionsPadding = EdgeInsets.all(
-    AppSpacing.x4 + AppSpacing.x1,
-  );
-  static const EdgeInsets bestExecutionArchiveReportPadding = EdgeInsets.all(
-    AppSpacing.x4,
-  );
-  static const EdgeInsets bestExecutionNoticePadding = EdgeInsets.fromLTRB(
-    AppSpacing.x4 - AppSpacing.x1,
-    AppSpacing.x3 + AppSpacing.x1,
-    AppSpacing.x3,
-    AppSpacing.x3 + AppSpacing.x1,
-  );
+
   static const double providerApplicationIntroTitleLineHeight =
       TradeCopySpacingTokens.providerApplicationIntroTitleLineHeight;
   static const double providerApplicationIntroDescriptionLineHeight =
@@ -468,88 +384,15 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyAuditMetadataPanelPadding;
   static const EdgeInsets copyAuditExportButtonPadding =
       TradeCopySpacingTokens.copyAuditExportButtonPadding;
-  static const double copyAuditNoticeLineHeight = tradeBotLineHeightBody;
-  static const double copyAuditSheetTitleLineHeight = tradeBotLineHeightCompact;
-  static const double copyAuditEventTitleLineHeight = tradeBotLineHeightCaption;
-  static const double copyAuditEventDescriptionLineHeight =
-      tradeBotLineHeightCompact;
-  static const double copyAuditMetaLineHeight = tradeBotLineHeightTight;
-  static const double copyAuditExportLineHeight = tradeBotLineHeightShort;
+
   static const double copyAuditMetadataConfigHeight =
       TradeCopySpacingTokens.copyAuditMetadataConfigHeight;
   static const double copyAuditSummaryCardHeight =
       TradeCopySpacingTokens.copyAuditSummaryCardHeight;
-  static const double exPostCostsReportNoticeIcon =
-      AppSpacing.x4 + AppSpacing.x1;
-  static const double exPostCostsReportNoticeIconGap =
-      AppSpacing.x3 + AppSpacing.hairlineStroke;
-  static const double exPostCostsReportNoticeBodyGap = AppSpacing.x3;
-  static const double exPostCostsReportSummaryHeight = 46;
-  static const double exPostCostsReportSummaryLineHeight =
-      tradeBotLineHeightCaption;
+
   static const double exPostCostsReportBreakdownTitleTop =
       AppSpacing.x3 + AppSpacing.hairlineStroke;
-  static const double exPostCostsReportBreakdownEstimateGap =
-      AppSpacing.rowGap + AppSpacing.dividerHairline;
-  static const double exPostCostsReportBreakdownNoteGap =
-      AppSpacing.x5 + AppSpacing.dividerHairline;
-  static const double exPostCostsReportVarianceNoteIcon =
-      AppSpacing.rowGap + AppSpacing.x1;
-  static const double exPostCostsReportVarianceNoteIconGap =
-      AppSpacing.x1 + AppSpacing.hairlineStroke;
-  static const double exPostCostsReportLineHeightTight =
-      tradeBotLineHeightTight;
-  static const double exPostCostsReportLineHeightBody = tradeBotLineHeightBody;
-  static const double exPostCostsReportVarianceGap = AppSpacing.contentPad;
-  static const EdgeInsets exPostCostsReportNoticePadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3 + AppSpacing.hairlineStroke,
-    0,
-    AppSpacing.x3,
-    0,
-  );
-  static const EdgeInsets exPostCostsReportSummaryPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3 + AppSpacing.hairlineStroke,
-    AppSpacing.x4 + AppSpacing.hairlineStroke,
-    AppSpacing.x3 + AppSpacing.hairlineStroke,
-    AppSpacing.x4,
-  );
-  static const EdgeInsets exPostCostsReportBreakdownPadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x4 + AppSpacing.x1,
-        AppSpacing.x4 + AppSpacing.x1,
-        AppSpacing.x4 + AppSpacing.x1,
-        AppSpacing.x4 + AppSpacing.hairlineStroke,
-      );
-  static const EdgeInsets exPostCostsReportBreakdownTitlePadding =
-      EdgeInsets.only(top: exPostCostsReportBreakdownTitleTop);
-  static const EdgeInsets exPostCostsReportVarianceNoteHigherPadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x3 + AppSpacing.hairlineStroke,
-        AppSpacing.x3,
-        AppSpacing.x3 + AppSpacing.hairlineStroke,
-        AppSpacing.x3,
-      );
-  static const EdgeInsets exPostCostsReportVarianceNoteLowerPadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x3,
-        AppSpacing.x3,
-        AppSpacing.x3 + AppSpacing.hairlineStroke,
-        AppSpacing.x3,
-      );
-  static const EdgeInsets exPostCostsReportVariancePadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x4 + AppSpacing.x1,
-        AppSpacing.x5,
-        AppSpacing.x4 + AppSpacing.x1,
-        AppSpacing.x4 + AppSpacing.x1,
-      );
-  static const EdgeInsets exPostCostsReportVarianceBodyPadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x4 - AppSpacing.x1,
-        AppSpacing.x4,
-        AppSpacing.x4 - AppSpacing.x1,
-        AppSpacing.x4 - AppSpacing.x1,
-      );
+
   static const double copySettingsBottomInsetVisual =
       TradeCopySpacingTokens.copySettingsBottomInsetVisual;
   static const double copySettingsBottomInsetNative =
@@ -703,13 +546,7 @@ final class TradeSpacingTokens {
       TradeComplianceSpacingTokens.complaintTrackingTimelineRailWidth;
   static const double complaintTrackingTimelineConnectorHeight =
       TradeComplianceSpacingTokens.complaintTrackingTimelineConnectorHeight;
-  static const EdgeInsets complaintTrackingStatusCardPadding =
-      EdgeInsets.fromLTRB(
-        WalletSpacingTokens.walletAddressActionIcon,
-        WalletSpacingTokens.walletAddressActionIcon,
-        WalletSpacingTokens.walletAddressActionIcon,
-        copyTradingHeroAumPaddingValue,
-      );
+
   static const EdgeInsets complaintTrackingMetricPadding =
       TradeComplianceSpacingTokens.complaintTrackingMetricPadding;
   static const EdgeInsets complaintTrackingConnectorPadding =
@@ -723,7 +560,7 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         bottomInset,
       );
-  static const double ombudsmanSectionGap = complaintCaseCompactGap;
+
   static const EdgeInsets ombudsmanEligibilityPadding = EdgeInsets.fromLTRB(
     copyTradingHeroAumPaddingValue,
     AppSpacing.contentPad - AppSpacing.x2,
@@ -733,8 +570,7 @@ final class TradeSpacingTokens {
   static const EdgeInsets ombudsmanProcessPadding = EdgeInsets.all(
     AppSpacing.x4,
   );
-  static const double ombudsmanContactIconBox =
-      AppSpacing.buttonCompact + AppSpacing.formFieldLabelGap;
+
   static const double complaintsHandlingBottomInsetVisual =
       TradeComplianceSpacingTokens.complaintsHandlingBottomInsetVisual;
   static const double complaintsHandlingBottomInsetNative =
@@ -751,15 +587,14 @@ final class TradeSpacingTokens {
       TradeComplianceSpacingTokens.complaintsHandlingStatsGap;
   static const double complaintsHandlingTabGap =
       TradeComplianceSpacingTokens.complaintsHandlingTabGap;
-  static const double complaintsHandlingGridGap = complaintCaseCompactGap;
+
   static const double complaintsHandlingCategoryWidth =
       TradeComplianceSpacingTokens.complaintsHandlingCategoryWidth;
   static const double complaintsHandlingCategoryHeight =
       TradeComplianceSpacingTokens.complaintsHandlingCategoryHeight;
   static const double complaintsHandlingTimelineStepSize =
       TradeComplianceSpacingTokens.complaintsHandlingTimelineStepSize;
-  static const double complaintsHandlingTimelineItemGap =
-      copyTradingHeroAumPaddingValue;
+
   static const double complaintsHandlingTimelineLabelGap =
       TradeComplianceSpacingTokens.complaintsHandlingTimelineLabelGap;
   static const double complaintsHandlingRightsIconGap =
@@ -768,21 +603,10 @@ final class TradeSpacingTokens {
       complaintSubmissionLineHeightBody;
   static const double complaintsHandlingOmbudsmanLineHeight =
       complaintSubmissionLineHeightReadable;
-  static const EdgeInsets complaintsHandlingRightsPadding = EdgeInsets.fromLTRB(
-    complaintCaseCompactGap,
-    0,
-    AppSpacing.x3,
-    0,
-  );
+
   static const EdgeInsets complaintsHandlingCategoryPadding =
       TradeComplianceSpacingTokens.complaintsHandlingCategoryPadding;
-  static const EdgeInsets complaintsHandlingTimelinePadding =
-      EdgeInsets.fromLTRB(
-        copyTradingHeroAumPaddingValue,
-        WalletSpacingTokens.walletAddressActionIcon,
-        copyTradingHeroAumPaddingValue,
-        WalletSpacingTokens.walletAddressActionIcon,
-      );
+
   static EdgeInsets complaintsHandlingScrollPadding(double bottomInset) =>
       EdgeInsets.fromLTRB(
         AppSpacing.contentPad,
@@ -846,14 +670,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyEducationTabHeight;
   static const EdgeInsets copyEducationStepNumberPadding =
       TradeCopySpacingTokens.copyEducationStepNumberPadding;
-  static const double marginTradingHubHeroStatHeight = 85;
-  static const double marginTradingHubMenuItemMinHeight = 92;
-  static const double marginTradingHubNavIconSize =
-      AppSpacing.iconMd + AppSpacing.hairlineStroke / 2;
-  static const double marginTradingHubChevronIcon =
-      AppSpacing.iconMd + AppSpacing.hairlineStroke;
-  static const double marginTradingHubFeatureCheckIcon =
-      AppSpacing.x4 + AppSpacing.x1;
+
   static const double marginTradingHubComplianceIcon =
       AppSpacing.x4 + AppSpacing.x1;
   static const double marginTradingHubComplianceGap =
@@ -862,12 +679,9 @@ final class TradeSpacingTokens {
   static const int marginTradingHubComplianceGridColumns = 2;
   static const double marginTradingHubComplianceGridExtent =
       AppSpacing.buttonCompact + AppSpacing.hairlineStroke;
-  static const double marginTradingHubComplianceGridCrossGap = tradeBotRowGap;
-  static const double marginTradingHubComplianceGridMainGap = AppSpacing.x3;
+
   static const double marginTradingHubLineHeightTight = tradeBotLineHeightTight;
-  static const double marginTradingHubLineHeightTitle = 1.1;
-  static const double marginTradingHubLineHeightCaption =
-      tradeBotLineHeightCaption;
+
   static const double marginTradingHubLineHeightBody =
       tradeBotLineHeightReadable;
   static const EdgeInsets marginTradingHubComplianceInfoPadding =
@@ -896,12 +710,10 @@ final class TradeSpacingTokens {
       EdgeInsets.symmetric(horizontal: AppSpacing.x3);
   static const EdgeInsets transactionReportingQuickActionCardPadding =
       EdgeInsets.all(AppSpacing.x4);
-  static const EdgeInsets transactionReportingComplianceNoticePadding =
-      EdgeInsets.all(AppSpacing.x4);
+
   static const double transactionReportingLineHeightTight =
       tradeBotLineHeightTight;
-  static const double transactionReportingNoticeLineHeight =
-      tradeBotLineHeightMedium;
+
   static const double transactionReportingErrorLineHeight = 1.3;
   static const double transactionReportingStatIcon =
       AppSpacing.x4 + AppSpacing.x1;
@@ -945,189 +757,22 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copySafetyIconTextPadding;
   static const double copySafetyHeroTitleLineHeight =
       TradeCopySpacingTokens.copySafetyHeroTitleLineHeight;
-  static const double copySafetyListItemLineHeight = tradeBotLineHeightCaption;
-  static const double copySafetyDescriptionLineHeight =
-      tradeBotLineHeightCompact;
-  static const double copySafetyBodyLineHeight = tradeBotLineHeightBody;
-  static const double copySafetyIntroLineHeight = tradeBotLineHeightMedium;
-  static const double copySafetyLineHeightTight = tradeBotLineHeightTight;
+
   static const double copySafetyTierIcon =
       TradeCopySpacingTokens.copySafetyTierIcon;
   static const double copySafetyIconTextIcon =
       TradeCopySpacingTokens.copySafetyIconTextIcon;
   static const double copySafetyIconTextGap =
       TradeCopySpacingTokens.copySafetyIconTextGap;
-  static const double tradeChartTvLeft = 12;
-  static const double tradeChartTvBottom = AppSpacing.rowGap;
-  static const double tradeChartPriceRight = AppSpacing.rowGap;
-  static const double tradeChartPriceTopDefault = 38;
-  static const double tradeChartPriceTopDefaultSecond = 60;
-  static const double tradeChartPriceTopPair = 18;
-  static const double tradeChartPriceTopPairSecond = 40;
-  static const double tradeChartPriceRightTop = 46;
-  static const double tradeChartPriceRightBottom = 22;
-  static const EdgeInsets tradePriceBadgePadding = EdgeInsets.symmetric(
-    horizontal: WalletSpacingTokens.walletAssetSmallGap,
-    vertical: AppSpacing.x1,
-  );
-  static const EdgeInsets tradeMarketListPadding = EdgeInsets.all(14);
-  static const double tradeBookRowTopGap =
-      WalletSpacingTokens.walletAssetSmallGap;
-  static const double tradeBookDividerHeight = 16;
-  static const double tradeTapeRowBottomGap = AppSpacing.rowGap;
-  static const int tradeHubPrimaryCount = 6;
-  static const double tradeHubTileExtent =
-      AppSpacing.buttonCompact + AppSpacing.x2;
-  static const double tradeChartPanelHeight =
-      AppSpacing.x7 + AppSpacing.x6 + AppSpacing.x4;
-  static const double tradeOrderTabsHeight = 44;
-  static const EdgeInsets tradeOrderTabsInnerPadding = EdgeInsets.all(4);
-  static const double tradeFormGap = 16;
-  static const double tradeFormSmallGap = 14;
-  static const double tradePctGap = 10;
-  static const double tradeSideSwitchHeight = 46;
-  static const double tradeOrderTypeSize = 39;
-  static const double tradePctButtonHeight = 38;
-  static const double tradeTpslHeight = 38;
-  static const EdgeInsets tradeTpslPadding = EdgeInsets.symmetric(
-    horizontal: 14,
-  );
+
   static const double tradeTpslIcon = 16;
-  static const double tradeTpslGap = AppSpacing.rowGap;
-  static const EdgeInsets tradeFeeCardPadding = EdgeInsets.all(16);
-  static const double tradeFeeRowGap = 10;
-  static const EdgeInsets tradeFeeBadgePadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x2,
-    vertical: AppSpacing.hairlineStroke,
-  );
-  static const double tradeCtaHeight = AppSpacing.ctaHeight;
-  static const double tradeListGap = 12;
-  static const EdgeInsets tradeListCardPadding = EdgeInsets.all(14);
-  static const double tradeHistoryTabGap = AppSpacing.rowGap;
-  static const EdgeInsets tradeHistoryTopTabsPadding = EdgeInsets.fromLTRB(
-    16,
-    12,
-    16,
-    12,
-  );
-  static const double tradeHistoryTopTabHeight = 40;
-  static const EdgeInsets tradeHistoryBadgePadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.rowGap,
-    vertical: 4,
-  );
-  static const double tradeHistoryTypeBadgeMinWidth = 18;
-  static const double tradeHistoryInfoGap = AppSpacing.x2;
-  static const EdgeInsets tradeHistoryEmptyPadding = EdgeInsets.symmetric(
-    vertical: 84,
-  );
-  static const double tradeHistoryEmptyIcon = 48;
-  static const double tradeHistoryEmptyGap = 12;
-  static const EdgeInsets tradeHistoryFilterPadding = EdgeInsets.fromLTRB(
-    16,
-    AppSpacing.rowGap,
-    16,
-    AppSpacing.rowGap,
-  );
-  static const double tradeHistoryFilterGap = 10;
-  static const double tradeHistoryFilterHeight = AppSpacing.x6;
-  static const double tradeHistoryFilterWidth = 58;
-  static const double tradeHistoryFilterCompactWidth = 61;
-  static const EdgeInsets tradeHistoryFilterPaddingCompact =
-      EdgeInsets.symmetric(horizontal: 10);
-  static const EdgeInsets tradeHistoryTilePadding = EdgeInsets.fromLTRB(
-    tradeHorizontalPadding,
-    14,
-    tradeHorizontalPadding,
-    12,
-  );
-  static const double tradeHistorySymbolGap = AppSpacing.rowGap;
-  static const double tradeHistoryTypeGap = 6;
-  static const double tradeHistoryStatusWidth = 118;
-  static const double tradeHistoryStatusIcon = 15;
-  static const double tradeHistoryStatusGap = AppSpacing.x2;
-  static const double tradeHistoryTileGap = 12;
-  static const double tradeHistoryTileSmallGap = 10;
-  static const double tradeHistoryProgressHeight = AppSpacing.x2;
-  static const double tradeHistoryCancelHeight = 36;
-  static const double tradeReceiptScrollBottom = 22;
-  static const EdgeInsets tradeReceiptRiskPadding = EdgeInsets.all(12);
-  static const EdgeInsets tradeReceiptHeroPadding = EdgeInsets.fromLTRB(
-    40,
-    34,
-    40,
-    38,
-  );
-  static const double tradeReceiptHeroIconBox = 64;
-  static const double tradeReceiptHeroIcon = AppSpacing.x6;
-  static const double tradeReceiptHeroGlowSpread = 12;
-  static const double tradeReceiptHeroTitleGap = 22;
-  static const double tradeReceiptHeroSubtitleGap = 4;
-  static const EdgeInsets tradeReceiptHorizontalMargin = EdgeInsets.symmetric(
-    horizontal: 40,
-  );
-  static const EdgeInsets tradeReceiptCardPadding = EdgeInsets.fromLTRB(
-    16,
-    16,
-    16,
-    17,
-  );
-  static const double tradeReceiptHeaderGap = 10;
-  static const double tradeReceiptSectionGap = AppSpacing.x4;
-  static const double tradeReceiptDividerGap = 15;
-  static const double tradeReceiptSmallDividerGap = 4;
-  static const double tradeReceiptTotalGap = 9;
-  static const double tradeReceiptRiskTitleGap = 11;
-  static const double tradeReceiptRiskColumnGap = 12;
-  static const EdgeInsets tradeReceiptSideBadgePadding = EdgeInsets.symmetric(
-    horizontal: 10,
-    vertical: 6,
-  );
-  static const EdgeInsets tradeReceiptStatusBadgePadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.rowGap,
-    vertical: 6,
-  );
+
   static const double tradeReceiptStatusIcon = 12;
-  static const double tradeReceiptStatusGap = 4;
-  static const EdgeInsets tradeReceiptDetailPadding = EdgeInsets.symmetric(
-    vertical: 6,
-  );
-  static const double tradeReceiptDetailLabelWidth = 116;
-  static const double tradeReceiptDetailGap = 10;
-  static const double tradeReceiptDetailTrailingGap = 4;
-  static const double tradeReceiptCopyButton = 18;
-  static const double tradeReceiptCopyIcon = 12;
-  static const double tradeReceiptRiskBoxHeight = 62;
-  static const EdgeInsets tradeReceiptRiskBoxPadding = EdgeInsets.fromLTRB(
-    12,
-    10,
-    10,
-    AppSpacing.rowGap,
-  );
-  static const double tradeReceiptRiskValueGap = AppSpacing.x2;
-  static const EdgeInsets tradeReceiptNoticePadding = EdgeInsets.fromLTRB(
-    12,
-    10,
-    12,
-    10,
-  );
-  static const double tradeReceiptNoticeIconTop = 2;
-  static const double tradeReceiptNoticeIcon = 14;
-  static const double tradeReceiptNoticeGap = AppSpacing.rowGap;
-  static const double tradeReceiptSupportHeight = 46;
+
   static const EdgeInsets tradeReceiptSupportPadding = EdgeInsets.symmetric(
     horizontal: 12,
   );
-  static const double tradeReceiptSupportIcon = 16;
-  static const double tradeReceiptSupportGap = 9;
-  static const double tradeReceiptSupportChevronGap = 4;
-  static const EdgeInsets tradeReceiptFooterPadding = EdgeInsets.fromLTRB(
-    40,
-    16,
-    40,
-    AppSpacing.rowGap,
-  );
-  static const double tradeReceiptFooterButtonHeight = 48;
-  static const double tradeReceiptFooterGap = 12;
+
   static const double tradeReceiptFooterIcon = 16;
   static const double tradeBotBottomInsetVisual =
       TradeBotsSpacingTokens.tradeBotBottomInsetVisual;
@@ -1445,27 +1090,23 @@ final class TradeSpacingTokens {
       AppSpacing.x6 + AppSpacing.hairlineStroke;
   static const double productGovernanceContentGap =
       TradeComplianceSpacingTokens.productGovernanceContentGap;
-  static const double productGovernanceInlineGap = tradeBotRowGap;
+
   static const double productGovernancePillGap =
       TradeComplianceSpacingTokens.productGovernancePillGap;
-  static const double productGovernanceTagGap = tradeBotNarrowIconGap;
+
   static const double productGovernanceTargetGap =
       TradeComplianceSpacingTokens.productGovernanceTargetGap;
-  static const double productGovernanceDateSectionGap = tradeBotMediumIcon;
-  static const double productGovernanceNegativeTagGap = tradeBotContentGap;
+
   static const double productGovernanceReviewGap =
       TradeComplianceSpacingTokens.productGovernanceReviewGap;
-  static const double productGovernanceReviewActionGap = tradeBotNarrowIconGap;
+
   static const double productGovernanceReviewTextGap =
       TradeComplianceSpacingTokens.productGovernanceReviewTextGap;
-  static const double productGovernanceActionIcon = tradeBotMediumIcon;
-  static const double productGovernanceNoticeIcon = tradeBotMediumIcon;
+
   static const double productGovernanceChannelIconBox =
       TradeComplianceSpacingTokens.productGovernanceChannelIconBox;
   static const double productGovernanceChannelStatusIcon = 19;
-  static const double productGovernanceDateBoxHeight = tradeBotCassMetricHeight;
-  static const double productGovernanceLineHeightTight =
-      tradeBotLineHeightTight;
+
   static const EdgeInsets productGovernanceNoticePadding =
       TradeComplianceSpacingTokens.productGovernanceNoticePadding;
   static const EdgeInsets productGovernanceCardPadding =
@@ -1474,12 +1115,7 @@ final class TradeSpacingTokens {
       TradeComplianceSpacingTokens.productGovernanceReviewRowPadding;
   static const EdgeInsets productGovernanceDistributionCardPadding =
       TradeComplianceSpacingTokens.productGovernanceDistributionCardPadding;
-  static const EdgeInsets productGovernanceDateBoxPadding = EdgeInsets.fromLTRB(
-    tradeBotRowGap,
-    AppSpacing.x2,
-    tradeBotRowGap,
-    AppSpacing.x2,
-  );
+
   static EdgeInsets productGovernanceScrollPadding(double bottomInset) =>
       EdgeInsets.fromLTRB(
         AppSpacing.contentPad,
@@ -1487,45 +1123,14 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         bottomInset,
       );
-  static const double activeCopiesBottomInsetVisual = 104;
-  static const double activeCopiesBottomInsetNative = 28;
-  static const double activeCopiesPortfolioHeight = 194;
-  static const double activeCopiesPnlHeight = 62;
-  static const double activeCopiesTabsHeight =
-      AppSpacing.inputHeight - AppSpacing.x4;
-  static const double activeCopiesMiniValueHeight =
-      AppSpacing.inputHeight - AppSpacing.hairlineStroke;
-  static const double activeCopiesReturnHeight =
-      LaunchpadSpacingTokens.launchpadBox40 + AppSpacing.hairlineStroke;
-  static const double activeCopiesPerformanceHeight =
-      AppSpacing.x7 - AppSpacing.hairlineStroke;
-  static const double activeCopiesActionHeight =
-      WalletSpacingTokens.walletDepositCopyButtonHeight;
+
   static const double activeCopiesPnlIcon = tradeBotMediumIcon;
   static const double activeCopiesVerifiedIcon =
       AppSpacing.x3 + AppSpacing.x4 - AppSpacing.x1;
   static const double activeCopiesExpandIcon =
       productGovernanceChannelStatusIcon;
   static const double activeCopiesExpandPadding = 4.5;
-  static const double activeCopiesLineHeightTight = tradeBotLineHeightTight;
-  static const double activeCopiesLineHeightShort = 1.1;
-  static const double activeCopiesLineHeightCompact = tradeBotLineHeightShort;
-  static const double activeCopiesLineHeightCaption = tradeBotLineHeightCaption;
-  static const double activeCopiesLineHeightNotice = tradeBotLineHeightReadable;
-  static const EdgeInsets activeCopiesPnlPadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.rowPy,
-    vertical: AppSpacing.x3,
-  );
-  static const EdgeInsets activeCopiesTabsPadding = EdgeInsets.all(
-    AppSpacing.x1,
-  );
-  static const EdgeInsets activeCopiesMiniValuePadding = EdgeInsets.symmetric(
-    horizontal: AppSpacing.x3,
-    vertical: AppSpacing.x3,
-  );
-  static const EdgeInsets activeCopiesReturnPadding = EdgeInsets.all(
-    AppSpacing.x3,
-  );
+
   static const EdgeInsets activeCopiesDetailsPadding = EdgeInsets.only(
     top: AppSpacing.rowPy,
   );
@@ -1583,8 +1188,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyConfigurationPresetHeight;
   static const double copyConfigurationRatioWidth =
       TradeCopySpacingTokens.copyConfigurationRatioWidth;
-  static const double copyConfigurationDescriptionLineHeight =
-      tradeBotLineHeightBody;
+
   static const EdgeInsets copyConfigurationCardPadding =
       TradeCopySpacingTokens.copyConfigurationCardPadding;
   static const EdgeInsets copyConfigurationInnerPadding =
@@ -1634,17 +1238,12 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.copyConfirmationCheckboxIcon;
   static const double copyConfirmationWarningIcon =
       TradeCopySpacingTokens.copyConfirmationWarningIcon;
-  static const double copyConfirmationCoolingIcon = tradeBotDisputeTabBadgeSize;
+
   static const double copyConfirmationProviderAvatarRadius =
       TradeCopySpacingTokens.copyConfirmationProviderAvatarRadius;
   static const double copyConfirmationStepRadius =
       TradeCopySpacingTokens.copyConfirmationStepRadius;
-  static const double copyConfirmationLineHeightDense =
-      complaintCaseLineHeightDense;
-  static const double copyConfirmationLineHeightBody =
-      complaintsHandlingRightsBodyLineHeight;
-  static const double copyConfirmationLineHeightReadable =
-      complaintsHandlingOmbudsmanLineHeight;
+
   static const EdgeInsets copyConfirmationCardPadding =
       TradeCopySpacingTokens.copyConfirmationCardPadding;
   static const EdgeInsets copyConfirmationSoftPadding =
@@ -1742,31 +1341,18 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         bottomInset,
       );
-  static const double executionVenueBottomInsetVisualExtra =
-      AppSpacing.x7 + AppSpacing.x6 + AppSpacing.x5 + AppSpacing.x3;
-  static const double executionVenueBottomInsetNativeExtra =
-      AppSpacing.x6 - AppSpacing.formFieldLabelGap;
-  static const double executionVenueContentGap = 0;
-  static const double executionVenueSectionGap = AppSpacing.x4 + AppSpacing.x1;
-  static const double executionVenueControlGap =
-      AppSpacing.x5 + AppSpacing.x3 - AppSpacing.x2 + AppSpacing.hairlineStroke;
-  static const double executionVenueTabBodyGap =
-      AppSpacing.x5 + AppSpacing.x3 - AppSpacing.x2 + AppSpacing.x1;
-  static const double executionVenueNoticeTopOffset = AppSpacing.ctaLoadingIcon;
-  static const double executionVenueNoticeIcon = AppSpacing.ctaLoadingIcon;
+
   static const double executionVenueBodyIcon =
       AppSpacing.ctaLoadingIcon - AppSpacing.x1;
   static const double executionVenueSummaryGap = AppSpacing.x4 - AppSpacing.x1;
-  static const double executionVenueSummaryHeight =
-      AppSpacing.x7 + AppSpacing.x6 + AppSpacing.x1 - AppSpacing.hairlineStroke;
+
   static const double executionVenueSortIcon =
       AppSpacing.ctaLoadingIcon - AppSpacing.dividerHairline;
   static const double executionVenueSortLabelWidth =
       AppSpacing.buttonCompact + AppSpacing.x3;
   static const double executionVenueSortLabelGap =
       AppSpacing.x2 + AppSpacing.hairlineStroke;
-  static const double executionVenueLineHeightTight = 1;
-  static const double executionVenueLineHeightControl = 1.15;
+
   static const double executionVenueCardPaddingValue = AppSpacing.x4;
   static const double executionVenuePanelPaddingValue =
       AppSpacing.x4 + AppSpacing.x1 - AppSpacing.hairlineStroke;
@@ -1775,45 +1361,10 @@ final class TradeSpacingTokens {
   static const double executionVenueRankGap =
       AppSpacing.x4 - AppSpacing.hairlineStroke;
   static const double executionVenueWinnerIcon = AppSpacing.x4 + AppSpacing.x1;
-  static const double executionVenueMetricBoxHeight =
-      AppSpacing.buttonCompact + AppSpacing.x4 + AppSpacing.x1;
+
   static const double executionVenueMetricBoxBottomPadding =
       AppSpacing.x3 - AppSpacing.hairlineStroke + AppSpacing.x1;
-  static const double executionVenueMetricGap =
-      AppSpacing.x3 - AppSpacing.hairlineStroke + AppSpacing.x1;
-  static const double executionVenueProgressGap =
-      AppSpacing.x3 + AppSpacing.hairlineStroke;
-  static const double executionVenueProgressHeight =
-      AppSpacing.x2 + AppSpacing.hairlineStroke;
-  static const double executionVenueTrendBarHeight = AppSpacing.x3;
-  static const EdgeInsets executionVenueNoticePadding = EdgeInsets.fromLTRB(
-    AppSpacing.x4 - AppSpacing.x1,
-    AppSpacing.x3 + AppSpacing.x1,
-    AppSpacing.x3,
-    AppSpacing.x3 + AppSpacing.x1,
-  );
-  static const EdgeInsets executionVenueSummaryCardPadding =
-      EdgeInsets.fromLTRB(
-        AppSpacing.x4 - AppSpacing.x1,
-        AppSpacing.x4,
-        AppSpacing.x4 - AppSpacing.x1,
-        AppSpacing.x4 - AppSpacing.x1,
-      );
-  static const EdgeInsets executionVenueCardPadding = EdgeInsets.all(
-    executionVenueCardPaddingValue,
-  );
-  static const EdgeInsets executionVenueMetricBoxPadding = EdgeInsets.fromLTRB(
-    AppSpacing.x3,
-    AppSpacing.x3,
-    AppSpacing.x3,
-    executionVenueMetricBoxBottomPadding,
-  );
-  static const EdgeInsets executionVenuePanelPadding = EdgeInsets.all(
-    executionVenuePanelPaddingValue,
-  );
-  static const EdgeInsets executionVenueCompactPanelPadding = EdgeInsets.all(
-    executionVenueCompactPanelPaddingValue,
-  );
+
   static EdgeInsets executionVenueScrollPadding(double bottomInset) =>
       AppSpacing.contentInsets.copyWith(
         top: AppSpacing.x4,
@@ -1867,10 +1418,7 @@ final class TradeSpacingTokens {
       TradeCopySpacingTokens.providerGovernancePanelIcon;
   static const double providerGovernanceRequestHeight =
       TradeCopySpacingTokens.providerGovernanceRequestHeight;
-  static const double providerGovernanceLineHeightTight =
-      tradeBotLineHeightTight;
-  static const double providerGovernanceLineHeightReadable =
-      tradeBotLineHeightReadable;
+
   static const double providerLeaderboardBottomInsetVisualExtra =
       TradeCopySpacingTokens.providerLeaderboardBottomInsetVisualExtra;
   static const double providerLeaderboardBottomInsetNativeExtra =
@@ -1965,69 +1513,23 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         bottomInset,
       );
-  static const double armIntegrationBottomInsetVisualExtra =
-      AppSpacing.x7 + AppSpacing.x6 + AppSpacing.x5 + AppSpacing.x3;
-  static const double armIntegrationBottomInsetNativeExtra =
-      AppSpacing.x6 - AppSpacing.formFieldLabelGap;
-  static const double armIntegrationContentGap = AppSpacing.rowPy;
+
   static const double armIntegrationCardPaddingValue =
       AppSpacing.contentPad - AppSpacing.x1;
-  static const double armIntegrationProviderIconBox =
-      AppSpacing.inputHeight - AppSpacing.x2;
-  static const double armIntegrationProviderIcon =
-      AppSpacing.iconMd + AppSpacing.x1;
-  static const double armIntegrationInlineGap = AppSpacing.x4;
-  static const double armIntegrationLabelGap =
-      AppSpacing.rowGapRegular + AppSpacing.x1;
-  static const double armIntegrationMetricRowGap = AppSpacing.rowPy;
-  static const double armIntegrationCardSectionGap = AppSpacing.x4;
-  static const double armIntegrationMetricHeight = AppSpacing.buttonStandard;
+
   static const double armIntegrationMetricPaddingHorizontal =
       AppSpacing.rowGapRegular + AppSpacing.x1;
   static const double armIntegrationMetricPaddingTop =
       AppSpacing.rowGapRegular + AppSpacing.x1;
   static const double armIntegrationMetricPaddingBottom = AppSpacing.x3;
-  static const double armIntegrationDetailsGap = AppSpacing.rowGapRegular;
-  static const double armIntegrationTestIcon =
-      AppSpacing.x4 + AppSpacing.hairlineStroke;
-  static const double armIntegrationLogsIcon =
-      AppSpacing.x4 + AppSpacing.dividerHairline;
-  static const double armIntegrationLineHeightTight = tradeBotLineHeightTight;
-  static const double armIntegrationChartHeight =
-      WalletSpacingTokens.walletAssetChartHeight - AppSpacing.rowGapRegular;
+
   static const double armIntegrationDividerHeight = AppSpacing.dividerHairline;
-  static const double armIntegrationLegendGap = AppSpacing.ctaLoadingIcon;
+
   static const double armIntegrationSlaGap =
       AppSpacing.ctaLoadingIcon - AppSpacing.x1;
-  static const double armIntegrationProgressLabelGap = AppSpacing.x4;
+
   static const double armIntegrationProgressHeight = AppSpacing.x3;
-  static const double armIntegrationQuickActionIcon =
-      AppSpacing.ctaLoadingIcon - AppSpacing.dividerHairline;
-  static const EdgeInsets armIntegrationCardPadding = EdgeInsets.all(
-    armIntegrationCardPaddingValue,
-  );
-  static const EdgeInsets armIntegrationMetricPadding = EdgeInsets.fromLTRB(
-    armIntegrationMetricPaddingHorizontal,
-    armIntegrationMetricPaddingTop,
-    armIntegrationMetricPaddingHorizontal,
-    armIntegrationMetricPaddingBottom,
-  );
-  static const EdgeInsets armIntegrationDetailsPadding = EdgeInsets.symmetric(
-    horizontal: armIntegrationMetricPaddingHorizontal,
-    vertical: armIntegrationMetricPaddingTop,
-  );
-  static const EdgeInsets armIntegrationLatencyPadding = EdgeInsets.fromLTRB(
-    armIntegrationCardPaddingValue,
-    AppSpacing.rowPy,
-    armIntegrationCardPaddingValue,
-    AppSpacing.rowPy,
-  );
-  static const EdgeInsets armIntegrationSlaPadding = EdgeInsets.fromLTRB(
-    armIntegrationCardPaddingValue,
-    armIntegrationSlaGap,
-    armIntegrationCardPaddingValue,
-    armIntegrationSlaGap,
-  );
+
   static EdgeInsets armIntegrationScrollPadding(double bottomInset) =>
       EdgeInsets.fromLTRB(
         AppSpacing.contentPad,
@@ -2057,8 +1559,7 @@ final class TradeSpacingTokens {
       TradeComplianceSpacingTokens.regulatoryDisclosuresHeroSubtitleGap;
   static const double regulatoryDisclosuresHeroTitleLineHeight =
       TradeComplianceSpacingTokens.regulatoryDisclosuresHeroTitleLineHeight;
-  static const double regulatoryDisclosuresLineHeightCompact =
-      tradeBotLineHeightCaption;
+
   static const double regulatoryDisclosuresActionPaddingValue =
       TradeComplianceSpacingTokens.regulatoryDisclosuresActionPaddingValue;
   static const double regulatoryDisclosuresContactPaddingValue =
@@ -2073,12 +1574,12 @@ final class TradeSpacingTokens {
       TradeComplianceSpacingTokens.regulatoryDisclosuresContactIcon;
   static const double regulatoryDisclosuresActionGap =
       TradeComplianceSpacingTokens.regulatoryDisclosuresActionGap;
-  static const double regulatoryDisclosuresContactGap = tradeBotCardGap;
+
   static const double regulatoryDisclosuresContactTextGap =
       TradeComplianceSpacingTokens.regulatoryDisclosuresContactTextGap;
   static const double regulatoryDisclosuresNoticeTitleGap =
       TradeComplianceSpacingTokens.regulatoryDisclosuresNoticeTitleGap;
-  static const double regulatoryDisclosuresNoticeActionGap = tradeBotPanelGap;
+
   static const EdgeInsets regulatoryDisclosuresHeroPadding =
       TradeComplianceSpacingTokens.regulatoryDisclosuresHeroPadding;
   static const EdgeInsets regulatoryDisclosuresActionPadding =
@@ -2100,12 +1601,7 @@ final class TradeSpacingTokens {
       TradeBotsSpacingTokens.tradeBotSheetActionHeight;
   static const double tradeBotFooterTopOffset =
       TradeBotsSpacingTokens.tradeBotFooterTopOffset;
-  static const EdgeInsets tradeBotScrollPadding = EdgeInsets.fromLTRB(
-    AppSpacing.contentPad,
-    tradeBotPageTopGap,
-    AppSpacing.contentPad,
-    0,
-  );
+
   static const EdgeInsets tradeBotPageBodyPadding =
       TradeBotsSpacingTokens.tradeBotPageBodyPadding;
   static const EdgeInsets tradeBotHeroPadding =
@@ -2200,12 +1696,7 @@ final class TradeSpacingTokens {
       TradeBotsSpacingTokens.tradeBotNoticeIconTopPadding;
   static const EdgeInsets tradeBotRecordIconTopPadding =
       TradeBotsSpacingTokens.tradeBotRecordIconTopPadding;
-  static const EdgeInsets tradeBotMetricTableHeaderPadding = EdgeInsets.only(
-    bottom: tradeBotRowGap,
-  );
-  static const EdgeInsets tradeBotMetricTableRowPadding = EdgeInsets.symmetric(
-    vertical: tradeBotRowGap,
-  );
+
   static const EdgeInsets tradeBotMetricTableStarGap =
       TradeBotsSpacingTokens.tradeBotMetricTableStarGap;
   static const EdgeInsets tradeBotTermsBulletPadding = EdgeInsets.only(
@@ -2276,41 +1767,28 @@ final class TradeSpacingTokens {
         AppSpacing.contentPad,
         tradeBotCheckbox + bottomInset,
       );
-  static const double tradeToolBottomInsetSlippageVisual = 118;
-  static const double tradeToolBottomInsetSlippageNative = 28;
-  static const double tradeToolBottomInsetRiskVisual = 97;
-  static const double tradeToolBottomInsetRiskNative = 24;
+
   static const double tradeToolBottomInsetExport = 126;
   static const double tradeToolPageTopGap = 14;
-  static const double tradeToolSectionGap = 26;
-  static const double tradeToolContentGap = 24;
-  static const double tradeToolReviewGap = 22;
+
   static const double tradeToolCardGap = 12;
   static const double tradeToolInlineGap = AppSpacing.x3;
   static const double tradeToolTinyGap = AppSpacing.x2;
   static const double tradeToolMicroGap = 2;
   static const double tradeToolIconGap = 10;
-  static const double tradeToolSectionHeaderGap = 12;
-  static const double tradeToolTabHeight = 53;
+
   static const double tradeToolRiskTabHeight = 44;
-  static const double tradeToolStatCardHeight = 150;
-  static const double tradeToolStatValueHeight = 52;
+
   static const double tradeToolMetricHeight = 60;
-  static const double tradeToolMetricRowHeight = 30;
+
   static const double tradeToolDateColumnWidth = 46;
-  static const double tradeToolExportSummaryHeight = 132;
-  static const double tradeToolFormatHeight = 118;
-  static const double tradeToolIncludeRowHeight = 41;
+
   static const double tradeToolProgressHeight = AppSpacing.x3;
   static const double tradeToolIconTileSm = 40;
   static const double tradeToolIconTileMd = 48;
-  static const double tradeToolAlertIcon = 17;
+
   static const double tradeToolBodyIcon = 18;
-  static const double tradeToolPanelIcon = 19;
-  static const double tradeToolFormatIcon = 24;
-  static const double tradeToolFooterIcon = 17;
-  static const double tradeToolCloseIcon = 16;
-  static const double tradeToolFooterReadyHeight = 42;
+
   static const int tradeToolFooterButtonFlex = 2;
   static const EdgeInsets tradeToolAlertPadding = EdgeInsets.fromLTRB(
     12,
@@ -2319,7 +1797,7 @@ final class TradeSpacingTokens {
     12,
   );
   static const EdgeInsets tradeToolCardPadding = EdgeInsets.all(14);
-  static const EdgeInsets tradeToolCardPaddingCompact = EdgeInsets.all(13);
+
   static const EdgeInsets tradeToolMetricPadding = EdgeInsets.fromLTRB(
     8,
     8,
@@ -2329,55 +1807,13 @@ final class TradeSpacingTokens {
   static const EdgeInsets tradeToolMetricRowPadding = EdgeInsets.symmetric(
     horizontal: 10,
   );
-  static const EdgeInsets tradeToolNoticePadding = EdgeInsets.fromLTRB(
-    12,
-    9,
-    8,
-    9,
-  );
+
   static const EdgeInsets tradeToolRiskReviewPadding = EdgeInsets.all(12);
   static const EdgeInsets tradeToolRiskIntroPadding = EdgeInsets.all(16);
   static const EdgeInsets tradeToolSheetRowPadding = EdgeInsets.symmetric(
     vertical: 7,
   );
-  static const EdgeInsets tradeToolToastPadding = EdgeInsets.symmetric(
-    horizontal: 14,
-    vertical: 12,
-  );
-  static const EdgeInsets tradeToolExportSummaryPadding = EdgeInsets.fromLTRB(
-    16,
-    16,
-    16,
-    15,
-  );
-  static const EdgeInsets tradeToolFormatPadding = EdgeInsets.fromLTRB(
-    12,
-    16,
-    12,
-    14,
-  );
-  static const EdgeInsets tradeToolIncludeListPadding = EdgeInsets.symmetric(
-    horizontal: 16,
-    vertical: 8,
-  );
-  static const EdgeInsets tradeToolTaxNotePadding = EdgeInsets.fromLTRB(
-    12,
-    11,
-    12,
-    11,
-  );
-  static const EdgeInsets tradeToolFooterPaddingStandard = EdgeInsets.fromLTRB(
-    AppSpacing.contentPad,
-    16,
-    AppSpacing.contentPad,
-    tradeToolPageTopGap,
-  );
-  static const EdgeInsets tradeToolFooterPaddingExported = EdgeInsets.fromLTRB(
-    AppSpacing.contentPad,
-    12,
-    AppSpacing.contentPad,
-    tradeToolPageTopGap,
-  );
+
   static EdgeInsets tradeToolScrollPadding(double bottomInset) =>
       EdgeInsets.fromLTRB(
         AppSpacing.contentPad,
