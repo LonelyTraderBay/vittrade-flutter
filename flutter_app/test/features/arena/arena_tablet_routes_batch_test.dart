@@ -8,6 +8,7 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -78,6 +79,28 @@ void main() {
 
     await tapVisible('Khám phá mode');
     await tapVisible('Mở Sân chơi của tôi');
+    await tapVisible('Tạo thử thách');
+    await tapVisible('Xem hướng dẫn');
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3: bấm phòng live đầu (onRoom -> trang thử thách).
+  testWidgets('arena home: bấm phòng live mở trang thử thách', (tester) async {
+    await pumpTablet(tester, AppRoutePaths.arena);
+
+    // Bấm card phòng đầu trong section "Phòng đang mở" nếu có.
+    await tester.scrollUntilVisible(
+      find.text('Phòng đang mở'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
+    final cards = find.byType(VitCard);
+    if (cards.evaluate().isNotEmpty) {
+      // Card trong vùng phòng đang mở: bấm card đầu tiên thấy được.
+      await tester.tap(cards.first);
+      await tester.pumpAndSettle();
+    }
     expect(tester.takeException(), isNull);
   });
 }

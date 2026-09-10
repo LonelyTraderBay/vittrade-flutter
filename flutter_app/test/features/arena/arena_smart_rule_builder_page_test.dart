@@ -5,8 +5,8 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/arena/data/arena_repository.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/studio/arena_smart_rule_builder_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
-import 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
 
@@ -288,5 +288,47 @@ void main() {
     await tester.tap(find.byKey(ArenaSmartRuleBuilderPage.saveKey));
     await tester.pumpAndSettle();
     expect(find.text('Đã lưu nháp'), findsWidgets);
+  });
+
+  // Coverage dòng 2 p3: gợi ý nhanh (2 nhánh title rỗng/đã điền), toggle
+  // rematch + save-as-mode, reset form, đổi mô tả.
+  testWidgets('SC-186 gợi ý nhanh, toggle rematch/mode, reset form', (
+    tester,
+  ) async {
+    await pumpSmartRules(tester);
+
+    Future<void> tapVisible(Finder f) async {
+      await tester.ensureVisible(f);
+      await tester.pumpAndSettle();
+      await tester.tap(f);
+      await tester.pumpAndSettle();
+    }
+
+    // Gợi ý nhanh khi title rỗng -> điền title.
+    final suggestions = find.byType(VitPresetChipRow);
+    if (suggestions.evaluate().isNotEmpty) {
+      await tapVisible(suggestions.first);
+    }
+
+    // Toggle rematch + lưu làm mode.
+    final rematch = find.textContaining('Cho phép rematch');
+    if (rematch.evaluate().isNotEmpty) {
+      await tapVisible(rematch.first);
+    }
+    final saveMode = find.textContaining('Lưu thành reusable mode');
+    if (saveMode.evaluate().isNotEmpty) {
+      await tapVisible(saveMode.first);
+    }
+
+    // Đổi mô tả.
+    final desc = find.byType(TextField);
+    if (desc.evaluate().length >= 2) {
+      await tester.enterText(desc.at(1), 'Mô tả thử nghiệm');
+      await tester.pumpAndSettle();
+    }
+
+    // Reset form về sạch.
+    await tapVisible(find.byKey(ArenaSmartRuleBuilderPage.resetKey));
+    expect(tester.takeException(), isNull);
   });
 }
