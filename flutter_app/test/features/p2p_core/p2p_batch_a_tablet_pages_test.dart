@@ -28,6 +28,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_order_book_tablet_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/app/providers/p2p_marketplace_controller_providers.dart';
 
 /// Khóa Batch A (GĐ2) P2P tablet: order-book/dashboard/express/confirm
 /// render trang thật, KHÔNG rơi vào placeholder.
@@ -490,6 +491,35 @@ void main() {
       await tester.pumpAndSettle();
     }
     expect(find.byType(P2PDashboardTabletPage), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3d: nhánh error của P2P home (override family record key)
+  // + pane tương quan error (một lần pump mỗi cái).
+  testWidgets('P2P home error: ném lỗi qua family override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          p2pHomeProvider((
+            tradeType: P2PTradeType.buy,
+            asset: '',
+            fiat: 'VND',
+          )).overrideWith((ref) async => throw StateError('lỗi mạng')),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: '/p2p',
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được P2P Marketplace'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
