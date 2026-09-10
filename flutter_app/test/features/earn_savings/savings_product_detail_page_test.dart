@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,6 +7,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/earn_core/data/earn_repository.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_page.dart';
+import 'package:vit_trade_flutter/app/providers/earn_savings_controller_providers.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_product_detail_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
@@ -86,5 +89,56 @@ void main() {
 
     expect(find.byType(SavingsProductDetailPage), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3h: nhánh loading + error product detail.
+  testWidgets('SC-330 loading qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    // Pump widget trực tiếp (route chỉ đăng ký id cứng 'sample').
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          savingsProductDetailSnapshotProvider('btc-fixed-90').overrideWith(
+            (ref) => Completer<SavingsProductDetailSnapshot>().future,
+          ),
+        ],
+        child: const MaterialApp(
+          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Đang tải…'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  // Error ở test riêng — ProviderScope container không đổi override giữa 2
+  // lần pumpWidget trong cùng test.
+  testWidgets('SC-330 error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          savingsProductDetailSnapshotProvider(
+            'btc-fixed-90',
+          ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+        ],
+        child: const MaterialApp(
+          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được'), findsAtLeastNWidgets(1));
+    expect(find.text('Thử lại'), findsOneWidget);
   });
 }
