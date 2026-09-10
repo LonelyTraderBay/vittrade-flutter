@@ -452,13 +452,22 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    // Quick amount đầu tiên trong danh sách.
-    await tester.tap(find.byType(VitFilterChip).last);
+    // Quick amount 2.000.000 (trong hạn mức mọi ad) — chip theo label.
+    final quick = find.text('2.000.000');
+    expect(quick, findsOneWidget);
+    await Scrollable.ensureVisible(tester.element(quick));
     await tester.pumpAndSettle();
+    await tester.tap(quick);
+    await tester.pumpAndSettle();
+
+    // Với số tiền > 0: card offer tốt nhất render.
+    expect(find.text('Offer tốt nhất'), findsOneWidget);
 
     // CTA "Mua nhanh" chuyển sang trang xác nhận express.
     final cta = find.byType(VitCtaButton);
     expect(cta.evaluate(), isNotEmpty);
+    await Scrollable.ensureVisible(tester.element(cta.first));
+    await tester.pumpAndSettle();
     await tester.tap(cta.first);
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);

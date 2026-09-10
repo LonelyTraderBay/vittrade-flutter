@@ -10,6 +10,7 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/buy_
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/wallet_transfer_sections.dart';
+import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 
@@ -151,5 +152,39 @@ void main() {
     await tester.tap(confirm);
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3e: nhánh error 3 trang wallet tablet (family key asset id).
+  testWidgets('wallet tablet: deposit/withdraw error state', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    Future<void> pumpErr(String location) async {
+      await tester.pumpWidget(
+        VitTradeApp(
+          overrides: [
+            walletDepositControllerProvider((
+              asset: 'usdt',
+              assetScoped: true,
+            )).overrideWith((ref) async => throw StateError('lỗi')),
+            walletPendingDepositsProvider.overrideWith(
+              (ref) async => throw StateError('lỗi'),
+            ),
+          ],
+          routerConfig: createAppRouter(
+            surface: AppSurface.tablet,
+            initialLocation: location,
+          ),
+        ),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(tester.takeException(), isNull, reason: location);
+    }
+
+    await pumpErr('/wallet/deposit/usdt');
+    await pumpErr('/wallet/pending-deposits');
   });
 }

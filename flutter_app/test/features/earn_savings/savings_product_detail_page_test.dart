@@ -64,4 +64,27 @@ void main() {
 
     expect(find.byType(SavingsPage), findsOneWidget);
   });
+
+  // Coverage dòng 2 p3e: trạng thái dữ liệu thật với id 'btc-fixed-90'
+  // (test cũ chỉ phủ not-found qua id sample).
+  testWidgets('SC-330 render chi tiết sản phẩm thật', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    // Route chỉ đăng ký path sample với id cứng — pump trực tiếp widget
+    // với id thật để phủ nhánh dữ liệu (khuôn launchpad contract page).
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(
+          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SavingsProductDetailPage), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }
