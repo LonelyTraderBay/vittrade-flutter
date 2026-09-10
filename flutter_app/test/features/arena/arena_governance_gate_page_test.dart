@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/app/providers/arena_controller_providers.dart';
 import 'package:vit_trade_flutter/features/arena/data/arena_repository.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/phone/pages/governance/arena_governance_gate_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
@@ -161,5 +162,30 @@ void main() {
     await tester.tap(find.byKey(ArenaGovernanceGatePage.saveKey));
     await tester.pumpAndSettle();
     expect(find.text('Đã lưu nháp'), findsOneWidget);
+  });
+
+  // Coverage dòng 2 p3i: nhánh error governance gate.
+  testWidgets('SC-188 error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          arenaGovernanceSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.arenaStudioGovernance,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được Governance Gate'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

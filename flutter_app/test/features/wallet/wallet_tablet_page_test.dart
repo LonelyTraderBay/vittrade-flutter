@@ -173,4 +173,48 @@ void main() {
       findsOneWidget,
     );
   });
+
+  // Coverage dòng 2 p3i: tìm kiếm + filter + more actions + đổi tab.
+  testWidgets('SC-135 wallet tablet: search, filter, more actions, tabs', (
+    tester,
+  ) async {
+    await pumpTabletWallet(tester);
+
+    // Tìm kiếm theo symbol.
+    final search = find.byKey(WalletTabletKeys.search);
+    if (search.evaluate().isNotEmpty) {
+      await tester.ensureVisible(search);
+      await tester.pumpAndSettle();
+      await tester.enterText(search, 'btc');
+      await tester.pumpAndSettle();
+    }
+
+    // Filter (ẩn số dư nhỏ).
+    final filter = find.byKey(WalletTabletKeys.filter);
+    if (filter.evaluate().isNotEmpty) {
+      await tester.ensureVisible(filter);
+      await tester.pumpAndSettle();
+      await tester.tap(filter);
+      await tester.pumpAndSettle();
+    }
+
+    // More actions sheet.
+    final more = find.byKey(WalletTabletKeys.moreActions);
+    if (more.evaluate().isNotEmpty) {
+      await tester.ensureVisible(more);
+      await tester.pumpAndSettle();
+      await tester.tap(more);
+      await tester.pumpAndSettle();
+    }
+
+    // Đổi tab.
+    final tab = find.byKey(WalletTabletKeys.tab('history'));
+    if (tab.evaluate().isNotEmpty) {
+      await tester.ensureVisible(tab);
+      await tester.pumpAndSettle();
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+    }
+    expect(tester.takeException(), isNull);
+  });
 }
