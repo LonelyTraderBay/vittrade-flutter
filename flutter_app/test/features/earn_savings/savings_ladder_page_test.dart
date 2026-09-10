@@ -4,6 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/features/earn_core/data/earn_repository.dart';
+import 'dart:async';
+
+import 'package:vit_trade_flutter/features/earn_savings/presentation/widgets/savings/savings_ladder_rung_manager.dart';
+import 'package:vit_trade_flutter/app/providers/earn_savings_controller_providers.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_ladder_page.dart';
 import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
@@ -219,6 +223,102 @@ void main() {
       expect(find.text('Tạo ladder để xem phân tích'), findsNothing);
     },
   );
+
+  // Coverage dòng 2: nhánh loading/error + custom preset (toggle tự gia hạn,
+  // thêm bậc, mở sheet xác nhận và bấm xác nhận tạo ladder).
+  // Coverage dòng 2: nhánh loading/error + custom preset (toggle tự gia hạn,
+  // thêm bậc, mở sheet xác nhận và bấm xác nhận tạo ladder).
+  testWidgets('SC-351 nhánh loading và error hiển thị đúng', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    // VitTradeApp có ProviderScope riêng bên trong — override phải đi qua
+    // tham số overrides của app, không phải bọc ngoài.
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          savingsLadderSnapshotProvider.overrideWith(
+            (ref) => Completer<SavingsLadderSnapshot>().future,
+          ),
+        ],
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.earnSavingsLadder,
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Đang tải…'), findsOneWidget);
+
+    // Nhánh error được kiểm ở test riêng — ProviderScope của app không tái
+    // tạo container khi override đổi giữa hai lần pumpWidget cùng test.
+  });
+
+  testWidgets('SC-351 nhánh error hiển thị nút Thử lại', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          savingsLadderSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.earnSavingsLadder,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được'), findsAtLeastNWidgets(1));
+    expect(find.text('Thử lại'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('SC-351 custom preset: gia hạn, thêm bậc, sheet xác nhận', (
+    tester,
+  ) async {
+    await pumpLadder(tester);
+
+    final customPreset = find.byKey(
+      SavingsLadderPage.presetKey(SavingsLadderPreset.custom),
+    );
+    await Scrollable.ensureVisible(tester.element(customPreset));
+    await tester.pumpAndSettle();
+    await tester.tap(customPreset);
+    await tester.pumpAndSettle();
+
+    final renew = find.byTooltip('Tắt tự gia hạn');
+    if (renew.evaluate().isNotEmpty) {
+      await tester.tap(renew.first);
+      await tester.pumpAndSettle();
+      expect(find.byTooltip('Bật tự gia hạn'), findsOneWidget);
+    }
+
+    final addBtn = find.byType(AddRungButton);
+    if (addBtn.evaluate().isNotEmpty) {
+      await tester.tap(addBtn.first);
+      await tester.pumpAndSettle();
+    }
+
+    final confirm = find.byKey(SavingsLadderPage.confirmKey);
+    await Scrollable.ensureVisible(tester.element(confirm), alignment: .82);
+    await tester.pumpAndSettle();
+    await tester.tap(confirm);
+    await tester.pumpAndSettle();
+    expect(find.text('Xác nhận tạo ladder'), findsOneWidget);
+
+    await tester.tap(find.text('Xác nhận tạo ladder'));
+    await tester.pumpAndSettle();
+    expect(find.text('Xác nhận tạo ladder'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('SC-351 savings insight edge opens ladder page', (tester) async {
     tester.view.devicePixelRatio = 1;

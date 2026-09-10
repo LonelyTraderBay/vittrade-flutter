@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
-import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpPhone(WidgetTester tester, String location) async {
@@ -44,16 +43,23 @@ void main() {
     await pumpPhone(tester, AppRoutePaths.tradeCopySafetyCenter);
     expect(tester.takeException(), isNull);
 
-    // Đổi tab qua segmented bar (đủ nhánh _activeTabId của Safety Center).
-    final tabs = find.descendant(
-      of: find.byType(VitSegmentedTabBar),
-      matching: find.byType(Text),
-    );
-    final count = tabs.evaluate().length;
-    for (var i = 0; i < count && i < 4; i++) {
-      await tester.tap(tabs.at(i));
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-    }
+    // Tab Enforcement render danh sách hành động xử phạt (enforcement
+    // common) — nội dung đặc trưng: provider bị đình chỉ.
+    final enforcementTab = find.text('Enforcement');
+    expect(enforcementTab, findsOneWidget);
+    await tester.ensureVisible(enforcementTab);
+    await tester.pumpAndSettle();
+    await tester.tap(enforcementTab);
+    await tester.pumpAndSettle();
+    expect(find.text('SUSPENDED'), findsWidgets);
+    expect(find.text('Provider X'), findsOneWidget);
+
+    // Tab Metrics render trust metrics.
+    final metricsTab = find.text('Metrics');
+    await tester.ensureVisible(metricsTab);
+    await tester.pumpAndSettle();
+    await tester.tap(metricsTab);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
   });
 }
