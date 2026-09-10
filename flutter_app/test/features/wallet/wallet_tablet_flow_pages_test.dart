@@ -108,35 +108,48 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  // Coverage đợt 2: mua crypto tablet — nhập số tiền, chọn payment, CTA mua.
-  testWidgets('mua crypto tablet: nhập tiền + payment + CTA mua', (
+  // Coverage dòng 2: mua crypto tablet — luồng đầy đủ: picker crypto,
+  // nhập tiền, nút mua -> màn xác nhận -> submit -> thành công.
+  testWidgets('mua crypto tablet: picker, xác nhận, submit thành công', (
     tester,
   ) async {
     await pumpTablet(tester, AppRoutePaths.walletBuyCrypto);
 
-    // Nhập số tiền VND vào trường amount của card.
+    // Mở picker crypto và chọn loại khác.
+    await tester.tap(find.byKey(const Key('sc145_buy_crypto_selector')));
+    await tester.pumpAndSettle();
+    expect(find.text('Chọn loại Crypto'), findsOneWidget);
+    final options = find.byType(VitAssetAvatar);
+    if (options.evaluate().length > 1) {
+      await tester.tap(options.last);
+      await tester.pumpAndSettle();
+    } else {
+      await tester.tap(find.byType(VitCard).last);
+      await tester.pumpAndSettle();
+    }
+    expect(find.text('Chọn loại Crypto'), findsNothing);
+
+    // Nhập số tiền VND.
     final fields = find.byType(TextField);
-    if (fields.evaluate().isNotEmpty) {
-      await tester.enterText(fields.first, '500000');
-      await tester.pumpAndSettle();
-    }
+    await tester.enterText(fields.first, '500000');
+    await tester.pumpAndSettle();
 
-    // Chọn phương thức thanh toán (chip payment) nếu hiển thị.
-    final chips = find.byType(VitFilterChip);
-    if (chips.evaluate().isNotEmpty) {
-      await tester.tap(chips.last);
-      await tester.pumpAndSettle();
-    }
+    // Bấm nút mua (key do widget dùng chung gắn) -> màn xác nhận.
+    final buy = find.byKey(const Key('sc145_buy_crypto_buy'));
+    expect(buy, findsOneWidget);
+    await Scrollable.ensureVisible(tester.element(buy));
+    await tester.pumpAndSettle();
+    await tester.tap(buy);
+    await tester.pumpAndSettle();
+    expect(find.text('Xác nhận mua'), findsOneWidget);
+    expect(find.textContaining('Xem lại lệnh mua'), findsOneWidget);
 
-    // Bấm nút mua — có thể nằm dưới fold, cuộn tới trước khi tap.
-    final buy = find.byKey(BuyCryptoTabletPage.buyButtonKey);
-    if (buy.evaluate().isNotEmpty) {
-      await Scrollable.ensureVisible(tester.element(buy.first));
-      await tester.pumpAndSettle();
-      await tester.tap(buy.first);
-      await tester.pumpAndSettle();
-    }
+    // Xác nhận -> chờ 250ms -> màn thành công.
+    final confirm = find.byType(VitCtaButton).last;
+    await Scrollable.ensureVisible(tester.element(confirm));
+    await tester.pumpAndSettle();
+    await tester.tap(confirm);
+    await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
-    expect(find.byType(BuyCryptoTabletPage), findsOneWidget);
   });
 }

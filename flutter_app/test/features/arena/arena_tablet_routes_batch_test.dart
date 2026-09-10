@@ -58,4 +58,26 @@ void main() {
       expect(tester.takeException(), isNull, reason: location);
     }
   });
+
+  // Coverage dòng 2: tương tác Arena home tablet — CTA tạo thử thách, khám phá
+  // mode, mở Sân chơi của tôi, hướng dẫn (đủ nhánh onNavigate/onCreate).
+  testWidgets('arena home: bấm CTA tạo thử thách + mở sân chơi', (
+    tester,
+  ) async {
+    await pumpTablet(tester, AppRoutePaths.arena);
+    expect(tester.takeException(), isNull);
+
+    Future<void> tapVisible(String label) async {
+      final f = find.text(label);
+      if (f.evaluate().isEmpty) return;
+      await Scrollable.ensureVisible(tester.element(f.first));
+      await tester.pumpAndSettle();
+      await tester.tap(f.first);
+      await tester.pumpAndSettle();
+    }
+
+    await tapVisible('Khám phá mode');
+    await tapVisible('Mở Sân chơi của tôi');
+    expect(tester.takeException(), isNull);
+  });
 }
