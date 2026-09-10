@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/notifications_controller_providers.dart';
+import 'package:vit_trade_flutter/app/router/route_error_page.dart';
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/router/contracts/auth_route_args.dart';
 import 'package:vit_trade_flutter/app/router/tablet/tablet_route_manifest.dart';
@@ -63,9 +64,7 @@ import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_settings_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_my_orders_tablet_page.dart';
 import 'package:vit_trade_flutter/features/rewards/presentation/tablet/pages/rewards_tablet_page.dart';
-import 'package:vit_trade_flutter/features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_page.dart';
-import 'package:vit_trade_flutter/features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_create_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_api_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_activity_pane.dart';
@@ -116,7 +115,6 @@ import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_page.dart';
-import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/features/trade_core/domain/entities/trade_core_entities.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_add_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart';
@@ -142,7 +140,6 @@ import 'package:vit_trade_flutter/app/shell/tablet/tablet_app_shell.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
 import 'package:vit_trade_flutter/shared/widgets/vit_error_state.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 
 /// Builds the complete Tablet route tree without importing the Phone/Web
 /// composition or the compatibility router.
@@ -1627,91 +1624,26 @@ Widget _buildTabletPage(
     return const ProfileSubAccountsPane();
   }
 
+  // SC-405/SC-406: hai route settings-security mirror ProfileSecurityPane.
   final profileUtility = _profileUtilityForRoute(path);
   if (profileUtility != null) return profileUtility;
 
-  final p2pUtility = _p2pUtilityForRoute(path);
-  if (p2pUtility != null) return p2pUtility;
+  // Gate tablet (GĐ7): mọi route trong manifest đã có composition thật —
+  // probe toàn bộ 443 path khẳng định 0 utility. Chuỗi fallback utility cũ
+  // chết theo lcov (2026-09-10); route lạ rơi vào trang lỗi tiếng Việt
+  // thay vì placeholder im lặng.
+  return const VitRouteErrorPage();
+}
 
-  final utilityTitle = _tabletUtilityTitle(path);
-  if (utilityTitle != null) {
-    return VitTabletUtilityPage(
-      semanticIdentifier: _semanticIdentifier(spec),
-      title: utilityTitle,
-      subtitle: _tabletUtilitySubtitle(utilityTitle),
-      description: _tabletUtilityDescription(utilityTitle),
-      facts: const [
-        VitTabletUtilityFact(label: 'Surface', value: 'Tablet'),
-        VitTabletUtilityFact(label: 'Trạng thái', value: 'Sẵn sàng mở rộng'),
-      ],
-      onBack: () => context.go(_backPathFor(path)),
-      actionLabel: _requiresConfirmation(path) ? 'Xem trước điều kiện' : null,
-      requiresConfirmation: _requiresConfirmation(path),
-      confirmationTitle: 'Xác nhận bước tiếp theo',
-    );
+Widget? _profileUtilityForRoute(String path) {
+  // SC-405/SC-406: phone builds SecurityPage cho cả hai route (cùng nội dung
+  // /profile/security) — tablet mirror đúng hành vi đó bằng ProfileSecurityPane
+  // thay vì placeholder (xem profile_routes.dart arm tương ứng).
+  if (path == AppRoutePaths.settingsSecurityBiometric ||
+      path == AppRoutePaths.settingsSecurityChangePassword) {
+    return const ProfileSecurityPane();
   }
-
-  if (_isProfileSpec(spec)) {
-    return ProfileTabletUtilityPage(
-      semanticIdentifier: _semanticIdentifier(spec),
-      title: 'Tài khoản trên Tablet',
-      subtitle: 'Hồ sơ · bảo mật · thiết lập',
-      description:
-          'Màn hình này đã được tách riêng cho bố cục Tablet. Nội dung chi tiết sẽ được mở rộng trong pane tài khoản tương ứng.',
-      icon: Icons.manage_accounts_outlined,
-    );
-  }
-
-  if (_isP2pSpec(spec)) {
-    return P2PTabletUtilityPage(
-      semanticIdentifier: _semanticIdentifier(spec),
-      title: 'P2P trên Tablet',
-      subtitle: 'Giao dịch · đối chiếu · an toàn',
-      description:
-          'Thông tin P2P được trình bày trong không gian Tablet riêng, với điều kiện và bước tiếp theo được hiển thị rõ ràng.',
-      facts: const [
-        P2PTabletFact(label: 'Phạm vi', value: 'P2P'),
-        P2PTabletFact(label: 'Trạng thái', value: 'Đang cập nhật'),
-        P2PTabletFact(label: 'Bước tiếp theo', value: 'Rà soát điều kiện'),
-      ],
-      actionLabel: _requiresConfirmation(path) ? 'Xem trước điều kiện' : null,
-      requiresConfirmation: _requiresConfirmation(path),
-      confirmationTitle: 'Xác nhận bước P2P',
-    );
-  }
-
-  if (_isTradeSpec(spec)) {
-    return TradeTabletUtilityPage(
-      semanticIdentifier: _semanticIdentifier(spec),
-      title: 'Giao dịch trên Tablet',
-      subtitle: 'Lệnh · điều kiện · quản trị rủi ro',
-      description:
-          'Màn hình giao dịch này có composition Tablet riêng. Phí, điều kiện và trạng thái thực thi cần được rà soát trước khi tiếp tục.',
-      facts: const [
-        TradeTabletFact(label: 'Khu vực', value: 'Giao dịch'),
-        TradeTabletFact(label: 'Trạng thái', value: 'Đang cập nhật'),
-      ],
-      actionLabel: _requiresConfirmation(path) ? 'Xem trước điều kiện' : null,
-      requiresConfirmation: _requiresConfirmation(path),
-      confirmationTitle: 'Xác nhận rà soát giao dịch',
-    );
-  }
-
-  return VitTabletUtilityPage(
-    semanticIdentifier: _semanticIdentifier(spec),
-    title: 'Tính năng trên Tablet',
-    subtitle: 'Không gian Tablet · trạng thái tính năng',
-    description:
-        'Màn hình này đã được tách khỏi Phone và đang sử dụng composition Tablet theo route contract chung.',
-    facts: const [
-      VitTabletUtilityFact(label: 'Surface', value: 'Tablet'),
-      VitTabletUtilityFact(label: 'Trạng thái', value: 'Sẵn sàng mở rộng'),
-    ],
-    onBack: () => context.go(_backPathFor(spec.path)),
-    actionLabel: _requiresConfirmation(path) ? 'Xem trước điều kiện' : null,
-    requiresConfirmation: _requiresConfirmation(path),
-    confirmationTitle: 'Xác nhận bước tiếp theo',
-  );
+  return null;
 }
 
 bool _isMarketSpec(TabletRouteSpec spec) {
@@ -1727,161 +1659,6 @@ bool _isProfileSpec(TabletRouteSpec spec) {
       path.startsWith('${AppRoutePaths.profile}/') ||
       path == AppRoutePaths.settingsSecurity ||
       path.startsWith('/settings/security/');
-}
-
-bool _isP2pSpec(TabletRouteSpec spec) => spec.path.startsWith('/p2p');
-
-bool _isTradeSpec(TabletRouteSpec spec) =>
-    spec.path == AppRoutePaths.trade ||
-    spec.path.startsWith('${AppRoutePaths.trade}/');
-
-bool _requiresConfirmation(String path) {
-  const sensitiveMarkers = [
-    'withdraw',
-    'security',
-    'kyc',
-    'payment-method',
-    'dispute',
-    'insurance/claim',
-    'risk',
-    'regulatory',
-    'compliance',
-    'emergency',
-    'stop',
-    'client-money',
-    'cost',
-    'complaint',
-  ];
-  return sensitiveMarkers.any(path.contains);
-}
-
-String _backPathFor(String path) {
-  if (path.startsWith('/p2p')) return AppRoutePaths.p2p;
-  if (path.startsWith('/trade')) return AppRoutePaths.trade;
-  if (path.startsWith('/wallet')) return AppRoutePaths.wallet;
-  if (path.startsWith('/profile') || path.startsWith('/settings/security')) {
-    return AppRoutePaths.profile;
-  }
-  if (path.startsWith('/markets') || path.startsWith('/pair/')) {
-    return AppRoutePaths.markets;
-  }
-  return AppRoutePaths.home;
-}
-
-String? _tabletUtilityTitle(String path) {
-  if (path == AppRoutePaths.support ||
-      path.startsWith('${AppRoutePaths.support}/')) {
-    return 'Hỗ trợ VitTrade';
-  }
-  if (path == AppRoutePaths.rewards) return 'Trung tâm phần thưởng';
-  if (path == AppRoutePaths.adminSettings) return 'Cài đặt quản trị';
-  if (path == AppRoutePaths.marketsOverview) return 'Công cụ thị trường';
-  if (path == AppRoutePaths.marketsPredictions ||
-      path.startsWith('${AppRoutePaths.marketsPredictions}/')) {
-    return 'Prediction Markets';
-  }
-  if (path == AppRoutePaths.dca || path.startsWith('${AppRoutePaths.dca}/')) {
-    return 'DCA';
-  }
-  if (path == AppRoutePaths.arena ||
-      path.startsWith('${AppRoutePaths.arena}/')) {
-    return 'Open Arena';
-  }
-  if (path == AppRoutePaths.launchpad ||
-      path.startsWith('${AppRoutePaths.launchpad}/')) {
-    return 'Launchpad';
-  }
-  if (path == AppRoutePaths.earnSavings ||
-      path.startsWith('${AppRoutePaths.earnSavings}/')) {
-    return 'Earn Savings';
-  }
-  if (path == AppRoutePaths.earn || path.startsWith('${AppRoutePaths.earn}/')) {
-    return 'Earn Staking';
-  }
-  if (path == AppRoutePaths.tradeBots ||
-      path.startsWith('${AppRoutePaths.tradeBots}/')) {
-    return 'Trading Bots';
-  }
-  if (path == AppRoutePaths.tradeCopyTrading ||
-      path.startsWith('${AppRoutePaths.tradeCopyTrading}/')) {
-    return 'Copy Trading';
-  }
-  if (path == AppRoutePaths.tradeCopyRegulatoryDisclosures) {
-    return 'Tuân thủ giao dịch';
-  }
-  if (path == AppRoutePaths.tradeRiskManagement) {
-    return 'Giao dịch trên Tablet';
-  }
-  return null;
-}
-
-Widget? _profileUtilityForRoute(String path) {
-  // SC-405/SC-406: phone builds SecurityPage cho cả hai route (cùng nội dung
-  // /profile/security) — tablet mirror đúng hành vi đó bằng ProfileSecurityPane
-  // thay vì placeholder (xem profile_routes.dart arm tương ứng).
-  if (path == AppRoutePaths.settingsSecurityBiometric ||
-      path == AppRoutePaths.settingsSecurityChangePassword) {
-    return const ProfileSecurityPane();
-  }
-  return null;
-}
-
-P2PTabletUtilityPage? _p2pUtilityForRoute(String path) {
-  return null;
-}
-
-String _tabletUtilitySubtitle(String title) {
-  return switch (title) {
-    'Hỗ trợ VitTrade' => 'Hỗ trợ · yêu cầu · trạng thái',
-    'Trung tâm phần thưởng' => 'Phần thưởng · nhiệm vụ · tiến độ',
-    'Cài đặt quản trị' => 'Quản trị · quyền · cấu hình',
-    'Công cụ thị trường' => 'Dữ liệu · phân tích · theo dõi',
-    'Prediction Markets' => 'Phân tích và quản trị vị thế trên Tablet',
-    'DCA' => 'Chiến lược phân bổ định kỳ trên Tablet',
-    'Open Arena' => 'Không gian thử thách và điểm Arena trên Tablet',
-    'Launchpad' => 'Quản trị tài sản phát hành trên Tablet',
-    'Earn Savings' => 'Tích lũy linh hoạt và mục tiêu tài chính trên Tablet',
-    'Earn Staking' => 'Staking, validator và quản trị rủi ro trên Tablet',
-    'Trading Bots' => 'Tự động hóa giao dịch và kiểm soát rủi ro trên Tablet',
-    'Copy Trading' => 'Theo dõi nhà giao dịch và quản trị sao chép trên Tablet',
-    _ => 'Lệnh · điều kiện · quản trị rủi ro',
-  };
-}
-
-String _tabletUtilityDescription(String title) {
-  return switch (title) {
-    'Hỗ trợ VitTrade' =>
-      'Tìm đúng kênh hỗ trợ và theo dõi yêu cầu trong bố cục Tablet rõ ràng.',
-    'Trung tâm phần thưởng' =>
-      'Theo dõi nhiệm vụ, phần thưởng và tiến độ trong bố cục Tablet rõ ràng.',
-    'Cài đặt quản trị' => 'Rà soát quyền và cấu hình quản trị trước khi lưu.',
-    'Công cụ thị trường' =>
-      'Theo dõi dữ liệu, biến động và công cụ phân tích trong không gian Tablet.',
-    'Prediction Markets' =>
-      'Không gian Tablet tập trung cho dữ liệu, vị thế và quyết định có kiểm soát.',
-    'DCA' =>
-      'Không gian Tablet để theo dõi cấu hình, lịch thực hiện và hiệu suất DCA.',
-    'Open Arena' =>
-      'Không gian Tablet riêng cho thử thách, điểm Arena và an toàn cộng đồng.',
-    'Launchpad' =>
-      'Không gian Tablet để theo dõi dự án, giao dịch phát hành và công cụ Launchpad.',
-    'Earn Savings' =>
-      'Không gian Tablet để theo dõi sản phẩm tiết kiệm, mục tiêu, lợi suất và lịch sử.',
-    'Earn Staking' =>
-      'Không gian Tablet để theo dõi lợi suất staking, validator và các chính sách liên quan.',
-    'Trading Bots' =>
-      'Không gian Tablet để theo dõi bot, hiệu suất, cấu hình và điều kiện an toàn.',
-    'Copy Trading' =>
-      'Không gian Tablet để xem nhà cung cấp, hiệu suất và các lớp an toàn Copy Trading.',
-    _ =>
-      'Màn hình giao dịch này có composition Tablet riêng. Phí, điều kiện và trạng thái thực thi cần được rà soát trước khi tiếp tục.',
-  };
-}
-
-String _semanticIdentifier(TabletRouteSpec spec) {
-  final value = spec.name ?? spec.path;
-  final normalized = value.replaceAll(RegExp(r'[^A-Za-z0-9]+'), '_');
-  return 'TABLET_${normalized.toUpperCase()}';
 }
 
 List<TabletRouteSpec> _sortedSpecs(Iterable<TabletRouteSpec> specs) {

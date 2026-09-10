@@ -29,106 +29,66 @@ List<RouteBase> p2pOrdersRoutes(
     GoRoute(
       path: '/p2p/order/timeline/:orderId',
       name: AppRouteNames.sc212P2POrderTimeline,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2POrderTimelinePage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2POrderTimelinePage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/order/rate/:orderId',
       name: AppRouteNames.sc213P2POrderRate,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2POrderRatePage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2POrderRatePage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/order/cancel/:orderId',
       name: AppRouteNames.sc214P2POrderCancel,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2POrderCancelPage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2POrderCancelPage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/order/proof/:orderId',
       name: AppRouteNames.sc215P2POrderProof,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2POrderProofPage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2POrderProofPage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/order/:orderId',
       name: AppRouteNames.sc216P2POrder,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2POrderPage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2POrderPage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/chat/:orderId',
       name: AppRouteNames.sc217P2PChat,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2PChatPage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2PChatPage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.p2pEscrowBalance,
       name: AppRouteNames.sc245P2PEscrowBalance,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2PEscrowBalancePage(
-          initialAsset: p2pAssetFromQuery(state.uri.queryParameters['asset']),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2PEscrowBalancePage(
+        initialAsset: p2pAssetFromQuery(state.uri.queryParameters['asset']),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: '/p2p/escrow/:orderId',
       name: AppRouteNames.sc246P2PEscrowDetail,
-      builder: (_, state) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2PEscrowDetailPage(
-          orderId: requireRouteParam(state, 'orderId'),
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, state) => P2PEscrowDetailPage(
+        orderId: requireRouteParam(state, 'orderId'),
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.p2pWallet,
@@ -158,15 +118,10 @@ List<RouteBase> p2pOrdersRoutes(
     GoRoute(
       path: AppRoutePaths.p2pWalletHistory,
       name: AppRouteNames.sc263P2PWalletHistoryAlias,
-      builder: (_, _) => switch (surface) {
-        AppSurface.phone ||
-        AppSurface.tablet ||
-        AppSurface.web ||
-        null => P2PFundLockHistoryPage(
-          walletHistoryAlias: true,
-          shellRenderMode: shellRenderMode,
-        ),
-      },
+      builder: (_, _) => P2PFundLockHistoryPage(
+        walletHistoryAlias: true,
+        shellRenderMode: shellRenderMode,
+      ),
     ),
     GoRoute(
       path: AppRoutePaths.p2pMyOrders,
