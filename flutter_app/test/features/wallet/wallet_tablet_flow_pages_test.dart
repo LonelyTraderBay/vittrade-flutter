@@ -10,6 +10,7 @@ import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/buy_
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/pending_deposits_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/tablet/pages/transfer_tablet_page.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/wallet_transfer_sections.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 
 void main() {
@@ -105,5 +106,37 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Chuyển thành công'), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  // Coverage đợt 2: mua crypto tablet — nhập số tiền, chọn payment, CTA mua.
+  testWidgets('mua crypto tablet: nhập tiền + payment + CTA mua', (
+    tester,
+  ) async {
+    await pumpTablet(tester, AppRoutePaths.walletBuyCrypto);
+
+    // Nhập số tiền VND vào trường amount của card.
+    final fields = find.byType(TextField);
+    if (fields.evaluate().isNotEmpty) {
+      await tester.enterText(fields.first, '500000');
+      await tester.pumpAndSettle();
+    }
+
+    // Chọn phương thức thanh toán (chip payment) nếu hiển thị.
+    final chips = find.byType(VitFilterChip);
+    if (chips.evaluate().isNotEmpty) {
+      await tester.tap(chips.last);
+      await tester.pumpAndSettle();
+    }
+
+    // Bấm nút mua — có thể nằm dưới fold, cuộn tới trước khi tap.
+    final buy = find.byKey(BuyCryptoTabletPage.buyButtonKey);
+    if (buy.evaluate().isNotEmpty) {
+      await Scrollable.ensureVisible(tester.element(buy.first));
+      await tester.pumpAndSettle();
+      await tester.tap(buy.first);
+      await tester.pumpAndSettle();
+    }
+    expect(tester.takeException(), isNull);
+    expect(find.byType(BuyCryptoTabletPage), findsOneWidget);
   });
 }

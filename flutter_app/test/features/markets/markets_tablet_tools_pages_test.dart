@@ -8,6 +8,7 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -43,5 +44,38 @@ void main() {
 
     expect(find.byType(VitTabletUtilityPage), findsNothing);
     expect(tester.takeException(), isNull);
+  });
+
+  // Coverage đợt 2 nhóm c: đổi tab Ma trận/Cặp/Đa dạng hóa + chip timeframe
+  // của pane tương quan; pane biểu đồ nâng cao đổi các chip lọc.
+  testWidgets('pane tương quan: đổi tab và chip timeframe', (tester) async {
+    await pumpTablet(tester, AppRoutePaths.marketsCorrelations);
+
+    for (final label in ['Cặp', 'Đa dạng hóa', 'Ma trận']) {
+      final tab = find.text(label);
+      if (tab.evaluate().isNotEmpty) {
+        await tester.tap(tab.first);
+        await tester.pumpAndSettle();
+      }
+      expect(tester.takeException(), isNull, reason: label);
+    }
+
+    final chips = find.byType(VitFilterChip);
+    if (chips.evaluate().isNotEmpty) {
+      await tester.tap(chips.first);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    }
+  });
+
+  testWidgets('pane biểu đồ nâng cao: đổi chip lọc', (tester) async {
+    await pumpTablet(tester, AppRoutePaths.marketsAdvancedCharts);
+
+    final chips = find.byType(VitFilterChip);
+    if (chips.evaluate().isNotEmpty) {
+      await tester.tap(chips.first);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    }
   });
 }
