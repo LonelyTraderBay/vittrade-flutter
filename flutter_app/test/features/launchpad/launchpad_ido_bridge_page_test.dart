@@ -84,4 +84,27 @@ void main() {
     expect(find.byType(LaunchpadPage), findsOneWidget);
     expect(find.text('Launchpad'), findsWidgets);
   });
+
+  // Coverage 2026-09-10: như SC-300 — pump id project thật để phủ hero,
+  // networks, route cards và risk disclosure của IDO Bridge.
+  testWidgets('SC-299 render trạng thái dữ liệu với project thật', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(home: LaunchpadIdoBridgePage(projectId: 'proj1')),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(LaunchpadIdoBridgePage.contentKey), findsOneWidget);
+    expect(find.byKey(LaunchpadIdoBridgePage.notFoundKey), findsNothing);
+    expect(find.byIcon(Icons.error_outline_rounded), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 }

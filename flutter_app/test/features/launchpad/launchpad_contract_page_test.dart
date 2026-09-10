@@ -84,4 +84,29 @@ void main() {
     expect(find.byType(LaunchpadPage), findsOneWidget);
     expect(find.text('Launchpad'), findsWidgets);
   });
+
+  // Coverage 2026-09-10: route thật chỉ tới /launchpad/contract/sample
+  // (luôn not-found) — pump trực tiếp với id project thật để phủ trạng thái
+  // dữ liệu (hero/networks/functions/simulation/risk ~400 dòng build).
+  testWidgets('SC-300 render trạng thái dữ liệu với project thật', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(home: LaunchpadContractPage(projectId: 'proj1')),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(LaunchpadContractPage.contentKey), findsOneWidget);
+    expect(find.byKey(LaunchpadContractPage.notFoundKey), findsNothing);
+    expect(find.text('NexaAI Protocol Contract'), findsOneWidget);
+    expect(find.text('Mạng hỗ trợ'), findsOneWidget);
+    expect(find.byIcon(Icons.error_outline_rounded), findsNothing);
+  });
 }

@@ -54,4 +54,65 @@ void main() {
     expect(find.text('Giao dịch Spot'), findsOneWidget);
     expect(find.byType(TradeTabletUtilityPage), findsNothing);
   });
+
+  // Phủ trực tiếp khung utility (coverage 2026-09-10: 64 dòng chưa phủ —
+  // nhóm trên chỉ assert trang này KHÔNG xuất hiện ở route thật).
+  group('pump trực tiếp khung TradeTabletUtilityPage', () {
+    Future<void> pumpUtility(
+      WidgetTester tester, {
+      bool requiresConfirmation = false,
+    }) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TradeTabletUtilityPage(
+            semanticIdentifier: 'TRADE-UT-TEST',
+            title: 'Tiện ích Trade thử nghiệm',
+            subtitle: 'Kiểm tra khung utility Trade',
+            description: 'Mô tả ngắn về tiện ích đang chờ composition thật.',
+            facts: const [
+              TradeTabletFact(label: 'Trạng thái', value: 'Đang chờ backend'),
+              TradeTabletFact(label: 'Bề mặt', value: 'Tablet'),
+            ],
+            actionLabel: 'Kích hoạt',
+            requiresConfirmation: requiresConfirmation,
+            confirmationTitle: 'Xác nhận Trade',
+            confirmationMessage: 'Bạn có muốn tiếp tục thao tác này không?',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('render đủ nội dung và key', (tester) async {
+      await pumpUtility(tester);
+
+      expect(
+        find.byKey(const Key('TRADE-UT-TEST-tablet-content')),
+        findsOneWidget,
+      );
+      expect(find.text('Tiện ích Trade thử nghiệm'), findsOneWidget);
+      expect(find.text('Đang chờ backend'), findsOneWidget);
+    });
+
+    testWidgets('flow xác nhận mở sheet và đóng bằng confirm', (tester) async {
+      await pumpUtility(tester, requiresConfirmation: true);
+
+      await tester.tap(find.byKey(const Key('TRADE-UT-TEST-tablet-action')));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const Key('TRADE-UT-TEST-tablet-confirm-sheet')),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.byKey(const Key('TRADE-UT-TEST-tablet-confirm')));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const Key('TRADE-UT-TEST-tablet-confirm-sheet')),
+        findsNothing,
+      );
+      expect(tester.takeException(), isNull);
+    });
+  });
 }
