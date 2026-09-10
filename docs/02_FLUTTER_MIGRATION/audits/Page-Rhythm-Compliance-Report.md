@@ -1,6 +1,6 @@
 # Page Rhythm Compliance Report
 
-Generated: 2026-09-09
+Generated: 2026-09-10
 
 Source: `VitTrade-Page-Rhythm-Screen-Compliance.csv`
 
@@ -44,7 +44,7 @@ Screen rollup: 409 real_page routes, L1 pass 399, L2 pass 399 warn 0, unknown 10
 
 ## By module
 
-### app (279 routes, L2 warn 0, unknown 0)
+### app (280 routes, L2 warn 0, unknown 0)
 
 ### auth (6 routes, L2 warn 0, unknown 0)
 
@@ -59,8 +59,6 @@ Screen rollup: 409 real_page routes, L1 pass 399, L2 pass 399 warn 0, unknown 10
 ### profile (11 routes, L2 warn 0, unknown 10)
 
 ### trade (13 routes, L2 warn 0, unknown 0)
-
-### trade_compliance (1 routes, L2 warn 0, unknown 0)
 
 ### wallet (21 routes, L2 warn 0, unknown 0)
 

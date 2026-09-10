@@ -5,6 +5,14 @@ import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_web_utility_page.dart';
 
+/// Builder thay thế cho closure trang phone trong root route groups của
+/// legacy (web-only) router: mọi route bị buildTabletUtilityRouteFamily bọc
+/// thành utility trên web, phone/tablet dùng cây router riêng — closure
+/// thật đã chứng minh không chạy ở đâu (lcov, 2026-09-10). Tear-off dùng
+/// chung giữ route list dựng bình thường (parity path/name không đổi).
+Widget legacyPhoneRouteStub(BuildContext _, GoRouterState _) =>
+    const SizedBox.shrink();
+
 /// Builds a route with independent Tablet and Web compositions.
 ///
 /// The fallback is selected only for Phone and the compatibility surface.

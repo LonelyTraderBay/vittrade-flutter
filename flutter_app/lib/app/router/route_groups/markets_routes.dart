@@ -2,30 +2,14 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vit_trade_flutter/app/bootstrap/app_surface.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/portfolio/advanced_charts_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/derivatives_overview_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/comparison_tool_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_calendar_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_correlations_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/market_depth_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/market_heatmap_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_movers_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/market_news_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/hub/market_overview_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/pair/pair_detail_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/portfolio/portfolio_tracker_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_screener_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/tools/market_sectors_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/portfolio/price_alerts_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/social_signals_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/social_sentiment_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/token_info_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/research/token_unlocks_page.dart';
-import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/hub/watchlist_page.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart';
 import 'package:vit_trade_flutter/shared/layout/shell_render_mode.dart';
 import 'package:vit_trade_flutter/app/router/route_groups/surface_route_helpers.dart';
+import 'package:vit_trade_flutter/features/markets/presentation/phone/pages/market_list_page.dart';
 
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 
@@ -43,12 +27,12 @@ List<RouteBase> marketsRoutes(
     GoRoute(
       path: AppRoutePaths.marketsOverview,
       name: AppRouteNames.sc009MarketOverview,
-      builder: (_, _) => MarketOverviewPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsMovers,
       name: AppRouteNames.sc010MarketMovers,
-      builder: (_, _) => MarketMoversPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsSectors,
@@ -61,79 +45,77 @@ List<RouteBase> marketsRoutes(
     GoRoute(
       path: AppRoutePaths.marketsWatchlist,
       name: AppRouteNames.sc012Watchlist,
-      builder: (_, _) => WatchlistPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsHeatmap,
       name: AppRouteNames.sc013MarketHeatmap,
-      builder: (_, _) => MarketHeatmapPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsAlerts,
       name: AppRouteNames.sc014PriceAlerts,
-      builder: (_, _) => PriceAlertsPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsScreener,
       name: AppRouteNames.sc015MarketScreener,
-      builder: (_, _) => MarketScreenerPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsCompare,
       name: AppRouteNames.sc016ComparisonTool,
-      builder: (_, _) => ComparisonToolPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsCalendar,
       name: AppRouteNames.sc017MarketCalendar,
-      builder: (_, _) => MarketCalendarPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsDerivatives,
       name: AppRouteNames.sc018DerivativesOverview,
-      builder: (_, _) =>
-          DerivativesOverviewPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsDepth,
       name: AppRouteNames.sc019MarketDepth,
-      builder: (_, _) => MarketDepthPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsSocialSentiment,
       name: AppRouteNames.sc020SocialSentiment,
-      builder: (_, _) => SocialSentimentPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsPortfolioTracker,
       name: AppRouteNames.sc021PortfolioTracker,
-      builder: (_, _) => PortfolioTrackerPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsNews,
       name: AppRouteNames.sc022MarketNews,
-      builder: (_, _) => MarketNewsPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsAdvancedCharts,
       name: AppRouteNames.sc023AdvancedCharts,
-      builder: (_, _) => AdvancedChartsPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsUnlocks,
       name: AppRouteNames.sc024TokenUnlocks,
-      builder: (_, _) => TokenUnlocksPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsSignals,
       name: AppRouteNames.sc025SocialSignals,
-      builder: (_, _) => SocialSignalsPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
     GoRoute(
       path: AppRoutePaths.marketsCorrelations,
       name: AppRouteNames.sc026MarketCorrelations,
-      builder: (_, _) =>
-          MarketCorrelationsPage(shellRenderMode: shellRenderMode),
+      builder: legacyPhoneRouteStub,
     ),
   ];
   if (surface == AppSurface.web) {
