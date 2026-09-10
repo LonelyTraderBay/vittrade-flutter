@@ -85,15 +85,18 @@ class _P2PHomeTabletPageState extends ConsumerState<P2PHomeTabletPage> {
               ),
               data: (snapshot) {
                 final asset = _asset ?? snapshot.selectedAsset;
+                // Mock/BE đã trả ads ĐỐI ỨNG theo tradeType (buy → sell
+                // offers) — lọc lại ad.type == _tradeType ở đây làm rỗng
+                // danh sách (bug 2026-09-10, bắt nhờ coverage grind);
+                // client chỉ lọc tiếp theo asset + từ khóa.
                 final visibleAds = [
                   for (final ad in snapshot.ads)
-                    if (ad.type == _tradeType)
-                      if (asset == 'Tất cả' || ad.asset == asset)
-                        if (_searchController.text.isEmpty ||
-                            ad.merchant.toLowerCase().contains(
-                              _searchController.text.toLowerCase(),
-                            ))
-                          ad,
+                    if (asset == 'Tất cả' || ad.asset == asset)
+                      if (_searchController.text.isEmpty ||
+                          ad.merchant.toLowerCase().contains(
+                            _searchController.text.toLowerCase(),
+                          ))
+                        ad,
                 ];
                 return VitTwoColumnTabletDashboard(
                   onRefresh: () async {
