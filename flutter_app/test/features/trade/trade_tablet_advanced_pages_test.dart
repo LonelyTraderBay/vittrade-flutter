@@ -50,18 +50,57 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  // Coverage đợt 2: bấm các feature card để đổi tab execution/amendment/slippage.
-  testWidgets('chất lượng thực thi: đổi tab qua feature card', (tester) async {
+  // Coverage đợt 2: bấm các feature card để đổi tab execution/amendment/slippage
+  // + mở 3 sheet cấu hình từ từng tab (onOpen).
+  testWidgets('chất lượng thực thi: đổi tab + mở 3 sheet cấu hình', (
+    tester,
+  ) async {
     await pumpTablet(tester, AppRoutePaths.tradeExecutionQuality);
 
+    // Tab slippage (mặc định) -> sheet Configure Slippage Protection.
+    final slippageOpen = find.textContaining('Configure Slippage Protection');
+    if (slippageOpen.evaluate().isNotEmpty) {
+      await tester.ensureVisible(slippageOpen.first);
+      await tester.pumpAndSettle();
+      await tester.tap(slippageOpen.first);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Ngưỡng'), findsAtLeastNWidgets(1));
+      // Đóng sheet bằng nút đầu tiên nếu có.
+      final close = find.byType(VitCtaButton);
+      if (close.evaluate().isNotEmpty) {
+        await tester.tap(close.first);
+        await tester.pumpAndSettle();
+      }
+    }
+
+    // Đổi sang tab execution qua feature card thứ hai, mở sheet report.
     final cards = find.byType(ExecutionQualityFeatureCard);
     expect(cards.evaluate(), isNotEmpty);
-    final count = cards.evaluate().length;
-    for (var i = 0; i < count && i < 3; i++) {
-      await tester.tap(cards.at(i));
+    if (cards.evaluate().length > 1) {
+      await tester.tap(cards.at(1));
       await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
+      final reportOpen = find.textContaining('View Sample Execution Report');
+      if (reportOpen.evaluate().isNotEmpty) {
+        await tester.ensureVisible(reportOpen.first);
+        await tester.pumpAndSettle();
+        await tester.tap(reportOpen.first);
+        await tester.pumpAndSettle();
+      }
     }
+
+    // Tab amendment, mở sheet Modify Open Order.
+    if (cards.evaluate().length > 2) {
+      await tester.tap(cards.at(2));
+      await tester.pumpAndSettle();
+      final modify = find.textContaining('Modify Open Order');
+      if (modify.evaluate().isNotEmpty) {
+        await tester.ensureVisible(modify.first);
+        await tester.pumpAndSettle();
+        await tester.tap(modify.first);
+        await tester.pumpAndSettle();
+      }
+    }
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('trang công cụ nâng cao render thật, không utility', (

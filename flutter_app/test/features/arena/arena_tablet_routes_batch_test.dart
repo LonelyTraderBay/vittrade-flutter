@@ -9,6 +9,7 @@ import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_utility_page.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/app/providers/arena_controller_providers.dart';
 
 void main() {
   Future<void> pumpTablet(WidgetTester tester, String location) async {
@@ -102,5 +103,84 @@ void main() {
       await tester.pumpAndSettle();
     }
     expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3c: nhánh error của các trang play (SC-189..193) —
+  // override provider family ném lỗi rồi bấm Thử lại.
+  testWidgets('arena play error: mode detail ném lỗi + Thử lại', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          arenaModeDetailSnapshotProvider(
+            'mode-01',
+          ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: '/arena/mode/mode-01',
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được chế độ'), findsOneWidget);
+
+    final retry = find.text('Thử lại');
+    if (retry.evaluate().isNotEmpty) {
+      await tester.tap(retry.first);
+      await tester.pump();
+    }
+    expect(tester.takeException(), isNull);
+  });
+
+  // Cùng khuôn error cho 4 trang play còn lại của part-file này.
+  testWidgets('arena play error: challenge/join/creator/report', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    Future<void> pumpError(String location, String errorTitle) async {
+      await tester.pumpWidget(
+        VitTradeApp(
+          overrides: [
+            arenaChallengeDetailSnapshotProvider(
+              'ch-01',
+            ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+            arenaJoinSnapshotProvider(
+              'ch-01',
+            ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+            arenaCreatorSnapshotProvider(
+              'cr-01',
+            ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+            arenaReportCaseSnapshotProvider(
+              'cs-01',
+            ).overrideWith((ref) async => throw StateError('lỗi mạng')),
+          ],
+          routerConfig: createAppRouter(
+            surface: AppSurface.tablet,
+            initialLocation: location,
+          ),
+        ),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.text(errorTitle), findsOneWidget, reason: location);
+      expect(tester.takeException(), isNull, reason: location);
+    }
+
+    await pumpError('/arena/challenge/ch-01', 'Không tải được thách đấu');
+    await pumpError('/arena/join/ch-01', 'Không tải được thông tin tham gia');
+    await pumpError('/arena/creator/cr-01', 'Không tải được hồ sơ');
+    await pumpError('/arena/report/cs-01', 'Không tải được hồ sơ');
   });
 }
