@@ -96,7 +96,7 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
 
     await tester.pumpWidget(
-      ProviderScope(
+      const ProviderScope(
         child: MaterialApp(home: LaunchpadIdoBridgePage(projectId: 'proj1')),
       ),
     );

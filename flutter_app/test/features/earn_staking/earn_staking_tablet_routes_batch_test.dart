@@ -29,7 +29,9 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('earn_staking tablet routes render trang thật (lô 1)', (tester) async {
+  testWidgets('earn_staking tablet routes render trang thật (lô 1)', (
+    tester,
+  ) async {
     final locations = <String>[
       AppRoutePaths.earnStaking,
       AppRoutePaths.earnStakingTerms,
@@ -63,7 +65,9 @@ void main() {
     }
   });
 
-  testWidgets('earn_staking tablet routes render trang thật (lô 2)', (tester) async {
+  testWidgets('earn_staking tablet routes render trang thật (lô 2)', (
+    tester,
+  ) async {
     final locations = <String>[
       AppRoutePaths.earnCustody,
       AppRoutePaths.earnSuitabilityAssessment,

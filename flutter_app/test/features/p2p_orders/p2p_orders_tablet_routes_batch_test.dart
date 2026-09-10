@@ -29,7 +29,9 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('p2p_orders tablet routes render trang thật (lô 1)', (tester) async {
+  testWidgets('p2p_orders tablet routes render trang thật (lô 1)', (
+    tester,
+  ) async {
     final locations = <String>[
       AppRoutePaths.p2pEscrowBalance,
       AppRoutePaths.p2pWallet,
