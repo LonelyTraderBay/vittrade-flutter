@@ -82,9 +82,7 @@ void main() {
     // với id thật để phủ nhánh dữ liệu (khuôn launchpad contract page).
     await tester.pumpWidget(
       const ProviderScope(
-        child: MaterialApp(
-          home: SavingsProductDetailPage(productId: 'sav001'),
-        ),
+        child: MaterialApp(home: SavingsProductDetailPage(productId: 'sav001')),
       ),
     );
     // Mock delay 250ms KHÔNG phải frame — pumpAndSettle không chờ nó;
