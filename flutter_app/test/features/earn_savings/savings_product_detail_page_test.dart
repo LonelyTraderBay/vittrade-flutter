@@ -11,6 +11,8 @@ import 'package:vit_trade_flutter/app/providers/earn_savings_controller_provider
 import 'package:vit_trade_flutter/features/earn_savings/presentation/phone/pages/savings/savings_product_detail_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
 
+import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+
 void main() {
   Future<void> pumpProductDetail(WidgetTester tester) async {
     tester.view.devicePixelRatio = 1;
@@ -68,7 +70,7 @@ void main() {
     expect(find.byType(SavingsPage), findsOneWidget);
   });
 
-  // Coverage dòng 2 p3e: trạng thái dữ liệu thật với id 'btc-fixed-90'
+  // Coverage dòng 2 p3e: trạng thái dữ liệu thật với id 'sav001' (mock getSavings.products)
   // (test cũ chỉ phủ not-found qua id sample).
   testWidgets('SC-330 render chi tiết sản phẩm thật', (tester) async {
     tester.view.devicePixelRatio = 1;
@@ -81,13 +83,17 @@ void main() {
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
-          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+          home: SavingsProductDetailPage(productId: 'sav001'),
         ),
       ),
     );
+    // Mock delay 250ms KHÔNG phải frame — pumpAndSettle không chờ nó;
+    // pump thời gian thực để Future.delayed hoàn thành rồi settle.
+    await tester.pump(const Duration(milliseconds: 400));
     await tester.pumpAndSettle();
 
     expect(find.byType(SavingsProductDetailPage), findsOneWidget);
+    expect(find.byType(VitSkeletonList), findsNothing);
     expect(tester.takeException(), isNull);
   });
 
@@ -102,12 +108,12 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          savingsProductDetailSnapshotProvider('btc-fixed-90').overrideWith(
+          savingsProductDetailSnapshotProvider('sav001').overrideWith(
             (ref) => Completer<SavingsProductDetailSnapshot>().future,
           ),
         ],
         child: const MaterialApp(
-          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+          home: SavingsProductDetailPage(productId: 'sav001'),
         ),
       ),
     );
@@ -128,11 +134,11 @@ void main() {
       ProviderScope(
         overrides: [
           savingsProductDetailSnapshotProvider(
-            'btc-fixed-90',
+            'sav001',
           ).overrideWith((ref) async => throw StateError('lỗi mạng')),
         ],
         child: const MaterialApp(
-          home: SavingsProductDetailPage(productId: 'btc-fixed-90'),
+          home: SavingsProductDetailPage(productId: 'sav001'),
         ),
       ),
     );

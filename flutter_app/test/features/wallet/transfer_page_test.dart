@@ -12,6 +12,8 @@ import 'package:vit_trade_flutter/shared/layout/vit_status_bar.dart';
 
 import '../../helpers/first_viewport_test_utils.dart';
 
+import 'package:vit_trade_flutter/features/wallet/presentation/widgets/transfer/wallet_transfer_sections.dart';
+
 void main() {
   Future<void> pumpTransfer(
     WidgetTester tester, {
@@ -209,6 +211,35 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
     }
+    expect(tester.takeException(), isNull);
+  });
+
+  // Coverage dòng 2 p3m: asset picker transfer phone — mở Chọn tài sản,
+  // chọn dòng đầu, sheet đóng.
+  testWidgets('SC-146 transfer phone: mở và chọn asset picker', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: VitTradeApp(
+          routerConfig: createAppRouter(
+            initialLocation: AppRoutePaths.walletTransfer,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(TransferPage.assetSelectorKey));
+    await tester.pumpAndSettle();
+    expect(find.text('Chọn tài sản'), findsOneWidget);
+
+    await tester.tap(find.byType(TransferAssetPickerRow).first);
+    await tester.pumpAndSettle();
+    expect(find.text('Chọn tài sản'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 }
