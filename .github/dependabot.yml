@@ -9,6 +9,12 @@ updates:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 5
+    # DEP-LOCK: go_router 18 là major breaking (xử lý lại navigation API)
+    # — bump từng cú làm vỡ CI (PR #109). Chặn nhánh major; bump trong batch
+    # nâng cấp go_router có chủ đích khi xử lý breaking changes.
+    ignore:
+      - dependency-name: "go_router"
+        versions: [">=18.0.0"]
     groups:
       pub-minor-patch:
         update-types:
