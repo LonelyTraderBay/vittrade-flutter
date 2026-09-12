@@ -106,6 +106,19 @@ features/markets/routes/web_markets_routes.dart
   chuyển home web sang `VitTwoColumnTabletDashboard` khi nâng cấp.
 - Breakpoint 2 cột dùng chung `twoColumnMinWidth` 900.
 
+### Hợp đồng route web sau router surgery (2026-09-10)
+
+- Web router (`createLegacyAppRouter` qua nhánh `AppSurface.web`) lấy
+  route từ **các group gốc** `lib/app/router/route_groups/*_routes.dart`.
+- Khi `surface == web || tablet`, mọi group feature bị
+  `buildTabletUtilityRouteFamily` bọc thành **utility route** — closure
+  trang phone bên trong KHÔNG BAO GIỜ chạy (đã thay bằng tear-off
+  `legacyPhoneRouteStub`, commit 0b8e4764). Chỉ `auth_routes.dart`,
+  `home_routes.dart` và `utility_routes.dart` render composition thật
+  (auth/home/rewards/enterprise-states/dev tools...).
+- Route mới trên web: đăng ký path/name trong phone/tablet group + manifest
+  như thường; utility web tự sinh — **không sửa group gốc**.
+
 ## Migration rule
 
 - Mỗi batch gọn trong một feature/bounded context (kích thước theo scope).
