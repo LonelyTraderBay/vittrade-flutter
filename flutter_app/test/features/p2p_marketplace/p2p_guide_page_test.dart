@@ -196,4 +196,45 @@ void main() {
     expect(find.byType(P2PGuidePage), findsNothing);
     expect(find.text('P2P'), findsOneWidget);
   });
+
+  // Coverage dòng 2 p3l: chọn video + tab trong trang hướng dẫn P2P
+  // (phủ guide video common).
+  testWidgets('SC-280 P2P guide: chọn video và tab', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: VitTradeApp(
+          routerConfig: createAppRouter(
+            initialLocation: AppRoutePaths.p2pGuide,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Bấm video đầu nếu có (chọn video active).
+    final videos = find.byKey(P2PGuidePage.videoKey('start'));
+    if (videos.evaluate().isNotEmpty) {
+      await tester.ensureVisible(videos.first);
+      await tester.pumpAndSettle();
+      await tester.tap(videos.first);
+      await tester.pumpAndSettle();
+    }
+
+    // Đổi tab theo key thật.
+    for (final id in ['basics', 'trading', 'security']) {
+      final tab = find.byKey(P2PGuidePage.tabKey(id));
+      if (tab.evaluate().isNotEmpty) {
+        await tester.ensureVisible(tab);
+        await tester.pumpAndSettle();
+        await tester.tap(tab);
+        await tester.pumpAndSettle();
+      }
+    }
+    expect(tester.takeException(), isNull);
+  });
 }

@@ -148,4 +148,28 @@ void main() {
     expect(find.text('Complaint COMP-2026-001'), findsOneWidget);
     expect(find.text('Under Review'), findsWidgets);
   });
+
+  // Coverage dòng 2 p3l: trang xử lý khiếu nại phone render process common
+  // (step timeline) — pump route thật.
+  testWidgets('SC-221 complaints handling: render process steps', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.tradeCopyComplaintsHandling,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Complaints Handling'), findsOneWidget);
+    expect(find.text('Complaint process'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }
