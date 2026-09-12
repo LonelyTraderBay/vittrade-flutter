@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vit_trade_flutter/app/router/app_router.dart';
 import 'package:vit_trade_flutter/app/vit_trade_app.dart';
+import 'package:vit_trade_flutter/app/providers/wallet_controller_providers.dart';
 import 'package:vit_trade_flutter/features/wallet/data/wallet_repository.dart';
 import 'package:vit_trade_flutter/features/wallet/presentation/phone/pages/transfer_page.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_bottom_nav.dart';
@@ -176,5 +177,38 @@ void main() {
     await tester.pumpAndSettle();
     // showVitNoticeSheet replaces the former inline TransferSuccessBanner.
     expect(find.text('Chuy\u1ec3n th\u00e0nh c\u00f4ng'), findsOneWidget);
+  });
+
+  // Coverage dòng 2 p3k: nhánh error transfer phone (test riêng theo khuôn
+  // container-không-đổi-override).
+  testWidgets('SC-146 transfer error qua override', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(440, 956);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          walletTransferProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          initialLocation: AppRoutePaths.walletTransfer,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được dữ liệu chuyển nội bộ'), findsOneWidget);
+
+    final retry = find.text('Thử lại');
+    if (retry.evaluate().isNotEmpty) {
+      await tester.tap(retry.first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+    }
+    expect(tester.takeException(), isNull);
   });
 }

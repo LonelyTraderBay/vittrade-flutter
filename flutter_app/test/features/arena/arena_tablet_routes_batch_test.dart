@@ -183,4 +183,37 @@ void main() {
     await pumpError('/arena/creator/cr-01', 'Không tải được hồ sơ');
     await pumpError('/arena/report/cs-01', 'Không tải được hồ sơ');
   });
+
+  // Coverage dòng 2 p3k: nhánh error arena home tablet + Thử lại.
+  testWidgets('arena home error + retry', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          arenaHomeSnapshotProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.arena,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được Open Arena'), findsOneWidget);
+
+    final retry = find.text('Thử lại');
+    if (retry.evaluate().isNotEmpty) {
+      await tester.tap(retry.first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+    }
+    expect(tester.takeException(), isNull);
+  });
 }

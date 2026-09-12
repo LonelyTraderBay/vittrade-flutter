@@ -238,4 +238,34 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
     expect(tester.takeException(), isNull);
   });
+
+  // Coverage dòng 2 p3k: nhánh error buy crypto tablet + Thử lại.
+  testWidgets('buy crypto tablet error + retry', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      VitTradeApp(
+        overrides: [
+          walletBuyCryptoProvider.overrideWith(
+            (ref) async => throw StateError('lỗi mạng'),
+          ),
+        ],
+        routerConfig: createAppRouter(
+          surface: AppSurface.tablet,
+          initialLocation: AppRoutePaths.walletBuyCrypto,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Không tải được dữ liệu mua crypto'), findsOneWidget);
+
+    await tester.tap(find.text('Thử lại'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(tester.takeException(), isNull);
+  });
 }
