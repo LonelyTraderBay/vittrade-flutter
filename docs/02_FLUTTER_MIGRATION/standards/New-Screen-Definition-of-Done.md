@@ -1,5 +1,7 @@
 # Checklist: Thêm màn hình mới (UI Definition of Done)
 
+**Scope:** both surfaces — checklist process bắt buộc cho mọi màn hình mới thêm vào `lib/` (phone + tablet); không quy định giá trị token riêng.
+
 Bản chốt 2026-09-12 sau khi gate "Enterprise Flutter Gates" XANH lần đầu
 (run 34723194564, coverage sàn 92.0% ratchet chỉ-tăng). Mục tiêu: màn hình
 mới đi theo checklist này thì **không phải quay lại sửa gì** — guardrail tự

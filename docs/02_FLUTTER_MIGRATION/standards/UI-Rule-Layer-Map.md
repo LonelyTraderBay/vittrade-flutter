@@ -17,7 +17,7 @@
 
 ## Layer index — all 33 standards
 
-### Chung (both surfaces) — 24
+### Chung (both surfaces) — 25
 
 | Standard | Notes |
 | --- | --- |
@@ -26,6 +26,7 @@
 | Flutter-Page-Archetype-Standard | Guidance archetypes, review checklist. |
 | Typography-Standard | Explicitly surface-agnostic. |
 | UI-Density-Standard | Fullscreen density audit, both surfaces. |
+| New-Screen-Definition-of-Done | Checklist process cho màn hình mới — route 3 surface, test tối thiểu, artifact regen. |
 | Accent-Icon-Box-Standard | 34px accent icon boxes. |
 | Top-Header-Standard | 4 audits scan app-wide. |
 | Back-Navigation-Standard | 2 domains, app-wide. |
