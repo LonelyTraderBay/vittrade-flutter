@@ -78,168 +78,188 @@ class _P2PCreateAdTabletPageState extends ConsumerState<P2PCreateAdTabletPage> {
                   onAction: () => ref.invalidate(p2pCreateAdProvider),
                 ),
               ),
-              data: (snapshot) => VitTwoColumnTabletDashboard(
-                primaryChildren: [
-                  VitSegmentedTabBar(
-                    tabs: const [
-                      VitTabItem(key: 'buy', label: 'Mua (Tôi mua)'),
-                      VitTabItem(key: 'sell', label: 'Bán (Tôi bán)'),
-                    ],
-                    activeKey: _tradeType == P2PTradeType.buy ? 'buy' : 'sell',
-                    onChanged: (value) => setState(() {
-                      _tradeType = value == 'buy'
-                          ? P2PTradeType.buy
-                          : P2PTradeType.sell;
-                    }),
-                  ),
-
-                  _FormSectionCard(
-                    title: 'Tài sản & tiền tệ',
-                    child: Wrap(
-                      spacing: TabletSpacingTokens.x3,
-                      runSpacing: TabletSpacingTokens.x2,
-                      children: [
-                        for (final asset in snapshot.assets)
-                          VitFilterChip(
-                            label: asset,
-                            active:
-                                asset ==
-                                (_selectedAsset ?? snapshot.defaultAsset),
-                            onTap: () => setState(() => _selectedAsset = asset),
-                            color: AppColors.primary,
-                          ),
-                      ],
-                    ),
-                  ),
-
-                  _FormSectionCard(
-                    title: 'Giá & hạn mức',
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        VitInput(
-                          controller: _priceController,
-                          keyboardType: TextInputType.number,
-                          semanticLabel: 'Giá VND',
-                          hintText:
-                              'Giá VND (thị trường ${snapshot.marketPrices[snapshot.defaultAsset]} VND)',
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x2),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: VitInput(
-                                controller: _minLimitController,
-                                keyboardType: TextInputType.number,
-                                semanticLabel: 'Hạn mức tối thiểu',
-                                hintText: 'Hạn mức tối thiểu',
-                              ),
-                            ),
-                            const SizedBox(width: TabletSpacingTokens.x3),
-                            Expanded(
-                              child: VitInput(
-                                controller: _maxLimitController,
-                                keyboardType: TextInputType.number,
-                                semanticLabel: 'Hạn mức tối đa',
-                                hintText: 'Hạn mức tối đa',
-                              ),
-                            ),
+              data: (snapshot) => Column(
+                children: [
+                  Expanded(
+                    child: VitTwoColumnTabletDashboard(
+                      primaryChildren: [
+                        VitSegmentedTabBar(
+                          tabs: const [
+                            VitTabItem(key: 'buy', label: 'Mua (Tôi mua)'),
+                            VitTabItem(key: 'sell', label: 'Bán (Tôi bán)'),
                           ],
+                          activeKey: _tradeType == P2PTradeType.buy
+                              ? 'buy'
+                              : 'sell',
+                          onChanged: (value) => setState(() {
+                            _tradeType = value == 'buy'
+                                ? P2PTradeType.buy
+                                : P2PTradeType.sell;
+                          }),
+                        ),
+
+                        _FormSectionCard(
+                          title: 'Tài sản & tiền tệ',
+                          child: Wrap(
+                            spacing: TabletSpacingTokens.x3,
+                            runSpacing: TabletSpacingTokens.x2,
+                            children: [
+                              for (final asset in snapshot.assets)
+                                VitFilterChip(
+                                  label: asset,
+                                  active:
+                                      asset ==
+                                      (_selectedAsset ?? snapshot.defaultAsset),
+                                  onTap: () =>
+                                      setState(() => _selectedAsset = asset),
+                                  color: AppColors.primary,
+                                ),
+                            ],
+                          ),
+                        ),
+
+                        _FormSectionCard(
+                          title: 'Giá & hạn mức',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              VitInput(
+                                controller: _priceController,
+                                keyboardType: TextInputType.number,
+                                semanticLabel: 'Giá VND',
+                                hintText:
+                                    'Giá VND (thị trường ${snapshot.marketPrices[snapshot.defaultAsset]} VND)',
+                              ),
+                              const SizedBox(height: TabletSpacingTokens.x2),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: VitInput(
+                                      controller: _minLimitController,
+                                      keyboardType: TextInputType.number,
+                                      semanticLabel: 'Hạn mức tối thiểu',
+                                      hintText: 'Hạn mức tối thiểu',
+                                    ),
+                                  ),
+                                  const SizedBox(width: TabletSpacingTokens.x3),
+                                  Expanded(
+                                    child: VitInput(
+                                      controller: _maxLimitController,
+                                      keyboardType: TextInputType.number,
+                                      semanticLabel: 'Hạn mức tối đa',
+                                      hintText: 'Hạn mức tối đa',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        _FormSectionCard(
+                          title: 'Phương thức thanh toán',
+                          child: Wrap(
+                            spacing: TabletSpacingTokens.x3,
+                            runSpacing: TabletSpacingTokens.x2,
+                            children: [
+                              for (final option in snapshot.paymentOptions)
+                                VitFilterChip(
+                                  label: option,
+                                  onTap: () =>
+                                      setState(() => _selectedPayment = option),
+                                  active: option == _selectedPayment,
+                                  color: AppColors.primary,
+                                ),
+                            ],
+                          ),
+                        ),
+
+                        _FormSectionCard(
+                          title: 'Khung giờ giao dịch',
+                          child: Wrap(
+                            spacing: TabletSpacingTokens.x3,
+                            runSpacing: TabletSpacingTokens.x2,
+                            children: [
+                              for (final hours in snapshot.tradingHours.take(6))
+                                VitFilterChip(
+                                  label: hours,
+                                  onTap: () =>
+                                      setState(() => _selectedHours = hours),
+                                  active:
+                                      hours ==
+                                      (_selectedHours ??
+                                          snapshot.defaultTradingHours),
+                                  color: AppColors.primary,
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      secondaryChildren: [
+                        const VitHighRiskStatePanel(
+                          state: VitHighRiskUiState.riskReview,
+                          title: 'Xem trước khi đăng quảng cáo',
+                          message:
+                              'Kiểm tra giá, hạn mức, phương thức thanh toán và khung giờ. Quảng cáo đăng lên sẽ nhận lệnh P2P thật.',
+                          contractId: 'p2p-create-ad-tablet',
+                        ),
+
+                        VitCard(
+                          radius: VitCardRadius.tight,
+                          padding: TabletSpacingTokens.cardPaddingCompact,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Ký quỹ an toàn',
+                                style: AppTextStyles.caption.copyWith(
+                                  fontWeight: AppTextStyles.bold,
+                                  color: AppColors.text1,
+                                ),
+                              ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
+                              Text(
+                                snapshot.escrowNote,
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.text2,
+                                  height: 1.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        VitCard(
+                          radius: VitCardRadius.tight,
+                          padding: TabletSpacingTokens.cardPaddingCompact,
+                          child: Text(
+                            snapshot.warningNote,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text2,
+                              height: 1.3,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
-
-                  _FormSectionCard(
-                    title: 'Phương thức thanh toán',
-                    child: Wrap(
-                      spacing: TabletSpacingTokens.x3,
-                      runSpacing: TabletSpacingTokens.x2,
-                      children: [
-                        for (final option in snapshot.paymentOptions)
-                          VitFilterChip(
-                            label: option,
-                            onTap: () =>
-                                setState(() => _selectedPayment = option),
-                            active: option == _selectedPayment,
-                            color: AppColors.primary,
-                          ),
-                      ],
-                    ),
+                  const Divider(
+                    height: TabletSpacingTokens.dividerHairline,
+                    color: AppColors.divider,
                   ),
-
-                  _FormSectionCard(
-                    title: 'Khung giờ giao dịch',
-                    child: Wrap(
-                      spacing: TabletSpacingTokens.x3,
-                      runSpacing: TabletSpacingTokens.x2,
-                      children: [
-                        for (final hours in snapshot.tradingHours.take(6))
-                          VitFilterChip(
-                            label: hours,
-                            onTap: () => setState(() => _selectedHours = hours),
-                            active:
-                                hours ==
-                                (_selectedHours ??
-                                    snapshot.defaultTradingHours),
-                            color: AppColors.primary,
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-                secondaryChildren: [
-                  const VitHighRiskStatePanel(
-                    state: VitHighRiskUiState.riskReview,
-                    title: 'Xem trước khi đăng quảng cáo',
-                    message:
-                        'Kiểm tra giá, hạn mức, phương thức thanh toán và khung giờ. Quảng cáo đăng lên sẽ nhận lệnh P2P thật.',
-                    contractId: 'p2p-create-ad-tablet',
-                  ),
-
-                  VitCard(
-                    radius: VitCardRadius.tight,
-                    padding: TabletSpacingTokens.cardPaddingCompact,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Ký quỹ an toàn',
-                          style: AppTextStyles.caption.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.text1,
-                          ),
-                        ),
-                        const SizedBox(height: TabletSpacingTokens.x1),
-                        Text(
-                          snapshot.escrowNote,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text2,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  VitCard(
-                    radius: VitCardRadius.tight,
-                    padding: TabletSpacingTokens.cardPaddingCompact,
-                    child: Text(
-                      snapshot.warningNote,
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.text2,
-                        height: 1.3,
+                  SafeArea(
+                    top: false,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: TabletSpacingTokens.contentPad,
+                        vertical: TabletSpacingTokens.x4,
+                      ),
+                      child: VitCtaButton(
+                        key: P2PCreateAdTabletPage.submitKey,
+                        onPressed: () => context.push(AppRoutePaths.p2pMyAds),
+                        child: const Text('Xem trước & đăng'),
                       ),
                     ),
-                  ),
-
-                  const SizedBox(height: TabletSpacingTokens.x4),
-
-                  VitCtaButton(
-                    key: P2PCreateAdTabletPage.submitKey,
-                    onPressed: () => context.push(AppRoutePaths.p2pMyAds),
-                    child: const Text('Xem trước & đăng'),
                   ),
                 ],
               ),
