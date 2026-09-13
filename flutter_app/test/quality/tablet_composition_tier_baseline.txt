@@ -1,0 +1,2 @@
+features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart
+features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart

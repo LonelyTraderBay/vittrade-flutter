@@ -81,6 +81,9 @@ jobs:
       - name: Navigation edge artifact is current
         run: dart run tool/navigation_edge_audit.dart --check
 
+      - name: Tablet composition tier artifact is current
+        run: dart run tool/tablet_composition_tier_audit.dart --check
+
       - name: Design token consistency artifact is current
         run: dart run tool/design_token_consistency_audit.dart --check
 

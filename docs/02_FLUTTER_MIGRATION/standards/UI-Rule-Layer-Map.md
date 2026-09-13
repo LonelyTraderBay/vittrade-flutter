@@ -53,11 +53,12 @@
 | --- | --- |
 | Phone-Composition-Standard | 5 composition archetypes at 360px + phone↔tablet mapping. |
 
-### Tablet-only — 6
+### Tablet-only — 7
 
 | Standard | Notes |
 | --- | --- |
 | Tablet-Adaptive-Standard | R1–R9 surface contract, shells, tiers. |
+| Tablet-Composition-Tier-Standard | Registry scaffold khóa role khung trang tablet (T1 ratchet baseline + T2 tuyệt đối: 0 autohide, 0 khuôn `Frame` tự chế). |
 | Tablet-Spacing-Gutter-Standard | S1–S7 + closed Base-8-derived role scale + Rule 5 token overrides. `TabletSpacingTokens` owns Tablet geometry; `AppSurfaceSpacing` is the surface-aware bridge for shared widgets. |
 | Tablet-Card-Border-Standard | R1–R7 frames, radii, tints, card padding. |
 | Tablet-Input-Standard | I1–I5 hover/focus states. |

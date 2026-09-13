@@ -23,6 +23,7 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | --- | --- |
 | [ke-hoac-tong-the.md](02_FLUTTER_MIGRATION/ke-hoac-tong-the.md) | Project dashboard + completed migration summary |
 | [ke-hoach-san-sang-production.md](02_FLUTTER_MIGRATION/ke-hoach-san-sang-production.md) | Production readiness — what is done vs blocked |
+| [ke-hoach-nang-cap-ui-tablet-enterprise.md](02_FLUTTER_MIGRATION/ke-hoach-nang-cap-ui-tablet-enterprise.md) | Kế hoạch nâng cấp composition UI tablet theo 7 archetype (đang chạy — Đợt 0 xong) |
 
 ## Flutter standards
 

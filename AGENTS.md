@@ -143,7 +143,7 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
 
 - Visual contract for agents: [`DESIGN.md`](DESIGN.md) at repo root (tokens +
   component ladder); `AGENTS.md` wins on product/financial rules.
-- Full map of every design-consistency audit domain (~24), what enforces it,
+- Full map of every design-consistency audit domain (~25), what enforces it,
   and the exact command to check it locally — see
   `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` before
   creating a new page.
@@ -163,6 +163,17 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   guardrails); tablet surface **không** render lại phone page. Real web pages
   exist only for auth and home; mọi web route khác là placeholder
   `VitWebUtilityPage`.
+- Tablet page composition tier is **role-locked** (2026-09-13): mọi page
+  library tablet phải dựng khung từ registry scaffold chuẩn
+  (`VitTwoColumnTabletDashboard`, `*TabletMasterShell`, `*PaneScaffold`,
+  `VitTabletSectionFrame`, `VitPageLayout`, feature surface
+  `WalletTabletDetailSurface`/`TradeTabletDetailSurface`/`AuthTabletSurface`…);
+  cấm `VitAutoHidePageScaffold` và khuôn `class …Frame` tự chế trong tablet
+  pages. Khóa bởi `tool/tablet_composition_tier_audit.dart` (T1 ratchet +
+  T2 tuyệt đối) — chuẩn:
+  `docs/02_FLUTTER_MIGRATION/standards/Tablet-Composition-Tier-Standard.md`;
+  kế hoạch nâng cấp UI tablet:
+  `docs/02_FLUTTER_MIGRATION/ke-hoach-nang-cap-ui-tablet-enterprise.md`.
 - Porting phone content into a tablet pane is a **re-compose, not a copy**:
   the pane scaffold (`MarketsPaneScaffold` / `ProfilePaneScaffold` /
   `VitTwoColumnTabletDashboard`) owns every vertical section gap, so pane

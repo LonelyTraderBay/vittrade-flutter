@@ -1,0 +1,3 @@
+rule,path,detail
+T1-no-registry-scaffold,features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart,"library"
+T1-no-registry-scaffold,features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart,"library"

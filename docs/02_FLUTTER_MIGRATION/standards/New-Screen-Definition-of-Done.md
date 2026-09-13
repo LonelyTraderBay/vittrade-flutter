@@ -18,7 +18,9 @@ chạy là người gác.
 - [ ] Tablet composition BẮT BUỘC cùng batch phone (gate GĐ7: 0 utility
   placeholder). Scaffold chuẩn: `VitTabletSectionFrame` /
   `VitTwoColumnTabletDashboard` / `WalletTabletDetailSurface`... không tự
-  lắp `Center + maxWidth`.
+  lắp `Center + maxWidth`. Registry đầy đủ khóa bởi
+  `tool/tablet_composition_tier_audit.dart` — xem
+  [Tablet-Composition-Tier-Standard.md](./Tablet-Composition-Tier-Standard.md).
 
 ## 2. Dữ liệu (nếu có snapshot mới)
 
