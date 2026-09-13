@@ -76,6 +76,7 @@ import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/p
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_sub_accounts_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/widgets/tablet/profile_vip_pane.dart';
 import 'package:vit_trade_flutter/features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart';
+import 'package:vit_trade_flutter/features/wallet/presentation/tablet/widgets/wallet_tablet_history_shell.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/advanced_analytics_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/advanced_chart_tablet_page.dart';
 import 'package:vit_trade_flutter/features/trade/presentation/tablet/pages/advanced_tools_tablet_page.dart';
@@ -148,12 +149,16 @@ List<RouteBase> buildTabletRouteTree({
 }) {
   final marketSpecs = _sortedSpecs(tabletRouteManifest.where(_isMarketSpec));
   final profileSpecs = _sortedSpecs(tabletRouteManifest.where(_isProfileSpec));
+  final walletHistorySpecs = _sortedSpecs(
+    tabletRouteManifest.where(_isWalletHistorySpec),
+  );
   final contentSpecs = _sortedSpecs(
     tabletRouteManifest.where(
       (spec) =>
           !_tabletTopLevelPaths.contains(spec.path) &&
           !_isMarketSpec(spec) &&
-          !_isProfileSpec(spec),
+          !_isProfileSpec(spec) &&
+          !_isWalletHistorySpec(spec),
     ),
   );
 
@@ -168,6 +173,7 @@ List<RouteBase> buildTabletRouteTree({
       routes: [
         _marketsShell(marketSpecs, shellRenderMode),
         _profileShell(profileSpecs),
+        _walletHistoryShell(walletHistorySpecs),
         for (final spec in contentSpecs) _goRouteForSpec(spec, shellRenderMode),
       ],
     ),
@@ -1659,6 +1665,34 @@ bool _isProfileSpec(TabletRouteSpec spec) {
       path.startsWith('${AppRoutePaths.profile}/') ||
       path == AppRoutePaths.settingsSecurity ||
       path.startsWith('/settings/security/');
+}
+
+/// Cặp route lịch sử giao dịch bọc trong shell master–detail riêng
+/// (2026-09-14): hub `/wallet/history` + pane `/wallet/transaction/:txId`.
+bool _isWalletHistorySpec(TabletRouteSpec spec) {
+  final path = spec.path;
+  return path == AppRoutePaths.walletHistory ||
+      path == '/wallet/transaction/:txId';
+}
+
+/// Shell master–detail Lịch sử giao dịch — hub route đứng trước trong
+/// branch để selection/back-stack có gốc; path/name giữ nguyên byte-identical.
+StatefulShellRoute _walletHistoryShell(List<TabletRouteSpec> specs) {
+  final orderedSpecs = [
+    ...specs.where((spec) => spec.path == AppRoutePaths.walletHistory),
+    ...specs.where((spec) => spec.path != AppRoutePaths.walletHistory),
+  ];
+  return StatefulShellRoute.indexedStack(
+    builder: (context, state, navigationShell) => WalletTabletHistoryShell(
+      navigationShell: navigationShell,
+      currentPath: state.uri.path,
+    ),
+    branches: [
+      StatefulShellBranch(
+        routes: [for (final spec in orderedSpecs) _goRouteForSpec(spec, null)],
+      ),
+    ],
+  );
 }
 
 List<TabletRouteSpec> _sortedSpecs(Iterable<TabletRouteSpec> specs) {

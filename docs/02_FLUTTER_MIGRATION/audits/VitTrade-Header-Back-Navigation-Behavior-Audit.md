@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=578
+visible_header_back_entries=580
 strict_back_issues=0
 high_risk_entries=129
 modal_close_baseline=73
@@ -14,7 +14,7 @@ sheet_result_baseline=9
 
 | Classification | Count |
 | --- | ---: |
-| parent_route_only | 473 |
+| parent_route_only | 475 |
 | history_then_fallback | 105 |
 
 ## Strict Issue Counts
@@ -605,8 +605,10 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/wallet/presentation/phone/pages/transfer/withdraw_limits_page.dart` | 63 | `WithdrawLimitsPage` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.wallet` | yes | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/wallet/presentation/phone/pages/wallet_page.dart` | 81 | `_WalletPageState` | `VitTopChrome` | history_then_fallback | history_then_fallback | `AppRoutePaths.home` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/wallet/presentation/phone/widgets/vit_wallet_detail_scaffold.dart` | 79 | `VitWalletDetailScaffold` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
+| `flutter_app/lib/features/wallet/presentation/tablet/pages/transaction_detail_tablet_page.dart` | 95 | `_TransactionDetailTabletPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.walletHistory` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/wallet/presentation/tablet/pages/wallet_tablet_page.dart` | 128 | `_WalletTabletPageState` | `VitTopChrome` | history_then_fallback | history_then_fallback | `AppRoutePaths.home` | no | - | Uses shared back-navigation helper. |
-| `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart` | 39 | `WalletTabletDetailSurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
+| `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_detail_surface.dart` | 47 | `WalletTabletDetailSurface` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | no | - | Reusable widget receives an owner-provided back callback. |
+| `flutter_app/lib/features/wallet/presentation/tablet/widgets/wallet_tablet_history_shell.dart` | 49 | `WalletTabletHistoryShell` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.wallet` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/wallet/presentation/widgets/address/wallet_address_add_preview.dart` | 132 | `AddressSavedState` | `VitHeader` | parent_route_only | delegated_by_owner | `delegated_callback` | yes | - | Reusable widget receives an owner-provided back callback. |
 | `flutter_app/lib/features/wallet/presentation/widgets/tools/wallet_health_score_page_shell.dart` | 19 | `_WalletHealthScorePageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.wallet` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/shared/layout/vit_tablet_section_frame.dart` | 116 | `VitTabletSectionFrame` | `VitHeader` | history_then_fallback | history_then_fallback | `backFallback` | no | - | Uses shared back-navigation helper. |
