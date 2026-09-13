@@ -7,3 +7,5 @@ features/markets/presentation/tablet/widgets/markets_tablet_master_shell.dart 1
 features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart 1
 # Ngoại lệ 4: chính scaffold dashboard chuẩn — chủ sở hữu hợp pháp của Center (wide tier căn giữa cặp cột).
 shared/layout/vit_two_column_tablet_dashboard.dart 1
+# Ngoại lệ 5: wallet history shell — cùng lớp shell master-detail chuẩn (cap động), mirror markets/profile.
+features/wallet/presentation/tablet/widgets/wallet_tablet_history_shell.dart 1

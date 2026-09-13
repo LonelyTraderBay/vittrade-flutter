@@ -64,9 +64,9 @@ Re-compose sâu ~65 library; polish nhẹ ~29; giữ nguyên flagship 5 root tab
 
 | Đợt | Phạm vi | Trạng thái |
 | --- | --- | --- |
-| 0 — Blueprint & khóa nền | Tier standard + audit tool + CI step; xác định maxWidth p2p_chat là cap bong bóng chat hợp lệ (C1 chỉ khóa 1xxx) | ✅ 2026-09-13 |
-| 1 — Shared bổ khuyết archetype | `WalletTabletDetailSurface` tổng quát cho 12 màn dòng tiền; grammar bảng dữ liệu pane theo `Data-Table-Standard`; test shared scaffold | ⬜ |
-| 2 — Wallet cluster | 19 library wallet → dashboard hub + detail surface + wizard; test mỗi màn (mockup đã gate) | ⬜ |
+| 0 — Blueprint & khóa nền | Tier standard + audit tool + CI step; xác định maxWidth p2p_chat là cap bong bóng chat hợp lệ (C1 chỉ khóa 1xxx) | ✅ 2026-09-13 (789cf7d1) |
+| 1 — Shared bổ khuyết archetype | `WalletTabletDetailSurface` thêm slot `footer` ghim CTA flow (idiom `MarketsPaneScaffold.footer`) + test riêng surface | ✅ 2026-09-14 (e95b9fff) |
+| 2 — Wallet cluster | Đ2a: ghim footer CTA rút/chuyển/dust/address_add (mua crypto giữ inline — CTA nằm trong `BuyInputContent` dùng chung phone, R2; deposit/asset_detail/withdraw_limits không có CTA flow; token_approval + 3 trang tools giữ CTA inline vì là hành động rà soát theo tab). Đ2b: Lịch sử giao dịch SC-136/141 lên shell master-detail route-based (`WalletTabletHistoryShell` + `StatefulShellRoute` 1 branch, selection route-derived, hub pane = empty state rule 6). Đ2c: portfolio_analytics + network_status đã dày sẵn, hub là dashboard reference — giữ nguyên | ✅ 2026-09-14 (e95b9fff → ba0e67c2) |
 | 3 — Trade cluster | 21 library trade (analytics, futures, margin, orders/positions) | ⬜ |
 | 4 — P2P cluster | 23 library p2p_core | ⬜ |
 | 5 — Earn cluster | staking (8 part), savings, dca, launchpad | ⬜ |

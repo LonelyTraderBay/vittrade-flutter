@@ -104,6 +104,7 @@ class _TransactionDetailTabletPageState
             child: VitPageContent(
               key: TransactionDetailTabletPage.contentKey,
               rhythm: VitPageRhythm.standard,
+              fullBleed: true,
               children: children,
             ),
           ),

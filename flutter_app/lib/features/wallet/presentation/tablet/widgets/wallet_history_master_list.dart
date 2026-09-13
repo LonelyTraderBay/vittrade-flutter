@@ -165,7 +165,7 @@ class _TransactionMasterCard extends StatelessWidget {
       onTap: onTap,
       variant: selected ? VitCardVariant.hero : VitCardVariant.ghost,
       density: VitDensity.compact,
-      borderColor: selected ? AppColors.primary.withValues(alpha: .35) : null,
+      borderColor: selected ? AppColors.primary30 : null,
       child: Row(
         children: [
           VitCard(

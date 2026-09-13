@@ -21,6 +21,7 @@ class TransactionHistoryTabletPage extends StatelessWidget {
     return const VitPageContent(
       key: contentKey,
       rhythm: VitPageRhythm.standard,
+      fullBleed: true,
       children: [
         VitEmptyState(
           title: 'Chọn một giao dịch',
