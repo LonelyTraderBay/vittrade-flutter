@@ -117,26 +117,30 @@ class _AddressAddTabletPageState extends ConsumerState<AddressAddTabletPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: sections.take(2).toList(growable: false),
           ),
-          secondary: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              sections[2],
-              const SizedBox(height: TabletSpacingTokens.x4),
-              AddressPrimaryActionButton(
-                key: AddressAddTabletPage.saveKey,
-                enabled: _canSave(controller),
-                semanticLabel: 'Lưu địa chỉ ví trên tablet',
-                label: 'Lưu địa chỉ',
-                onTap: () => _showConfirmPreview(controller),
-              ),
-            ],
+          secondary: sections[2],
+          footer: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TabletSpacingTokens.contentPad,
+              vertical: TabletSpacingTokens.x4,
+            ),
+            child: AddressPrimaryActionButton(
+              key: AddressAddTabletPage.saveKey,
+              enabled: _canSave(controller),
+              semanticLabel: 'Lưu địa chỉ ví trên tablet',
+              label: 'Lưu địa chỉ',
+              onTap: () => _showConfirmPreview(controller),
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _frame({required Widget primary, required Widget secondary}) {
+  Widget _frame({
+    required Widget primary,
+    required Widget secondary,
+    Widget? footer,
+  }) {
     return WalletTabletDetailSurface(
       semanticLabel: 'Thêm địa chỉ ví trên tablet',
       semanticIdentifier: 'SC-143-TABLET',
@@ -145,6 +149,7 @@ class _AddressAddTabletPageState extends ConsumerState<AddressAddTabletPage> {
       onBack: () => _goBackToAddressBook(context),
       primary: primary,
       secondary: secondary,
+      footer: footer,
     );
   }
 
