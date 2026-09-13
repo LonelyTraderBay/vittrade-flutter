@@ -99,6 +99,9 @@ class P2PDisputesTabletPage extends ConsumerWidget {
                                       color: AppColors.text1,
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: TabletSpacingTokens.x1,
+                                  ),
                                   Text(
                                     snapshot.disputes[i].createdAt,
                                     style: AppTextStyles.micro.copyWith(

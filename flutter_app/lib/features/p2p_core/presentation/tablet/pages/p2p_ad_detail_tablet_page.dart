@@ -104,6 +104,7 @@ class P2PAdDetailTabletPage extends ConsumerWidget {
                                   fontFeatures: AppTextStyles.tabularFigures,
                                 ),
                               ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
                               Text(
                                 '${snapshot.priceDiffPct >= 0 ? '+' : ''}'
                                 '${snapshot.priceDiffPct.toStringAsFixed(2)}% thị trường',

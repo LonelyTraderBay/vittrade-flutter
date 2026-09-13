@@ -227,3 +227,45 @@ flutter test test/quality/tablet_token_override_guardrail_test.dart --reporter=c
 - Vertical rhythm tiers: [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md)
 - Frame widths & master-detail shells: [Tablet-Adaptive-Standard.md](./Tablet-Adaptive-Standard.md)
 - Card frames & borders: [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
+
+## Rule 8 — Two-line text stack (S8, absolute lock — 2026-09-14)
+
+Trong tablet presentation, một `Column` children **không được chứa hai widget
+`Text(` liền kề** mà không có gap token giữa chúng — tối thiểu
+`TabletSpacingTokens.x1` (4dp micro). **0dp không thuộc role scale**; hai dòng
+chữ dính nhau trong cell/hàng dữ liệu là lỗi "cell 2 dòng" đã đo bằng pixel
+trên emulator (staking Sản phẩm, 2026-09-14 — tiêu đề↔phụ đề 0dp trong khi
+giữa các hàng lại 24dp: phân cấp ngược).
+
+- Stack ≥3 Text: chèn gap giữa MỖI cặp liền kề.
+- `Row` ngang (Text cạnh Text theo trục ngang) không thuộc rule này.
+- Widget khác xen giữa (`Padding`, `VitBadge`,…) reset — chỉ cặp `Text` kề
+  trực tiếp mới flag.
+- Site đặc biệt cần 0dp: phải có lý do ghi trong baseline
+  (ratchet đẳng thức — sửa xong phải xóa dòng).
+
+**Enforcement:** `tool/tablet_text_stack_gap_audit.dart` (mini-lexer: hiểu
+string literal + `${}` interpolation + comment, phân biệt `Column` vs `Row`,
+item detection neo từng dòng — không quét xuyên newline). CI step
+`Tablet text stack gap artifact is current`.
+
+## Optical rhythm reference (guide cho màn mới — không enforce)
+
+Khoảng trống NHÌN THẤY (tính từ biên nội dung, đã gồm padding 2 phía) cho
+cùng một vai trò hiển thị nên rơi vào các khoảng参考 sau — đo trên emulator
+density 320 (1dp = 2px), chia 2 ra dp:
+
+| Vai trò hiển thị | Whitespace nhìn thấy (dp) | Cấu trúc điển hình |
+| --- | --- | --- |
+| Giữa 2 thẻ ghost/inner trong một khung | 12–17 | danh sách thẻ có padding |
+| Giữa các hàng trong một cell bảng (2 dòng) | ≥ 4 (micro) — không được 0 | `_stkSection`-style rows |
+| Giữa các hàng bảng có `tableCellPaddingV` | 24–35 | bảng dữ liệu SectionFrame |
+| Giữa section trong scroll rhythm standard | 12 (+padding 2 phía nếu có card) | dashboard 2 cột |
+| Trong tile dashboard (icon↔label, micro) | 4 | tile lưới nhanh |
+
+Lệch ngoài bảng trên ở MÀN MỚI = xem lại composition (padding stacking) trước
+khi đổi token — đo bằng pixel, không đo bằng mắt.
+
+Màn mới làm đúng ngay lần đầu bằng cách: chọn scaffold từ registry
+(Tablet-Composition-Tier-Standard) → gap theo Rule 1 → cell 2 dòng có gap
+micro (Rule 8) → đối chiếu bảng optical này khi review.

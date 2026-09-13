@@ -51,12 +51,14 @@ class StakingWebhooksTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${webhook.events.length} sự kiện · lần cuối ${webhook.lastTriggered}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -182,6 +184,7 @@ class StakingThirdPartyIntegrationsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               integration.description,
                               style: AppTextStyles.caption.copyWith(
@@ -189,6 +192,7 @@ class StakingThirdPartyIntegrationsTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -269,12 +273,14 @@ class StakingDeveloperConsoleTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${key.keyPreview} · tạo ${key.created}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -343,6 +349,7 @@ class StakingApiDocumentationTabletPage extends ConsumerWidget {
                           color: AppColors.primary,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         endpoint.description,
                         style: AppTextStyles.caption.copyWith(

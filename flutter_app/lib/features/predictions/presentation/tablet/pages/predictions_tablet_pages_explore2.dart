@@ -56,6 +56,7 @@ class PredictionSocialTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         comment.content,
                         style: AppTextStyles.caption.copyWith(
@@ -349,12 +350,14 @@ class PredictionDataIntegrationTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${source.category} · đồng bộ ${source.lastSyncLabel} · tin cậy ${_pdmPct(source.reliability)}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

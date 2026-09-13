@@ -147,6 +147,7 @@ class LaunchpadHomeTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               project.description,
                               style: AppTextStyles.caption.copyWith(
@@ -154,6 +155,7 @@ class LaunchpadHomeTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -267,12 +269,14 @@ class LaunchpadPortfolioTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${sub.tokensAllocated} token · phân bổ ${sub.allocationRatio.toStringAsFixed(2)}× · ${sub.timestamp}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

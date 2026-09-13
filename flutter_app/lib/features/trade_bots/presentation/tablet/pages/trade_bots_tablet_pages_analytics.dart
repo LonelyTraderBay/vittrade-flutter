@@ -155,6 +155,7 @@ class BotStrategyCompareTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         recommendation.reason,
                         style: AppTextStyles.caption.copyWith(
@@ -221,6 +222,7 @@ class BotOptimizationTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         target.description,
                         style: AppTextStyles.caption.copyWith(

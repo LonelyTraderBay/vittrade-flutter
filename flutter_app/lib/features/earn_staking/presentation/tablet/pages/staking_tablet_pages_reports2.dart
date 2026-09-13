@@ -58,12 +58,14 @@ class StakingAuditReportsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${report.dateLabel} · nghiêm trọng ${report.findings.critical}, cao ${report.findings.high}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

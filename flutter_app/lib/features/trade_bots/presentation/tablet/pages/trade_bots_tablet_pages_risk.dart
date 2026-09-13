@@ -294,12 +294,14 @@ class BotSecuritySettingsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               key.permissions,
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -412,6 +414,7 @@ class BotHistoryTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${trade.side.name} ${_tbpDec(trade.qty, 4)} @ ${_tbpDec(trade.price, 2)} · phí ${_tbpDec(trade.fee, 4)} · ${trade.timestamp}',
                               style: AppTextStyles.caption.copyWith(
@@ -419,6 +422,7 @@ class BotHistoryTabletPage extends ConsumerWidget {
                                 fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

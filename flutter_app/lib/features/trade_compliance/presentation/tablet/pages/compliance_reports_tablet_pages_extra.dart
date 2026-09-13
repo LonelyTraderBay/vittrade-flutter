@@ -157,6 +157,7 @@ class OmbudsmanReferralTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         eligibility.description,
                         style: AppTextStyles.caption.copyWith(
@@ -285,6 +286,7 @@ class ProductGovernanceTabletPage extends ConsumerWidget {
                         color: AppColors.text2,
                       ),
                     ),
+                    const SizedBox(height: TabletSpacingTokens.x1),
                   ],
                 ),
               ),

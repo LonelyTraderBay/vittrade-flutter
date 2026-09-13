@@ -180,6 +180,7 @@ class _DustConverterTabletPageState
                         color: AppColors.text2,
                       ),
                     ),
+                    const SizedBox(height: TabletSpacingTokens.x1),
                   ],
                 ),
               ),

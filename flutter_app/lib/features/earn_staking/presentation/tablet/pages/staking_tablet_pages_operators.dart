@@ -51,6 +51,7 @@ class StakingValidatorSelectionTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               'Hoa hồng ${validator.commission.toStringAsFixed(1)}% · uptime ${validator.uptime.toStringAsFixed(1)}% · ${validator.delegators} delegator',
                               style: AppTextStyles.caption.copyWith(
@@ -58,6 +59,7 @@ class StakingValidatorSelectionTabletPage extends ConsumerWidget {
                                 fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -134,6 +136,7 @@ class StakingValidatorHealthMonitorTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               'Uptime ${validator.uptime.toStringAsFixed(1)}% · APR ${validator.apr.toStringAsFixed(1)}%',
                               style: AppTextStyles.caption.copyWith(
@@ -141,6 +144,7 @@ class StakingValidatorHealthMonitorTabletPage extends ConsumerWidget {
                                 fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -295,12 +299,14 @@ class StakingLiquidStakingTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               'Tài sản gốc ${token.underlyingAsset} · TVL ${_stkUsd(token.tvl)}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

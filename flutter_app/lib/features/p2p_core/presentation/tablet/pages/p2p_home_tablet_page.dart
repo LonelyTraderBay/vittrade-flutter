@@ -231,6 +231,7 @@ class _PlatformStatsStrip extends StatelessWidget {
                   'Khối lượng 24h',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   formatP2PVnd(stats.volume24h),
                   style: AppTextStyles.control.copyWith(

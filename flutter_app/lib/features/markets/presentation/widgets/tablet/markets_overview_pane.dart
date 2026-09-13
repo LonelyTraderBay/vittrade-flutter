@@ -128,6 +128,7 @@ class _GlobalStatsStrip extends StatelessWidget {
                         color: AppColors.text3,
                       ),
                     ),
+                    const SizedBox(height: TabletSpacingTokens.x1),
                     Text(
                       formatMarketCompact(stats.totalMarketCap, prefix: '\$'),
                       style: AppTextStyles.control.copyWith(
@@ -136,6 +137,7 @@ class _GlobalStatsStrip extends StatelessWidget {
                         fontFeatures: AppTextStyles.tabularFigures,
                       ),
                     ),
+                    const SizedBox(height: TabletSpacingTokens.x1),
                     Text(
                       '${capChange >= 0 ? '+' : ''}${capChange.toStringAsFixed(2)}% 24h',
                       style: AppTextStyles.caption.copyWith(

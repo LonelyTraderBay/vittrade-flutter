@@ -156,6 +156,7 @@ class _MarketTicker extends StatelessWidget {
                     color: AppColors.text1,
                   ),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   formatP2PVnd(market.lastPriceVnd),
                   style: AppTextStyles.control.copyWith(
@@ -177,6 +178,7 @@ class _MarketTicker extends StatelessWidget {
                   fontFeatures: AppTextStyles.tabularFigures,
                 ),
               ),
+              const SizedBox(height: TabletSpacingTokens.x1),
               Text(
                 'KL ${market.volume24hLabel} · ${market.trades24h} lệnh',
                 style: AppTextStyles.micro.copyWith(

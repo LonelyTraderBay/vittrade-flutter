@@ -369,6 +369,7 @@ class _MasterPairRow extends ConsumerWidget {
                           fontWeight: AppTextStyles.bold,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '/${pair.quoteAsset}',
                         maxLines: 1,

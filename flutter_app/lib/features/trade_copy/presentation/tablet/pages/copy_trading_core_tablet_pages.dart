@@ -122,6 +122,7 @@ class ActiveCopiesTabletPage extends ConsumerWidget {
                             color: AppColors.text3,
                           ),
                         ),
+                        const SizedBox(height: TabletSpacingTokens.x1),
                         Text(
                           formatTradeUsdWhole(portfolio.totalValue),
                           style: AppTextStyles.control.copyWith(
@@ -143,6 +144,7 @@ class ActiveCopiesTabletPage extends ConsumerWidget {
                             color: AppColors.text3,
                           ),
                         ),
+                        const SizedBox(height: TabletSpacingTokens.x1),
                         Text(
                           formatTradeSignedUsdRounded(portfolio.totalPnl),
                           style: AppTextStyles.control.copyWith(
@@ -191,6 +193,9 @@ class ActiveCopiesTabletPage extends ConsumerWidget {
                                       fontWeight: AppTextStyles.bold,
                                       color: AppColors.text1,
                                     ),
+                                  ),
+                                  const SizedBox(
+                                    height: TabletSpacingTokens.x1,
                                   ),
                                   Text(
                                     'Từ ${snapshot.copies[i].startDate} · ${snapshot.copies[i].trades} lệnh',

@@ -84,6 +84,7 @@ class _MarketsPortfolioPaneState extends ConsumerState<MarketsPortfolioPane> {
                               color: AppColors.text3,
                             ),
                           ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
                           Text(
                             formatMarketCompact(
                               snapshot.stats.totalValue,
@@ -109,6 +110,7 @@ class _MarketsPortfolioPaneState extends ConsumerState<MarketsPortfolioPane> {
                               color: AppColors.text3,
                             ),
                           ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
                           Text(
                             '${snapshot.stats.totalPnl >= 0 ? '+' : ''}'
                             '${formatMarketCompact(snapshot.stats.totalPnl, prefix: '\$')} '
@@ -135,6 +137,7 @@ class _MarketsPortfolioPaneState extends ConsumerState<MarketsPortfolioPane> {
                               color: AppColors.text3,
                             ),
                           ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
                           Text(
                             '${snapshot.stats.best24hSymbol} '
                             '+${snapshot.stats.best24hChange.toStringAsFixed(1)}%',

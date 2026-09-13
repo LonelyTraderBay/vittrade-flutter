@@ -133,6 +133,7 @@ List<Widget> _stkTitleBody(List<(String, String)> pairs) {
                 color: AppColors.text1,
               ),
             ),
+            const SizedBox(height: TabletSpacingTokens.x1),
             Text(
               body,
               style: AppTextStyles.caption.copyWith(
@@ -211,12 +212,14 @@ class StakingEarnTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${product.lockLabel} · đã stake ${product.totalStaked}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

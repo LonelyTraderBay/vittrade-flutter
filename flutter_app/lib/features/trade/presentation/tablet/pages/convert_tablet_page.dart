@@ -355,6 +355,7 @@ class _AssetBlock extends StatelessWidget {
           symbol,
           style: AppTextStyles.sectionTitle.copyWith(color: AppColors.text1),
         ),
+        const SizedBox(height: TabletSpacingTokens.x1),
         Text(
           name,
           style: AppTextStyles.caption.copyWith(color: AppColors.text3),

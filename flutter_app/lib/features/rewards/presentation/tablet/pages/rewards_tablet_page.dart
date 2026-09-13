@@ -150,6 +150,7 @@ class _RewardsSummaryCard extends StatelessWidget {
                   'Điểm hiện có',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   '${summary.currentPoints}',
                   style: AppTextStyles.control.copyWith(
@@ -158,6 +159,7 @@ class _RewardsSummaryCard extends StatelessWidget {
                     fontFeatures: AppTextStyles.tabularFigures,
                   ),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   summary.tierLabel,
                   style: AppTextStyles.caption.copyWith(
@@ -175,6 +177,7 @@ class _RewardsSummaryCard extends StatelessWidget {
                   'Đang chờ',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   '${summary.pendingCount}',
                   style: AppTextStyles.control.copyWith(
@@ -194,6 +197,7 @@ class _RewardsSummaryCard extends StatelessWidget {
                   'Hạng',
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   '#${summary.rank} · Top ${summary.topPercent}%',
                   style: AppTextStyles.caption.copyWith(
@@ -235,6 +239,7 @@ class _TaskRow extends StatelessWidget {
                     color: AppColors.text1,
                   ),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   task.subtitle,
                   maxLines: 1,

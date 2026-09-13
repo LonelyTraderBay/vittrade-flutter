@@ -48,6 +48,7 @@ class StakingSocialFeedTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         post.content,
                         style: AppTextStyles.caption.copyWith(
@@ -202,12 +203,14 @@ class StakingProposalsTabletPage extends ConsumerWidget {
                                     color: AppColors.text1,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                                 Text(
                                   '${proposal.category} · hết hạn ${proposal.endsIn}',
                                   style: AppTextStyles.caption.copyWith(
                                     color: AppColors.text2,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                               ],
                             ),
                           ),

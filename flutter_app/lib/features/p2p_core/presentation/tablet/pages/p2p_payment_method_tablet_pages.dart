@@ -110,6 +110,7 @@ class P2PPaymentMethodsTabletPage extends ConsumerWidget {
                                     color: AppColors.text1,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                                 Text(
                                   snapshot.methods[i].accountNumber,
                                   style: AppTextStyles.micro.copyWith(

@@ -84,6 +84,9 @@ jobs:
       - name: Tablet composition tier artifact is current
         run: dart run tool/tablet_composition_tier_audit.dart --check
 
+      - name: Tablet text stack gap artifact is current
+        run: dart run tool/tablet_text_stack_gap_audit.dart --check
+
       - name: Design token consistency artifact is current
         run: dart run tool/design_token_consistency_audit.dart --check
 

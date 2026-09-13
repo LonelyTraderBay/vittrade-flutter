@@ -128,6 +128,7 @@ class _PriceRecordCard extends StatelessWidget {
               fontFeatures: AppTextStyles.tabularFigures,
             ),
           ),
+          const SizedBox(height: TabletSpacingTokens.x1),
           Text(
             date,
             style: AppTextStyles.micro.copyWith(color: AppColors.text3),
@@ -493,6 +494,7 @@ class _LinkRow extends StatelessWidget {
                     fontWeight: AppTextStyles.medium,
                   ),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   value,
                   maxLines: 1,

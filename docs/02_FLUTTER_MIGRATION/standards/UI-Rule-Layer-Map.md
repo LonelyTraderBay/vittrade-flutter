@@ -59,7 +59,7 @@
 | --- | --- |
 | Tablet-Adaptive-Standard | R1–R9 surface contract, shells, tiers. |
 | Tablet-Composition-Tier-Standard | Registry scaffold khóa role khung trang tablet (T1 ratchet baseline + T2 tuyệt đối: 0 autohide, 0 khuôn `Frame` tự chế). |
-| Tablet-Spacing-Gutter-Standard | S1–S7 + closed Base-8-derived role scale + Rule 5 token overrides. `TabletSpacingTokens` owns Tablet geometry; `AppSurfaceSpacing` is the surface-aware bridge for shared widgets. |
+| Tablet-Spacing-Gutter-Standard | S1–S8 + closed Base-8-derived role scale + Rule 5 token overrides. `TabletSpacingTokens` owns Tablet geometry; `AppSurfaceSpacing` is the surface-aware bridge for shared widgets. S8 (2026-09-14): cấm 2 `Text` liền kề 0dp trong Column children — `tablet_text_stack_gap_audit`. |
 | Tablet-Card-Border-Standard | R1–R7 frames, radii, tints, card padding. |
 | Tablet-Input-Standard | I1–I5 hover/focus states. |
 | Home-Tablet-Reference-Contract | Home-as-reference extraction. |

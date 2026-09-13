@@ -139,6 +139,7 @@ List<Widget> _pdmEventRows(
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${event.category} · khối lượng 24h ${_pdmUsd(event.volume24h)}',
                         style: AppTextStyles.caption.copyWith(
@@ -146,6 +147,7 @@ List<Widget> _pdmEventRows(
                           fontFeatures: AppTextStyles.tabularFigures,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                     ],
                   ),
                 ),
@@ -483,12 +485,14 @@ class PredictionsPortfolioTabletPage extends ConsumerWidget {
                                   color: AppColors.text1,
                                 ),
                               ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
                               Text(
                                 '${_pdmDec(position.shares, 1)} cổ phần · giá TB ${_pdmDec(position.avgPrice)}',
                                 style: AppTextStyles.caption.copyWith(
                                   color: AppColors.text2,
                                 ),
                               ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
                             ],
                           ),
                         ),

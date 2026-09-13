@@ -1,0 +1,5 @@
+# S8 baseline — tablet_text_stack_gap_audit (ratchet đẳng thức, chỉ được giảm).
+# 2026-09-14: RỖNG — zero tolerance. Sweep đầu tiên đã chèn 100 gap micro
+# (x1 = 4dp) vào 48 file (mẫu cell 2 dòng Text dính nhau 0dp, đo bằng pixel
+# trên emulator: staking Sản phẩm). Site mới vi phạm fail CI ngay; ngoại lệ
+# phải có lý do ghi rõ tại đây.

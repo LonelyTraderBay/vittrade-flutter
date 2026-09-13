@@ -71,6 +71,7 @@ class SavingsGoalsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               template.description,
                               style: AppTextStyles.caption.copyWith(
@@ -78,6 +79,7 @@ class SavingsGoalsTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -110,6 +112,7 @@ class SavingsGoalsTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         tip.description,
                         style: AppTextStyles.caption.copyWith(
@@ -302,6 +305,7 @@ class SavingsRebalanceTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         strategy.description,
                         style: AppTextStyles.caption.copyWith(
@@ -384,6 +388,7 @@ class SavingsNotificationPreferencesTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               alert.description,
                               style: AppTextStyles.caption.copyWith(
@@ -391,6 +396,7 @@ class SavingsNotificationPreferencesTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

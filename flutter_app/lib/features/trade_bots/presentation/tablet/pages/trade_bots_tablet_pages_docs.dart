@@ -160,6 +160,7 @@ class BotGuideTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         practice.description,
                         style: AppTextStyles.caption.copyWith(
@@ -189,6 +190,7 @@ class BotGuideTabletPage extends ConsumerWidget {
                           color: AppColors.sell,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         'Vì sao: ${mistake.why}',
                         style: AppTextStyles.caption.copyWith(
@@ -196,6 +198,7 @@ class BotGuideTabletPage extends ConsumerWidget {
                           height: 1.3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         'Khắc phục: ${mistake.fix}',
                         style: AppTextStyles.caption.copyWith(
@@ -263,6 +266,7 @@ class BotFaqTabletPage extends ConsumerWidget {
                             color: AppColors.text1,
                           ),
                         ),
+                        const SizedBox(height: TabletSpacingTokens.x1),
                         Text(
                           item.answer,
                           style: AppTextStyles.caption.copyWith(
@@ -354,6 +358,7 @@ class BotTaxReportingTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               reportType.description,
                               style: AppTextStyles.caption.copyWith(
@@ -444,6 +449,7 @@ class BotApiDocumentationTabletPage extends ConsumerWidget {
                           fontFeatures: AppTextStyles.tabularFigures,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         endpoint.description,
                         style: AppTextStyles.caption.copyWith(
@@ -474,6 +480,7 @@ class BotApiDocumentationTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         event.description,
                         style: AppTextStyles.caption.copyWith(

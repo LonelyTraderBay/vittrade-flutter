@@ -175,10 +175,11 @@ class LeverageTabletPage extends ConsumerWidget {
               ),
             const SizedBox(height: TabletSpacingTokens.x4),
             if (preview.warningText.isNotEmpty)
-              Text(
-                preview.warningText,
-                style: AppTextStyles.caption.copyWith(color: AppColors.caution),
-              ),
+              const SizedBox(height: TabletSpacingTokens.x1),
+            Text(
+              preview.warningText,
+              style: AppTextStyles.caption.copyWith(color: AppColors.caution),
+            ),
           ],
         ),
       ),

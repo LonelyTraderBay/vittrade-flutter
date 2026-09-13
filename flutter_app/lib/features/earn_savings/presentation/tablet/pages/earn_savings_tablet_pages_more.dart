@@ -58,6 +58,7 @@ class SavingsExportTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${reportType.description} · ${reportType.rowsLabel}',
                         style: AppTextStyles.caption.copyWith(
@@ -249,6 +250,7 @@ class SavingsAutoPilotTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               module.description,
                               style: AppTextStyles.caption.copyWith(
@@ -256,6 +258,7 @@ class SavingsAutoPilotTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

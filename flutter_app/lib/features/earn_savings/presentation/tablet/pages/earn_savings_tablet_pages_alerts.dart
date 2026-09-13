@@ -50,6 +50,7 @@ class SavingsNotificationsTabletPage extends ConsumerWidget {
                               : AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         notification.message,
                         style: AppTextStyles.caption.copyWith(
@@ -82,6 +83,7 @@ class SavingsNotificationsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               setting.description,
                               style: AppTextStyles.caption.copyWith(
@@ -89,6 +91,7 @@ class SavingsNotificationsTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -351,12 +354,14 @@ class AutoCompoundSettingsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               'Gộp ${position.autoCompound ? 'bật' : 'tắt'} · ${position.compoundFrequency}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -410,6 +415,7 @@ class AutoCompoundSettingsTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         info.description,
                         style: AppTextStyles.caption.copyWith(

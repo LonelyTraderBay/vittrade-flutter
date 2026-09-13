@@ -119,6 +119,7 @@ class AuditTrailTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               entry.details,
                               style: AppTextStyles.caption.copyWith(
@@ -126,6 +127,7 @@ class AuditTrailTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -206,6 +208,7 @@ class ClientOptUpRequestTabletPage extends ConsumerWidget {
                                     : AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               category.description,
                               style: AppTextStyles.caption.copyWith(

@@ -228,6 +228,7 @@ class HomeTabletKpiStrip extends StatelessWidget {
                     fontWeight: AppTextStyles.bold,
                   ),
                 ),
+                const SizedBox(height: TabletSpacingTokens.x1),
                 Text(
                   'Nạp USDT để bắt đầu giao dịch trên VitTrade.',
                   style: AppTextStyles.caption.copyWith(

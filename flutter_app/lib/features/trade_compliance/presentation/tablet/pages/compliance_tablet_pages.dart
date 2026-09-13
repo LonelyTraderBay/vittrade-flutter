@@ -250,6 +250,7 @@ class CassReconciliationTabletPage extends ConsumerWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${snapshot.reconciledCount}',
                         style: AppTextStyles.control.copyWith(
@@ -271,6 +272,7 @@ class CassReconciliationTabletPage extends ConsumerWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${snapshot.resolvedCount}',
                         style: AppTextStyles.control.copyWith(
@@ -292,6 +294,7 @@ class CassReconciliationTabletPage extends ConsumerWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${snapshot.outstandingCount}',
                         style: AppTextStyles.control.copyWith(

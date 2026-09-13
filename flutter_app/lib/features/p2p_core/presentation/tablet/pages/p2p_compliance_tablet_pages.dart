@@ -383,6 +383,7 @@ class P2PComplianceOverviewTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               item.value,
                               style: AppTextStyles.caption.copyWith(

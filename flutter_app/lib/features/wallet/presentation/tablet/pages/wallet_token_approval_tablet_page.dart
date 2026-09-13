@@ -154,6 +154,7 @@ class _WalletTokenApprovalTabletPageState
                 '${snapshot.criticalCount}',
                 style: AppTextStyles.amountSm.copyWith(color: AppColors.sell),
               ),
+              const SizedBox(height: TabletSpacingTokens.x1),
               Text(
                 'Rủi ro nghiêm trọng',
                 style: AppTextStyles.micro.copyWith(color: AppColors.text3),

@@ -62,6 +62,7 @@ class CopyNotificationsTabletPage extends ConsumerWidget {
                                     color: AppColors.text1,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                                 Text(
                                   snapshot.notifications[i].message,
                                   maxLines: 2,
@@ -70,6 +71,7 @@ class CopyNotificationsTabletPage extends ConsumerWidget {
                                     color: AppColors.text3,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                               ],
                             ),
                           ),

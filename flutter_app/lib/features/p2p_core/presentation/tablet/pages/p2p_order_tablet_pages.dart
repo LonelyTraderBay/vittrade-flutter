@@ -376,6 +376,7 @@ class _TimelineEventRow extends StatelessWidget {
                       color: AppColors.text1,
                     ),
                   ),
+                  const SizedBox(height: TabletSpacingTokens.x1),
                   Text(
                     '${event.time} · ${event.actor}',
                     style: AppTextStyles.micro.copyWith(

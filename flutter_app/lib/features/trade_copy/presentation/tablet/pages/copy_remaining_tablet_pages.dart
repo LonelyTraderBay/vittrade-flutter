@@ -298,6 +298,7 @@ class SafetyEducationTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               flag.explanation,
                               style: AppTextStyles.caption.copyWith(
@@ -305,6 +306,7 @@ class SafetyEducationTabletPage extends ConsumerWidget {
                                 height: 1.3,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

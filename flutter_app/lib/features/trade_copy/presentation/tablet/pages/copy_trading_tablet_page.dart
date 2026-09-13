@@ -103,6 +103,7 @@ class _CopyTradingTabletPageState extends ConsumerState<CopyTradingTabletPage> {
                                   color: AppColors.text3,
                                 ),
                               ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
                               Text(
                                 formatTradeUsdWhole(snapshot.totalAum),
                                 style: AppTextStyles.control.copyWith(
@@ -124,6 +125,7 @@ class _CopyTradingTabletPageState extends ConsumerState<CopyTradingTabletPage> {
                                   color: AppColors.text3,
                                 ),
                               ),
+                              const SizedBox(height: TabletSpacingTokens.x1),
                               Text(
                                 formatTradeInt(snapshot.totalCopiers),
                                 style: AppTextStyles.control.copyWith(
@@ -309,6 +311,7 @@ class _TraderRow extends StatelessWidget {
                         color: AppColors.text1,
                       ),
                     ),
+                    const SizedBox(height: TabletSpacingTokens.x1),
                     Text(
                       '${trader.copiers}/${trader.maxCopiers} copiers · ${trader.tags.take(2).join(" · ")}',
                       maxLines: 1,

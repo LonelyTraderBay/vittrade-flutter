@@ -302,6 +302,7 @@ class SavingsHistoryTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${tx.asset} ${tx.amount} (${tx.usdValue}) · ${tx.date} ${tx.time}',
                               style: AppTextStyles.caption.copyWith(
@@ -309,6 +310,7 @@ class SavingsHistoryTabletPage extends ConsumerWidget {
                                 fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -388,6 +390,7 @@ class SavingsGuideTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         tip.description,
                         style: AppTextStyles.caption.copyWith(
@@ -464,6 +467,7 @@ class SavingsFaqTabletPage extends ConsumerWidget {
                             color: AppColors.text1,
                           ),
                         ),
+                        const SizedBox(height: TabletSpacingTokens.x1),
                         Text(
                           item.answer,
                           style: AppTextStyles.caption.copyWith(

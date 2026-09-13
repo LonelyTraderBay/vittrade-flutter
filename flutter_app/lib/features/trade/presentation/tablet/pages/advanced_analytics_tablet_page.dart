@@ -253,6 +253,7 @@ class _SignalTile extends StatelessWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         value,
                         style: AppTextStyles.caption.copyWith(

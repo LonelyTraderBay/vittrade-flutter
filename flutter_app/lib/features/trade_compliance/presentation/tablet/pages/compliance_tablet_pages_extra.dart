@@ -164,6 +164,7 @@ class ComplaintsHandlingTabletPage extends ConsumerWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${snapshot.activeCount}',
                         style: AppTextStyles.control.copyWith(
@@ -185,6 +186,7 @@ class ComplaintsHandlingTabletPage extends ConsumerWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         '${snapshot.resolvedCount}',
                         style: AppTextStyles.control.copyWith(

@@ -233,6 +233,7 @@ class StakingHistoryTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${tx.asset} ${tx.amountLabel} · ${tx.date} ${tx.time}',
                               style: AppTextStyles.caption.copyWith(
@@ -240,6 +241,7 @@ class StakingHistoryTabletPage extends ConsumerWidget {
                                 fontFeatures: AppTextStyles.tabularFigures,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -315,12 +317,14 @@ class StakingEarningsCalendarTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${event.description} · ${event.dateIso}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

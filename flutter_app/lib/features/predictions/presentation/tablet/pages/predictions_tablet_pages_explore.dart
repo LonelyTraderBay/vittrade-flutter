@@ -291,12 +291,14 @@ class PredictionMarketMakerTabletPage extends ConsumerWidget {
                           color: AppColors.text1,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                       Text(
                         'Cung cấp ${_pdmUsd(position.liquidityProvided)} · APR ${_pdmPct(position.apr)}',
                         style: AppTextStyles.caption.copyWith(
                           color: AppColors.text2,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
                     ],
                   ),
                 ),
@@ -368,12 +370,14 @@ class PredictionPortfolioAnalyzerTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${_pdmDec(position.shares, 1)} cổ phần · vào ${_pdmDec(position.avgPrice)} → hiện ${_pdmDec(position.currentPrice)}',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),
@@ -456,12 +460,14 @@ class PredictionEventCalendarTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               '${event.category} · xác suất ${event.probability}%',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.text2,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                           ],
                         ),
                       ),

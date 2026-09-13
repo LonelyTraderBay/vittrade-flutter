@@ -121,6 +121,7 @@ class ExAnteCostsTabletPage extends ConsumerWidget {
                                 color: AppColors.text1,
                               ),
                             ),
+                            const SizedBox(height: TabletSpacingTokens.x1),
                             Text(
                               cost.description,
                               style: AppTextStyles.micro.copyWith(
@@ -140,6 +141,7 @@ class ExAnteCostsTabletPage extends ConsumerWidget {
                               fontFeatures: AppTextStyles.tabularFigures,
                             ),
                           ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
                           Text(
                             '${cost.percentOfInvestment.toStringAsFixed(2)}%',
                             style: AppTextStyles.micro.copyWith(

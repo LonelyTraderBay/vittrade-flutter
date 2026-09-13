@@ -309,6 +309,7 @@ class _AssetDetailTabletPageState extends ConsumerState<AssetDetailTabletPage> {
                                     color: AppColors.text3,
                                   ),
                                 ),
+                                const SizedBox(height: TabletSpacingTokens.x1),
                               ],
                             ),
                           ),
