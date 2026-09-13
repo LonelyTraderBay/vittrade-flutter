@@ -31,8 +31,12 @@ Mỗi page library tablet phải dựng khung từ **registry scaffold chuẩn**
 | `*TabletMasterShell` | Shell master–detail cấp feature (Profile/Markets…, match substring `TabletMasterShell(`) |
 | `*PaneScaffold` | Pane trong shell master–detail (match substring `PaneScaffold(`) |
 
-- Nợ hiện có pin trong `test/quality/tablet_composition_tier_baseline.txt`
-  (2 file `*_tablet_utility_page.dart` dead-code, chờ xóa Đợt 9).
+- Nợ hiện có pin trong `test/quality/tablet_composition_tier_baseline.txt`.
+  Hai entry là **ngoại lệ vĩnh viễn có tài liệu** (2026-09-14): 3 file
+  `*_tablet_utility_page.dart` là sentinel của gate GĐ7
+  (`tablet_full_route_gate_test.dart` assert "không route nào render
+  utility" bằng type marker) — sentinel cố ý nằm ngoài registry scaffold;
+  xóa sentinel là phá thiết kế gate.
 - Baseline là **ratchet đẳng thức**: file được sửa hết nợ thì phải xóa dòng
   baseline; file mới thiếu scaffold fail ngay. Chỉ regen baseline bằng
   `dart run tool/tablet_composition_tier_audit.dart --regen-baseline` khi

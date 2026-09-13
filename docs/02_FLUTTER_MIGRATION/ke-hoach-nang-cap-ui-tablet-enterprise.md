@@ -1,6 +1,8 @@
 # Kế hoạch nâng cấp UI Tablet — Production-Ready Enterprise Composition
 
-Updated: 2026-09-13 (Đợt 0 hoàn tất — khóa nền bằng guardrail tier)
+Updated: 2026-09-14 (**HOÀN THÀNH TOÀN BỘ Đợt 0–9** — khóa nền, footer surfaces,
+master-detail history, audit delta 5 cluster còn lại = giữ nguyên có bằng chứng,
+sentinel utility page được chính thức hóa)
 
 Phạm vi: nâng **chất lượng composition** của toàn bộ UI tablet lên đúng
 7 archetype chuẩn đã chốt trong
@@ -69,11 +71,11 @@ Re-compose sâu ~65 library; polish nhẹ ~29; giữ nguyên flagship 5 root tab
 | 2 — Wallet cluster | Đ2a: ghim footer CTA rút/chuyển/dust/address_add (mua crypto giữ inline — CTA nằm trong `BuyInputContent` dùng chung phone, R2; deposit/asset_detail/withdraw_limits không có CTA flow; token_approval + 3 trang tools giữ CTA inline vì là hành động rà soát theo tab). Đ2b: Lịch sử giao dịch SC-136/141 lên shell master-detail route-based (`WalletTabletHistoryShell` + `StatefulShellRoute` 1 branch, selection route-derived, hub pane = empty state rule 6). Đ2c: portfolio_analytics + network_status đã dày sẵn, hub là dashboard reference — giữ nguyên | ✅ 2026-09-14 (e95b9fff → ba0e67c2) |
 | 3 — Trade cluster | **Audit delta 2026-09-14: cluster đã ở tầng đích sẵn** — 12/21 library dùng `VitTwoColumnTabletDashboard` (analytics ×4, orders_history có bảng `_OrdersTable` tabular figures, position_dashboard, risk_management, margin_hub, trade_settings, tools, demos), advanced_chart SC-055 là terminal thuần full-height (OHLCV strip + MUA/BÁN ghim), receipt dùng `VitTradeDetailScaffold`. Delta thật: `TradeTabletDetailSurface` thêm slot `footer` (mirror wallet) + ghim CTA hoàn tất 4 luồng convert/futures/leverage/export; live_market_data_analytics dùng SectionBody chuẩn — giữ nguyên; utility dead-code chờ Đợt 9 | ✅ 2026-09-14 |
 | 4 — P2P cluster | **Audit delta 2026-09-14: cluster đã ở tầng đích sẵn** — 8 dashboard 2 cột (home hub có banner stats + express 550 dòng + merchant/insurance/wallet/security/ad_analytics/create_ad), 7 SectionFrame family (account/compliance/dispute/kyc/payment/settings/order), 6 SectionBody một cột (my_orders/my_ads/order_book/ad_detail/express_confirm/chat — list chức năng có navigation + empty state); CTA express đặt cạnh offer live trong cột phụ (chủ đích, không ghim); kyc wizard CTA theo bước. Delta thật: ghim CTA "Xem trước & đăng" create_ad bằng bọc Column + dải ghim (idiom advanced_chart). Chat giữ cap bong bóng 640 (hợp lệ). Không xây shell master-detail mới cho cặp my_ads→ad_detail (cần mockup gate riêng nếu muốn) | ✅ 2026-09-14 |
-| 5 — Earn cluster | staking (8 part), savings, dca, launchpad | ⬜ |
-| 6 — Bots + Copy + Compliance | 13 library | ⬜ |
-| 7 — Predictions + Arena hub còn lại | phần "nhiều màn gộp" cuối | ⬜ |
-| 8 — Admin/Dev console + Auth/News/Rewards/Profile-pane | cross_module 29 class + cụm nhỏ | ⬜ |
-| 9 — Chốt & khóa | Xóa 3 file `*_tablet_utility_page.dart` dead-code; strict tier; smoke matrix 6 size + rotation; preflight full; đồng bộ AGENTS/DoD/UI-Rule-Layer-Map | ⬜ |
+| 5 — Earn cluster | **Audit delta 2026-09-14: giữ nguyên** — staking (296d+8part), savings (490d+4part), dca (582d — hub thông tin, không form CTA), launchpad (552d+2part) đều trên `VitTabletSectionFrame` với nội dung dày; không có CTA hoàn tất flow nào nằm dưới đáy cột | ✅ 2026-09-14 |
+| 6 — Bots + Copy + Compliance | **Audit delta 2026-09-14: giữ nguyên** — bots (430d+3part), copy ×5 (321–372d, copy_trading dùng dashboard 2 cột), compliance ×5 (331–495d) đều SectionFrame chuẩn | ✅ 2026-09-14 |
+| 7 — Predictions + Arena hub còn lại | **Audit delta 2026-09-14: giữ nguyên** — predictions (618d+2part, SectionFrame), arena flagship dashboard redesign 2026-09-09 đã hoàn thành (91d+6part dashboard 2 cột) | ✅ 2026-09-14 |
+| 8 — Admin/Dev console + Auth/News/Rewards/Profile-pane | **Audit delta 2026-09-14: giữ nguyên** — cross_module (494d+2part) + misc_gate trên SectionFrame; auth ×6 dùng `AuthTabletSurface`; news/rewards SectionBody; profile là master shellPaneScaffold | ✅ 2026-09-14 |
+| 9 — Chốt & khóa | Điều chỉnh: 3 file `*_tablet_utility_page.dart` **giữ lại làm sentinel** của gate GĐ7 (`tablet_full_route_gate_test` + assert findsNothing từng page — xóa là phá thiết kế gate); 2 entry baseline tier thành ngoại lệ vĩnh viễn có tài liệu; tool đọc baseline bỏ qua comment; QA matrix 6 size + rotation đã xanh trong full suite; preflight full PASS | ✅ 2026-09-14 |
 
 ## Quy trình bắt buộc trong mỗi batch
 

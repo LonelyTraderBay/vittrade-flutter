@@ -1,2 +1,8 @@
+# T1 baseline — tablet_composition_tier_audit (đẳng thức, chỉ được giảm).
+# 2026-09-14: 2 entry dưới đây là NGOẠI LỆ VĨNH VIỄN, không phải nợ chờ trả —
+# 3 file *_tablet_utility_page.dart (p2p/trade/profile) là SENTINEL của gate
+# GĐ7 `tablet_full_route_gate_test.dart` + assert findsNothing trong test từng
+# page (assert "không route nào render utility"). Xóa sentinel = phá thiết kế
+# gate; giữ chúng ngoài registry scaffold là chủ đích.
 features/p2p_core/presentation/tablet/pages/p2p_tablet_utility_page.dart
 features/profile/presentation/tablet/pages/profile_tablet_utility_page.dart

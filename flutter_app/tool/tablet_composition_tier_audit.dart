@@ -220,7 +220,7 @@ void main(List<String> args) {
       baselineFile
           .readAsLinesSync()
           .map((l) => l.trim())
-          .where((l) => l.isNotEmpty)
+          .where((l) => l.isNotEmpty && !l.startsWith('#'))
           .toList()
         ..sort();
   final stale = baseline.where((p) => !t1Paths.contains(p)).toList();
