@@ -56,7 +56,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('deep-link thẳng vào chi tiết vẫn nằm trong shell', (tester) async {
+  testWidgets('deep-link thẳng vào chi tiết vẫn nằm trong shell', (
+    tester,
+  ) async {
     await pumpRoute(tester, AppRoutePaths.walletTransaction('tx001'));
 
     expect(find.byType(WalletTabletHistoryShell), findsOneWidget);
@@ -69,7 +71,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('dưới 680px: hub render danh sách toàn chiều rộng', (tester) async {
+  testWidgets('dưới 680px: hub render danh sách toàn chiều rộng', (
+    tester,
+  ) async {
     await pumpRoute(
       tester,
       AppRoutePaths.walletHistory,
