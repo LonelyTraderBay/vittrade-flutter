@@ -88,15 +88,38 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             asset: asset,
             usdValue: usdValue,
             validationMessage: validationMessage,
-            canTransfer: canTransfer,
           ),
           secondary: _buildSecondary(snapshot: snapshot),
+          footer: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TabletSpacingTokens.contentPad,
+              vertical: TabletSpacingTokens.x4,
+            ),
+            child: TransferButton(
+              key: TransferTabletPage.submitKey,
+              enabled: canTransfer,
+              disabledReason: validationMessage,
+              onTap: canTransfer
+                  ? () => _showConfirmSheet(
+                      fromWallet: fromWallet,
+                      toWallet: toWallet,
+                      asset: asset,
+                      amount: _amount,
+                      usdValue: usdValue,
+                    )
+                  : null,
+            ),
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required Widget primary, required Widget secondary}) {
+  Widget _frame({
+    required Widget primary,
+    required Widget secondary,
+    Widget? footer,
+  }) {
     return WalletTabletDetailSurface(
       semanticLabel: 'Chuyển nội bộ trên tablet',
       semanticIdentifier: 'SC-146-TABLET',
@@ -105,6 +128,7 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
       onBack: () => context.go(AppRoutePaths.wallet),
       primary: primary,
       secondary: secondary,
+      footer: footer,
     );
   }
 
@@ -115,7 +139,6 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
     required WalletTransferAsset asset,
     required double usdValue,
     required String? validationMessage,
-    required bool canTransfer,
   }) {
     return Column(
       key: TransferTabletPage.contentKey,
@@ -178,20 +201,6 @@ class _TransferTabletPageState extends ConsumerState<TransferTabletPage> {
             if (_amount > 0) TransferAmountEstimate(usdValue: usdValue),
             if (validationMessage != null)
               TransferValidationNotice(message: validationMessage),
-            TransferButton(
-              key: TransferTabletPage.submitKey,
-              enabled: canTransfer,
-              disabledReason: validationMessage,
-              onTap: canTransfer
-                  ? () => _showConfirmSheet(
-                      fromWallet: fromWallet,
-                      toWallet: toWallet,
-                      asset: asset,
-                      amount: _amount,
-                      usdValue: usdValue,
-                    )
-                  : null,
-            ),
           ],
         ),
       ],

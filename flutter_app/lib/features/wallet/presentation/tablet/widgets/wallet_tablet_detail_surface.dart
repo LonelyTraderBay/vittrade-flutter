@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.dart';
@@ -8,6 +10,10 @@ import 'package:vit_trade_flutter/shared/layout/vit_two_column_tablet_dashboard.
 ///
 /// It owns the wide-screen column relationship. The Phone pages do not import
 /// this boundary; data, controllers and financial contracts remain shared.
+///
+/// [footer] là dải ghim dưới khối hai cột (không cuộn — idiom
+/// `MarketsPaneScaffold.footer`): dùng cho CTA hoàn tất flow luôn nhìn thấy.
+/// Null = không có dải ghim.
 class WalletTabletDetailSurface extends StatelessWidget {
   const WalletTabletDetailSurface({
     super.key,
@@ -18,6 +24,7 @@ class WalletTabletDetailSurface extends StatelessWidget {
     required this.primary,
     required this.secondary,
     required this.onBack,
+    this.footer,
   });
 
   final String semanticLabel;
@@ -27,6 +34,7 @@ class WalletTabletDetailSurface extends StatelessWidget {
   final Widget primary;
   final Widget secondary;
   final VoidCallback onBack;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +56,13 @@ class WalletTabletDetailSurface extends StatelessWidget {
               secondaryChildren: [secondary],
             ),
           ),
+          if (footer != null) ...[
+            const Divider(
+              height: TabletSpacingTokens.dividerHairline,
+              color: AppColors.divider,
+            ),
+            footer!,
+          ],
         ],
       ),
     );

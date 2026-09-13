@@ -62,14 +62,44 @@ class _DustConverterTabletPageState
         ),
         secondary: const SizedBox.shrink(),
       ),
-      data: (snapshot) => _frame(
-        primary: _buildPrimary(snapshot),
-        secondary: _buildSecondary(snapshot),
-      ),
+      data: (snapshot) {
+        final selection = _selection(snapshot);
+        return _frame(
+          primary: _buildPrimary(snapshot, selection),
+          secondary: _buildSecondary(snapshot),
+          footer: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TabletSpacingTokens.contentPad,
+              vertical: TabletSpacingTokens.x4,
+            ),
+            child: VitCtaButton(
+              key: DustConverterTabletPage.ctaKey,
+              onPressed: selection.selected.isEmpty
+                  ? null
+                  : () => _showConfirmSheet(
+                      snapshot,
+                      selection.selected,
+                      selection.total,
+                    ),
+              variant: VitCtaButtonVariant.primary,
+              leading: const Icon(Icons.transform_rounded),
+              child: Text(
+                selection.selected.isEmpty
+                    ? 'Chọn tài sản để chuyển đổi'
+                    : 'Chuyển đổi ${selection.selected.length} tài sản → $_targetSymbol',
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _frame({required Widget primary, required Widget secondary}) {
+  Widget _frame({
+    required Widget primary,
+    required Widget secondary,
+    Widget? footer,
+  }) {
     return WalletTabletDetailSurface(
       semanticLabel: 'Chuyển đổi số dư nhỏ trên tablet',
       semanticIdentifier: 'SC-154-TABLET',
@@ -78,17 +108,41 @@ class _DustConverterTabletPageState
       onBack: () => context.go(AppRoutePaths.wallet),
       primary: primary,
       secondary: secondary,
+      footer: footer,
     );
   }
 
-  Widget _buildPrimary(WalletDustConverterSnapshot snapshot) {
+  ({
+    List<WalletDustAsset> assets,
+    List<WalletDustAsset> selected,
+    double total,
+    bool allSelected,
+  })
+  _selection(WalletDustConverterSnapshot snapshot) {
     final assets = snapshot.eligibleAssets(_targetSymbol);
-    final selectedAssets = assets
+    final selected = assets
         .where((asset) => _selectedIds.contains(asset.id))
         .toList(growable: false);
-    final selectedTotal = _sumUsd(selectedAssets);
-    final selectedAll =
-        assets.isNotEmpty && _selectedIds.length == assets.length;
+    return (
+      assets: assets,
+      selected: selected,
+      total: _sumUsd(selected),
+      allSelected: assets.isNotEmpty && _selectedIds.length == assets.length,
+    );
+  }
+
+  Widget _buildPrimary(
+    WalletDustConverterSnapshot snapshot,
+    ({
+      List<WalletDustAsset> assets,
+      List<WalletDustAsset> selected,
+      double total,
+      bool allSelected,
+    })
+    selection,
+  ) {
+    final assets = selection.assets;
+    final selectedAll = selection.allSelected;
 
     return Column(
       key: DustConverterTabletPage.contentKey,
@@ -121,7 +175,7 @@ class _DustConverterTabletPageState
                     const Text('Số dư nhỏ có thể chuyển đổi'),
                     const SizedBox(height: TabletSpacingTokens.x4),
                     Text(
-                      '${assets.length} tài sản · ${VitFormat.usd(selectedTotal)} đang chọn',
+                      '${assets.length} tài sản · ${VitFormat.usd(selection.total)} đang chọn',
                       style: AppTextStyles.caption.copyWith(
                         color: AppColors.text2,
                       ),
@@ -201,20 +255,6 @@ class _DustConverterTabletPageState
             else
               for (final asset in assets) _assetCard(asset),
           ],
-        ),
-        VitCtaButton(
-          key: DustConverterTabletPage.ctaKey,
-          onPressed: selectedAssets.isEmpty
-              ? null
-              : () =>
-                    _showConfirmSheet(snapshot, selectedAssets, selectedTotal),
-          variant: VitCtaButtonVariant.primary,
-          leading: const Icon(Icons.transform_rounded),
-          child: Text(
-            selectedAssets.isEmpty
-                ? 'Chọn tài sản để chuyển đổi'
-                : 'Chuyển đổi ${selectedAssets.length} tài sản → $_targetSymbol',
-          ),
         ),
       ],
     );

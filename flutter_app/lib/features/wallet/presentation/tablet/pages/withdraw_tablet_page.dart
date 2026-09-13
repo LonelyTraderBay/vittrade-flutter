@@ -106,6 +106,18 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
           onBack: () => _goBackToWallet(context),
           primary: _buildPrimary(controller, network, validation),
           secondary: _buildSecondary(snapshot, network, validation),
+          footer: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TabletSpacingTokens.contentPad,
+              vertical: TabletSpacingTokens.x4,
+            ),
+            child: WithdrawNextButton(
+              onTap: validation == null
+                  ? () => _showPreview(controller, network)
+                  : null,
+              disabledReason: validation,
+            ),
+          ),
         );
       },
     );
@@ -117,7 +129,6 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
     String? validation,
   ) {
     final snapshot = controller.state.snapshot;
-    final canPreview = validation == null;
     return Column(
       key: WithdrawTabletPage.contentKey,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -193,10 +204,6 @@ class _WithdrawTabletPageState extends ConsumerState<WithdrawTabletPage> {
         ),
         if (validation != null)
           WithdrawPreviewBlockedNotice(message: validation),
-        WithdrawNextButton(
-          onTap: canPreview ? () => _showPreview(controller, network) : null,
-          disabledReason: validation,
-        ),
       ],
     );
   }
