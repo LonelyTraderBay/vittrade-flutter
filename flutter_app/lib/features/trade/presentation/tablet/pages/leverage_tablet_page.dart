@@ -84,6 +84,24 @@ class LeverageTabletPage extends ConsumerWidget {
         fallbackPath: AppRoutePaths.tradePair(pairId),
         mode: BackNavigationMode.historyThenFallback,
       ),
+      footer: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: TabletSpacingTokens.contentPad,
+          vertical: TabletSpacingTokens.x4,
+        ),
+        child: VitCtaButton(
+          key: LeverageTabletPage.submitKey,
+          onPressed: state.request.leverage == snapshot.currentLeverage || busy
+              ? null
+              : () => _apply(context, ref, state),
+          loading: busy,
+          child: Text(
+            state.request.leverage == snapshot.currentLeverage
+                ? 'Đòn bẩy đã áp dụng'
+                : 'Xem trước & áp dụng đòn bẩy',
+          ),
+        ),
+      ),
       primary: VitCard(
         radius: VitCardRadius.tight,
         padding: TabletSpacingTokens.cardPaddingCompact,
@@ -114,20 +132,6 @@ class LeverageTabletPage extends ConsumerWidget {
             ),
             const SizedBox(height: TabletSpacingTokens.x4),
             _LeverageImpactRows(preview: preview),
-            const SizedBox(height: TabletSpacingTokens.x4),
-            VitCtaButton(
-              key: LeverageTabletPage.submitKey,
-              onPressed:
-                  state.request.leverage == snapshot.currentLeverage || busy
-                  ? null
-                  : () => _apply(context, ref, state),
-              loading: busy,
-              child: Text(
-                state.request.leverage == snapshot.currentLeverage
-                    ? 'Đòn bẩy đã áp dụng'
-                    : 'Xem trước & áp dụng đòn bẩy',
-              ),
-            ),
           ],
         ),
       ),

@@ -199,6 +199,30 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
         fallbackPath: AppRoutePaths.tradePair(widget.pairId),
         mode: BackNavigationMode.historyThenFallback,
       ),
+      footer: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: TabletSpacingTokens.contentPad,
+          vertical: TabletSpacingTokens.x4,
+        ),
+        child: VitCtaButton(
+          key: FuturesTabletPage.submitKey,
+          onPressed: preview.canOpen && !submitting
+              ? () => _openConfirm(preview, submitting)
+              : null,
+          loading: submitting,
+          density: VitDensity.tool,
+          variant: _side == TradeFuturesSide.long
+              ? VitCtaButtonVariant.success
+              : VitCtaButtonVariant.danger,
+          child: Text(
+            submitting
+                ? 'Đang gửi lệnh…'
+                : preview.canOpen
+                ? 'Xem lại & xác nhận'
+                : 'Nhập ký quỹ để tiếp tục',
+          ),
+        ),
+      ),
       primary: VitCard(
         radius: VitCardRadius.tight,
         density: VitDensity.tool,
@@ -279,27 +303,8 @@ class _FuturesTabletPageState extends ConsumerState<FuturesTabletPage> {
               const SizedBox(height: TabletSpacingTokens.x4),
               _FuturesPreviewRows(preview: preview),
             ],
-            const SizedBox(height: TabletSpacingTokens.x4),
-            VitCtaButton(
-              key: FuturesTabletPage.submitKey,
-              onPressed: preview.canOpen && !submitting
-                  ? () => _openConfirm(preview, submitting)
-                  : null,
-              loading: submitting,
-              density: VitDensity.tool,
-              variant: _side == TradeFuturesSide.long
-                  ? VitCtaButtonVariant.success
-                  : VitCtaButtonVariant.danger,
-              child: Text(
-                submitting
-                    ? 'Đang gửi lệnh…'
-                    : preview.canOpen
-                    ? 'Xem lại & xác nhận'
-                    : 'Nhập ký quỹ để tiếp tục',
-              ),
-            ),
             // Bậc thang canSubmit của máy ADR-001 — hiển thị lỗi validate
-            // gần nút bấm (form feedback chuẩn).
+            // trong form (nút xác nhận đã ghim ở footer).
             if (!orderNotifier.canSubmit && margin > 0) ...[
               const SizedBox(height: TabletSpacingTokens.x4),
               Text(

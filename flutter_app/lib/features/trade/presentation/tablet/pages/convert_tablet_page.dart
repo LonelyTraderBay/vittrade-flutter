@@ -110,6 +110,25 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
             fallbackPath: AppRoutePaths.trade,
             mode: BackNavigationMode.historyThenFallback,
           ),
+          footer: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TabletSpacingTokens.contentPad,
+              vertical: TabletSpacingTokens.x4,
+            ),
+            child: VitCtaButton(
+              key: ConvertTabletPage.submitKey,
+              onPressed: amount <= 0
+                  ? null
+                  : () => _openConfirm(snapshot, quote),
+              child: Text(
+                amount <= 0
+                    ? 'Nhập số lượng để tiếp tục'
+                    : quote == null
+                    ? 'Đang lấy báo giá…'
+                    : 'Xem trước & xác nhận',
+              ),
+            ),
+          ),
           primary: VitCard(
             radius: VitCardRadius.tight,
             padding: TabletSpacingTokens.cardPaddingCompact,
@@ -191,20 +210,6 @@ class _ConvertTabletPageState extends ConsumerState<ConvertTabletPage> {
                       ),
                     ),
                 ],
-                const SizedBox(height: TabletSpacingTokens.x4),
-                VitCtaButton(
-                  key: ConvertTabletPage.submitKey,
-                  onPressed: amount <= 0
-                      ? null
-                      : () => _openConfirm(snapshot, quote),
-                  child: Text(
-                    amount <= 0
-                        ? 'Nhập số lượng để tiếp tục'
-                        : quote == null
-                        ? 'Đang lấy báo giá…'
-                        : 'Xem trước & xác nhận',
-                  ),
-                ),
               ],
             ),
           ),

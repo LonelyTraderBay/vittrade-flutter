@@ -65,6 +65,34 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
             fallbackPath: AppRoutePaths.trade,
             mode: BackNavigationMode.historyThenFallback,
           ),
+          footer: state.result != null
+              ? null
+              : Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: TabletSpacingTokens.contentPad,
+                    vertical: TabletSpacingTokens.x4,
+                  ),
+                  child: VitCtaButton(
+                    key: TradeHistoryExportTabletPage.submitKey,
+                    onPressed: state.isExporting
+                        ? null
+                        : () async {
+                            await notifier.submitExport();
+                            if (!context.mounted) return;
+                            await showVitNoticeSheet(
+                              context: context,
+                              title: 'Đã tạo báo cáo',
+                              message: 'Báo cáo đã sẵn sàng để tải xuống.',
+                              variant: VitBannerVariant.success,
+                              ctaVariant: VitCtaButtonVariant.success,
+                            );
+                          },
+                    loading: state.isExporting,
+                    child: Text(
+                      state.isExporting ? 'Đang tạo báo cáo…' : 'Tạo báo cáo',
+                    ),
+                  ),
+                ),
           primary: VitCard(
             radius: VitCardRadius.tight,
             padding: TabletSpacingTokens.cardPaddingCompact,
@@ -165,27 +193,7 @@ class TradeHistoryExportTabletPage extends ConsumerWidget {
                     onPressed: notifier.resetResult,
                     child: const Text('Tạo báo cáo khác'),
                   ),
-                ] else
-                  VitCtaButton(
-                    key: TradeHistoryExportTabletPage.submitKey,
-                    onPressed: state.isExporting
-                        ? null
-                        : () async {
-                            await notifier.submitExport();
-                            if (!context.mounted) return;
-                            await showVitNoticeSheet(
-                              context: context,
-                              title: 'Đã tạo báo cáo',
-                              message: 'Báo cáo đã sẵn sàng để tải xuống.',
-                              variant: VitBannerVariant.success,
-                              ctaVariant: VitCtaButtonVariant.success,
-                            );
-                          },
-                    loading: state.isExporting,
-                    child: Text(
-                      state.isExporting ? 'Đang tạo báo cáo…' : 'Tạo báo cáo',
-                    ),
-                  ),
+                ],
               ],
             ),
           ),
