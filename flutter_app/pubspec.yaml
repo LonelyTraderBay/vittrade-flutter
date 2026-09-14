@@ -18,7 +18,7 @@ dependencies:
   # Toolchain align 2026-09-10: CI + local đồng pin Flutter 3.47.2 (Dart 3.13)
   # — mở room từ <3.4.0 (DEP-LOCK PR Dependabot #104) lên nhánh 3.4.x.
   flutter_riverpod: ">=3.4.0 <3.5.0"
-  dio: ^5.11.0
+  dio: ^5.11.1
   # GĐ4-F1: tầng persistence — chỉ được import bên trong lib/core/storage/
   # (guardrail runtime_seams canh); phần còn lại của app đi qua seam
   # KeyValueStore/SecureStore.
