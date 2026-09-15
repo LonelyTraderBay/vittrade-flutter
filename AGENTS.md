@@ -143,7 +143,7 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
 
 - Visual contract for agents: [`DESIGN.md`](DESIGN.md) at repo root (tokens +
   component ladder); `AGENTS.md` wins on product/financial rules.
-- Full map of every design-consistency audit domain (~25), what enforces it,
+- Full map of every design-consistency audit domain (~27), what enforces it,
   and the exact command to check it locally — see
   `docs/02_FLUTTER_MIGRATION/Flutter-Design-System-Reference.md` before
   creating a new page.

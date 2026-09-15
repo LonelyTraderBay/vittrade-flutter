@@ -1,8 +1,8 @@
-# Motion Standard (Mandatory — phase 1: tablet surface)
+# Motion Standard (Mandatory — tablet absolute + phone ratchet)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Interaction · [AGENTS.md](../../../AGENTS.md) UI rules · [Tablet-Input-Standard.md](./Tablet-Input-Standard.md) (hover/focus are input states; their *timing* is motion)
 **Enforcement:** `dart run tool/motion_audit.dart --check` · `test/quality/motion_guardrail_test.dart` (**absolute lock on the tablet surface — zero baseline**; phone keeps its current rules in phase 1 — see "Phases")
-**Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`), excluding the `lib/app/theme/` token layer. Shared widgets adopt tokens opportunistically (they render on every surface).
+**Scope:** every Dart file under `lib/` on **both surfaces** — tablet absolute + phone ratchet (see "Phases"; path contains `/tablet/`, or the file name mentions `tablet`), excluding the `lib/app/theme/` token layer. Shared widgets adopt tokens opportunistically (they render on every surface).
 **Born:** 2026-08-23 — before this standard the repo had **no motion tokens at all** (`lib/app/theme/` had zero duration/easing values): every animation picked its milliseconds by feel, the exact drift class spacing suffered before S1–S4. World-class systems (Material 3, IBM Carbon, Shopify Polaris) all ship a duration scale + easing scale + reduced-motion rule; this standard brings the tablet surface to that bar.
 
 ## Why this standard exists
@@ -68,7 +68,7 @@ Loading skeletons shimmer at `feedback` cadence and resolve without reflow (the 
 ## Enforcement & phases
 
 - **Phase 1 (2026-08-23):** tablet surface absolute lock, born at 0 violations (the last two literals migrated in the same commit); `lib/app/theme/` exempt as the token layer.
-- **Phase 2 (2026-08-24, shipped):** the phone surface joins with a **ratchet baseline** — `test/quality/motion_phone_baseline.txt` pins the 55 pre-existing literals (durations + curves across presentation/shared code); new violations fail CI, and entries must disappear as files are touched (migrate to `AppMotion` tokens, then `--regen-baseline`). No new standard was written — this doc simply widened scope, as planned.
+- **Phase 2 (2026-08-24, shipped):** the phone surface joins with a **ratchet baseline** — `test/quality/motion_phone_baseline.txt` pins the pre-existing literals (54 entries as of 2026-09-14; durations + curves across presentation/shared code); new violations fail CI, and entries must disappear as files are touched (migrate to `AppMotion` tokens, then `--regen-baseline`). No new standard was written — this doc simply widened scope, as planned.
 
 ## Verify
 

@@ -15,9 +15,9 @@
 
 **Precedence when layers meet:** chung sets the floor; a surface standard may only *tighten* it for that surface (e.g. Typography is chung; Tablet-Spacing tightens which tokens each role uses). A surface standard may not loosen a chung rule. Differences between surfaces are allowed only as *disciplined* per-surface rules — never ad-hoc values.
 
-## Layer index — all 33 standards
+## Layer index — all 35 standards
 
-### Chung (both surfaces) — 25
+### Chung (both surfaces) — 26
 
 | Standard | Notes |
 | --- | --- |
@@ -46,6 +46,7 @@
 | Scroll-Physics-Standard | Scroll feel. |
 | Spacing-Token-Duplication-Standard | One role → one token. |
 | Data-Table-Standard | "either surface" — financial tables. |
+| Motion-Standard | Tablet absolute-zero; phone legacy ratchet only-shrink (54 entries) — cả hai surface. |
 
 ### Phone-only — 1
 
@@ -53,7 +54,7 @@
 | --- | --- |
 | Phone-Composition-Standard | 5 composition archetypes at 360px + phone↔tablet mapping. |
 
-### Tablet-only — 7
+### Tablet-only — 6
 
 | Standard | Notes |
 | --- | --- |
@@ -63,7 +64,6 @@
 | Tablet-Card-Border-Standard | R1–R7 frames, radii, tints, card padding. |
 | Tablet-Input-Standard | I1–I5 hover/focus states. |
 | Home-Tablet-Reference-Contract | Home-as-reference extraction. |
-| Motion-Standard | Phase 1: tablet absolute; phone 55 legacy items ratcheted (phase 2). |
 
 ### Module-scoped (Trade) — 2
 
