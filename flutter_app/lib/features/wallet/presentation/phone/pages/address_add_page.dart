@@ -196,7 +196,6 @@ class _AddressAddPageState extends ConsumerState<AddressAddPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         builder: (context) => AddressConfirmPreviewSheet(
           preview: preview,
           onConfirm: () {

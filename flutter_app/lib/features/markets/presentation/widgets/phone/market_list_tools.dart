@@ -121,7 +121,6 @@ class MarketListTools extends StatelessWidget {
       showVitBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: AppColors.bg,
         builder: (sheetContext) {
           return VitSheetPanel(
             title: 'Thêm công cụ',

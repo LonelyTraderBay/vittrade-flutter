@@ -117,7 +117,6 @@ class _ReferralRewardsPageState extends ConsumerState<ReferralRewardsPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,
         ),
@@ -184,7 +183,6 @@ class _ReferralRewardsPageState extends ConsumerState<ReferralRewardsPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,
         ),
@@ -239,7 +237,6 @@ class _ReferralRewardsPageState extends ConsumerState<ReferralRewardsPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,
         ),

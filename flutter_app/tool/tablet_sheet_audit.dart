@@ -45,6 +45,17 @@ final _dialogApiRes = <String, RegExp>{
   'AlertDialog': RegExp(r'AlertDialog\s*\('),
 };
 
+/// Mỗi dòng tham số `backgroundColor:` nằm nguyên dòng trong head của lời
+/// gọi sheet (từ sau showVitBottomSheet tới `builder:`).
+final _opaqueBgLineRe = RegExp(
+  r'^\s*backgroundColor:\s*AppColors\.(?:bg|surface)\s*,?\s*$',
+  multiLine: true,
+);
+final _transparentBgLineRe = RegExp(
+  r'^\s*backgroundColor:\s*AppColors\.transparent\s*,?\s*$',
+  multiLine: true,
+);
+
 class SheetRow {
   const SheetRow(this.rule, this.path, this.detail);
   final String rule;
@@ -116,6 +127,39 @@ List<SheetRow> scanLib() {
           'mở dialog căn giữa: ${dialogApis.join(', ')}',
         ),
       );
+    }
+  }
+
+  // S-bg-override — app-wide: màu nền sheet là tài sản của wrapper
+  // (`AppColors.surface` mặc định); caller không được truyền
+  // `backgroundColor: AppColors.bg/surface` (hai tông này từng trộn lẫn
+  // trên 27 call site). Riêng `transparent` là idiom phone legacy
+  // (widget tự vẽ VitSheetSurface) — hợp lệ ngoài tablet, CẤM trong
+  // tablet vì VitSheetPanel không tự vẽ nền (sheet sẽ lộ scrim).
+  for (final rel in all.keys.toList()..sort()) {
+    final src = all[rel]!;
+    final isTablet = _isTabletFile(rel);
+    for (final m in _rawSheetCallRe.allMatches(src)) {
+      final headStart = m.end;
+      final stop = src.indexOf('builder:', headStart);
+      final headEnd = (stop >= 0 && stop <= headStart + 400)
+          ? stop
+          : headStart + 400;
+      final head = src.substring(headStart, headEnd);
+      var detail = '';
+      if (_opaqueBgLineRe.hasMatch(head)) {
+        detail = 'truyền backgroundColor bg/surface — wrapper sở hữu màu nền';
+      } else if (isTablet && _transparentBgLineRe.hasMatch(head)) {
+        detail =
+            'truyền backgroundColor transparent trên tablet — panel '
+            'không tự vẽ nền, sheet sẽ lộ scrim';
+      }
+      if (detail.isNotEmpty) {
+        rows.add(
+          SheetRow('S-bg-override', rel.replaceFirst('lib/', ''), detail),
+        );
+        break; // một row mỗi file là đủ để ratchet
+      }
     }
   }
 
@@ -194,6 +238,18 @@ void _selfTest() {
       _dialogApiRes['showDialog']!.hasMatch('showVitConfirmSheet(x)') ||
       _dialogApiRes['showDialog']!.hasMatch('showVitBottomSheet(x)')) {
     stderr.writeln('selfTest: dialog-API regex broken.');
+    exit(3);
+  }
+  // S-bg-override: khớp nguyên dòng bg/surface/transparent, không khớp
+  // màu khác.
+  if (!_opaqueBgLineRe.hasMatch('        backgroundColor: AppColors.bg,') ||
+      !_opaqueBgLineRe.hasMatch('backgroundColor: AppColors.surface,') ||
+      _opaqueBgLineRe.hasMatch('backgroundColor: AppColors.transparent,') ||
+      _opaqueBgLineRe.hasMatch('backgroundColor: Colors.white,') ||
+      !_transparentBgLineRe.hasMatch(
+        'backgroundColor: AppColors.transparent,',
+      )) {
+    stderr.writeln('selfTest: bg-override regex broken.');
     exit(3);
   }
   if (_classDefRe.firstMatch('class FooBar extends X {')?.group(1) !=

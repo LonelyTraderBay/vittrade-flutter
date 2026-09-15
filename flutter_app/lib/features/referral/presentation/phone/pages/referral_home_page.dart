@@ -205,7 +205,6 @@ class _ReferralHomePageState extends ConsumerState<ReferralHomePage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,
         ),

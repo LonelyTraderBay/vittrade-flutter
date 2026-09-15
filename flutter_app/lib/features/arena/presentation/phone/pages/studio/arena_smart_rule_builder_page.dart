@@ -401,7 +401,6 @@ class _ArenaSmartRuleBuilderPageState
       isScrollControlled: true,
       useRootNavigator: true,
       useSafeArea: true,
-      backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: AppRadii.sheetTopRadius,
       ),
@@ -428,7 +427,6 @@ class _ArenaSmartRuleBuilderPageState
       isScrollControlled: true,
       useRootNavigator: true,
       useSafeArea: true,
-      backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: AppRadii.sheetTopRadius,
       ),
@@ -522,7 +520,6 @@ class _ArenaSmartRuleBuilderPageState
       isScrollControlled: true,
       useRootNavigator: true,
       useSafeArea: true,
-      backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: AppRadii.sheetTopRadius,
       ),

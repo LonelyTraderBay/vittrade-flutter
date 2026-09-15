@@ -203,7 +203,6 @@ class _ExecutionQualityTabletPageState
     final updated = await showVitBottomSheet<TradeSlippageSettings>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.transparent,
       builder: (context) => ExecutionQualitySlippageSheet(settings: current),
     );
     if (updated == null || !mounted) return;
@@ -231,7 +230,6 @@ class _ExecutionQualityTabletPageState
     await showVitBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.transparent,
       builder: (context) =>
           ExecutionQualityExecutionSheet(report: snapshot.report),
     );
@@ -246,7 +244,6 @@ class _ExecutionQualityTabletPageState
     final amended = await showVitBottomSheet<bool>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.transparent,
       builder: (context) => ExecutionQualityAmendmentSheet(order: order),
     );
     if (amended != true || !mounted) return;

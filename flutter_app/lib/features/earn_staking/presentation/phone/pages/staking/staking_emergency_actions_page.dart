@@ -156,7 +156,6 @@ class StakingEmergencyActionsPage extends ConsumerWidget {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         barrierColor: AppColors.bg.withValues(alpha: 0.72),
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,

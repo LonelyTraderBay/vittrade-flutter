@@ -27,7 +27,6 @@ class _HomePageState extends ConsumerState<HomePage> {
       showVitBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: AppColors.bg,
         barrierColor: AppColors.modalScrim,
         builder: (sheetContext) {
           return HomeMoreProductsSheet(

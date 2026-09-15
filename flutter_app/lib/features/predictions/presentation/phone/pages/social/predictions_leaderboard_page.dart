@@ -160,7 +160,6 @@ class _PredictionsLeaderboardPageState
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,
         ),

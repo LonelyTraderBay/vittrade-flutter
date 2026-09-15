@@ -46,6 +46,7 @@ Trên tablet, sheet **không tràn theo viewport**: wrapper tự kẹp bề rộ
 | Bề rộng phone | full-width theo viewport — không đổi | wrapper bỏ qua khi surface phone |
 | Tier chiều cao | compact **0.40** · standard **0.60** (mặc định tablet) · tall **0.85** | `VitSheetPanel.maxHeightFactor` nhận `TabletSpacingTokens.sheetHeightFactor*`; form nhiều bước khai báo tall |
 | Khung (handle + tiêu đề) | bắt buộc `VitSheetPanel`, hoặc API chuyên dụng `showVitNoticeSheet` / `showVitPreviewConfirmSheet` / `showVitTradeConfirmSheet` | `tool/tablet_sheet_audit.dart --check` |
+| **Màu nền sheet** | **wrapper sở hữu** — mặc định `AppColors.surface`, caller KHÔNG truyền `backgroundColor: AppColors.bg/surface` (hai tông này từng trộn lẫn trên 27 call site, user bắt được khi nghiệm thu); rule S-bg-override cấm cả `transparent` trên tablet vì `VitSheetPanel` không tự vẽ nền (sheet sẽ lộ scrim) | `tool/tablet_sheet_audit.dart --check` (rule S-bg-override, quét toàn app) |
 | Footer CTA | slot `footer` của `VitSheetPanel`: Divider hairline phía trên, KHÔNG cuộn theo nội dung — dùng cho confirm tài chính | cùng idiom `MarketsPaneScaffold.footer` |
 | Grid 2 cột | `VitSheetTwoColGrid` — bề rộng ô tính từ bề rộng THẬT của sheet (LayoutBuilder), **cấm** `MediaQuery.sizeOf` trong builder sheet ( viewport ≠ sheet sau khi cap) | widget shared |
 | Khoảng cách | title→nội dung x4 · grid gap x3 · nội dung→footer x4 — toàn bộ `TabletSpacingTokens` | panel tự áp |
@@ -64,6 +65,8 @@ Trên tablet surface, **mọi popup đều là bottom sheet** — không có dia
 | Thông báo cần bấm "Đã hiểu" | `showVitNoticeSheet` |
 
 `showVitConfirmDialog` / `AlertDialog` / `showDialog` là modality của **phone** — dùng trong code tablet bị rule **S-dialog** của `tablet_sheet_audit` chặn (đã quét sạch 7 vị trí dialog cũ: home catalog, ghi chú watchlist, 4 confirm profile/address book). Phone giữ nguyên hành vi hiện tại.
+
+**Ngoại lệ transparent (phone legacy):** ~35 sheet phone earn/trade-demo truyền `backgroundColor: AppColors.transparent` và tự vẽ nền bằng `VitSheetSurface` — idiom tồn tại trước chuẩn, hợp lệ trên phone (không thuộc ratchet). Trên **tablet bị cấm** (panel không tự vẽ nền). Sheet mới không được thêm vào nhóm này.
 
 ### Vì sao 480 chứ không phải 560/640
 

@@ -9,7 +9,9 @@ import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 /// tự áp **pop-over cap** trên tablet surface: khi `tabletSurfaceActive` bật
 /// và caller không tự truyền `constraints`, sheet bị kẹp bề rộng
 /// `TabletSpacingTokens.sheetMaxWidth` (480dp) và căn giữa — caller không
-/// cần (và không nên) tự tính bề rộng theo viewport.
+/// cần (và không nên) tự tính bề rộng theo viewport. **Màu nền sheet cũng do
+/// wrapper sở hữu** (`AppColors.surface`) — caller không truyền
+/// `backgroundColor` (rule S-bg-override của tablet_sheet_audit).
 Future<T?> showVitBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,

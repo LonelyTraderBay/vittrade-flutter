@@ -218,7 +218,6 @@ class _ArenaModeDetailPageState extends ConsumerState<ArenaModeDetailPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.surface,
         barrierColor: AppColors.dynamicIslandBg.withValues(alpha: .55),
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopRadius,

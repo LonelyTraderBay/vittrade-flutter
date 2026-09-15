@@ -38,7 +38,6 @@ Future<bool> showVitTradeConfirmSheet({
   final result = await showVitBottomSheet<bool>(
     context: context,
     isScrollControlled: true,
-    backgroundColor: AppColors.surface,
     barrierColor: AppColors.modalScrim,
     builder: (context) => VitTradeConfirmSheet(
       key: VitTradeConfirmKeys.confirmSheet,

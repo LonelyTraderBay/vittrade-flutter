@@ -249,7 +249,6 @@ class _ArenaHomePageState extends ConsumerState<ArenaHomePage> {
       showVitBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: AppColors.bg,
         builder: (sheetContext) {
           return _ArenaToolsSheet(
             onNavigate: (route) {

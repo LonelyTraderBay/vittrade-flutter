@@ -208,7 +208,6 @@ class _CopyAuditLogPageState extends ConsumerState<CopyAuditLogPage> {
     unawaited(
       showVitBottomSheet<void>(
         context: context,
-        backgroundColor: AppColors.bg,
         barrierColor: AppColors.dynamicIslandBg.withValues(alpha: .5),
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadii.sheetTopLargeRadius,

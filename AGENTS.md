@@ -217,10 +217,12 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   dung sheet phải trong `VitSheetPanel` (tier chiều cao, CTA confirm ghim
   slot `footer`, grid 2 cột `VitSheetTwoColGrid`). Trên tablet wrapper tự
   pop-over cap 480dp căn giữa — không truyền `constraints` hay tự tính
-  `MediaQuery.sizeOf` trong builder sheet. **Tablet không mở dialog căn
-  giữa**: catalog tràn/confirm/notice đều là bottom sheet (confirm dùng
-  `showVitConfirmSheet`); `showDialog`/`AlertDialog` là modality phone.
-  Tool khóa: `dart run tool/tablet_sheet_audit.dart --check`.
+  `MediaQuery.sizeOf` trong builder sheet. **Màu nền sheet do wrapper sở
+  hữu** (`AppColors.surface`) — không truyền tham số `backgroundColor` với
+  `AppColors.bg/surface` (rule S-bg-override). **Tablet không mở dialog
+  căn giữa**: catalog tràn/confirm/notice đều là bottom sheet (confirm
+  dùng `showVitConfirmSheet`); `showDialog`/`AlertDialog` là modality
+  phone. Tool khóa: `dart run tool/tablet_sheet_audit.dart --check`.
 
 ## Financial Safety
 

@@ -236,7 +236,6 @@ class _WalletPageState extends ConsumerState<WalletPage> {
       showVitBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: AppColors.bg,
         barrierColor: AppColors.modalScrim,
         builder: (sheetContext) {
           return VitSheetPanel(

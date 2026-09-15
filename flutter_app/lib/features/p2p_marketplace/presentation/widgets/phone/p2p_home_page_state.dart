@@ -277,7 +277,6 @@ class _P2PHomePageState extends ConsumerState<P2PHomePage> {
       showVitBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: AppColors.bg,
         builder: (sheetContext) {
           return _P2PHomeToolsSheet(
             onNavigate: (route) {

@@ -249,7 +249,6 @@ class _ConvertPageState extends ConsumerState<ConvertPage> {
     final selected = await showVitBottomSheet<String>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.surface,
       barrierColor: AppColors.modalScrim,
       builder: (_) => ConvertAssetSheet(
         side: side,
