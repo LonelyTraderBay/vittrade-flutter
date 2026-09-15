@@ -366,32 +366,28 @@ class _WalletHealthScoreTabletPageState
   Future<void> _showRecommendation(WalletHealthRecommendation recommendation) {
     return showVitBottomSheet<void>(
       context: context,
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(TabletSpacingTokens.x5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(recommendation.title, style: AppTextStyles.sectionTitle),
-              const SizedBox(height: TabletSpacingTokens.x4),
-              Text(recommendation.description),
-              const SizedBox(height: TabletSpacingTokens.x4),
-              VitStatusPill(
-                label: 'Khuyến nghị ưu tiên · ${recommendation.category}',
-                status: VitStatusPillStatus.warning,
-                icon: Icons.info_outline_rounded,
-                size: VitStatusPillSize.sm,
-              ),
-              const SizedBox(height: TabletSpacingTokens.x4),
-              VitCtaButton(
-                key: WalletHealthScoreTabletPage.sheetCloseKey,
-                onPressed: () => Navigator.of(context).pop(),
-                variant: VitCtaButtonVariant.secondary,
-                child: const Text('Đóng'),
-              ),
-            ],
-          ),
+      builder: (context) => VitSheetPanel(
+        title: recommendation.title,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(recommendation.description),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            VitStatusPill(
+              label: 'Khuyến nghị ưu tiên · ${recommendation.category}',
+              status: VitStatusPillStatus.warning,
+              icon: Icons.info_outline_rounded,
+              size: VitStatusPillSize.sm,
+            ),
+            const SizedBox(height: TabletSpacingTokens.x4),
+            VitCtaButton(
+              key: WalletHealthScoreTabletPage.sheetCloseKey,
+              onPressed: () => Navigator.of(context).pop(),
+              variant: VitCtaButtonVariant.secondary,
+              child: const Text('Đóng'),
+            ),
+          ],
         ),
       ),
     );

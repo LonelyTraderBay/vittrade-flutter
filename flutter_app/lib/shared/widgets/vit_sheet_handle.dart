@@ -40,19 +40,31 @@ class VitSheetHandle extends StatelessWidget {
   }
 }
 
-/// Standard bottom sheet body chrome: drag handle, title, and a
-/// height-clamped, flexible content area for [child].
+/// Standard bottom sheet body chrome: drag handle, title, a height-clamped,
+/// flexible content area for [child], and an optional pinned [footer] that
+/// never scrolls with the content (Divider hairline above it — same idiom
+/// as `MarketsPaneScaffold.footer`).
+///
+/// Chiều cao qua [maxHeightFactor] theo 3 tier của Bottom-Sheet-Standard
+/// (tablet): `sheetHeightFactorCompact` 0.40 cho notice ngắn,
+/// `sheetHeightFactorStandard` 0.60 mặc định, `sheetHeightFactorTall` 0.85
+/// cho form nhiều bước. Không truyền = default theo surface.
 class VitSheetPanel extends StatelessWidget {
   const VitSheetPanel({
     super.key,
     required this.title,
     required this.child,
     this.maxHeightFactor,
+    this.footer,
   });
 
   final String title;
   final Widget child;
   final double? maxHeightFactor;
+
+  /// Dải ghim dưới (CTA xác nhận/hủy…) — Divider hairline phía trên, không
+  /// cuộn theo nội dung. Null = không có.
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +78,7 @@ class VitSheetPanel extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxHeight),
         child: Padding(
-          padding: SharedSpacingTokens.homeMoreProductsSheetPadding,
+          padding: AppSurfaceSpacing.sheetPanelPadding,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,10 +93,51 @@ class VitSheetPanel extends StatelessWidget {
               ),
               SizedBox(height: AppSurfaceSpacing.x4),
               Flexible(child: child),
+              if (footer != null) ...[
+                SizedBox(height: AppSurfaceSpacing.x4),
+                Divider(
+                  height: AppSurfaceSpacing.dividerHairline,
+                  thickness: AppSurfaceSpacing.dividerHairline,
+                  color: AppColors.divider,
+                ),
+                SizedBox(height: AppSurfaceSpacing.x4),
+                footer!,
+              ],
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Lưới 2 cột chuẩn cho nội dung sheet: bề rộng ô tính từ **bề rộng thật
+/// của sheet** (LayoutBuilder), không bao giờ từ `MediaQuery.sizeOf` — nhờ
+/// vậy ô không tràn khi sheet bị pop-over cap 480dp trên tablet.
+class VitSheetTwoColGrid extends StatelessWidget {
+  const VitSheetTwoColGrid({super.key, required this.children, this.spacing});
+
+  final List<Widget> children;
+
+  /// Khoảng cách ngang/dọc giữa các ô; mặc định x3 (12dp tablet / 8dp
+  /// phone theo surface).
+  final double? spacing;
+
+  @override
+  Widget build(BuildContext context) {
+    final gap = spacing ?? AppSurfaceSpacing.x3;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final tileWidth = (constraints.maxWidth - gap) / 2;
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
+          children: [
+            for (final child in children)
+              SizedBox(width: tileWidth, child: child),
+          ],
+        );
+      },
     );
   }
 }

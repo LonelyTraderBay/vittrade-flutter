@@ -39,7 +39,7 @@
 | Segment-Pill-Standard | `VitSegmentedTabBar` pills. |
 | Service-Tile-Badge-Standard | Tier-B corner badges. |
 | Task-Card-Standard | Tier-E intrinsic-height rows. |
-| Bottom-Sheet-Standard | `showVitBottomSheet` only. |
+| Bottom-Sheet-Standard | `showVitBottomSheet` only; tablet thêm pop-over cap 480dp tự động + `VitSheetPanel`/tier/footer bắt buộc. |
 | High-Risk-State-Standard | Risk chrome primitives. |
 | Notice-Acknowledgement-Standard | Acknowledgement flow. |
 | Scroll-Auto-Hide-Standard | Scrollbar visibility. |

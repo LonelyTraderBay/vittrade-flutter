@@ -300,6 +300,9 @@ final class AppSurfaceSpacing {
   static double get sheetPanelMaxHeightFactor => _isTablet
       ? TabletSpacingTokens.sheetPanelMaxHeightFactor
       : AppSpacing.sheetPanelMaxHeightFactor;
+  static EdgeInsets get sheetPanelPadding => _isTablet
+      ? TabletSpacingTokens.sheetPanelPadding
+      : SharedSpacingTokens.homeMoreProductsSheetPadding;
   static double get vitPresetChipRowGap => _isTablet
       ? TabletSpacingTokens.vitPresetChipRowGap
       : AppSpacing.vitPresetChipRowGap;

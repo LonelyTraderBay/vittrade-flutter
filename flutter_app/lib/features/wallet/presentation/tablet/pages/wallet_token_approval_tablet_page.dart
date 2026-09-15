@@ -382,65 +382,67 @@ class _WalletTokenApprovalTabletPageState
     unawaited(
       showVitBottomSheet<void>(
         context: context,
+        // Tier tall của panel chỉ có hiệu lực khi modal không bị kẹp 9/16
+        // màn hình theo mặc định của Flutter.
+        isScrollControlled: true,
         builder: (sheetContext) => _revokeSheet(sheetContext, preview),
       ),
     );
   }
 
   Widget _revokeSheet(BuildContext sheetContext, TokenRevokePreview preview) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(TabletSpacingTokens.x5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(preview.title, style: AppTextStyles.sectionTitle),
-            const SizedBox(height: TabletSpacingTokens.x4),
-            Text(preview.body),
-            const SizedBox(height: TabletSpacingTokens.x4),
-            const VitHighRiskStatePanel(
-              state: VitHighRiskUiState.riskReview,
-              title: 'Bước xem trước bắt buộc',
-              message:
-                  'Kiểm tra đúng bên chi tiêu, token, hạn mức, phí gas và tác động trước khi ký.',
-              contractId: 'Thu hồi quyền token',
-              density: VitDensity.compact,
+    // Confirm thu hồi token = bước tài chính high-risk: CTA ghim footer,
+    // không cuộn theo nội dung (Bottom-Sheet-Standard); form confirm dùng
+    // tier tall để bảng rủi ro hiện trọn.
+    return VitSheetPanel(
+      maxHeightFactor: TabletSpacingTokens.sheetHeightFactorTall,
+      title: preview.title,
+      footer: Row(
+        children: [
+          Expanded(
+            child: VitCtaButton(
+              key: WalletTokenApprovalTabletPage.revokeSheetCancelKey,
+              onPressed: () => Navigator.of(sheetContext).pop(),
+              variant: VitCtaButtonVariant.secondary,
+              child: const Text('Xem lại sau'),
             ),
-            const SizedBox(height: TabletSpacingTokens.x4),
-            Row(
-              children: [
-                Expanded(
-                  child: VitCtaButton(
-                    key: WalletTokenApprovalTabletPage.revokeSheetCancelKey,
-                    onPressed: () => Navigator.of(sheetContext).pop(),
-                    variant: VitCtaButtonVariant.secondary,
-                    child: const Text('Xem lại sau'),
+          ),
+          const SizedBox(width: TabletSpacingTokens.x4),
+          Expanded(
+            child: VitCtaButton(
+              key: WalletTokenApprovalTabletPage.revokeSheetConfirmKey,
+              onPressed: () {
+                Navigator.of(sheetContext).pop();
+                unawaited(
+                  showVitNoticeSheet(
+                    context: context,
+                    title: 'Đã ghi nhận yêu cầu thu hồi',
+                    message:
+                        'Yêu cầu cần được ký và phát sóng sau khi kiểm tra phí mạng.',
                   ),
-                ),
-                const SizedBox(width: TabletSpacingTokens.x4),
-                Expanded(
-                  child: VitCtaButton(
-                    key: WalletTokenApprovalTabletPage.revokeSheetConfirmKey,
-                    onPressed: () {
-                      Navigator.of(sheetContext).pop();
-                      unawaited(
-                        showVitNoticeSheet(
-                          context: context,
-                          title: 'Đã ghi nhận yêu cầu thu hồi',
-                          message:
-                              'Yêu cầu cần được ký và phát sóng sau khi kiểm tra phí mạng.',
-                        ),
-                      );
-                    },
-                    variant: VitCtaButtonVariant.danger,
-                    child: Text(preview.confirmLabel),
-                  ),
-                ),
-              ],
+                );
+              },
+              variant: VitCtaButtonVariant.danger,
+              child: Text(preview.confirmLabel),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(preview.body),
+          const SizedBox(height: TabletSpacingTokens.x4),
+          const VitHighRiskStatePanel(
+            state: VitHighRiskUiState.riskReview,
+            title: 'Bước xem trước bắt buộc',
+            message:
+                'Kiểm tra đúng bên chi tiêu, token, hạn mức, phí gas và tác động trước khi ký.',
+            contractId: 'Thu hồi quyền token',
+            density: VitDensity.compact,
+          ),
+        ],
       ),
     );
   }

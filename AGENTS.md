@@ -213,6 +213,12 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
 - Never wrap `VitTabBar` / `VitSegmentedTabBar` in `VitCard` or `DecoratedBox`
   with a border — segment tabs render their own pill outline. Never use
   `BorderRadius.circular()` outside `app_radii.dart`.
+- Bottom sheet luôn qua `showVitBottomSheet` (guardrail chặn API thô); nội
+  dung sheet phải trong `VitSheetPanel` (tier chiều cao, CTA confirm ghim
+  slot `footer`, grid 2 cột `VitSheetTwoColGrid`). Trên tablet wrapper tự
+  pop-over cap 480dp căn giữa — không truyền `constraints` hay tự tính
+  `MediaQuery.sizeOf` trong builder sheet. Tool khóa:
+  `dart run tool/tablet_sheet_audit.dart --check`.
 
 ## Financial Safety
 

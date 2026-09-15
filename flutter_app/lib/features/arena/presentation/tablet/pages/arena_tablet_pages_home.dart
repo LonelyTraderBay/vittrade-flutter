@@ -1133,20 +1133,14 @@ class _ArenaToolsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    // Panel owns handle + title + inset ngang (Bottom-Sheet-Standard); hàng
+    // tool chỉ giữ padding dọc riêng.
+    return VitSheetPanel(
+      title: 'Công cụ Open Arena',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.all(TabletSpacingTokens.x5),
-            child: Text(
-              'Công cụ Open Arena',
-              style: AppTextStyles.sectionTitle.copyWith(
-                color: AppColors.text1,
-              ),
-            ),
-          ),
           for (final tool in _tools)
             Material(
               color: AppColors.transparent,
@@ -1154,7 +1148,6 @@ class _ArenaToolsSheet extends StatelessWidget {
                 onTap: () => onNavigate(tool.route),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: TabletSpacingTokens.x5,
                     vertical: TabletSpacingTokens.x3,
                   ),
                   child: Row(

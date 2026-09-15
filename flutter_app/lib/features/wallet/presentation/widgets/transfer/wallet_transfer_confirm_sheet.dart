@@ -26,6 +26,40 @@ class TransferConfirmSheet extends StatelessWidget {
 
     return VitSheetPanel(
       title: 'Xác nhận chuyển nội bộ',
+      // CTA ghim dưới theo Bottom-Sheet-Standard: không cuộn theo nội
+      // dung, luôn nhìn thấy kể cả khi bảng giá trị dài.
+      footer: Row(
+        children: [
+          Expanded(
+            child: Semantics(
+              button: true,
+              enabled: true,
+              label: 'Hủy xác nhận chuyển nội bộ',
+              child: VitCtaButton(
+                onPressed: () => Navigator.of(context).pop(),
+                variant: VitCtaButtonVariant.secondary,
+                height: AppSurfaceSpacing.ctaHeight,
+                child: const Text('Hủy'),
+              ),
+            ),
+          ),
+          SizedBox(width: _transferInlineGap),
+          Expanded(
+            child: Semantics(
+              key: const Key('sc146_transfer_confirm'),
+              button: true,
+              enabled: true,
+              label: 'Xác nhận chuyển nội bộ',
+              child: VitCtaButton(
+                onPressed: onConfirm,
+                variant: VitCtaButtonVariant.primary,
+                height: AppSurfaceSpacing.ctaHeight,
+                child: const Text('Xác nhận'),
+              ),
+            ),
+          ),
+        ],
+      ),
       child: ListView(
         shrinkWrap: true,
         children: [
@@ -109,38 +143,6 @@ class TransferConfirmSheet extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSurfaceSpacing.pageRhythmFormInnerGap),
-          Row(
-            children: [
-              Expanded(
-                child: Semantics(
-                  button: true,
-                  enabled: true,
-                  label: 'Hủy xác nhận chuyển nội bộ',
-                  child: VitCtaButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    variant: VitCtaButtonVariant.secondary,
-                    height: AppSurfaceSpacing.ctaHeight,
-                    child: const Text('Hủy'),
-                  ),
-                ),
-              ),
-              SizedBox(width: _transferInlineGap),
-              Expanded(
-                child: Semantics(
-                  key: const Key('sc146_transfer_confirm'),
-                  button: true,
-                  enabled: true,
-                  label: 'Xác nhận chuyển nội bộ',
-                  child: VitCtaButton(
-                    onPressed: onConfirm,
-                    variant: VitCtaButtonVariant.primary,
-                    height: AppSurfaceSpacing.ctaHeight,
-                    child: const Text('Xác nhận'),
-                  ),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );

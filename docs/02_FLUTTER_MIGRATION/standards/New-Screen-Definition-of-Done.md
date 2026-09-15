@@ -38,6 +38,11 @@ chạy là người gác.
   ADR-014 — không ThemeMode, không brightness branch).
 - [ ] Widget tái dùng từ 67 `Vit*` trước khi tự viết; `VitTabBar` không bọc
   trong card; semanticLabel tiếng Việt có dấu.
+- [ ] Bottom sheet: chỉ mở qua `showVitBottomSheet` / `showVitNoticeSheet` /
+  `showVitPreviewConfirmSheet` — nội dung trong `VitSheetPanel` (handle +
+  title + tier chiều cao; CTA confirm ghim slot `footer`); grid 2 cột dùng
+  `VitSheetTwoColGrid`, không tự tính `MediaQuery.sizeOf` (tablet đã
+  pop-over cap 480dp tự động — xem Bottom-Sheet-Standard).
 - [ ] File >600 dòng phải tách part `_sections`/`_widgets` (cùng thư mục,
   KHÔNG `_part_NN`).
 

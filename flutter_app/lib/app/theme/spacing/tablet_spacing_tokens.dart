@@ -194,8 +194,19 @@ final class TabletSpacingTokens {
   static const double serviceTileCompactLabelHeight =
       28; // nguồn: AppSpacing.serviceTileCompactLabelHeight
   static const double inputPrefixIcon = 18; // nguồn: AppSpacing.inputPrefixIcon
+  // ---- Bottom-Sheet-Standard (tablet surface): pop-over cap 480 + tier
+  // chiều cao — mặc định panel tablet = standard (0.60); sheet cao (form)
+  // khai báo tall, notice ngắn khai báo compact. ----
+  static const double sheetMaxWidth = 480;
+  static const double sheetHeightFactorCompact = 0.40;
+  static const double sheetHeightFactorStandard = 0.60;
+  static const double sheetHeightFactorTall = 0.85;
   static const double sheetPanelMaxHeightFactor =
-      0.72; // nguồn: AppSpacing.sheetPanelMaxHeightFactor
+      sheetHeightFactorStandard; // nguồn cũ 0.72 — chuẩn hóa theo tier
+  static const EdgeInsets sheetPanelPadding = EdgeInsets.symmetric(
+    horizontal: contentPad,
+    vertical: x4,
+  );
   static const double vitPresetChipRowGap =
       x1; // nguồn: AppSpacing.vitPresetChipRowGap
   static const double vitPresetChipRowHeight =

@@ -124,27 +124,19 @@ class MarketListTools extends StatelessWidget {
         builder: (sheetContext) {
           return VitSheetPanel(
             title: 'Thêm công cụ',
-            child: Wrap(
+            child: VitSheetTwoColGrid(
               spacing: TabletSpacingTokens.x3,
-              runSpacing: TabletSpacingTokens.x3,
               children: [
                 for (final tool in overflowTools)
-                  SizedBox(
-                    width:
-                        (MediaQuery.sizeOf(sheetContext).width -
-                            TabletSpacingTokens.contentPad * 2 -
-                            TabletSpacingTokens.x3) /
-                        2,
-                    child: VitServiceTile(
-                      density: VitServiceTileDensity.compact,
-                      icon: tool.icon,
-                      label: tool.label,
-                      accentColor: tool.color,
-                      onTap: () {
-                        Navigator.of(sheetContext).pop();
-                        onNavigate('/markets/${tool.route}');
-                      },
-                    ),
+                  VitServiceTile(
+                    density: VitServiceTileDensity.compact,
+                    icon: tool.icon,
+                    label: tool.label,
+                    accentColor: tool.color,
+                    onTap: () {
+                      Navigator.of(sheetContext).pop();
+                      onNavigate('/markets/${tool.route}');
+                    },
                   ),
               ],
             ),

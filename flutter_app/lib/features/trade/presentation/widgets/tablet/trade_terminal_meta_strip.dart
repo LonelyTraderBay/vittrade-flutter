@@ -53,40 +53,19 @@ class TradeTerminalMetaStrip extends StatelessWidget {
   Future<void> _openPairPicker(BuildContext context) async {
     final selected = await showVitBottomSheet<TradePair>(
       context: context,
-      builder: (sheetContext) => SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      builder: (sheetContext) => VitSheetPanel(
+        title: 'Chọn cặp giao dịch',
+        child: ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
           children: [
-            const Padding(
-              padding: TabletSpacingTokens.contentInsets,
-              child: VitSheetHandle(),
-            ),
-            Padding(
-              padding: TabletSpacingTokens.contentInsets,
-              child: Text(
-                'Chọn cặp giao dịch',
-                style: AppTextStyles.sectionTitle.copyWith(
-                  color: AppColors.text1,
-                ),
+            for (final candidate in pairs)
+              _TradePairPickerRow(
+                pair: candidate,
+                active: candidate.id == pair.id,
+                onTap: () => Navigator.of(sheetContext).pop(candidate),
               ),
-            ),
-            Flexible(
-              child: ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: TabletSpacingTokens.contentInsets,
-                children: [
-                  for (final candidate in pairs)
-                    _TradePairPickerRow(
-                      pair: candidate,
-                      active: candidate.id == pair.id,
-                      onTap: () => Navigator.of(sheetContext).pop(candidate),
-                    ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
