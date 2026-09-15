@@ -33,6 +33,18 @@ final _classDefRe = RegExp(
   multiLine: true,
 );
 
+/// Dialog APIs bị cấm trong code tablet (Bottom-Sheet-Standard "Dialog vs
+/// Sheet"): mọi popup trên tablet là bottom sheet — catalog tràn, confirm
+/// bảo mật/tài chính (showVitConfirmSheet), notice (showVitNoticeSheet).
+/// Dialog căn giữa là modality của phone.
+final _dialogApiRes = <String, RegExp>{
+  'showDialog': RegExp(r'showDialog\s*[<(]'),
+  'showVitConfirmDialog': RegExp(r'showVitConfirmDialog\s*\('),
+  'showGeneralDialog': RegExp(r'showGeneralDialog\s*[<(]'),
+  'showAdaptiveDialog': RegExp(r'showAdaptiveDialog\s*[<(]'),
+  'AlertDialog': RegExp(r'AlertDialog\s*\('),
+};
+
 class SheetRow {
   const SheetRow(this.rule, this.path, this.detail);
   final String rule;
@@ -79,7 +91,8 @@ List<SheetRow> scanLib() {
   final tabletFiles = all.keys.where(_isTabletFile).toList()..sort();
   final rows = <SheetRow>[];
 
-  // S-chrome-leak — theo file vật lý (tuyệt đối cho mọi file tablet).
+  // S-chrome-leak + S-dialog — theo file vật lý (tuyệt đối cho mọi file
+  // tablet).
   for (final rel in tabletFiles) {
     final src = all[rel]!;
     if (src.contains('VitSheetHandle(') || src.contains('VitSheetSurface(')) {
@@ -88,6 +101,19 @@ List<SheetRow> scanLib() {
           'S-chrome-leak',
           rel.replaceFirst('lib/', ''),
           'dùng trực tiếp VitSheetHandle/VitSheetSurface',
+        ),
+      );
+    }
+    final dialogApis = [
+      for (final e in _dialogApiRes.entries)
+        if (e.value.hasMatch(src)) e.key,
+    ];
+    if (dialogApis.isNotEmpty) {
+      rows.add(
+        SheetRow(
+          'S-dialog',
+          rel.replaceFirst('lib/', ''),
+          'mở dialog căn giữa: ${dialogApis.join(', ')}',
         ),
       );
     }
@@ -158,6 +184,16 @@ void _selfTest() {
       !_rawSheetCallRe.hasMatch('showVitBottomSheet<bool>(x)') ||
       _rawSheetCallRe.hasMatch('showVitNoticeSheet(x)')) {
     stderr.writeln('selfTest: raw-call regex broken.');
+    exit(3);
+  }
+  // S-dialog: bắt cả dạng generic, không lẫn API sheet hợp lệ.
+  if (!_dialogApiRes['showDialog']!.hasMatch('showDialog<void>(x)') ||
+      !_dialogApiRes['showVitConfirmDialog']!.hasMatch(
+        'showVitConfirmDialog(x)',
+      ) ||
+      _dialogApiRes['showDialog']!.hasMatch('showVitConfirmSheet(x)') ||
+      _dialogApiRes['showDialog']!.hasMatch('showVitBottomSheet(x)')) {
+    stderr.writeln('selfTest: dialog-API regex broken.');
     exit(3);
   }
   if (_classDefRe.firstMatch('class FooBar extends X {')?.group(1) !=

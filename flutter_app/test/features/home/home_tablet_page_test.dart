@@ -347,9 +347,11 @@ void main() {
     await tester.tap(moreAction);
     await tester.pumpAndSettle();
 
-    // Tablet presents the catalog as a centered dialog, not the phone
-    // bottom sheet.
-    expect(find.byType(AlertDialog), findsOneWidget);
+    // Tablet presents the catalog as a standard bottom sheet (pop-over cap
+    // 480dp) — cùng modality "Thêm" của Markets/Arena, không còn dialog
+    // căn giữa (Bottom-Sheet-Standard "Dialog vs Sheet").
+    expect(find.byType(VitSheetPanel), findsOneWidget);
+    expect(find.byType(AlertDialog), findsNothing);
     expect(find.byType(HomeMoreProductsSheet), findsNothing);
     // …and as compact list rows, not the old tile grid.
     expect(

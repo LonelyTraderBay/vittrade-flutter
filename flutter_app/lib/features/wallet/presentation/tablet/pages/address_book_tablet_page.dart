@@ -519,7 +519,7 @@ class _AddressTabletCard extends StatelessWidget {
     WidgetRef ref,
     WalletSavedAddress address,
   ) async {
-    final confirmed = await showVitConfirmDialog(
+    final confirmed = await showVitConfirmSheet(
       context: context,
       title: 'Xóa địa chỉ',
       message: 'Bạn có chắc muốn xóa "${address.label}" không?',

@@ -6,8 +6,9 @@ import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/home_controller_providers.dart';
 import 'package:vit_trade_flutter/app/providers/notifications_controller_providers.dart';
+import 'package:vit_trade_flutter/shared/widgets/vit_bottom_sheet.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_header.dart';
-import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_more_products_dialog.dart';
+import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_more_products_sheet_tablet.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_products_section.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_status_content.dart';
 import 'package:vit_trade_flutter/features/home/presentation/widgets/tablet/home_tablet_reference_home.dart';
@@ -75,13 +76,14 @@ class _HomeTabletPageState extends ConsumerState<HomeTabletPage> {
     if (actions.isEmpty) return;
 
     unawaited(
-      showDialog<void>(
+      showVitBottomSheet<void>(
         context: context,
-        builder: (dialogContext) {
-          return HomeMoreProductsDialog(
+        isScrollControlled: true,
+        builder: (sheetContext) {
+          return HomeMoreProductsTabletSheet(
             actions: actions,
             onNavigate: (path) {
-              Navigator.of(dialogContext).pop();
+              Navigator.of(sheetContext).pop();
               unawaited(rootContext.push(path));
             },
           );

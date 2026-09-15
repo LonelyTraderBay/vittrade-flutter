@@ -151,7 +151,7 @@ class _ProfileApiPaneState extends ConsumerState<ProfileApiPane> {
 
   Future<void> _confirmDelete(ProfileApiKey apiKey) async {
     unawaited(HapticFeedback.selectionClick());
-    final confirmed = await showVitConfirmDialog(
+    final confirmed = await showVitConfirmSheet(
       context: context,
       title: 'Xóa API Key?',
       message:

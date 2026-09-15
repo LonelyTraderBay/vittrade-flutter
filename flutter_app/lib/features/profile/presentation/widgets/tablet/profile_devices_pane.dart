@@ -164,7 +164,7 @@ class _ProfileDevicesPaneState extends ConsumerState<ProfileDevicesPane> {
 
   Future<void> _logoutDevice(String id) async {
     final device = _deviceById(id);
-    final confirmed = await showVitConfirmDialog(
+    final confirmed = await showVitConfirmSheet(
       context: context,
       title: 'Đăng xuất thiết bị?',
       message: 'Phiên đăng nhập trên thiết bị này sẽ bị thu hồi ngay lập tức.',

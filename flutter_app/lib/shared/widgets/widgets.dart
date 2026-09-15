@@ -16,6 +16,7 @@ export 'package:vit_trade_flutter/shared/widgets/vit_segmented_choice.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_segmented_tab_bar.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_compact_product_card.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_confirm_dialog.dart';
+export 'package:vit_trade_flutter/shared/widgets/vit_confirm_sheet.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_counted_section_header.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_cta_button.dart';
 export 'package:vit_trade_flutter/shared/widgets/vit_discovery_action_card.dart';

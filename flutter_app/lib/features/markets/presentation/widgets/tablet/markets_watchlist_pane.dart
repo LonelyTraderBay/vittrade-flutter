@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:vit_trade_flutter/app/providers/market_controller_providers.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
-import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/markets/presentation/widgets/market_formatters.dart';
@@ -116,34 +115,37 @@ class _MarketsWatchlistPaneState extends ConsumerState<MarketsWatchlistPane> {
 
   Future<void> _editNote(MarketWatchlistEntry entry) async {
     final controller = TextEditingController(text: entry.note ?? '');
-    final note = await showDialog<String>(
+    // Bottom sheet chuẩn (Bottom-Sheet-Standard): tablet không mở dialog
+    // căn giữa; CTA Lưu/Hủy ghim footer, không cuộn theo input.
+    final note = await showVitBottomSheet<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surface,
-        title: Text(
-          entry.note == null ? 'Thêm ghi chú' : 'Sửa ghi chú',
-          style: AppTextStyles.baseMedium,
+      isScrollControlled: true,
+      builder: (sheetContext) => VitSheetPanel(
+        title: entry.note == null ? 'Thêm ghi chú' : 'Sửa ghi chú',
+        footer: Row(
+          children: [
+            Expanded(
+              child: VitCtaButton(
+                onPressed: () => Navigator.of(sheetContext).pop(),
+                variant: VitCtaButtonVariant.ghost,
+                child: const Text('Hủy'),
+              ),
+            ),
+            const SizedBox(width: TabletSpacingTokens.x4),
+            Expanded(
+              child: VitCtaButton(
+                onPressed: () =>
+                    Navigator.of(sheetContext).pop(controller.text),
+                child: const Text('Lưu'),
+              ),
+            ),
+          ],
         ),
-        content: VitInput(
+        child: VitInput(
           controller: controller,
           autofocus: true,
           semanticLabel: 'Ghi chú danh mục theo dõi',
         ),
-        actions: [
-          VitCtaButton(
-            onPressed: () => Navigator.of(context).pop(),
-            variant: VitCtaButtonVariant.ghost,
-            fullWidth: false,
-            density: VitDensity.compact,
-            child: const Text('Hủy'),
-          ),
-          VitCtaButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            fullWidth: false,
-            density: VitDensity.compact,
-            child: const Text('Lưu'),
-          ),
-        ],
       ),
     );
     if (note == null) return;

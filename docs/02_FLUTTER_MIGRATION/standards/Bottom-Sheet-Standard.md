@@ -52,6 +52,19 @@ Trên tablet, sheet **không tràn theo viewport**: wrapper tự kẹp bề rộ
 
 **Bẫy chiều cao Flutter:** `showModalBottomSheet` không có `isScrollControlled: true` tự kẹp sheet ở **9/16 chiều cao màn hình**, vô hiệu hóa mọi tier của panel — sheet dùng tier standard/tall hoặc có footer phải luôn truyền `isScrollControlled: true`.
 
+### Dialog vs Sheet (tablet — 2026-09-13, user chốt "popup thành bottom sheet hết")
+
+Trên tablet surface, **mọi popup đều là bottom sheet** — không có dialog căn giữa:
+
+| Loại popup | API bắt buộc |
+| --- | --- |
+| Danh mục/công cụ tràn ("Xem thêm", "Thêm công cụ") | `showVitBottomSheet` + `VitSheetPanel` (+ `VitSheetTwoColGrid` nếu grid) |
+| Confirm bảo mật/tài chính (xóa key, đăng xuất thiết bị, xóa địa chỉ…) | `showVitConfirmSheet` — song sinh bottom-sheet của `showVitConfirmDialog`, cùng tham số, CTA ghim footer |
+| Confirm tài chính có bảng xem trước | `showVitPreviewConfirmSheet` |
+| Thông báo cần bấm "Đã hiểu" | `showVitNoticeSheet` |
+
+`showVitConfirmDialog` / `AlertDialog` / `showDialog` là modality của **phone** — dùng trong code tablet bị rule **S-dialog** của `tablet_sheet_audit` chặn (đã quét sạch 7 vị trí dialog cũ: home catalog, ghi chú watchlist, 4 confirm profile/address book). Phone giữ nguyên hành vi hiện tại.
+
 ### Vì sao 480 chứ không phải 560/640
 
 640dp là mặc định vô tình của framework (không ai quyết định); 480dp kiểu iPad pop-over giữ sheet gọn trong tầm mắt, ô grid 2 cột ≈ 214dp đủ đọc thoải mái, và sheet không chiếm ngang toàn màn hình tablet landscape. User duyệt 480 trong phiên chốt chuẩn 2026-09-13.

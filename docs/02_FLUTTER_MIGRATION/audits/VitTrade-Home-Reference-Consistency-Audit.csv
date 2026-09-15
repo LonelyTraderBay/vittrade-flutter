@@ -381,7 +381,7 @@ home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/ho
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_header.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_ticker_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_market_watchlist_panel.dart,0,0,0,0,0,0,0,0,yes,allowed_source_keyword: candlestick
-home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_more_products_dialog.dart,0,0,0,0,0,0,0,0,no,-
+home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_more_products_sheet_tablet.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_next_action_section.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_notice_line.dart,0,0,0,0,0,0,0,0,no,-
 home,feature_widget,flutter_app/lib/features/home/presentation/widgets/tablet/home_portfolio_card.dart,0,0,0,0,0,0,0,0,no,-

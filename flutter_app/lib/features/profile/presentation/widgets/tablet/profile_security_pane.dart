@@ -119,7 +119,7 @@ class _ProfileSecurityPaneState extends ConsumerState<ProfileSecurityPane> {
   }
 
   Future<void> _saveAntiPhishingCode() async {
-    final confirmed = await showVitConfirmDialog(
+    final confirmed = await showVitConfirmSheet(
       context: context,
       title: 'Xác nhận mã chống lừa đảo',
       rows: [
