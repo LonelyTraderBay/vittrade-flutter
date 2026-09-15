@@ -366,6 +366,8 @@ class _WalletHealthScoreTabletPageState
   Future<void> _showRecommendation(WalletHealthRecommendation recommendation) {
     return showVitBottomSheet<void>(
       context: context,
+      // Tránh kẹp 9/16 mặc định của Flutter (bẫy đã ghi trong chuẩn).
+      isScrollControlled: true,
       builder: (context) => VitSheetPanel(
         title: recommendation.title,
         child: Column(

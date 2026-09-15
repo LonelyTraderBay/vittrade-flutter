@@ -53,6 +53,8 @@ class TradeTerminalMetaStrip extends StatelessWidget {
   Future<void> _openPairPicker(BuildContext context) async {
     final selected = await showVitBottomSheet<TradePair>(
       context: context,
+      // Tránh kẹp 9/16 mặc định của Flutter (bẫy đã ghi trong chuẩn).
+      isScrollControlled: true,
       builder: (sheetContext) => VitSheetPanel(
         title: 'Chọn cặp giao dịch',
         child: ListView(

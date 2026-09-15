@@ -136,6 +136,11 @@ List<SheetRow> scanLib() {
   // trên 27 call site). Riêng `transparent` là idiom phone legacy
   // (widget tự vẽ VitSheetSurface) — hợp lệ ngoài tablet, CẤM trong
   // tablet vì VitSheetPanel không tự vẽ nền (sheet sẽ lộ scrim).
+  //
+  // S-scroll — tablet: mọi showVitBottomSheet PHẢI truyền
+  // `isScrollControlled: true`; thiếu nó Flutter tự kẹp sheet ở 9/16 chiều
+  // cao màn hình, vô hiệu tier của panel (bẫy 2026-09-13: sheet revoke
+  // tràn 40px vì vậy).
   for (final rel in all.keys.toList()..sort()) {
     final src = all[rel]!;
     final isTablet = _isTabletFile(rel);
@@ -147,17 +152,23 @@ List<SheetRow> scanLib() {
           : headStart + 400;
       final head = src.substring(headStart, headEnd);
       var detail = '';
+      var rule = '';
       if (_opaqueBgLineRe.hasMatch(head)) {
+        rule = 'S-bg-override';
         detail = 'truyền backgroundColor bg/surface — wrapper sở hữu màu nền';
       } else if (isTablet && _transparentBgLineRe.hasMatch(head)) {
+        rule = 'S-bg-override';
         detail =
             'truyền backgroundColor transparent trên tablet — panel '
             'không tự vẽ nền, sheet sẽ lộ scrim';
+      } else if (isTablet && !head.contains('isScrollControlled')) {
+        rule = 'S-scroll';
+        detail =
+            'thiếu isScrollControlled: true — Flutter kẹp sheet 9/16 '
+            'màn hình, tier của panel mất tác dụng';
       }
       if (detail.isNotEmpty) {
-        rows.add(
-          SheetRow('S-bg-override', rel.replaceFirst('lib/', ''), detail),
-        );
+        rows.add(SheetRow(rule, rel.replaceFirst('lib/', ''), detail));
         break; // một row mỗi file là đủ để ratchet
       }
     }
