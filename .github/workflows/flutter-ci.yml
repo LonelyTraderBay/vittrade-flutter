@@ -90,6 +90,9 @@ jobs:
       - name: Tablet sheet chrome artifact is current
         run: dart run tool/tablet_sheet_audit.dart --check
 
+      - name: Tablet neutral widget artifact is current
+        run: dart run tool/tablet_neutral_widget_audit.dart --check
+
       - name: Design token consistency artifact is current
         run: dart run tool/design_token_consistency_audit.dart --check
 

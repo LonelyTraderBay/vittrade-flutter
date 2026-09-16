@@ -34,7 +34,7 @@
 | Page-Content-Width-Standard | Recipe A/B; tablet shells documented. |
 | Page-Rhythm-Standard | Role→tier table is chung — **hero `relaxed` is phone-only** (PR-T1 bans it on tablet). |
 | Device-UI-Organization-Standard | Folder contract phone\|tablet\|web. |
-| Surface-Architecture-Standard | No cross-surface imports. |
+| Surface-Architecture-Standard | No cross-surface imports; module composition pattern + neutral widget path dual-surface (`tablet_neutral_widget_audit`). |
 | Card-Tile-Standard | Fixed-height tiles; on tablet also obey CB-R5 (radius tight). |
 | Segment-Pill-Standard | `VitSegmentedTabBar` pills. |
 | Service-Tile-Badge-Standard | Tier-B corner badges. |
