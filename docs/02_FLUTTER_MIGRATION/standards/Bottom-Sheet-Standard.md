@@ -42,7 +42,9 @@ Trên tablet, sheet **không tràn theo viewport**: wrapper tự kẹp bề rộ
 
 | Quy tắc | Giá trị chuẩn | Cơ chế |
 | --- | --- | --- |
-| Bề rộng tablet/web | cap **480dp** (`TabletSpacingTokens.sheetMaxWidth`), căn giữa, tự động | nằm trong `showVitBottomSheet` — caller không truyền `constraints` |
+| Bề rộng **tablet** | cap **480dp** (`TabletSpacingTokens.sheetMaxWidth`), căn giữa, tự động | nằm trong `showVitBottomSheet` — caller không truyền `constraints` |
+
+**Phạm vi (2026-09-16, user chốt):** chuẩn này ràng buộc **surface tablet** — scope của team UI tablet hiện tại. Phone giữ modality riêng; **web chưa được cap 480** (cờ `tabletSurfaceActive` = false trên web ⇒ sheet web rơi về mặc định 640dp của Flutter) — bàn giao cho đội phụ trách web sau, chưa sửa trong chuẩn này.
 | Bề rộng phone | full-width theo viewport — không đổi | wrapper bỏ qua khi surface phone |
 | Tier chiều cao | compact **0.40** · standard **0.60** (mặc định tablet) · tall **0.85** | `VitSheetPanel.maxHeightFactor` nhận `TabletSpacingTokens.sheetHeightFactor*`; form nhiều bước khai báo tall |
 | Khung (handle + tiêu đề) | bắt buộc `VitSheetPanel`, hoặc API chuyên dụng `showVitNoticeSheet` / `showVitPreviewConfirmSheet` / `showVitTradeConfirmSheet` | `tool/tablet_sheet_audit.dart --check` |
