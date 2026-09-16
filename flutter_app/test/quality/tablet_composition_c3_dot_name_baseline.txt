@@ -105,12 +105,12 @@ features/earn_staking/presentation/phone/pages/staking/staking_third_party_integ
 features/earn_staking/presentation/phone/pages/staking/staking_validator_selection_page.dart 2
 features/earn_staking/presentation/tablet/pages/staking_tablet_pages.dart 1
 features/earn_staking/presentation/tablet/pages/staking_tablet_pages_community.dart 3
-features/earn_staking/presentation/tablet/pages/staking_tablet_pages_community2.dart 1
-features/earn_staking/presentation/tablet/pages/staking_tablet_pages_core2.dart 1
+features/earn_staking/presentation/tablet/pages/staking_tablet_pages_core.dart 1
+features/earn_staking/presentation/tablet/pages/staking_tablet_pages_custody.dart 3
+features/earn_staking/presentation/tablet/pages/staking_tablet_pages_governance.dart 1
+features/earn_staking/presentation/tablet/pages/staking_tablet_pages_institutional.dart 2
 features/earn_staking/presentation/tablet/pages/staking_tablet_pages_operators.dart 5
-features/earn_staking/presentation/tablet/pages/staking_tablet_pages_operators2.dart 2
 features/earn_staking/presentation/tablet/pages/staking_tablet_pages_reports.dart 5
-features/earn_staking/presentation/tablet/pages/staking_tablet_pages_reports2.dart 3
 features/earn_staking/presentation/widgets/staking/staking_advanced_orders_overview_orders.dart 3
 features/earn_staking/presentation/widgets/staking/staking_api_documentation_endpoints.dart 1
 features/earn_staking/presentation/widgets/staking/staking_api_documentation_overview.dart 1
@@ -234,7 +234,7 @@ features/predictions/presentation/phone/pages/hub/predictions_home_page.dart 1
 features/predictions/presentation/phone/pages/portfolio/predictions_portfolio_page.dart 4
 features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart 1
 features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart 2
-features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore2.dart 9
+features/predictions/presentation/tablet/pages/predictions_tablet_pages_social.dart 9
 features/predictions/presentation/widgets/event/prediction_advanced_chart_analysis.dart 1
 features/predictions/presentation/widgets/event/prediction_advanced_chart_indicators.dart 1
 features/predictions/presentation/widgets/event/prediction_event_detail_activity_holders.dart 1

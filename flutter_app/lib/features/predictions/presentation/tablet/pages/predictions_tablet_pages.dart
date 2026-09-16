@@ -13,7 +13,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 part 'predictions_tablet_pages_explore.dart';
-part 'predictions_tablet_pages_explore2.dart';
+part 'predictions_tablet_pages_social.dart';
 
 String _pdmUsd(num v) => VitFormat.usd(v.toDouble());
 String _pdmUsdS(num v) => VitFormat.usdSigned(v.toDouble());

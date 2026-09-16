@@ -13,12 +13,12 @@ import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 
 part 'staking_tablet_pages_policies.dart';
 part 'staking_tablet_pages_operators.dart';
-part 'staking_tablet_pages_operators2.dart';
+part 'staking_tablet_pages_institutional.dart';
 part 'staking_tablet_pages_reports.dart';
-part 'staking_tablet_pages_reports2.dart';
+part 'staking_tablet_pages_custody.dart';
 part 'staking_tablet_pages_community.dart';
-part 'staking_tablet_pages_community2.dart';
-part 'staking_tablet_pages_core2.dart';
+part 'staking_tablet_pages_governance.dart';
+part 'staking_tablet_pages_core.dart';
 
 String _stkUsd(num v) => VitFormat.usd(v.toDouble());
 String _stkUsdS(num v) => VitFormat.usdSigned(v.toDouble());
