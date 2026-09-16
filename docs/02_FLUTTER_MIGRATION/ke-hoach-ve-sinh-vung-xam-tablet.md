@@ -1,6 +1,15 @@
 # Kế hoạch vệ sinh vùng xám tablet (nhóm C) — chốt 2026-09-16
 
-Trạng thái: **ĐÃ DUYỆT** — chạy theo thứ tự ưu tiên GĐ1 → GĐ4 đến hoàn thiện 100%.
+Trạng thái: **HOÀN THÀNH 100%** (2026-09-16). Kết quả từng giai đoạn:
+
+| Giai đoạn | Kết quả | Commit |
+| --- | --- | --- |
+| GĐ1 Batch 1 (C3) | 2 part order receipt tablet dời về cùng thư mục lib cha + tiền tố tên lib; regen 7 artifact + baseline icon | `560e3346` |
+| GĐ1 Batch 2 (C4) | 5 part file đuôi "2" đổi tên vai trò (core/institutional/custody/governance/social); baseline C3 dot-name + nav edges | `eddfadac` |
+| GĐ2 (C1) | Đo lại import-graph: 0 widget cần dời (33 đã ở widgets/tablet, 22 trung tính đều dual-surface) — không thi công | `0de5484a` |
+| GĐ3 (C2) | Section Module Composition Pattern trong Surface-Architecture-Standard + AGENTS + bàn giao phone (pair order_receipt phone) | `d414e3f7` |
+| GĐ4 | `tool/tablet_neutral_widget_audit.dart` (N-tablet-only/N-tablet-part, giải import transitive) + CI step + baseline 0 | `c1beffac` |
+
 Phạm vi: tablet-only. Mọi nợ phone chỉ ghi vào bảng bàn giao, không sửa.
 
 ## Đầu vào đo được (2026-09-16)
