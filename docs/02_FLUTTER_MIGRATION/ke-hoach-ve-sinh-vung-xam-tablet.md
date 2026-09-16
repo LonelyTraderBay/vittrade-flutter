@@ -5,7 +5,7 @@ Phạm vi: tablet-only. Mọi nợ phone chỉ ghi vào bảng bàn giao, không
 
 ## Đầu vào đo được (2026-09-16)
 
-- **C1**: 55 widget trung tính bị tablet import = 29 dual-surface (hợp lệ, giữ) + **26 tablet-only cần dời** về `presentation/widgets/tablet/` (profile 8, trade 3 + 6 panel terminal, wallet 4, markets 3, home 2). 0/55 widget đọc `AppSpacing` trực tiếp ⇒ không migrate token.
+- **C1**: 55 đường widget bị tablet page import = **33 file đã nằm đúng `presentation/widgets/tablet/`** + 22 file trung tính, trong đó **toàn bộ 22 đều dual-surface** (19 phone import trực tiếp + 3 chuỗi wallet `widgets/address/` phone dùng transitively qua `wallet_address_add_sections.dart` ← `address_add_page.dart:13`). **Tập cần dời = 0 file.** (Số "26 cần dời" ban đầu là lỗi đo: regex bắt cả path `/tablet/` + đếm basename không thấy usage transitive; bẫy grep-wrapper pattern bắt đầu `/` cũng che mất bước lọc.) 0/55 widget đọc `AppSpacing` trực tiếp ⇒ không migrate token.
 - **C2**: 2 pattern module song song (P2P: phone-UI thuần + domain dồn p2p_core ↔ 27 module full-stack). Chưa chuẩn chốt pattern feature mới.
 - **C3**: 2 part tablet của `trade_tablet_order_receipt_page.dart` đặt ở `widgets/tablet/` qua `part '../../…'`. Phone pair cùng tên cũng lệch chuẩn (bàn giao, không sửa).
 - **C4**: 5 part file đuôi "2" (staking ×4, predictions ×1). Test không tham chiếu tên file nào trong 5 file.
@@ -29,19 +29,13 @@ Phạm vi: tablet-only. Mọi nợ phone chỉ ghi vào bảng bàn giao, không
   - `predictions_tablet_pages_explore2` → `predictions_tablet_pages_social`
   - Sửa part directive trong 2 thư viện cha. Re-verify tên mới chưa tồn tại trước khi mv.
 
-## GĐ2 — Dời 26 widget tablet-only về `presentation/widgets/tablet/`
+## GĐ2 — Dời widget tablet-only: KHÔNG CẦN THI CÔNG (đo lại = 0 vi phạm)
 
-Chỉ dời + sửa import, không sửa nội dung widget. Đích là quy ước đa số `widgets/tablet/` (wallet dùng `presentation/tablet/widgets/` — ghi nhận lệch, ngoài scope).
-
-| Batch | Feature | File (26) | Lưu ý |
-| --- | --- | --- | --- |
-| 3 | profile | account_hero, discovery_panel, pane_navigation, **pane_scaffold**, product_hub_panel, security_summary, status_content, tablet_keys | pane_scaffold là scaffold registry T1/T2 — chạy tier audit sau move |
-| 4 | trade | trade_status_content, trade_tablet_detail_surface, trade_tablet_keys (13 importer) + trade_terminal_{book,bottom,chart,meta,panel,tape}_panel | trace đầy đủ importer |
-| 5 | wallet | wallet_address_add_{common,form,preview}, wallet_tablet_keys | — |
-| 6 | markets | markets_pulse_strip, markets_status_content, markets_tablet_keys | chạy golden suite markets |
-| 7 | home | home_more_products_sheet_tablet, home_tablet_reference_home | rà chuẩn Home-Tablet-Reference-Contract trước khi move (có thể reference path) |
-
-Chấp nhận GĐ2: `presentation/widgets/` (ngoài `/tablet/`) không còn file nào chỉ tablet dùng; 29 file dual-surface còn lại = "trung tính thật".
+Đo lại bằng import-graph trước khi di chuyển cho ra: mọi widget tablet-only đã ở
+đúng `presentation/widgets/tablet/`; đường trung tính `presentation/widgets/**`
+chứa đúng widget dual-surface (trực tiếp hoặc transitively). Không batch 3–7.
+Quy ước thực tế này được ghi thành chuẩn ở GĐ3 và khóa bằng audit ở GĐ4
+(audit phải giải import transitive — bài học từ chuỗi wallet address).
 
 ## GĐ3 — Chuẩn module pattern (doc-only)
 
