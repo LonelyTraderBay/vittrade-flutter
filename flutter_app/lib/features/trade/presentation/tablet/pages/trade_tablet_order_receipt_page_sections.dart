@@ -1,4 +1,4 @@
-part of '../../tablet/pages/trade_tablet_order_receipt_page.dart';
+part of 'trade_tablet_order_receipt_page.dart';
 
 class _ReceiptCard extends StatelessWidget {
   const _ReceiptCard({required this.receipt});

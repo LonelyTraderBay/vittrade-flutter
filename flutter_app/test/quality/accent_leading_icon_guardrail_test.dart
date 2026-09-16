@@ -164,7 +164,7 @@ Row(
           2,
       '/features/profile/presentation/widgets/tablet/profile_vip_pane_sections.dart':
           1,
-      '/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart':
+      '/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page_common.dart':
           2,
       '/features/wallet/presentation/tablet/pages/address_book_tablet_page.dart':
           2,

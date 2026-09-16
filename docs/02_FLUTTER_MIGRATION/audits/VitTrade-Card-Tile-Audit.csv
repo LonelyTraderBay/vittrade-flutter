@@ -867,6 +867,8 @@ trade,flutter_app/lib/features/trade/presentation/tablet/pages/risk_management_t
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/risk_management_tablet_page_widgets.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_history_export_tablet_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_settings_tablet_page.dart,2,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page_common.dart,3,0,0,C,0,0,0,pass,-
+trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_order_receipt_page_sections.dart,1,0,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/tablet/pages/trade_tablet_utility_page.dart,3,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_amount_widgets.dart,2,1,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/convert/convert_page_sections.dart,1,0,0,E,0,0,0,pass,-
@@ -890,8 +892,6 @@ trade,flutter_app/lib/features/trade/presentation/widgets/phone/trade_history_ex
 trade,flutter_app/lib/features/trade/presentation/widgets/phone/trade_settings_page_common.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/phone/trade_settings_page_sections.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_confirm_sheet.dart,1,0,0,C,0,0,0,pass,-
-trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,3,0,0,C,0,0,0,pass,-
-trade,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,1,0,0,E,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,2,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_terminal_panel.dart,1,0,0,C,0,0,0,pass,-
 trade,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_ticker_strip.dart,1,0,0,E,0,0,0,pass,-

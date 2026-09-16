@@ -893,8 +893,6 @@ trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/v
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_hero.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_order_form.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/phone/vit_trade_simple_shell.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_common.dart,0,0,0,0,0,0,0,0,no,-
-trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/order_receipt_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_positions_panel.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_status_content.dart,0,0,0,0,0,0,0,0,no,-
 trade,feature_widget,flutter_app/lib/features/trade/presentation/widgets/tablet/trade_tablet_detail_surface.dart,0,0,0,0,0,0,0,0,no,-

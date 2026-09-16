@@ -19,8 +19,8 @@ import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/trade_module_layout.dart';
 import 'package:vit_trade_flutter/features/trade_core/presentation/widgets/vit_trade_compliance_hero.dart';
 
-part '../../widgets/tablet/order_receipt_page_sections.dart';
-part '../../widgets/tablet/order_receipt_page_common.dart';
+part 'trade_tablet_order_receipt_page_sections.dart';
+part 'trade_tablet_order_receipt_page_common.dart';
 
 const double _receiptCopyActionExtent = TabletSpacingTokens.buttonCompact;
 
