@@ -80,6 +80,49 @@ features/markets/routes/web_markets_routes.dart
 
 `app/router/<surface>/<surface>_app_router.dart` chỉ làm composition root.
 
+## Module Composition Pattern (chốt 2026-09-16)
+
+**Mặc định — full-stack module:** feature mới mang đủ `domain/` + `data/` +
+`presentation/{phone,tablet}/` trong dir riêng; tablet pages của feature đặt
+trong chính feature đó (ship phone + tablet cùng batch theo gate route
+coverage). 19/35 feature hiện theo pattern này.
+
+**Composition-module chị — chỉ 2 trường hợp được phép:**
+
+1. **Product family chia nhiều feature dir.** Hiện chỉ nhà P2P: `p2p_core`
+   giữ `domain/` + `data/` và dựng toàn bộ tablet pages; 5 module con
+   (`p2p_account`, `p2p_dispute`, `p2p_marketplace`, `p2p_orders`,
+   `p2p_security`) chỉ giữ phone presentation. Không nhân rộng pattern này
+   cho feature mới trừ khi family có cấu trúc tương đương.
+2. **Màn ghép đa module thật sự.** `cross_module` dựng tablet cho
+   admin/support/referral/notifications/onboarding/enterprise-states/
+   discovery/dev; `trade` dựng tablet cho `trade_terminal`. Bắt buộc tái dùng
+   controller/domain qua `app/providers/*` (re-compose UI, không copy logic).
+
+**Nguyên tắc đặt widget theo bề mặt (đo đếm 2026-09-16):**
+
+- Widget **tablet-only** → `presentation/widgets/tablet/` (110 file hiện có)
+  — không đặt ở đường trung tính.
+- Đường trung tính `presentation/widgets/**` chỉ chứa widget **dual-surface**
+  — phone dùng trực tiếp HOẶC transitively (bài học chuỗi
+  `widgets/address/wallet_address_add_*`: phone vào qua
+  `wallet_address_add_sections.dart`, không phải import trực tiếp).
+- Ngoại lệ lịch sử được ghi nhận, không nhân rộng: wallet đặt 8 file ở
+  `presentation/tablet/widgets/`.
+
+**P2P không refactor ngược:** 71 class Page tablet đang chạy tốt; chuyển đổi
+thuần tổ chức không có lợi ích chức năng — ghi nhận là ngoại lệ có chủ đích.
+
+**Khóa:** `tool/tablet_neutral_widget_audit.dart --check` (audit giải import
+transitive, xem GĐ4 kế hoạch vệ sinh vùng xám 2026-09-16).
+
+**Bàn giao phone (ngoài scope tablet, không sửa):** pair
+`order_receipt_page_{common,sections}.dart` ở
+`trade/presentation/widgets/phone/` là part của
+`presentation/phone/pages/order_receipt_page.dart` đặt lệch thư mục — cùng
+lỗi đã sửa phía tablet (commit 560e3346); đội phone xử lý theo cùng khuôn:
+dời về cùng thư mục lib cha + tiền tố theo tên lib.
+
 ## Test bắt buộc
 
 - Import boundary test.

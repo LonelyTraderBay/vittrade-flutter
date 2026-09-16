@@ -65,6 +65,13 @@ Rules:
   `market_controller_providers.dart`. `trade_core` intentionally has none —
   it is the shared entity kernel with no screens/controllers of its own).
 - Prefer `package:vit_trade_flutter/...` imports across modules.
+- Feature mới theo **full-stack module** (domain + data +
+  `presentation/{phone,tablet}/` trong cùng feature dir).
+  Composition-module chị (`p2p_core`, `cross_module`, `trade`) chỉ dành cho
+  product family chia dir hoặc màn ghép đa module thật sự — chi tiết: section
+  *Module Composition Pattern* trong
+  `docs/02_FLUTTER_MIGRATION/standards/Surface-Architecture-Standard.md`
+  (chốt 2026-09-16).
 
 ### State management / controller pattern
 
