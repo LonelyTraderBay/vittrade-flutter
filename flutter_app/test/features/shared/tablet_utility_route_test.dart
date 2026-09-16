@@ -19,7 +19,7 @@ import 'package:vit_trade_flutter/features/dca/presentation/tablet/pages/dca_tab
 import 'package:vit_trade_flutter/features/earn_savings/presentation/tablet/pages/earn_savings_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/earn_staking/presentation/tablet/pages/staking_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/trade_bots/presentation/tablet/pages/trade_bots_tablet_pages.dart';
-import 'package:vit_trade_flutter/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart';
 import 'package:vit_trade_flutter/features/launchpad/presentation/tablet/pages/launchpad_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/tablet/pages/arena_tablet_pages.dart';
 import 'package:vit_trade_flutter/features/cross_module/presentation/tablet/pages/cross_module_tablet_pages.dart';

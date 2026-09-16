@@ -21,6 +21,7 @@ class VitTabletSectionBody extends StatelessWidget {
     super.key,
     required this.children,
     this.contentKey,
+    this.gutterFlush = false,
   });
 
   /// Danh sách section — gap 12dp do body chèn giữa từng cặp.
@@ -29,8 +30,19 @@ class VitTabletSectionBody extends StatelessWidget {
   /// Key của vùng scroll (probe/audit dùng để xác nhận nội dung render).
   final Key? contentKey;
 
+  /// Trang render trong detail column của một master-detail shell phải là
+  /// gutter-flush (S6 — Chuẩn Tablet Spacing & Gutter): shell đã sở hữu
+  /// `outerHorizontalMargin`, nên trang không stack thêm `contentPad` lên
+  /// trên (12 + 20 = 32dp mép phải — lớp bug stacking 2026-08-28). Khi
+  /// bật, inset ngang của body về 0 — tổng inset từ mép màn hình do shell
+  /// cấp; trang top-level (không nằm trong shell) giữ mặc định false.
+  final bool gutterFlush;
+
   @override
   Widget build(BuildContext context) {
+    final horizontalInset = gutterFlush
+        ? TabletSpacingTokens.zero
+        : TabletSpacingTokens.contentPad;
     return Align(
       alignment: AlignmentDirectional.topStart,
       child: ConstrainedBox(
@@ -40,9 +52,9 @@ class VitTabletSectionBody extends StatelessWidget {
         child: SingleChildScrollView(
           key: contentKey,
           child: Padding(
-            padding: const EdgeInsetsDirectional.only(
-              start: TabletSpacingTokens.contentPad,
-              end: TabletSpacingTokens.contentPad,
+            padding: EdgeInsetsDirectional.only(
+              start: horizontalInset,
+              end: horizontalInset,
               bottom: TabletSpacingTokens.pageEndBreathing,
             ),
             child: VitPageContent(
@@ -88,6 +100,7 @@ class VitTabletSectionFrame extends StatelessWidget {
     this.subtitle,
     this.contentKey,
     this.backFallback = AppRoutePaths.home,
+    this.gutterFlush = false,
   });
 
   final String semanticIdentifier;
@@ -104,6 +117,11 @@ class VitTabletSectionFrame extends StatelessWidget {
   /// Fallback khi stack lịch sử rỗng (back về tab gốc của module).
   final String backFallback;
 
+  /// Gutter-flush (S6) cho trang render trong detail column của master-detail
+  /// shell — body bỏ `contentPad` ngang, header `horizontalPadding: zero` để
+  /// thẳng mép với nội dung full-bleed cùng cột (idiom Markets overview).
+  final bool gutterFlush;
+
   @override
   Widget build(BuildContext context) {
     final showBack = context.canPop();
@@ -117,6 +135,7 @@ class VitTabletSectionFrame extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             showBack: showBack,
+            horizontalPadding: gutterFlush ? TabletSpacingTokens.zero : null,
             onBack: showBack
                 ? () => goBackOrFallback(
                     context,
@@ -128,6 +147,7 @@ class VitTabletSectionFrame extends StatelessWidget {
           Expanded(
             child: VitTabletSectionBody(
               contentKey: contentKey,
+              gutterFlush: gutterFlush,
               children: children,
             ),
           ),

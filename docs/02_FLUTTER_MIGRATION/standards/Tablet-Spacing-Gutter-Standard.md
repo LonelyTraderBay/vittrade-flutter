@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `dart run tool/tablet_text_stack_gap_audit.dart --check` (**S8 — 2026-09-14**) · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet) · `test/quality/tablet_composition_guardrail_test.dart` (**2026-09-09 — composition contract C1/C2/C3 ratchet**: không reading-width literal, không khung `Center` dọc, không `.name` lộ presentation; khung chuẩn cho trang section top-level là `VitTabletSectionFrame` — `shared/layout/vit_tablet_section_frame.dart`)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `dart run tool/tablet_text_stack_gap_audit.dart --check` (**S8 — 2026-09-14**) · `dart run tool/tablet_gap_role_audit.dart --check` (**ROLE của gap R1–R5 — 2026-09-16**) · `dart run tool/tablet_gutter_flush_audit.dart --check` (**S6 route-context — 2026-09-17**) · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet call-site) · `test/quality/tablet_gutter_flush_guardrail_test.dart` (S6 — gutter-flush **route-context**, zero-tolerance) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet) · `test/quality/tablet_composition_guardrail_test.dart` (**2026-09-09 — composition contract C1/C2/C3 ratchet**: không reading-width literal, không khung `Center` dọc, không `.name` lộ presentation; khung chuẩn cho trang section top-level là `VitTabletSectionFrame` — `shared/layout/vit_tablet_section_frame.dart`)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -87,7 +87,7 @@ In tablet files, every dimension must be a token reference:
 - `thickness: 2`, `Divider(height: 1)` → `TabletSpacingTokens.dividerHairline` (S3)
 - **No element-level separator SizedBox in a rhythm-owning scaffold's children (S4, token-blind):** `ProfilePaneScaffold(children:)` and `VitTwoColumnTabletDashboard(primaryChildren:/secondaryChildren:)` wrap their children in `VitPageContent(rhythm:)`, which already inserts the section gap between every pair — a `SizedBox` standing as a direct child of those lists stacks onto it (12+12). Children stay flat; a heading/content pair with a tighter inner gap is ONE child widget (the loaded sidebar's `VitTradeSection` pattern), never two children with a SizedBox between them. The scanner checks every children argument of every scaffold occurrence and is token-blind — even a tokenized separator is a violation.
 - **Icon size must be a token (S5):** `Icon(size: 14)`-style literals were a scanner blind spot (S1–S3 cover only SizedBox/EdgeInsets/thickness) — found live in Markets token-info (14/14/15 while the scale is iconSm 13 / iconMd 21). Enforced by `test/quality/tablet_icon_size_guardrail_test.dart`: any `size:` numeric literal in a tablet file fails CI, except 4 legacy hero-status icons (auth 56/72, wallet 144) pinned in the test's exact-set baseline — migrate on touch, never add.
-- **Detail content of a master-detail shell is gutter-flush (S6):** a page/pane/skeleton rendering inside the shell's detail column must declare `VitPageContent(fullBleed: true)` (+ `density: compact`, header `horizontalPadding: TabletSpacingTokens.zero`) — the shell already owns `outerHorizontalMargin` and `blockVerticalGap`; skipping `fullBleed` double-stacks both (the 2026-08-28 Markets overview bug: 68dp stacked top breathing + 40px horizontal offset vs the master frame — same class as the 4a171046 gutter-stacking bug). Hub routes and utility surfaces that bypass `*PaneScaffold` are the risky ones. Enforced by `test/quality/tablet_fullbleed_guardrail_test.dart`: every `VitPageContent(` in a tablet file must declare top-level `fullBleed:`; 5 wrappers that legitimately own their own gutter (Profile master menu + its skeleton/error, both `VitTwoColumnTabletDashboard` wrappers) are pinned in the exact-set baseline.
+- **Detail content of a master-detail shell is gutter-flush (S6):** a page/pane/skeleton rendering inside the shell's detail column must declare `VitPageContent(fullBleed: true)` (+ `density: compact`, header `horizontalPadding: TabletSpacingTokens.zero`) — the shell already owns `outerHorizontalMargin` and `blockVerticalGap`; skipping `fullBleed` double-stacks both (the 2026-08-28 Markets overview bug: 68dp stacked top breathing + 40px horizontal offset vs the master frame — same class as the 4a171046 gutter-stacking bug). Hub routes and utility surfaces that bypass `*PaneScaffold` are the risky ones. Enforced by `test/quality/tablet_fullbleed_guardrail_test.dart`: every `VitPageContent(` in a tablet file must declare top-level `fullBleed:`; 5 wrappers that legitimately own their own gutter (Profile master menu + its skeleton/error, both `VitTwoColumnTabletDashboard` wrappers) are pinned in the exact-set baseline. Trang dựng qua `VitTabletSectionFrame/Body` (fullBleed nằm trong wrapper) phải dùng `gutterFlush: true` khi render trong detail column — lớp ngữ cảnh route do `tool/tablet_gutter_flush_audit.dart` khóa (xem mục *Gutter-CONTEXT audit* cuối chuẩn; bug 32dp predictions 2026-09-16 là vi phạm dạng này).
 - **Pane/dashboard children carry no vertical inset (S7, token-blind):** `MarketsPaneScaffold(children:)`, `ProfilePaneScaffold(children:)` and `VitTwoColumnTabletDashboard(primaryChildren:/secondaryChildren:)` own the vertical rhythm — `VitPageContent(rhythm:)` already inserts the section gap (12dp standard tier) between every pair of children. A `Padding` wrapper standing as a direct child whose padding has a positive vertical component (a Phone-page margin token like `pairRiskMargin` 10/13, `pairTradeCtaPadding` …/16, or any `EdgeInsets.all`/`only(top:)`/`fromLTRB(…, >0, …, >0)`) stacks onto that gap and breaks the page rhythm — the 2026-08-29 pair-detail pane bug: gaps rendered at 23–29dp instead of 12dp, with the two link cards squeezed at 8dp in between. Direct-child wrappers must be horizontal-only: `EdgeInsets.symmetric(horizontal: TabletSpacingTokens.contentPad)`, `EdgeInsetsDirectional.only(start:…, end:…)`, `fromLTRB(x, 0, x, 0)`, `.zero`, or a token in the guardrail's exact-set allowlist (`MarketsSpacingTokens.pairPaneChildFlushPadding` — value-locked to `symmetric(horizontal: contentPad)` by its own test; adding a token requires bumping the allowlist + value lock in the same commit). End-of-scroll breathing lives INSIDE the last widget (the `_Disclaimer` / `_PairTradeCtas` pattern), never in the children list. **Porting Phone content into a tablet pane is a re-compose, not a copy**: every vertical margin the Phone page owned must be dropped at the port boundary — the tablet scaffold is the single source of vertical truth. Enforced by `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (scans every children/primaryChildren/secondaryChildren list of the three scaffolds, unwraps `if (cond)` elements, and is token-blind — even a tokenized Phone margin fails).
 
 The guardrail is **zero-tolerance with no baseline** — the surface is clean today and any new literal fails CI outright. (Token references like `TabletSpacingTokens.x5` never trip the scanner: the digit is glued to a word character.)
@@ -210,16 +210,49 @@ nhất của luật.
 cd flutter_app
 dart run tool/tablet_spacing_audit.dart            # regenerate audit CSV
 dart run tool/tablet_spacing_audit.dart --check    # CI: artifact current
+dart run tool/tablet_gap_role_audit.dart --check   # CI: ROLE của gap (R1-R5, ratchet baseline)
+dart run tool/tablet_gutter_flush_audit.dart --check # CI: S6 gắn NGỮ CẢNH ROUTE (3 shell, 0 vi phạm)
 flutter test test/quality/tablet_spacing_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_base8_role_scale_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_module_role_scale_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_gap_12_guardrail_test.dart --reporter=compact
+flutter test test/quality/tablet_gap_role_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_rhythm_role_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_icon_size_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_fullbleed_guardrail_test.dart --reporter=compact
+flutter test test/quality/tablet_gutter_flush_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_token_override_guardrail_test.dart --reporter=compact
 ```
+
+### Gap-ROLE audit (2026-09-16, sinh từ lỗi module predictions)
+
+`tool/tablet_gap_role_audit.dart` khóa **đúng role cho đúng quan hệ** — lớp
+mà whitelist token của `tablet_gap_12` không phủ: R1 card-sibling dọc+ngang
+(trong cả spread `...[`) = 12, R2 VitCard hero không ép padding ngoài họ
+hero, R3 `Wrap(spacing:)` = micro 4, R4 Text-label → control form = 8,
+R5 gap giữa 2 `Expanded` ≥ 8. Baseline
+`test/quality/tablet_gap_role_baseline.txt` chỉ được GIẢM (nợ module cũ trả
+dần); module predictions khóa tuyệt đối 0 qua
+`tablet_gap_role_guardrail_test.dart`.
+
+### Gutter-CONTEXT audit — S6 theo ngữ cảnh route (2026-09-17, sinh từ bug 32dp predictions)
+
+`tablet_fullbleed_guardrail_test` (ratchet S6 cũ) soi **call-site
+`VitPageContent(` trực tiếp** — mù với trang dựng qua
+`VitTabletSectionFrame/Body` (fullBleed nằm BÊN TRONG wrapper hợp lệ, trong
+khi wrapper tự cấp `contentPad` 20dp cho idiom top-level): module predictions
+đóng đúng mọi guardrail sẵn có nhưng vẫn stack 12 (`outerHorizontalMargin`
+shell) + 20 (`contentPad` frame) = **32dp mép phải** (bug 2026-09-16, user
+đánh dấu screenshot). `tool/tablet_gutter_flush_audit.dart` đóng lỗ hổng ngữ
+cảnh: phân lớp route theo đúng predicate shell của `tablet_route_tree.dart`
+(`_isMarketSpec`/`_isProfileSpec`/`_isWalletHistorySpec` — markets /
+profile / wallet-history) và yêu cầu mọi trang trong detail column theo
+MỘT trong 3 idiom flush: **frame** `VitTabletSectionFrame/Body(gutterFlush:
+true)`, **hub** `VitPageContent(fullBleed: true)` trực tiếp, hoặc **pane**
+`*PaneScaffold(`. Khóa **tuyệt đối 0 vi phạm** (không baseline); census
+đầy đủ 55 trang live trong artifact
+[VitTrade-Tablet-Gutter-Flush-Audit.csv](../audits/VitTrade-Tablet-Gutter-Flush-Audit.csv).
 
 ## Migration pointers
 

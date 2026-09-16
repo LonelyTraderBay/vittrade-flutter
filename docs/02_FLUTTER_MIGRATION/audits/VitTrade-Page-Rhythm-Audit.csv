@@ -1044,6 +1044,7 @@ predictions,flutter_app/lib/features/predictions/presentation/widgets/social/pre
 predictions,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_filters_tabs.dart,standard,,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_podium_rankings.dart,standard,,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_rows_wins.dart,standard,,0,,0,,0,0,pass
+predictions,flutter_app/lib/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart,standard,,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/phone/pages/activity_log_page.dart,standard,standard,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart,standard,standard,0,,0,,0,0,pass
 profile,flutter_app/lib/features/profile/presentation/phone/pages/api_management_page.dart,standard,standard,0,,0,,0,0,pass

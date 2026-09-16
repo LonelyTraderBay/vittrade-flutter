@@ -1,404 +1,257 @@
 part of 'predictions_tablet_pages.dart';
 
-/// SC-214: Bảng xếp hạng trader prediction.
-class PredictionsLeaderboardTabletPage extends ConsumerWidget {
-  const PredictionsLeaderboardTabletPage({super.key});
+// ---------------------------------------------------------------------------
+// SC-215: Hoạt động toàn cục prediction — thống kê trực tiếp + lọc số tiền
+// tối thiểu + bảng tin giao dịch, state cục bộ như phone SC-034.
+// ---------------------------------------------------------------------------
 
-  static const contentKey = Key('sc214_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsLeaderboardSnapshotProvider((
-        timeFilter: PredictionLeaderboardTimeFilter.allTime,
-        metric: PredictionLeaderboardMetric.pnl,
-      )),
-    );
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-214',
-        semanticLabel: 'Bảng xếp hạng prediction',
-        title: 'Bảng xếp hạng',
-        subtitle: 'Theo kỳ · Chỉ số',
-        contentKey: PredictionsLeaderboardTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được bảng xếp hạng',
-            () => ref.invalidate(
-              predictionsLeaderboardSnapshotProvider((
-                timeFilter: PredictionLeaderboardTimeFilter.allTime,
-                metric: PredictionLeaderboardMetric.pnl,
-              )),
-            ),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-214',
-        semanticLabel: 'Bảng xếp hạng prediction',
-        title: 'Bảng xếp hạng',
-        subtitle: 'Cập nhật ${snapshot.lastUpdatedLabel}',
-        contentKey: PredictionsLeaderboardTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Top trader',
-            rows: [
-              for (final trader in snapshot.traders.take(10))
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: TabletSpacingTokens.x5,
-                        child: Text(
-                          '#${trader.rank}',
-                          style: AppTextStyles.caption.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          trader.user,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${_pdmUsdS(trader.pnl)} · thắng ${trader.winRate}%',
-                        style: AppTextStyles.caption.copyWith(
-                          fontWeight: AppTextStyles.bold,
-                          color: trader.pnl >= 0
-                              ? AppColors.buy
-                              : AppColors.sell,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-215: Hoạt động toàn cục prediction.
-class PredictionsGlobalActivityTabletPage extends ConsumerWidget {
+class PredictionsGlobalActivityTabletPage extends ConsumerStatefulWidget {
   const PredictionsGlobalActivityTabletPage({super.key});
 
   static const contentKey = Key('sc215_tablet_content');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsGlobalActivitySnapshotProvider(0),
+  ConsumerState<PredictionsGlobalActivityTabletPage> createState() =>
+      _PredictionsGlobalActivityTabletPageState();
+}
+
+class _PredictionsGlobalActivityTabletPageState
+    extends ConsumerState<PredictionsGlobalActivityTabletPage> {
+  double _minAmount = 0;
+
+  static const _amountSteps = <double>[0, 100, 500, 1000, 5000];
+
+  @override
+  Widget build(BuildContext context) {
+    final activityAsync = ref.watch(
+      predictionsGlobalActivitySnapshotProvider(_minAmount),
     );
 
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-215',
-        semanticLabel: 'Hoạt động prediction',
-        title: 'Hoạt động toàn cục',
-        subtitle: 'Mua · Bán',
-        contentKey: PredictionsGlobalActivityTabletPage.contentKey,
+    return activityAsync.when(
+      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      error: (error, stackTrace) => _frame(
         children: [
           _pdmError(
-            'Không tải được hoạt động',
-            () => ref.invalidate(predictionsGlobalActivitySnapshotProvider(0)),
+            'Không tải được hoạt động toàn cầu',
+            () => ref.invalidate(
+              predictionsGlobalActivitySnapshotProvider(_minAmount),
+            ),
           ),
         ],
       ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-215',
-        semanticLabel: 'Hoạt động prediction',
-        title: 'Hoạt động toàn cục',
+      data: (snapshot) => _frame(
         subtitle: '${snapshot.buyCount} mua · ${snapshot.sellCount} bán',
-        contentKey: PredictionsGlobalActivityTabletPage.contentKey,
         children: [
-          _pdmSection(
-            title: 'Luồng hoạt động',
-            rows: [
-              for (final activity in snapshot.activities.take(12))
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${activity.user} · ${activity.action.name} ${activity.outcome}',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${_pdmDec(activity.price)} × ${activity.shares}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                          fontFeatures: AppTextStyles.tabularFigures,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-216: Máy tính rủi ro prediction.
-class PredictionRiskCalculatorTabletPage extends ConsumerWidget {
-  const PredictionRiskCalculatorTabletPage({super.key});
-
-  static const contentKey = Key('sc216_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(predictionsRiskCalculatorSnapshotProvider);
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-216',
-        semanticLabel: 'Máy tính rủi ro prediction',
-        title: 'Máy tính rủi ro',
-        subtitle: 'Vị thế · Vốn',
-        contentKey: PredictionRiskCalculatorTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được máy tính rủi ro',
-            () => ref.invalidate(predictionsRiskCalculatorSnapshotProvider),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-216',
-        semanticLabel: 'Máy tính rủi ro prediction',
-        title: 'Máy tính rủi ro',
-        subtitle: snapshot.defaultEventName,
-        contentKey: PredictionRiskCalculatorTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Tham số mặc định',
-            rows: _pdmRows([
-              ('Sự kiện', snapshot.defaultEventName),
-              ('Kết quả', snapshot.defaultOutcome),
-              ('Số cổ phần', _pdmDec(snapshot.defaultShares, 1)),
-              ('Giá vào', _pdmDec(snapshot.defaultEntryPrice)),
-              ('Giá hiện tại', _pdmDec(snapshot.defaultCurrentPrice)),
-              ('Vốn', _pdmUsd(snapshot.defaultBankroll)),
-            ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-217: Market maker prediction.
-class PredictionMarketMakerTabletPage extends ConsumerWidget {
-  const PredictionMarketMakerTabletPage({super.key});
-
-  static const contentKey = Key('sc217_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(predictionsMarketMakerSnapshotProvider);
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-217',
-        semanticLabel: 'Tạo thanh khoản dự đoán',
-        title: 'Market maker',
-        subtitle: 'Thanh khoản · Phí',
-        contentKey: PredictionMarketMakerTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được market maker',
-            () => ref.invalidate(predictionsMarketMakerSnapshotProvider),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-217',
-        semanticLabel: 'Tạo thanh khoản dự đoán',
-        title: 'Market maker',
-        subtitle: 'Chênh lệch ${snapshot.defaultSpreadBps} bps',
-        contentKey: PredictionMarketMakerTabletPage.contentKey,
-        children: [
-          _stkLikeLiquidity(snapshot.positions),
-
-          _pdmSection(
-            title: 'Thu nhập phí theo ngày',
-            rows: [
-              for (final point in snapshot.earningsHistory.take(8))
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          point.date,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Phí ${_pdmUsdS(point.fees)} · KL ${_pdmUsd(point.volume)}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _stkLikeLiquidity(List<PredictionLiquidityPositionDraft> positions) {
-    return _pdmSection(
-      title: 'Vị thế thanh khoản',
-      rows: [
-        for (final position in positions)
-          Padding(
-            padding: TabletSpacingTokens.tableCellPaddingV,
+          VitCard(
+            density: VitDensity.compact,
             child: Row(
               children: [
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        position.eventName,
-                        style: AppTextStyles.caption.copyWith(
-                          fontWeight: AppTextStyles.bold,
-                          color: AppColors.text1,
-                        ),
-                      ),
-                      const SizedBox(height: TabletSpacingTokens.x1),
-                      Text(
-                        'Cung cấp ${_pdmUsd(position.liquidityProvided)} · APR ${_pdmPct(position.apr)}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                        ),
-                      ),
-                      const SizedBox(height: TabletSpacingTokens.x1),
-                    ],
+                  child: _Sc215LiveStat(
+                    label: 'Khối lượng 24h',
+                    value: VitFormat.compactSuffix(
+                      snapshot.totalVolume,
+                      prefix: r'$',
+                    ),
                   ),
                 ),
-                Text(
-                  _pdmUsdS(position.feesEarned),
-                  style: AppTextStyles.caption.copyWith(
-                    fontWeight: AppTextStyles.bold,
-                    color: AppColors.buy,
+                Expanded(
+                  child: _Sc215LiveStat(
+                    label: 'Lệnh mua',
+                    value: VitFormat.count(snapshot.buyCount),
+                    valueColor: AppColors.buy,
+                  ),
+                ),
+                Expanded(
+                  child: _Sc215LiveStat(
+                    label: 'Lệnh bán',
+                    value: VitFormat.count(snapshot.sellCount),
+                    valueColor: AppColors.sell,
                   ),
                 ),
               ],
             ),
           ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (
+                  var index = 0;
+                  index < _amountSteps.length;
+                  index += 1
+                ) ...[
+                  VitChoicePill(
+                    label: _amountSteps[index] == 0
+                        ? 'Tất cả'
+                        : '${VitFormat.compactSuffix(_amountSteps[index], prefix: r'$')}+',
+                    selected: _minAmount == _amountSteps[index],
+                    onTap: () => setState(() {
+                      _minAmount = _amountSteps[index];
+                    }),
+                    accentColor: AppColors.primary,
+                  ),
+                  if (index != _amountSteps.length - 1)
+                    const SizedBox(width: TabletSpacingTokens.x1),
+                ],
+              ],
+            ),
+          ),
+          if (snapshot.activities.isEmpty)
+            const VitEmptyState(
+              title: 'Không có hoạt động',
+              message: 'Hạ mức lọc số tiền tối thiểu để xem thêm',
+              icon: Icons.timeline_rounded,
+            )
+          else
+            VitPageSection(
+              label: 'Bảng tin trực tiếp',
+              accentColor: AppColors.primary,
+              innerGap: TabletSpacingTokens.x4,
+              children: [
+                VitCard(
+                  density: VitDensity.compact,
+                  child: Column(
+                    children: [
+                      for (final activity in snapshot.activities)
+                        _Sc215ActivityRow(activity: activity),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
+        ],
+      ),
+    );
+  }
+
+  Widget _frame({required List<Widget> children, String? subtitle}) {
+    return VitTabletSectionFrame(
+      gutterFlush: true,
+      semanticIdentifier: 'SC-215',
+      semanticLabel: 'Hoạt động toàn cục prediction',
+      title: 'Hoạt động toàn cục',
+      subtitle: subtitle ?? 'Bảng tin giao dịch trực tiếp',
+      contentKey: PredictionsGlobalActivityTabletPage.contentKey,
+      backFallback: AppRoutePaths.marketsPredictions,
+      children: children,
+    );
+  }
+}
+
+class _Sc215LiveStat extends StatelessWidget {
+  const _Sc215LiveStat({
+    required this.label,
+    required this.value,
+    this.valueColor = AppColors.text1,
+  });
+
+  final String label;
+  final String value;
+  final Color valueColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+        ),
+        const SizedBox(height: TabletSpacingTokens.x1),
+        Text(
+          value,
+          style: AppTextStyles.caption.copyWith(
+            color: valueColor,
+            fontWeight: AppTextStyles.bold,
+            fontFeatures: AppTextStyles.tabularFigures,
+          ),
+        ),
       ],
     );
   }
 }
 
-/// SC-218: Phân tích danh mục prediction.
-class PredictionPortfolioAnalyzerTabletPage extends ConsumerWidget {
-  const PredictionPortfolioAnalyzerTabletPage({super.key});
+class _Sc215ActivityRow extends StatelessWidget {
+  const _Sc215ActivityRow({required this.activity});
 
-  static const contentKey = Key('sc218_tablet_content');
+  final PredictionGlobalActivityDraft activity;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsPortfolioAnalyzerSnapshotProvider,
-    );
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-218',
-        semanticLabel: 'Phân tích danh mục prediction',
-        title: 'Phân tích danh mục',
-        subtitle: 'Vị thế · Lịch sử PnL',
-        contentKey: PredictionPortfolioAnalyzerTabletPage.contentKey,
+  Widget build(BuildContext context) {
+    final isBuy = activity.action == PredictionGlobalActivityAction.bought;
+    final color = isBuy ? AppColors.buy : AppColors.sell;
+    return Padding(
+      padding: TabletSpacingTokens.tableCellPaddingV,
+      child: Row(
         children: [
-          _pdmError(
-            'Không tải được phân tích',
-            () => ref.invalidate(predictionsPortfolioAnalyzerSnapshotProvider),
+          CircleAvatar(
+            radius: TabletSpacingTokens.iconSm,
+            backgroundColor: AppColors.surface2,
+            child: Text(
+              activity.avatar,
+              style: AppTextStyles.micro.copyWith(
+                color: AppColors.text1,
+                fontWeight: AppTextStyles.bold,
+              ),
+            ),
           ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-218',
-        semanticLabel: 'Phân tích danh mục prediction',
-        title: 'Phân tích danh mục',
-        subtitle: 'Cập nhật ${snapshot.lastUpdatedLabel}',
-        contentKey: PredictionPortfolioAnalyzerTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Vị thế',
-            rows: [
-              for (final position in snapshot.positions)
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${position.eventName} · ${position.outcome}',
-                              style: AppTextStyles.caption.copyWith(
-                                fontWeight: AppTextStyles.bold,
-                                color: AppColors.text1,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              '${_pdmDec(position.shares, 1)} cổ phần · vào ${_pdmDec(position.avgPrice)} → hiện ${_pdmDec(position.currentPrice)}',
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text2,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                          ],
-                        ),
+          const SizedBox(width: TabletSpacingTokens.x2),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x1,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      activity.user,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text1,
+                        fontWeight: AppTextStyles.bold,
                       ),
-                      Text(
-                        position.status.name,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text3,
-                        ),
+                    ),
+                    _pdmTinyBadge(
+                      label: isBuy ? 'Mua' : 'Bán',
+                      color: color,
+                      background: color.withValues(alpha: .12),
+                    ),
+                    Text(
+                      activity.outcome,
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text3,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-            ],
+                Text(
+                  '${VitFormat.count(activity.shares)} cổ phần @ '
+                  '${VitFormat.usd(activity.price)}',
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
+            ),
           ),
-
-          _pdmSection(
-            title: 'Lịch sử PnL',
-            rows: _pdmRows([
-              for (final point in snapshot.pnlHistory.take(8))
-                (point.date, _pdmUsdS(point.value)),
-            ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                VitFormat.usd(activity.amount),
+                style: AppTextStyles.caption.copyWith(
+                  color: color,
+                  fontWeight: AppTextStyles.bold,
+                  fontFeatures: AppTextStyles.tabularFigures,
+                ),
+              ),
+              const SizedBox(height: TabletSpacingTokens.x1),
+              Text(
+                activity.timestamp,
+                style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+              ),
+            ],
           ),
         ],
       ),
@@ -406,81 +259,194 @@ class PredictionPortfolioAnalyzerTabletPage extends ConsumerWidget {
   }
 }
 
-/// SC-219: Lịch sự kiện prediction.
-class PredictionEventCalendarTabletPage extends ConsumerWidget {
+// ---------------------------------------------------------------------------
+// SC-219: Lịch sự kiện prediction — lọc danh mục + dòng thời gian theo tháng
+// (chốt kèo, xác suất, đang theo dõi), state cục bộ như phone SC-039.
+// ---------------------------------------------------------------------------
+
+class PredictionEventCalendarTabletPage extends ConsumerStatefulWidget {
   const PredictionEventCalendarTabletPage({super.key});
 
   static const contentKey = Key('sc219_tablet_content');
+  static const allCategoryKey = Key('sc219_category_all');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsEventCalendarSnapshotProvider(null),
+  ConsumerState<PredictionEventCalendarTabletPage> createState() =>
+      _PredictionEventCalendarTabletPageState();
+}
+
+class _PredictionEventCalendarTabletPageState
+    extends ConsumerState<PredictionEventCalendarTabletPage> {
+  String? _category;
+
+  @override
+  Widget build(BuildContext context) {
+    final calendarAsync = ref.watch(
+      predictionsEventCalendarSnapshotProvider(_category),
     );
 
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-219',
-        semanticLabel: 'Lịch sự kiện prediction',
-        title: 'Lịch sự kiện',
-        subtitle: 'Ngày phân định',
-        contentKey: PredictionEventCalendarTabletPage.contentKey,
+    return calendarAsync.when(
+      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      error: (error, stackTrace) => _frame(
         children: [
           _pdmError(
-            'Không tải được lịch',
-            () =>
-                ref.invalidate(predictionsEventCalendarSnapshotProvider(null)),
+            'Không tải được lịch sự kiện',
+            () => ref.invalidate(
+              predictionsEventCalendarSnapshotProvider(_category),
+            ),
           ),
         ],
       ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-219',
-        semanticLabel: 'Lịch sự kiện prediction',
-        title: 'Lịch sự kiện',
+      data: (snapshot) => _frame(
         subtitle: '${snapshot.events.length} sự kiện',
-        contentKey: PredictionEventCalendarTabletPage.contentKey,
         children: [
-          _pdmSection(
-            title: 'Sự kiện',
-            rows: [
-              for (final event in snapshot.events.take(12))
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              event.title,
-                              style: AppTextStyles.caption.copyWith(
-                                fontWeight: AppTextStyles.bold,
-                                color: AppColors.text1,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              '${event.category} · xác suất ${event.probability}%',
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text2,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        '${event.resolutionDate.year}-${event.resolutionDate.month.toStringAsFixed(0).padLeft(2, '0')}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text3,
-                        ),
-                      ),
-                    ],
-                  ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                VitFilterChip(
+                  key: PredictionEventCalendarTabletPage.allCategoryKey,
+                  label: 'Tất cả',
+                  active: _category == null,
+                  onTap: () => setState(() {
+                    _category = null;
+                  }),
+                  color: AppColors.primary,
                 ),
+                const SizedBox(width: TabletSpacingTokens.x2),
+                for (
+                  var index = 0;
+                  index < snapshot.categories.length;
+                  index += 1
+                ) ...[
+                  VitFilterChip(
+                    label: snapshot.categories[index],
+                    active: _category == snapshot.categories[index],
+                    onTap: () => setState(() {
+                      _category = _category == snapshot.categories[index]
+                          ? null
+                          : snapshot.categories[index];
+                    }),
+                    color: AppColors.primary,
+                  ),
+                  if (index != snapshot.categories.length - 1)
+                    const SizedBox(width: TabletSpacingTokens.x2),
+                ],
+              ],
+            ),
+          ),
+          for (final month in snapshot.months)
+            VitPageSection(
+              label: month.label,
+              accentColor: AppColors.primary,
+              innerGap: TabletSpacingTokens.x4,
+              children: [
+                for (final event in month.events)
+                  _Sc219CalendarEventCard(event: event),
+              ],
+            ),
+          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
+        ],
+      ),
+    );
+  }
+
+  Widget _frame({required List<Widget> children, String? subtitle}) {
+    return VitTabletSectionFrame(
+      gutterFlush: true,
+      semanticIdentifier: 'SC-219',
+      semanticLabel: 'Lịch sự kiện prediction',
+      title: 'Lịch sự kiện',
+      subtitle: subtitle ?? 'Ngày chốt kèo · Theo dõi',
+      contentKey: PredictionEventCalendarTabletPage.contentKey,
+      backFallback: AppRoutePaths.marketsPredictions,
+      children: children,
+    );
+  }
+}
+
+class _Sc219CalendarEventCard extends StatelessWidget {
+  const _Sc219CalendarEventCard({required this.event});
+
+  final PredictionCalendarEventDraft event;
+
+  @override
+  Widget build(BuildContext context) {
+    final statusColor = switch (event.status) {
+      PredictionCalendarEventStatus.active => AppColors.buy,
+      PredictionCalendarEventStatus.upcoming => AppColors.text3,
+      PredictionCalendarEventStatus.resolving => AppColors.warn,
+      PredictionCalendarEventStatus.resolved => AppColors.text3,
+    };
+    return VitCard(
+      onTap: () => context.push(AppRoutePaths.marketsPredictionEvent(event.id)),
+      density: VitDensity.compact,
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${event.resolutionDate.day}',
+                style: AppTextStyles.body.copyWith(
+                  color: AppColors.text1,
+                  fontWeight: AppTextStyles.bold,
+                ),
+              ),
+              const SizedBox(height: TabletSpacingTokens.x1),
+              Text(
+                'Tháng ${event.resolutionDate.month}',
+                style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+              ),
             ],
+          ),
+          const SizedBox(width: TabletSpacingTokens.x3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: TabletSpacingTokens.x1,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      event.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.text1,
+                        fontWeight: AppTextStyles.bold,
+                      ),
+                    ),
+                    if (event.isWatching)
+                      const Icon(
+                        Icons.star_rounded,
+                        color: AppColors.warn,
+                        size: TabletSpacingTokens.iconSm,
+                      ),
+                  ],
+                ),
+                Text(
+                  '${event.category} · '
+                  '${VitFormat.percent(event.probability, fractionDigits: 0)} · '
+                  'khối lượng '
+                  '${VitFormat.compactSuffix(event.volume, prefix: r'$')}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
+            ),
+          ),
+          _pdmTinyBadge(
+            label: switch (event.status) {
+              PredictionCalendarEventStatus.active => 'Đang mở',
+              PredictionCalendarEventStatus.upcoming => 'Sắp mở',
+              PredictionCalendarEventStatus.resolving => 'Đang chốt',
+              PredictionCalendarEventStatus.resolved => 'Đã chốt',
+            },
+            color: statusColor,
+            background: statusColor.withValues(alpha: .12),
           ),
         ],
       ),

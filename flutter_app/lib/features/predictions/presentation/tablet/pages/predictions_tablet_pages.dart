@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,21 +7,34 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/providers/predictions_controller_providers.dart';
 import 'package:vit_trade_flutter/features/predictions/domain/entities/predictions_entities.dart';
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
+import 'package:vit_trade_flutter/app/theme/accent_tone_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
+import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_common.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_summary.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_positions.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_orders.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_history.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/predictions_portfolio_bridge_card.dart';
 
 part 'predictions_tablet_pages_explore.dart';
 part 'predictions_tablet_pages_social.dart';
+part 'predictions_tablet_pages_discovery.dart';
+part 'predictions_tablet_pages_breaking.dart';
+part 'predictions_tablet_pages_rewards.dart';
+part 'predictions_tablet_pages_leaderboard.dart';
+part 'predictions_tablet_pages_tournaments.dart';
+part 'predictions_tablet_pages_chart.dart';
 
 String _pdmUsd(num v) => VitFormat.usd(v.toDouble());
-String _pdmUsdS(num v) => VitFormat.usdSigned(v.toDouble());
-String _pdmPct(num v, [int d = 1]) => VitFormat.percent(v, fractionDigits: d);
-String _pdmDec(num v, [int d = 2]) => v.toStringAsFixed(d);
-
 Widget _pdmError(String title, VoidCallback onRetry) {
   return VitErrorState(
     title: title,
@@ -29,65 +44,22 @@ Widget _pdmError(String title, VoidCallback onRetry) {
   );
 }
 
-Widget _pdmSection({required String title, required List<Widget> rows}) {
-  return VitCard(
-    radius: VitCardRadius.tight,
-    padding: TabletSpacingTokens.cardPaddingCompact,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: AppTextStyles.control.copyWith(
-            fontWeight: AppTextStyles.bold,
-            color: AppColors.text1,
-          ),
-        ),
-        const SizedBox(height: TabletSpacingTokens.x2),
-        ...rows,
-      ],
+Widget _pdmTinyBadge({
+  required String label,
+  required Color color,
+  required Color background,
+}) {
+  return Material(
+    color: background,
+    borderRadius: AppRadii.badgeRadius,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: TabletSpacingTokens.x2,
+        vertical: TabletSpacingTokens.x1,
+      ),
+      child: Text(label, style: AppTextStyles.badge.copyWith(color: color)),
     ),
   );
-}
-
-List<Widget> _pdmRows(List<(String, String)> pairs) {
-  return [
-    for (final (label, value) in pairs)
-      Padding(
-        padding: TabletSpacingTokens.tableCellPaddingV,
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                label,
-                style: AppTextStyles.caption.copyWith(color: AppColors.text2),
-              ),
-            ),
-            Flexible(
-              child: Text(
-                value,
-                textAlign: TextAlign.end,
-                style: AppTextStyles.caption.copyWith(
-                  color: AppColors.text1,
-                  fontWeight: AppTextStyles.bold,
-                  fontFeatures: AppTextStyles.tabularFigures,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-  ];
-}
-
-List<Widget> _pdmBullets(List<String> notes) {
-  return [
-    for (final note in notes)
-      Padding(
-        padding: TabletSpacingTokens.tableCellPaddingV,
-        child: VitBulletRow(text: note),
-      ),
-  ];
 }
 
 Widget _pdmBody(String text) {
@@ -97,351 +69,36 @@ Widget _pdmBody(String text) {
   );
 }
 
-Widget _pdmQuickLinks(BuildContext context, List<(String, String)> links) {
-  return Wrap(
-    spacing: TabletSpacingTokens.x2,
-    runSpacing: TabletSpacingTokens.x2,
-    children: [
-      for (final (label, path) in links)
-        VitFilterChip(
-          label: label,
-          active: false,
-          color: AppColors.primary,
-          onTap: () => context.push(path),
-        ),
-    ],
-  );
-}
-
-List<Widget> _pdmEventRows(
-  BuildContext context,
-  List<PredictionEventDraft> events,
-) {
-  return [
-    for (final event in events.take(10))
-      Padding(
-        padding: TabletSpacingTokens.tableCellPaddingV,
-        child: Material(
-          color: AppColors.transparent,
-          child: InkWell(
-            onTap: () =>
-                context.push(AppRoutePaths.marketsPredictionEvent(event.id)),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        event.title,
-                        style: AppTextStyles.caption.copyWith(
-                          fontWeight: AppTextStyles.bold,
-                          color: AppColors.text1,
-                        ),
-                      ),
-                      const SizedBox(height: TabletSpacingTokens.x1),
-                      Text(
-                        '${event.category} · khối lượng 24h ${_pdmUsd(event.volume24h)}',
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text2,
-                          fontFeatures: AppTextStyles.tabularFigures,
-                        ),
-                      ),
-                      const SizedBox(height: TabletSpacingTokens.x1),
-                    ],
-                  ),
-                ),
-                Text(
-                  '${event.outcomes.length} kết quả',
-                  style: AppTextStyles.caption.copyWith(color: AppColors.text3),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-  ];
-}
-
-/// SC-208: Hub Prediction Markets.
-class PredictionsHomeTabletPage extends ConsumerWidget {
-  const PredictionsHomeTabletPage({super.key});
-
-  static const contentKey = Key('sc208_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsHomeSnapshotProvider((
-        filter: PredictionFilterTab.trending,
-        category: null,
-        searchQuery: '',
-      )),
-    );
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-208',
-        semanticLabel: 'Thị trường dự đoán',
-        title: 'Prediction Markets',
-        subtitle: 'Sự kiện · Xác suất',
-        contentKey: PredictionsHomeTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được prediction',
-            () => ref.invalidate(
-              predictionsHomeSnapshotProvider((
-                filter: PredictionFilterTab.trending,
-                category: null,
-                searchQuery: '',
-              )),
-            ),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-208',
-        semanticLabel: 'Thị trường dự đoán',
-        title: 'Prediction Markets',
-        subtitle: '${snapshot.openPositionCount} vị thế mở',
-        contentKey: PredictionsHomeTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Sự kiện nổi bật',
-            rows: _pdmEventRows(context, snapshot.events),
-          ),
-
-          _pdmSection(
-            title: 'Danh mục',
-            rows: _pdmBullets(snapshot.categories),
-          ),
-
-          _pdmSection(
-            title: 'Khám phá',
-            rows: [
-              _pdmQuickLinks(context, [
-                ('Tìm kiếm', AppRoutePaths.marketsPredictionsSearch),
-                ('Biến động mạnh', AppRoutePaths.marketsPredictionsBreaking),
-                ('Danh mục', AppRoutePaths.marketsPredictionsPortfolio),
-                ('Phần thưởng', AppRoutePaths.marketsPredictionsRewards),
-                ('Bảng xếp hạng', AppRoutePaths.marketsPredictionsLeaderboard),
-                ('Hoạt động', AppRoutePaths.marketsPredictionsActivity),
-                ('Giải đấu', AppRoutePaths.marketsPredictionsTournaments),
-                ('Lịch sự kiện', AppRoutePaths.marketsPredictionsEventCalendar),
-                (
-                  'Máy tính rủi ro',
-                  AppRoutePaths.marketsPredictionsRiskCalculator,
-                ),
-                ('Market maker', AppRoutePaths.marketsPredictionsMarketMaker),
-                (
-                  'Phân tích danh mục',
-                  AppRoutePaths.marketsPredictionsPortfolioAnalyzer,
-                ),
-                ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
-                (
-                  'Tích hợp dữ liệu',
-                  AppRoutePaths.marketsPredictionsDataIntegration,
-                ),
-              ]),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-209: Tìm kiếm sự kiện dự đoán.
-class PredictionsSearchTabletPage extends ConsumerWidget {
-  const PredictionsSearchTabletPage({super.key});
-
-  static const contentKey = Key('sc209_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsSearchSnapshotProvider((
-        sort: PredictionSearchSort.trending,
-        status: PredictionStatusFilter.all,
-        category: null,
-        searchQuery: '',
-      )),
-    );
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-209',
-        semanticLabel: 'Tìm kiếm prediction',
-        title: 'Tìm kiếm',
-        subtitle: 'Sự kiện · Kết quả',
-        contentKey: PredictionsSearchTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được tìm kiếm',
-            () => ref.invalidate(
-              predictionsSearchSnapshotProvider((
-                sort: PredictionSearchSort.trending,
-                status: PredictionStatusFilter.all,
-                category: null,
-                searchQuery: '',
-              )),
-            ),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-209',
-        semanticLabel: 'Tìm kiếm prediction',
-        title: 'Tìm kiếm',
-        subtitle: '${snapshot.results.length} kết quả',
-        contentKey: PredictionsSearchTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Kết quả',
-            rows: _pdmEventRows(context, snapshot.results),
-          ),
-
-          _pdmSection(
-            title: 'Cập nhật',
-            rows: [_pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}')],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-210: Biến động mạnh.
-class PredictionsBreakingTabletPage extends ConsumerWidget {
-  const PredictionsBreakingTabletPage({super.key});
-
-  static const contentKey = Key('sc210_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(predictionsBreakingSnapshotProvider(null));
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-210',
-        semanticLabel: 'Biến động prediction',
-        title: 'Biến động mạnh',
-        subtitle: 'Tăng · Giảm',
-        contentKey: PredictionsBreakingTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được biến động',
-            () => ref.invalidate(predictionsBreakingSnapshotProvider(null)),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-210',
-        semanticLabel: 'Biến động prediction',
-        title: 'Biến động mạnh',
-        subtitle: '${snapshot.upCount} tăng · ${snapshot.downCount} giảm',
-        contentKey: PredictionsBreakingTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Movers',
-            rows: _pdmEventRows(context, snapshot.movers),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// SC-211: Chi tiết sự kiện dự đoán.
-class PredictionEventDetailTabletPage extends ConsumerWidget {
-  const PredictionEventDetailTabletPage({super.key, required this.eventId});
-
-  static const contentKey = Key('sc211_tablet_content');
-
-  final String eventId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(
-      predictionsEventDetailSnapshotProvider(eventId),
-    );
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-211',
-        semanticLabel: 'Chi tiết sự kiện prediction',
-        title: 'Chi tiết sự kiện',
-        subtitle: eventId,
-        contentKey: PredictionEventDetailTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được sự kiện',
-            () =>
-                ref.invalidate(predictionsEventDetailSnapshotProvider(eventId)),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-211',
-        semanticLabel: 'Chi tiết sự kiện prediction',
-        title: snapshot.event.title,
-        subtitle: snapshot.event.category,
-        contentKey: PredictionEventDetailTabletPage.contentKey,
-        children: [
-          _pdmSection(title: 'Quy tắc', rows: _pdmBullets(snapshot.rules)),
-
-          _stkLikeHolders(snapshot.topHolders),
-
-          _pdmSection(
-            title: 'Liên quan',
-            rows: [
-              _pdmQuickLinks(context, [
-                (
-                  'Biểu đồ nâng cao',
-                  AppRoutePaths.marketsPredictionsAdvancedChart(eventId),
-                ),
-                ('Cộng đồng', AppRoutePaths.marketsPredictionsSocial),
-              ]),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _stkLikeHolders(List<PredictionHolderDraft> holders) {
-    return _pdmSection(
-      title: 'Nắm giữ lớn',
-      rows: _pdmRows([
-        for (final holder in holders.take(8))
-          ('${holder.name} · ${holder.outcome}', '${holder.shares} cổ phần'),
-      ]),
-    );
-  }
-}
-
-/// SC-212: Danh mục prediction.
-class PredictionsPortfolioTabletPage extends ConsumerWidget {
+/// SC-212: Danh mục prediction trên tablet — tái composition theo phone
+/// SC-031: hero tổng quan (ẩn/hiện giá trị), thông báo cổ phần, 3 tab
+/// Đang mở / Đã đóng / Lịch sử, lệnh mở có hủy, cầu nối Arena. Toàn bộ
+/// section tái dùng widget standalone của feature.
+class PredictionsPortfolioTabletPage extends ConsumerStatefulWidget {
   const PredictionsPortfolioTabletPage({super.key});
 
   static const contentKey = Key('sc212_tablet_content');
+  static const activeTabKey = Key('sc212_tab_active');
+  static const closedTabKey = Key('sc212_tab_closed');
+  static const historyTabKey = Key('sc212_tab_history');
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(predictionsPortfolioSnapshotProvider);
+  ConsumerState<PredictionsPortfolioTabletPage> createState() =>
+      _PredictionsPortfolioTabletPageState();
+}
 
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-212',
-        semanticLabel: 'Danh mục prediction',
-        title: 'Danh mục prediction',
-        subtitle: 'Vị thế · Lãi lỗ',
-        contentKey: PredictionsPortfolioTabletPage.contentKey,
+class _PredictionsPortfolioTabletPageState
+    extends ConsumerState<PredictionsPortfolioTabletPage> {
+  PredictionPortfolioTab _activeTab = PredictionPortfolioTab.active;
+  bool _isHidden = false;
+  final Set<String> _cancelledOrderIds = <String>{};
+
+  @override
+  Widget build(BuildContext context) {
+    final controllerAsync = ref.watch(predictionsPortfolioControllerProvider);
+
+    return controllerAsync.when(
+      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      error: (error, stackTrace) => _frame(
         children: [
           _pdmError(
             'Không tải được danh mục',
@@ -449,174 +106,109 @@ class PredictionsPortfolioTabletPage extends ConsumerWidget {
           ),
         ],
       ),
-      data: (value) {
-        return VitTabletSectionFrame(
-          semanticIdentifier: 'SC-212',
-          semanticLabel: 'Danh mục prediction',
-          title: 'Danh mục prediction',
-          subtitle: 'Giá trị ${_pdmUsd(value.totalCurrentValue)}',
-          contentKey: PredictionsPortfolioTabletPage.contentKey,
+      data: (controller) {
+        final snapshot = controller.state.snapshot;
+        final openOrders = controller.openOrdersExcluding(_cancelledOrderIds);
+        return _frame(
+          subtitle: 'Giá trị ${_pdmUsd(snapshot.totalCurrentValue)}',
           children: [
-            _pdmSection(
-              title: 'Tổng quan',
-              rows: _pdmRows([
-                ('Giá trị hiện tại', _pdmUsd(value.totalCurrentValue)),
-                ('Đã đầu tư', _pdmUsd(value.totalInvested)),
-                ('Lãi lỗ', _pdmUsdS(value.totalPnl)),
-              ]),
+            VitCard(
+              variant: VitCardVariant.hero,
+              radius: VitCardRadius.large,
+              clip: true,
+              padding: TabletSpacingTokens.cardPaddingHero,
+              background: const VitHeroGlow(),
+              child: PredictionPortfolioSummaryCard(
+                snapshot: snapshot,
+                openOrderCount: openOrders.length,
+                isHidden: _isHidden,
+                onToggleHidden: () => setState(() {
+                  _isHidden = !_isHidden;
+                }),
+              ),
             ),
-
-            _pdmSection(
-              title: 'Vị thế',
-              rows: [
-                for (final position in value.positions)
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                position.outcome,
-                                style: AppTextStyles.caption.copyWith(
-                                  fontWeight: AppTextStyles.bold,
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x1),
-                              Text(
-                                '${_pdmDec(position.shares, 1)} cổ phần · giá TB ${_pdmDec(position.avgPrice)}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
-                              ),
-                              const SizedBox(height: TabletSpacingTokens.x1),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          _pdmUsdS(position.pnl),
-                          style: AppTextStyles.caption.copyWith(
-                            fontWeight: AppTextStyles.bold,
-                            color: position.pnl >= 0
-                                ? AppColors.buy
-                                : AppColors.sell,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            const VitAnnouncementBanner(
+              message: predictionPortfolioSharesNoteMessage,
+              icon: Icons.info_outline_rounded,
+              accentColor: AppColors.primary,
+              variant: VitAnnouncementBannerVariant.compact,
+            ),
+            VitTabBar(
+              variant: VitTabBarVariant.segment,
+              activeKey: _sc212TabKey(_activeTab),
+              onChanged: (key) => setState(() {
+                _activeTab = PredictionPortfolioTab.values.byName(key);
+              }),
+              tabs: const [
+                VitTabItem(
+                  key: 'active',
+                  label: 'Đang mở',
+                  widgetKey: PredictionsPortfolioTabletPage.activeTabKey,
+                ),
+                VitTabItem(
+                  key: 'closed',
+                  label: 'Đã đóng',
+                  widgetKey: PredictionsPortfolioTabletPage.closedTabKey,
+                ),
+                VitTabItem(
+                  key: 'history',
+                  label: 'Lịch sử',
+                  widgetKey: PredictionsPortfolioTabletPage.historyTabKey,
+                ),
               ],
             ),
-
-            _pdmSection(
-              title: 'Biên lai',
-              rows: [
-                for (final receipt in value.receipts.take(6))
-                  Padding(
-                    padding: TabletSpacingTokens.tableCellPaddingV,
-                    child: Material(
-                      color: AppColors.transparent,
-                      child: InkWell(
-                        onTap: () => context.push(
-                          AppRoutePaths.marketsPredictionReceipt(receipt.id),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                '${receipt.outcome} · ${receipt.status}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text1,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              _pdmUsd(receipt.total),
-                              style: AppTextStyles.caption.copyWith(
-                                fontWeight: AppTextStyles.bold,
-                                color: AppColors.text1,
-                                fontFeatures: AppTextStyles.tabularFigures,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
+            if (_activeTab == PredictionPortfolioTab.active)
+              PredictionPortfolioPositionsList(
+                snapshot: snapshot,
+                positions: snapshot.activePositions,
+                emptyTitle: 'Chưa có vị thế đang mở',
+                emptySubtitle: 'Bắt đầu giao dịch để xây danh mục',
+              )
+            else if (_activeTab == PredictionPortfolioTab.closed)
+              PredictionPortfolioPositionsList(
+                snapshot: snapshot,
+                positions: snapshot.closedPositions,
+                emptyTitle: 'Chưa có vị thế đã đóng',
+                emptySubtitle: 'Vị thế đã đóng sẽ hiện ở đây',
+              )
+            else
+              PredictionPortfolioHistorySection(snapshot: snapshot),
+            if (_activeTab == PredictionPortfolioTab.active &&
+                openOrders.isNotEmpty)
+              PredictionPortfolioOpenOrdersSection(
+                snapshot: snapshot,
+                orders: openOrders,
+                onCancel: (orderId) => setState(() {
+                  _cancelledOrderIds.add(orderId);
+                }),
+              ),
+            PredictionsPortfolioArenaBridgeCard(
+              onTap: () => context.push(AppRoutePaths.arena),
             ),
           ],
         );
       },
     );
   }
-}
 
-/// SC-213: Phần thưởng thanh khoản prediction.
-class PredictionsRewardsTabletPage extends ConsumerWidget {
-  const PredictionsRewardsTabletPage({super.key});
-
-  static const contentKey = Key('sc213_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(predictionsRewardsSnapshotProvider);
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-213',
-        semanticLabel: 'Phần thưởng prediction',
-        title: 'Phần thưởng',
-        subtitle: 'Quỹ hàng ngày',
-        contentKey: PredictionsRewardsTabletPage.contentKey,
-        children: [
-          _pdmError(
-            'Không tải được phần thưởng',
-            () => ref.invalidate(predictionsRewardsSnapshotProvider),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-213',
-        semanticLabel: 'Phần thưởng prediction',
-        title: 'Phần thưởng',
-        subtitle: 'Quỹ ngày ${_pdmUsd(snapshot.totalDailyPool)}',
-        contentKey: PredictionsRewardsTabletPage.contentKey,
-        children: [
-          _pdmSection(
-            title: 'Cơ hội kiếm thưởng',
-            rows: [
-              for (final reward in snapshot.rewards.take(8))
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${reward.category} · chênh lệch tối đa ${_pdmPct(reward.maxSpread)}',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${_pdmUsd(reward.dailyReward)}/ngày',
-                        style: AppTextStyles.caption.copyWith(
-                          fontWeight: AppTextStyles.bold,
-                          color: AppColors.buy,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
+  Widget _frame({required List<Widget> children, String? subtitle}) {
+    return VitTabletSectionFrame(
+      gutterFlush: true,
+      semanticIdentifier: 'SC-212',
+      semanticLabel: 'Danh mục prediction',
+      title: 'Danh mục prediction',
+      subtitle: subtitle ?? 'Vị thế · Lệnh · Lịch sử',
+      contentKey: PredictionsPortfolioTabletPage.contentKey,
+      backFallback: AppRoutePaths.marketsPredictions,
+      children: children,
     );
   }
+}
+
+String _sc212TabKey(PredictionPortfolioTab tab) {
+  return switch (tab) {
+    PredictionPortfolioTab.active => 'active',
+    PredictionPortfolioTab.closed => 'closed',
+    PredictionPortfolioTab.history => 'history',
+  };
 }

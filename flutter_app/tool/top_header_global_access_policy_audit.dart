@@ -59,6 +59,7 @@ const _globalSearchAllowlist = <String>{
 const _moduleSearchAllowlist = <String>{
   'lib/features/discovery/presentation/phone/pages/topic_hub_page.dart',
   'lib/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart',
+  'lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart',
 };
 
 const _globalNotificationAllowlist = <String>{

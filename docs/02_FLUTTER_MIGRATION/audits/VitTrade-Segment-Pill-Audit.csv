@@ -242,7 +242,30 @@ p2p_security,p2p_security/presentation/widgets/security/p2p_tax_reporting_page_c
 p2p_security,p2p_security/presentation/widgets/security/p2p_tax_reporting_page_sections.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
 predictions,predictions/presentation/phone/pages/hub/predictions_home_page.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
 predictions,predictions/presentation/phone/pages/portfolio/predictions_portfolio_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
-predictions,predictions/presentation/tablet/pages/predictions_tablet_pages.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+predictions,predictions/presentation/tablet/pages/prediction_event_detail_tablet_sections.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+predictions,predictions/presentation/tablet/pages/prediction_event_detail_tablet_tabs.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_event_detail_tablet_trade.dart,VitChoicePill,chip,1,44,hug,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_event_detail_tablet_trade.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_event_detail_tablet_trade.dart,VitSegmentedChoice,primaryAccent,6,44,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_market_maker_tablet_page.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_market_maker_tablet_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_portfolio_analyzer_tablet_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_sections.dart,VitChoicePill,chip,2,44,full_or_hug,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_home_tablet_page.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+predictions,predictions/presentation/tablet/pages/predictions_home_tablet_sections.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+predictions,predictions/presentation/tablet/pages/predictions_home_tablet_sections.dart,VitPresetChipRow,preset_row,1,34,equal_full,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_breaking.dart,VitChoicePill,chip,1,44,hug,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_discovery.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_discovery.dart,VitSegmentedChoice,primaryAccent,4,44,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_discovery.dart,VitTabBar,pill_wrap,1,~28,wrap_hug,-,review,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart,VitChoicePill,chip,1,44,hug,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_leaderboard.dart,VitChoicePill,chip,1,44,hug,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_leaderboard.dart,VitSegmentedChoice,primaryAccent,3,44,equal_expanded,-,pass,
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_rewards.dart,VitFilterChip,filter_accent,2,44,hug_scroll,-,review,wrapper over VitChoicePill
+predictions,predictions/presentation/tablet/pages/predictions_tablet_pages_tournaments.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 predictions,predictions/presentation/widgets/event/prediction_advanced_chart_overview.dart,VitChoicePill,chip,1,44,full_or_hug,-,pass,
 predictions,predictions/presentation/widgets/event/prediction_event_detail_detail_tabs.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 predictions,predictions/presentation/widgets/event/prediction_event_detail_trade_panel.dart,VitChoicePill,chip,1,44,hug,-,pass,
