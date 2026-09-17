@@ -9,6 +9,7 @@ class PredictionTournamentsTabletPage extends ConsumerStatefulWidget {
   const PredictionTournamentsTabletPage({super.key});
 
   static const contentKey = Key('sc222_tablet_content');
+  static const controlPaneKey = Key('sc222_tablet_control_pane');
   static const activeTabKey = Key('sc222_tab_active');
   static const endedTabKey = Key('sc222_tab_ended');
 
@@ -30,14 +31,20 @@ class _PredictionTournamentsTabletPageState
     final tournamentsAsync = ref.watch(predictionsTournamentsSnapshotProvider);
 
     return tournamentsAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionTournamentsTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionTournamentsTabletPage.contentKey, [
           _pdmError(
             'Không tải được giải đấu',
             () => ref.invalidate(predictionsTournamentsSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (snapshot) {
         final tournaments = _activeTab == _Sc222Tab.active
@@ -50,96 +57,122 @@ class _PredictionTournamentsTabletPageState
         final featured = snapshot.activeTournaments
             .where((tournament) => tournament.featured)
             .toList();
-        return _frame(
-          subtitle: '${snapshot.activeTournaments.length} giải đang diễn ra',
-          children: [
-            VitTabBar(
-              variant: VitTabBarVariant.segment,
-              activeKey: _activeTab == _Sc222Tab.active ? 'active' : 'ended',
-              onChanged: (key) => setState(() {
-                _activeTab = _Sc222Tab.values.byName(key);
-              }),
-              tabs: const [
-                VitTabItem(
-                  key: 'active',
-                  label: 'Đang diễn ra',
-                  widgetKey: PredictionTournamentsTabletPage.activeTabKey,
-                ),
-                VitTabItem(
-                  key: 'ended',
-                  label: 'Đã kết thúc',
-                  widgetKey: PredictionTournamentsTabletPage.endedTabKey,
-                ),
-              ],
+        final tabBar = VitTabBar(
+          variant: VitTabBarVariant.segment,
+          activeKey: _activeTab == _Sc222Tab.active ? 'active' : 'ended',
+          onChanged: (key) => setState(() {
+            _activeTab = _Sc222Tab.values.byName(key);
+          }),
+          tabs: const [
+            VitTabItem(
+              key: 'active',
+              label: 'Đang diễn ra',
+              widgetKey: PredictionTournamentsTabletPage.activeTabKey,
             ),
-            if (_activeTab == _Sc222Tab.active)
-              for (final tournament in featured)
-                _Sc222FeaturedBlock(tournament: tournament),
-            if (tournaments.isEmpty)
-              const VitEmptyState(
+            VitTabItem(
+              key: 'ended',
+              label: 'Đã kết thúc',
+              widgetKey: PredictionTournamentsTabletPage.endedTabKey,
+            ),
+          ],
+        );
+        final featuredBlocks = [
+          if (_activeTab == _Sc222Tab.active)
+            for (final tournament in featured)
+              _Sc222FeaturedBlock(tournament: tournament),
+        ];
+        final cards = tournaments.isEmpty
+            ? const VitEmptyState(
                 title: 'Chưa có giải đấu',
                 message: 'Giải đấu mới sẽ xuất hiện ở đây',
                 icon: Icons.emoji_events_outlined,
               )
-            else
-              for (final tournament in tournaments)
-                _Sc222TournamentCard(tournament: tournament),
-            VitPageSection(
-              label: 'Thống kê nhanh',
-              accentColor: AppColors.accent,
-              innerGap: TabletSpacingTokens.x4,
-              children: [
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _Sc222Stat(
-                          label: 'Tổng giải',
-                          value: VitFormat.count(snapshot.tournaments.length),
-                        ),
-                      ),
-                      Expanded(
-                        child: _Sc222Stat(
-                          label: 'Đang diễn ra',
-                          value: VitFormat.count(
-                            snapshot.activeTournaments.length,
-                          ),
-                          valueColor: AppColors.buy,
-                        ),
-                      ),
-                      Expanded(
-                        child: _Sc222Stat(
-                          label: 'Tổng người tham gia',
-                          value: VitFormat.count(
-                            snapshot.tournaments.fold(
-                              0,
-                              (sum, tournament) =>
-                                  sum + tournament.participants,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+            : PredictionTabletCardGrid(
+                children: [
+                  for (final tournament in tournaments)
+                    _Sc222TournamentCard(tournament: tournament),
+                ],
+              );
+        final stats = VitPageSection(
+          label: 'Thống kê nhanh',
+          accentColor: AppColors.accent,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            VitCard(
+              density: VitDensity.compact,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _Sc222Stat(
+                      label: 'Tổng giải',
+                      value: VitFormat.count(snapshot.tournaments.length),
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: _Sc222Stat(
+                      label: 'Đang diễn ra',
+                      value: VitFormat.count(snapshot.activeTournaments.length),
+                      valueColor: AppColors.buy,
+                    ),
+                  ),
+                  Expanded(
+                    child: _Sc222Stat(
+                      label: 'Tổng người tham gia',
+                      value: VitFormat.count(
+                        snapshot.tournaments.fold(
+                          0,
+                          (sum, tournament) => sum + tournament.participants,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
+        );
+        return _frame(
+          context,
+          subtitle: '${snapshot.activeTournaments.length} giải đang diễn ra',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionTournamentsTabletPage.contentKey,
+            secondaryContentKey: PredictionTournamentsTabletPage.controlPaneKey,
+            primaryChildren: [tabBar, ...featuredBlocks, cards],
+            secondaryChildren: [stats],
+            narrowChildren: [tabBar, ...featuredBlocks, cards, stats],
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-222',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Giải đấu prediction',
-      title: 'Giải đấu',
-      subtitle: subtitle ?? 'Giải đấu · Prediction',
-      contentKey: PredictionTournamentsTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-222',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Giải đấu',
+            subtitle: subtitle ?? 'Giải đấu · Prediction',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }
@@ -356,6 +389,7 @@ class PredictionTournamentDetailTabletPage extends ConsumerWidget {
   });
 
   static const contentKey = Key('sc223_tablet_content');
+  static const controlPaneKey = Key('sc223_tablet_control_pane');
   static const joinKey = Key('sc223_join');
 
   final String tournamentId;
@@ -365,123 +399,160 @@ class PredictionTournamentDetailTabletPage extends ConsumerWidget {
     final tournamentsAsync = ref.watch(predictionsTournamentsSnapshotProvider);
 
     return tournamentsAsync.when(
-      loading: () => const VitTabletSectionFrame(
-        semanticIdentifier: 'SC-223',
-        semanticLabel: 'Chi tiết giải đấu prediction',
-        title: 'Chi tiết giải đấu',
-        children: [VitSkeletonList(rows: 6)],
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(
+          PredictionTournamentDetailTabletPage.contentKey,
+          const [VitSkeletonList(rows: 6)],
+        ),
       ),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-223',
-        semanticLabel: 'Chi tiết giải đấu prediction',
-        title: 'Chi tiết giải đấu',
-        children: [
+      error: (error, stackTrace) => _frame(
+        context,
+        body: _pdmStatusBody(PredictionTournamentDetailTabletPage.contentKey, [
           _pdmError(
             'Không tải được giải đấu',
             () => ref.invalidate(predictionsTournamentsSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (snapshot) {
         final tournament = snapshot.tournaments.firstWhere(
           (item) => item.id == tournamentId,
           orElse: () => snapshot.tournaments.first,
         );
-        return VitTabletSectionFrame(
-          semanticIdentifier: 'SC-223',
-          semanticLabel: 'Chi tiết giải đấu prediction',
-          title: tournament.name,
-          subtitle: tournament.category,
-          contentKey: PredictionTournamentDetailTabletPage.contentKey,
-          backFallback: AppRoutePaths.marketsPredictionsTournaments,
+        final heroCard = VitCard(
+          variant: VitCardVariant.hero,
+          radius: VitCardRadius.large,
+          padding: TabletSpacingTokens.cardPaddingHero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tournament.description,
+                style: AppTextStyles.caption.copyWith(color: AppColors.text2),
+              ),
+              const SizedBox(height: TabletSpacingTokens.x3),
+              _Sc222TournamentMeta(tournament: tournament),
+            ],
+          ),
+        );
+        final leaderboard = VitPageSection(
+          label: 'Bảng xếp hạng giải đấu',
+          accentColor: AppColors.primary,
+          innerGap: TabletSpacingTokens.x4,
           children: [
             VitCard(
-              variant: VitCardVariant.hero,
-              radius: VitCardRadius.large,
-              padding: TabletSpacingTokens.cardPaddingHero,
+              density: VitDensity.compact,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    tournament.description,
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.text2,
+                  for (final entry in snapshot.leaderboard)
+                    Padding(
+                      padding: TabletSpacingTokens.tableCellPaddingV,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: TabletSpacingTokens.x5,
+                            child: Text(
+                              '#${entry.rank}',
+                              style: AppTextStyles.caption.copyWith(
+                                color: entry.rank == 1
+                                    ? AppColors.warn
+                                    : AppColors.text3,
+                                fontWeight: AppTextStyles.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: TabletSpacingTokens.x2),
+                          Expanded(
+                            child: Text(
+                              entry.name,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text1,
+                                fontWeight: AppTextStyles.bold,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '${VitFormat.count(entry.score)} điểm · '
+                            '${VitFormat.usd(entry.prize.toDouble())}',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text2,
+                              fontFeatures: AppTextStyles.tabularFigures,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: TabletSpacingTokens.x3),
-                  _Sc222TournamentMeta(tournament: tournament),
                 ],
               ),
             ),
-            VitPageSection(
-              label: 'Bảng xếp hạng giải đấu',
-              accentColor: AppColors.primary,
-              innerGap: TabletSpacingTokens.x4,
-              children: [
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Column(
-                    children: [
-                      for (final entry in snapshot.leaderboard)
-                        Padding(
-                          padding: TabletSpacingTokens.tableCellPaddingV,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: TabletSpacingTokens.x5,
-                                child: Text(
-                                  '#${entry.rank}',
-                                  style: AppTextStyles.caption.copyWith(
-                                    color: entry.rank == 1
-                                        ? AppColors.warn
-                                        : AppColors.text3,
-                                    fontWeight: AppTextStyles.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: TabletSpacingTokens.x2),
-                              Expanded(
-                                child: Text(
-                                  entry.name,
-                                  style: AppTextStyles.caption.copyWith(
-                                    color: AppColors.text1,
-                                    fontWeight: AppTextStyles.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                '${VitFormat.count(entry.score)} điểm · '
-                                '${VitFormat.usd(entry.prize.toDouble())}',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                  fontFeatures: AppTextStyles.tabularFigures,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            if (tournament.status == TournamentStatus.active)
-              VitCtaButton(
-                key: PredictionTournamentDetailTabletPage.joinKey,
-                onPressed: () {
-                  unawaited(
-                    showVitNoticeSheet(
-                      context: context,
-                      title: 'Sắp ra mắt',
-                      message: 'Tham gia giải đấu sẽ sớm ra mắt.',
-                    ),
-                  );
-                },
-                child: const Text('Tham gia giải đấu'),
-              ),
           ],
         );
+        final joinButton = VitCtaButton(
+          key: PredictionTournamentDetailTabletPage.joinKey,
+          onPressed: () {
+            unawaited(
+              showVitNoticeSheet(
+                context: context,
+                title: 'Sắp ra mắt',
+                message: 'Tham gia giải đấu sẽ sớm ra mắt.',
+              ),
+            );
+          },
+          child: const Text('Tham gia giải đấu'),
+        );
+        return _frame(
+          context,
+          title: tournament.name,
+          subtitle: tournament.category,
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionTournamentDetailTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionTournamentDetailTabletPage.controlPaneKey,
+            primaryChildren: [
+              leaderboard,
+              if (tournament.status == TournamentStatus.active) joinButton,
+            ],
+            secondaryChildren: [heroCard],
+            narrowChildren: [
+              heroCard,
+              leaderboard,
+              if (tournament.status == TournamentStatus.active) joinButton,
+            ],
+          ),
+        );
       },
+    );
+  }
+
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? title,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
+      semanticLabel: 'Chi tiết giải đấu prediction',
+      semanticIdentifier: 'SC-223',
+      child: Column(
+        children: [
+          VitHeader(
+            title: title ?? 'Chi tiết giải đấu',
+            subtitle: subtitle,
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictionsTournaments,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

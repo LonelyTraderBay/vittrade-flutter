@@ -9,6 +9,7 @@ class PredictionsRewardsTabletPage extends ConsumerStatefulWidget {
   const PredictionsRewardsTabletPage({super.key});
 
   static const contentKey = Key('sc213_tablet_content');
+  static const controlPaneKey = Key('sc213_tablet_control_pane');
   static const allCategoryKey = Key('sc213_category_all');
 
   @override
@@ -25,14 +26,20 @@ class _PredictionsRewardsTabletPageState
     final rewardsAsync = ref.watch(predictionsRewardsSnapshotProvider);
 
     return rewardsAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionsRewardsTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsRewardsTabletPage.contentKey, [
           _pdmError(
             'Không tải được phần thưởng',
             () => ref.invalidate(predictionsRewardsSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (snapshot) {
         final rewards = _category == null
@@ -40,110 +47,133 @@ class _PredictionsRewardsTabletPageState
             : snapshot.rewards
                   .where((reward) => reward.category == _category)
                   .toList();
-        return _frame(
-          subtitle: 'Quỹ ngày ${_pdmUsd(snapshot.totalDailyPool)}',
-          children: [
-            VitCard(
-              variant: VitCardVariant.hero,
-              radius: VitCardRadius.large,
-              padding: TabletSpacingTokens.cardPaddingHero,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _Sc213HeroKpi(
-                      label: 'Quỹ thưởng hàng ngày',
-                      value: VitFormat.usd(snapshot.totalDailyPool),
-                      caption: 'Chia đều theo thanh khoản cung cấp',
-                    ),
-                  ),
-                  const SizedBox(
-                    width: TabletSpacingTokens.dividerHairline,
-                    height: TabletSpacingTokens.x6,
-                    child: ColoredBox(color: AppColors.border),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: TabletSpacingTokens.x4,
-                      ),
-                      child: _Sc213HeroKpi(
-                        label: 'Cơ hội đang mở',
-                        value: VitFormat.count(snapshot.rewards.length),
-                        caption: 'Sự kiện cần thanh khoản hai bên',
-                      ),
-                    ),
-                  ),
-                ],
+        final heroCard = VitCard(
+          variant: VitCardVariant.hero,
+          radius: VitCardRadius.large,
+          padding: TabletSpacingTokens.cardPaddingHero,
+          child: Row(
+            children: [
+              Expanded(
+                child: _Sc213HeroKpi(
+                  label: 'Quỹ thưởng hàng ngày',
+                  value: VitFormat.usd(snapshot.totalDailyPool),
+                  caption: 'Chia đều theo thanh khoản cung cấp',
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  VitFilterChip(
-                    key: PredictionsRewardsTabletPage.allCategoryKey,
-                    label: 'Tất cả',
-                    active: _category == null,
-                    onTap: () => setState(() {
-                      _category = null;
-                    }),
-                    color: AppColors.primary,
-                  ),
-                  const SizedBox(width: TabletSpacingTokens.x2),
-                  for (
-                    var index = 0;
-                    index < snapshot.categories.length;
-                    index += 1
-                  ) ...[
-                    VitFilterChip(
-                      label: snapshot.categories[index],
-                      active: _category == snapshot.categories[index],
-                      onTap: () => setState(() {
-                        _category = _category == snapshot.categories[index]
-                            ? null
-                            : snapshot.categories[index];
-                      }),
-                      color: AppColors.primary,
-                    ),
-                    if (index != snapshot.categories.length - 1)
-                      const SizedBox(width: TabletSpacingTokens.x2),
-                  ],
-                ],
+              const SizedBox(
+                width: TabletSpacingTokens.dividerHairline,
+                height: TabletSpacingTokens.x6,
+                child: ColoredBox(color: AppColors.border),
               ),
-            ),
-            VitPageSection(
-              label: 'Cơ hội kiếm thưởng',
-              accentColor: AppColors.primary,
-              innerGap: TabletSpacingTokens.x4,
-              children: [
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Column(
-                    children: [
-                      const _Sc213RewardHeader(),
-                      const SizedBox(height: TabletSpacingTokens.x3),
-                      for (final reward in rewards)
-                        _Sc213RewardRow(reward: reward),
-                    ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    start: TabletSpacingTokens.x4,
+                  ),
+                  child: _Sc213HeroKpi(
+                    label: 'Cơ hội đang mở',
+                    value: VitFormat.count(snapshot.rewards.length),
+                    caption: 'Sự kiện cần thanh khoản hai bên',
                   ),
                 ),
+              ),
+            ],
+          ),
+        );
+        final categoryChips = SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              VitFilterChip(
+                key: PredictionsRewardsTabletPage.allCategoryKey,
+                label: 'Tất cả',
+                active: _category == null,
+                onTap: () => setState(() {
+                  _category = null;
+                }),
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: TabletSpacingTokens.x2),
+              for (
+                var index = 0;
+                index < snapshot.categories.length;
+                index += 1
+              ) ...[
+                VitFilterChip(
+                  label: snapshot.categories[index],
+                  active: _category == snapshot.categories[index],
+                  onTap: () => setState(() {
+                    _category = _category == snapshot.categories[index]
+                        ? null
+                        : snapshot.categories[index];
+                  }),
+                  color: AppColors.primary,
+                ),
+                if (index != snapshot.categories.length - 1)
+                  const SizedBox(width: TabletSpacingTokens.x2),
               ],
+            ],
+          ),
+        );
+        final opportunityTable = VitPageSection(
+          label: 'Cơ hội kiếm thưởng',
+          accentColor: AppColors.primary,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            VitCard(
+              density: VitDensity.compact,
+              child: Column(
+                children: [
+                  const _Sc213RewardHeader(),
+                  const SizedBox(height: TabletSpacingTokens.x3),
+                  for (final reward in rewards) _Sc213RewardRow(reward: reward),
+                ],
+              ),
             ),
           ],
+        );
+        return _frame(
+          context,
+          subtitle: 'Quỹ ngày ${_pdmUsd(snapshot.totalDailyPool)}',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsRewardsTabletPage.contentKey,
+            secondaryContentKey: PredictionsRewardsTabletPage.controlPaneKey,
+            primaryChildren: [heroCard, opportunityTable],
+            secondaryChildren: [categoryChips],
+            narrowChildren: [heroCard, categoryChips, opportunityTable],
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-213',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Phần thưởng prediction',
-      title: 'Phần thưởng',
-      subtitle: subtitle ?? 'Quỹ hàng ngày',
-      contentKey: PredictionsRewardsTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-213',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Phần thưởng',
+            subtitle: subtitle ?? 'Quỹ hàng ngày',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

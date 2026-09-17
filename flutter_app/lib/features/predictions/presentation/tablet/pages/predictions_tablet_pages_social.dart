@@ -9,6 +9,7 @@ class PredictionSocialTabletPage extends ConsumerWidget {
   const PredictionSocialTabletPage({super.key});
 
   static const contentKey = Key('sc220_tablet_content');
+  static const insightPaneKey = Key('sc220_tablet_insight_pane');
   static const shareKey = Key('sc220_share');
 
   @override
@@ -16,181 +17,222 @@ class PredictionSocialTabletPage extends ConsumerWidget {
     final socialAsync = ref.watch(predictionsSocialSnapshotProvider);
 
     return socialAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionSocialTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionSocialTabletPage.contentKey, [
           _pdmError(
             'Không tải được cộng đồng',
             () => ref.invalidate(predictionsSocialSnapshotProvider),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: snapshot.eventTitle,
-        children: [
-          VitPageSection(
-            label: 'Sentiment cộng đồng',
-            accentColor: AppColors.primary,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              VitCard(
-                density: VitDensity.compact,
-                child: Column(
-                  children: [
-                    for (final item in snapshot.sentiment)
-                      Padding(
-                        padding: TabletSpacingTokens.tableCellPaddingV,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width:
-                                  TabletSpacingTokens.x7 -
-                                  TabletSpacingTokens.x3,
-                              child: Text(
-                                item.name,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text2,
-                                ),
+      data: (snapshot) {
+        final sentimentSection = VitPageSection(
+          label: 'Sentiment cộng đồng',
+          accentColor: AppColors.primary,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            VitCard(
+              density: VitDensity.compact,
+              child: Column(
+                children: [
+                  for (final item in snapshot.sentiment)
+                    Padding(
+                      padding: TabletSpacingTokens.tableCellPaddingV,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width:
+                                TabletSpacingTokens.x7 - TabletSpacingTokens.x3,
+                            child: Text(
+                              item.name,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text2,
                               ),
                             ),
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: AppRadii.badgeRadius,
-                                child: SizedBox(
-                                  height: TabletSpacingTokens.x3,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: item.value,
-                                        child: ColoredBox(
-                                          color: item.tone.resolve().withValues(
-                                            alpha: .30,
-                                          ),
+                          ),
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: AppRadii.badgeRadius,
+                              child: SizedBox(
+                                height: TabletSpacingTokens.x3,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: item.value,
+                                      child: ColoredBox(
+                                        color: item.tone.resolve().withValues(
+                                          alpha: .30,
                                         ),
                                       ),
-                                      const Expanded(
-                                        flex: 100,
-                                        child: ColoredBox(
-                                          color: AppColors.surface2,
-                                        ),
+                                    ),
+                                    const Expanded(
+                                      flex: 100,
+                                      child: ColoredBox(
+                                        color: AppColors.surface2,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: TabletSpacingTokens.x5,
-                              child: Text(
-                                VitFormat.percent(
-                                  item.value,
-                                  fractionDigits: 0,
-                                ),
-                                textAlign: TextAlign.end,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: item.tone.resolve(),
-                                  fontWeight: AppTextStyles.bold,
-                                ),
+                          ),
+                          SizedBox(
+                            width: TabletSpacingTokens.x5,
+                            child: Text(
+                              VitFormat.percent(item.value, fractionDigits: 0),
+                              textAlign: TextAlign.end,
+                              style: AppTextStyles.caption.copyWith(
+                                color: item.tone.resolve(),
+                                fontWeight: AppTextStyles.bold,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
-            ],
-          ),
-          VitPageSection(
-            label: 'Bình luận',
-            accentColor: AppColors.accent,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final comment in snapshot.comments)
-                _Sc220CommentCard(comment: comment),
-            ],
-          ),
-          VitPageSection(
-            label: 'Đóng góp nổi bật',
-            accentColor: AppColors.warn,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              VitCard(
-                density: VitDensity.compact,
-                child: Column(
-                  children: [
-                    for (final contributor in snapshot.contributors)
-                      Padding(
-                        padding: TabletSpacingTokens.tableCellPaddingV,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: TabletSpacingTokens.iconSm,
-                              backgroundColor: AppColors.surface2,
-                              child: Text(
-                                contributor.name[0],
-                                style: AppTextStyles.micro.copyWith(
-                                  color: AppColors.text1,
-                                  fontWeight: AppTextStyles.bold,
-                                ),
+            ),
+          ],
+        );
+        final commentsSection = VitPageSection(
+          label: 'Bình luận',
+          accentColor: AppColors.accent,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            for (final comment in snapshot.comments)
+              _Sc220CommentCard(comment: comment),
+          ],
+        );
+        final contributionsSection = VitPageSection(
+          label: 'Đóng góp nổi bật',
+          accentColor: AppColors.warn,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            VitCard(
+              density: VitDensity.compact,
+              child: Column(
+                children: [
+                  for (final contributor in snapshot.contributors)
+                    Padding(
+                      padding: TabletSpacingTokens.tableCellPaddingV,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: TabletSpacingTokens.iconSm,
+                            backgroundColor: AppColors.surface2,
+                            child: Text(
+                              contributor.name[0],
+                              style: AppTextStyles.micro.copyWith(
+                                color: AppColors.text1,
+                                fontWeight: AppTextStyles.bold,
                               ),
                             ),
-                            const SizedBox(width: TabletSpacingTokens.x2),
-                            Expanded(
-                              child: Text(
-                                contributor.name,
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text1,
-                                  fontWeight: AppTextStyles.bold,
-                                ),
+                          ),
+                          const SizedBox(width: TabletSpacingTokens.x2),
+                          Expanded(
+                            child: Text(
+                              contributor.name,
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.text1,
+                                fontWeight: AppTextStyles.bold,
                               ),
                             ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
+                          ),
+                          // Panel workspace ~240dp: số liệu đuôi co giãn +
+                          // ellipsis thay vì cố định như bản một cột 800dp.
+                          const SizedBox(width: TabletSpacingTokens.x2),
+                          Flexible(
+                            child: Text(
                               '${VitFormat.count(contributor.comments)} bình '
                               'luận · ${VitFormat.count(contributor.upvotes)} '
                               'bình chọn',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.micro.copyWith(
                                 color: AppColors.text3,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
+            ),
+          ],
+        );
+        final shareButton = VitCtaButton(
+          key: PredictionSocialTabletPage.shareKey,
+          onPressed: () {
+            unawaited(
+              showVitNoticeSheet(
+                context: context,
+                title: 'Sắp ra mắt',
+                message: 'Chia sẻ phân tích sẽ sớm ra mắt.',
+              ),
+            );
+          },
+          variant: VitCtaButtonVariant.secondary,
+          leading: const Icon(Icons.ios_share_rounded),
+          child: const Text('Chia sẻ phân tích'),
+        );
+        return _frame(
+          context,
+          subtitle: snapshot.eventTitle,
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionSocialTabletPage.contentKey,
+            secondaryContentKey: PredictionSocialTabletPage.insightPaneKey,
+            // Dòng bình luận cột chính; insight (sentiment + đóng góp nổi
+            // bật) panel phải (mockup Cụm E).
+            primaryChildren: [commentsSection, shareButton],
+            secondaryChildren: [sentimentSection, contributionsSection],
+            narrowChildren: [
+              sentimentSection,
+              commentsSection,
+              contributionsSection,
+              shareButton,
             ],
           ),
-          VitCtaButton(
-            key: PredictionSocialTabletPage.shareKey,
-            onPressed: () {
-              unawaited(
-                showVitNoticeSheet(
-                  context: context,
-                  title: 'Sắp ra mắt',
-                  message: 'Chia sẻ phân tích sẽ sớm ra mắt.',
-                ),
-              );
-            },
-            variant: VitCtaButtonVariant.secondary,
-            leading: const Icon(Icons.ios_share_rounded),
-            child: const Text('Chia sẻ phân tích'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-220',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Cộng đồng prediction',
-      title: 'Cộng đồng',
-      subtitle: subtitle ?? 'Bình luận · Sentiment',
-      contentKey: PredictionSocialTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-220',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Cộng đồng',
+            subtitle: subtitle ?? 'Bình luận · Sentiment',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

@@ -20,7 +20,6 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_tablet_card_grid.dart';
