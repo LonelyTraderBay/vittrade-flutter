@@ -13,10 +13,12 @@ import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/predictions/domain/entities/predictions_entities.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/predictions_outcome_widgets.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_tablet_card_grid.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -42,6 +44,7 @@ class PredictionsHomeTabletPage extends ConsumerStatefulWidget {
   static const breakingMoversKey = Key('sc208_breaking_movers');
   static const arenaBridgeKey = Key('sc208_arena_bridge');
   static const viewAllEventsKey = Key('sc208_view_all_events');
+  static const controlPaneKey = Key('sc208_tablet_control_pane');
 
   static Key eventCardKey(String id) => Key('sc208_event_$id');
   static Key toolKey(String id) => Key('sc208_tool_$id');
@@ -95,9 +98,10 @@ class _PredictionsHomeTabletPageState
     final showDiscoveryExtras = _searchQuery.isEmpty;
 
     return homeAsync.when(
-      loading: () => _scaffold(children: const [VitSkeletonList(rows: 6)]),
+      loading: () =>
+          _scaffold(body: _statusBody(const [VitSkeletonList(rows: 6)])),
       error: (error, stackTrace) => _scaffold(
-        children: [
+        body: _statusBody([
           VitErrorState(
             title: 'Không tải được trang chủ dự đoán',
             message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
@@ -110,109 +114,95 @@ class _PredictionsHomeTabletPageState
               )),
             ),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _scaffold(
-        children: [
-          _Sc208Hero(
-            openEventCount:
-                hubTotalsValue?.events.length ?? snapshot.events.length,
-            openPositionCount: snapshot.openPositionCount,
-            onPositionsTap: () =>
-                context.push(AppRoutePaths.marketsPredictionsPortfolio),
-          ),
-          VitSearchBar(
-            key: PredictionsHomeTabletPage.searchFieldKey,
-            controller: _searchController,
-            placeholder: 'Tìm sự kiện…',
-            onChanged: (value) => setState(() {
-              _searchQuery = value;
-            }),
-            onClear: () => setState(() {
-              _searchController.clear();
-              _searchQuery = '';
-            }),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: VitTabBar(
-              variant: VitTabBarVariant.pill,
-              activeKey: _sc208FilterKey(_filter),
-              onChanged: (key) => setState(
-                () => _filter = PredictionFilterTab.values.byName(key),
+      data: (snapshot) {
+        // Các khối dựng một lần, tham chiếu ở cả tầng workspace và tầng hẹp —
+        // một thời điểm chỉ MỘT danh sách nằm trong cây.
+        final hero = _Sc208Hero(
+          openEventCount:
+              hubTotalsValue?.events.length ?? snapshot.events.length,
+          openPositionCount: snapshot.openPositionCount,
+          onPositionsTap: () =>
+              context.push(AppRoutePaths.marketsPredictionsPortfolio),
+        );
+        final searchField = VitSearchBar(
+          key: PredictionsHomeTabletPage.searchFieldKey,
+          controller: _searchController,
+          placeholder: 'Tìm sự kiện…',
+          onChanged: (value) => setState(() {
+            _searchQuery = value;
+          }),
+          onClear: () => setState(() {
+            _searchController.clear();
+            _searchQuery = '';
+          }),
+        );
+        final filterTabs = SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: VitTabBar(
+            variant: VitTabBarVariant.pill,
+            activeKey: _sc208FilterKey(_filter),
+            onChanged: (key) => setState(
+              () => _filter = PredictionFilterTab.values.byName(key),
+            ),
+            tabs: const [
+              VitTabItem(
+                key: 'trending',
+                label: 'Xu hướng',
+                icon: Icons.trending_up_outlined,
+                widgetKey: PredictionsHomeTabletPage.trendingFilterKey,
               ),
-              tabs: const [
-                VitTabItem(
-                  key: 'trending',
-                  label: 'Xu hướng',
-                  icon: Icons.trending_up_outlined,
-                  widgetKey: PredictionsHomeTabletPage.trendingFilterKey,
-                ),
-                VitTabItem(
-                  key: 'newEvents',
-                  label: 'Mới',
-                  icon: Icons.fiber_new_outlined,
-                  widgetKey: PredictionsHomeTabletPage.newFilterKey,
-                ),
-                VitTabItem(
-                  key: 'popular',
-                  label: 'Phổ biến',
-                  icon: Icons.group_outlined,
-                ),
-                VitTabItem(
-                  key: 'liquid',
-                  label: 'Thanh khoản',
-                  icon: Icons.bar_chart_outlined,
-                ),
-                VitTabItem(
-                  key: 'ending',
-                  label: 'Sắp đóng',
-                  icon: Icons.schedule_outlined,
-                ),
-                VitTabItem(
-                  key: 'competitive',
-                  label: 'Cạnh tranh',
-                  icon: Icons.track_changes_outlined,
-                ),
-              ],
-            ),
+              VitTabItem(
+                key: 'newEvents',
+                label: 'Mới',
+                icon: Icons.fiber_new_outlined,
+                widgetKey: PredictionsHomeTabletPage.newFilterKey,
+              ),
+              VitTabItem(
+                key: 'popular',
+                label: 'Phổ biến',
+                icon: Icons.group_outlined,
+              ),
+              VitTabItem(
+                key: 'liquid',
+                label: 'Thanh khoản',
+                icon: Icons.bar_chart_outlined,
+              ),
+              VitTabItem(
+                key: 'ending',
+                label: 'Sắp đóng',
+                icon: Icons.schedule_outlined,
+              ),
+              VitTabItem(
+                key: 'competitive',
+                label: 'Cạnh tranh',
+                icon: Icons.track_changes_outlined,
+              ),
+            ],
           ),
-          _Sc208CategoryChips(
-            categories: snapshot.categories,
-            activeCategory: _category,
-            onSelected: (value) => setState(() {
-              _category = _category == value ? null : value;
-            }),
-          ),
-          if (showDiscoveryExtras) ...[
-            _Sc208BreakingMoversStrip(
-              snapshot: snapshot,
-              onTap: () =>
-                  context.push(AppRoutePaths.marketsPredictionsBreaking),
-            ),
-            _Sc208ArenaBridgeCard(
-              onTap: () => context.push(AppRoutePaths.arena),
-            ),
-          ],
-          if (snapshot.highRiskContractId != null)
-            VitHighRiskStatePanel(
-              state: VitHighRiskUiState.riskReview,
-              title: 'Trạng thái thị trường dự đoán',
-              message:
-                  'Thiết lập sự kiện, xem trước rủi ro, xác nhận, biên lai, '
-                  'danh mục và hỗ trợ dùng luồng high-risk chung.',
-              contractId: snapshot.highRiskContractId,
-            ),
-          if (snapshot.events.isEmpty)
-            _Sc208EmptyState(
-              hasActiveFilters: _hasActiveFilters,
-              onClearFilters: _clearFilters,
-              onBreaking: () =>
-                  context.push(AppRoutePaths.marketsPredictionsBreaking),
-            )
-          else ...[
-            // PERF-HN3: chỉ dựng lát cắt bounded (cap 8) — phần còn lại đi
-            // qua trang tìm kiếm, như phone SC-027.
+        );
+        final categoryChips = _Sc208CategoryChips(
+          categories: snapshot.categories,
+          activeCategory: _category,
+          onSelected: (value) => setState(() {
+            _category = _category == value ? null : value;
+          }),
+        );
+        final highRiskPanel = snapshot.highRiskContractId == null
+            ? null
+            : VitHighRiskStatePanel(
+                state: VitHighRiskUiState.riskReview,
+                title: 'Trạng thái thị trường dự đoán',
+                message:
+                    'Thiết lập sự kiện, xem trước rủi ro, xác nhận, biên lai, '
+                    'danh mục và hỗ trợ dùng luồng high-risk chung.',
+                contractId: snapshot.highRiskContractId,
+              );
+        // PERF-HN3: chỉ dựng lát cắt bounded (cap 8) — phần còn lại đi
+        // qua trang tìm kiếm, như phone SC-027. Grid tự về 1 cột khi hẹp.
+        final eventFeed = PredictionTabletCardGrid(
+          children: [
             for (final event in snapshot.visibleEvents)
               PredictionEventCardTablet(
                 key: PredictionsHomeTabletPage.eventCardKey(event.id),
@@ -221,8 +211,11 @@ class _PredictionsHomeTabletPageState
                   AppRoutePaths.marketsPredictionEvent(event.id),
                 ),
               ),
-            if (snapshot.events.length > snapshot.visibleEvents.length)
-              VitCard(
+          ],
+        );
+        final viewAllCard =
+            snapshot.events.length > snapshot.visibleEvents.length
+            ? VitCard(
                 key: PredictionsHomeTabletPage.viewAllEventsKey,
                 density: VitDensity.compact,
                 onTap: () =>
@@ -236,16 +229,99 @@ class _PredictionsHomeTabletPageState
                     ),
                   ),
                 ),
-              ),
-          ],
-          _Sc208ToolsSection(onNavigate: (route) => context.push(route)),
-          const _Sc208RiskDisclaimer(),
-        ],
+              )
+            : null;
+        final emptyState = _Sc208EmptyState(
+          hasActiveFilters: _hasActiveFilters,
+          onClearFilters: _clearFilters,
+          onBreaking: () =>
+              context.push(AppRoutePaths.marketsPredictionsBreaking),
+        );
+        final tools = _Sc208ToolsSection(
+          onNavigate: (route) => context.push(route),
+        );
+        final disclaimer = const _Sc208RiskDisclaimer();
+
+        return _scaffold(
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsHomeTabletPage.contentKey,
+            secondaryContentKey: PredictionsHomeTabletPage.controlPaneKey,
+            primaryChildren: [
+              hero,
+              ?highRiskPanel,
+              if (snapshot.events.isEmpty)
+                emptyState
+              else ...[
+                eventFeed,
+                ?viewAllCard,
+              ],
+              tools,
+            ],
+            secondaryChildren: [
+              searchField,
+              filterTabs,
+              categoryChips,
+              if (showDiscoveryExtras) ...[
+                _Sc208BreakingMoversStrip(
+                  snapshot: snapshot,
+                  onTap: () =>
+                      context.push(AppRoutePaths.marketsPredictionsBreaking),
+                ),
+                _Sc208ArenaBridgeCard(
+                  onTap: () => context.push(AppRoutePaths.arena),
+                ),
+              ],
+              disclaimer,
+            ],
+            narrowChildren: [
+              hero,
+              searchField,
+              filterTabs,
+              categoryChips,
+              if (showDiscoveryExtras) ...[
+                _Sc208BreakingMoversStrip(
+                  snapshot: snapshot,
+                  onTap: () =>
+                      context.push(AppRoutePaths.marketsPredictionsBreaking),
+                ),
+                _Sc208ArenaBridgeCard(
+                  onTap: () => context.push(AppRoutePaths.arena),
+                ),
+              ],
+              ?highRiskPanel,
+              if (snapshot.events.isEmpty)
+                emptyState
+              else ...[
+                eventFeed,
+                ?viewAllCard,
+              ],
+              tools,
+              disclaimer,
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// Thân một cột cho trạng thái loading/error — cùng recipe cột hẹp của
+  /// `VitTabletPaneWorkspace`.
+  Widget _statusBody(List<Widget> children) {
+    return SingleChildScrollView(
+      key: PredictionsHomeTabletPage.contentKey,
+      padding: const EdgeInsetsDirectional.only(
+        bottom: TabletSpacingTokens.pageEndBreathing,
+      ),
+      child: VitPageContent(
+        padding: VitContentPadding.compact,
+        fullBleed: true,
+        rhythm: VitPageRhythm.standard,
+        children: children,
       ),
     );
   }
 
-  Widget _scaffold({required List<Widget> children}) {
+  Widget _scaffold({required Widget body}) {
     return VitPageLayout(
       variant: VitPageVariant.flush,
       semanticLabel:
@@ -280,12 +356,7 @@ class _PredictionsHomeTabletPageState
               ),
             ],
           ),
-          Expanded(
-            child: VitTabletSectionBody(
-              contentKey: PredictionsHomeTabletPage.contentKey,
-              children: children,
-            ),
-          ),
+          Expanded(child: body),
         ],
       ),
     );

@@ -9,6 +9,7 @@ class PredictionsBreakingTabletPage extends ConsumerStatefulWidget {
   const PredictionsBreakingTabletPage({super.key});
 
   static const contentKey = Key('sc210_tablet_content');
+  static const controlPaneKey = Key('sc210_tablet_control_pane');
   static const allTabKey = Key('sc210_tab_all');
   static const cryptoTabKey = Key('sc210_tab_live_crypto');
   static const subscribeKey = Key('sc210_subscribe');
@@ -39,34 +40,33 @@ class _PredictionsBreakingTabletPageState
     );
 
     return breakingAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionsBreakingTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsBreakingTabletPage.contentKey, [
           _pdmError(
             'Không tải được biến động',
             () =>
                 ref.invalidate(predictionsBreakingSnapshotProvider(_category)),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: '${snapshot.upCount} tăng · ${snapshot.downCount} giảm',
-        children: [
-          _Sc210MovementSummary(snapshot: snapshot),
-          _Sc210CategoryTabs(
-            categories: snapshot.categories,
-            activeCategory: _category,
-            onSelected: (value) => setState(() {
-              _category = value;
-            }),
-          ),
-          if (snapshot.movers.isEmpty)
-            _Sc210BreakingEmptyState(
-              onShowAll: () => setState(() {
-                _category = null;
-              }),
-            )
-          else
+      data: (snapshot) {
+        final summary = _Sc210MovementSummary(snapshot: snapshot);
+        final categoryTabs = _Sc210CategoryTabs(
+          categories: snapshot.categories,
+          activeCategory: _category,
+          onSelected: (value) => setState(() {
+            _category = value;
+          }),
+        );
+        final moversGrid = PredictionTabletCardGrid(
+          children: [
             for (var index = 0; index < snapshot.movers.length; index += 1)
               _Sc210MoverCard(
                 key: PredictionsBreakingTabletPage.moverKey(
@@ -80,29 +80,71 @@ class _PredictionsBreakingTabletPageState
                   ),
                 ),
               ),
-          _Sc210EmailCta(
-            controller: _emailController,
-            subscribed: _subscribed,
-            onSubscribe: () => setState(() {
-              if (_emailController.text.contains('@')) {
-                _subscribed = true;
-              }
-            }),
+          ],
+        );
+        final emptyState = _Sc210BreakingEmptyState(
+          onShowAll: () => setState(() {
+            _category = null;
+          }),
+        );
+        final emailCta = _Sc210EmailCta(
+          controller: _emailController,
+          subscribed: _subscribed,
+          onSubscribe: () => setState(() {
+            if (_emailController.text.contains('@')) {
+              _subscribed = true;
+            }
+          }),
+        );
+        return _frame(
+          context,
+          subtitle: '${snapshot.upCount} tăng · ${snapshot.downCount} giảm',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsBreakingTabletPage.contentKey,
+            secondaryContentKey: PredictionsBreakingTabletPage.controlPaneKey,
+            primaryChildren: [
+              if (snapshot.movers.isEmpty) emptyState else moversGrid,
+            ],
+            secondaryChildren: [summary, categoryTabs, emailCta],
+            narrowChildren: [
+              summary,
+              categoryTabs,
+              if (snapshot.movers.isEmpty) emptyState else moversGrid,
+              emailCta,
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-210',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Biến động prediction',
-      title: 'Biến động',
-      subtitle: subtitle ?? 'Xác suất thay đổi 24h',
-      contentKey: PredictionsBreakingTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-210',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Biến động',
+            subtitle: subtitle ?? 'Xác suất thay đổi 24h',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

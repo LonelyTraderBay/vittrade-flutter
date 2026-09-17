@@ -267,6 +267,7 @@ class PredictionEventCalendarTabletPage extends ConsumerStatefulWidget {
   const PredictionEventCalendarTabletPage({super.key});
 
   static const contentKey = Key('sc219_tablet_content');
+  static const controlPaneKey = Key('sc219_tablet_control_pane');
   static const allCategoryKey = Key('sc219_category_all');
 
   @override
@@ -285,80 +286,120 @@ class _PredictionEventCalendarTabletPageState
     );
 
     return calendarAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(
+          PredictionEventCalendarTabletPage.contentKey,
+          const [VitSkeletonList(rows: 6)],
+        ),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionEventCalendarTabletPage.contentKey, [
           _pdmError(
             'Không tải được lịch sự kiện',
             () => ref.invalidate(
               predictionsEventCalendarSnapshotProvider(_category),
             ),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: '${snapshot.events.length} sự kiện',
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
+      data: (snapshot) {
+        final categoryChips = SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              VitFilterChip(
+                key: PredictionEventCalendarTabletPage.allCategoryKey,
+                label: 'Tất cả',
+                active: _category == null,
+                onTap: () => setState(() {
+                  _category = null;
+                }),
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: TabletSpacingTokens.x2),
+              for (
+                var index = 0;
+                index < snapshot.categories.length;
+                index += 1
+              ) ...[
                 VitFilterChip(
-                  key: PredictionEventCalendarTabletPage.allCategoryKey,
-                  label: 'Tất cả',
-                  active: _category == null,
+                  label: snapshot.categories[index],
+                  active: _category == snapshot.categories[index],
                   onTap: () => setState(() {
-                    _category = null;
+                    _category = _category == snapshot.categories[index]
+                        ? null
+                        : snapshot.categories[index];
                   }),
                   color: AppColors.primary,
                 ),
-                const SizedBox(width: TabletSpacingTokens.x2),
-                for (
-                  var index = 0;
-                  index < snapshot.categories.length;
-                  index += 1
-                ) ...[
-                  VitFilterChip(
-                    label: snapshot.categories[index],
-                    active: _category == snapshot.categories[index],
-                    onTap: () => setState(() {
-                      _category = _category == snapshot.categories[index]
-                          ? null
-                          : snapshot.categories[index];
-                    }),
-                    color: AppColors.primary,
-                  ),
-                  if (index != snapshot.categories.length - 1)
-                    const SizedBox(width: TabletSpacingTokens.x2),
-                ],
+                if (index != snapshot.categories.length - 1)
+                  const SizedBox(width: TabletSpacingTokens.x2),
               ],
-            ),
+            ],
           ),
+        );
+        final months = [
           for (final month in snapshot.months)
             VitPageSection(
               label: month.label,
               accentColor: AppColors.primary,
               innerGap: TabletSpacingTokens.x4,
               children: [
-                for (final event in month.events)
-                  _Sc219CalendarEventCard(event: event),
+                PredictionTabletCardGrid(
+                  children: [
+                    for (final event in month.events)
+                      _Sc219CalendarEventCard(event: event),
+                  ],
+                ),
               ],
             ),
-          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
-        ],
-      ),
+        ];
+        final footer = _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}');
+        return _frame(
+          context,
+          subtitle: '${snapshot.events.length} sự kiện',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionEventCalendarTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionEventCalendarTabletPage.controlPaneKey,
+            primaryChildren: [...months, footer],
+            secondaryChildren: [categoryChips],
+            narrowChildren: [categoryChips, ...months, footer],
+          ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-219',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Lịch sự kiện prediction',
-      title: 'Lịch sự kiện',
-      subtitle: subtitle ?? 'Ngày chốt kèo · Theo dõi',
-      contentKey: PredictionEventCalendarTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-219',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Lịch sự kiện',
+            subtitle: subtitle ?? 'Ngày chốt kèo · Theo dõi',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

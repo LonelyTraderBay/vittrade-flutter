@@ -9,6 +9,7 @@ class PredictionsSearchTabletPage extends ConsumerStatefulWidget {
   const PredictionsSearchTabletPage({super.key});
 
   static const contentKey = Key('sc209_tablet_content');
+  static const filterPaneKey = Key('sc209_tablet_filter_pane');
   static const searchFieldKey = Key('sc209_search_field');
   static const filtersToggleKey = Key('sc209_filters_toggle');
   static const clearFiltersKey = Key('sc209_clear_filters');
@@ -54,62 +55,47 @@ class _PredictionsSearchTabletPageState
     );
 
     return searchAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionsSearchTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsSearchTabletPage.contentKey, [
           _pdmError(
             'Không tải được tìm kiếm',
             () =>
                 ref.invalidate(predictionsSearchSnapshotProvider(searchQuery)),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: '${snapshot.results.length} kết quả',
-        children: [
-          VitSearchBar(
-            key: PredictionsSearchTabletPage.searchFieldKey,
-            controller: _searchController,
-            placeholder: 'Tìm theo tiêu đề, thẻ, danh mục…',
-            filterKey: PredictionsSearchTabletPage.filtersToggleKey,
-            filterActive: _showFilters,
-            filterInline: true,
-            onChanged: (_) => setState(() {}),
-            onClear: () => setState(_searchController.clear),
-            onFilterTap: () => setState(() {
-              _showFilters = !_showFilters;
-            }),
-          ),
-          if (_showFilters)
-            _Sc209SearchFilterSection(
-              sort: _sort,
-              status: _status,
-              categories: snapshot.categories,
-              selectedCategory: _category,
-              hasActiveFilters: _hasActiveFilters,
-              onSortSelected: (value) => setState(() {
-                _sort = value;
-              }),
-              onStatusSelected: (value) => setState(() {
-                _status = value;
-              }),
-              onCategorySelected: (value) => setState(() {
-                _category = value;
-              }),
-              onClear: _clearFilters,
-            ),
-          Text(
-            'Tìm thấy ${snapshot.results.length} sự kiện',
-            style: AppTextStyles.micro.copyWith(color: AppColors.text3),
-          ),
-          if (snapshot.results.isEmpty)
-            _Sc209SearchEmptyState(
-              hasActiveFilters: _hasActiveFilters,
-              onClearFilters: _clearFilters,
-              onBreaking: () =>
-                  context.push(AppRoutePaths.marketsPredictionsBreaking),
-            )
-          else
+      data: (snapshot) {
+        // Các khối dựng một lần — tham chiếu ở cả tầng workspace lẫn hẹp.
+        final filterSection = _Sc209SearchFilterSection(
+          sort: _sort,
+          status: _status,
+          categories: snapshot.categories,
+          selectedCategory: _category,
+          hasActiveFilters: _hasActiveFilters,
+          onSortSelected: (value) => setState(() {
+            _sort = value;
+          }),
+          onStatusSelected: (value) => setState(() {
+            _status = value;
+          }),
+          onCategorySelected: (value) => setState(() {
+            _category = value;
+          }),
+          onClear: _clearFilters,
+        );
+        final resultCount = Text(
+          'Tìm thấy ${snapshot.results.length} sự kiện',
+          style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+        );
+        final resultsGrid = PredictionTabletCardGrid(
+          children: [
             for (final event in snapshot.results)
               PredictionEventCardTablet(
                 event: event,
@@ -117,9 +103,63 @@ class _PredictionsSearchTabletPageState
                   AppRoutePaths.marketsPredictionEvent(event.id),
                 ),
               ),
-          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
-        ],
-      ),
+          ],
+        );
+        final emptyState = _Sc209SearchEmptyState(
+          hasActiveFilters: _hasActiveFilters,
+          onClearFilters: _clearFilters,
+          onBreaking: () =>
+              context.push(AppRoutePaths.marketsPredictionsBreaking),
+        );
+        final footer = _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}');
+        return _frame(
+          context,
+          subtitle: '${snapshot.results.length} kết quả',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsSearchTabletPage.contentKey,
+            secondaryContentKey: PredictionsSearchTabletPage.filterPaneKey,
+            // Workspace: bộ lọc LUÔN mở trong panel — hết nhu cầu gập.
+            secondaryChildren: [
+              VitSearchBar(
+                key: PredictionsSearchTabletPage.searchFieldKey,
+                controller: _searchController,
+                placeholder: 'Tìm theo tiêu đề, thẻ, danh mục…',
+                onChanged: (_) => setState(() {}),
+                onClear: () => setState(_searchController.clear),
+              ),
+              filterSection,
+            ],
+            primaryChildren: [
+              if (snapshot.results.isEmpty)
+                emptyState
+              else ...[
+                resultCount,
+                resultsGrid,
+              ],
+              footer,
+            ],
+            narrowChildren: [
+              VitSearchBar(
+                key: PredictionsSearchTabletPage.searchFieldKey,
+                controller: _searchController,
+                placeholder: 'Tìm theo tiêu đề, thẻ, danh mục…',
+                filterKey: PredictionsSearchTabletPage.filtersToggleKey,
+                filterActive: _showFilters,
+                filterInline: true,
+                onChanged: (_) => setState(() {}),
+                onClear: () => setState(_searchController.clear),
+                onFilterTap: () => setState(() {
+                  _showFilters = !_showFilters;
+                }),
+              ),
+              if (_showFilters) filterSection,
+              resultCount,
+              if (snapshot.results.isEmpty) emptyState else resultsGrid,
+              footer,
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -132,15 +172,33 @@ class _PredictionsSearchTabletPageState
     });
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-209',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Tìm kiếm prediction',
-      title: 'Tìm sự kiện',
-      subtitle: subtitle ?? 'Lọc theo chủ đề · xác suất',
-      contentKey: PredictionsSearchTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-209',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Tìm sự kiện',
+            subtitle: subtitle ?? 'Lọc theo chủ đề · xác suất',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

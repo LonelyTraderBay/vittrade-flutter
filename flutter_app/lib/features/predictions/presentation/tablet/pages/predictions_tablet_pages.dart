@@ -23,6 +23,7 @@ import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart';
+import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_tablet_card_grid.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_common.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_summary.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/portfolio/prediction_portfolio_positions.dart';
@@ -63,6 +64,23 @@ Widget _pdmTinyBadge({
         vertical: TabletSpacingTokens.x1,
       ),
       child: Text(label, style: AppTextStyles.badge.copyWith(color: color)),
+    ),
+  );
+}
+
+/// Thân một cột cho trạng thái loading/error — cùng recipe cột hẹp của
+/// `VitTabletPaneWorkspace` (các trang Cụm A dùng chung).
+Widget _pdmStatusBody(Key? contentKey, List<Widget> children) {
+  return SingleChildScrollView(
+    key: contentKey,
+    padding: const EdgeInsetsDirectional.only(
+      bottom: TabletSpacingTokens.pageEndBreathing,
+    ),
+    child: VitPageContent(
+      padding: VitContentPadding.compact,
+      fullBleed: true,
+      rhythm: VitPageRhythm.standard,
+      children: children,
     ),
   );
 }

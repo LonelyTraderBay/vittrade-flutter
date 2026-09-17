@@ -77,17 +77,16 @@ void main() {
   ) async {
     await pumpPage(tester, AppRoutePaths.marketsPredictionsSearch);
 
-    // Nút filter inline trong search bar trượt với finder-tap đơn thuần;
-    // chuỗi tap-để-focus + tapAt-theo-rect-hiện-tại là tổ hợp đã kiểm chứng
-    // ổn định (down/up đầu kiện định layout, lần bấm sau trúng nút).
-    final toggleFinder = find.byKey(
-      PredictionsSearchTabletPage.filtersToggleKey,
+    // Cụm A workspace: bộ lọc LUÔN mở trong panel phải (1280 test surface
+    // → 2 cột) — không còn nút gập để bấm như bản một cột.
+    expect(
+      find.byKey(PredictionsSearchTabletPage.filterPaneKey),
+      findsOneWidget,
     );
-    await tester.tap(toggleFinder);
-    await tester.pumpAndSettle();
-    final toggle = tester.getRect(toggleFinder);
-    await tester.tapAt(toggle.center);
-    await tester.pumpAndSettle();
+    expect(
+      find.byKey(PredictionsSearchTabletPage.filtersToggleKey),
+      findsNothing,
+    );
 
     await tester.tap(find.byKey(PredictionsSearchTabletPage.statusResolvedKey));
     await tester.pumpAndSettle();
@@ -240,15 +239,7 @@ void main() {
     (tester) async {
       await pumpPage(tester, AppRoutePaths.marketsPredictionsSearch);
 
-      final toggleFinder = find.byKey(
-        PredictionsSearchTabletPage.filtersToggleKey,
-      );
-      await tester.tap(toggleFinder);
-      await tester.pumpAndSettle();
-      final toggle = tester.getRect(toggleFinder);
-      await tester.tapAt(toggle.center);
-      await tester.pumpAndSettle();
-
+      // Workspace: bộ lọc luôn mở (panel phải), không cần toggle.
       await tester.tap(
         find.byKey(PredictionsSearchTabletPage.statusResolvedKey),
       );

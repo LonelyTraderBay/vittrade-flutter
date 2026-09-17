@@ -785,6 +785,7 @@ predictions,feature_widget,flutter_app/lib/features/predictions/presentation/wid
 predictions,feature_widget,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_podium_rankings.dart,0,0,0,0,0,0,0,0,no,-
 predictions,feature_widget,flutter_app/lib/features/predictions/presentation/widgets/social/predictions_leaderboard_rows_wins.dart,0,0,0,0,0,0,0,0,no,-
 predictions,feature_widget,flutter_app/lib/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart,0,0,0,0,0,0,0,0,no,-
+predictions,feature_widget,flutter_app/lib/features/predictions/presentation/widgets/tablet/prediction_tablet_card_grid.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_common.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/activity_log_page_sections.dart,0,0,0,0,0,0,0,0,no,-
 profile,feature_widget,flutter_app/lib/features/profile/presentation/widgets/api_management_docs.dart,0,0,0,0,0,0,0,0,no,-
