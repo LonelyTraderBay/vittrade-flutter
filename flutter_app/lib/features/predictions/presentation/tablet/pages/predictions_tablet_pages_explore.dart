@@ -9,6 +9,7 @@ class PredictionsGlobalActivityTabletPage extends ConsumerStatefulWidget {
   const PredictionsGlobalActivityTabletPage({super.key});
 
   static const contentKey = Key('sc215_tablet_content');
+  static const controlPaneKey = Key('sc215_tablet_control_pane');
 
   @override
   ConsumerState<PredictionsGlobalActivityTabletPage> createState() =>
@@ -28,113 +29,142 @@ class _PredictionsGlobalActivityTabletPageState
     );
 
     return activityAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(
+          PredictionsGlobalActivityTabletPage.contentKey,
+          const [VitSkeletonList(rows: 6)],
+        ),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsGlobalActivityTabletPage.contentKey, [
           _pdmError(
             'Không tải được hoạt động toàn cầu',
             () => ref.invalidate(
               predictionsGlobalActivitySnapshotProvider(_minAmount),
             ),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: '${snapshot.buyCount} mua · ${snapshot.sellCount} bán',
-        children: [
-          VitCard(
-            density: VitDensity.compact,
-            child: Row(
-              children: [
-                Expanded(
-                  child: _Sc215LiveStat(
-                    label: 'Khối lượng 24h',
-                    value: VitFormat.compactSuffix(
-                      snapshot.totalVolume,
-                      prefix: r'$',
+      data: (snapshot) {
+        final statsCard = VitCard(
+          density: VitDensity.compact,
+          child: Row(
+            children: [
+              Expanded(
+                child: _Sc215LiveStat(
+                  label: 'Khối lượng 24h',
+                  value: VitFormat.compactSuffix(
+                    snapshot.totalVolume,
+                    prefix: r'$',
+                  ),
+                ),
+              ),
+              Expanded(
+                child: _Sc215LiveStat(
+                  label: 'Lệnh mua',
+                  value: VitFormat.count(snapshot.buyCount),
+                  valueColor: AppColors.buy,
+                ),
+              ),
+              Expanded(
+                child: _Sc215LiveStat(
+                  label: 'Lệnh bán',
+                  value: VitFormat.count(snapshot.sellCount),
+                  valueColor: AppColors.sell,
+                ),
+              ),
+            ],
+          ),
+        );
+        final amountPills = SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              for (var index = 0; index < _amountSteps.length; index += 1) ...[
+                VitChoicePill(
+                  label: _amountSteps[index] == 0
+                      ? 'Tất cả'
+                      : '${VitFormat.compactSuffix(_amountSteps[index], prefix: r'$')}+',
+                  selected: _minAmount == _amountSteps[index],
+                  onTap: () => setState(() {
+                    _minAmount = _amountSteps[index];
+                  }),
+                  accentColor: AppColors.primary,
+                ),
+                if (index != _amountSteps.length - 1)
+                  const SizedBox(width: TabletSpacingTokens.x1),
+              ],
+            ],
+          ),
+        );
+        final tape = snapshot.activities.isEmpty
+            ? const VitEmptyState(
+                title: 'Không có hoạt động',
+                message: 'Hạ mức lọc số tiền tối thiểu để xem thêm',
+                icon: Icons.timeline_rounded,
+              )
+            : VitPageSection(
+                label: 'Bảng tin trực tiếp',
+                accentColor: AppColors.primary,
+                innerGap: TabletSpacingTokens.x4,
+                children: [
+                  VitCard(
+                    density: VitDensity.compact,
+                    child: Column(
+                      children: [
+                        for (final activity in snapshot.activities)
+                          _Sc215ActivityRow(activity: activity),
+                      ],
                     ),
                   ),
-                ),
-                Expanded(
-                  child: _Sc215LiveStat(
-                    label: 'Lệnh mua',
-                    value: VitFormat.count(snapshot.buyCount),
-                    valueColor: AppColors.buy,
-                  ),
-                ),
-                Expanded(
-                  child: _Sc215LiveStat(
-                    label: 'Lệnh bán',
-                    value: VitFormat.count(snapshot.sellCount),
-                    valueColor: AppColors.sell,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                for (
-                  var index = 0;
-                  index < _amountSteps.length;
-                  index += 1
-                ) ...[
-                  VitChoicePill(
-                    label: _amountSteps[index] == 0
-                        ? 'Tất cả'
-                        : '${VitFormat.compactSuffix(_amountSteps[index], prefix: r'$')}+',
-                    selected: _minAmount == _amountSteps[index],
-                    onTap: () => setState(() {
-                      _minAmount = _amountSteps[index];
-                    }),
-                    accentColor: AppColors.primary,
-                  ),
-                  if (index != _amountSteps.length - 1)
-                    const SizedBox(width: TabletSpacingTokens.x1),
                 ],
-              ],
-            ),
+              );
+        final footer = _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}');
+        return _frame(
+          context,
+          subtitle: '${snapshot.buyCount} mua · ${snapshot.sellCount} bán',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsGlobalActivityTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionsGlobalActivityTabletPage.controlPaneKey,
+            primaryChildren: [tape, footer],
+            secondaryChildren: [statsCard, amountPills],
+            narrowChildren: [statsCard, amountPills, tape, footer],
           ),
-          if (snapshot.activities.isEmpty)
-            const VitEmptyState(
-              title: 'Không có hoạt động',
-              message: 'Hạ mức lọc số tiền tối thiểu để xem thêm',
-              icon: Icons.timeline_rounded,
-            )
-          else
-            VitPageSection(
-              label: 'Bảng tin trực tiếp',
-              accentColor: AppColors.primary,
-              innerGap: TabletSpacingTokens.x4,
-              children: [
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Column(
-                    children: [
-                      for (final activity in snapshot.activities)
-                        _Sc215ActivityRow(activity: activity),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-215',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Hoạt động toàn cục prediction',
-      title: 'Hoạt động toàn cục',
-      subtitle: subtitle ?? 'Bảng tin giao dịch trực tiếp',
-      contentKey: PredictionsGlobalActivityTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-215',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Hoạt động toàn cục',
+            subtitle: subtitle ?? 'Bảng tin giao dịch trực tiếp',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

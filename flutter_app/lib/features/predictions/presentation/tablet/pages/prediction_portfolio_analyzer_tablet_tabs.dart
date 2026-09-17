@@ -141,6 +141,71 @@ class _Sc218OverviewTab extends StatelessWidget {
   }
 }
 
+/// Panel chỉ số nhanh ghim bên phải (Cụm C): 4 số cốt lõi đọc được khi đang
+/// ở bất kỳ tab nào — cùng công thức với tab Tổng quan.
+class _Sc218QuickStatsPanel extends StatelessWidget {
+  const _Sc218QuickStatsPanel({required this.snapshot});
+
+  final PredictionPortfolioAnalyzerSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    final invested = snapshot.positions.fold(
+      0.0,
+      (sum, position) => sum + position.shares * position.avgPrice,
+    );
+    final realized = snapshot.closedPositions.fold(
+      0.0,
+      (sum, position) => sum + (position.closedPnl ?? 0),
+    );
+    final unrealized = snapshot.openPositions.fold(
+      0.0,
+      (sum, position) =>
+          sum + (position.currentPrice - position.avgPrice) * position.shares,
+    );
+    final returnPct = invested > 0
+        ? ((realized + unrealized) / invested) * 100
+        : 0;
+    return VitCard(
+      density: VitDensity.compact,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Chỉ số nhanh',
+            style: AppTextStyles.body.copyWith(
+              color: AppColors.text1,
+              fontWeight: AppTextStyles.bold,
+            ),
+          ),
+          const SizedBox(height: TabletSpacingTokens.x3),
+          _Sc218SummaryMetric(
+            label: 'Đã đầu tư',
+            value: VitFormat.usd(invested),
+          ),
+          const SizedBox(height: TabletSpacingTokens.x3),
+          _Sc218SummaryMetric(
+            label: 'Hiệu suất',
+            value: VitFormat.signedPercent(returnPct, fractionDigits: 2),
+            valueColor: returnPct >= 0 ? AppColors.buy : AppColors.sell,
+          ),
+          const SizedBox(height: TabletSpacingTokens.x3),
+          _Sc218SummaryMetric(
+            label: 'Lãi/lỗ chưa khớp',
+            value: VitFormat.usdSigned(unrealized),
+            valueColor: unrealized >= 0 ? AppColors.buy : AppColors.sell,
+          ),
+          const SizedBox(height: TabletSpacingTokens.x3),
+          _Sc218SummaryMetric(
+            label: 'Vị thế mở',
+            value: VitFormat.count(snapshot.openPositions.length),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _Sc218SummaryMetric extends StatelessWidget {
   const _Sc218SummaryMetric({
     required this.label,

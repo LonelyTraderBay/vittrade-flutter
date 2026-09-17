@@ -10,6 +10,7 @@ class PredictionsLeaderboardTabletPage extends ConsumerStatefulWidget {
   const PredictionsLeaderboardTabletPage({super.key});
 
   static const contentKey = Key('sc214_tablet_content');
+  static const controlPaneKey = Key('sc214_tablet_control_pane');
   static const pnlMetricKey = Key('sc214_metric_pnl');
   static const volumeMetricKey = Key('sc214_metric_volume');
   static const infoKey = Key('sc214_pnl_info');
@@ -53,160 +54,198 @@ class _PredictionsLeaderboardTabletPageState
     );
 
     return leaderboardAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(
+          PredictionsLeaderboardTabletPage.contentKey,
+          const [VitSkeletonList(rows: 6)],
+        ),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsLeaderboardTabletPage.contentKey, [
           _pdmError(
             'Không tải được bảng xếp hạng',
             () => ref.invalidate(
               predictionsLeaderboardSnapshotProvider(leaderboardQuery),
             ),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: switch (_metric) {
-          PredictionLeaderboardMetric.pnl => 'Xếp theo P/L',
-          PredictionLeaderboardMetric.volume => 'Xếp theo khối lượng',
-        },
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                for (
-                  var index = 0;
-                  index < PredictionLeaderboardTimeFilter.values.length;
-                  index += 1
-                ) ...[
-                  VitChoicePill(
-                    label: _sc214TimeLabel(
+      data: (snapshot) {
+        final timePills = SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              for (
+                var index = 0;
+                index < PredictionLeaderboardTimeFilter.values.length;
+                index += 1
+              ) ...[
+                VitChoicePill(
+                  label: _sc214TimeLabel(
+                    PredictionLeaderboardTimeFilter.values[index],
+                  ),
+                  selected:
+                      _timeFilter ==
                       PredictionLeaderboardTimeFilter.values[index],
-                    ),
-                    selected:
-                        _timeFilter ==
-                        PredictionLeaderboardTimeFilter.values[index],
-                    onTap: () => setState(() {
-                      _timeFilter =
-                          PredictionLeaderboardTimeFilter.values[index];
-                    }),
-                    accentColor: AppColors.primary,
-                  ),
-                  if (index !=
-                      PredictionLeaderboardTimeFilter.values.length - 1)
-                    const SizedBox(width: TabletSpacingTokens.x1),
-                ],
-              ],
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: VitSegmentedChoice<PredictionLeaderboardMetric>(
-                  selected: _metric,
-                  onChanged: (value) => setState(() {
-                    _metric = value;
+                  onTap: () => setState(() {
+                    _timeFilter = PredictionLeaderboardTimeFilter.values[index];
                   }),
-                  options: const [
-                    VitSegmentedChoiceOption(
-                      value: PredictionLeaderboardMetric.pnl,
-                      label: 'P/L',
-                      key: PredictionsLeaderboardTabletPage.pnlMetricKey,
-                    ),
-                    VitSegmentedChoiceOption(
-                      value: PredictionLeaderboardMetric.volume,
-                      label: 'Khối lượng',
-                      key: PredictionsLeaderboardTabletPage.volumeMetricKey,
-                    ),
-                  ],
+                  accentColor: AppColors.primary,
                 ),
-              ),
-              SizedBox.square(
-                dimension: TabletSpacingTokens.minTapTarget,
-                child: IconButton(
-                  key: PredictionsLeaderboardTabletPage.infoKey,
-                  onPressed: _showPnlInfo,
-                  icon: const Icon(
-                    Icons.info_outline_rounded,
-                    color: AppColors.text3,
-                  ),
-                ),
-              ),
+                if (index != PredictionLeaderboardTimeFilter.values.length - 1)
+                  const SizedBox(width: TabletSpacingTokens.x1),
+              ],
             ],
           ),
-          _Sc214Podium(traders: snapshot.traders.take(3).toList()),
-          VitPageSection(
-            label: 'Xếp hạng',
-            accentColor: AppColors.primary,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
+        );
+        final metricRow = Row(
+          children: [
+            Expanded(
+              child: VitSegmentedChoice<PredictionLeaderboardMetric>(
+                selected: _metric,
+                onChanged: (value) => setState(() {
+                  _metric = value;
+                }),
+                options: const [
+                  VitSegmentedChoiceOption(
+                    value: PredictionLeaderboardMetric.pnl,
+                    label: 'P/L',
+                    key: PredictionsLeaderboardTabletPage.pnlMetricKey,
+                  ),
+                  VitSegmentedChoiceOption(
+                    value: PredictionLeaderboardMetric.volume,
+                    label: 'Khối lượng',
+                    key: PredictionsLeaderboardTabletPage.volumeMetricKey,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox.square(
+              dimension: TabletSpacingTokens.minTapTarget,
+              child: IconButton(
+                key: PredictionsLeaderboardTabletPage.infoKey,
+                onPressed: _showPnlInfo,
+                icon: const Icon(
+                  Icons.info_outline_rounded,
+                  color: AppColors.text3,
+                ),
+              ),
+            ),
+          ],
+        );
+        final podium = _Sc214Podium(traders: snapshot.traders.take(3).toList());
+        final ranking = VitPageSection(
+          label: 'Xếp hạng',
+          accentColor: AppColors.primary,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            VitCard(
+              density: VitDensity.compact,
+              child: Column(
+                children: [
+                  for (final trader in snapshot.traders)
+                    _Sc214TraderRow(trader: trader, metric: _metric),
+                ],
+              ),
+            ),
+          ],
+        );
+        final biggestWins = VitPageSection(
+          label: 'Thắng lớn nhất',
+          accentColor: AppColors.accent,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            for (final trader in snapshot.biggestWins)
               VitCard(
+                key: Key('sc214_biggest_win_${trader.user}'),
                 density: VitDensity.compact,
-                child: Column(
+                child: Row(
                   children: [
-                    for (final trader in snapshot.traders)
-                      _Sc214TraderRow(trader: trader, metric: _metric),
+                    const SizedBox.square(
+                      dimension: TabletSpacingTokens.iconSm,
+                      child: Icon(
+                        Icons.emoji_events_rounded,
+                        color: AppColors.warn,
+                        size: TabletSpacingTokens.iconSm,
+                      ),
+                    ),
+                    const SizedBox(width: TabletSpacingTokens.x2),
+                    Expanded(
+                      child: Text(
+                        trader.user,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                          fontWeight: AppTextStyles.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      VitFormat.usdSigned(trader.pnl),
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.buy,
+                        fontWeight: AppTextStyles.bold,
+                        fontFeatures: AppTextStyles.tabularFigures,
+                      ),
+                    ),
                   ],
                 ),
               ),
+          ],
+        );
+        return _frame(
+          context,
+          subtitle: switch (_metric) {
+            PredictionLeaderboardMetric.pnl => 'Xếp theo P/L',
+            PredictionLeaderboardMetric.volume => 'Xếp theo khối lượng',
+          },
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsLeaderboardTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionsLeaderboardTabletPage.controlPaneKey,
+            primaryChildren: [podium, ranking, biggestWins],
+            secondaryChildren: [timePills, metricRow],
+            narrowChildren: [
+              timePills,
+              metricRow,
+              podium,
+              ranking,
+              biggestWins,
             ],
           ),
-          VitPageSection(
-            label: 'Thắng lớn nhất',
-            accentColor: AppColors.accent,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final trader in snapshot.biggestWins)
-                VitCard(
-                  key: Key('sc214_biggest_win_${trader.user}'),
-                  density: VitDensity.compact,
-                  child: Row(
-                    children: [
-                      const SizedBox.square(
-                        dimension: TabletSpacingTokens.iconSm,
-                        child: Icon(
-                          Icons.emoji_events_rounded,
-                          color: AppColors.warn,
-                          size: TabletSpacingTokens.iconSm,
-                        ),
-                      ),
-                      const SizedBox(width: TabletSpacingTokens.x2),
-                      Expanded(
-                        child: Text(
-                          trader.user,
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                            fontWeight: AppTextStyles.bold,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        VitFormat.usdSigned(trader.pnl),
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.buy,
-                          fontWeight: AppTextStyles.bold,
-                          fontFeatures: AppTextStyles.tabularFigures,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-214',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Bảng xếp hạng prediction',
-      title: 'Bảng xếp hạng',
-      subtitle: subtitle ?? 'Trader · Prediction',
-      contentKey: PredictionsLeaderboardTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-214',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Bảng xếp hạng',
+            subtitle: subtitle ?? 'Trader · P/L · Khối lượng',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }

@@ -100,6 +100,7 @@ class PredictionsPortfolioTabletPage extends ConsumerStatefulWidget {
   const PredictionsPortfolioTabletPage({super.key});
 
   static const contentKey = Key('sc212_tablet_content');
+  static const controlPaneKey = Key('sc212_tablet_control_pane');
   static const activeTabKey = Key('sc212_tab_active');
   static const closedTabKey = Key('sc212_tab_closed');
   static const historyTabKey = Key('sc212_tab_history');
@@ -120,109 +121,155 @@ class _PredictionsPortfolioTabletPageState
     final controllerAsync = ref.watch(predictionsPortfolioControllerProvider);
 
     return controllerAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(PredictionsPortfolioTabletPage.contentKey, const [
+          VitSkeletonList(rows: 6),
+        ]),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionsPortfolioTabletPage.contentKey, [
           _pdmError(
             'Không tải được danh mục',
             () => ref.invalidate(predictionsPortfolioSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (controller) {
         final snapshot = controller.state.snapshot;
         final openOrders = controller.openOrdersExcluding(_cancelledOrderIds);
-        return _frame(
-          subtitle: 'Giá trị ${_pdmUsd(snapshot.totalCurrentValue)}',
-          children: [
-            VitCard(
-              variant: VitCardVariant.hero,
-              radius: VitCardRadius.large,
-              clip: true,
-              padding: TabletSpacingTokens.cardPaddingHero,
-              background: const VitHeroGlow(),
-              child: PredictionPortfolioSummaryCard(
-                snapshot: snapshot,
-                openOrderCount: openOrders.length,
-                isHidden: _isHidden,
-                onToggleHidden: () => setState(() {
-                  _isHidden = !_isHidden;
-                }),
-              ),
+        // Các khối dựng một lần — tham chiếu ở cả tầng workspace lẫn hẹp.
+        final heroCard = VitCard(
+          variant: VitCardVariant.hero,
+          radius: VitCardRadius.large,
+          clip: true,
+          padding: TabletSpacingTokens.cardPaddingHero,
+          background: const VitHeroGlow(),
+          child: PredictionPortfolioSummaryCard(
+            snapshot: snapshot,
+            openOrderCount: openOrders.length,
+            isHidden: _isHidden,
+            onToggleHidden: () => setState(() {
+              _isHidden = !_isHidden;
+            }),
+          ),
+        );
+        final sharesBanner = const VitAnnouncementBanner(
+          message: predictionPortfolioSharesNoteMessage,
+          icon: Icons.info_outline_rounded,
+          accentColor: AppColors.primary,
+          variant: VitAnnouncementBannerVariant.compact,
+        );
+        final tabBar = VitTabBar(
+          variant: VitTabBarVariant.segment,
+          activeKey: _sc212TabKey(_activeTab),
+          onChanged: (key) => setState(() {
+            _activeTab = PredictionPortfolioTab.values.byName(key);
+          }),
+          tabs: const [
+            VitTabItem(
+              key: 'active',
+              label: 'Đang mở',
+              widgetKey: PredictionsPortfolioTabletPage.activeTabKey,
             ),
-            const VitAnnouncementBanner(
-              message: predictionPortfolioSharesNoteMessage,
-              icon: Icons.info_outline_rounded,
-              accentColor: AppColors.primary,
-              variant: VitAnnouncementBannerVariant.compact,
+            VitTabItem(
+              key: 'closed',
+              label: 'Đã đóng',
+              widgetKey: PredictionsPortfolioTabletPage.closedTabKey,
             ),
-            VitTabBar(
-              variant: VitTabBarVariant.segment,
-              activeKey: _sc212TabKey(_activeTab),
-              onChanged: (key) => setState(() {
-                _activeTab = PredictionPortfolioTab.values.byName(key);
-              }),
-              tabs: const [
-                VitTabItem(
-                  key: 'active',
-                  label: 'Đang mở',
-                  widgetKey: PredictionsPortfolioTabletPage.activeTabKey,
-                ),
-                VitTabItem(
-                  key: 'closed',
-                  label: 'Đã đóng',
-                  widgetKey: PredictionsPortfolioTabletPage.closedTabKey,
-                ),
-                VitTabItem(
-                  key: 'history',
-                  label: 'Lịch sử',
-                  widgetKey: PredictionsPortfolioTabletPage.historyTabKey,
-                ),
-              ],
+            VitTabItem(
+              key: 'history',
+              label: 'Lịch sử',
+              widgetKey: PredictionsPortfolioTabletPage.historyTabKey,
             ),
-            if (_activeTab == PredictionPortfolioTab.active)
-              PredictionPortfolioPositionsList(
-                snapshot: snapshot,
-                positions: snapshot.activePositions,
-                emptyTitle: 'Chưa có vị thế đang mở',
-                emptySubtitle: 'Bắt đầu giao dịch để xây danh mục',
-              )
-            else if (_activeTab == PredictionPortfolioTab.closed)
-              PredictionPortfolioPositionsList(
-                snapshot: snapshot,
-                positions: snapshot.closedPositions,
-                emptyTitle: 'Chưa có vị thế đã đóng',
-                emptySubtitle: 'Vị thế đã đóng sẽ hiện ở đây',
-              )
-            else
-              PredictionPortfolioHistorySection(snapshot: snapshot),
-            if (_activeTab == PredictionPortfolioTab.active &&
+          ],
+        );
+        final tabContent = switch (_activeTab) {
+          PredictionPortfolioTab.active => PredictionPortfolioPositionsList(
+            snapshot: snapshot,
+            positions: snapshot.activePositions,
+            emptyTitle: 'Chưa có vị thế đang mở',
+            emptySubtitle: 'Bắt đầu giao dịch để xây danh mục',
+          ),
+          PredictionPortfolioTab.closed => PredictionPortfolioPositionsList(
+            snapshot: snapshot,
+            positions: snapshot.closedPositions,
+            emptyTitle: 'Chưa có vị thế đã đóng',
+            emptySubtitle: 'Vị thế đã đóng sẽ hiện ở đây',
+          ),
+          PredictionPortfolioTab.history => PredictionPortfolioHistorySection(
+            snapshot: snapshot,
+          ),
+        };
+        final openOrdersSection =
+            (_activeTab == PredictionPortfolioTab.active &&
                 openOrders.isNotEmpty)
-              PredictionPortfolioOpenOrdersSection(
+            ? PredictionPortfolioOpenOrdersSection(
                 snapshot: snapshot,
                 orders: openOrders,
                 onCancel: (orderId) => setState(() {
                   _cancelledOrderIds.add(orderId);
                 }),
-              ),
-            PredictionsPortfolioArenaBridgeCard(
-              onTap: () => context.push(AppRoutePaths.arena),
-            ),
-          ],
+              )
+            : null;
+        final arenaBridge = PredictionsPortfolioArenaBridgeCard(
+          onTap: () => context.push(AppRoutePaths.arena),
+        );
+        return _frame(
+          context,
+          subtitle: 'Giá trị ${_pdmUsd(snapshot.totalCurrentValue)}',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionsPortfolioTabletPage.contentKey,
+            secondaryContentKey: PredictionsPortfolioTabletPage.controlPaneKey,
+            primaryChildren: [heroCard, sharesBanner, tabBar, tabContent],
+            secondaryChildren: [
+              // Lệnh mở ghim panel: hủy ngay tại chỗ khi đang xem bất kỳ tab
+              // nào (mockup Cụm C).
+              ?openOrdersSection,
+              arenaBridge,
+            ],
+            narrowChildren: [
+              heroCard,
+              sharesBanner,
+              tabBar,
+              tabContent,
+              ?openOrdersSection,
+              arenaBridge,
+            ],
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-212',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Danh mục prediction',
-      title: 'Danh mục prediction',
-      subtitle: subtitle ?? 'Vị thế · Lệnh · Lịch sử',
-      contentKey: PredictionsPortfolioTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-212',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Danh mục prediction',
+            subtitle: subtitle ?? 'Vị thế · Lệnh · Lịch sử',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }
