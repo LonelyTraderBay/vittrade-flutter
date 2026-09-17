@@ -38,7 +38,13 @@ class _Sc218OverviewTab extends StatelessWidget {
         ? 0.0
         : receiptsTotal / snapshot.receipts.length;
 
-    return Column(
+    // Khuôn như 2 tab kia: VitPageSection sở hữu nhãn + gap hệ thống giữa
+    // các khối (children tight 8, label→children innerGap 12). Column trần
+    // từng khiến 3 card dính 0dp — đo pixel emulator 2026-09-18.
+    return VitPageSection(
+      label: 'Tổng quan',
+      accentColor: AppColors.primary,
+      innerGap: TabletSpacingTokens.x4,
       children: [
         VitCard(
           density: VitDensity.compact,
@@ -102,6 +108,7 @@ class _Sc218OverviewTab extends StatelessWidget {
           ),
         ),
         Row(
+          key: PredictionPortfolioAnalyzerTabletPage.statsRowKey,
           children: [
             for (var index = 0; index < 4; index += 1) ...[
               Expanded(
@@ -130,11 +137,14 @@ class _Sc218OverviewTab extends StatelessWidget {
             ],
           ],
         ),
-        for (final category in _sc218Categories(snapshot))
+        for (final (index, category) in _sc218Categories(snapshot).indexed)
           _Sc218CategoryCard(
             category: category.$1,
             openCount: category.$2,
             sharePct: category.$3,
+            key: index == 0
+                ? PredictionPortfolioAnalyzerTabletPage.firstCategoryKey
+                : null,
           ),
       ],
     );
@@ -278,6 +288,7 @@ class _Sc218StatCard extends StatelessWidget {
 
 class _Sc218CategoryCard extends StatelessWidget {
   const _Sc218CategoryCard({
+    super.key,
     required this.category,
     required this.openCount,
     required this.sharePct,

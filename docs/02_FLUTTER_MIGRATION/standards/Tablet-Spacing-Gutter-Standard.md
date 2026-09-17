@@ -1,7 +1,7 @@
 # Tablet Spacing & Gutter Standard (Mandatory)
 
 **Authority:** [DESIGN.md](../../../DESIGN.md) Layout · [AGENTS.md](../../../AGENTS.md) UI rules · [Page-Rhythm-Standard.md](./Page-Rhythm-Standard.md) (vertical page rhythm) · [Tablet-Card-Border-Standard.md](./Tablet-Card-Border-Standard.md)
-**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `dart run tool/tablet_text_stack_gap_audit.dart --check` (**S8 — 2026-09-14**) · `dart run tool/tablet_gap_role_audit.dart --check` (**ROLE của gap R1–R5 — 2026-09-16**) · `dart run tool/tablet_gutter_flush_audit.dart --check` (**S6 route-context — 2026-09-17**) · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet call-site) · `test/quality/tablet_gutter_flush_guardrail_test.dart` (S6 — gutter-flush **route-context**, zero-tolerance) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet) · `test/quality/tablet_composition_guardrail_test.dart` (**2026-09-09 — composition contract C1/C2/C3 ratchet**: không reading-width literal, không khung `Center` dọc, không `.name` lộ presentation; khung chuẩn cho trang section top-level là `VitTabletSectionFrame` — `shared/layout/vit_tablet_section_frame.dart`)
+**Enforcement:** `dart run tool/tablet_spacing_audit.dart --check` · `dart run tool/tablet_text_stack_gap_audit.dart --check` (**S8 — 2026-09-14**) · `dart run tool/tablet_gap_role_audit.dart --check` (**ROLE của gap R1–R6 — 2026-09-16, R6 thêm 2026-09-18**) · `dart run tool/tablet_gutter_flush_audit.dart --check` (**S6 route-context — 2026-09-17**) · `test/quality/tablet_spacing_guardrail_test.dart` (**absolute lock — zero baseline**) · `test/quality/tablet_base8_role_scale_guardrail_test.dart` (**closed role/value contract**) · `test/quality/tablet_module_role_scale_guardrail_test.dart` (**module/shared token mapping and no Phone-role leakage**) · `test/quality/tablet_gap_12_guardrail_test.dart` (**Rule 6 — major block gaps 12dp dọc+ngang, zero-tolerance, no baseline**) · `test/quality/tablet_icon_size_guardrail_test.dart` (S5 — icon-size literal ratchet) · `test/quality/tablet_fullbleed_guardrail_test.dart` (S6 — gutter-flush ratchet call-site) · `test/quality/tablet_gutter_flush_guardrail_test.dart` (S6 — gutter-flush **route-context**, zero-tolerance) · `test/quality/tablet_pane_child_vertical_inset_guardrail_test.dart` (S7 — pane-child vertical-inset lock) · `test/quality/tablet_token_override_guardrail_test.dart` (Rule 5 — co-location · no-leakage · exact-set ratchet) · `test/quality/tablet_composition_guardrail_test.dart` (**2026-09-09 — composition contract C1/C2/C3 ratchet**: không reading-width literal, không khung `Center` dọc, không `.name` lộ presentation; khung chuẩn cho trang section top-level là `VitTabletSectionFrame` — `shared/layout/vit_tablet_section_frame.dart`)
 **Scope:** every Dart file under `lib/` on the **tablet surface** (path contains `/tablet/`, or the file name mentions `tablet`).
 **Born:** 2026-08-22 — companion to the Tablet Card & Border Standard; locks the "which gap, which token" decision so tablet screens stop drifting optically page-to-page.
 
@@ -210,7 +210,7 @@ nhất của luật.
 cd flutter_app
 dart run tool/tablet_spacing_audit.dart            # regenerate audit CSV
 dart run tool/tablet_spacing_audit.dart --check    # CI: artifact current
-dart run tool/tablet_gap_role_audit.dart --check   # CI: ROLE của gap (R1-R5, ratchet baseline)
+dart run tool/tablet_gap_role_audit.dart --check   # CI: ROLE của gap (R1-R6, ratchet baseline)
 dart run tool/tablet_gutter_flush_audit.dart --check # CI: S6 gắn NGỮ CẢNH ROUTE (3 shell, 0 vi phạm)
 flutter test test/quality/tablet_spacing_guardrail_test.dart --reporter=compact
 flutter test test/quality/tablet_base8_role_scale_guardrail_test.dart --reporter=compact
@@ -231,7 +231,10 @@ flutter test test/quality/tablet_token_override_guardrail_test.dart --reporter=c
 mà whitelist token của `tablet_gap_12` không phủ: R1 card-sibling dọc+ngang
 (trong cả spread `...[`) = 12, R2 VitCard hero không ép padding ngoài họ
 hero, R3 `Wrap(spacing:)` = micro 4, R4 Text-label → control form = 8,
-R5 gap giữa 2 `Expanded` ≥ 8. Baseline
+R5 gap giữa 2 `Expanded` ≥ 8, R6 Column trần chứa ≥2 khối (card/Row) kề
+nhau KHÔNG SizedBox/VitPageSection ngăn — render dính 0dp (sinh từ bug tab
+Tổng quan SC-218 đo pixel 2026-09-18; các rule token chỉ thấy gap SAI,
+không thấy gap THIẾU). Baseline
 `test/quality/tablet_gap_role_baseline.txt` chỉ được GIẢM (nợ module cũ trả
 dần); module predictions khóa tuyệt đối 0 qua
 `tablet_gap_role_guardrail_test.dart`.

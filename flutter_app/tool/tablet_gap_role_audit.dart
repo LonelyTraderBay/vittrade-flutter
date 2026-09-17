@@ -90,9 +90,10 @@ class _Item {
 }
 
 class _ListCtx {
-  _ListCtx(this.depth, this.spread);
+  _ListCtx(this.depth, this.spread, this.parent);
   final int depth;
   final bool spread;
+  final String parent; // widget sở hữu children-list ('Column', 'Row', ...)
   final items = <_Item>[];
 }
 
@@ -217,7 +218,13 @@ class _Scanner {
           final isChildren =
               RegExp(r'children\s*:\s*$').hasMatch(before) || _pendingChildren;
           if (isSpread || isChildren) {
-            _lists.add(_ListCtx(depthAfterOpen, isSpread));
+            _lists.add(
+              _ListCtx(
+                depthAfterOpen,
+                isSpread,
+                _stack.isEmpty ? '' : (_stack.last.widget ?? ''),
+              ),
+            );
           }
           _pendingChildren = false;
         }
@@ -381,6 +388,33 @@ class _Scanner {
             'Gap giữa 2 Expanded = $token — role item = 8 (x3), không micro.',
           ),
         );
+      }
+    }
+
+    // R6: Column trần chứa ≥2 khối (card/Row) kề nhau KHÔNG SizedBox ngăn —
+    // render dính 0dp. Sinh từ bug tab Tổng quan SC-218 (đo pixel emulator
+    // 2026-09-18); VitPageSection/VitPageContent là chủ gap đúng — bọc khối
+    // tab content bằng section thay vì Column trần. Chỉ áp cho Column: Row
+    // có idiom chia Expanded không gap hợp pháp; list spread (for ...[...])
+    // không tính vì item của for không qua _onNewline.
+    if (!list.spread && list.parent == 'Column') {
+      for (var i = 1; i < items.length; i++) {
+        final prev = items[i - 1];
+        final cur = items[i];
+        if (prev.kind == 'gap' || cur.kind == 'gap') continue;
+        final prevBlock = _isCard(prev) || prev.kind == 'Row';
+        final curBlock = _isCard(cur) || cur.kind == 'Row';
+        if (prevBlock && curBlock) {
+          rows.add(
+            RoleRow(
+              rel,
+              cur.line,
+              'R6-bare-block-list',
+              'Column chứa 2 khối kề nhau không SizedBox ngăn (${prev.kind} → '
+                  '${cur.kind}) — dính 0dp; bọc VitPageSection/chèn SizedBox.',
+            ),
+          );
+        }
       }
     }
   }

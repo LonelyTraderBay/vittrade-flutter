@@ -138,7 +138,8 @@ void main() {
     );
 
     expect(find.byType(PredictionPortfolioAnalyzerTabletPage), findsOneWidget);
-    expect(find.text('Tổng quan'), findsOneWidget);
+    // Tab active + nhãn section Tổng quan (khuôn 2 tab kia, fix gap 0dp).
+    expect(find.text('Tổng quan'), findsNWidgets(2));
     expect(find.text('Hiệu suất'), findsWidgets);
     expect(find.text('Rủi ro'), findsOneWidget);
     expect(find.text('Tóm tắt danh mục'), findsOneWidget);

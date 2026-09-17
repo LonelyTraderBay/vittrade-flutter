@@ -1,9 +1,11 @@
 // Guardrail: Tablet-Spacing-Gutter-Standard — ROLE của khoảng cách
 // (Rule 1 + Rule 6), scanner tool/tablet_gap_role_audit.dart.
 //
-// Khóa 5 lớp lỗi role mà tablet_gap_12_guardrail (chỉ whitelist token)
+// Khóa 6 lớp lỗi role mà tablet_gap_12_guardrail (chỉ whitelist token)
 // không phủ: R1 card-sibling phải 12, R2 hero padding 24, R3 Wrap micro 4,
-// R4 label→control 8, R5 gap giữa 2 Expanded ≥ 8.
+// R4 label→control 8, R5 gap giữa 2 Expanded ≥ 8, R6 Column trần chứa ≥2
+// khối kề nhau không SizedBox/VitPageSection (dính 0dp — bug SC-218
+// 2026-09-18).
 //
 // Ratchet path|rule|count qua test/quality/tablet_gap_role_baseline.txt
 // (CHỈ ĐƯỢC GIẢM — nợ module ngoài predictions trả dần). Module

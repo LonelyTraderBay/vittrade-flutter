@@ -1,9 +1,12 @@
 rule,path,line,detail
+R6-bare-block-list,features/arena/presentation/tablet/pages/arena_tablet_pages_home.dart,402,"Column chứa 2 khối kề nhau không SizedBox ngăn (Row → VitCard) — dính 0dp; bọc VitPageSection/chèn SizedBox."
 R3-wrap-micro,features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart,212,"Wrap spacing x4 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart,66,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_correlations_pane.dart,115,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
+R6-bare-block-list,features/markets/presentation/widgets/tablet/markets_correlations_pane.dart,195,"Column chứa 2 khối kề nhau không SizedBox ngăn (Row → Row) — dính 0dp; bọc VitPageSection/chèn SizedBox."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_news_pane.dart,70,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_news_pane.dart,83,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
+R6-bare-block-list,features/markets/presentation/widgets/tablet/markets_pair_detail_pane_chart.dart,99,"Column chứa 2 khối kề nhau không SizedBox ngăn (Row → Row) — dính 0dp; bọc VitPageSection/chèn SizedBox."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_portfolio_pane.dart,40,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."
 R1-card-sibling,features/markets/presentation/widgets/tablet/markets_portfolio_pane.dart,156,"Gap card sibling = x3 — Rule 6 đòi 12 (x4/cardGap)."
 R3-wrap-micro,features/markets/presentation/widgets/tablet/markets_screener_pane.dart,90,"Wrap spacing x3 — Wrap là cụm pill/badge, role micro = 4 (x1/x2)."

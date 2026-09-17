@@ -32,6 +32,8 @@ class PredictionPortfolioAnalyzerTabletPage extends ConsumerStatefulWidget {
   static const overviewTabKey = Key('sc218_tab_overview');
   static const performanceTabKey = Key('sc218_tab_performance');
   static const riskTabKey = Key('sc218_tab_risk');
+  static const statsRowKey = Key('sc218_tablet_stats_row');
+  static const firstCategoryKey = Key('sc218_tablet_category_first');
 
   @override
   ConsumerState<PredictionPortfolioAnalyzerTabletPage> createState() =>
