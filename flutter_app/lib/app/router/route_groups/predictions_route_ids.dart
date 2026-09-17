@@ -1,39 +1,35 @@
 final class PredictionsRoutePaths {
   const PredictionsRoutePaths._();
 
-  static const String marketsPredictions = '/markets/predictions';
-  static const String marketsPredictionsSearch = '/markets/predictions/search';
-  static const String marketsPredictionsBreaking =
-      '/markets/predictions/breaking';
-  static const String marketsPredictionsPortfolio =
-      '/markets/predictions/portfolio';
+  static const String marketsPredictions = '/predictions';
+  static const String marketsPredictionsSearch = '/predictions/search';
+  static const String marketsPredictionsBreaking = '/predictions/breaking';
+  static const String marketsPredictionsPortfolio = '/predictions/portfolio';
   static String marketsPredictionEvent(String eventId) =>
-      '/markets/predictions/event/$eventId';
+      '/predictions/event/$eventId';
   static String marketsPredictionReceipt(String receiptId) =>
-      '/markets/predictions/receipt/$receiptId';
-  static const String marketsPredictionsRewards =
-      '/markets/predictions/rewards';
+      '/predictions/receipt/$receiptId';
+  static const String marketsPredictionsRewards = '/predictions/rewards';
   static const String marketsPredictionsLeaderboard =
-      '/markets/predictions/leaderboard';
-  static const String marketsPredictionsActivity =
-      '/markets/predictions/activity';
+      '/predictions/leaderboard';
+  static const String marketsPredictionsActivity = '/predictions/activity';
   static const String marketsPredictionsRiskCalculator =
-      '/markets/predictions/risk-calculator';
+      '/predictions/risk-calculator';
   static const String marketsPredictionsMarketMaker =
-      '/markets/predictions/market-maker';
+      '/predictions/market-maker';
   static const String marketsPredictionsPortfolioAnalyzer =
-      '/markets/predictions/portfolio-analyzer';
+      '/predictions/portfolio-analyzer';
   static const String marketsPredictionsEventCalendar =
-      '/markets/predictions/event-calendar';
-  static const String marketsPredictionsSocial = '/markets/predictions/social';
+      '/predictions/event-calendar';
+  static const String marketsPredictionsSocial = '/predictions/social';
   static String marketsPredictionsAdvancedChart(String eventId) =>
-      '/markets/predictions/advanced-chart/$eventId';
+      '/predictions/advanced-chart/$eventId';
   static const String marketsPredictionsTournaments =
-      '/markets/predictions/tournaments';
+      '/predictions/tournaments';
   static String marketsPredictionTournament(String tournamentId) =>
-      '/markets/predictions/tournament/$tournamentId';
+      '/predictions/tournament/$tournamentId';
   static const String marketsPredictionsDataIntegration =
-      '/markets/predictions/data-integration';
+      '/predictions/data-integration';
 }
 
 final class PredictionsRouteNames {

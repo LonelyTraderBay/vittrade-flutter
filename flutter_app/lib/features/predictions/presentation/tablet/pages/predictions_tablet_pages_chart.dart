@@ -79,8 +79,6 @@ class PredictionAdvancedChartTabletPage extends ConsumerWidget {
           VitHeader(
             title: 'Biểu đồ nâng cao',
             subtitle: subtitle,
-            // Gutter-flush (S6): shell markets đã sở hữu outerHorizontalMargin.
-            horizontalPadding: TabletSpacingTokens.zero,
             showBack: showBack,
             onBack: showBack
                 ? () => goBackOrFallback(

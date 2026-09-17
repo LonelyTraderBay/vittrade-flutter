@@ -39,7 +39,7 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
         ),
         ConnectedScreenDraft(
           name: 'PredictionsHomePage_vFinal_Connected',
-          route: '/markets/predictions',
+          route: '/predictions',
           status: ConnectedEcosystemScreenStatus.vFinal,
           source: '09A',
           bridgeComponents: ['TopicChipBar (shared taxonomy)'],
@@ -48,7 +48,7 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
         ),
         ConnectedScreenDraft(
           name: 'PredictionEventDetailPage_vFinal_Connected',
-          route: '/markets/predictions/event/:id',
+          route: '/predictions/event/:id',
           status: ConnectedEcosystemScreenStatus.vFinal,
           source: '09B + 09C + 09D',
           bridgeComponents: [
@@ -202,17 +202,17 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
             ),
             ConnectedFlowStepDraft(
               label: 'PredictionsHome',
-              route: '/markets/predictions',
+              route: '/predictions',
               description: 'Browse events, filter by topic.',
             ),
             ConnectedFlowStepDraft(
               label: 'EventDetail',
-              route: '/markets/predictions/event/:id',
+              route: '/predictions/event/:id',
               description: 'Xem event, scroll đến Arena section.',
             ),
             ConnectedFlowStepDraft(
               label: 'ConfirmSheet',
-              route: '/markets/predictions/event/:id',
+              route: '/predictions/event/:id',
               description:
                   'Tạo room Arena từ event này? Confirmation sheet có 3 disclosure bullets.',
               isBridge: true,
@@ -257,7 +257,7 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
             ),
             ConnectedFlowStepDraft(
               label: 'PredictionEvent',
-              route: '/markets/predictions/event/:id',
+              route: '/predictions/event/:id',
               description: 'Navigate qua CTA xem thị trường dự đoán.',
               isBridge: true,
             ),
@@ -275,7 +275,7 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
             ),
             ConnectedFlowStepDraft(
               label: 'PredictionPortfolio',
-              route: '/markets/predictions/portfolio',
+              route: '/predictions/portfolio',
               description: 'Prediction card -> positions and P/L.',
             ),
             ConnectedFlowStepDraft(
@@ -305,7 +305,7 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
             ),
             ConnectedFlowStepDraft(
               label: 'Choice: Predictions',
-              route: '/markets/predictions',
+              route: '/predictions',
               description: 'Tap Dự đoán thị trường -> PredictionsHome.',
             ),
             ConnectedFlowStepDraft(
@@ -415,13 +415,13 @@ mixin _MockArenaRepositoryConnectedGuideMethods on _MockArenaRepositoryBase {
           bridgeComponents: ['DiscoverMoreSection'],
         ),
         ConnectedRouteEntryDraft(
-          route: '/markets/predictions',
+          route: '/predictions',
           page: 'PredictionsHomePage',
           bridgeType: ConnectedBridgeType.source,
           bridgeComponents: ['TopicChipBar'],
         ),
         ConnectedRouteEntryDraft(
-          route: '/markets/predictions/event/:id',
+          route: '/predictions/event/:id',
           page: 'PredictionEventDetailPage',
           bridgeType: ConnectedBridgeType.source,
           bridgeComponents: ['ArenaRelatedRoomsSection'],

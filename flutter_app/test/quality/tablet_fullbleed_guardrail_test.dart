@@ -31,7 +31,7 @@ import 'package:flutter_test/flutter_test.dart';
 const List<String> kBaselineNonFullBleedPageContents = [
   'shared/layout/vit_two_column_tablet_dashboard.dart|190',
   'shared/layout/vit_two_column_tablet_dashboard.dart|285',
-  'shared/layout/vit_tablet_pane_workspace.dart|127',
+  'shared/layout/vit_tablet_pane_workspace.dart|161',
 ];
 
 final _pageContentStartRe = RegExp(r'\bVitPageContent\s*\(');

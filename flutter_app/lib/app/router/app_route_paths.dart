@@ -226,7 +226,7 @@ final class AppRoutePaths {
   static const String marketsCorrelations =
       MarketsRoutePaths.marketsCorrelations;
 
-  // ==== PREDICTIONS (nested under /markets/predictions) ====
+  // ==== PREDICTIONS (nested under /predictions) ====
   static const String marketsPredictions =
       PredictionsRoutePaths.marketsPredictions;
   static const String marketsPredictionsSearch =

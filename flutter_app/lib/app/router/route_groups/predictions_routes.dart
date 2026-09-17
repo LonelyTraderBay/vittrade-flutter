@@ -61,7 +61,7 @@ List<RouteBase> predictionRoutes(
       ),
     ),
     GoRoute(
-      path: '/markets/predictions/event/:eventId',
+      path: '/predictions/event/:eventId',
       name: AppRouteNames.sc030PredictionEventDetail,
       builder: (context, state) => _tabletPredictionRoute(
         context: context,
@@ -116,7 +116,7 @@ List<RouteBase> predictionRoutes(
       ),
     ),
     GoRoute(
-      path: '/markets/predictions/receipt/:receiptId',
+      path: '/predictions/receipt/:receiptId',
       name: AppRouteNames.sc035PredictionOrderReceipt,
       builder: (context, state) => _tabletPredictionRoute(
         context: context,
@@ -185,7 +185,7 @@ List<RouteBase> predictionRoutes(
       ),
     ),
     GoRoute(
-      path: '/markets/predictions/advanced-chart/:eventId',
+      path: '/predictions/advanced-chart/:eventId',
       name: AppRouteNames.sc041PredictionAdvancedChart,
       builder: (context, state) => _tabletPredictionRoute(
         context: context,
@@ -209,7 +209,7 @@ List<RouteBase> predictionRoutes(
       ),
     ),
     GoRoute(
-      path: '/markets/predictions/tournament/:tournamentId',
+      path: '/predictions/tournament/:tournamentId',
       name: AppRouteNames.sc414PredictionTournamentDetail,
       builder: (context, state) => _tabletPredictionRoute(
         context: context,

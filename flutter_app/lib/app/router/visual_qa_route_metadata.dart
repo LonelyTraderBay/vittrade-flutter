@@ -29,6 +29,12 @@ VitBottomNavDestination activeDestinationForPath(String path) {
   if (path.startsWith(AppRoutePaths.markets)) {
     return VitBottomNavDestination.markets;
   }
+  // P2 tách route top-level: predictions vào từ Markets nên rail/bottom-nav
+  // giữ ngữ cảnh Markets (như /arena giữ Trade).
+  if (path == AppRoutePaths.marketsPredictions ||
+      path.startsWith('${AppRoutePaths.marketsPredictions}/')) {
+    return VitBottomNavDestination.markets;
+  }
   if (path.startsWith(AppRoutePaths.trade)) {
     return VitBottomNavDestination.trade;
   }
@@ -182,12 +188,12 @@ String visualQaStatusBarTimeForUri(Uri uri) {
   if (path == AppRoutePaths.marketsPredictions) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsSearch) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsBreaking) return '23:28';
-  if (path.startsWith('/markets/predictions/event/')) return '23:28';
+  if (path.startsWith('/predictions/event/')) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsPortfolio) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsRewards) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsLeaderboard) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsActivity) return '23:28';
-  if (path.startsWith('/markets/predictions/receipt/')) return '23:28';
+  if (path.startsWith('/predictions/receipt/')) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsRiskCalculator) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsMarketMaker) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsPortfolioAnalyzer) {
@@ -195,9 +201,9 @@ String visualQaStatusBarTimeForUri(Uri uri) {
   }
   if (path == AppRoutePaths.marketsPredictionsEventCalendar) return '23:28';
   if (path == AppRoutePaths.marketsPredictionsSocial) return '23:28';
-  if (path.startsWith('/markets/predictions/advanced-chart/')) return '23:29';
+  if (path.startsWith('/predictions/advanced-chart/')) return '23:29';
   if (path == AppRoutePaths.marketsPredictionsTournaments) return '23:29';
-  if (path.startsWith('/markets/predictions/tournament/')) return '23:29';
+  if (path.startsWith('/predictions/tournament/')) return '23:29';
   if (path == AppRoutePaths.marketsPredictionsDataIntegration) return '23:29';
   if (path.startsWith('/pair/')) return '23:29';
   if (path == AppRoutePaths.news) return '23:29';

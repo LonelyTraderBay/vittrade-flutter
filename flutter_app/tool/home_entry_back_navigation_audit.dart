@@ -366,7 +366,7 @@ const _homeMatrixSourceRules = [
     id: 'HEB-018',
     area: 'Matrix source',
     file: 'lib/features/home/presentation/phone/pages/home_page_sections.dart',
-    requiredSnippets: ["onTap: () => onNavigate('/markets/predictions')"],
+    requiredSnippets: ["onTap: () => onNavigate('/predictions')"],
     notes: 'Discovery Predictions entry (not Home quick action) is present.',
   ),
   HomeEntryBackRule(
@@ -412,7 +412,7 @@ const _homeMatrixSourceRules = [
     id: 'HEB-024',
     area: 'Matrix source',
     file: 'lib/features/home/presentation/phone/pages/home_page_sections.dart',
-    requiredSnippets: ["onTap: () => onNavigate('/markets/predictions')"],
+    requiredSnippets: ["onTap: () => onNavigate('/predictions')"],
     notes: 'Discovery Prediction Markets source is present.',
   ),
   HomeEntryBackRule(

@@ -142,7 +142,6 @@ class _PredictionMarketMakerTabletPageState
 
   Widget _frame({required List<Widget> children}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-217',
       semanticLabel: 'Tạo lập thị trường dự đoán',
       title: 'Market Maker',

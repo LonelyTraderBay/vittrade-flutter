@@ -79,4 +79,39 @@ void main() {
     expect(find.byType(Scrollable), findsOneWidget);
     expect(find.text('Cột hẹp'), findsOneWidget);
   });
+
+  testWidgets('tầng top-level rộng: cap cặp cột R5 — cột chính dừng ở 800dp', (
+    tester,
+  ) async {
+    // Mở rộng surface test — host() dùng SizedBox nhưng viewport mặc định
+    // 800dp sẽ bóp constraint (bài học: 444 = 800 − 24 − 320 − 12).
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1400, 600);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    await tester.pumpWidget(host(1400));
+    await tester.pumpAndSettle();
+
+    // Cặp cột bị cap 800 + 320 + 12 = 1132, căn giữa trong 1400 − 2×12.
+    expect(
+      tester.getSize(find.byKey(const Key('workspace_secondary'))).width,
+      320,
+    );
+    expect(
+      tester.getSize(find.byKey(const Key('workspace_primary'))).width,
+      800,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('mép ngang 12dp do workspace sở hữu ở tầng hẹp (top-level)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(host(360));
+    await tester.pumpAndSettle();
+
+    final rect = tester.getRect(find.byKey(const Key('workspace_primary')));
+    expect(rect.left, 12);
+    expect(rect.right, 360 - 12);
+  });
 }

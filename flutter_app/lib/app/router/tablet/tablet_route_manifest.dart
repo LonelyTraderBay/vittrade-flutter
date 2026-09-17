@@ -1005,7 +1005,7 @@ const List<TabletRouteSpec> tabletRouteManifest = [
     name: AppRouteNames.sc029PredictionsBreaking,
   ),
   TabletRouteSpec(
-    path: '/markets/predictions/event/:eventId',
+    path: '/predictions/event/:eventId',
     name: AppRouteNames.sc030PredictionEventDetail,
   ),
   TabletRouteSpec(
@@ -1025,7 +1025,7 @@ const List<TabletRouteSpec> tabletRouteManifest = [
     name: AppRouteNames.sc034PredictionsGlobalActivity,
   ),
   TabletRouteSpec(
-    path: '/markets/predictions/receipt/:receiptId',
+    path: '/predictions/receipt/:receiptId',
     name: AppRouteNames.sc035PredictionOrderReceipt,
   ),
   TabletRouteSpec(
@@ -1049,7 +1049,7 @@ const List<TabletRouteSpec> tabletRouteManifest = [
     name: AppRouteNames.sc040PredictionSocial,
   ),
   TabletRouteSpec(
-    path: '/markets/predictions/advanced-chart/:eventId',
+    path: '/predictions/advanced-chart/:eventId',
     name: AppRouteNames.sc041PredictionAdvancedChart,
   ),
   TabletRouteSpec(
@@ -1057,7 +1057,7 @@ const List<TabletRouteSpec> tabletRouteManifest = [
     name: AppRouteNames.sc042PredictionTournaments,
   ),
   TabletRouteSpec(
-    path: '/markets/predictions/tournament/:tournamentId',
+    path: '/predictions/tournament/:tournamentId',
     name: AppRouteNames.sc414PredictionTournamentDetail,
   ),
   TabletRouteSpec(

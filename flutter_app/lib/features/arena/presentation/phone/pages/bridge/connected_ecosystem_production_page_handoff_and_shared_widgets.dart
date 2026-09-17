@@ -392,15 +392,12 @@ const _handoffBoards = [
 String _resolveConnectedRoute(String route) {
   return switch (route) {
     '/' => AppRoutePaths.home,
-    '/markets/predictions/event/:id' => AppRoutePaths.marketsPredictionEvent(
-      'pred-1',
-    ),
+    '/predictions/event/:id' => AppRoutePaths.marketsPredictionEvent('pred-1'),
     '/arena/challenge/:id' => AppRoutePaths.arenaChallenge('ch003'),
     '/arena/challenge/:challengeId' => AppRoutePaths.arenaChallenge('ch003'),
     '/arena/mode/:id' => AppRoutePaths.arenaMode('mode001'),
     '/profile/arena' => AppRoutePaths.profileArena,
-    '/markets/predictions/portfolio' =>
-      AppRoutePaths.marketsPredictionsPortfolio,
+    '/predictions/portfolio' => AppRoutePaths.marketsPredictionsPortfolio,
     _ => route,
   };
 }

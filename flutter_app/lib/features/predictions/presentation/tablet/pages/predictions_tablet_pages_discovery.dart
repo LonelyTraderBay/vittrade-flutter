@@ -134,7 +134,6 @@ class _PredictionsSearchTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-209',
       semanticLabel: 'Tìm kiếm prediction',
       title: 'Tìm sự kiện',

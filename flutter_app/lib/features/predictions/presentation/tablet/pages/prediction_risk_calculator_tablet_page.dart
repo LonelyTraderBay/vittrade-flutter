@@ -196,7 +196,6 @@ class _PredictionRiskCalculatorTabletPageState
 
   Widget _frame({required List<Widget> children}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-216',
       semanticLabel: 'Máy tính rủi ro prediction',
       title: 'Máy tính rủi ro',

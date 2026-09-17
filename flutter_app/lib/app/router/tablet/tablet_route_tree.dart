@@ -1005,7 +1005,7 @@ Widget _buildTabletPage(
   if (path == AppRoutePaths.marketsPredictionsBreaking) {
     return const PredictionsBreakingTabletPage();
   }
-  if (path == '/markets/predictions/event/:eventId') {
+  if (path == '/predictions/event/:eventId') {
     return PredictionEventDetailTabletPage(
       eventId: _requiredParam(state, 'eventId'),
     );
@@ -1037,7 +1037,7 @@ Widget _buildTabletPage(
   if (path == AppRoutePaths.marketsPredictionsSocial) {
     return const PredictionSocialTabletPage();
   }
-  if (path == '/markets/predictions/advanced-chart/:eventId') {
+  if (path == '/predictions/advanced-chart/:eventId') {
     return PredictionAdvancedChartTabletPage(
       eventId: _requiredParam(state, 'eventId'),
     );
@@ -1045,7 +1045,7 @@ Widget _buildTabletPage(
   if (path == AppRoutePaths.marketsPredictionsTournaments) {
     return const PredictionTournamentsTabletPage();
   }
-  if (path == '/markets/predictions/tournament/:tournamentId') {
+  if (path == '/predictions/tournament/:tournamentId') {
     return PredictionTournamentDetailTabletPage(
       tournamentId: _requiredParam(state, 'tournamentId'),
     );
@@ -1053,7 +1053,7 @@ Widget _buildTabletPage(
   if (path == AppRoutePaths.marketsPredictionsDataIntegration) {
     return const PredictionDataIntegrationTabletPage();
   }
-  if (path == '/markets/predictions/receipt/:receiptId') {
+  if (path == '/predictions/receipt/:receiptId') {
     return PredictionOrderReceiptTabletPage(
       receiptId: _requiredParam(state, 'receiptId'),
     );
@@ -1810,7 +1810,10 @@ VitBottomNavDestination _activeDestinationForPath(String path) {
   }
   if (path == AppRoutePaths.markets ||
       path.startsWith('/markets/') ||
-      path.startsWith('/pair/')) {
+      path.startsWith('/pair/') ||
+      // P2: predictions top-level — rail giữ ngữ cảnh Markets (vào từ đó).
+      path == AppRoutePaths.marketsPredictions ||
+      path.startsWith('${AppRoutePaths.marketsPredictions}/')) {
     return VitBottomNavDestination.markets;
   }
   if (path.startsWith('/profile/') ||

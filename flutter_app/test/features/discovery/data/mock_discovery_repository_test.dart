@@ -22,7 +22,7 @@ void main() {
       expect(snapshot.trendingQueries.first.label, 'Bitcoin');
       expect(snapshot.modules, hasLength(3));
       expect(snapshot.modules.first.id, 'predictions');
-      expect(snapshot.modules.first.route, '/markets/predictions');
+      expect(snapshot.modules.first.route, '/predictions');
       expect(snapshot.results.totalCount, 0);
       expect(snapshot.results.isEmpty, isTrue);
       expect(snapshot.hasQuery, isFalse);

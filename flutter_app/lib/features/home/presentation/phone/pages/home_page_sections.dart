@@ -28,7 +28,7 @@ class _HomeDiscoverySection extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [AppColors.accent15, AppColors.primary08],
           ),
-          onTap: () => onNavigate('/markets/predictions'),
+          onTap: () => onNavigate('/predictions'),
         ),
         const SizedBox(height: SharedSpacingTokens.homeSectionInnerGap),
         VitDiscoveryActionCard(

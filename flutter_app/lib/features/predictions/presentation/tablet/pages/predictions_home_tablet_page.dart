@@ -256,8 +256,6 @@ class _PredictionsHomeTabletPageState
           VitHeader(
             title: 'Dự đoán thị trường',
             subtitle: 'Xác suất và sự kiện đang mở',
-            // Gutter-flush (S6): shell markets đã sở hữu outerHorizontalMargin.
-            horizontalPadding: TabletSpacingTokens.zero,
             showBack: context.canPop(),
             onBack: context.canPop()
                 ? () => goBackOrFallback(
@@ -284,7 +282,6 @@ class _PredictionsHomeTabletPageState
           ),
           Expanded(
             child: VitTabletSectionBody(
-              gutterFlush: true,
               contentKey: PredictionsHomeTabletPage.contentKey,
               children: children,
             ),

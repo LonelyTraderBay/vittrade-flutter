@@ -100,7 +100,6 @@ class _PredictionPortfolioAnalyzerTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-218',
       semanticLabel: 'Phân tích danh mục prediction',
       title: 'Phân tích danh mục',

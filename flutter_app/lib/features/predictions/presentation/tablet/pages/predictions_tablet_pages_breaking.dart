@@ -96,7 +96,6 @@ class _PredictionsBreakingTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-210',
       semanticLabel: 'Biến động prediction',
       title: 'Biến động',

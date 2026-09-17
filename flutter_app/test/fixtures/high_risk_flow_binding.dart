@@ -745,7 +745,7 @@ final class HighRiskFlowBindings {
       screenBindings: [
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.entry,
-          routePath: '/markets/predictions',
+          routePath: '/predictions',
           screenName: 'PredictionsHomePage',
           repositoryMethod: 'getHome',
           snapshotType: 'PredictionHomeSnapshot',
@@ -753,7 +753,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.eligibilityCheck,
-          routePath: '/markets/predictions/risk-calculator',
+          routePath: '/predictions/risk-calculator',
           screenName: 'PredictionRiskCalculatorPage',
           repositoryMethod: 'getRiskCalculator',
           snapshotType: 'PredictionRiskCalculatorSnapshot',
@@ -761,7 +761,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.setupOrConfiguration,
-          routePath: '/markets/predictions/event/event001',
+          routePath: '/predictions/event/event001',
           screenName: 'PredictionEventDetailPage',
           repositoryMethod: 'getEventDetail',
           snapshotType: 'PredictionEventDetailSnapshot',
@@ -769,7 +769,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.riskAndFeePreview,
-          routePath: '/markets/predictions/advanced-chart/event001',
+          routePath: '/predictions/advanced-chart/event001',
           screenName: 'PredictionAdvancedChartPage',
           repositoryMethod: 'getAdvancedChart',
           snapshotType: 'PredictionAdvancedChartSnapshot',
@@ -777,7 +777,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.explicitConfirmation,
-          routePath: '/markets/predictions/event/event001',
+          routePath: '/predictions/event/event001',
           screenName: 'PredictionEventDetailPage',
           repositoryMethod: 'getEventDetail',
           snapshotType: 'PredictionEventDetailSnapshot',
@@ -785,7 +785,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.submittedState,
-          routePath: '/markets/predictions/receipt/receipt001',
+          routePath: '/predictions/receipt/receipt001',
           screenName: 'PredictionOrderReceiptPage',
           repositoryMethod: 'getOrderReceipt',
           snapshotType: 'PredictionOrderReceiptSnapshot',
@@ -793,7 +793,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.receiptOrStatusDetail,
-          routePath: '/markets/predictions/receipt/receipt001',
+          routePath: '/predictions/receipt/receipt001',
           screenName: 'PredictionOrderReceiptPage',
           repositoryMethod: 'getOrderReceipt',
           snapshotType: 'PredictionOrderReceiptSnapshot',
@@ -801,7 +801,7 @@ final class HighRiskFlowBindings {
         ),
         HighRiskFlowScreenBinding(
           stage: HighRiskFlowStage.manageOrHistory,
-          routePath: '/markets/predictions/portfolio',
+          routePath: '/predictions/portfolio',
           screenName: 'PredictionsPortfolioPage',
           repositoryMethod: 'getPortfolio',
           snapshotType: 'PredictionPortfolioSnapshot',

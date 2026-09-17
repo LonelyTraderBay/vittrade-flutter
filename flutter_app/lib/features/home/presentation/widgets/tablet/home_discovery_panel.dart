@@ -38,7 +38,7 @@ class HomeDiscoveryPanel extends StatelessWidget {
                 subtitle: 'Thị trường xác suất, vị thế và danh mục',
                 badgeLabel: 'Ví / PnL',
                 actionLabel: 'Khám phá',
-                onTap: () => onNavigate('/markets/predictions'),
+                onTap: () => onNavigate('/predictions'),
               ),
               const Divider(
                 height: TabletSpacingTokens.dividerHairline,

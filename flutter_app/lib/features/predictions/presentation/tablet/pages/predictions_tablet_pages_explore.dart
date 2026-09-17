@@ -128,7 +128,6 @@ class _PredictionsGlobalActivityTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-215',
       semanticLabel: 'Hoạt động toàn cục prediction',
       title: 'Hoạt động toàn cục',
@@ -353,7 +352,6 @@ class _PredictionEventCalendarTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-219',
       semanticLabel: 'Lịch sự kiện prediction',
       title: 'Lịch sự kiện',

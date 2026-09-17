@@ -509,7 +509,7 @@ final class HighRiskFlowContracts {
       module: 'predictions',
       capability: 'Prediction event trading and receipt lifecycle',
       ownerSurface: 'Markets tab',
-      entryRoute: '/markets/predictions',
+      entryRoute: '/predictions',
       supportRoute: '/support',
       steps: [
         HighRiskFlowStep(
@@ -519,17 +519,17 @@ final class HighRiskFlowContracts {
         HighRiskFlowStep(
           stage: HighRiskFlowStage.eligibilityCheck,
           label: 'Event rules, wallet readiness, and risk calculator checks',
-          routePath: '/markets/predictions/risk-calculator',
+          routePath: '/predictions/risk-calculator',
         ),
         HighRiskFlowStep(
           stage: HighRiskFlowStage.setupOrConfiguration,
           label: 'Outcome, probability, side, amount, and limit setup',
-          routePath: '/markets/predictions/event/event001',
+          routePath: '/predictions/event/event001',
         ),
         HighRiskFlowStep(
           stage: HighRiskFlowStage.riskAndFeePreview,
           label: 'Probability, liquidity, fee, and payout scenario preview',
-          routePath: '/markets/predictions/advanced-chart/event001',
+          routePath: '/predictions/advanced-chart/event001',
         ),
         HighRiskFlowStep(
           stage: HighRiskFlowStage.explicitConfirmation,
@@ -542,12 +542,12 @@ final class HighRiskFlowContracts {
         HighRiskFlowStep(
           stage: HighRiskFlowStage.receiptOrStatusDetail,
           label: 'Prediction receipt detail',
-          routePath: '/markets/predictions/receipt/receipt001',
+          routePath: '/predictions/receipt/receipt001',
         ),
         HighRiskFlowStep(
           stage: HighRiskFlowStage.manageOrHistory,
           label: 'Prediction portfolio and activity history',
-          routePath: '/markets/predictions/portfolio',
+          routePath: '/predictions/portfolio',
         ),
         HighRiskFlowStep(
           stage: HighRiskFlowStage.supportOrRecovery,

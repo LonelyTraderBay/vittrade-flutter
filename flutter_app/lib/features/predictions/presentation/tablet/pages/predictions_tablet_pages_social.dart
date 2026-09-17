@@ -184,7 +184,6 @@ class PredictionSocialTabletPage extends ConsumerWidget {
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-220',
       semanticLabel: 'Cộng đồng prediction',
       title: 'Cộng đồng',
@@ -515,7 +514,6 @@ class PredictionDataIntegrationTabletPage extends ConsumerWidget {
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-224',
       semanticLabel: 'Tích hợp dữ liệu prediction',
       title: 'Tích hợp dữ liệu',

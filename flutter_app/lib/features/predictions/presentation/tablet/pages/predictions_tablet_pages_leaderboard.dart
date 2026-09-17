@@ -200,7 +200,6 @@ class _PredictionsLeaderboardTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-214',
       semanticLabel: 'Bảng xếp hạng prediction',
       title: 'Bảng xếp hạng',

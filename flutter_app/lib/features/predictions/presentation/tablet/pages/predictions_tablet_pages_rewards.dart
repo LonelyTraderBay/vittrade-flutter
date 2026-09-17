@@ -137,7 +137,6 @@ class _PredictionsRewardsTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-213',
       semanticLabel: 'Phần thưởng prediction',
       title: 'Phần thưởng',

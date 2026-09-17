@@ -77,7 +77,7 @@ final class MockUnifiedPortfolioRepository
           change24h: 5.6,
           activePositions: 7,
           pnl: 780,
-          route: '/markets/predictions',
+          route: '/predictions',
         ),
         UnifiedPortfolioModuleDraft(
           id: UnifiedPortfolioModuleId.arena,

@@ -63,7 +63,7 @@ final class MockDiscoveryRepository implements DiscoveryRepository {
       actionDraft: 'read-only or local navigation action',
       title: 'Trung tâm chủ đề',
       searchRoute: '/search',
-      predictionsRoute: '/markets/predictions',
+      predictionsRoute: '/predictions',
       arenaRoute: '/arena',
       createArenaRoute: '/arena/studio',
       staleMessage: 'Mất kết nối. Đang hiển thị dữ liệu gần nhất.',

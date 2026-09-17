@@ -189,8 +189,6 @@ class _PredictionEventDetailTabletPageState
           VitHeader(
             title: 'Chi tiết sự kiện',
             subtitle: subtitle ?? 'Xác suất · vị thế · quy tắc',
-            // Gutter-flush (S6): shell markets đã sở hữu outerHorizontalMargin.
-            horizontalPadding: TabletSpacingTokens.zero,
             showBack: showBack,
             onBack: showBack
                 ? () => goBackOrFallback(

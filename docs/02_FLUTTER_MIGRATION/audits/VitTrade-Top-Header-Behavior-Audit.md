@@ -275,10 +275,10 @@ unresolved=114
 | p2p_security | `AppRoutePaths.p2pSecuritySuspiciousActivity` | `P2PSuspiciousActivityPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/phone/pages/security/p2p_suspicious_activity_page.dart` |
 | p2p_security | `AppRoutePaths.p2pSecurityWhitelist` | `P2PWhitelistModePage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/phone/pages/security/p2p_security_center_page.dart` |
 | p2p_security | `AppRoutePaths.p2pTaxReporting` | `P2PTaxReportingPage` | auto_hide_header | shared_auto_hide_scaffold | `flutter_app/lib/features/p2p_security/presentation/phone/pages/security/p2p_tax_reporting_page.dart` |
-| predictions | `'/markets/predictions/advanced-chart/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
-| predictions | `'/markets/predictions/event/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
-| predictions | `'/markets/predictions/receipt/:receiptId'` | `unresolved` | unresolved | unresolved | `unresolved` |
-| predictions | `'/markets/predictions/tournament/:tournamentId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/predictions/advanced-chart/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/predictions/event/:eventId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/predictions/receipt/:receiptId'` | `unresolved` | unresolved | unresolved | `unresolved` |
+| predictions | `'/predictions/tournament/:tournamentId'` | `unresolved` | unresolved | unresolved | `unresolved` |
 | predictions | `AppRoutePaths.marketsPredictions` | `unresolved` | unresolved | unresolved | `unresolved` |
 | predictions | `AppRoutePaths.marketsPredictionsActivity` | `unresolved` | unresolved | unresolved | `unresolved` |
 | predictions | `AppRoutePaths.marketsPredictionsBreaking` | `unresolved` | unresolved | unresolved | `unresolved` |

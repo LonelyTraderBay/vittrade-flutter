@@ -9,3 +9,5 @@ features/profile/presentation/tablet/widgets/profile_tablet_master_shell.dart 1
 shared/layout/vit_two_column_tablet_dashboard.dart 1
 # Ngoại lệ 5: wallet history shell — cùng lớp shell master-detail chuẩn (cap động), mirror markets/profile.
 features/wallet/presentation/tablet/widgets/wallet_tablet_history_shell.dart 1
+# Ngoại lệ 6: pane workspace scaffold — Center bọc cap cặp cột tầng rộng (idiom R5 mirror dashboard, P2 2026-09-17).
+shared/layout/vit_tablet_pane_workspace.dart 1

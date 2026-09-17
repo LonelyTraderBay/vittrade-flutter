@@ -133,7 +133,6 @@ class _PredictionTournamentsTabletPageState
 
   Widget _frame({required List<Widget> children, String? subtitle}) {
     return VitTabletSectionFrame(
-      gutterFlush: true,
       semanticIdentifier: 'SC-222',
       semanticLabel: 'Giải đấu prediction',
       title: 'Giải đấu',
@@ -367,14 +366,12 @@ class PredictionTournamentDetailTabletPage extends ConsumerWidget {
 
     return tournamentsAsync.when(
       loading: () => const VitTabletSectionFrame(
-        gutterFlush: true,
         semanticIdentifier: 'SC-223',
         semanticLabel: 'Chi tiết giải đấu prediction',
         title: 'Chi tiết giải đấu',
         children: [VitSkeletonList(rows: 6)],
       ),
       error: (error, stackTrace) => VitTabletSectionFrame(
-        gutterFlush: true,
         semanticIdentifier: 'SC-223',
         semanticLabel: 'Chi tiết giải đấu prediction',
         title: 'Chi tiết giải đấu',
@@ -391,7 +388,6 @@ class PredictionTournamentDetailTabletPage extends ConsumerWidget {
           orElse: () => snapshot.tournaments.first,
         );
         return VitTabletSectionFrame(
-          gutterFlush: true,
           semanticIdentifier: 'SC-223',
           semanticLabel: 'Chi tiết giải đấu prediction',
           title: tournament.name,

@@ -44,7 +44,6 @@ class PredictionOrderReceiptTabletPage extends ConsumerWidget {
 
     return receiptAsync.when(
       loading: () => const VitTabletSectionFrame(
-        gutterFlush: true,
         semanticIdentifier: 'SC-225',
         semanticLabel: 'Biên lai lệnh prediction',
         title: 'Chi tiết lệnh',
@@ -53,7 +52,6 @@ class PredictionOrderReceiptTabletPage extends ConsumerWidget {
         children: [VitSkeletonList(rows: 6)],
       ),
       error: (error, stackTrace) => VitTabletSectionFrame(
-        gutterFlush: true,
         semanticIdentifier: 'SC-225',
         semanticLabel: 'Biên lai lệnh prediction',
         title: 'Chi tiết lệnh',
@@ -72,7 +70,6 @@ class PredictionOrderReceiptTabletPage extends ConsumerWidget {
         ],
       ),
       data: (snapshot) => VitTabletSectionFrame(
-        gutterFlush: true,
         semanticIdentifier: 'SC-225',
         semanticLabel: 'Biên lai lệnh prediction',
         title: 'Chi tiết lệnh',
