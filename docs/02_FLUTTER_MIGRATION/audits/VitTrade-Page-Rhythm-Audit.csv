@@ -977,7 +977,9 @@ predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social
 predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_global_activity_page.dart,compact,compact,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_leaderboard_page.dart,compact,compact,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_event_detail_tablet_page.dart,standard,standard,0,,0,,0,0,pass
+predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_market_maker_tablet_page.dart,standard,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_portfolio_analyzer_tablet_page.dart,standard,standard,0,,0,,0,0,pass
+predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_page.dart,standard,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart,compact,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart,standard,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_chart.dart,flush,standard,0,,0,,0,0,pass

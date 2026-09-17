@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/predictions_controller_providers.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
+import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/predictions/domain/entities/predictions_entities.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -23,6 +29,7 @@ class PredictionRiskCalculatorTabletPage extends ConsumerStatefulWidget {
   const PredictionRiskCalculatorTabletPage({super.key});
 
   static const contentKey = Key('sc216_tablet_content');
+  static const resultPaneKey = Key('sc216_tablet_result_pane');
   static const calculatorTabKey = Key('sc216_tab_calculator');
   static const scenariosTabKey = Key('sc216_tab_scenarios');
   static const guideTabKey = Key('sc216_tab_guide');
@@ -106,9 +113,11 @@ class _PredictionRiskCalculatorTabletPageState
     );
 
     return riskCalculatorAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () =>
+          _frame(context, body: _statusBody(const [VitSkeletonList(rows: 6)])),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _statusBody([
           VitErrorState(
             title: 'Không tải được máy tính rủi ro',
             message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
@@ -116,7 +125,7 @@ class _PredictionRiskCalculatorTabletPageState
             onAction: () =>
                 ref.invalidate(predictionsRiskCalculatorSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (snapshot) {
         _ensureControllers(snapshot);
@@ -127,47 +136,71 @@ class _PredictionRiskCalculatorTabletPageState
           riskBudget: _sc216Parse(_riskBudgetController!.text, fallback: 1),
         );
         final metrics = _sc216Calculate(inputs);
-        return _frame(
-          children: [
-            VitTabBar(
-              variant: VitTabBarVariant.segment,
-              activeKey: switch (_activeTab) {
-                _Sc216Tab.calculator => 'calculator',
-                _Sc216Tab.scenarios => 'scenarios',
-                _Sc216Tab.guide => 'guide',
-              },
-              onChanged: (key) => setState(() {
-                _activeTab = _Sc216Tab.values.byName(key);
-              }),
-              tabs: const [
-                VitTabItem(
-                  key: 'calculator',
-                  label: 'Máy tính',
-                  widgetKey:
-                      PredictionRiskCalculatorTabletPage.calculatorTabKey,
-                ),
-                VitTabItem(
-                  key: 'scenarios',
-                  label: 'Kịch bản',
-                  widgetKey: PredictionRiskCalculatorTabletPage.scenariosTabKey,
-                ),
-                VitTabItem(
-                  key: 'guide',
-                  label: 'Hướng dẫn',
-                  widgetKey: PredictionRiskCalculatorTabletPage.guideTabKey,
-                ),
-              ],
+        final tabBar = VitTabBar(
+          variant: VitTabBarVariant.segment,
+          activeKey: switch (_activeTab) {
+            _Sc216Tab.calculator => 'calculator',
+            _Sc216Tab.scenarios => 'scenarios',
+            _Sc216Tab.guide => 'guide',
+          },
+          onChanged: (key) => setState(() {
+            _activeTab = _Sc216Tab.values.byName(key);
+          }),
+          tabs: const [
+            VitTabItem(
+              key: 'calculator',
+              label: 'Máy tính',
+              widgetKey: PredictionRiskCalculatorTabletPage.calculatorTabKey,
             ),
-            if (_activeTab == _Sc216Tab.calculator) ...[
-              _Sc216PositionInfoCard(
-                eventController: _eventController!,
-                sharesController: _sharesController!,
-                entryPriceController: _entryPriceController!,
-                currentPriceController: _currentPriceController!,
-                riskBudgetController: _riskBudgetController!,
-                outcome: _outcome,
-                onOutcomeChanged: (value) => setState(() => _outcome = value),
-              ),
+            VitTabItem(
+              key: 'scenarios',
+              label: 'Kịch bản',
+              widgetKey: PredictionRiskCalculatorTabletPage.scenariosTabKey,
+            ),
+            VitTabItem(
+              key: 'guide',
+              label: 'Hướng dẫn',
+              widgetKey: PredictionRiskCalculatorTabletPage.guideTabKey,
+            ),
+          ],
+        );
+        final formCard = _Sc216PositionInfoCard(
+          eventController: _eventController!,
+          sharesController: _sharesController!,
+          entryPriceController: _entryPriceController!,
+          currentPriceController: _currentPriceController!,
+          riskBudgetController: _riskBudgetController!,
+          outcome: _outcome,
+          onOutcomeChanged: (value) => setState(() => _outcome = value),
+        );
+        final highRiskPanel = const VitHighRiskStatePanel(
+          state: VitHighRiskUiState.riskReview,
+          title: 'Xem lại rủi ro máy tính dự đoán',
+          message:
+              'Bên kết quả, cổ phần, xác suất vào/hiện tại, ngân sách rủi ro, '
+              'tối đa mất, khoảng kết quả, bảng kịch bản và hướng dẫn được xem '
+              'trước khi định cỡ vị thế dự đoán.',
+          contractId: 'SC-216',
+        );
+        return _frame(
+          context,
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionRiskCalculatorTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionRiskCalculatorTabletPage.resultPaneKey,
+            // Khuôn Cụm D "form trái — kết quả phải": bảng nhập cột chính,
+            // kết quả live cập nhật từng keystroke ghim panel phải.
+            primaryChildren: [
+              tabBar,
+              if (_activeTab == _Sc216Tab.calculator)
+                formCard
+              else if (_activeTab == _Sc216Tab.scenarios)
+                _Sc216ScenariosTab(inputs: inputs, metrics: metrics)
+              else
+                const _Sc216GuideTab(),
+              highRiskPanel,
+            ],
+            secondaryChildren: [
               _Sc216PositionSummary(inputs: inputs),
               _Sc216RiskAnalysis(metrics: metrics),
               _Sc216KellyRecommendation(
@@ -175,33 +208,69 @@ class _PredictionRiskCalculatorTabletPageState
                 riskBudget: inputs.riskBudget,
               ),
               const _Sc216RiskWarning(),
-            ] else if (_activeTab == _Sc216Tab.scenarios)
-              _Sc216ScenariosTab(inputs: inputs, metrics: metrics)
-            else
-              const _Sc216GuideTab(),
-            const VitHighRiskStatePanel(
-              state: VitHighRiskUiState.riskReview,
-              title: 'Xem lại rủi ro máy tính dự đoán',
-              message:
-                  'Bên kết quả, cổ phần, xác suất vào/hiện tại, ngân sách rủi '
-                  'ro, tối đa mất, khoảng kết quả, bảng kịch bản và hướng dẫn '
-                  'được xem trước khi định cỡ vị thế dự đoán.',
-              contractId: 'SC-216',
-            ),
-          ],
+            ],
+            narrowChildren: [
+              tabBar,
+              if (_activeTab == _Sc216Tab.calculator) ...[
+                formCard,
+                _Sc216PositionSummary(inputs: inputs),
+                _Sc216RiskAnalysis(metrics: metrics),
+                _Sc216KellyRecommendation(
+                  metrics: metrics,
+                  riskBudget: inputs.riskBudget,
+                ),
+                const _Sc216RiskWarning(),
+              ] else if (_activeTab == _Sc216Tab.scenarios)
+                _Sc216ScenariosTab(inputs: inputs, metrics: metrics)
+              else
+                const _Sc216GuideTab(),
+              highRiskPanel,
+            ],
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required List<Widget> children}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-216',
+  Widget _frame(BuildContext context, {required Widget body}) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Máy tính rủi ro prediction',
-      title: 'Máy tính rủi ro',
-      subtitle: 'Rủi ro · Prediction',
-      contentKey: PredictionRiskCalculatorTabletPage.contentKey,
-      children: children,
+      semanticIdentifier: 'SC-216',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Máy tính rủi ro',
+            subtitle: 'Rủi ro · Prediction',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
+    );
+  }
+
+  /// Thân một cột cho trạng thái loading/error — recipe cột hẹp workspace.
+  Widget _statusBody(List<Widget> children) {
+    return SingleChildScrollView(
+      key: PredictionRiskCalculatorTabletPage.contentKey,
+      padding: const EdgeInsetsDirectional.only(
+        bottom: TabletSpacingTokens.pageEndBreathing,
+      ),
+      child: VitPageContent(
+        padding: VitContentPadding.compact,
+        fullBleed: true,
+        rhythm: VitPageRhythm.standard,
+        children: children,
+      ),
     );
   }
 }

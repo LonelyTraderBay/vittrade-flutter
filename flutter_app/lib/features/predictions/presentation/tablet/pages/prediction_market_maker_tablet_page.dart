@@ -3,16 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:vit_trade_flutter/app/providers/predictions_controller_providers.dart';
+import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
+import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
 import 'package:vit_trade_flutter/features/predictions/domain/entities/predictions_entities.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -25,6 +31,7 @@ class PredictionMarketMakerTabletPage extends ConsumerStatefulWidget {
   const PredictionMarketMakerTabletPage({super.key});
 
   static const contentKey = Key('sc217_tablet_content');
+  static const controlPaneKey = Key('sc217_tablet_control_pane');
   static const provideTabKey = Key('sc217_tab_provide');
   static const positionsTabKey = Key('sc217_tab_positions');
   static const earningsTabKey = Key('sc217_tab_earnings');
@@ -76,9 +83,11 @@ class _PredictionMarketMakerTabletPageState
     final marketMakerAsync = ref.watch(predictionsMarketMakerSnapshotProvider);
 
     return marketMakerAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () =>
+          _frame(context, body: _statusBody(const [VitSkeletonList(rows: 6)])),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _statusBody([
           VitErrorState(
             title: 'Không tải được market maker',
             message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
@@ -86,68 +95,135 @@ class _PredictionMarketMakerTabletPageState
             onAction: () =>
                 ref.invalidate(predictionsMarketMakerSnapshotProvider),
           ),
-        ],
+        ]),
       ),
       data: (snapshot) {
         _ensureControllers(snapshot);
-        return _frame(
-          children: [
-            VitTabBar(
-              variant: VitTabBarVariant.segment,
-              activeKey: switch (_activeTab) {
-                _Sc217Tab.provide => 'provide',
-                _Sc217Tab.positions => 'positions',
-                _Sc217Tab.earnings => 'earnings',
-              },
-              onChanged: (key) => setState(() {
-                _activeTab = _Sc217Tab.values.byName(key);
-              }),
-              tabs: const [
-                VitTabItem(
-                  key: 'provide',
-                  label: 'Cung cấp',
-                  widgetKey: PredictionMarketMakerTabletPage.provideTabKey,
-                ),
-                VitTabItem(
-                  key: 'positions',
-                  label: 'Vị thế',
-                  widgetKey: PredictionMarketMakerTabletPage.positionsTabKey,
-                ),
-                VitTabItem(
-                  key: 'earnings',
-                  label: 'Thu nhập',
-                  widgetKey: PredictionMarketMakerTabletPage.earningsTabKey,
-                ),
-              ],
+        final amount = double.tryParse(_amountController!.text) ?? 0;
+        final tabBar = VitTabBar(
+          variant: VitTabBarVariant.segment,
+          activeKey: switch (_activeTab) {
+            _Sc217Tab.provide => 'provide',
+            _Sc217Tab.positions => 'positions',
+            _Sc217Tab.earnings => 'earnings',
+          },
+          onChanged: (key) => setState(() {
+            _activeTab = _Sc217Tab.values.byName(key);
+          }),
+          tabs: const [
+            VitTabItem(
+              key: 'provide',
+              label: 'Cung cấp',
+              widgetKey: PredictionMarketMakerTabletPage.provideTabKey,
             ),
-            if (_activeTab == _Sc217Tab.provide) ...[
-              _Sc217AddLiquidityForm(
-                eventController: _eventController!,
-                amountController: _amountController!,
-                minDepthController: _minDepthController!,
-                spreadBps: _spreadBps,
-                onSpreadChanged: (value) => setState(() => _spreadBps = value),
-              ),
-              _Sc217LiquidityOverview(snapshot: snapshot),
-              const _Sc217LiquidityWarning(),
-            ] else if (_activeTab == _Sc217Tab.positions)
-              _Sc217PositionsTab(snapshot: snapshot)
-            else
-              _Sc217EarningsTab(snapshot: snapshot),
+            VitTabItem(
+              key: 'positions',
+              label: 'Vị thế',
+              widgetKey: PredictionMarketMakerTabletPage.positionsTabKey,
+            ),
+            VitTabItem(
+              key: 'earnings',
+              label: 'Thu nhập',
+              widgetKey: PredictionMarketMakerTabletPage.earningsTabKey,
+            ),
           ],
+        );
+        final provideForm = _Sc217AddLiquidityForm(
+          eventController: _eventController!,
+          amountController: _amountController!,
+          minDepthController: _minDepthController!,
+          spreadBps: _spreadBps,
+          onSpreadChanged: (value) => setState(() => _spreadBps = value),
+          // Tầng workspace: ước tính tách lên panel phải.
+          showEstimate: false,
+        );
+        final overview = _Sc217LiquidityOverview(snapshot: snapshot);
+        final warning = const _Sc217LiquidityWarning();
+        return _frame(
+          context,
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionMarketMakerTabletPage.contentKey,
+            secondaryContentKey: PredictionMarketMakerTabletPage.controlPaneKey,
+            // Khuôn Cụm D "form trái — kết quả phải": form + cảnh báo cột
+            // chính, ước tính realtime + tổng quan thanh khoản ghim panel.
+            primaryChildren: [
+              tabBar,
+              if (_activeTab == _Sc217Tab.provide)
+                provideForm
+              else if (_activeTab == _Sc217Tab.positions)
+                _Sc217PositionsTab(snapshot: snapshot)
+              else
+                _Sc217EarningsTab(snapshot: snapshot),
+            ],
+            secondaryChildren: [
+              if (_activeTab == _Sc217Tab.provide && amount > 0)
+                _Sc217EstimatedReturns(amount: amount),
+              overview,
+              if (_activeTab == _Sc217Tab.provide) warning,
+            ],
+            narrowChildren: [
+              tabBar,
+              if (_activeTab == _Sc217Tab.provide) ...[
+                _Sc217AddLiquidityForm(
+                  eventController: _eventController!,
+                  amountController: _amountController!,
+                  minDepthController: _minDepthController!,
+                  spreadBps: _spreadBps,
+                  onSpreadChanged: (value) =>
+                      setState(() => _spreadBps = value),
+                ),
+                overview,
+                warning,
+              ] else if (_activeTab == _Sc217Tab.positions)
+                _Sc217PositionsTab(snapshot: snapshot)
+              else
+                _Sc217EarningsTab(snapshot: snapshot),
+            ],
+          ),
         );
       },
     );
   }
 
-  Widget _frame({required List<Widget> children}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-217',
+  /// Thân một cột cho trạng thái loading/error — recipe cột hẹp workspace.
+  Widget _statusBody(List<Widget> children) {
+    return SingleChildScrollView(
+      key: PredictionMarketMakerTabletPage.contentKey,
+      padding: const EdgeInsetsDirectional.only(
+        bottom: TabletSpacingTokens.pageEndBreathing,
+      ),
+      child: VitPageContent(
+        padding: VitContentPadding.compact,
+        fullBleed: true,
+        rhythm: VitPageRhythm.standard,
+        children: children,
+      ),
+    );
+  }
+
+  Widget _frame(BuildContext context, {required Widget body}) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Tạo lập thị trường dự đoán',
-      title: 'Market Maker',
-      subtitle: 'Thanh khoản · Prediction',
-      contentKey: PredictionMarketMakerTabletPage.contentKey,
-      children: children,
+      semanticIdentifier: 'SC-217',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Market Maker',
+            subtitle: 'Thanh khoản · Prediction',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }
@@ -159,6 +235,7 @@ class _Sc217AddLiquidityForm extends StatelessWidget {
     required this.minDepthController,
     required this.spreadBps,
     required this.onSpreadChanged,
+    this.showEstimate = true,
   });
 
   final TextEditingController eventController;
@@ -166,6 +243,10 @@ class _Sc217AddLiquidityForm extends StatelessWidget {
   final TextEditingController minDepthController;
   final int spreadBps;
   final ValueChanged<int> onSpreadChanged;
+
+  /// Tầng hẹp nhúng ước tính trong form (phone-parity); tầng workspace tách
+  /// ước tính lên panel phải — truyền `false`.
+  final bool showEstimate;
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +293,7 @@ class _Sc217AddLiquidityForm extends StatelessWidget {
                   style: AppTextStyles.micro.copyWith(color: AppColors.text3),
                 ),
               ),
-              if (hasAmount) ...[
+              if (showEstimate && hasAmount) ...[
                 const SizedBox(height: TabletSpacingTokens.x3),
                 _Sc217EstimatedReturns(amount: amount),
               ],

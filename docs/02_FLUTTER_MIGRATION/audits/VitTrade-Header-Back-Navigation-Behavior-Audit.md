@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=590
+visible_header_back_entries=593
 strict_back_issues=0
 high_risk_entries=129
 modal_close_baseline=73
@@ -15,7 +15,7 @@ sheet_result_baseline=9
 | Classification | Count |
 | --- | ---: |
 | parent_route_only | 475 |
-| history_then_fallback | 115 |
+| history_then_fallback | 118 |
 
 ## Strict Issue Counts
 
@@ -548,7 +548,9 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_global_activity_page.dart` | 73 | `_PredictionsGlobalActivityPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.marketsPredictions` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_leaderboard_page.dart` | 92 | `_PredictionsLeaderboardPageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.marketsPredictions` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_event_detail_tablet_page.dart` | 189 | `_PredictionEventDetailTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_market_maker_tablet_page.dart` | 212 | `_PredictionMarketMakerTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_portfolio_analyzer_tablet_page.dart` | 131 | `_PredictionPortfolioAnalyzerTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictionsPortfolio` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_page.dart` | 243 | `_PredictionRiskCalculatorTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart` | 332 | `_PredictionsHomeTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.markets` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart` | 258 | `_PredictionsPortfolioTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_breaking.dart` | 133 | `_PredictionsBreakingTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
@@ -557,6 +559,7 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart` | 153 | `_PredictionsGlobalActivityTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart` | 418 | `_PredictionEventCalendarTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_leaderboard.dart` | 234 | `_PredictionsLeaderboardTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_social.dart` | 549 | `PredictionDataIntegrationTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.marketsPredictions` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/predictions/presentation/widgets/social/prediction_tournaments_detail.dart` | 96 | `_TournamentDetailScaffold` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.marketsPredictionsTournaments` | no | - | Back goes to an explicit parent route. |
 | `flutter_app/lib/features/profile/presentation/phone/pages/activity_log_page.dart` | 73 | `_ActivityLogPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.profile` | no | - | History pop is paired with an explicit fallback route. |
 | `flutter_app/lib/features/profile/presentation/phone/pages/api_key_create_page.dart` | 115 | `_ApiKeyCreatePageState` | `VitHeader` | parent_route_only | parent_route_only | `AppRoutePaths.profileApi` | yes | - | Uses shared back-navigation helper. |

@@ -312,6 +312,7 @@ class PredictionDataIntegrationTabletPage extends ConsumerWidget {
   const PredictionDataIntegrationTabletPage({super.key});
 
   static const contentKey = Key('sc224_tablet_content');
+  static const controlPaneKey = Key('sc224_tablet_control_pane');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -320,207 +321,246 @@ class PredictionDataIntegrationTabletPage extends ConsumerWidget {
     );
 
     return integrationAsync.when(
-      loading: () => _frame(children: const [VitSkeletonList(rows: 6)]),
+      loading: () => _frame(
+        context,
+        body: _pdmStatusBody(
+          PredictionDataIntegrationTabletPage.contentKey,
+          const [VitSkeletonList(rows: 6)],
+        ),
+      ),
       error: (error, stackTrace) => _frame(
-        children: [
+        context,
+        body: _pdmStatusBody(PredictionDataIntegrationTabletPage.contentKey, [
           _pdmError(
             'Không tải được tích hợp dữ liệu',
             () => ref.invalidate(predictionsDataIntegrationSnapshotProvider),
           ),
-        ],
+        ]),
       ),
-      data: (snapshot) => _frame(
-        subtitle: '${snapshot.sources.length} nguồn dữ liệu',
-        children: [
-          VitPageSection(
-            label: 'Nguồn dữ liệu',
-            accentColor: AppColors.primary,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final source in snapshot.sources)
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              source.name,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                                fontWeight: AppTextStyles.bold,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              '${source.provider} · ${source.category} · '
-                              'đã chốt ${VitFormat.count(source.eventsResolved)} sự kiện',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+      data: (snapshot) {
+        final sourcesSection = VitPageSection(
+          label: 'Nguồn dữ liệu',
+          accentColor: AppColors.primary,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            for (final source in snapshot.sources)
+              VitCard(
+                density: VitDensity.compact,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _pdmTinyBadge(
-                            label: switch (source.status) {
-                              PredictionDataSourceStatus.active => 'Hoạt động',
-                              PredictionDataSourceStatus.inactive => 'Tắt',
-                              PredictionDataSourceStatus.error => 'Lỗi',
-                            },
-                            color: switch (source.status) {
-                              PredictionDataSourceStatus.active =>
-                                AppColors.buy,
-                              PredictionDataSourceStatus.inactive =>
-                                AppColors.text3,
-                              PredictionDataSourceStatus.error =>
-                                AppColors.sell,
-                            },
-                            background: switch (source.status) {
-                              PredictionDataSourceStatus.active =>
-                                AppColors.buy10,
-                              PredictionDataSourceStatus.inactive =>
-                                AppColors.surface2,
-                              PredictionDataSourceStatus.error =>
-                                AppColors.sell10,
-                            },
-                          ),
                           Text(
-                            'Độ tin cậy '
-                            '${VitFormat.percent(source.reliability, fractionDigits: 0)}',
+                            source.name,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                              fontWeight: AppTextStyles.bold,
+                            ),
+                          ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
+                          Text(
+                            '${source.provider} · ${source.category} · '
+                            'đã chốt ${VitFormat.count(source.eventsResolved)} sự kiện',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: AppTextStyles.micro.copyWith(
                               color: AppColors.text3,
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _pdmTinyBadge(
+                          label: switch (source.status) {
+                            PredictionDataSourceStatus.active => 'Hoạt động',
+                            PredictionDataSourceStatus.inactive => 'Tắt',
+                            PredictionDataSourceStatus.error => 'Lỗi',
+                          },
+                          color: switch (source.status) {
+                            PredictionDataSourceStatus.active => AppColors.buy,
+                            PredictionDataSourceStatus.inactive =>
+                              AppColors.text3,
+                            PredictionDataSourceStatus.error => AppColors.sell,
+                          },
+                          background: switch (source.status) {
+                            PredictionDataSourceStatus.active =>
+                              AppColors.buy10,
+                            PredictionDataSourceStatus.inactive =>
+                              AppColors.surface2,
+                            PredictionDataSourceStatus.error =>
+                              AppColors.sell10,
+                          },
+                        ),
+                        Text(
+                          'Độ tin cậy '
+                          '${VitFormat.percent(source.reliability, fractionDigits: 0)}',
+                          style: AppTextStyles.micro.copyWith(
+                            color: AppColors.text3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
+          ],
+        );
+        final apiKeysSection = VitPageSection(
+          label: 'Khóa API',
+          accentColor: AppColors.accent,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            for (final apiKey in snapshot.apiKeys)
+              VitCard(
+                density: VitDensity.compact,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            apiKey.name,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                              fontWeight: AppTextStyles.bold,
+                            ),
+                          ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
+                          Text(
+                            '${apiKey.key} · ${apiKey.permissions.join(', ')}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.micro.copyWith(
+                              color: AppColors.text3,
+                              fontFeatures: AppTextStyles.tabularFigures,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    _pdmTinyBadge(
+                      label: switch (apiKey.status) {
+                        PredictionApiKeyStatus.active => 'Đang dùng',
+                        PredictionApiKeyStatus.revoked => 'Đã thu hồi',
+                      },
+                      color: switch (apiKey.status) {
+                        PredictionApiKeyStatus.active => AppColors.buy,
+                        PredictionApiKeyStatus.revoked => AppColors.sell,
+                      },
+                      background: switch (apiKey.status) {
+                        PredictionApiKeyStatus.active => AppColors.buy10,
+                        PredictionApiKeyStatus.revoked => AppColors.sell10,
+                      },
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        );
+        final webhooksSection = VitPageSection(
+          label: 'Webhook',
+          accentColor: AppColors.warn,
+          innerGap: TabletSpacingTokens.x4,
+          children: [
+            for (final webhook in snapshot.webhooks)
+              VitCard(
+                density: VitDensity.compact,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            webhook.url,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.text1,
+                              fontWeight: AppTextStyles.bold,
+                            ),
+                          ),
+                          const SizedBox(height: TabletSpacingTokens.x1),
+                          Text(
+                            webhook.events.join(', '),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.micro.copyWith(
+                              color: AppColors.text3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      'Thành công '
+                      '${VitFormat.percent(webhook.successRate, fractionDigits: 1)}',
+                      style: AppTextStyles.micro.copyWith(
+                        color: AppColors.text3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        );
+        final footer = _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}');
+        return _frame(
+          context,
+          subtitle: '${snapshot.sources.length} nguồn dữ liệu',
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionDataIntegrationTabletPage.contentKey,
+            secondaryContentKey:
+                PredictionDataIntegrationTabletPage.controlPaneKey,
+            // Khuôn Cụm D: nguồn dữ liệu cột chính, quản lý (khóa API +
+            // webhook) panel phải.
+            primaryChildren: [sourcesSection, footer],
+            secondaryChildren: [apiKeysSection, webhooksSection],
+            narrowChildren: [
+              sourcesSection,
+              apiKeysSection,
+              webhooksSection,
+              footer,
             ],
           ),
-          VitPageSection(
-            label: 'Khóa API',
-            accentColor: AppColors.accent,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final apiKey in snapshot.apiKeys)
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              apiKey.name,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                                fontWeight: AppTextStyles.bold,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              '${apiKey.key} · ${apiKey.permissions.join(', ')}',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                                fontFeatures: AppTextStyles.tabularFigures,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      _pdmTinyBadge(
-                        label: switch (apiKey.status) {
-                          PredictionApiKeyStatus.active => 'Đang dùng',
-                          PredictionApiKeyStatus.revoked => 'Đã thu hồi',
-                        },
-                        color: switch (apiKey.status) {
-                          PredictionApiKeyStatus.active => AppColors.buy,
-                          PredictionApiKeyStatus.revoked => AppColors.sell,
-                        },
-                        background: switch (apiKey.status) {
-                          PredictionApiKeyStatus.active => AppColors.buy10,
-                          PredictionApiKeyStatus.revoked => AppColors.sell10,
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-          VitPageSection(
-            label: 'Webhook',
-            accentColor: AppColors.warn,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final webhook in snapshot.webhooks)
-                VitCard(
-                  density: VitDensity.compact,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              webhook.url,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                                fontWeight: AppTextStyles.bold,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              webhook.events.join(', '),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        'Thành công '
-                        '${VitFormat.percent(webhook.successRate, fractionDigits: 1)}',
-                        style: AppTextStyles.micro.copyWith(
-                          color: AppColors.text3,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-          _pdmBody('Cập nhật ${snapshot.lastUpdatedLabel}'),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _frame({required List<Widget> children, String? subtitle}) {
-    return VitTabletSectionFrame(
-      semanticIdentifier: 'SC-224',
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
       semanticLabel: 'Tích hợp dữ liệu prediction',
-      title: 'Tích hợp dữ liệu',
-      subtitle: subtitle ?? 'Nguồn · API · Webhook',
-      contentKey: PredictionDataIntegrationTabletPage.contentKey,
-      backFallback: AppRoutePaths.marketsPredictions,
-      children: children,
+      semanticIdentifier: 'SC-224',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Tích hợp dữ liệu',
+            subtitle: subtitle ?? 'Nguồn · Khóa API · Webhook',
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictions,
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
+        ],
+      ),
     );
   }
 }
