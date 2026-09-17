@@ -18,6 +18,9 @@
 //   pane    — dựng từ `*PaneScaffold(` registry scaffold
 //             (MarketsPaneScaffold/ProfilePaneScaffold… — fullBleed + header
 //             zero nằm sẵn trong scaffold)
+//   workspace — dựng từ `VitTabletPaneWorkspace(` registry scaffold
+//             (idiom pane-workspace 2026-09-17: 2 cột trong detail pane,
+//             flush bẩm sinh — scaffold không tự thêm mép ngang nào)
 //
 // Redirect alias (manifest `redirectTarget:`) miễn — không có trang.
 // Khóa TUYỆT ĐỐI 0 vi phạm (không baseline): thêm trang vào shell mà
@@ -101,7 +104,7 @@ class _Row {
   final String shell;
   final String path;
   final String? pageClass;
-  final String idiom; // frame | hub | pane | VIOLATION
+  final String idiom; // workspace | frame | hub | pane | VIOLATION
   final String file; // '' khi không tìm thấy
   final String? reason;
 }
@@ -282,7 +285,11 @@ List<_Row> _audit() {
       continue;
     }
     final src = File(file).readAsStringSync();
-    if (src.contains('gutterFlush: true')) {
+    // Thứ tự: workspace là tier composition mạnh nhất của trang — tin trước
+    // khi frame/hub khi file dùng cả hai (vd. loading state còn SectionFrame).
+    if (src.contains('VitTabletPaneWorkspace(')) {
+      rows.add(_Row(shell, spec.path, cls, 'workspace', file, null));
+    } else if (src.contains('gutterFlush: true')) {
       rows.add(_Row(shell, spec.path, cls, 'frame', file, null));
     } else if (_vitPageContentRe.hasMatch(src) &&
         src.contains('fullBleed: true')) {
@@ -298,9 +305,9 @@ List<_Row> _audit() {
           'VIOLATION',
           file,
           'không có idiom gutter-flush nào (frame gutterFlush:true | hub '
-              'fullBleed:true | *PaneScaffold) — trang trong detail column '
-              'của shell phải flush (S6), không stack contentPad lên '
-              'outerHorizontalMargin của shell',
+              'fullBleed:true | *PaneScaffold | VitTabletPaneWorkspace) — trang '
+              'trong detail column của shell phải flush (S6), không stack '
+              'contentPad lên outerHorizontalMargin của shell',
         ),
       );
     }

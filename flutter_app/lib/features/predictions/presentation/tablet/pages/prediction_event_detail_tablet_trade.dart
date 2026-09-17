@@ -139,19 +139,27 @@ class _Sc211TradeSection extends StatelessWidget {
                 onChanged: onAmountChanged,
               ),
               const SizedBox(height: TabletSpacingTokens.x3),
-              VitPresetChipRow<String>(
-                selectedValue: amount,
-                onTap: onAmountChanged,
-                accentColor: AppColors.primary,
-                height: VitDensity.compact.controlHeight,
-                padding: TabletSpacingTokens.zeroInsets,
-                gap: TabletSpacingTokens.vitPresetChipRowGap,
-                items: const [
-                  VitPresetChipItem(value: '10', label: r'$10'),
-                  VitPresetChipItem(value: '25', label: r'$25'),
-                  VitPresetChipItem(value: '50', label: r'$50'),
-                  VitPresetChipItem(value: '100', label: r'$100'),
-                ],
+              // Panel workspace ~272dp hẹp hơn trang phone — chip preset ôm
+              // nội dung nên bọc scroll ngang như hàng pill kết quả ở trên.
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: VitPresetChipRow<String>(
+                  selectedValue: amount,
+                  onTap: onAmountChanged,
+                  accentColor: AppColors.primary,
+                  height: VitDensity.compact.controlHeight,
+                  padding: TabletSpacingTokens.zeroInsets,
+                  gap: TabletSpacingTokens.vitPresetChipRowGap,
+                  // Chip ôm nội dung (Tier S3 fullWidth=false) — bên trong
+                  // scroll ngang không được dùng Expanded.
+                  fullWidth: false,
+                  items: const [
+                    VitPresetChipItem(value: '10', label: r'$10'),
+                    VitPresetChipItem(value: '25', label: r'$25'),
+                    VitPresetChipItem(value: '50', label: r'$50'),
+                    VitPresetChipItem(value: '100', label: r'$100'),
+                  ],
+                ),
               ),
               const SizedBox(height: TabletSpacingTokens.x4),
               PredictionOrderPreviewCard(preview: preview),

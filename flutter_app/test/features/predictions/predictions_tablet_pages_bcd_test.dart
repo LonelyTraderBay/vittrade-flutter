@@ -224,6 +224,11 @@ void main() {
     expect(find.text('Giá · MA7 · MA25'), findsOneWidget);
     expect(find.text('Dòng lệnh mua/bán'), findsOneWidget);
     expect(find.text('Tín hiệu chỉ báo'), findsOneWidget);
+    // Workspace 2 cột (redesign Cụm B): tín hiệu nằm ở panel phụ riêng.
+    expect(
+      find.byKey(PredictionAdvancedChartTabletPage.sidePanelKey),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 

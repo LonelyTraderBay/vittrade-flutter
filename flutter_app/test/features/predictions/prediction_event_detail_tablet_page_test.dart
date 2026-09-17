@@ -53,47 +53,66 @@ void main() {
     expect(find.text('Phần thưởng hàng ngày'), findsOneWidget);
     expect(find.text('Hoạt động toàn cục'), findsOneWidget);
     expect(tester.takeException(), isNull);
+
+    // Workspace 2 cột (redesign Cụm B): panel giao dịch tồn tại và ticket
+    // nằm TRONG TẦM MẮT ngay khi mở trang — không phải cuộn tìm.
+    expect(
+      find.byKey(PredictionEventDetailTabletPage.tradePaneKey),
+      findsOneWidget,
+    );
+    final ctaRect = tester.getRect(
+      find.byKey(PredictionEventDetailTabletPage.submitKey),
+    );
+    expect(ctaRect.top, lessThan(900));
+    expect(ctaRect.bottom, greaterThan(0));
   });
 
-  testWidgets('SC-211 tablet order book and tabs switch locally', (
-    tester,
-  ) async {
-    await pumpTabletRoute(
-      tester,
-      AppRoutePaths.marketsPredictionEvent('pred-1'),
-    );
+  testWidgets(
+    'SC-211 tablet order book luôn mở ở workspace; tabs chuyển cục bộ',
+    (tester) async {
+      await pumpTabletRoute(
+        tester,
+        AppRoutePaths.marketsPredictionEvent('pred-1'),
+      );
 
-    await tester.ensureVisible(
-      find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
-    );
-    await tester.tap(
-      find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
-    );
-    await tester.pumpAndSettle();
+      // Workspace: sổ lệnh là panel thường trực — không còn đầu gập.
+      expect(
+        find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
+        findsNothing,
+      );
+      expect(find.text('GIÁ'), findsOneWidget);
+      expect(find.text('CỔ PHẦN'), findsOneWidget);
+      expect(find.text('TỔNG'), findsOneWidget);
 
-    expect(find.text('GIÁ'), findsOneWidget);
-    expect(find.text('CỔ PHẦN'), findsOneWidget);
-    expect(find.text('TỔNG'), findsOneWidget);
+      final primaryScroll = find.descendant(
+        of: find.byKey(PredictionEventDetailTabletPage.contentKey),
+        matching: find.byType(Scrollable),
+      );
 
-    await tester.ensureVisible(
-      find.byKey(PredictionEventDetailTabletPage.commentsTabKey),
-    );
-    await tester.tap(
-      find.byKey(PredictionEventDetailTabletPage.commentsTabKey),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text('Thêm bình luận…'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.byKey(PredictionEventDetailTabletPage.commentsTabKey),
+        200,
+        scrollable: primaryScroll,
+      );
+      await tester.tap(
+        find.byKey(PredictionEventDetailTabletPage.commentsTabKey),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Thêm bình luận…'), findsOneWidget);
 
-    await tester.tap(find.byKey(PredictionEventDetailTabletPage.holdersTabKey));
-    await tester.pumpAndSettle();
-    expect(find.text('AlphaDesk'), findsOneWidget);
+      await tester.tap(
+        find.byKey(PredictionEventDetailTabletPage.holdersTabKey),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('AlphaDesk'), findsOneWidget);
 
-    await tester.tap(
-      find.byKey(PredictionEventDetailTabletPage.activityTabKey),
-    );
-    await tester.pumpAndSettle();
-    expect(find.textContaining('Trader A'), findsOneWidget);
-  });
+      await tester.tap(
+        find.byKey(PredictionEventDetailTabletPage.activityTabKey),
+      );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Trader A'), findsOneWidget);
+    },
+  );
 
   testWidgets(
     'SC-211 tablet confirm sheet gates the ERR-36 submit and navigates receipt',
@@ -103,20 +122,25 @@ void main() {
         AppRoutePaths.marketsPredictionEvent('pred-1'),
       );
 
+      // Cột dọc panel là Scrollable đầu tiên (chip preset là scroll ngang
+      // lồng bên trong ticket).
+      final tradePaneScroll = find
+          .descendant(
+            of: find.byKey(PredictionEventDetailTabletPage.tradePaneKey),
+            matching: find.byType(Scrollable),
+          )
+          .first;
+
       await tester.scrollUntilVisible(
         find.text(r'$25'),
         200,
-        scrollable: find.byType(Scrollable).first,
+        scrollable: tradePaneScroll,
       );
       await tester.tap(find.text(r'$25'));
       await tester.pumpAndSettle();
 
       final cta = find.text('Xem trước & xác nhận');
-      await tester.scrollUntilVisible(
-        cta,
-        120,
-        scrollable: find.byType(Scrollable).first,
-      );
+      await tester.scrollUntilVisible(cta, 120, scrollable: tradePaneScroll);
       await tester.tap(cta);
       await tester.pumpAndSettle();
 
@@ -132,6 +156,53 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(PredictionOrderReceiptTabletPage), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'SC-211 pane hẹp (tablet portrait ~360dp): một cột phone-parity, sổ lệnh có đầu gập',
+    (tester) async {
+      // 800dp logical portrait: 800 − rail 96 = 704 ≥ 680 shell vẫn split
+      // master 308 → detail pane ~360dp < 720 → workspace fallback một cột.
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(800, 1280);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetPhysicalSize);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          child: VitTradeApp(
+            routerConfig: createAppRouter(
+              initialLocation: AppRoutePaths.marketsPredictionEvent('pred-1'),
+              surface: AppSurface.tablet,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PredictionEventDetailTabletPage), findsOneWidget);
+      // Không còn panel phụ — mọi section nằm trong một cột cuộn.
+      expect(
+        find.byKey(PredictionEventDetailTabletPage.tradePaneKey),
+        findsNothing,
+      );
+      // Sổ lệnh về dạng đầu gập như phone (chưa mở).
+      expect(
+        find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
+        findsOneWidget,
+      );
+      expect(find.text('GIÁ'), findsNothing);
+
+      await tester.ensureVisible(
+        find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
+      );
+      await tester.tap(
+        find.byKey(PredictionEventDetailTabletPage.orderBookToggleKey),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('GIÁ'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

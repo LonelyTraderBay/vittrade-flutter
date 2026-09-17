@@ -976,6 +976,8 @@ predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social
 predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social/prediction_tournaments_page.dart,standard,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_global_activity_page.dart,compact,compact,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/phone/pages/social/predictions_leaderboard_page.dart,compact,compact,0,,0,,0,0,pass
+predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_event_detail_tablet_page.dart,standard,standard,0,,0,,0,0,pass
+predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_chart.dart,flush,standard,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/widgets/event/prediction_advanced_chart_analysis.dart,flush,flush,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/widgets/event/prediction_advanced_chart_indicators.dart,flush,flush,0,,0,,0,0,pass
 predictions,flutter_app/lib/features/predictions/presentation/widgets/event/prediction_advanced_chart_overview.dart,flush,flush,0,,0,,0,0,pass

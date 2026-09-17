@@ -207,6 +207,9 @@ class _Sc211ArenaBridgeSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: TabletSpacingTokens.x3),
+                // Panel workspace ~232dp nội dung: badge nằm DƯỚI dòng phụ
+                // thay vì ghim cột phải như bản một cột 840dp (re-compose,
+                // không copy khung ngang của trang cũ).
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,10 +228,11 @@ class _Sc211ArenaBridgeSection extends StatelessWidget {
                           color: AppColors.text3,
                         ),
                       ),
+                      const SizedBox(height: TabletSpacingTokens.x2),
+                      const _Sc211ArenaBadge('Chỉ dùng Arena Points'),
                     ],
                   ),
                 ),
-                const _Sc211ArenaBadge('Chỉ dùng Arena Points'),
                 const SizedBox(width: TabletSpacingTokens.x2),
                 const Icon(
                   Icons.chevron_right_rounded,

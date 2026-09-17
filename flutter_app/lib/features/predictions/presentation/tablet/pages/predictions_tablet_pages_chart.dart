@@ -1,14 +1,18 @@
 part of 'predictions_tablet_pages.dart';
 
 // ---------------------------------------------------------------------------
-// SC-221: Biểu đồ nâng cao prediction — đường giá + MA7/MA25, dòng lệnh
-// mua/bán, tín hiệu chỉ báo và mẫu hình, như phone SC-041.
+// SC-221: Biểu đồ nâng cao prediction — workspace 2 cột trong detail pane
+// (redesign Cụm B 2026-09-17): cột chính = biểu đồ giá/MA7/MA25 + dòng lệnh
+// mua/bán; panel phụ = tín hiệu chỉ báo + mẫu hình nhận diện (đọc cạnh
+// biểu đồ, không phải cuộn xuống dưới). Pane hẹp về một cột như phone
+// SC-041. Nội dung section giữ nguyên như phone.
 // ---------------------------------------------------------------------------
 
 class PredictionAdvancedChartTabletPage extends ConsumerWidget {
   const PredictionAdvancedChartTabletPage({super.key, required this.eventId});
 
   static const contentKey = Key('sc221_tablet_content');
+  static const sidePanelKey = Key('sc221_tablet_side_pane');
 
   final String eventId;
 
@@ -19,164 +23,169 @@ class PredictionAdvancedChartTabletPage extends ConsumerWidget {
     );
 
     return chartAsync.when(
-      loading: () => const VitTabletSectionFrame(
-        gutterFlush: true,
-        semanticIdentifier: 'SC-221',
-        semanticLabel: 'Biểu đồ nâng cao prediction',
-        title: 'Biểu đồ nâng cao',
-        children: [VitSkeletonList(rows: 6)],
-      ),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        gutterFlush: true,
-        semanticIdentifier: 'SC-221',
-        semanticLabel: 'Biểu đồ nâng cao prediction',
-        title: 'Biểu đồ nâng cao',
-        children: [
+      loading: () =>
+          _frame(context, body: _narrowBody(const [VitSkeletonList(rows: 6)])),
+      error: (error, stackTrace) => _frame(
+        context,
+        body: _narrowBody([
           _pdmError(
             'Không tải được biểu đồ',
             () => ref.invalidate(
               predictionsAdvancedChartSnapshotProvider(eventId),
             ),
           ),
+        ]),
+      ),
+      data: (snapshot) {
+        final chartSection = _chartSection(snapshot);
+        final flowSection = _orderFlowSection(snapshot);
+        final indicatorsSection = _indicatorSection(snapshot);
+        final patternsSection = _patternSection(snapshot);
+        return _frame(
+          context,
+          subtitle: snapshot.eventId,
+          body: VitTabletPaneWorkspace(
+            contentKey: PredictionAdvancedChartTabletPage.contentKey,
+            secondaryContentKey: PredictionAdvancedChartTabletPage.sidePanelKey,
+            primaryChildren: [chartSection, flowSection],
+            secondaryChildren: [
+              indicatorsSection,
+              if (snapshot.patterns.isNotEmpty) patternsSection,
+            ],
+            narrowChildren: [
+              chartSection,
+              flowSection,
+              indicatorsSection,
+              if (snapshot.patterns.isNotEmpty) patternsSection,
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _frame(
+    BuildContext context, {
+    required Widget body,
+    String? subtitle,
+  }) {
+    final showBack = context.canPop();
+    return VitPageLayout(
+      variant: VitPageVariant.flush,
+      semanticLabel: 'Biểu đồ nâng cao prediction',
+      semanticIdentifier: 'SC-221',
+      child: Column(
+        children: [
+          VitHeader(
+            title: 'Biểu đồ nâng cao',
+            subtitle: subtitle,
+            // Gutter-flush (S6): shell markets đã sở hữu outerHorizontalMargin.
+            horizontalPadding: TabletSpacingTokens.zero,
+            showBack: showBack,
+            onBack: showBack
+                ? () => goBackOrFallback(
+                    context,
+                    fallbackPath: AppRoutePaths.marketsPredictionEvent(eventId),
+                    mode: BackNavigationMode.historyThenFallback,
+                  )
+                : null,
+          ),
+          Expanded(child: body),
         ],
       ),
-      data: (snapshot) => VitTabletSectionFrame(
-        gutterFlush: true,
-        semanticIdentifier: 'SC-221',
-        semanticLabel: 'Biểu đồ nâng cao prediction',
-        title: 'Biểu đồ nâng cao',
-        subtitle: snapshot.eventId,
-        contentKey: PredictionAdvancedChartTabletPage.contentKey,
-        backFallback: AppRoutePaths.marketsPredictionEvent(eventId),
-        children: [
-          VitPageSection(
-            label: 'Giá · MA7 · MA25',
-            accentColor: AppColors.primary,
-            innerGap: TabletSpacingTokens.x4,
+    );
+  }
+
+  /// Thân một cột cho trạng thái loading/error — cùng recipe cột hẹp của
+  /// `VitTabletPaneWorkspace`.
+  Widget _narrowBody(List<Widget> children) {
+    return SingleChildScrollView(
+      key: PredictionAdvancedChartTabletPage.contentKey,
+      padding: const EdgeInsets.only(
+        bottom: TabletSpacingTokens.pageEndBreathing,
+      ),
+      child: VitPageContent(
+        padding: VitContentPadding.compact,
+        fullBleed: true,
+        rhythm: VitPageRhythm.standard,
+        children: children,
+      ),
+    );
+  }
+
+  Widget _chartSection(PredictionAdvancedChartSnapshot snapshot) {
+    return VitPageSection(
+      label: 'Giá · MA7 · MA25',
+      accentColor: AppColors.primary,
+      innerGap: TabletSpacingTokens.x4,
+      children: [
+        VitCard(
+          density: VitDensity.compact,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              VitCard(
-                density: VitDensity.compact,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      height:
-                          TabletSpacingTokens.x7 +
-                          TabletSpacingTokens.x7 +
-                          TabletSpacingTokens.x3,
-                      child: CustomPaint(
-                        painter: _Sc221ChartPainter(
-                          points: snapshot.priceHistory,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: TabletSpacingTokens.x3),
-                    const Row(
-                      children: [
-                        _Sc221LegendDot(color: AppColors.primary, label: 'Giá'),
-                        SizedBox(width: TabletSpacingTokens.x2),
-                        _Sc221LegendDot(color: AppColors.accent, label: 'MA7'),
-                        SizedBox(width: TabletSpacingTokens.x2),
-                        _Sc221LegendDot(color: AppColors.warn, label: 'MA25'),
-                      ],
-                    ),
-                  ],
+              SizedBox(
+                height:
+                    TabletSpacingTokens.x7 +
+                    TabletSpacingTokens.x7 +
+                    TabletSpacingTokens.x3,
+                child: CustomPaint(
+                  painter: _Sc221ChartPainter(points: snapshot.priceHistory),
                 ),
+              ),
+              const SizedBox(height: TabletSpacingTokens.x3),
+              const Row(
+                children: [
+                  _Sc221LegendDot(color: AppColors.primary, label: 'Giá'),
+                  SizedBox(width: TabletSpacingTokens.x2),
+                  _Sc221LegendDot(color: AppColors.accent, label: 'MA7'),
+                  SizedBox(width: TabletSpacingTokens.x2),
+                  _Sc221LegendDot(color: AppColors.warn, label: 'MA25'),
+                ],
               ),
             ],
           ),
-          VitPageSection(
-            label: 'Dòng lệnh mua/bán',
-            accentColor: AppColors.buy,
-            innerGap: TabletSpacingTokens.x4,
+        ),
+      ],
+    );
+  }
+
+  Widget _orderFlowSection(PredictionAdvancedChartSnapshot snapshot) {
+    return VitPageSection(
+      label: 'Dòng lệnh mua/bán',
+      accentColor: AppColors.buy,
+      innerGap: TabletSpacingTokens.x4,
+      children: [
+        VitCard(
+          density: VitDensity.compact,
+          child: Column(
             children: [
-              VitCard(
-                density: VitDensity.compact,
-                child: Column(
-                  children: [
-                    for (final flow in snapshot.orderFlow)
-                      Padding(
-                        padding: TabletSpacingTokens.tableCellPaddingV,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width:
-                                  TabletSpacingTokens.x5 +
-                                  TabletSpacingTokens.x2,
-                              child: Text(
-                                VitFormat.usd(flow.price),
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.text1,
-                                  fontWeight: AppTextStyles.bold,
-                                  fontFeatures: AppTextStyles.tabularFigures,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: _Sc221FlowBar(
-                                value: flow.buyVolume,
-                                color: AppColors.buy,
-                              ),
-                            ),
-                            Expanded(
-                              child: _Sc221FlowBar(
-                                value: flow.sellVolume,
-                                color: AppColors.sell,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          VitPageSection(
-            label: 'Tín hiệu chỉ báo',
-            accentColor: AppColors.accent,
-            innerGap: TabletSpacingTokens.x4,
-            children: [
-              for (final indicator in snapshot.indicators)
-                VitCard(
-                  density: VitDensity.compact,
+              for (final flow in snapshot.orderFlow)
+                Padding(
+                  padding: TabletSpacingTokens.tableCellPaddingV,
                   child: Row(
                     children: [
+                      SizedBox(
+                        width: TabletSpacingTokens.x5 + TabletSpacingTokens.x2,
+                        child: Text(
+                          VitFormat.usd(flow.price),
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.text1,
+                            fontWeight: AppTextStyles.bold,
+                            fontFeatures: AppTextStyles.tabularFigures,
+                          ),
+                        ),
+                      ),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              indicator.name,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                                fontWeight: AppTextStyles.bold,
-                              ),
-                            ),
-                            const SizedBox(height: TabletSpacingTokens.x1),
-                            Text(
-                              indicator.description,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                              ),
-                            ),
-                          ],
+                        child: _Sc221FlowBar(
+                          value: flow.buyVolume,
+                          color: AppColors.buy,
                         ),
                       ),
-                      _pdmTinyBadge(
-                        label: indicator.signal,
-                        color: indicator.tone.resolve(),
-                        background: indicator.tone.resolve().withValues(
-                          alpha: .12,
-                        ),
-                      ),
-                      const SizedBox(width: TabletSpacingTokens.x1),
-                      Text(
-                        indicator.strength,
-                        style: AppTextStyles.micro.copyWith(
-                          color: AppColors.text3,
+                      Expanded(
+                        child: _Sc221FlowBar(
+                          value: flow.sellVolume,
+                          color: AppColors.sell,
                         ),
                       ),
                     ],
@@ -184,53 +193,102 @@ class PredictionAdvancedChartTabletPage extends ConsumerWidget {
                 ),
             ],
           ),
-          if (snapshot.patterns.isNotEmpty)
-            VitPageSection(
-              label: 'Mẫu hình nhận diện',
-              accentColor: AppColors.warn,
-              innerGap: TabletSpacingTokens.x4,
+        ),
+      ],
+    );
+  }
+
+  Widget _indicatorSection(PredictionAdvancedChartSnapshot snapshot) {
+    return VitPageSection(
+      label: 'Tín hiệu chỉ báo',
+      accentColor: AppColors.accent,
+      innerGap: TabletSpacingTokens.x4,
+      children: [
+        for (final indicator in snapshot.indicators)
+          VitCard(
+            density: VitDensity.compact,
+            child: Row(
               children: [
-                for (final pattern in snapshot.patterns)
-                  VitCard(
-                    density: VitDensity.compact,
-                    child: Row(
-                      children: [
-                        SizedBox.square(
-                          dimension: TabletSpacingTokens.iconSm,
-                          child: Icon(
-                            pattern.bullish
-                                ? Icons.trending_up_rounded
-                                : Icons.trending_down_rounded,
-                            color: pattern.bullish
-                                ? AppColors.buy
-                                : AppColors.sell,
-                            size: TabletSpacingTokens.iconSm,
-                          ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        indicator.name,
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.text1,
+                          fontWeight: AppTextStyles.bold,
                         ),
-                        const SizedBox(width: TabletSpacingTokens.x2),
-                        Expanded(
-                          child: Text(
-                            pattern.name,
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text1,
-                              fontWeight: AppTextStyles.bold,
-                            ),
-                          ),
+                      ),
+                      const SizedBox(height: TabletSpacingTokens.x1),
+                      Text(
+                        indicator.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.micro.copyWith(
+                          color: AppColors.text3,
                         ),
-                        Text(
-                          'Độ tin cậy '
-                          '${VitFormat.percent(pattern.confidence, fractionDigits: 0)}',
-                          style: AppTextStyles.micro.copyWith(
-                            color: AppColors.text3,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
+                _pdmTinyBadge(
+                  label: indicator.signal,
+                  color: indicator.tone.resolve(),
+                  background: indicator.tone.resolve().withValues(alpha: .12),
+                ),
+                const SizedBox(width: TabletSpacingTokens.x1),
+                Text(
+                  indicator.strength,
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
               ],
             ),
-        ],
-      ),
+          ),
+      ],
+    );
+  }
+
+  Widget _patternSection(PredictionAdvancedChartSnapshot snapshot) {
+    return VitPageSection(
+      label: 'Mẫu hình nhận diện',
+      accentColor: AppColors.warn,
+      innerGap: TabletSpacingTokens.x4,
+      children: [
+        for (final pattern in snapshot.patterns)
+          VitCard(
+            density: VitDensity.compact,
+            child: Row(
+              children: [
+                SizedBox.square(
+                  dimension: TabletSpacingTokens.iconSm,
+                  child: Icon(
+                    pattern.bullish
+                        ? Icons.trending_up_rounded
+                        : Icons.trending_down_rounded,
+                    color: pattern.bullish ? AppColors.buy : AppColors.sell,
+                    size: TabletSpacingTokens.iconSm,
+                  ),
+                ),
+                const SizedBox(width: TabletSpacingTokens.x2),
+                Expanded(
+                  child: Text(
+                    pattern.name,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text1,
+                      fontWeight: AppTextStyles.bold,
+                    ),
+                  ),
+                ),
+                Text(
+                  'Độ tin cậy '
+                  '${VitFormat.percent(pattern.confidence, fractionDigits: 0)}',
+                  style: AppTextStyles.micro.copyWith(color: AppColors.text3),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

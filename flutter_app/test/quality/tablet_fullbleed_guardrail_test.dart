@@ -11,21 +11,27 @@
 //
 // S6: trong file tablet, MỌI constructor `VitPageContent(` phải khai báo
 // top-level `fullBleed:` một cách tường minh — chủ ý gutter thuộc về wrapper
-// ngoài (shell/master-detail/dashboard), không phải trang. Ngoại lệ legacy
-// (VitPageContent LÀ chủ gutter của chính nó) được ghim trong baseline
-// exact-set dưới đây: 2 wrapper của VitTwoColumnTabletDashboard. Chỉ được
-// GIẢM; VitPageContent
+// ngoài (shell/master-detail/dashboard), không phải trang. Ngoại lệ
+// (VitPageContent LÀ chủ gutter của chính nó — wrapper cấp panel nội bộ)
+// được ghim trong baseline exact-set dưới đây: 2 wrapper của
+// VitTwoColumnTabletDashboard + 1 của VitTabletPaneWorkspace (2026-09-17,
+// cùng lớp idiom). Chỉ được GIẢM; VitPageContent
 // mới không fullBleed thì fail CI.
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Baseline 2026-09-01 — 2 wrapper hợp lệ sở hữu gutter riêng.
+/// Baseline 2026-09-01 — wrapper hợp lệ sở hữu gutter riêng. Thêm
+/// 2026-09-17: `VitTabletPaneWorkspace|127` — VitPageContent cột panel phụ
+/// của pane-workspace, cùng lớp với dashboard|285 (fullBleed=false là nguồn
+/// padding ngang contentPad cho nội dung panel; wrapper flush bẩm sinh —
+/// idiom S6 thứ 4, xem tablet_gutter_flush_audit).
 /// Key `path|line`: nếu chỉ dịch dòng do edit phía trên, cập nhật số dòng
 /// kèm một dòng giải trình trong commit.
 const List<String> kBaselineNonFullBleedPageContents = [
   'shared/layout/vit_two_column_tablet_dashboard.dart|190',
   'shared/layout/vit_two_column_tablet_dashboard.dart|285',
+  'shared/layout/vit_tablet_pane_workspace.dart|127',
 ];
 
 final _pageContentStartRe = RegExp(r'\bVitPageContent\s*\(');

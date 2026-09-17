@@ -248,10 +248,12 @@ shell) + 20 (`contentPad` frame) = **32dp mép phải** (bug 2026-09-16, user
 cảnh: phân lớp route theo đúng predicate shell của `tablet_route_tree.dart`
 (`_isMarketSpec`/`_isProfileSpec`/`_isWalletHistorySpec` — markets /
 profile / wallet-history) và yêu cầu mọi trang trong detail column theo
-MỘT trong 3 idiom flush: **frame** `VitTabletSectionFrame/Body(gutterFlush:
-true)`, **hub** `VitPageContent(fullBleed: true)` trực tiếp, hoặc **pane**
-`*PaneScaffold(`. Khóa **tuyệt đối 0 vi phạm** (không baseline); census
-đầy đủ 55 trang live trong artifact
+MỘT trong 4 idiom flush: **frame** `VitTabletSectionFrame/Body(gutterFlush:
+true)`, **hub** `VitPageContent(fullBleed: true)` trực tiếp, **pane**
+`*PaneScaffold(`, hoặc **workspace** `VitTabletPaneWorkspace(` (thêm
+2026-09-17 cùng redesign predictions Cụm B — scaffold flush bẩm sinh, không
+tự cấp mép ngang). Khóa **tuyệt đối 0 vi phạm** (không baseline); census
+đầy đủ các trang live trong artifact
 [VitTrade-Tablet-Gutter-Flush-Audit.csv](../audits/VitTrade-Tablet-Gutter-Flush-Audit.csv).
 
 ## Migration pointers

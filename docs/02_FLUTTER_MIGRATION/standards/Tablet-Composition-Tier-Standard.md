@@ -21,6 +21,7 @@ Mỗi page library tablet phải dựng khung từ **registry scaffold chuẩn**
 | Scaffold / surface | Dùng cho |
 | --- | --- |
 | `VitTwoColumnTabletDashboard` | Monitor dashboard (Home/Wallet/Profile + hubs 2 cột) |
+| `VitTabletPaneWorkspace` | Workspace 2 cột TRONG detail pane của master-detail shell (predictions redesign 2026-09-17): cột chính Expanded + panel phụ 320dp đóng khung R7, ngưỡng tách 720dp, fallback một cột do trang khai; gutter-flush bẩm sinh (idiom S6 thứ 4) |
 | `VitTabletSectionFrame` / `VitTabletSectionBody` | Trang section chuẩn của tablet (khung section + header) |
 | `VitPageLayout` | Trang tablet một cột chuẩn (full-page scaffold wrapper) |
 | `VitPageContent` | Trang content rhythm chuẩn (tab root trong master shell) |

@@ -172,7 +172,9 @@ Chuẩn chốt tại GĐ2 · I18N-1 (DEC-i18n Nhánh A, 2026-07-16):
   `VitWebUtilityPage`.
 - Tablet page composition tier is **role-locked** (2026-09-13): mọi page
   library tablet phải dựng khung từ registry scaffold chuẩn
-  (`VitTwoColumnTabletDashboard`, `*TabletMasterShell`, `*PaneScaffold`,
+  (`VitTwoColumnTabletDashboard`, `VitTabletPaneWorkspace` — workspace 2 cột
+  trong detail pane của master-detail shell, thêm 2026-09-17,
+  `*TabletMasterShell`, `*PaneScaffold`,
   `VitTabletSectionFrame`, `VitPageLayout`, feature surface
   `WalletTabletDetailSurface`/`TradeTabletDetailSurface`/`AuthTabletSurface`…);
   cấm `VitAutoHidePageScaffold` và khuôn `class …Frame` tự chế trong tablet

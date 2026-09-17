@@ -14,11 +14,11 @@ markets,/markets/overview,MarketsOverviewPane,pane,lib/features/markets/presenta
 markets,/markets/portfolio-tracker,MarketsPortfolioPane,pane,lib/features/markets/presentation/widgets/tablet/markets_portfolio_pane.dart
 markets,/markets/predictions,PredictionsHomeTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart
 markets,/markets/predictions/activity,PredictionsGlobalActivityTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart
-markets,/markets/predictions/advanced-chart/:eventId,PredictionAdvancedChartTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_chart.dart
+markets,/markets/predictions/advanced-chart/:eventId,PredictionAdvancedChartTabletPage,workspace,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_chart.dart
 markets,/markets/predictions/breaking,PredictionsBreakingTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_breaking.dart
 markets,/markets/predictions/data-integration,PredictionDataIntegrationTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_social.dart
 markets,/markets/predictions/event-calendar,PredictionEventCalendarTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_explore.dart
-markets,/markets/predictions/event/:eventId,PredictionEventDetailTabletPage,frame,lib/features/predictions/presentation/tablet/pages/prediction_event_detail_tablet_page.dart
+markets,/markets/predictions/event/:eventId,PredictionEventDetailTabletPage,workspace,lib/features/predictions/presentation/tablet/pages/prediction_event_detail_tablet_page.dart
 markets,/markets/predictions/leaderboard,PredictionsLeaderboardTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_leaderboard.dart
 markets,/markets/predictions/market-maker,PredictionMarketMakerTabletPage,frame,lib/features/predictions/presentation/tablet/pages/prediction_market_maker_tablet_page.dart
 markets,/markets/predictions/portfolio,PredictionsPortfolioTabletPage,frame,lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart

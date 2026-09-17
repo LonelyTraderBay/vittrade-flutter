@@ -34,6 +34,7 @@ const _pagesGlobDir = 'lib/features';
 /// substring anywhere in the library's source, main file + parts).
 const _registryScaffolds = <String>[
   'VitTwoColumnTabletDashboard(',
+  'VitTabletPaneWorkspace(',
   'VitTabletSectionFrame(',
   'VitTabletSectionBody(',
   'VitPageLayout(',

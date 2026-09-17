@@ -12,6 +12,7 @@ import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/accent_tone_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
@@ -22,7 +23,7 @@ import 'package:vit_trade_flutter/features/predictions/presentation/widgets/pred
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
-import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 
@@ -31,15 +32,19 @@ part 'prediction_event_detail_tablet_tabs.dart';
 part 'prediction_event_detail_tablet_trade.dart';
 part 'prediction_event_detail_tablet_links.dart';
 
-/// SC-211: Chi tiết sự kiện dự đoán trên tablet — tái composition đầy đủ
-/// theo trang phone SC-030 (cùng section, cùng luồng đặt lệnh qua máy trạng
-/// thái ADR-001), khác phone ở hai điểm theo chuẩn surface: khoảng cách đọc
-/// token tablet, và bước xác nhận đặt lệnh là bottom sheet thay vì submit
-/// thẳng (Bottom-Sheet-Standard + Financial Safety).
+/// SC-211: Chi tiết sự kiện dự đoán trên tablet — workspace 2 cột trong
+/// detail pane của shell markets (redesign 2026-09-17, mockup Cụm B đã duyệt):
+/// cột chính = thông tin thị trường (header + chọn kết quả, biểu đồ xác suất,
+/// sổ lệnh LUÔN mở, stats, tabs quy tắc/bình luận/nắm giữ/hoạt động); panel
+/// phụ sticky = vị thế hiện tại + ticket đặt lệnh + thị trường liên quan +
+/// cầu nối Arena. Pane hẹp (portrait ~360dp) rơi về một cột phone-parity
+/// SC-030. Cùng máy trạng thái ADR-001 và bước xác nhận bottom sheet như
+/// trước (Bottom-Sheet-Standard + Financial Safety).
 class PredictionEventDetailTabletPage extends ConsumerStatefulWidget {
   const PredictionEventDetailTabletPage({super.key, required this.eventId});
 
   static const contentKey = Key('sc211_tablet_content');
+  static const tradePaneKey = Key('sc211_tablet_trade_pane');
   static const favoriteKey = Key('sc211_favorite_action');
   static const shareKey = Key('sc211_share_action');
   static const orderBookToggleKey = Key('sc211_order_book_toggle');
@@ -171,7 +176,7 @@ class _PredictionEventDetailTabletPageState
 
   Widget _scaffold({
     required List<VitHeaderActionItem> actions,
-    required List<Widget> children,
+    required Widget body,
     String? subtitle,
   }) {
     final showBack = context.canPop();
@@ -196,14 +201,26 @@ class _PredictionEventDetailTabletPageState
                 : null,
             actions: actions,
           ),
-          Expanded(
-            child: VitTabletSectionBody(
-              gutterFlush: true,
-              contentKey: PredictionEventDetailTabletPage.contentKey,
-              children: children,
-            ),
-          ),
+          Expanded(child: body),
         ],
+      ),
+    );
+  }
+
+  /// Thân một cột cho trạng thái loading/error — cùng recipe cột hẹp của
+  /// `VitTabletPaneWorkspace` (flush, thở cuối trang, nhịp section chuẩn)
+  /// để mọi trạng thái của trang đọc cùng một hệ.
+  Widget _statusBody(List<Widget> children) {
+    return SingleChildScrollView(
+      key: PredictionEventDetailTabletPage.contentKey,
+      padding: const EdgeInsets.only(
+        bottom: TabletSpacingTokens.pageEndBreathing,
+      ),
+      child: VitPageContent(
+        padding: VitContentPadding.compact,
+        fullBleed: true,
+        rhythm: VitPageRhythm.standard,
+        children: children,
       ),
     );
   }
@@ -217,11 +234,11 @@ class _PredictionEventDetailTabletPageState
     return eventDetailAsync.when(
       loading: () => _scaffold(
         actions: const [],
-        children: const [VitSkeletonList(rows: 6)],
+        body: _statusBody(const [VitSkeletonList(rows: 6)]),
       ),
       error: (error, stackTrace) => _scaffold(
         actions: const [],
-        children: [
+        body: _statusBody([
           VitErrorState(
             title: 'Không tải được chi tiết sự kiện',
             message: 'Đã có lỗi xảy ra. Vui lòng thử lại.',
@@ -230,7 +247,7 @@ class _PredictionEventDetailTabletPageState
               predictionsEventDetailSnapshotProvider(widget.eventId),
             ),
           ),
-        ],
+        ]),
       ),
       data: (_) => _buildContent(),
     );
@@ -255,35 +272,19 @@ class _PredictionEventDetailTabletPageState
       amountText: _amount,
     );
 
-    return _scaffold(
-      subtitle: event.category,
-      actions: [
-        VitHeaderActionItem(
-          key: PredictionEventDetailTabletPage.favoriteKey,
-          type: _isFavorite
-              ? VitHeaderActionType.favoriteOn
-              : VitHeaderActionType.favoriteOff,
-          onPressed: () => setState(() {
-            _isFavorite = !_isFavorite;
-          }),
-        ),
-        VitHeaderActionItem(
-          key: PredictionEventDetailTabletPage.shareKey,
-          type: VitHeaderActionType.share,
-          onPressed: _showShareComingSoon,
-        ),
-      ],
-      children: [
-        _Sc211EventHeader(
-          event: event,
-          selectedOutcome: _selectedOutcome,
-          onOutcomeSelected: (value) => setState(() {
-            _selectedOutcome = value;
-          }),
-        ),
-        _Sc211StatsGrid(event: event),
-        if (snapshot.highRiskContractId != null)
-          VitHighRiskStatePanel(
+    // Các khối dựng một lần, tham chiếu ở cả tầng workspace và tầng hẹp —
+    // một thời điểm chỉ MỘT danh sách nằm trong cây nên không trùng instance.
+    final eventHeader = _Sc211EventHeader(
+      event: event,
+      selectedOutcome: _selectedOutcome,
+      onOutcomeSelected: (value) => setState(() {
+        _selectedOutcome = value;
+      }),
+    );
+    final statsGrid = _Sc211StatsGrid(event: event);
+    final highRiskPanel = snapshot.highRiskContractId == null
+        ? null
+        : VitHighRiskStatePanel(
             state: switch (viewState.status) {
               PredictionHighRiskFlowStatus.submitting ||
               PredictionHighRiskFlowStatus.submitted =>
@@ -315,19 +316,13 @@ class _PredictionEventDetailTabletPageState
             },
             contractId: snapshot.highRiskContractId,
             density: VitDensity.compact,
-          ),
-        if (snapshot.position != null)
-          _Sc211PositionBanner(position: snapshot.position!),
-        _Sc211ChartSection(snapshot: snapshot),
-        _Sc211OrderBookSection(
-          snapshot: snapshot,
-          expanded: _showOrderBook,
-          onToggle: () => setState(() {
-            _showOrderBook = !_showOrderBook;
-          }),
-        ),
-        if (event.status == PredictionEventStatus.active) ...[
-          _Sc211TradeSection(
+          );
+    final positionBanner = snapshot.position == null
+        ? null
+        : _Sc211PositionBanner(position: snapshot.position!);
+    final chartSection = _Sc211ChartSection(snapshot: snapshot);
+    final tradeSection = event.status == PredictionEventStatus.active
+        ? _Sc211TradeSection(
             event: event,
             preview: orderPreview,
             selectedOutcome: _selectedOutcome,
@@ -349,28 +344,87 @@ class _PredictionEventDetailTabletPageState
             onOutcomeChanged: (value) => setState(() {
               _selectedOutcome = value;
             }),
-          ),
-          _Sc211RiskLink(onTap: _showRiskComingSoon),
-        ],
-        _Sc211DetailTabs(
-          activeTab: _activeTab,
-          onChanged: (value) => setState(() {
-            _activeTab = value;
+          )
+        : null;
+    final riskLink = event.status == PredictionEventStatus.active
+        ? _Sc211RiskLink(onTap: _showRiskComingSoon)
+        : null;
+    final detailTabs = _Sc211DetailTabs(
+      activeTab: _activeTab,
+      onChanged: (value) => setState(() {
+        _activeTab = value;
+      }),
+    );
+    final tabCard = _Sc211TabCard(snapshot: snapshot, activeTab: _activeTab);
+    final relatedSection = _Sc211RelatedMarketsSection(snapshot: snapshot);
+    final arenaSection = _Sc211ArenaBridgeSection(
+      snapshot: snapshot,
+      onCreate: () => context.push(AppRoutePaths.arenaStudio),
+    );
+    final quickLinks = _Sc211QuickLinks(
+      onRewards: () => context.push(AppRoutePaths.marketsPredictionsRewards),
+      onActivity: () => context.push(AppRoutePaths.marketsPredictionsActivity),
+    );
+
+    return _scaffold(
+      subtitle: event.category,
+      actions: [
+        VitHeaderActionItem(
+          key: PredictionEventDetailTabletPage.favoriteKey,
+          type: _isFavorite
+              ? VitHeaderActionType.favoriteOn
+              : VitHeaderActionType.favoriteOff,
+          onPressed: () => setState(() {
+            _isFavorite = !_isFavorite;
           }),
         ),
-        _Sc211TabCard(snapshot: snapshot, activeTab: _activeTab),
-        _Sc211RelatedMarketsSection(snapshot: snapshot),
-        _Sc211ArenaBridgeSection(
-          snapshot: snapshot,
-          onCreate: () => context.push(AppRoutePaths.arenaStudio),
-        ),
-        _Sc211QuickLinks(
-          onRewards: () =>
-              context.push(AppRoutePaths.marketsPredictionsRewards),
-          onActivity: () =>
-              context.push(AppRoutePaths.marketsPredictionsActivity),
+        VitHeaderActionItem(
+          key: PredictionEventDetailTabletPage.shareKey,
+          type: VitHeaderActionType.share,
+          onPressed: _showShareComingSoon,
         ),
       ],
+      body: VitTabletPaneWorkspace(
+        contentKey: PredictionEventDetailTabletPage.contentKey,
+        secondaryContentKey: PredictionEventDetailTabletPage.tradePaneKey,
+        primaryChildren: [
+          eventHeader,
+          chartSection,
+          // Workspace: sổ lệnh luôn mở, không đầu gập (mockup Cụm B).
+          _Sc211OrderBookSection(snapshot: snapshot, expanded: true),
+          statsGrid,
+          ?highRiskPanel,
+          detailTabs,
+          tabCard,
+        ],
+        secondaryChildren: [
+          ?positionBanner,
+          if (tradeSection != null) ...[tradeSection, riskLink!],
+          relatedSection,
+          arenaSection,
+          quickLinks,
+        ],
+        narrowChildren: [
+          eventHeader,
+          statsGrid,
+          ?highRiskPanel,
+          ?positionBanner,
+          chartSection,
+          _Sc211OrderBookSection(
+            snapshot: snapshot,
+            expanded: _showOrderBook,
+            onToggle: () => setState(() {
+              _showOrderBook = !_showOrderBook;
+            }),
+          ),
+          if (tradeSection != null) ...[tradeSection, riskLink!],
+          detailTabs,
+          tabCard,
+          relatedSection,
+          arenaSection,
+          quickLinks,
+        ],
+      ),
     );
   }
 }

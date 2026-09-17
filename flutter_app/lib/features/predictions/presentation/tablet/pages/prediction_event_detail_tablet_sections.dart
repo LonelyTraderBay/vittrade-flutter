@@ -686,15 +686,29 @@ class _Sc211OrderBookSection extends StatelessWidget {
   const _Sc211OrderBookSection({
     required this.snapshot,
     required this.expanded,
-    required this.onToggle,
+    this.onToggle,
   });
 
   final PredictionEventDetailSnapshot snapshot;
+
+  /// Hiển thị danh sách sổ lệnh — tầng workspace luôn `true`.
   final bool expanded;
-  final VoidCallback onToggle;
+
+  /// Đầu gập cho tầng hẹp (phone-parity). `null` = tầng workspace: sổ lệnh
+  /// là panel thường trực trong cột thị trường, không có gì để gập.
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
+    if (onToggle == null) {
+      return VitPageSection(
+        label: 'Sổ lệnh',
+        innerGap: TabletSpacingTokens.x4,
+        accentColor: AppColors.primary,
+        density: VitDensity.compact,
+        children: [_Sc211OrderBookCard(snapshot: snapshot)],
+      );
+    }
     final chance = snapshot.event.outcomes.first.chance / 100;
     final bestBid = snapshot.orderBook.bids.first.price;
     final bestAsk = snapshot.orderBook.asks.first.price;
@@ -750,40 +764,57 @@ class _Sc211OrderBookSection extends StatelessWidget {
         ),
         if (expanded) ...[
           const SizedBox(height: TabletSpacingTokens.x4),
-          VitCard(
-            density: VitDensity.compact,
-            child: Column(
-              children: [
-                const _Sc211OrderBookHeader(),
-                const SizedBox(height: TabletSpacingTokens.x3),
-                for (final ask in snapshot.orderBook.asks.reversed)
-                  _Sc211OrderBookRow(entry: ask, isBid: false),
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Material(
-                    color: AppColors.surface2,
-                    borderRadius: AppRadii.smRadius,
-                    child: Padding(
-                      padding: TabletSpacingTokens.cardPaddingCompact,
-                      child: Center(
-                        child: Text(
-                          '${VitFormat.usd(chance)} · giá giữa',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.text1,
-                            fontWeight: AppTextStyles.bold,
-                          ),
-                        ),
-                      ),
+          _Sc211OrderBookCard(snapshot: snapshot, midPriceChance: chance),
+        ],
+      ],
+    );
+  }
+}
+
+/// Danh sách sổ lệnh (asks → giá giữa → bids) dùng chung cả hai tầng.
+class _Sc211OrderBookCard extends StatelessWidget {
+  const _Sc211OrderBookCard({required this.snapshot, this.midPriceChance});
+
+  final PredictionEventDetailSnapshot snapshot;
+
+  /// Xác suất đã quy đổi (0..1) cho dòng giá giữa — tầng workspace tính
+  /// sẵn ngoài để không lặp logic; tầng hẹp truyền từ caller cũ.
+  final double? midPriceChance;
+
+  @override
+  Widget build(BuildContext context) {
+    final chance = midPriceChance ?? snapshot.event.outcomes.first.chance / 100;
+    return VitCard(
+      density: VitDensity.compact,
+      child: Column(
+        children: [
+          const _Sc211OrderBookHeader(),
+          const SizedBox(height: TabletSpacingTokens.x3),
+          for (final ask in snapshot.orderBook.asks.reversed)
+            _Sc211OrderBookRow(entry: ask, isBid: false),
+          Padding(
+            padding: TabletSpacingTokens.tableCellPaddingV,
+            child: Material(
+              color: AppColors.surface2,
+              borderRadius: AppRadii.smRadius,
+              child: Padding(
+                padding: TabletSpacingTokens.cardPaddingCompact,
+                child: Center(
+                  child: Text(
+                    '${VitFormat.usd(chance)} · giá giữa',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.text1,
+                      fontWeight: AppTextStyles.bold,
                     ),
                   ),
                 ),
-                for (final bid in snapshot.orderBook.bids)
-                  _Sc211OrderBookRow(entry: bid, isBid: true),
-              ],
+              ),
             ),
           ),
+          for (final bid in snapshot.orderBook.bids)
+            _Sc211OrderBookRow(entry: bid, isBid: true),
         ],
-      ],
+      ),
     );
   }
 }

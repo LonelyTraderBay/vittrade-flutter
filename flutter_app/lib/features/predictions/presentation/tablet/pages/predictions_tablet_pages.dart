@@ -9,12 +9,17 @@ import 'package:vit_trade_flutter/features/predictions/domain/entities/predictio
 import 'package:vit_trade_flutter/app/router/app_route_contracts.dart';
 import 'package:vit_trade_flutter/app/theme/accent_tone_colors.dart';
 import 'package:vit_trade_flutter/app/theme/app_colors.dart';
+import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/app/theme/app_radii.dart';
 import 'package:vit_trade_flutter/app/theme/app_text_styles.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
+import 'package:vit_trade_flutter/core/navigation/back_navigation.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
 import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_section_frame.dart';
 import 'package:vit_trade_flutter/app/theme/app_density.dart';
 import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tablet/prediction_event_card_tablet.dart';

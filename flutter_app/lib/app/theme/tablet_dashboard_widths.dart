@@ -100,4 +100,22 @@ final class TabletDashboardWidths {
   /// trang section — re-verify on-device trước khi đổi, không bump vì "nhìn
   /// gần đúng".
   static const double readingContentMaxWidth = 1080;
+
+  /// Chiều rộng cột panel (secondary) của workspace 2 cột trong detail
+  /// pane (`VitTabletPaneWorkspace` — idiom pane-workspace,(predictions
+  /// redesign 2026-09-17). 320 trong pane detail markets landscape ~840dp
+  /// cho cột chính ~508dp: đủ cho ticket đặt lệnh/panel điều khiển xây từ
+  /// widget compact, cột chính giữ mật độ card thiết kế. Panel là
+  /// `SizedBox` cố định (không `Expanded`) — theo R5 của dashboard chuẩn.
+  static const double paneWorkspaceSecondaryWidth = 320;
+
+  /// Độ rộng pane tối thiểu để `VitTabletPaneWorkspace` tách 2 cột; dưới
+  /// ngưỡng rơi về một cột `narrowChildren` (phone-parity do trang tự khai
+  /// báo). 720 = cột chính 388 + gutter 12 + panel 320: cột chính ≥ chiều
+  /// rộng phone nên mọi widget compact an toàn. Tablet portrait thật render
+  /// predictions trong pane ~360dp (800 − rail 96 − margin 24 − master 308
+  /// − gutter 12) → luôn một cột; landscape 1280dp → pane ~840dp → luôn
+  /// workspace. Không trùng ngưỡng 900/680 của dashboard/master shell vì
+  /// đây là bậc thứ ba: pane TRONG shell, không phải trang top-level.
+  static const double paneWorkspaceSplitMinWidth = 720;
 }
