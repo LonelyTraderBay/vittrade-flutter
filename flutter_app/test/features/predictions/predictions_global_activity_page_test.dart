@@ -46,7 +46,7 @@ void main() {
     );
     expect(snapshot.activities.first.amount, 22.11);
     expect(snapshot.eventFor(snapshot.activities.first.eventId).id, 'pred-1');
-    expect(snapshot.lastUpdatedLabel, 'realtime-refresh');
+    expect(snapshot.lastUpdatedLabel, 'trực tiếp');
     expect(
       snapshot.supportedStates,
       containsAll([

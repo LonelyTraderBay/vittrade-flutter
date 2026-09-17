@@ -52,7 +52,7 @@ void main() {
     expect(snapshot.orders, hasLength(2));
     expect(snapshot.receipts, hasLength(1));
     expect(snapshot.rewards, hasLength(2));
-    expect(snapshot.lastUpdatedLabel, 'read-only');
+    expect(snapshot.lastUpdatedLabel, 'chỉ đọc');
     expect(
       snapshot.supportedStates,
       containsAll([

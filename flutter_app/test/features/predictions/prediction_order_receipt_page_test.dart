@@ -42,7 +42,7 @@ void main() {
     expect(missing.orders, hasLength(3));
     expect(missing.receipts, hasLength(6));
     expect(missing.rewards, isNotEmpty);
-    expect(missing.lastUpdatedLabel, 'realtime-refresh');
+    expect(missing.lastUpdatedLabel, 'trực tiếp');
     expect(
       missing.supportedStates,
       containsAll([

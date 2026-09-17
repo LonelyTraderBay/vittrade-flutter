@@ -58,7 +58,7 @@ void main() {
     expect(snapshot.rewards, isNotEmpty);
     expect(snapshot.totalCurrentValue, 1787);
     expect(snapshot.totalPnl, 440.5);
-    expect(snapshot.lastUpdatedLabel, 'realtime-refresh');
+    expect(snapshot.lastUpdatedLabel, 'trực tiếp');
     expect(
       snapshot.supportedStates,
       containsAll([

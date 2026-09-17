@@ -42,7 +42,7 @@ void main() {
     expect(snapshot.orders, hasLength(3));
     expect(snapshot.receipts, hasLength(6));
     expect(snapshot.rewards, isNotEmpty);
-    expect(snapshot.lastUpdatedLabel, 'realtime-refresh');
+    expect(snapshot.lastUpdatedLabel, 'trực tiếp');
     expect(
       snapshot.supportedStates,
       containsAll([

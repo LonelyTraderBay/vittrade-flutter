@@ -48,7 +48,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       filter: filter,
       category: category,
       searchQuery: searchQuery,
-      lastUpdatedLabel: 'read-only',
+      lastUpdatedLabel: 'chỉ đọc',
       highRiskContractId: HighRiskFlowContractIds.predictionMarketEvent,
       supportedStates: const {
         PredictionScreenState.loading,
@@ -110,7 +110,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionOrders,
       receipts: _predictionReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'read-only',
+      lastUpdatedLabel: 'chỉ đọc',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -153,7 +153,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionOrders,
       receipts: _predictionReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'read-only',
+      lastUpdatedLabel: 'chỉ đọc',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -319,7 +319,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionOrders,
       receipts: _predictionReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'read-only',
+      lastUpdatedLabel: 'chỉ đọc',
       highRiskContractId: HighRiskFlowContractIds.predictionMarketEvent,
       supportedStates: const {
         PredictionScreenState.loading,
@@ -360,7 +360,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       totalInvested: totalInvested,
       totalPnl: totalPnl,
       totalPnlPct: totalInvested == 0 ? 0 : (totalPnl / totalInvested) * 100,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -385,7 +385,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       rewards: _predictionRewardOpportunities,
       arenaRooms: _predictionRewardArenaRooms,
       totalDailyPool: totalDailyPool,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -428,7 +428,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
           .toList(),
       timeFilter: timeFilter,
       metric: metric,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -471,7 +471,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
           )
           .length,
       minAmount: minAmount,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -502,7 +502,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       highRiskContractId: HighRiskFlowContractIds.predictionMarketEvent,
       supportedStates: const {
         PredictionScreenState.loading,
@@ -544,7 +544,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -568,7 +568,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -589,7 +589,7 @@ mixin _MockPredictionsRepositoryMethodsPart01
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,

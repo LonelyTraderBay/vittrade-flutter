@@ -42,7 +42,7 @@ void main() {
     expect(snapshot.traders.first.pnl, 18200);
     expect(snapshot.biggestWins, hasLength(4));
     expect(snapshot.eventForWin(snapshot.biggestWins.first)?.id, 'pred-1');
-    expect(snapshot.lastUpdatedLabel, 'realtime-refresh');
+    expect(snapshot.lastUpdatedLabel, 'trực tiếp');
     expect(
       snapshot.supportedStates,
       containsAll([

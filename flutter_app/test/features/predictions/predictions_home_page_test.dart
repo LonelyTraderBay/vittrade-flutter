@@ -55,7 +55,7 @@ void main() {
       'pred-10',
       'pred-1',
     ]);
-    expect(snapshot.lastUpdatedLabel, 'read-only');
+    expect(snapshot.lastUpdatedLabel, 'chỉ đọc');
     expect(
       snapshot.supportedStates,
       containsAll([

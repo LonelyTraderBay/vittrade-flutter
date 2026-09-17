@@ -20,7 +20,7 @@ mixin _MockPredictionsRepositoryMethodsPart02
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -44,7 +44,7 @@ mixin _MockPredictionsRepositoryMethodsPart02
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -70,7 +70,7 @@ mixin _MockPredictionsRepositoryMethodsPart02
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -91,7 +91,7 @@ mixin _MockPredictionsRepositoryMethodsPart02
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,
@@ -113,7 +113,7 @@ mixin _MockPredictionsRepositoryMethodsPart02
       orders: _predictionPortfolioOrders,
       receipts: _predictionPortfolioReceipts,
       rewards: _predictionRewards,
-      lastUpdatedLabel: 'realtime-refresh',
+      lastUpdatedLabel: 'trực tiếp',
       supportedStates: const {
         PredictionScreenState.loading,
         PredictionScreenState.empty,

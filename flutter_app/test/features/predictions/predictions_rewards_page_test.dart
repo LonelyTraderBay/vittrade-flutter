@@ -47,7 +47,7 @@ void main() {
     expect(snapshot.rewards.first.minShares, 100);
     expect(snapshot.rewards.first.dailyReward, 45);
     expect(snapshot.rewards.first.isFavorite, isTrue);
-    expect(snapshot.lastUpdatedLabel, 'realtime-refresh');
+    expect(snapshot.lastUpdatedLabel, 'trực tiếp');
     expect(
       snapshot.supportedStates,
       containsAll([
