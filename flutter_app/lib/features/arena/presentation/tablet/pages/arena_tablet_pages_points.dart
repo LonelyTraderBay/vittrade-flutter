@@ -522,10 +522,7 @@ class ArenaFlowMapTabletPage extends ConsumerWidget {
                                 height: TabletSpacingTokens.x6,
                                 child: ColoredBox(color: AppColors.border),
                               ),
-                              const SizedBox(
-                                width: TabletSpacingTokens.x4,
-                                height: TabletSpacingTokens.x6,
-                              ),
+                              const SizedBox(width: TabletSpacingTokens.x4),
                             ],
                             Expanded(
                               child: _ArenaHeroKpi(
@@ -736,7 +733,9 @@ class ArenaProductionReadyTabletPage extends ConsumerWidget {
                     rows: [
                       for (final flow in snapshot.flows)
                         _PlayInfoRow(
-                          label: flow.name,
+                          label: switch (flow) {
+                            ArenaProductionFlowDraft(:final name) => name,
+                          },
                           value: '${flow.steps.length} bước',
                         ),
                     ],
@@ -764,7 +763,12 @@ class ArenaProductionReadyTabletPage extends ConsumerWidget {
                       title: 'Màn chuẩn',
                       rows: [
                         for (final screen in snapshot.canonicalScreens)
-                          _PlayInfoRow(label: screen.name, value: screen.route),
+                          _PlayInfoRow(
+                            label: switch (screen) {
+                              ArenaProductionScreenDraft(:final name) => name,
+                            },
+                            value: screen.route,
+                          ),
                       ],
                     ),
                 ],
@@ -782,7 +786,9 @@ Widget _productionScreenTile(ArenaProductionScreenDraft screen) {
     dense: true,
     leading: const Icon(Icons.webhook_outlined, color: AppModuleAccents.arena),
     title: Text(
-      screen.name,
+      switch (screen) {
+        ArenaProductionScreenDraft(:final name) => name,
+      },
       style: AppTextStyles.caption.copyWith(
         color: AppColors.text1,
         fontWeight: AppTextStyles.bold,
@@ -1010,7 +1016,9 @@ class ArenaEcosystemTabletPage extends ConsumerWidget {
                             color: AppModuleAccents.arena,
                           ),
                           title: Text(
-                            screen.name,
+                            switch (screen) {
+                              ConnectedScreenDraft(:final name) => name,
+                            },
                             style: AppTextStyles.caption.copyWith(
                               color: AppColors.text1,
                               fontWeight: AppTextStyles.bold,
@@ -1065,7 +1073,9 @@ class ArenaEcosystemTabletPage extends ConsumerWidget {
                       rows: [
                         for (final flow in snapshot.connectedFlows)
                           _PlayInfoRow(
-                            label: flow.name,
+                            label: switch (flow) {
+                              ConnectedFlowDraft(:final name) => name,
+                            },
                             value: '${flow.steps.length} bước',
                           ),
                       ],
@@ -1076,7 +1086,11 @@ class ArenaEcosystemTabletPage extends ConsumerWidget {
                       icon: Icons.compare_arrows_outlined,
                       rows: [
                         for (final item in snapshot.sharedItems)
-                          VitBulletRow(text: item.name),
+                          VitBulletRow(
+                            text: switch (item) {
+                              ConnectedRegistryItemDraft(:final name) => name,
+                            },
+                          ),
                       ],
                     ),
                   if (snapshot.separateItems.isNotEmpty)
@@ -1085,7 +1099,11 @@ class ArenaEcosystemTabletPage extends ConsumerWidget {
                       icon: Icons.call_split_outlined,
                       rows: [
                         for (final item in snapshot.separateItems)
-                          VitBulletRow(text: item.name),
+                          VitBulletRow(
+                            text: switch (item) {
+                              ConnectedRegistryItemDraft(:final name) => name,
+                            },
+                          ),
                       ],
                     ),
                 ],
@@ -1095,7 +1113,12 @@ class ArenaEcosystemTabletPage extends ConsumerWidget {
                       title: 'Màn chuẩn hệ sinh thái',
                       rows: [
                         for (final screen in snapshot.canonicalScreens)
-                          _PlayInfoRow(label: screen.name, value: screen.route),
+                          _PlayInfoRow(
+                            label: switch (screen) {
+                              ConnectedScreenDraft(:final name) => name,
+                            },
+                            value: screen.route,
+                          ),
                       ],
                     ),
                 ],

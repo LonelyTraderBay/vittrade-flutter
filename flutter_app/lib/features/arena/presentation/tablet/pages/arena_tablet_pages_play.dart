@@ -1,609 +1,16 @@
 part of 'arena_tablet_pages.dart';
 
-// Cụm Play (Đợt 1 redesign tablet Arena 2026-09-19): SC-189 Mode detail,
-// SC-190 Challenge detail, SC-191 Join, SC-193 Creator — re-compose từ nội
-// dung phone theo idiom workspace 2 cột (VitTabletPaneWorkspace), đầy đủ dữ
-// liệu snapshot (không take-N), nối controller read-model.
-
-// ---------------------------------------------------------------------------
-// Helper dùng chung cụm play.
-
-String _playChallengeStateLabel(ArenaChallengeState state) {
-  return switch (state) {
-    ArenaChallengeState.open => 'Đang mở',
-    ArenaChallengeState.full => 'Đã đủ chỗ',
-    ArenaChallengeState.live => 'Đang diễn ra',
-    ArenaChallengeState.pendingResult => 'Chờ kết quả',
-    ArenaChallengeState.resolved => 'Đã phân xử',
-    ArenaChallengeState.canceled => 'Đã huỷ',
-  };
-}
-
-VitStatusPillStatus _playChallengeStatePill(ArenaChallengeState state) {
-  return switch (state) {
-    ArenaChallengeState.open => VitStatusPillStatus.info,
-    ArenaChallengeState.full => VitStatusPillStatus.neutral,
-    ArenaChallengeState.live => VitStatusPillStatus.success,
-    ArenaChallengeState.pendingResult => VitStatusPillStatus.warning,
-    ArenaChallengeState.resolved => VitStatusPillStatus.neutral,
-    ArenaChallengeState.canceled => VitStatusPillStatus.error,
-  };
-}
-
-VitStatusPillStatus _playMetricPill(VitArenaMetricStatus status) {
-  return switch (status) {
-    VitArenaMetricStatus.success => VitStatusPillStatus.success,
-    VitArenaMetricStatus.warning => VitStatusPillStatus.warning,
-    VitArenaMetricStatus.info => VitStatusPillStatus.info,
-    VitArenaMetricStatus.neutral => VitStatusPillStatus.neutral,
-  };
-}
-
-/// Dòng label → value dùng trong card thông tin (đủ số liệu, không cắt).
-class _PlayInfoRow extends StatelessWidget {
-  const _PlayInfoRow({required this.label, required this.value, this.color});
-
-  final String label;
-  final String value;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Flexible(
-          child: Text(
-            label,
-            style: AppTextStyles.caption.copyWith(color: AppColors.text2),
-          ),
-        ),
-        const SizedBox(width: TabletSpacingTokens.x3),
-        Expanded(
-          child: Text(
-            value,
-            style: AppTextStyles.caption.copyWith(
-              color: color ?? AppColors.text1,
-              fontWeight: AppTextStyles.bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Card danh sách dòng label → value (điều khoản, chỉ số, quy tắc tóm tắt).
-class _PlayInfoCard extends StatelessWidget {
-  const _PlayInfoCard({required this.title, required this.rows, this.icon});
-
-  final String title;
-  final List<Widget> rows;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return VitCard(
-      radius: VitCardRadius.tight,
-      padding: TabletSpacingTokens.cardPaddingCompact,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              if (icon != null) ...[
-                Icon(
-                  icon,
-                  size: TabletSpacingTokens.iconSm,
-                  color: AppColors.text2,
-                ),
-                const SizedBox(width: TabletSpacingTokens.x2),
-              ],
-              Expanded(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.control.copyWith(
-                    fontWeight: AppTextStyles.bold,
-                    color: AppColors.text1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: TabletSpacingTokens.x3),
-          for (var i = 0; i < rows.length; i++) ...[
-            rows[i],
-            if (i < rows.length - 1)
-              const SizedBox(height: TabletSpacingTokens.x3),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-/// Danh sách quy tắc đánh số (đủ nội dung, không take).
-class _PlayRuleList extends StatelessWidget {
-  const _PlayRuleList({required this.rules});
-
-  final List<String> rules;
-
-  @override
-  Widget build(BuildContext context) {
-    return VitCard(
-      radius: VitCardRadius.tight,
-      padding: TabletSpacingTokens.cardPaddingCompact,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (var i = 0; i < rules.length; i++) ...[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: TabletSpacingTokens.x5,
-                  child: Text(
-                    '${i + 1}.',
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppModuleAccents.arena,
-                      fontWeight: AppTextStyles.bold,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    rules[i],
-                    style: AppTextStyles.body.copyWith(color: AppColors.text1),
-                  ),
-                ),
-              ],
-            ),
-            if (i < rules.length - 1)
-              const SizedBox(height: TabletSpacingTokens.x3),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-/// Tile danh sách phòng/mode bấm được — cùng idiom card zeroInsets + divider
-/// như section "Phòng đang mở" của hub home.
-class _PlayListSection extends StatelessWidget {
-  const _PlayListSection({
-    required this.title,
-    required this.itemCount,
-    required this.itemBuilder,
-    this.emptyMessage,
-  });
-
-  final String title;
-  final int itemCount;
-  final Widget Function(BuildContext, int) itemBuilder;
-  final String? emptyMessage;
-
-  @override
-  Widget build(BuildContext context) {
-    if (itemCount == 0) {
-      return emptyMessage == null
-          ? const SizedBox.shrink()
-          : VitCard(
-              radius: VitCardRadius.tight,
-              padding: TabletSpacingTokens.cardPaddingCompact,
-              child: Text(
-                emptyMessage!,
-                style: AppTextStyles.caption.copyWith(color: AppColors.text2),
-              ),
-            );
-    }
-    return VitCard(
-      radius: VitCardRadius.tight,
-      padding: TabletSpacingTokens.zeroInsets,
-      clip: true,
-      child: Column(
-        children: [
-          Padding(
-            padding: TabletSpacingTokens.cardPaddingCompact,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: AppTextStyles.control.copyWith(
-                      fontWeight: AppTextStyles.bold,
-                      color: AppColors.text1,
-                    ),
-                  ),
-                ),
-                Text(
-                  '$itemCount',
-                  style: AppTextStyles.caption.copyWith(color: AppColors.text2),
-                ),
-              ],
-            ),
-          ),
-          for (var i = 0; i < itemCount; i++) ...[
-            itemBuilder(context, i),
-            if (i < itemCount - 1)
-              const Divider(
-                height: TabletSpacingTokens.dividerHairline,
-                color: AppColors.divider,
-              ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// SC-189: Chi tiết chế độ đấu.
-
-class ArenaModeDetailTabletPage extends ConsumerWidget {
-  const ArenaModeDetailTabletPage({super.key, required this.modeId});
-
-  static const contentKey = Key('sc189_tablet_content');
-
-  final String modeId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(arenaModeDetailSnapshotProvider(modeId));
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-189',
-        semanticLabel: 'Chi tiết chế độ đấu',
-        title: 'Chi tiết chế độ',
-        subtitle: modeId,
-        contentKey: ArenaModeDetailTabletPage.contentKey,
-        children: [
-          _ardError(
-            'Không tải được chế độ',
-            () => ref.invalidate(arenaModeDetailSnapshotProvider(modeId)),
-          ),
-        ],
-      ),
-      data: (snapshot) {
-        final mode = snapshot.mode;
-        final showBack = context.canPop();
-        return VitPageLayout(
-          variant: VitPageVariant.flush,
-          semanticIdentifier: 'SC-189',
-          semanticLabel: 'Chi tiết chế độ đấu',
-          child: Column(
-            children: [
-              VitHeader(
-                title: mode.title,
-                subtitle: 'Chế độ đấu · ${snapshot.creator.name}',
-                showBack: showBack,
-                onBack: showBack
-                    ? () => goBackOrFallback(
-                        context,
-                        fallbackPath: AppRoutePaths.arena,
-                        mode: BackNavigationMode.historyThenFallback,
-                      )
-                    : null,
-              ),
-              Expanded(
-                child: VitTabletPaneWorkspace(
-                  contentKey: ArenaModeDetailTabletPage.contentKey,
-                  primaryChildren: [
-                    VitModuleHeroCard(
-                      accentColor: AppModuleAccents.arena,
-                      density: VitDensity.compact,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  mode.title,
-                                  style: AppTextStyles.sectionTitle.copyWith(
-                                    fontWeight: AppTextStyles.heavy,
-                                    color: AppColors.text1,
-                                  ),
-                                ),
-                              ),
-                              if (mode.fairPlay)
-                                const VitStatusPill(
-                                  label: 'Fair play',
-                                  status: VitStatusPillStatus.success,
-                                  size: VitStatusPillSize.sm,
-                                ),
-                            ],
-                          ),
-                          if (mode.description.isNotEmpty) ...[
-                            const SizedBox(height: TabletSpacingTokens.x2),
-                            Text(
-                              mode.description,
-                              style: AppTextStyles.body.copyWith(
-                                color: AppColors.text2,
-                              ),
-                            ),
-                          ],
-                          const SizedBox(height: TabletSpacingTokens.x4),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _ArenaHeroKpi(
-                                  label: 'Lượt dùng lại',
-                                  value: '${mode.cloneCount}',
-                                ),
-                              ),
-                              const SizedBox(
-                                width: TabletSpacingTokens.x4,
-                                height: TabletSpacingTokens.x6,
-                                child: ColoredBox(color: AppColors.border),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: TabletSpacingTokens.x4,
-                                  ),
-                                  child: _ArenaHeroKpi(
-                                    label: 'Thách đấu đang mở',
-                                    value: '${mode.activeChallenges}',
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: TabletSpacingTokens.x4,
-                                height: TabletSpacingTokens.x6,
-                                child: ColoredBox(color: AppColors.border),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: TabletSpacingTokens.x4,
-                                  ),
-                                  child: _ArenaHeroKpi(
-                                    label: 'Tỉ lệ hoàn thành',
-                                    value: '${mode.completionRate}%',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if (mode.tags.isNotEmpty) ...[
-                            const SizedBox(height: TabletSpacingTokens.x3),
-                            Wrap(
-                              spacing: TabletSpacingTokens.x2,
-                              runSpacing: TabletSpacingTokens.x2,
-                              children: [
-                                for (final tag in mode.tags)
-                                  VitFilterChip(
-                                    label: tag,
-                                    active: false,
-                                    color: AppModuleAccents.arena,
-                                    onTap: () {},
-                                  ),
-                              ],
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                    if (snapshot.ruleRows.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Tóm tắt quy tắc',
-                        icon: Icons.menu_book_outlined,
-                        rows: [
-                          for (final row in snapshot.ruleRows)
-                            _PlayInfoRow(label: row.label, value: row.value),
-                        ],
-                      ),
-                    if (snapshot.qualityMetrics.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Chất lượng chế độ',
-                        icon: Icons.verified_outlined,
-                        rows: [
-                          for (final metric in snapshot.qualityMetrics)
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        metric.label,
-                                        style: AppTextStyles.caption.copyWith(
-                                          color: AppColors.text1,
-                                          fontWeight: AppTextStyles.bold,
-                                        ),
-                                      ),
-                                      if (metric.description.isNotEmpty) ...[
-                                        const SizedBox(
-                                          height: TabletSpacingTokens.x1,
-                                        ),
-                                        Text(
-                                          metric.description,
-                                          style: AppTextStyles.caption.copyWith(
-                                            color: AppColors.text3,
-                                          ),
-                                        ),
-                                      ],
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: TabletSpacingTokens.x3),
-                                VitStatusPill(
-                                  label: metric.value,
-                                  status: _playMetricPill(metric.status),
-                                  size: VitStatusPillSize.sm,
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                    _PlayListSection(
-                      title: 'Phòng đấu theo chế độ này',
-                      itemCount: snapshot.relatedRooms.length,
-                      emptyMessage: 'Chưa có phòng mở theo chế độ này.',
-                      itemBuilder: (context, i) {
-                        final room = snapshot.relatedRooms[i];
-                        return _ArenaRoomTile(
-                          room: room,
-                          onTap: () => context.push(
-                            AppRoutePaths.arenaChallenge(room.id),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                  secondaryChildren: [
-                    _PlayInfoCard(
-                      title: 'Người tạo chế độ',
-                      icon: Icons.person_outline,
-                      rows: [
-                        _PlayInfoRow(
-                          label: 'Tên',
-                          value: snapshot.creator.name,
-                        ),
-                        _PlayInfoRow(
-                          label: 'Danh hiệu',
-                          value: snapshot.creator.badge,
-                        ),
-                        _PlayInfoRow(
-                          label: 'Điểm uy tín',
-                          value: '${snapshot.creator.trustScore}',
-                        ),
-                      ],
-                    ),
-                    if (snapshot.predictionContext.eventId.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Ngữ cảnh dự đoán',
-                        icon: Icons.insights_outlined,
-                        rows: [
-                          _PlayInfoRow(
-                            label: 'Sự kiện',
-                            value: snapshot.predictionContext.title,
-                          ),
-                          _PlayInfoRow(
-                            label: 'Kết quả',
-                            value: snapshot.predictionContext.outcomeName,
-                          ),
-                          _PlayInfoRow(
-                            label: 'Xác suất',
-                            value: '${snapshot.predictionContext.probability}%',
-                          ),
-                        ],
-                      ),
-                    if (snapshot.relatedModes.isNotEmpty)
-                      _PlayListSection(
-                        title: 'Chế độ liên quan',
-                        itemCount: snapshot.relatedModes.length,
-                        itemBuilder: (context, i) {
-                          final related = snapshot.relatedModes[i];
-                          return ListTile(
-                            dense: true,
-                            title: Text(
-                              related.title,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                              ),
-                            ),
-                            subtitle: Text(
-                              'bởi ${related.creatorName}',
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.chevron_right_outlined,
-                              color: AppColors.text3,
-                            ),
-                            onTap: () => context.push(
-                              AppRoutePaths.arenaMode(related.id),
-                            ),
-                          );
-                        },
-                      ),
-                    VitCtaButton(
-                      onPressed: () => context.push(AppRoutePaths.arena),
-                      child: const Text('Về hub Open Arena'),
-                    ),
-                  ],
-                  narrowChildren: [
-                    // Phone-parity: tổng quan → quy tắc → chất lượng → phòng.
-                    VitModuleHeroCard(
-                      accentColor: AppModuleAccents.arena,
-                      density: VitDensity.compact,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            mode.title,
-                            style: AppTextStyles.sectionTitle.copyWith(
-                              fontWeight: AppTextStyles.heavy,
-                              color: AppColors.text1,
-                            ),
-                          ),
-                          if (mode.description.isNotEmpty) ...[
-                            const SizedBox(height: TabletSpacingTokens.x2),
-                            Text(
-                              mode.description,
-                              style: AppTextStyles.body.copyWith(
-                                color: AppColors.text2,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                    if (snapshot.ruleRows.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Tóm tắt quy tắc',
-                        rows: [
-                          for (final row in snapshot.ruleRows)
-                            _PlayInfoRow(label: row.label, value: row.value),
-                        ],
-                      ),
-                    if (snapshot.qualityMetrics.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Chất lượng chế độ',
-                        rows: [
-                          for (final metric in snapshot.qualityMetrics)
-                            _PlayInfoRow(
-                              label: metric.label,
-                              value: metric.value,
-                            ),
-                        ],
-                      ),
-                    _PlayListSection(
-                      title: 'Phòng đấu theo chế độ này',
-                      itemCount: snapshot.relatedRooms.length,
-                      emptyMessage: 'Chưa có phòng mở theo chế độ này.',
-                      itemBuilder: (context, i) {
-                        final room = snapshot.relatedRooms[i];
-                        return _ArenaRoomTile(
-                          room: room,
-                          onTap: () => context.push(
-                            AppRoutePaths.arenaChallenge(room.id),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
+// Cụm Play (Đợt 1 redesign tablet Arena 2026-09-19): SC-190 Challenge
+// detail, SC-191 Join — re-compose từ phone theo workspace 2 cột.
 // ---------------------------------------------------------------------------
 // SC-190: Chi tiết thử thách.
 
-enum _PlayChallengeTab { rules, evidence, participants, activity }
+const List<(String, String, IconData)> _playChallengeTabs = [
+  ('rules', 'Luật chơi', Icons.menu_book_outlined),
+  ('evidence', 'Bằng chứng', Icons.camera_alt_outlined),
+  ('participants', 'Thành viên', Icons.groups_2_outlined),
+  ('activity', 'Hoạt động', Icons.timeline_outlined),
+];
 
 class ArenaChallengeDetailTabletPage extends ConsumerStatefulWidget {
   const ArenaChallengeDetailTabletPage({super.key, required this.challengeId});
@@ -620,7 +27,7 @@ class ArenaChallengeDetailTabletPage extends ConsumerStatefulWidget {
 
 class _ArenaChallengeDetailTabletPageState
     extends ConsumerState<ArenaChallengeDetailTabletPage> {
-  _PlayChallengeTab _tab = _PlayChallengeTab.rules;
+  String _tab = 'rules';
 
   @override
   Widget build(BuildContext context) {
@@ -820,38 +227,11 @@ class _ArenaChallengeDetailTabletPageState
                   ],
                 ),
                 VitSegmentedTabBar(
-                  activeKey: _tab.name,
-                  onChanged: (key) => setState(
-                    () => _tab = _PlayChallengeTab.values.byName(key),
-                  ),
+                  activeKey: _tab,
+                  onChanged: (key) => setState(() => _tab = key),
                   tabs: [
-                    for (final entry in const [
-                      (
-                        _PlayChallengeTab.rules,
-                        'Luật chơi',
-                        Icons.menu_book_outlined,
-                      ),
-                      (
-                        _PlayChallengeTab.evidence,
-                        'Bằng chứng',
-                        Icons.camera_alt_outlined,
-                      ),
-                      (
-                        _PlayChallengeTab.participants,
-                        'Thành viên',
-                        Icons.groups_2_outlined,
-                      ),
-                      (
-                        _PlayChallengeTab.activity,
-                        'Hoạt động',
-                        Icons.timeline_outlined,
-                      ),
-                    ])
-                      VitTabItem(
-                        key: entry.$1.name,
-                        label: entry.$2,
-                        icon: entry.$3,
-                      ),
+                    for (final (key, label, icon) in _playChallengeTabs)
+                      VitTabItem(key: key, label: label, icon: icon),
                   ],
                 ),
                 _buildTabPanel(snapshot),
@@ -861,7 +241,12 @@ class _ArenaChallengeDetailTabletPageState
                   title: 'Người tạo thử thách',
                   icon: Icons.person_outline,
                   rows: [
-                    _PlayInfoRow(label: 'Tên', value: snapshot.creator.name),
+                    _PlayInfoRow(
+                      label: 'Tên',
+                      value: switch (snapshot.creator) {
+                        ArenaChallengeCreatorDraft(:final name) => name,
+                      },
+                    ),
                     _PlayInfoRow(
                       label: 'Vai trò',
                       value: snapshot.creator.role,
@@ -968,19 +353,21 @@ class _ArenaChallengeDetailTabletPageState
 
   Widget _buildTabPanel(ArenaChallengeDetailSnapshot snapshot) {
     return switch (_tab) {
-      _PlayChallengeTab.rules => _PlayRuleList(rules: snapshot.rules),
-      _PlayChallengeTab.evidence => VitCard(
+      'rules' => _PlayRuleList(rules: snapshot.rules),
+      'evidence' => VitCard(
         radius: VitCardRadius.tight,
         padding: TabletSpacingTokens.cardPaddingCompact,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(
-              Icons.camera_alt_outlined,
-              size: TabletSpacingTokens.iconSm,
-              color: AppModuleAccents.arena,
+            const Padding(
+              padding: EdgeInsetsDirectional.only(end: TabletSpacingTokens.x3),
+              child: Icon(
+                Icons.camera_alt_outlined,
+                size: TabletSpacingTokens.iconSm,
+                color: AppModuleAccents.arena,
+              ),
             ),
-            const SizedBox(width: TabletSpacingTokens.x3),
             Expanded(
               child: Text(
                 'Chưa có bằng chứng gửi từ thiết bị này. Kết quả chính dùng '
@@ -991,12 +378,13 @@ class _ArenaChallengeDetailTabletPageState
           ],
         ),
       ),
-      _PlayChallengeTab.participants => _PlayListSection(
+      'participants' => _PlayListSection(
         title: 'Đội tham gia',
         itemCount: snapshot.teams.length,
         emptyMessage: 'Chưa có đội nào vào thử thách.',
         itemBuilder: (context, i) {
           final team = snapshot.teams[i];
+          final ArenaTeamDraft(:name) = team;
           final color = team.accent == VitArenaTeamAccent.sol
               ? AppModuleAccents.arena
               : AppColors.sell;
@@ -1012,7 +400,7 @@ class _ArenaChallengeDetailTabletPageState
                 ),
                 child: Center(
                   child: Text(
-                    team.name.isEmpty ? '?' : team.name.characters.first,
+                    name.isEmpty ? '?' : name.characters.first,
                     style: AppTextStyles.micro.copyWith(
                       color: AppColors.bg,
                       fontWeight: AppTextStyles.bold,
@@ -1022,7 +410,7 @@ class _ArenaChallengeDetailTabletPageState
               ),
             ),
             title: Text(
-              team.name,
+              name,
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.text1,
                 fontWeight: AppTextStyles.bold,
@@ -1035,7 +423,7 @@ class _ArenaChallengeDetailTabletPageState
           );
         },
       ),
-      _PlayChallengeTab.activity => _PlayListSection(
+      _ => _PlayListSection(
         title: 'Hoạt động gần đây',
         itemCount: snapshot.activity.length,
         emptyMessage: 'Chưa có hoạt động nào được ghi lại.',
@@ -1222,12 +610,16 @@ class _ArenaJoinTabletPageState extends ConsumerState<ArenaJoinTabletPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.undo_outlined,
-                        size: TabletSpacingTokens.iconSm,
-                        color: AppColors.warn,
+                      const Padding(
+                        padding: EdgeInsetsDirectional.only(
+                          end: TabletSpacingTokens.x3,
+                        ),
+                        child: Icon(
+                          Icons.undo_outlined,
+                          size: TabletSpacingTokens.iconSm,
+                          color: AppColors.warn,
+                        ),
                       ),
-                      const SizedBox(width: TabletSpacingTokens.x3),
                       Expanded(
                         child: Text(
                           snapshot.refundNotice,
@@ -1481,16 +873,22 @@ class _JoinAckRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: AppRadii.xsRadius,
+      borderRadius: AppRadii.smRadius,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            checked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
-            size: TabletSpacingTokens.iconSm,
-            color: checked ? AppModuleAccents.arena : AppColors.text3,
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+              end: TabletSpacingTokens.x2,
+            ),
+            child: Icon(
+              checked
+                  ? Icons.check_box_outlined
+                  : Icons.check_box_outline_blank,
+              size: TabletSpacingTokens.iconSm,
+              color: checked ? AppModuleAccents.arena : AppColors.text3,
+            ),
           ),
-          const SizedBox(width: TabletSpacingTokens.x2),
           Expanded(
             child: Text(
               label,
@@ -1502,289 +900,6 @@ class _JoinAckRow extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// SC-193: Hồ sơ người dựng (creator).
-
-class ArenaCreatorTabletPage extends ConsumerWidget {
-  const ArenaCreatorTabletPage({super.key, required this.creatorId});
-
-  static const contentKey = Key('sc193_tablet_content');
-
-  final String creatorId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(arenaCreatorSnapshotProvider(creatorId));
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-193',
-        semanticLabel: 'Hồ sơ người dựng',
-        title: 'Nhà tạo lập',
-        subtitle: creatorId,
-        contentKey: ArenaCreatorTabletPage.contentKey,
-        children: [
-          _ardError(
-            'Không tải được hồ sơ',
-            () => ref.invalidate(arenaCreatorSnapshotProvider(creatorId)),
-          ),
-        ],
-      ),
-      data: (snapshot) {
-        final creator = snapshot.creator;
-        final showBack = context.canPop();
-        return VitPageLayout(
-          variant: VitPageVariant.flush,
-          semanticIdentifier: 'SC-193',
-          semanticLabel: 'Hồ sơ người dựng',
-          child: Column(
-            children: [
-              VitHeader(
-                title: creator.name,
-                subtitle: 'Người dựng · ${creator.badge}',
-                showBack: showBack,
-                onBack: showBack
-                    ? () => goBackOrFallback(
-                        context,
-                        fallbackPath: AppRoutePaths.arena,
-                        mode: BackNavigationMode.historyThenFallback,
-                      )
-                    : null,
-              ),
-              Expanded(
-                child: VitTabletPaneWorkspace(
-                  contentKey: ArenaCreatorTabletPage.contentKey,
-                  primaryChildren: [
-                    VitModuleHeroCard(
-                      accentColor: AppModuleAccents.arena,
-                      density: VitDensity.compact,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  creator.name,
-                                  style: AppTextStyles.sectionTitle.copyWith(
-                                    fontWeight: AppTextStyles.heavy,
-                                    color: AppColors.text1,
-                                  ),
-                                ),
-                              ),
-                              if (creator.fairPlayBadge)
-                                const VitStatusPill(
-                                  label: 'Fair play',
-                                  status: VitStatusPillStatus.success,
-                                  size: VitStatusPillSize.sm,
-                                ),
-                            ],
-                          ),
-                          if (creator.bio.isNotEmpty) ...[
-                            const SizedBox(height: TabletSpacingTokens.x2),
-                            Text(
-                              creator.bio,
-                              style: AppTextStyles.body.copyWith(
-                                color: AppColors.text2,
-                              ),
-                            ),
-                          ],
-                          const SizedBox(height: TabletSpacingTokens.x4),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _ArenaHeroKpi(
-                                  label: 'Điểm uy tín',
-                                  value: '${creator.trustScore}',
-                                ),
-                              ),
-                              const SizedBox(
-                                width: TabletSpacingTokens.x4,
-                                height: TabletSpacingTokens.x6,
-                                child: ColoredBox(color: AppColors.border),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: TabletSpacingTokens.x4,
-                                  ),
-                                  child: _ArenaHeroKpi(
-                                    label: 'Chế độ đã tạo',
-                                    value: '${creator.modesCreated}',
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: TabletSpacingTokens.x4,
-                                height: TabletSpacingTokens.x6,
-                                child: ColoredBox(color: AppColors.border),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: TabletSpacingTokens.x4,
-                                  ),
-                                  child: _ArenaHeroKpi(
-                                    label: 'Phòng hoàn thành',
-                                    value: '${creator.completedRooms}',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (snapshot.aboutRows.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Thông tin',
-                        icon: Icons.info_outline,
-                        rows: [
-                          for (final row in snapshot.aboutRows)
-                            _PlayInfoRow(label: row.label, value: row.value),
-                        ],
-                      ),
-                    _PlayListSection(
-                      title: 'Phòng đang mở',
-                      itemCount: snapshot.liveRooms.length,
-                      emptyMessage: 'Không có phòng nào đang mở.',
-                      itemBuilder: (context, i) {
-                        final room = snapshot.liveRooms[i];
-                        return _ArenaRoomTile(
-                          room: room,
-                          onTap: () => context.push(
-                            AppRoutePaths.arenaChallenge(room.id),
-                          ),
-                        );
-                      },
-                    ),
-                    _PlayListSection(
-                      title: 'Phòng đã kết thúc',
-                      itemCount: snapshot.historyRooms.length,
-                      emptyMessage: 'Chưa có phòng nào kết thúc.',
-                      itemBuilder: (context, i) {
-                        final room = snapshot.historyRooms[i];
-                        return _ArenaRoomTile(
-                          room: room,
-                          onTap: () => context.push(
-                            AppRoutePaths.arenaChallenge(room.id),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                  secondaryChildren: [
-                    _PlayInfoCard(
-                      title: 'Chỉ số uy tín',
-                      icon: Icons.verified_user_outlined,
-                      rows: [
-                        for (final metric in snapshot.trustMetrics)
-                          _PlayInfoRow(
-                            label: metric.label,
-                            value: metric.value,
-                          ),
-                      ],
-                    ),
-                    if (snapshot.modes.isNotEmpty)
-                      _PlayListSection(
-                        title: 'Chế độ của người dựng',
-                        itemCount: snapshot.modes.length,
-                        itemBuilder: (context, i) {
-                          final mode = snapshot.modes[i];
-                          return ListTile(
-                            dense: true,
-                            title: Text(
-                              mode.title,
-                              style: AppTextStyles.caption.copyWith(
-                                color: AppColors.text1,
-                              ),
-                            ),
-                            subtitle: Text(
-                              '${mode.activeChallenges} thách đấu đang mở',
-                              style: AppTextStyles.micro.copyWith(
-                                color: AppColors.text3,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.chevron_right_outlined,
-                              color: AppColors.text3,
-                            ),
-                            onTap: () =>
-                                context.push(AppRoutePaths.arenaMode(mode.id)),
-                          );
-                        },
-                      ),
-                    VitCtaButton(
-                      onPressed: () =>
-                          context.push(AppRoutePaths.arenaTrust(creator.id)),
-                      child: const Text('Xem độ tin cậy'),
-                    ),
-                    if (snapshot.policyLabel.isNotEmpty)
-                      Text(
-                        snapshot.policyLabel,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.text3,
-                        ),
-                      ),
-                  ],
-                  narrowChildren: [
-                    VitModuleHeroCard(
-                      accentColor: AppModuleAccents.arena,
-                      density: VitDensity.compact,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            creator.name,
-                            style: AppTextStyles.sectionTitle.copyWith(
-                              fontWeight: AppTextStyles.heavy,
-                              color: AppColors.text1,
-                            ),
-                          ),
-                          const SizedBox(height: TabletSpacingTokens.x2),
-                          Text(
-                            'Điểm uy tín ${creator.trustScore} · ${creator.badge}',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.text2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (snapshot.aboutRows.isNotEmpty)
-                      _PlayInfoCard(
-                        title: 'Thông tin',
-                        rows: [
-                          for (final row in snapshot.aboutRows)
-                            _PlayInfoRow(label: row.label, value: row.value),
-                        ],
-                      ),
-                    _PlayListSection(
-                      title: 'Phòng đang mở',
-                      itemCount: snapshot.liveRooms.length,
-                      emptyMessage: 'Không có phòng nào đang mở.',
-                      itemBuilder: (context, i) {
-                        final room = snapshot.liveRooms[i];
-                        return _ArenaRoomTile(
-                          room: room,
-                          onTap: () => context.push(
-                            AppRoutePaths.arenaChallenge(room.id),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

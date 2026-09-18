@@ -383,14 +383,27 @@ class _ArenaLiveRoomsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
-              child: VitModuleSectionHeader(
-                title: 'Phòng đang mở',
-                accentColor: AppColors.warn,
-                density: VitDensity.compact,
-                bottomGap: TabletSpacingTokens.zero,
+            SizedBox(
+              width: AppSurfaceSpacing.serviceTileAccentBarThickness,
+              height: AppSurfaceSpacing.pageSectionAccentHeight,
+              child: const DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: AppColors.warn,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: AppRadii.smRadius,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: TabletSpacingTokens.x3),
+            Expanded(
+              child: Text(
+                'Phòng đang mở',
+                style: AppTextStyles.caption.copyWith(
+                  color: AppColors.text1,
+                  fontWeight: AppTextStyles.bold,
+                ),
               ),
             ),
             if (liveCount > 0)

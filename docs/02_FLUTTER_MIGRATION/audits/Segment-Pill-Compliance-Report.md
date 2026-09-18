@@ -6,11 +6,11 @@
 
 | Metric | Count |
 | --- | ---: |
-| Audit rows | 430 |
+| Audit rows | 429 |
 | Files with shared widgets | 376 |
 | Compliance pass | 272 |
 | Compliance warn | 0 |
-| Compliance review | 158 |
+| Compliance review | 157 |
 | Interactive local classes | 0 |
 | P0 local classes | 0 |
 
@@ -23,14 +23,14 @@
 | VitSegmentedChoice | 108 |
 | VitSegmentedTabBar | 41 |
 | VitPresetChipRow | 36 |
-| VitFilterChip | 132 |
+| VitFilterChip | 131 |
 
 ## Module heat map
 
 | Module | Audit rows |
 | --- | ---: |
 | admin | 1 |
-| arena | 17 |
+| arena | 16 |
 | auth | 2 |
 | cross_module | 7 |
 | dca | 13 |

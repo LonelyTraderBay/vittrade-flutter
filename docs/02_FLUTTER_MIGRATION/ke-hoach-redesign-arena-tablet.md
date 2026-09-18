@@ -1,7 +1,8 @@
 # Kế hoạch redesign UI tablet Open Arena (đầy đủ + đúng đặc điểm tablet)
 
-> Trạng thái: **ĐỀ XUẤT — chờ user duyệt mockup từng đợt** (mockup gate per
-> cluster, theo quy tắc `user-redesign-mockup-gate`).
+> Trạng thái: **HOÀN THÀNH 2026-09-19** — 6/6 đợt đóng sạc, 25/25 trang
+> tablet đạt chuẩn workspace/hub (Đ0 `089b8a51` · Đ1 `196a7224` ·
+> Đ2 `1856c072` · Đ3 `162c13ec` · Đ4 `1aec1810`).
 > Ngày lập: 2026-09-19. Phạm vi: CHỈ UI tablet của `features/arena`
 > (theo chính sách `tablet-only-scope-policy`); không sửa phone/web.
 > Mô hình quy trình: redesign Predictions 18/18 màn (2026-09-19 đóng sạc,
@@ -109,13 +110,13 @@ Chưa có remote repository (đúng chính sách chờ backend; theo
 7. **P2 — Detail pages chưa dùng idiom workspace**: chuẩn có sẵn
    `VitTabletPaneWorkspace` (2026-09-17) chưa được arena dùng.
 
-## 4. Quyết định sản phẩm cần chốt trước Đợt 1
+## 4. Quyết định sản phẩm (ĐÃ THỰC THI 2026-09-19)
 
-| # | Quyết định | Đề xuất |
+| # | Quyết định | Kết quả thực thi |
 | --- | --- | --- |
-| D1 | `/arena/points` | **Giữ redirect** sang `/rewards?tab=arena` (nhất quán 2 surface, Rewards là chủ điểm thưởng), **xoá class dead** `ArenaPointsTabletPage`, đổi CTA "Điểm Arena" của Guide sang target trực tiếp `/rewards?tab=arena` |
-| D2 | Chính sách cắt nội dung | Bỏ toàn bộ `.take(N)` trong trang tablet; render đủ dữ liệu snapshot (fixtures hiện có số lượng nhỏ, không cần phân trang giai đoạn mock) |
-| D3 | Leaderboard/Verified/Ledger có filter kỳ/k loại không | Mockup kèm mục filter; default là có (search + filter chip theo kỳ/loại) vì đây là "đặc điểm tablet" (đậm dữ liệu) |
+| D1 | `/arena/points` | Giữ redirect `/rewards?tab=arena`; xoá class chết `ArenaPointsTabletPage` + `_ArenaTaskRow` + branch chết route tree; CTA "Điểm Arena" (home + Guide) trỏ thẳng sổ điểm `arenaLedger` (tránh trùng row "Phần thưởng" đã trỏ rewards) |
+| D2 | Chính sách cắt nội dung | Đã bỏ toàn bộ `.take(N)` trong 20 trang redesign — render đủ dữ liệu snapshot |
+| D3 | Filter cho list | Đã thêm: My reports (filter trạng thái có count), Ledger (filter loại biến động), Preset library (chip gói lĩnh vực) |
 
 ## 5. Kế hoạch 5 đợt (mỗi đợt 1 scope, mockup gate trước khi code)
 
