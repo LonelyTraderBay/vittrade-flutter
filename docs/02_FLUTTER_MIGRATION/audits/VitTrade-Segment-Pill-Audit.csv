@@ -9,6 +9,8 @@ arena,arena/presentation/phone/pages/hub/my_arena_page_rewards_and_safety.dart,V
 arena,arena/presentation/phone/pages/studio/arena_creator_page.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
 arena,arena/presentation/phone/pages/studio/arena_universal_preset_library_page_domains_suggestions_dropdowns.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 arena,arena/presentation/tablet/pages/arena_tablet_pages.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+arena,arena/presentation/tablet/pages/arena_tablet_pages_play.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
+arena,arena/presentation/tablet/pages/arena_tablet_pages_play.dart,VitSegmentedTabBar,segment_alias,1,~28,equal_expanded,-,pass,alias of VitTabBar.segment
 arena,arena/presentation/widgets/challenge/arena_leaderboard_controls.dart,VitChoicePill,chip,1,44,hug,-,pass,
 arena,arena/presentation/widgets/challenge/arena_leaderboard_controls.dart,VitFilterChip,filter_accent,1,44,hug_scroll,-,review,wrapper over VitChoicePill
 arena,arena/presentation/widgets/challenge/arena_leaderboard_controls.dart,VitTabBar,segment,1,~28,equal_expanded,-,pass,
