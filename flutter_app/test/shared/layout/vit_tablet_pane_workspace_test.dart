@@ -27,7 +27,7 @@ void main() {
     );
   }
 
-  testWidgets('pane rộng: 2 cột scroll độc lập, panel đóng khung 320dp', (
+  testWidgets('pane rộng: 2 cột scroll độc lập, panel đóng khung 400dp', (
     tester,
   ) async {
     await tester.pumpWidget(host(840));
@@ -48,7 +48,7 @@ void main() {
     );
     expect(
       tester.getSize(find.byKey(const Key('workspace_secondary'))).width,
-      320,
+      400,
     );
     expect(tester.takeException(), isNull);
   });
@@ -67,14 +67,14 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('ngưỡng tách: đúng 720dp là 2 cột, dưới 1dp là một cột', (
+  testWidgets('ngưỡng tách: đúng 800dp là 2 cột, dưới 1dp là một cột', (
     tester,
   ) async {
-    await tester.pumpWidget(host(720));
+    await tester.pumpWidget(host(800));
     await tester.pumpAndSettle();
     expect(find.byType(Scrollable), findsNWidgets(2));
 
-    await tester.pumpWidget(host(719.9));
+    await tester.pumpWidget(host(799.9));
     await tester.pumpAndSettle();
     expect(find.byType(Scrollable), findsOneWidget);
     expect(find.text('Cột hẹp'), findsOneWidget);
@@ -92,10 +92,11 @@ void main() {
     await tester.pumpWidget(host(1400));
     await tester.pumpAndSettle();
 
-    // Cặp cột bị cap 800 + 320 + 12 = 1132, căn giữa trong 1400 − 2×12.
+    // Cặp cột bị cap 800 + 400 + 12 = 1212, căn giữa trong 1400 − 2×12
+    // (1376 > 1212 → cap chạm).
     expect(
       tester.getSize(find.byKey(const Key('workspace_secondary'))).width,
-      320,
+      400,
     );
     expect(
       tester.getSize(find.byKey(const Key('workspace_primary'))).width,
