@@ -161,63 +161,6 @@ class ArenaFlowMapTabletPage extends ConsumerWidget {
   }
 }
 
-class ArenaSafetyCenterTabletPage extends ConsumerWidget {
-  const ArenaSafetyCenterTabletPage({super.key});
-
-  static const contentKey = Key('sc198_tablet_content');
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final snapshotAsync = ref.watch(arenaSafetyCenterSnapshotProvider);
-
-    return snapshotAsync.when(
-      loading: () => const Center(child: VitSkeletonList(rows: 6)),
-      error: (error, stackTrace) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-198',
-        semanticLabel: 'An toàn đấu trường',
-        title: snapshotAsync.value?.bannerTitle ?? 'An toàn',
-        subtitle: 'Quy tắc cộng đồng',
-        contentKey: ArenaSafetyCenterTabletPage.contentKey,
-        children: [
-          _ardError(
-            'Không tải được an toàn',
-            () => ref.invalidate(arenaSafetyCenterSnapshotProvider),
-          ),
-        ],
-      ),
-      data: (snapshot) => VitTabletSectionFrame(
-        semanticIdentifier: 'SC-198',
-        semanticLabel: 'An toàn đấu trường',
-        title: snapshot.bannerTitle,
-        subtitle: snapshot.bannerDescription,
-        contentKey: ArenaSafetyCenterTabletPage.contentKey,
-        children: [
-          _ardSection(
-            title: 'Quy tắc cộng đồng',
-            rows: [
-              for (final rule in snapshot.communityRules)
-                Padding(
-                  padding: TabletSpacingTokens.tableCellPaddingV,
-                  child: Text(
-                    rule.title,
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.text1,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-
-          _ardSection(
-            title: 'Nội dung cấm',
-            rows: _ardBullets(snapshot.bannedContent),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class ArenaProductionReadyTabletPage extends ConsumerWidget {
   const ArenaProductionReadyTabletPage({super.key});
 
