@@ -1,7 +1,6 @@
 # Tablet gap role baseline — ratchet: entries may only be REMOVED (trả nợ dần theo module).
 # Format: path|rule count
 # Regenerate: dart run tool/tablet_gap_role_audit.dart --regen-baseline
-features/arena/presentation/tablet/pages/arena_tablet_pages_home.dart|R6-bare-block-list 1
 features/auth/presentation/tablet/pages/two_fa_setup_tablet_page.dart|R3-wrap-micro 1
 features/markets/presentation/widgets/tablet/markets_advanced_charts_pane.dart|R3-wrap-micro 1
 features/markets/presentation/widgets/tablet/markets_correlations_pane.dart|R3-wrap-micro 1

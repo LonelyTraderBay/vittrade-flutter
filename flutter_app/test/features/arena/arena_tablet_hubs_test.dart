@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:vit_trade_flutter/app/theme/spacing/tablet_spacing_tokens.dart';
 import 'package:vit_trade_flutter/features/arena/presentation/tablet/pages/arena_tablet_pages.dart';
 
-/// Khóa composition 5 hub redesign Bước 2 (2026-09-09): mỗi hub render đầy
+/// Khóa composition 4 hub redesign Bước 2 (2026-09-09): mỗi hub render đầy
 /// đủ hero + section chính + panel cột phụ theo pattern flagship SC-184.
+/// Hub Điểm Arena (SC-200) đã xoá 2026-09-19: route /arena/points redirect
+/// sang /rewards?tab=arena trên cả 2 surface — class tablet là dead code.
 void main() {
   tearDown(() => TabletSpacingTokens.tabletSurfaceActive = false);
 
@@ -45,18 +47,6 @@ void main() {
     expect(find.text('Mẹo an toàn'), findsOneWidget);
     expect(find.text('Rà soát trước khi đấu'), findsOneWidget);
     expect(find.textContaining('Bước 1 ·'), findsWidgets);
-  });
-
-  testWidgets('Points SC-200: hero số dư + nhiệm vụ + điểm danh', (
-    tester,
-  ) async {
-    await pumpHub(tester, const ArenaPointsTabletPage());
-    expect(find.text('Điểm Arena của bạn'), findsOneWidget);
-    expect(find.text('Điểm hiện có'), findsOneWidget);
-    expect(find.text('Điểm đang khoá'), findsOneWidget);
-    expect(find.text('Xem sổ điểm'), findsOneWidget);
-    expect(find.text('Nhiệm vụ nhận điểm'), findsOneWidget);
-    expect(find.text('Điểm danh hằng ngày'), findsOneWidget);
   });
 
   testWidgets('Studio SC-185: hero phí nền tảng + quy trình + mẫu + công cụ', (

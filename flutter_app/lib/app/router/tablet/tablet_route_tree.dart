@@ -1172,9 +1172,6 @@ Widget _buildTabletPage(
   if (path == AppRoutePaths.arenaVerified) {
     return const VerifiedChallengesTabletPage();
   }
-  if (path == AppRoutePaths.arenaPoints) {
-    return const ArenaPointsTabletPage();
-  }
   if (path == AppRoutePaths.arenaFlowMap) {
     return const ArenaFlowMapTabletPage();
   }

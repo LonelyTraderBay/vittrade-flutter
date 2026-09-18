@@ -52,7 +52,9 @@ class _ArenaHomeTabletPageState extends ConsumerState<ArenaHomeTabletPage> {
       semanticIdentifier: 'SC-184',
       child: Column(
         children: [
-          VitHeader(
+          // Hub gốc module dùng rootModule chrome như Ví/Profile/Predictions.
+          VitTopChrome(
+            type: VitTopChromeType.rootModule,
             title: 'Open Arena',
             subtitle: 'Điểm Arena · thách đấu · hoàn thành',
             showBack: showBack,
@@ -67,12 +69,14 @@ class _ArenaHomeTabletPageState extends ConsumerState<ArenaHomeTabletPage> {
               VitHeaderActionItem(
                 key: ArenaHomeTabletPage.myArenaActionKey,
                 type: VitHeaderActionType.portfolio,
+                size: VitHeaderActionSize.sm,
                 tooltip: 'Sân chơi của tôi',
                 onPressed: () => context.push(AppRoutePaths.arenaMy),
               ),
               VitHeaderActionItem(
                 key: ArenaHomeTabletPage.toolsActionKey,
                 type: VitHeaderActionType.more,
+                size: VitHeaderActionSize.sm,
                 tooltip: 'Công cụ',
                 onPressed: _showToolsSheet,
               ),
@@ -386,7 +390,7 @@ class _ArenaLiveRoomsSection extends StatelessWidget {
                 title: 'Phòng đang mở',
                 accentColor: AppColors.warn,
                 density: VitDensity.compact,
-                bottomGap: TabletSpacingTokens.x4,
+                bottomGap: TabletSpacingTokens.zero,
               ),
             ),
             if (liveCount > 0)
@@ -398,6 +402,7 @@ class _ArenaLiveRoomsSection extends StatelessWidget {
               ),
           ],
         ),
+        const SizedBox(height: TabletSpacingTokens.x4),
         VitCard(
           radius: VitCardRadius.tight,
           padding: TabletSpacingTokens.zeroInsets,
@@ -742,7 +747,7 @@ class _ArenaQuickActions extends StatelessWidget {
             _ArenaQuickActionRow(
               icon: Icons.stars_outlined,
               label: 'Điểm Arena',
-              onTap: () => onNavigate(AppRoutePaths.arenaPoints),
+              onTap: () => onNavigate(AppRoutePaths.arenaLedger),
             ),
             _ArenaQuickActionRow(
               icon: Icons.star_border_rounded,
