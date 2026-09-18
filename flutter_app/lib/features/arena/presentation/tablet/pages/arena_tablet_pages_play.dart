@@ -52,13 +52,13 @@ class _PlayInfoRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: TabletSpacingTokens.iconLg + TabletSpacingTokens.x5,
+        Flexible(
           child: Text(
             label,
             style: AppTextStyles.caption.copyWith(color: AppColors.text2),
           ),
         ),
+        const SizedBox(width: TabletSpacingTokens.x3),
         Expanded(
           child: Text(
             value,
@@ -99,11 +99,15 @@ class _PlayInfoCard extends StatelessWidget {
                 ),
                 const SizedBox(width: TabletSpacingTokens.x2),
               ],
-              Text(
-                title,
-                style: AppTextStyles.control.copyWith(
-                  fontWeight: AppTextStyles.bold,
-                  color: AppColors.text1,
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.control.copyWith(
+                    fontWeight: AppTextStyles.bold,
+                    color: AppColors.text1,
+                  ),
                 ),
               ),
             ],
