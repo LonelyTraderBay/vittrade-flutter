@@ -41,37 +41,6 @@ Widget _ardError(String title, VoidCallback onRetry) {
   );
 }
 
-Widget _ardSection({required String title, required List<Widget> rows}) {
-  return VitCard(
-    radius: VitCardRadius.tight,
-    padding: TabletSpacingTokens.cardPaddingCompact,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: AppTextStyles.control.copyWith(
-            fontWeight: AppTextStyles.bold,
-            color: AppColors.text1,
-          ),
-        ),
-        const SizedBox(height: TabletSpacingTokens.x2),
-        ...rows,
-      ],
-    ),
-  );
-}
-
-List<Widget> _ardBullets(List<String> notes) {
-  return [
-    for (final note in notes)
-      Padding(
-        padding: TabletSpacingTokens.tableCellPaddingV,
-        child: VitBulletRow(text: note),
-      ),
-  ];
-}
-
 Widget _ardBody(String text) {
   return Text(
     text,

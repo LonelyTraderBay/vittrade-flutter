@@ -64,12 +64,12 @@ cluster,file,suggested_tier,violation_type,status,batch,notes
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page_demo_and_title_widgets.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page_domains_suggestions_dropdowns.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/phone/pages/studio/arena_universal_preset_library_page_titles_and_shared_widgets.dart,C,-,done,0,-
-03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_governance.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_home.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_hubs_extra.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_play.dart,C,-,done,0,-
+03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_studio.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_common.dart,C,-,done,0,-
 03_tab_roots,flutter_app/lib/features/arena/presentation/widgets/challenge/arena_join_page_sections.dart,C,-,done,0,-

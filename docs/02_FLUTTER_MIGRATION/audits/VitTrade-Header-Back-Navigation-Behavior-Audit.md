@@ -3,7 +3,7 @@
 Generated from `flutter_app/tool/back_navigation_behavior_audit.dart`.
 
 ```text
-visible_header_back_entries=611
+visible_header_back_entries=617
 strict_back_issues=0
 high_risk_entries=129
 modal_close_baseline=73
@@ -15,7 +15,7 @@ sheet_result_baseline=9
 | Classification | Count |
 | --- | ---: |
 | parent_route_only | 475 |
-| history_then_fallback | 136 |
+| history_then_fallback | 142 |
 
 ## Strict Issue Counts
 
@@ -79,6 +79,12 @@ sheet_result_baseline=9
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_play.dart` | 664 | `_ArenaChallengeDetailTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_play.dart` | 1121 | `_ArenaJoinTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arenaChallenge(` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_play.dart` | 1547 | `ArenaCreatorTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 64 | `_ArenaPointsLedgerTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 293 | `ArenaPointsEntryDetailTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arenaLedger` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 496 | `ArenaFlowMapTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 698 | `ArenaProductionReadyTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 842 | `ArenaPredictionBridgeTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
+| `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_points.dart` | 983 | `ArenaEcosystemTabletPage` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arena` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_studio.dart` | 278 | `_ArenaSmartRulesTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arenaStudio` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_studio.dart` | 845 | `_ArenaPresetLibraryTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arenaStudio` | no | - | Uses shared back-navigation helper. |
 | `flutter_app/lib/features/arena/presentation/tablet/pages/arena_tablet_pages_studio.dart` | 1074 | `_ArenaGovernanceGateTabletPageState` | `VitHeader` | history_then_fallback | history_then_fallback | `AppRoutePaths.arenaStudio` | no | - | Uses shared back-navigation helper. |
