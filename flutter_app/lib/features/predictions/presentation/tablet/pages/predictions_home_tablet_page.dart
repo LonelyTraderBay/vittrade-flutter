@@ -127,9 +127,9 @@ class _PredictionsHomeTabletPageState
           onPositionsTap: () =>
               context.push(AppRoutePaths.marketsPredictionsPortfolio),
         );
-        // Banner KPI ngang (thiết kế nội dung mới 2026-09-19): tầng rộng
-        // đưa hero lên banner giữa chrome và hai cột — idiom dashboard
-        // chuẩn; cột chính bắt đầu bằng grid, thoáng như hub Ví.
+        // KPI banner ngang (thiết kế 2026-09-19): nằm ĐẦU CỘT CUỘN như hero
+        // chuẩn hub Ví (không dùng banner fixed — user phản hồi khóa ~25%
+        // màn hình); tầng hẹp giữ hero dọc phone-parity.
         final kpiBanner = _Sc208KpiBanner(
           openEventCount:
               hubTotalsValue?.events.length ?? snapshot.events.length,
@@ -257,8 +257,8 @@ class _PredictionsHomeTabletPageState
           body: VitTabletPaneWorkspace(
             contentKey: PredictionsHomeTabletPage.contentKey,
             secondaryContentKey: PredictionsHomeTabletPage.controlPaneKey,
-            banner: kpiBanner,
             primaryChildren: [
+              kpiBanner,
               ?highRiskPanel,
               if (snapshot.events.isEmpty)
                 emptyState
