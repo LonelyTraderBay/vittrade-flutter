@@ -23,7 +23,7 @@ policy_violations=0
 | notification_action | context_notification | `lib/features/launchpad/presentation/phone/pages/claim/launchpad_claim_receipt_page.dart` | 160 | yes | - | Context notification action must not masquerade as global inbox. |
 | notification_action | context_notification | `lib/features/p2p_dispute/presentation/phone/pages/dispute/p2p_claim_detail_page_state.dart` | 47 | yes | - | Context notification action must not masquerade as global inbox. |
 | search_action | module_search | `lib/features/predictions/presentation/phone/pages/hub/predictions_home_page.dart` | 134 | yes | - | Module/discovery search action is allowlisted. |
-| search_action | module_search | `lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart` | 351 | yes | - | Module/discovery search action is allowlisted. |
+| search_action | module_search | `lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart` | 361 | yes | - | Module/discovery search action is allowlisted. |
 
 ## Source Issues
 

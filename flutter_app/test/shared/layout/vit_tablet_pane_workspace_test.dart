@@ -6,7 +6,7 @@ import 'package:vit_trade_flutter/shared/widgets/widgets.dart';
 void main() {
   // Bố cục host: ép width đúng tầng để LayoutBuilder của workspace rơi vào
   // nhánh mong muốn — height bounded do Scaffold body stretch.
-  Widget host(double width) {
+  Widget host(double width, {Widget? banner}) {
     return MaterialApp(
       home: Scaffold(
         body: Align(
@@ -14,18 +14,44 @@ void main() {
           child: SizedBox(
             width: width,
             height: 600,
-            child: const VitTabletPaneWorkspace(
-              contentKey: Key('workspace_primary'),
-              secondaryContentKey: Key('workspace_secondary'),
-              primaryChildren: [Text('Nội dung chính')],
-              secondaryChildren: [Text('Panel phụ')],
-              narrowChildren: [Text('Cột hẹp')],
+            child: VitTabletPaneWorkspace(
+              contentKey: const Key('workspace_primary'),
+              secondaryContentKey: const Key('workspace_secondary'),
+              banner: banner,
+              primaryChildren: const [Text('Nội dung chính')],
+              secondaryChildren: const [Text('Panel phụ')],
+              narrowChildren: const [Text('Cột hẹp')],
             ),
           ),
         ),
       ),
     );
   }
+
+  testWidgets('banner: khối ngang cố định TRÊN 2 cột, không cuộn theo cột', (
+    tester,
+  ) async {
+    await tester.pumpWidget(host(840, banner: const Text('BANNER KPI')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('BANNER KPI'), findsOneWidget);
+    // Banner nằm ngoài 2 cột cuộn — vẫn đúng 2 Scrollable (R4 bất biến).
+    expect(find.byType(Scrollable), findsNWidgets(2));
+    final bannerRect = tester.getRect(find.text('BANNER KPI'));
+    final primaryRect = tester.getRect(
+      find.byKey(const Key('workspace_primary')),
+    );
+    expect(bannerRect.bottom, lessThan(primaryRect.top));
+    expect(tester.takeException(), isNull);
+
+    // Tầng hẹp: banner vẫn cố định trên cột cuộn duy nhất.
+    await tester.pumpWidget(host(360, banner: const Text('BANNER KPI')));
+    await tester.pumpAndSettle();
+    expect(find.text('BANNER KPI'), findsOneWidget);
+    expect(find.byType(Scrollable), findsOneWidget);
+    expect(find.text('Cột hẹp'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('pane rộng: 2 cột scroll độc lập, panel đóng khung 400dp', (
     tester,

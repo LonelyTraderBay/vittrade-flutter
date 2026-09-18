@@ -42,6 +42,7 @@ class VitTabletPaneWorkspace extends StatelessWidget {
     required this.primaryChildren,
     required this.secondaryChildren,
     required this.narrowChildren,
+    this.banner,
     this.contentKey,
     this.secondaryContentKey,
     this.secondaryWidth = TabletDashboardWidths.paneWorkspaceSecondaryWidth,
@@ -57,10 +58,16 @@ class VitTabletPaneWorkspace extends StatelessWidget {
   /// Nội dung panel phụ (ticket/điều khiển), đóng khung R7, scroll riêng.
   final List<Widget> secondaryChildren;
 
-  /// Nội dung một cột khi pane hẹp hơn [splitMinWidth] — trang tự khai thứ
-  /// tự phone-parity (thường là danh sách section gốc trước khi lên
+  /// Nội dung một cột khi pane hẹp hơn [splitMinWidth] — trang tự khai
+  /// thứ tự phone-parity (thường là danh sách section gốc trước khi lên
   /// workspace).
   final List<Widget> narrowChildren;
+
+  /// Khối ngang full-width GIỮA chrome và hai cột (idiom `banner` của
+  /// dashboard chuẩn — KPI strip): cố định, không cuộn theo cột, nằm trong
+  /// cùng hệ mép/cap với hai cột, đứng trên một hàng gap
+  /// [TabletDashboardWidths.blockVerticalGap] chung. Null giữ hành vi cũ.
+  final Widget? banner;
 
   /// Key của vùng scroll cột chính / cột hẹp (probe/audit/test).
   final Key? contentKey;
@@ -95,23 +102,40 @@ class VitTabletPaneWorkspace extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < splitMinWidth) {
+          Widget body = SingleChildScrollView(
+            key: contentKey,
+            padding: const EdgeInsetsDirectional.only(
+              bottom: TabletSpacingTokens.pageEndBreathing,
+            ),
+            child: VitPageContent(
+              padding: VitContentPadding.compact,
+              fullBleed: true,
+              rhythm: VitPageRhythm.standard,
+              children: narrowChildren,
+            ),
+          );
+          if (banner != null) {
+            // Banner hẹp: cố định trên cột cuộn, cùng hàng gap block chuẩn.
+            body = Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: TabletDashboardWidths.blockVerticalGap,
+                  ),
+                  child: banner!,
+                ),
+                const SizedBox(height: TabletDashboardWidths.blockVerticalGap),
+                Expanded(child: body),
+              ],
+            );
+          }
           return Padding(
             padding: EdgeInsetsDirectional.only(
               start: outerHorizontalMargin,
               end: outerHorizontalMargin,
             ),
-            child: SingleChildScrollView(
-              key: contentKey,
-              padding: const EdgeInsetsDirectional.only(
-                bottom: TabletSpacingTokens.pageEndBreathing,
-              ),
-              child: VitPageContent(
-                padding: VitContentPadding.compact,
-                fullBleed: true,
-                rhythm: VitPageRhythm.standard,
-                children: narrowChildren,
-              ),
-            ),
+            child: body,
           );
         }
         return Padding(
@@ -122,53 +146,73 @@ class VitTabletPaneWorkspace extends StatelessWidget {
           child: Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: pairCap),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      key: contentKey,
-                      padding: const EdgeInsetsDirectional.only(
-                        bottom: TabletSpacingTokens.pageEndBreathing,
+                  if (banner != null) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: TabletDashboardWidths.blockVerticalGap,
                       ),
-                      // Không mép ngang riêng (idiom dashboard R5): cột chính
-                      // và khung panel nằm trên CÙNG một mặt phẳng nội dung,
-                      // tách nhau bằng gutter dưới. Top relaxed 16dp như
-                      // dashboard chuẩn (R6 — 2026-09-19: khớp chuẩn hub Ví,
-                      // sửa nốt lệch top sau khi đổi rootModule chrome).
-                      child: VitPageContent(
-                        padding: VitContentPadding.relaxed,
-                        fullBleed: true,
-                        rhythm: VitPageRhythm.standard,
-                        customGap:
-                            TabletSpacingTokens.pageRhythmStandardSectionGap,
-                        children: primaryChildren,
-                      ),
+                      child: banner!,
                     ),
-                  ),
-                  const SizedBox(width: TabletDashboardWidths.columnGutter),
-                  SizedBox(
-                    width: secondaryWidth,
-                    child: SingleChildScrollView(
-                      key: secondaryContentKey,
-                      child: VitCard(
-                        variant: VitCardVariant.inner,
-                        radius: VitCardRadius.standard,
-                        padding: EdgeInsets.zero,
-                        borderColor: AppColors.borderSolid,
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                            bottom: TabletSpacingTokens.pageEndBreathing,
-                          ),
-                          child: VitPageContent(
-                            padding: VitContentPadding.relaxed,
-                            rhythm: VitPageRhythm.standard,
-                            customGap: TabletSpacingTokens
-                                .pageRhythmStandardSectionGap,
-                            children: secondaryChildren,
+                    const SizedBox(
+                      height: TabletDashboardWidths.blockVerticalGap,
+                    ),
+                  ],
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            key: contentKey,
+                            padding: const EdgeInsetsDirectional.only(
+                              bottom: TabletSpacingTokens.pageEndBreathing,
+                            ),
+                            // Không mép ngang riêng (idiom dashboard R5): cột
+                            // chính và khung panel nằm trên CÙNG một mặt phẳng
+                            // nội dung, tách nhau bằng gutter dưới. Top relaxed
+                            // 16dp như dashboard chuẩn (R6 — 2026-09-19: khớp
+                            // chuẩn hub Ví).
+                            child: VitPageContent(
+                              padding: VitContentPadding.relaxed,
+                              fullBleed: true,
+                              rhythm: VitPageRhythm.standard,
+                              customGap: TabletSpacingTokens
+                                  .pageRhythmStandardSectionGap,
+                              children: primaryChildren,
+                            ),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          width: TabletDashboardWidths.columnGutter,
+                        ),
+                        SizedBox(
+                          width: secondaryWidth,
+                          child: SingleChildScrollView(
+                            key: secondaryContentKey,
+                            child: VitCard(
+                              variant: VitCardVariant.inner,
+                              radius: VitCardRadius.standard,
+                              padding: EdgeInsets.zero,
+                              borderColor: AppColors.borderSolid,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.only(
+                                  bottom: TabletSpacingTokens.pageEndBreathing,
+                                ),
+                                child: VitPageContent(
+                                  padding: VitContentPadding.relaxed,
+                                  rhythm: VitPageRhythm.standard,
+                                  customGap: TabletSpacingTokens
+                                      .pageRhythmStandardSectionGap,
+                                  children: secondaryChildren,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

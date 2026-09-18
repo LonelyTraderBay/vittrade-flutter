@@ -60,6 +60,10 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Biến động 24h'), findsOneWidget);
+    // Banner KPI ngang (thiết kế nội dung mới 2026-09-19): KPI + CTA ghim
+    // giữa chrome và hai cột; cột chính bắt đầu bằng grid sự kiện.
+    expect(find.text('Sự kiện mở'), findsOneWidget);
+    expect(find.text('Xem Biến động'), findsOneWidget);
 
     final cards = find.byType(PredictionEventCardTablet);
     expect(cards, findsWidgets);

@@ -72,6 +72,81 @@ class _Sc208Hero extends StatelessWidget {
   }
 }
 
+/// Banner KPI ngang giữa chrome và hai cột (thiết kế nội dung mới
+/// 2026-09-19 — idiom banner của dashboard chuẩn): 2 số KPI + CTA ghim
+/// phải, cố định không cuộn theo cột; tầng hẹp giữ hero dọc [_Sc208Hero].
+class _Sc208KpiBanner extends StatelessWidget {
+  const _Sc208KpiBanner({
+    required this.openEventCount,
+    required this.openPositionCount,
+    required this.onPositionsTap,
+  });
+
+  final int openEventCount;
+  final int openPositionCount;
+  final VoidCallback onPositionsTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return VitCard(
+      variant: VitCardVariant.hero,
+      radius: VitCardRadius.large,
+      padding: TabletSpacingTokens.cardPaddingHero,
+      child: Row(
+        children: [
+          Expanded(
+            child: _Sc208HeroKpi(
+              label: 'Sự kiện mở',
+              value: VitFormat.count(openEventCount),
+              caption: 'Thị trường đang giao dịch',
+              valueColor: AppColors.text1,
+            ),
+          ),
+          const SizedBox(
+            width: TabletSpacingTokens.dividerHairline,
+            height: TabletSpacingTokens.x6,
+            child: ColoredBox(color: AppColors.border),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(
+                start: TabletSpacingTokens.x4,
+              ),
+              child: Material(
+                color: AppColors.transparent,
+                child: InkWell(
+                  key: PredictionsHomeTabletPage.myPredictionsKey,
+                  onTap: onPositionsTap,
+                  borderRadius: AppRadii.smRadius,
+                  child: _Sc208HeroKpi(
+                    label: 'Vị thế của tôi',
+                    value: VitFormat.count(openPositionCount),
+                    caption: 'Xem danh mục vị thế',
+                    valueColor: AppColors.primary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: TabletSpacingTokens.x4),
+          // Non-flex trong Row nhận width vô hạn — VitCtaButton có min-width
+          // riêng nên phải bọc Flexible loose để nhận budget bounded.
+          Flexible(
+            fit: FlexFit.loose,
+            child: VitCtaButton(
+              onPressed: () =>
+                  context.push(AppRoutePaths.marketsPredictionsBreaking),
+              variant: VitCtaButtonVariant.secondary,
+              leading: const Icon(Icons.bolt_outlined),
+              child: const Text('Xem Biến động'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _Sc208HeroKpi extends StatelessWidget {
   const _Sc208HeroKpi({
     required this.label,

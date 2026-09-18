@@ -735,7 +735,7 @@ predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predi
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_guide.dart,3,0,0,C,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/prediction_risk_calculator_tablet_sections.dart,5,0,0,C,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_page.dart,1,0,0,C,0,0,0,pass,-
-predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_sections.dart,2,0,0,D,0,0,0,pass,-
+predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_home_tablet_sections.dart,3,0,0,D,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages.dart,1,0,0,E,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_breaking.dart,1,0,0,C,0,0,0,pass,-
 predictions,flutter_app/lib/features/predictions/presentation/tablet/pages/predictions_tablet_pages_chart.dart,4,0,0,C,0,0,0,pass,-
