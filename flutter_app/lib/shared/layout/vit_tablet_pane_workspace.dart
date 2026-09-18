@@ -133,9 +133,11 @@ class VitTabletPaneWorkspace extends StatelessWidget {
                       ),
                       // Không mép ngang riêng (idiom dashboard R5): cột chính
                       // và khung panel nằm trên CÙNG một mặt phẳng nội dung,
-                      // tách nhau bằng gutter dưới.
+                      // tách nhau bằng gutter dưới. Top relaxed 16dp như
+                      // dashboard chuẩn (R6 — 2026-09-19: khớp chuẩn hub Ví,
+                      // sửa nốt lệch top sau khi đổi rootModule chrome).
                       child: VitPageContent(
-                        padding: VitContentPadding.none,
+                        padding: VitContentPadding.relaxed,
                         fullBleed: true,
                         rhythm: VitPageRhythm.standard,
                         customGap:

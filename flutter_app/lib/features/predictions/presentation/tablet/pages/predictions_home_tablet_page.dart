@@ -17,6 +17,7 @@ import 'package:vit_trade_flutter/features/predictions/presentation/widgets/tabl
 import 'package:vit_trade_flutter/shared/layout/vit_header.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_content.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_page_layout.dart';
+import 'package:vit_trade_flutter/shared/layout/vit_top_chrome.dart';
 import 'package:vit_trade_flutter/app/theme/app_page_rhythm.dart';
 import 'package:vit_trade_flutter/shared/layout/vit_tablet_pane_workspace.dart';
 import 'package:vit_trade_flutter/shared/utils/vit_format.dart';
@@ -329,7 +330,11 @@ class _PredictionsHomeTabletPageState
       semanticIdentifier: 'SC-208',
       child: Column(
         children: [
-          VitHeader(
+          // Hub gốc module dùng rootModule chrome như Markets/Ví/Profile
+          // (2026-09-19: sửa lệch chuẩn khoảng trên — VitHeader mỏng 10dp
+          // giữa subtitle→hero, chuẩn root là 30dp; đo pixel cả 2 hub).
+          VitTopChrome(
+            type: VitTopChromeType.rootModule,
             title: 'Dự đoán thị trường',
             subtitle: 'Xác suất và sự kiện đang mở',
             showBack: context.canPop(),
@@ -344,12 +349,14 @@ class _PredictionsHomeTabletPageState
               VitHeaderActionItem(
                 key: PredictionsHomeTabletPage.searchActionKey,
                 type: VitHeaderActionType.search,
+                size: VitHeaderActionSize.sm,
                 onPressed: () =>
                     context.push(AppRoutePaths.marketsPredictionsSearch),
               ),
               VitHeaderActionItem(
                 key: PredictionsHomeTabletPage.portfolioHeaderKey,
                 type: VitHeaderActionType.portfolio,
+                size: VitHeaderActionSize.sm,
                 tooltip: 'Danh mục',
                 onPressed: () =>
                     context.push(AppRoutePaths.marketsPredictionsPortfolio),

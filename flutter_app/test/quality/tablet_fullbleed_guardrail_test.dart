@@ -28,10 +28,12 @@ import 'package:flutter_test/flutter_test.dart';
 /// idiom S6 thứ 4, xem tablet_gutter_flush_audit).
 /// Key `path|line`: nếu chỉ dịch dòng do edit phía trên, cập nhật số dòng
 /// kèm một dòng giải trình trong commit.
+/// 2026-09-19: pane_workspace 161 → 163 (comment top-relaxed ở primary
+/// dịch panel xuống 2 dòng — line drift, không đổi hành vi).
 const List<String> kBaselineNonFullBleedPageContents = [
   'shared/layout/vit_two_column_tablet_dashboard.dart|190',
   'shared/layout/vit_two_column_tablet_dashboard.dart|285',
-  'shared/layout/vit_tablet_pane_workspace.dart|161',
+  'shared/layout/vit_tablet_pane_workspace.dart|163',
 ];
 
 final _pageContentStartRe = RegExp(r'\bVitPageContent\s*\(');
