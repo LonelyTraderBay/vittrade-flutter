@@ -23,7 +23,8 @@ Load docs **on demand** — do not paste large audit output into chat. Shared ru
 | --- | --- |
 | [ke-hoac-tong-the.md](02_FLUTTER_MIGRATION/ke-hoac-tong-the.md) | Project dashboard + completed migration summary |
 | [ke-hoach-san-sang-production.md](02_FLUTTER_MIGRATION/ke-hoach-san-sang-production.md) | Production readiness — what is done vs blocked |
-| [ke-hoach-nang-cap-ui-tablet-enterprise.md](02_FLUTTER_MIGRATION/ke-hoach-nang-cap-ui-tablet-enterprise.md) | Kế hoạch nâng cấp composition UI tablet theo 7 archetype (đang chạy — Đợt 0 xong) |
+| [ke-hoach-nang-cap-ui-tablet-enterprise.md](02_FLUTTER_MIGRATION/ke-hoach-nang-cap-ui-tablet-enterprise.md) | Kế hoạch nâng cấp composition UI tablet theo 7 archetype (Đợt 0–9 hoàn tất 2026-09-14 — bị thay tiêu chí bởi kế hoạch redesign v2 bên dưới) |
+| [ke-hoach-redesign-tablet-con-lai.md](02_FLUTTER_MIGRATION/ke-hoach-redesign-tablet-con-lai.md) | Census phone-port 2026-09-19 + kế hoạch redesign ~140–150 trang tablet một cột còn lại theo chuẩn v2 Arena/Predictions (R1–R6, mở đầu bằng P2P) |
 
 ## Flutter standards
 
